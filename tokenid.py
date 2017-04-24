@@ -1,0 +1,6 @@
+# WARNING!
+# do not commit this file
+
+tokenid = 'eyJhbGciOiJIUzI1NiIsImV4cCI6MTY1NTUxODQxNCwiaWF0IjoxNDgyNzE4NDE0fQ.eyJ1c2VybmFtZSI6Imx4bjMwMzIifQ.retE4bvCmLrqYq4DvQDI2FftG2qEEFf5xlKiC-PddnY'
+tokenid_g18 = 'eyJhbGciOiJIUzI1NiIsImV4cCI6MTY0OTE1NzcyNiwiaWF0IjoxNDc2MzU3NzI2fQ.eyJ1c2VybmFtZSI6Imx4bjMwMzIifQ.IvL7wlsifQ4-K94c4cS-lc2cW0SbTprvSlC9116zVlE'
+tokenid_for_mh = 'eyJhbGciOiJIUzI1NiIsImV4cCI6MTY1NTAwNDM4NiwiaWF0IjoxNDgyMjA0Mzg2fQ.eyJ1c2VybmFtZSI6Imd6bGloYW9uYW4ifQ.KMRQk9AlMhXfnN-YdMmd-YuyqUjNcRj17nkBlxIjP3k'
