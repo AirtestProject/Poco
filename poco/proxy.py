@@ -2,6 +2,9 @@
 __author__ = 'lxn3032'
 
 
+import time
+
+
 QueryAttributeNames = (
     'type', 'text', 'enable', 'visable', 'touchenable',
 )
@@ -51,8 +54,22 @@ class UIObjectProxy(object):
         self.poco.touch(pos)
         self.poco.wait_stable()
 
+    def wait_for_appearance(self, timeout=300):
+        start = time.time()
+        while not self.exists():
+            self.poco.wait_for_polling_interval()
+            if time.time() - start > timeout:
+                raise RuntimeError('Timeout at waiting for {} to appear'.format(repr(self.query)))
+
+    def wait_for_disappearance(self, timeout=300):
+        start = time.time()
+        while self.exists():
+            self.poco.wait_for_polling_interval()
+            if time.time() - start > timeout:
+                raise RuntimeError('Timeout at waiting for {} to disappear'.format(repr(self.query)))
+
     def attr(self, name):
-        return self.poco.rpc_client.evaluate(self.poco.selector.selectAndGetAttribute(self.query, name))
+        return self.poco.selector.selectAndGetAttribute(self.query, name)
 
     def exists(self):
         try:
