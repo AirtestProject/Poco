@@ -4,6 +4,8 @@ __author__ = 'lxn3032'
 
 import time
 
+from hunter_cli.rpc.exceptions import HunterRpcException
+
 
 QueryAttributeNames = (
     'type', 'text', 'enable', 'visable', 'touchenable',
@@ -54,14 +56,14 @@ class UIObjectProxy(object):
         self.poco.touch(pos)
         self.poco.wait_stable()
 
-    def wait_for_appearance(self, timeout=300):
+    def wait_for_appearance(self, timeout=120):
         start = time.time()
         while not self.exists():
             self.poco.wait_for_polling_interval()
             if time.time() - start > timeout:
                 raise RuntimeError('Timeout at waiting for {} to appear'.format(repr(self.query)))
 
-    def wait_for_disappearance(self, timeout=300):
+    def wait_for_disappearance(self, timeout=120):
         start = time.time()
         while self.exists():
             self.poco.wait_for_polling_interval()
@@ -74,7 +76,7 @@ class UIObjectProxy(object):
     def exists(self):
         try:
             return self.attr('visible')
-        except:
+        except HunterRpcException:
             return False
 
     def visible(self):

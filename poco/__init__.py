@@ -65,3 +65,9 @@ class PocoUI(InputInterface, PocoUIAssertionMixin):
     def command(self, script, lang='text'):
         self.hunter.script(script, lang=lang)
         self.wait_stable()
+
+    def hide(self, uiobj):
+        pass
+
+    def show(self, uiobj):
+        pass
