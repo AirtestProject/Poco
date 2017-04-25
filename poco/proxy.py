@@ -3,8 +3,9 @@ __author__ = 'lxn3032'
 
 
 import time
+import functools
 
-from hunter_cli.rpc.exceptions import HunterRpcException
+from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
 
 
 QueryAttributeNames = (
@@ -22,6 +23,21 @@ def build_query(name, **attrs):
     for attr_name, attr_val in attrs.items():
         query.append(('attr=', (attr_name, attr_val)))
     return 'and', tuple(query)
+
+
+def retries_when(exctype, count=3):
+    def wrapper(func):
+        @functools.wraps(func)
+        def wrapped(*args, **kwargs):
+            ex = None
+            for i in range(count):
+                try:
+                    return func(*args, **kwargs)
+                except exctype as e:
+                    ex = e
+            raise ex
+        return wrapped
+    return wrapper
 
 
 class UIObjectProxy(object):
@@ -48,9 +64,11 @@ class UIObjectProxy(object):
         obj.query = ('index', (self.query, item))
         return obj
 
+    @retries_when(HunterRpcTimeoutException)
     def __len__(self):
         return self.poco.selector.selectAndGetAttribute(self.query, 'length')
 
+    @retries_when(HunterRpcTimeoutException)
     def click(self):
         pos = self.poco.selector.selectAndGetAttribute(self.query, 'centerPositionInScreen')
         self.poco.touch(pos)
@@ -70,13 +88,14 @@ class UIObjectProxy(object):
             if time.time() - start > timeout:
                 raise RuntimeError('Timeout at waiting for {} to disappear'.format(repr(self.query)))
 
+    @retries_when(HunterRpcTimeoutException)
     def attr(self, name):
         return self.poco.selector.selectAndGetAttribute(self.query, name)
 
     def exists(self):
         try:
             return self.attr('visible')
-        except HunterRpcException:
+        except HunterRpcRemoteException:
             return False
 
     def visible(self):
