@@ -158,3 +158,7 @@ class UIObjectProxy(object):
     def __str__(self):
         return 'UIObjectProxy of "{}"'.format(self.query)
     __repr__ = __str__
+
+    @property
+    def nodes(self):
+        return self.poco.selector.select(self.query)

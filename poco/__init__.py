@@ -8,41 +8,11 @@ from hunter_cli.rpc.client import HunterRpcClient
 from .input import InputInterface
 from .proxy import UIObjectProxy
 from .exceptions import InvalidOperationException
+from .assertions import PocoUIAssertionMixin
+from .acceleration import PocoUIAccelerationMixin
 
 
-class PocoUIAssertionMixin(object):
-    @staticmethod
-    def assert_equal(l, r, msg=''):
-        if l != r:
-            raise AssertionError('断言失败于"{}". {} != {}.'.format(msg, repr(l), repr(r)))
-
-    @staticmethod
-    def assert_greater(l, r, msg=''):
-        if l <= r:
-            raise AssertionError('断言失败于"{}". {} <= {}.'.format(msg, repr(l), repr(r)))
-
-    @staticmethod
-    def assert_greater_equal(l, r, msg=''):
-        if l <= r:
-            raise AssertionError('断言失败于"{}". {} < {}.'.format(msg, repr(l), repr(r)))
-
-    @staticmethod
-    def assert_less(l, r, msg=''):
-        if l <= r:
-            raise AssertionError('断言失败于"{}". {} >= {}.'.format(msg, repr(l), repr(r)))
-
-    @staticmethod
-    def assert_less_equal(l, r, msg=''):
-        if l <= r:
-            raise AssertionError('断言失败于"{}". {} > {}.'.format(msg, repr(l), repr(r)))
-
-    @staticmethod
-    def assert_true(l, msg=''):
-        if l is not True:
-            raise AssertionError('断言失败于"{}". {} is not True.'.format(msg, repr(l)))
-
-
-class PocoUI(InputInterface, PocoUIAssertionMixin):
+class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
     def __init__(self, hunter, **kwargs):
         super(PocoUI, self).__init__()
         self.hunter = hunter
