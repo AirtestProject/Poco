@@ -2,7 +2,6 @@
 __author__ = 'lxn3032'
 
 
-import copy
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
@@ -302,4 +301,9 @@ class UIObjectProxy(object):
 
     @property
     def nodes(self):
+        """
+        访问所选择对象的远程节点对象
+
+        :return: HunterRpcRemoteObjectProxy. HunterRpc远程对象代理
+        """
         return self.poco.selector.select(self.query)
