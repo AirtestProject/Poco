@@ -124,14 +124,13 @@ class UIObjectProxy(object):
 
     def __iter__(self):
         """
-        ui集合的节点迭代器，遍历所有节点对象
+        ui集合的节点迭代器，遍历所有满足选择条件的ui对象
 
-        :yield: 具体ui框架的节点对象代理(hunter_cli.rpc.proxy.RpcObjectProxy)
-        :return:
+        :yield: ui对象
         """
-        nodes = self.poco.selector.select(self.query)
-        for n in nodes:
-            yield n
+        length = self.attr('length')
+        for i in range(length):
+            yield self[i]
 
     @retries_when(HunterRpcTimeoutException)
     def click(self, click_anchor=True, sleep_interval=None):
