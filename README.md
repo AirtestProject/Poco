@@ -1,6 +1,24 @@
-# Poco Flexible Automation Framework
+# Poco Flexible Automation Framework (beta)
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
+
+## 安装 (beta version only)
+
+虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖
+
+```
+git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
+pip install -e airtest
+
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
+pip install -e hunter-cli
+
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
+cd airtest-hunter
+git checkout dev
+cd ..
+pip install -e airtest-hunter
+```
 
 ## 基本概念
 
@@ -130,6 +148,7 @@ Safaia().install(require('safaia.init.poco'))
 ```
 
 3. [hunter终端](http://hunter.nie.netease.com) 右上角点击**Inspector**按钮打开检视器面板。
+
 
 ## API Reference
 
