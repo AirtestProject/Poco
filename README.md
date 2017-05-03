@@ -115,6 +115,7 @@ for name in poco('mission_list').offspring('name_text'):
 
 1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在[项目](http://hunter.nie.netease.com/mywork/project#/)页直接下载最新版的接入模块。
 1. 在项目的`__init__`指令后面插入以下代码片段，然后重启游戏即可
+
 ```python
 # inspector extension
 # 提供hunter终端里的检视器面板
