@@ -29,7 +29,7 @@ pip install -e poco
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-text-attribute.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-search.png)
-
+![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-relations.png)
 
 **对象代理**: 通过poco选择出来代表的游戏内对象  
 **对象集合**: 通过poco选择出来代表一组的游戏内对象  

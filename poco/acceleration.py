@@ -6,7 +6,7 @@ import time
 
 
 class PocoUIAccelerationMixin(object):
-    def auto_dismiss(self, targets, exit_when=None, click_anchor=True, sleep_interval=1, appearance_timeout=20):
+    def dismiss(self, targets, exit_when=None, click_anchor=True, sleep_interval=1, appearance_timeout=20):
         try:
             self.wait_for_any(targets, timeout=appearance_timeout)
         except:
