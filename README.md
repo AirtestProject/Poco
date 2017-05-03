@@ -18,6 +18,10 @@ cd airtest-hunter
 git checkout dev
 cd ..
 pip install -e airtest-hunter
+
+# 不要忘了安装poco本身
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
+pip install -e poco
 ```
 
 ## 基本概念
