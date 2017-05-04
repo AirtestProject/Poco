@@ -2,7 +2,10 @@
 __author__ = 'lxn3032'
 
 
+import base64
+import re
 import time
+import os
 from hunter_cli.rpc.client import HunterRpcClient
 
 from .input import InputInterface
@@ -120,3 +123,19 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
     def long_click(self, pos, duration=2):
         if not (0 <= pos[0] <= self.screen_resolution[0]) or not (0 <= pos[1] <= self.screen_resolution[1]):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
+
+    def snapshot(self, filename='sshot.png'):
+        screen = self.rpc_client.remote('safaia-screen-addon')
+        screen_fetcher = screen.get_screen(self.screen_resolution[0])
+        if screen_fetcher is not None:
+            for i in range(10):
+                imgdata, fmt = screen_fetcher()
+                if imgdata:
+                    if not filename.endswith('.' + fmt):
+                        filename += '.' + fmt
+                    filename = re.sub(r'''[*?":<>']''', '_', filename)
+                    filename = os.path.normpath(filename)
+                    with open(filename, 'wb') as f:
+                        f.write(base64.b64decode(imgdata))
+                    break
+                time.sleep(1)

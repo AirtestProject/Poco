@@ -24,6 +24,3 @@ class AirtestPoco(PocoUI):
             swipe(p1, p2, duration=duration, steps=steps)
         else:
             swipe(p1, vector=direction, duration=duration, steps=steps)
-
-    def snapshot(self):
-        snapshot()
