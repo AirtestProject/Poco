@@ -103,7 +103,7 @@ mission_btn = poco('bg_mission')
 mission_btn.click()    
 
 # 点击对象的中心点
-mission_btn.click(click_anchor=False) 
+mission_btn.click('center') 
 ```
 
 **swipe** 以对象anchor为起点，朝某个方向滑动一段距离

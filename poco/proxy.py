@@ -132,45 +132,72 @@ class UIObjectProxy(object):
             yield self[i]
 
     @retries_when(HunterRpcTimeoutException)
-    def click(self, click_anchor=True, sleep_interval=None):
+    def click(self, anchor='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
-        :param click_anchor: True则点击对象的anchor，否则点击对象包围盒的中心。默认为True。
+        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+            其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
         """
-        pos = self.attr('anchorPosition') if click_anchor else self.attr('screenPosition')
+        if anchor == 'anchor':
+            pos = self.attr('anchorPosition')
+        elif anchor == 'center':
+            pos = self.attr('screenPosition')
+        elif type(anchor) in (list, tuple):
+            center = self.attr('screenPosition')
+            size = self.attr('size')
+            pos = [[anchor[0] - 0.5] * size[0] + center[0], [anchor[1] - 0.5] * size[1] + center[1]]
+        else:
+            raise TypeError('Unsupported anchor type {}. '
+                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
         self.poco.touch(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
 
-    def swipe(self, dir, distance_percent=0.1, duration=0.5):
+    def swipe(self, dir, anchor='anchor', duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离
 
         :param dir: 滑动方向，坐标系与屏幕坐标系相同。
-        :param distance_percent: 滑动距离百分比，以屏幕宽为1
+        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+            其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param duration: 滑动持续时间
         :return: None
         """
-        origin_pos = self.attr('anchorPosition')
+
+        # direction
         if dir == 'up':
-            dir_vec = [0, -1 * distance_percent]
+            dir_vec = [0, -0.1]
         elif dir == 'down':
-            dir_vec = [0, distance_percent]
+            dir_vec = [0, 0.1]
         elif dir == 'left':
-            dir_vec = [-1 * distance_percent, 0]
+            dir_vec = [-0.1, 0]
         elif dir == 'right':
-            dir_vec = [distance_percent, 0]
+            dir_vec = [0.1, 0]
         elif type(dir) in (list, tuple):
-            dir_vec = [dir[0] * distance_percent, dir[1] * distance_percent]
+            dir_vec = dir
         else:
             raise TypeError('Unsupported direction type {}. '
                             'Only "up/down/left/right" or 2 elements list/tuple available.'.format(type(dir)))
-        self.poco.swipe(origin_pos, direction=dir_vec, duration=duration)
+
+        # origin
+        if anchor == 'anchor':
+            pos = self.attr('anchorPosition')
+        elif anchor == 'center':
+            pos = self.attr('screenPosition')
+        elif type(anchor) in (list, tuple):
+            center = self.attr('screenPosition')
+            size = self.attr('size')
+            pos = [[anchor[0] - 0.5] * size[0] + center[0], [anchor[1] - 0.5] * size[1] + center[1]]
+        else:
+            raise TypeError('Unsupported anchor type {}. '
+                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
+
+        self.poco.swipe(pos, direction=dir_vec, duration=duration)
 
     def wait_for_appearance(self, timeout=120):
         """
