@@ -50,7 +50,7 @@ poco所使用的坐标系均为屏幕坐标系，屏幕坐标系定义如下（�
 from airtest.core.main import set_serialno
 from poco.vendor.airtest import AirtestPoco
 
-set_serialno()  # 以airtest的运行框架为例，初始化设备连接
+set_serialno()  # 以airtest的运行框架为例，选择连在电脑上的默认设备
 poco = AirtestPoco('g62')  # 传入hunter中的项目代号
 ```
 
