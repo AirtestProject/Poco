@@ -100,7 +100,9 @@ print(mission_btn.exists())  # True，表示是否存在界面中
 
 ### 对象代理操作
 
-**click** 点击对象，默认以anchor对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为[0, 0]，右下角为[1, 1]。
+#### click
+
+点击对象，默认以anchor对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。
 
 ```python
 poco('bg_mission').click()
@@ -110,8 +112,9 @@ poco('bg_mission').click([0.5, 0.5])    # 等价于center
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-click.png)
 
+#### swipe
 
-**swipe** 以对象anchor为起点，朝某个方向滑动一段距离
+以对象anchor为起点，朝某个方向滑动一段距离
 
 ```python
 joystick = poco('movetouch_panel').child('point_img')
@@ -122,7 +125,9 @@ joystick.swipe([0.2, -0.2], duration=0.5)
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-swipe.png)
 
-**drag** 从当前对象拖拽到目标对象
+#### drag
+ 
+从当前对象拖拽到目标对象
 
 ```python
 poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
@@ -141,7 +146,7 @@ for item in items:
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-iteration.png)
 
-## 断言
+## 断言与异常
 
 **基本断言**
 
@@ -152,7 +157,15 @@ poco.assert_greater(…)
 
 **捕获异常**
 
+```python
+from poco.exceptions import PocoTargetTimeout
 
+try:
+    poco('guide_panel', type='ImageView').wait_for_appearance()
+except PocoTargetTimeout:
+    # 面板没有弹出来，有bug
+    raise
+```
 
 ## 接入参考
 

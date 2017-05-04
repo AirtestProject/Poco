@@ -5,6 +5,7 @@ __author__ = 'lxn3032'
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
+from .exceptions import PocoTargetTimeout
 from .utils.retry import retries_when
 
 
@@ -220,13 +221,13 @@ class UIObjectProxy(object):
         :param timeout: 最长等待时间
         :return: None
 
-        :raise RuntimeError: 当超时时抛出该异常
+        :raise PocoTargetTimeout: 当超时时抛出该异常
         """
         start = time.time()
         while not self.exists():
             self.poco.sleep_for_polling_interval()
             if time.time() - start > timeout:
-                raise RuntimeError('Timeout at waiting for {} to appear'.format(repr(self.query)))
+                raise PocoTargetTimeout('appearance', self.query)
 
     def wait_for_disappearance(self, timeout=120):
         """
@@ -235,13 +236,13 @@ class UIObjectProxy(object):
         :param timeout: 最长等待时间
         :return: None
 
-        :raise RuntimeError: 当超时时抛出该异常
+        :raise PocoTargetTimeout: 当超时时抛出该异常
         """
         start = time.time()
         while self.exists():
             self.poco.sleep_for_polling_interval()
             if time.time() - start > timeout:
-                raise RuntimeError('Timeout at waiting for {} to disappear'.format(repr(self.query)))
+                raise PocoTargetTimeout('disappearance', self.query)
 
     @retries_when(HunterRpcTimeoutException)
     def attr(self, name):
