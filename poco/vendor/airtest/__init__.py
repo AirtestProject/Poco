@@ -2,7 +2,7 @@
 __author__ = 'lxn3032'
 
 
-from airtest.core.main import touch, swipe
+from airtest.core.main import touch, swipe, snapshot
 from airtest_hunter import AirtestHunter, open_platform
 from poco import PocoUI
 
@@ -24,3 +24,6 @@ class AirtestPoco(PocoUI):
             swipe(p1, p2, duration=duration, steps=steps)
         else:
             swipe(p1, vector=direction, duration=duration, steps=steps)
+
+    def snapshot(self):
+        snapshot()

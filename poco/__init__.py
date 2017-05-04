@@ -27,7 +27,7 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
         self.rpc_client = HunterRpcClient(hunter)
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
-        self.screen_size = self.remote_poco.get_screen_size()
+        self.screen_resolution = self.remote_poco.get_screen_size()
 
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
@@ -110,13 +110,13 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
 
     # input interface
     def touch(self, pos):
-        if not (0 <= pos[0] <= self.screen_size[0]) or not (0 <= pos[1] <= self.screen_size[1]):
+        if not (0 <= pos[0] <= self.screen_resolution[0]) or not (0 <= pos[1] <= self.screen_resolution[1]):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
 
     def swipe(self, p1, p2=None, direction=None, duration=0.5):
-        if not (0 <= p1[0] <= self.screen_size[0]) or not (0 <= p1[1] <= self.screen_size[1]):
+        if not (0 <= p1[0] <= self.screen_resolution[0]) or not (0 <= p1[1] <= self.screen_resolution[1]):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
 
     def long_click(self, pos, duration=2):
-        if not (0 <= pos[0] <= self.screen_size[0]) or not (0 <= pos[1] <= self.screen_size[1]):
+        if not (0 <= pos[0] <= self.screen_resolution[0]) or not (0 <= pos[1] <= self.screen_resolution[1]):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))

@@ -138,21 +138,11 @@ class UIObjectProxy(object):
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
         :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
-            其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
+            其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为[0, 0]，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
         """
-        if anchor == 'anchor':
-            pos = self.attr('anchorPosition')
-        elif anchor == 'center':
-            pos = self.attr('screenPosition')
-        elif type(anchor) in (list, tuple):
-            center = self.attr('screenPosition')
-            size = self.attr('size')
-            pos = [[anchor[0] - 0.5] * size[0] + center[0], [anchor[1] - 0.5] * size[1] + center[1]]
-        else:
-            raise TypeError('Unsupported anchor type {}. '
-                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
+        pos = self._position_of_anchor(anchor)
         self.poco.touch(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
@@ -170,7 +160,41 @@ class UIObjectProxy(object):
         :return: None
         """
 
-        # direction
+        dir_vec = self._direction_vector_of(dir)
+        origin = self._position_of_anchor(anchor)
+        self.poco.swipe(origin, direction=dir_vec, duration=duration)
+
+    def drag_to(self, target, duration=2):
+        """
+        以当前对象节点anchor为起点，拖动到目标对象节点anchor
+
+        :param target: 目标对象
+        :param duration: 持续时间
+        :return: None
+        """
+        target_pos = target.attr('anchorPosition')
+        origin_pos = self.attr('anchorPosition')
+        dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
+        normalized_dir = [dir[0] / self.poco.screen_resolution[0], dir[1] / self.poco.screen_resolution[1]]
+        self.swipe(normalized_dir, duration=duration)
+
+    def _position_of_anchor(self, anchor):
+        if anchor == 'anchor':
+            pos = self.attr('anchorPosition')
+        elif anchor == 'center':
+            pos = self.attr('screenPosition')
+        elif type(anchor) in (list, tuple):
+            center = self.get_position()
+            size = self.get_size()
+            pos = [(anchor[0] - 0.5) * size[0] + center[0], (anchor[1] - 0.5) * size[1] + center[1]]
+            screen_resolution = self.poco.screen_resolution
+            pos = [pos[0] * screen_resolution[0], pos[1] * screen_resolution[1]]
+        else:
+            raise TypeError('Unsupported anchor type {}. '
+                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
+        return pos
+
+    def _direction_vector_of(self, dir):
         if dir == 'up':
             dir_vec = [0, -0.1]
         elif dir == 'down':
@@ -184,35 +208,7 @@ class UIObjectProxy(object):
         else:
             raise TypeError('Unsupported direction type {}. '
                             'Only "up/down/left/right" or 2 elements list/tuple available.'.format(type(dir)))
-
-        # origin
-        if anchor == 'anchor':
-            pos = self.attr('anchorPosition')
-        elif anchor == 'center':
-            pos = self.attr('screenPosition')
-        elif type(anchor) in (list, tuple):
-            center = self.attr('screenPosition')
-            size = self.attr('size')
-            pos = [[anchor[0] - 0.5] * size[0] + center[0], [anchor[1] - 0.5] * size[1] + center[1]]
-        else:
-            raise TypeError('Unsupported anchor type {}. '
-                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
-
-        self.poco.swipe(pos, direction=dir_vec, duration=duration)
-
-    def drag_to(self, target, duration=2):
-        """
-        以当前对象节点anchor为起点，拖动到目标对象节点anchor
-
-        :param target: 目标对象
-        :param duration: 持续时间
-        :return: None
-        """
-        target_pos = target.attr('anchorPosition')
-        origin_pos = self.attr('anchorPosition')
-        dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
-        normalized_dir = [dir[0] / self.poco.screen_size[0], dir[1] / self.poco.screen_size[1]]
-        self.swipe(normalized_dir, duration=duration)
+        return dir_vec
 
     def wait_for_appearance(self, timeout=120):
         """
@@ -248,7 +244,7 @@ class UIObjectProxy(object):
     def attr(self, name):
         """
         获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
-        坐标、向量、尺寸均为屏幕坐标系的下的值，字符串均为utf-8编码
+        坐标、向量、尺寸均为屏幕坐标系的下的值，并非归一化值，字符串均为utf-8编码
 
         :param name: 属性名，只可能是下列之一
             visible: <bool>是否可见
@@ -331,11 +327,18 @@ class UIObjectProxy(object):
 
     def get_size(self):
         """
-        获取节点在屏幕上的尺寸
+        获取节点在屏幕上的归一化尺寸
 
-        :return: 格式为[width, height]的list
+        :return: 格式为[width, height]的list, width,height ∈ [0, 1]
         """
-        return self.attr('size')
+        size_in_screen = self.attr('size')
+        screen_resolution = self.poco.screen_resolution
+        return [size_in_screen[0] / screen_resolution[0], size_in_screen[1] / screen_resolution[1]]
+
+    def get_position(self):
+        position_in_screen = self.attr('screenPosition')
+        screen_resolution = self.poco.screen_resolution
+        return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
 
     def __str__(self):
         return 'UIObjectProxy of "{}"'.format(self.query)
