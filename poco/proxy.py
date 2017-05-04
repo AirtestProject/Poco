@@ -199,12 +199,18 @@ class UIObjectProxy(object):
 
         self.poco.swipe(pos, direction=dir_vec, duration=duration)
 
-    def drag_to(self, target, duration=10):
+    def drag_to(self, target, duration=2):
+        """
+        以当前对象节点anchor为起点，拖动到目标对象节点anchor
+
+        :param target: 目标对象
+        :param duration: 持续时间
+        :return: None
+        """
         target_pos = target.attr('anchorPosition')
         origin_pos = self.attr('anchorPosition')
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         normalized_dir = [dir[0] / self.poco.screen_size[0], dir[1] / self.poco.screen_size[1]]
-        print(normalized_dir)
         self.swipe(normalized_dir, duration=duration)
 
     def wait_for_appearance(self, timeout=120):

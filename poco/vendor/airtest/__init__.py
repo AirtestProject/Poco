@@ -19,7 +19,8 @@ class AirtestPoco(PocoUI):
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
         super(AirtestPoco, self).swipe(p1, p2, direction, duration)
+        steps = int(duration * 40) + 1
         if not direction:
-            swipe(p1, p2, duration=duration)
+            swipe(p1, p2, duration=duration, steps=steps)
         else:
-            swipe(p1, vector=direction, duration=duration)
+            swipe(p1, vector=direction, duration=duration, steps=steps)
