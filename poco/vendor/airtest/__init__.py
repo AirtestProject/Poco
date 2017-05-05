@@ -26,8 +26,9 @@ class AirtestPoco(PocoUI):
             swipe(p1, vector=direction, duration=duration, steps=steps)
 
     def snapshot(self, filename='sshot.png'):
-        if len(filename) > 256:
-            filename = filename[:256]
+        # windows系统文件名最大长度有限制
+        if len(filename) > 220:
+            filename = filename[:220]
         if not filename.endswith('.png'):
             filename += '.png'
         snapshot(filename)
