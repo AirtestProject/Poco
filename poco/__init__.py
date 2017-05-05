@@ -10,7 +10,7 @@ from hunter_cli.rpc.client import HunterRpcClient
 
 from .input import InputInterface
 from .proxy import UIObjectProxy
-from .exceptions import InvalidOperationException
+from .exceptions import InvalidOperationException, PocoTargetTimeout
 from .assertions import PocoUIAssertionMixin
 from .acceleration import PocoUIAccelerationMixin
 
@@ -69,7 +69,7 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
                 if obj.exists():
                     return obj
             if time.time() - start > timeout:
-                raise RuntimeError('Timeout at waiting for {} to appear'.format(objects))
+                raise PocoTargetTimeout('waiting for any to appear', objects)
             self.sleep_for_polling_interval()
 
     def wait_for_all(self, objects, timeout=120):
@@ -90,7 +90,7 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
             if all_exist:
                 return
             if time.time() - start > timeout:
-                raise RuntimeError('Timeout at waiting for {} to appear'.format(objects))
+                raise PocoTargetTimeout('waiting for all to appear', objects)
             self.sleep_for_polling_interval()
 
     def wait_stable(self):
