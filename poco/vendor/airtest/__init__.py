@@ -2,9 +2,6 @@
 __author__ = 'lxn3032'
 
 
-import os
-import re
-
 from airtest.core.main import touch, swipe, snapshot
 from airtest_hunter import AirtestHunter, open_platform
 from poco import PocoUI
@@ -29,8 +26,8 @@ class AirtestPoco(PocoUI):
             swipe(p1, vector=direction, duration=duration, steps=steps)
 
     def snapshot(self, filename='sshot.png'):
-        filename = re.sub(r'''[*?":<>']''', '_', filename)
-        filename = os.path.normpath(filename)
+        if len(filename) > 256:
+            filename = filename[:256]
         if not filename.endswith('.png'):
             filename += '.png'
         snapshot(filename)
