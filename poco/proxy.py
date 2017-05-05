@@ -5,7 +5,7 @@ __author__ = 'lxn3032'
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
-from .exceptions import PocoTargetTimeout
+from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .utils.retry import retries_when
 
 
@@ -316,6 +316,20 @@ class UIObjectProxy(object):
         if type(text) is unicode:
             text = text.encode('utf-8')
         return text
+
+    def set_text(self, text):
+        """
+        给TextField节点设置text值
+
+        :param text: 要设置的text值
+        :return: None
+
+        :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
+        """
+        try:
+            self.poco.remote_poco.set_text(self.nodes[0], text)
+        except HunterRpcRemoteException as e:
+            raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
     def get_name(self):
         """
