@@ -23,6 +23,8 @@ class PocoUIAccelerationMixin(object):
         :param appearance_timeout: 在进行dismiss之前会等待targets中任意一个target出现，超过了这个时间还没出现就自动退出了
         :param timeout: dismiss阶段超时时长
         :return: None
+
+        :raise PocoTargetTimeout: 当处于dismiss切超时时，会报这个错，因为正常情况下不可能这么长时间还没把该消的消掉
         """
         try:
             self.wait_for_any(targets, timeout=appearance_timeout)
@@ -42,5 +44,8 @@ class PocoUIAccelerationMixin(object):
                         pass
             time.sleep(sleep_interval)
             should_exit = exit_when() if exit_when else False
-            if no_target or should_exit or time.time() - start_time > timeout:
+            if no_target or should_exit:
                 return
+
+            if time.time() - start_time > timeout:
+                raise PocoTargetTimeout('dismiss', targets)

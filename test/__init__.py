@@ -9,7 +9,6 @@ from poco import PocoUI
 
 
 if __name__ == '__main__':
-    hunter = Hunter(tokenid, 'g62', devip='10.254.37.27')
+    hunter = Hunter(tokenid, 'g62', devip='10.254.36.254')
     poco = PocoUI(hunter)
-    for n in poco('map').child(type='Sprite'):
-        print n
+    print poco
