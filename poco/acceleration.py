@@ -3,6 +3,7 @@ __author__ = 'lxn3032'
 
 
 import time
+import warnings
 
 from .exceptions import PocoTargetTimeout
 
@@ -30,6 +31,7 @@ class PocoUIAccelerationMixin(object):
             self.wait_for_any(targets, timeout=appearance_timeout)
         except PocoTargetTimeout:
             # 仅当超时时自动退出
+            warnings.warn('尝试dismiss前等待对象出现但超时 "{}"'.format(targets))
             return
 
         start_time = time.time()

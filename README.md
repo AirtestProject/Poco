@@ -6,20 +6,24 @@
 
 虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖
 
-```
+```sh
+# airtest runtime
 git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
 pip install -e airtest
 
+# aircv for airtest
+git clone -b open-source ssh://git@git-qa.gz.netease.com:32200/airtest-projects/aircv.git
+pip install -e aircv
+
+# hunter-cli
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
 pip install -e hunter-cli
 
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
-cd airtest-hunter
-git checkout dev
-cd ..
+# hunter lib for airtest
+git clone -b dev ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
 pip install -e airtest-hunter
 
-# 不要忘了安装poco本身
+# poco
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
 ```

@@ -69,7 +69,7 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
                 if obj.exists():
                     return obj
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('waiting for any to appear', objects)
+                raise PocoTargetTimeout('any to appear', objects)
             self.sleep_for_polling_interval()
 
     def wait_for_all(self, objects, timeout=120):
@@ -90,7 +90,7 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
             if all_exist:
                 return
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('waiting for all to appear', objects)
+                raise PocoTargetTimeout('all to appear', objects)
             self.sleep_for_polling_interval()
 
     def wait_stable(self):
@@ -126,11 +126,13 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
 
     def snapshot(self, filename='sshot.png'):
         screen = self.rpc_client.remote('safaia-screen-addon')
-        screen_fetcher = screen.get_screen(self.screen_resolution[0])
+        screen_fetcher = screen.snapshot(self.screen_resolution[0] / 2)  # 以半分辨率截图
         if screen_fetcher is not None:
             for i in range(10):
                 imgdata, fmt = screen_fetcher()
                 if imgdata:
+                    if len(filename) > 220:
+                        filename = filename[:220]
                     if not filename.endswith('.' + fmt):
                         filename += '.' + fmt
                     filename = re.sub(r'''[*?":<>']''', '_', filename)
