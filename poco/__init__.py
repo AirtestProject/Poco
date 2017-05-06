@@ -99,17 +99,21 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
     def sleep_for_polling_interval(self):
         time.sleep(self._poll_interval)
 
-    def command(self, script, lang='text'):
+    def command(self, script, lang='text', sleep_interval=None):
         """
         通过hunter调用gm指令，可调用hunter指令库中定义的所有指令，也可以调用text类型的gm指令
         gm指令相关功能请参考safaia GM指令扩展模块
 
         :param script: 指令
         :param lang: 语言，默认text
+        :param sleep_interval: 调用指令后的等待间隔时间
         :return: None
         """
         self.hunter.script(script, lang=lang)
-        self.wait_stable()
+        if sleep_interval:
+            time.sleep(sleep_interval)
+        else:
+            self.wait_stable()
 
     # input interface
     def touch(self, pos):
