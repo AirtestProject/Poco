@@ -2,34 +2,13 @@
 __author__ = 'lxn3032'
 
 
+import copy
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException
 from .utils.retry import retries_when
-
-
-QueryAttributeNames = (
-    'type', 'text', 'enable', 'visable', 'touchenable',
-    'textNot', 'typeNot',
-)
-
-
-def build_query(name, **attrs):
-    for attr_name in attrs.keys():
-        if attr_name not in QueryAttributeNames:
-            raise Exception('Unsupported Attribute name for query  !!!')
-    query = []
-    if name is not None:
-        attrs['name'] = name
-    for attr_name, attr_val in attrs.items():
-        if attr_name in ('textNot', 'typeNot'):
-            attr_name = attr_name[:-3]
-            op = 'attr!='
-        else:
-            op = 'attr='
-        query.append((op, (attr_name, attr_val)))
-    return 'and', tuple(query)
+from .utils.query_util import query_expr, build_query
 
 
 class UIObjectProxy(object):
@@ -41,6 +20,8 @@ class UIObjectProxy(object):
         self._evaluated = False
         self._query_multiple = False
         self._nodes = None
+
+        self._anchor = None  # 相对于包围盒的anchor定义，用于touch/swipe/drag操作的局部相对定位
 
     def child(self, name=None, **attrs):
         """
@@ -182,13 +163,27 @@ class UIObjectProxy(object):
         :param duration: 持续时间
         :return: None
         """
-        target_pos = target.attr('anchorPosition')
-        origin_pos = self.attr('anchorPosition')
+
+        target_pos = target._position_of_anchor('anchor')
+        origin_pos = self._position_of_anchor('anchor')
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         normalized_dir = [dir[0] / self.poco.screen_resolution[0], dir[1] / self.poco.screen_resolution[1]]
         self.swipe(normalized_dir, duration=duration)
 
+    def anchor(self, a):
+        """
+        设置对象的操作定位点，相对于对象包围盒。Immutable操作，返回一个新的对象代理，原对象不受影响
+
+        :param a: anchor，anchor/center，或其余list[2]
+        :return: 新的对象代理
+        """
+
+        ret = copy.copy(self)
+        ret._anchor = a
+        return ret
+
     def _position_of_anchor(self, anchor):
+        anchor = self._anchor or anchor
         if anchor == 'anchor':
             pos = self.attr('anchorPosition')
         elif anchor == 'center':
@@ -369,7 +364,7 @@ class UIObjectProxy(object):
         return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
 
     def __str__(self):
-        return 'UIObjectProxy of "{}"'.format(self.query)
+        return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
     __repr__ = __str__
 
     @property
@@ -385,7 +380,7 @@ class UIObjectProxy(object):
         if not self._evaluated or refresh:
             self._nodes = self.poco.selector.select(self.query, multiple)
             if len(self._nodes) == 0:
-                raise PocoNoSuchNodeException(self.query)
+                raise PocoNoSuchNodeException(self)
             self._evaluated = True
             self._query_multiple = multiple
         return self._nodes

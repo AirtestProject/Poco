@@ -17,6 +17,6 @@ class PocoTargetTimeout(Exception):
 
 
 class PocoNoSuchNodeException(Exception):
-    def __init__(self, query):
-        msg = 'Cannot find any visible node by query {}'.format(repr(query))
+    def __init__(self, objproxy):
+        msg = 'Cannot find any visible node by query {}'.format(objproxy)
         super(PocoNoSuchNodeException, self).__init__(msg)
