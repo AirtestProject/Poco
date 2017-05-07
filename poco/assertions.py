@@ -2,7 +2,7 @@
 __author__ = 'lxn3032'
 
 
-class PocoUIAssertionMixin(object):
+class PocoAssertionMixin(object):
     @staticmethod
     def assert_equal(l, r, msg=''):
         if l != r:

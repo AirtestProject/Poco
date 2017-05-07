@@ -5,7 +5,7 @@ __author__ = 'lxn3032'
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
-from .exceptions import PocoTargetTimeout, InvalidOperationException
+from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException
 from .utils.retry import retries_when
 
 
@@ -36,7 +36,11 @@ class UIObjectProxy(object):
     def __init__(self, poco, name=None, **attrs):
         self.query = build_query(name, **attrs)
         self.poco = poco
-        self._negtive = False
+        self._negative = False
+
+        self._evaluated = False
+        self._query_multiple = False
+        self._nodes = None
 
     def child(self, name=None, **attrs):
         """
@@ -114,12 +118,16 @@ class UIObjectProxy(object):
 
         :return: 当前ui集合的节点个数
         """
-        return self.attr('length')
+        if not self._query_multiple:
+            nodes = self._do_query(multiple=True, refresh=True)
+        else:
+            nodes = self._nodes
+        return len(nodes)
 
     def __neg__(self):
         ret = UIObjectProxy(self.poco)
         ret.query = self.query
-        ret._negtive = True
+        ret._negative = True
         return ret
 
     def __iter__(self):
@@ -128,7 +136,7 @@ class UIObjectProxy(object):
 
         :yield: ui对象
         """
-        length = self.attr('length')
+        length = len(self)
         for i in range(length):
             yield self[i]
 
@@ -142,7 +150,9 @@ class UIObjectProxy(object):
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
         """
+
         pos = self._position_of_anchor(anchor)
+        print pos
         self.poco.touch(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
@@ -261,8 +271,11 @@ class UIObjectProxy(object):
 
         :raise HunterRpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
-        val = self.poco.selector.selectAndGetAttribute(self.query, name)
-        if self._negtive:
+
+        # 优化速度，只选择第一个匹配到的节点
+        nodes = self._do_query(multiple=False)
+        val = self.poco.attributor.getattr(nodes, name)
+        if self._negative:
             if type(val) is bool:
                 return not val
             elif type(val) in (float, int, long):
@@ -275,14 +288,15 @@ class UIObjectProxy(object):
 
         :return: 节点是否存在， True/False
         """
+
         try:
             return self.attr('visible')
-        except HunterRpcRemoteException:
+        except (HunterRpcRemoteException, PocoNoSuchNodeException):
             return False
 
     def visible(self):
         """
-        判断节点是否可见。TODO：功能还没确定，不要用这个方法
+        判断节点是否可见。TODO：功能还没确定，不要用这个方法，后面可能还会加上判断是否在屏幕外等
 
         :return: True/False
         """
@@ -327,7 +341,7 @@ class UIObjectProxy(object):
         :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
         """
         try:
-            self.poco.remote_poco.set_text(self.nodes[0], text)
+            self.poco.attributor.setattr(self.nodes[0], 'text', text)
         except HunterRpcRemoteException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
@@ -365,4 +379,13 @@ class UIObjectProxy(object):
 
         :return: HunterRpcRemoteObjectProxy. HunterRpc远程对象代理
         """
-        return self.poco.selector.select(self.query)
+        return self._do_query()
+
+    def _do_query(self, multiple=True, refresh=False):
+        if not self._evaluated or refresh:
+            self._nodes = self.poco.selector.select(self.query, multiple)
+            if len(self._nodes) == 0:
+                raise PocoNoSuchNodeException(self.query)
+            self._evaluated = True
+            self._query_multiple = multiple
+        return self._nodes

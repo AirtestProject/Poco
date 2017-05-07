@@ -8,7 +8,7 @@ import warnings
 from .exceptions import PocoTargetTimeout
 
 
-class PocoUIAccelerationMixin(object):
+class PocoAccelerationMixin(object):
     """
     该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。
     """
@@ -42,6 +42,7 @@ class PocoUIAccelerationMixin(object):
                     try:
                         t.click(anchor=anchor, sleep_interval=sleep_interval)
                         no_target = False
+                        break
                     except:
                         pass
             time.sleep(sleep_interval)

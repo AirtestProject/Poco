@@ -4,10 +4,10 @@ __author__ = 'lxn3032'
 
 from airtest.core.main import touch, swipe, snapshot
 from airtest_hunter import AirtestHunter, open_platform
-from poco import PocoUI
+from poco import Poco
 
 
-class AirtestPoco(PocoUI):
+class AirtestPoco(Poco):
     def __init__(self, process, hunter=None):
         apitoken = open_platform.get_api_token()
         hunter = hunter or AirtestHunter(apitoken, process)

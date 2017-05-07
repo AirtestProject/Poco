@@ -11,11 +11,11 @@ from hunter_cli.rpc.client import HunterRpcClient
 from .input import InputInterface
 from .proxy import UIObjectProxy
 from .exceptions import InvalidOperationException, PocoTargetTimeout
-from .assertions import PocoUIAssertionMixin
-from .acceleration import PocoUIAccelerationMixin
+from .assertions import PocoAssertionMixin
+from .acceleration import PocoAccelerationMixin
 
 
-class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
+class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
     def __init__(self, hunter, **kwargs):
         """
         实例化一个poco对象，一般每个testcase都实例化一个。
@@ -25,16 +25,17 @@ class PocoUI(InputInterface, PocoUIAssertionMixin, PocoUIAccelerationMixin):
             action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
             poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
         """
-        super(PocoUI, self).__init__()
+        super(Poco, self).__init__()
         self.hunter = hunter
         self.rpc_client = HunterRpcClient(hunter)
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
+        self.attributor = self.remote_poco.attributor
         self.screen_resolution = self.remote_poco.get_screen_size()
 
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
-        self._poll_interval = kwargs.get('poll_interval', 3)
+        self._poll_interval = kwargs.get('poll_interval', 2)
 
     def __call__(self, name=None, **kw):
         """

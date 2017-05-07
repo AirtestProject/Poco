@@ -14,3 +14,9 @@ class PocoTargetTimeout(Exception):
     def __init__(self, action, poco_obj_proxy):
         msg = 'Timeout when waiting for {} of "{}"'.format(action, poco_obj_proxy)
         super(PocoTargetTimeout, self).__init__(msg)
+
+
+class PocoNoSuchNodeException(Exception):
+    def __init__(self, query):
+        msg = 'Cannot find any visible node by query {}'.format(repr(query))
+        super(PocoNoSuchNodeException, self).__init__(msg)
