@@ -1,8 +1,8 @@
-# Poco Flexible Automation Framework (beta)
+# Poco Flexible Automation Framework
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
-## 安装 (beta version only)
+## 安装
 
 虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖
 
@@ -51,8 +51,10 @@ pip install -e poco
 from airtest.core.main import set_serialno
 from poco.vendor.airtest import AirtestPoco
 
-set_serialno()  # 以airtest的运行框架为例，选择连在电脑上的默认设备
+set_serialno()  # 初始化连在电脑上的默认设备
 poco = AirtestPoco('g62')  # 传入hunter中的项目代号
+
+target = poco('...')
 ```
 
 ### 基本选择器
@@ -138,6 +140,15 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 ```
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-drag.png)
+
+#### anchor (局部定位)
+
+与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用anchor操作。anchor同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
+
+```
+poco('bg_mission').anchor('center').click()  # 点击中心点
+poco(type='ScrollView').anchor([0.5, 0.8]).drag_to(poco(type='ScrollView').anchor([0.5, 0.2]))  # ScrollView卷动翻页
+```
 
 ### 遍历对象集合
 
