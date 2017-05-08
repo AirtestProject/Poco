@@ -2,6 +2,7 @@
 __author__ = 'lxn3032'
 
 
+import numbers
 import copy
 import time
 
@@ -133,7 +134,6 @@ class UIObjectProxy(object):
         """
 
         pos = self._position_of_anchor(anchor)
-        print pos
         self.poco.touch(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
@@ -269,11 +269,19 @@ class UIObjectProxy(object):
 
         # 优化速度，只选择第一个匹配到的节点
         nodes = self._do_query(multiple=False)
-        val = self.poco.attributor.getattr(nodes, name)
+        try:
+            val = self.poco.attributor.getattr(nodes, name)
+        except HunterRpcRemoteException as e:
+            # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
+            if e.error_type == 'NodeHasBeenRemovedException':
+                nodes = self._do_query(multiple=False, refresh=True)
+                val = self.poco.attributor.getattr(nodes, name)
+            else:
+                raise
         if self._negative:
             if type(val) is bool:
                 return not val
-            elif type(val) in (float, int, long):
+            elif isinstance(val, numbers.Number):
                 return -val
         return val
 

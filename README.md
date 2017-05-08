@@ -79,7 +79,7 @@ poco(text='据点支援', type='Button', enable=True)
 # 直系孩子/后代选择
 poco('main_node').child('list_item').offspring('item')
 ```
-
+``
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-relative.png)
 
 ### 顺序选择器（索引选择器）
@@ -177,11 +177,19 @@ except PocoTargetTimeout:
 1. 在项目的`__init__`指令后面插入以下代码片段，然后重启游戏即可
 
 ```python
+
+screen_handler = require('safaia.neox.screen')()  # 根据实际情况选择neox/messiah
+
+# screen 扩展，提供屏幕相关的信息和操作
+ScreenExtension = require('safaia.init.screen')
+ScreenExtension.screen_handler = screen_handler
+Safaia().install(ScreenExtension)
+
 # inspector extension
 # 提供hunter终端里的检视器面板
 InspectorExt = require('safaia.init.inspect')
-InspectorExt.screen = require('safaia.neox.screen')()  # 根据实际情况选择neox/messiah
-InspectorExt.ui2d = require('safaia.cocos2dx.utils')   # 目前ui2d选择器只实现了cocosui，其他的ui框架可另外单独实现
+InspectorExt.screen = screen_handler
+InspectorExt.ui2d = require('safaia.cocos2dx.utils')  # 目前ui2d选择器只实现了cocosui，其他的ui框架可另外单独实现
 Safaia().install(InspectorExt)
 
 # poco automation framework
