@@ -2,8 +2,9 @@
 __author__ = 'lxn3032'
 
 
-import numbers
 import copy
+import numbers
+import six
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
@@ -285,6 +286,19 @@ class UIObjectProxy(object):
                 return -val
         return val
 
+    @retries_when(HunterRpcTimeoutException)
+    def setattr(self, name, val):
+        nodes = self._do_query(multiple=False)
+        try:
+            self.poco.attributor.setattr(nodes, name, val)
+        except HunterRpcRemoteException as e:
+            # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
+            if e.error_type == 'NodeHasBeenRemovedException':
+                nodes = self._do_query(multiple=False, refresh=True)
+                self.poco.attributor.setattr(nodes, name, val)
+            else:
+                raise
+
     def exists(self):
         """
         判断节点是否存在visible节点树中。只要在节点树中的可见节点均为exists，包括屏幕外的和被遮挡的
@@ -330,8 +344,12 @@ class UIObjectProxy(object):
         :return: 节点上的文本值，以utf-8编码
         """
         text = self.attr('text')
-        if type(text) is unicode:
-            text = text.encode('utf-8')
+        if six.PY2:
+            if type(text) is unicode:
+                text = text.encode('utf-8')
+        else:
+            if type(text) is str:
+                text = text.encode('utf-8')
         return text
 
     def set_text(self, text):
@@ -343,8 +361,9 @@ class UIObjectProxy(object):
 
         :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
         """
+
         try:
-            self.poco.attributor.setattr(self.nodes[0], 'text', text)
+            self.setattr('text', text)
         except HunterRpcRemoteException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
