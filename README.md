@@ -145,7 +145,7 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用anchor操作。anchor同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
 
-```
+```python
 poco('bg_mission').anchor('center').click()  # 点击中心点
 poco(type='ScrollView').anchor([0.5, 0.8]).drag_to(poco(type='ScrollView').anchor([0.5, 0.2]))  # ScrollView卷动翻页
 ```
