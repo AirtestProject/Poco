@@ -344,12 +344,8 @@ class UIObjectProxy(object):
         :return: 节点上的文本值，以utf-8编码
         """
         text = self.attr('text')
-        if six.PY2:
-            if type(text) is unicode:
-                text = text.encode('utf-8')
-        else:
-            if type(text) is str:
-                text = text.encode('utf-8')
+        if six.PY2 and type(text) is unicode:
+            text = text.encode('utf-8')
         return text
 
     def set_text(self, text):
