@@ -2,9 +2,10 @@
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
-## 安装
+## 安装(install)
 
-虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖
+虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖。
+
 
 ```sh
 # airtest runtime
@@ -26,6 +27,13 @@ pip install -e airtest-hunter
 # poco
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
+```
+
+安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，git bash中使用以下脚本进行clone
+
+```sh
+# 请根据实际情况填上deploy-key的路径和git仓库地址
+ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
 ```
 
 ## 基本概念

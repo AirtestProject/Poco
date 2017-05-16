@@ -3,7 +3,7 @@ __author__ = 'lxn3032'
 
 
 class InputInterface(object):
-    def touch(self, pos):
+    def click(self, pos):
         raise NotImplementedError
 
     def swipe(self, p1, p2=None, direction=None, duration=0.5):

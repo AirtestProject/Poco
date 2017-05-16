@@ -135,7 +135,7 @@ class UIObjectProxy(object):
         """
 
         pos = self._position_of_anchor(anchor)
-        self.poco.touch(pos)
+        self.poco.click(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
@@ -185,16 +185,17 @@ class UIObjectProxy(object):
 
     def _position_of_anchor(self, anchor):
         anchor = self._anchor or anchor
+        screen_resolution = self.poco.screen_resolution
         if anchor == 'anchor':
             pos = self.attr('anchorPosition')
+            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
         elif anchor == 'center':
             pos = self.attr('screenPosition')
+            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
         elif type(anchor) in (list, tuple):
             center = self.get_position()
             size = self.get_size()
             pos = [(anchor[0] - 0.5) * size[0] + center[0], (anchor[1] - 0.5) * size[1] + center[1]]
-            screen_resolution = self.poco.screen_resolution
-            pos = [pos[0] * screen_resolution[0], pos[1] * screen_resolution[1]]
         else:
             raise TypeError('Unsupported anchor type {}. '
                             'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))

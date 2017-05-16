@@ -10,7 +10,7 @@ from hunter_cli.rpc.client import HunterRpcClient
 
 from .input import InputInterface
 from .proxy import UIObjectProxy
-from .exceptions import InvalidOperationException, PocoTargetTimeout
+from .exceptions import PocoTargetTimeout
 from .assertions import PocoAssertionMixin
 from .acceleration import PocoAccelerationMixin
 
@@ -32,6 +32,7 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
         self.selector = self.remote_poco.selector
         self.attributor = self.remote_poco.attributor
         self.screen_resolution = self.remote_poco.get_screen_size()
+        self.screen_resolution = [float(v) for v in self.screen_resolution]
 
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
@@ -117,18 +118,6 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
             self.wait_stable()
 
     # input interface
-    def touch(self, pos):
-        if not (0 <= pos[0] <= self.screen_resolution[0]) or not (0 <= pos[1] <= self.screen_resolution[1]):
-            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-
-    def swipe(self, p1, p2=None, direction=None, duration=0.5):
-        if not (0 <= p1[0] <= self.screen_resolution[0]) or not (0 <= p1[1] <= self.screen_resolution[1]):
-            raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
-
-    def long_click(self, pos, duration=2):
-        if not (0 <= pos[0] <= self.screen_resolution[0]) or not (0 <= pos[1] <= self.screen_resolution[1]):
-            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-
     def snapshot(self, filename='sshot.png'):
         screen = self.rpc_client.remote('safaia-screen-addon')
         screen_fetcher = screen.snapshot(self.screen_resolution[0] / 2)  # 以半分辨率截图

@@ -14,7 +14,6 @@ TranslatePred = {
 TranslateOp = {
     'and': '&',
     'or': '|',
-    'index': '[]',
     '/': '/',
     '>': '>',
     '-': '-',
@@ -23,8 +22,10 @@ TranslateOp = {
 
 def query_expr(query):
     op = query[0]
-    if op in ('/', '>', '-', 'index'):
+    if op in ('/', '>', '-'):
         return TranslateOp[op].join([query_expr(q) for q in query[1]])
+    elif op == 'index':
+        return '{}[{}]'.format(query_expr(query[1][0]), query[1][1])
     elif op in ('and', 'or'):
         exprs = []
         for subquery in query[1]:

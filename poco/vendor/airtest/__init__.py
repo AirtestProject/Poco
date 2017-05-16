@@ -5,6 +5,7 @@ __author__ = 'lxn3032'
 from airtest.core.main import touch, swipe, snapshot
 from airtest_hunter import AirtestHunter, open_platform
 from poco import Poco
+from poco.exceptions import InvalidOperationException
 
 
 class AirtestPoco(Poco):
@@ -13,12 +14,20 @@ class AirtestPoco(Poco):
         hunter = hunter or AirtestHunter(apitoken, process)
         super(AirtestPoco, self).__init__(hunter)
 
-    def touch(self, pos):
-        super(AirtestPoco, self).touch(pos)
+    def click(self, pos):
+        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
+            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
+        screen_size = self.screen_resolution
+        pos = [pos[0] * screen_size[0], pos[1] * screen_size[1]]
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
-        super(AirtestPoco, self).swipe(p1, p2, direction, duration)
+        if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
+            raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
+        screen_size = self.screen_resolution
+        p1 = [p1[0] * screen_size[0], p1[1] * screen_size[1]]
+        if p2:
+            p2 = [p2[0] * screen_size[0], p2[1] * screen_size[1]]
         steps = int(duration * 40) + 1
         if not direction:
             swipe(p1, p2, duration=duration, steps=steps)
