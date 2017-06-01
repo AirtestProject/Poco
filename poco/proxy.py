@@ -168,8 +168,7 @@ class UIObjectProxy(object):
         target_pos = target._position_of_anchor('anchor')
         origin_pos = self._position_of_anchor('anchor')
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
-        normalized_dir = [dir[0] / self.poco.screen_resolution[0], dir[1] / self.poco.screen_resolution[1]]
-        self.swipe(normalized_dir, duration=duration)
+        self.swipe(dir, duration=duration)
 
     def anchor(self, a):
         """
