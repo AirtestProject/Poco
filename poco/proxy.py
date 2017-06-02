@@ -389,6 +389,14 @@ class UIObjectProxy(object):
         screen_resolution = self.poco.screen_resolution
         return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
 
+    def get_bounds(self):
+        size = self.get_size()
+        top_left = self._position_of_anchor([0, 0])
+
+        # t, r, b, l
+        bounds = [top_left[1], top_left[0] + size[0], top_left[1] + size[1], top_left[0]]
+        return bounds
+
     def __str__(self):
         return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
     __repr__ = __str__
