@@ -160,12 +160,15 @@ class UIObjectProxy(object):
         """
         以当前对象节点anchor为起点，拖动到目标对象节点anchor
 
-        :param target: 目标对象
+        :param target: 目标对象/归一化坐标
         :param duration: 持续时间
         :return: None
         """
 
-        target_pos = target._position_of_anchor('anchor')
+        if type(target) in (list, tuple):
+            target_pos = target
+        else:
+            target_pos = target._position_of_anchor('anchor')
         origin_pos = self._position_of_anchor('anchor')
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         self.swipe(dir, duration=duration)
