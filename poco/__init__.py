@@ -10,6 +10,7 @@ from hunter_cli.rpc.client import HunterRpcClient
 
 from .input import InputInterface
 from .proxy import UIObjectProxy
+from .logging import enable_tracing
 from .exceptions import PocoTargetTimeout
 from .assertions import PocoAssertionMixin
 from .acceleration import PocoAccelerationMixin
@@ -37,6 +38,8 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
         self._poll_interval = kwargs.get('poll_interval', 2)
+
+        self.start_log_tracing()
 
     def __call__(self, name=None, **kw):
         """
@@ -135,3 +138,6 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
                         f.write(base64.b64decode(imgdata))
                     break
                 time.sleep(1)
+
+    def start_log_tracing(self):
+        enable_tracing(self.hunter.tokenid, self.hunter.devid)
