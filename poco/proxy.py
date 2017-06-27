@@ -8,7 +8,7 @@ import six
 import time
 
 from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
-from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException
+from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
 
@@ -43,6 +43,15 @@ class UIObjectProxy(object):
         obj = UIObjectProxy(self.poco)
         obj.query = query
         return obj
+
+    def children(self):
+        """
+        获取当前节点的所有孩子节点
+
+        :return: 
+        """
+
+        return self.child()
 
     def offspring(self, name=None, **attrs):
         """
@@ -101,6 +110,8 @@ class UIObjectProxy(object):
 
         :return: 当前ui集合的节点个数
         """
+
+        # 获取长度时总是multiple的
         if not self._query_multiple:
             nodes = self._do_query(multiple=True, refresh=True)
         else:
@@ -119,9 +130,29 @@ class UIObjectProxy(object):
 
         :yield: ui对象
         """
-        length = len(self)
+
+        # 节点数量太多时，就不按照控件顺序排序了
+        nodes = self.nodes
+        length = len(nodes)
+        sorted_nodes = []
         for i in range(length):
-            yield self[i]
+            uiobj = UIObjectProxy(self.poco)
+            uiobj.query = ('index', (self.query, i))
+            uiobj._evaluated = True
+            uiobj._query_multiple = True
+            uiobj._nodes = self.poco.selector.make_selection(nodes[i])
+            try:
+                pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
+            except HunterRpcRemoteException as e:
+                if e.error_type == 'NodeHasBeenRemovedException':
+                    raise PocoTargetRemovedException('iteration (index={})'.format(i), self.query)
+                else:
+                    raise
+            sorted_nodes.append((uiobj, pos))
+        sorted_nodes.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
+
+        for obj, _ in sorted_nodes:
+            yield obj
 
     @retries_when(HunterRpcTimeoutException)
     def click(self, anchor='anchor', sleep_interval=None):

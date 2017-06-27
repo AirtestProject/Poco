@@ -20,3 +20,9 @@ class PocoNoSuchNodeException(Exception):
     def __init__(self, objproxy):
         msg = 'Cannot find any visible node by query {}'.format(objproxy)
         super(PocoNoSuchNodeException, self).__init__(msg)
+
+
+class PocoTargetRemovedException(Exception):
+    def __init__(self, action, objproxy):
+        msg = 'Remote ui object "{}" has been removed from hierarchy during {}.'.format(objproxy, action)
+        super(PocoTargetRemovedException, self).__init__(msg)
