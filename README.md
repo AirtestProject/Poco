@@ -92,7 +92,7 @@ poco('main_node').child('list_item').offspring('item')
 ``
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-relative.png)
 
-### 顺序选择器（索引选择器）
+### 顺序选择器（索引选择器，不建议使用，推荐迭代遍历）
 
 ```python
 items = poco('main_node').child('list_item').offspring('item')
@@ -101,6 +101,19 @@ print(items[1].child('material_name').get_text())
 ```
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-sequence.png)
+
+### 遍历对象集合
+
+遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
+
+```python
+# 遍历每一个商品
+items = poco('main_node').child('list_item').offspring('item')
+for item in items:
+    item.child('icn_item')
+```
+
+![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-iteration.png)
 
 ### 获取对象代理属性
 
@@ -158,18 +171,6 @@ poco('bg_mission').anchor('center').click()  # 点击中心点
 poco(type='ScrollView').anchor([0.5, 0.8]).drag_to(poco(type='ScrollView').anchor([0.5, 0.2]))  # ScrollView卷动翻页
 ```
 
-### 遍历对象集合
-
-遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
-
-```python
-# 遍历每一个商品
-items = poco('main_node').child('list_item').offspring('item')
-for item in items:
-    item.child('icn_item')
-```
-
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-iteration.png)
 
 ## 断言与异常
 

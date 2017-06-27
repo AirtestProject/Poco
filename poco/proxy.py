@@ -38,6 +38,7 @@ class UIObjectProxy(object):
             HunterRpcRemoteException.NoSuchTargetException
             HunterRpcRemoteException.NoSuchAttributeException
         """
+
         sub_query = build_query(name, **attrs)
         query = ('/', (self.query, sub_query))
         obj = UIObjectProxy(self.poco)
@@ -66,6 +67,7 @@ class UIObjectProxy(object):
             HunterRpcRemoteException.NoSuchTargetException
             HunterRpcRemoteException.NoSuchAttributeException
         """
+
         sub_query = build_query(name, **attrs)
         query = ('>', (self.query, sub_query))
         obj = UIObjectProxy(self.poco)
@@ -85,6 +87,7 @@ class UIObjectProxy(object):
             HunterRpcRemoteException.NoSuchTargetException
             HunterRpcRemoteException.NoSuchAttributeException
         """
+
         sub_query = build_query(name, **attrs)
         query = ('-', (self.query, sub_query))
         obj = UIObjectProxy(self.poco)
@@ -93,16 +96,36 @@ class UIObjectProxy(object):
 
     def __getitem__(self, item):
         """
-        索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个
+        索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个。
+        该函数默认按照空间排序（从左到右从上到下）后才进行选择
+        
+        警告：此方法有极大延迟，请勿频繁调用此方法。
 
         :param item: <int> 数组索引
         :return: ui对象
 
         :raise: HunterRpcRemoteException.NoSuchTargetException
         """
-        obj = UIObjectProxy(self.poco)
-        obj.query = ('index', (self.query, item))
-        return obj
+
+        nodes = self.nodes
+        length = len(nodes)
+        sorted_nodes = []
+        for i in range(length):
+            uiobj = UIObjectProxy(self.poco)
+            uiobj.query = ('index', (self.query, i))
+            uiobj._evaluated = True
+            uiobj._query_multiple = True
+            uiobj._nodes = self.poco.selector.make_selection(nodes[i])
+            try:
+                pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
+            except HunterRpcRemoteException as e:
+                if e.error_type == 'NodeHasBeenRemovedException':
+                    raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
+                else:
+                    raise
+            sorted_nodes.append((uiobj, pos))
+        sorted_nodes.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
+        return sorted_nodes[item][0]
 
     def __len__(self):
         """
