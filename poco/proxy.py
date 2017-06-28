@@ -22,6 +22,7 @@ class UIObjectProxy(object):
         self._evaluated = False
         self._query_multiple = False
         self._nodes = None
+        self._sorted_childres = None  # 仅用于__getitem__时保存好已排序的child代理对象
 
         self._anchor = None  # 相对于包围盒的anchor定义，用于touch/swipe/drag操作的局部相对定位
 
@@ -105,27 +106,29 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raise: HunterRpcRemoteException.NoSuchTargetException
+        :raise: PocoTargetRemovedException
         """
 
         nodes = self.nodes
         length = len(nodes)
-        sorted_nodes = []
-        for i in range(length):
-            uiobj = UIObjectProxy(self.poco)
-            uiobj.query = ('index', (self.query, i))
-            uiobj._evaluated = True
-            uiobj._query_multiple = True
-            uiobj._nodes = self.poco.selector.make_selection(nodes[i])
-            try:
-                pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
-            except HunterRpcRemoteException as e:
-                if e.error_type == 'NodeHasBeenRemovedException':
-                    raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
-                else:
-                    raise
-            sorted_nodes.append((uiobj, pos))
-        sorted_nodes.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
-        return sorted_nodes[item][0]
+        if not self._sorted_childres:
+            self._sorted_childres = []
+            for i in range(length):
+                uiobj = UIObjectProxy(self.poco)
+                uiobj.query = ('index', (self.query, i))
+                uiobj._evaluated = True
+                uiobj._query_multiple = True
+                uiobj._nodes = self.poco.selector.make_selection(nodes[i])
+                try:
+                    pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
+                except HunterRpcRemoteException as e:
+                    if e.error_type == 'NodeHasBeenRemovedException':
+                        raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
+                    else:
+                        raise
+                self._sorted_childres.append((uiobj, pos))
+        self._sorted_childres.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
+        return self._sorted_childres[item][0]
 
     def __len__(self):
         """
@@ -149,9 +152,14 @@ class UIObjectProxy(object):
 
     def __iter__(self):
         """
-        ui集合的节点迭代器，遍历所有满足选择条件的ui对象
+        ui集合的节点迭代器，遍历所有满足选择条件的ui对象。
+        遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。
+        遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。
+        遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
         :yield: ui对象
+        
+        :raise: PocoTargetRemovedException
         """
 
         # 节点数量太多时，就不按照控件顺序排序了
