@@ -32,14 +32,19 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
         self.attributor = self.remote_poco.attributor
-        self.screen_resolution = self.remote_poco.get_screen_size()
-        self.screen_resolution = [float(v) for v in self.screen_resolution]
+
+        self.screen_resolution = None
+        self._init_screen_info()
 
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
         self._poll_interval = kwargs.get('poll_interval', 2)
 
         self.start_log_tracing()
+
+    def _init_screen_info(self):
+        self.screen_resolution = self.remote_poco.get_screen_size()
+        self.screen_resolution = [float(v) for v in self.screen_resolution]
 
     def __call__(self, name=None, **kw):
         """

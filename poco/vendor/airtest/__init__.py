@@ -14,6 +14,9 @@ class AirtestPoco(Poco):
         apitoken = open_platform.get_api_token(process)
         hunter = hunter or AirtestHunter(apitoken, process)
         super(AirtestPoco, self).__init__(hunter)
+
+    def _init_screen_info(self):
+        # override
         display_info = current_device().get_display_info()
         self.screen_resolution = [float(display_info['width']), float(display_info['width'])]
 
