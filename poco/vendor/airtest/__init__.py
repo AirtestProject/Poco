@@ -17,8 +17,15 @@ class AirtestPoco(Poco):
 
     def _init_screen_info(self):
         # override
+        engine_w, engine_h = self.remote_poco.get_screen_size()
         display_info = current_device().get_display_info()
-        self.screen_resolution = [float(display_info['width']), float(display_info['width'])]
+        real_w, real_h = display_info['width'], display_info['height']
+        if engine_w > engine_h:
+            w = max(real_w, real_h)
+            h = min(real_w, real_h)
+        else:
+            w, h = real_w, real_h
+        self.screen_resolution = [float(w), float(h)]
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
