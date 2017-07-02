@@ -16,7 +16,8 @@ class AirtestPoco(Poco):
         super(AirtestPoco, self).__init__(hunter)
 
     def _init_screen_info(self):
-        # override
+        super(AirtestPoco, self)._init_screen_info()
+
         engine_w, engine_h = self.remote_poco.get_screen_size()
         display_info = current_device().get_display_info()
         real_w, real_h = display_info['width'], display_info['height']
@@ -25,22 +26,22 @@ class AirtestPoco(Poco):
             h = min(real_w, real_h)
         else:
             w, h = real_w, real_h
-        self.screen_resolution = [float(w), float(h)]
+        self.touch_panel_resolution = [float(w), float(h)]
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-        screen_size = self.screen_resolution
-        pos = [pos[0] * screen_size[0], pos[1] * screen_size[1]]
+        panel_size = self.touch_panel_resolution
+        pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
-        screen_size = self.screen_resolution
-        p1 = [p1[0] * screen_size[0], p1[1] * screen_size[1]]
+        panel_size = self.touch_panel_resolution
+        p1 = [p1[0] * panel_size[0], p1[1] * panel_size[1]]
         if p2:
-            p2 = [p2[0] * screen_size[0], p2[1] * screen_size[1]]
+            p2 = [p2[0] * panel_size[0], p2[1] * panel_size[1]]
         steps = int(duration * 40) + 1
         if not direction:
             swipe(p1, p2, duration=duration, steps=steps)

@@ -33,7 +33,8 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
         self.selector = self.remote_poco.selector
         self.attributor = self.remote_poco.attributor
 
-        self.screen_resolution = None
+        self.screen_resolution = None  # 引擎接口获取的分辨率，与UI坐标值换算对应
+        self.touch_panel_resolution = None  # 用于进行输入的分辨率，与设备输入接口对应
         self._init_screen_info()
 
         # options
@@ -45,6 +46,7 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
     def _init_screen_info(self):
         self.screen_resolution = self.remote_poco.get_screen_size()
         self.screen_resolution = [float(v) for v in self.screen_resolution]
+        self.touch_panel_resolution = self.screen_resolution
 
     def __call__(self, name=None, **kw):
         """
