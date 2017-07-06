@@ -61,8 +61,8 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
             text: 节点文本值，比如按钮上面的字之类的,
             enable: 是否使能，True/False,
             touchenable: 是否可点击，True/False,
-            textNot: 文本不等于，选出文本值不为xxx的节点,
-            typeNot: 类型不等于，选出类型不为xxx的节点,
+            textMatches: 正则文本匹配,
+            typeMatches: 正则类型名匹配,
         :return: UI代理对象
         """
         return UIObjectProxy(self, name, **kw)

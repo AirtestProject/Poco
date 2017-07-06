@@ -7,7 +7,7 @@ __all__ = ['query_expr']
 
 TranslatePred = {
     'attr=': '=',
-    'attr!=': '!=',
+    'attr.*=': ' ^match$ ',
 }
 
 
@@ -39,7 +39,7 @@ def query_expr(query):
 
 QueryAttributeNames = (
     'type', 'text', 'enable', 'visable', 'touchenable',
-    'textNot', 'typeNot',
+    'textMatches', 'typeMatches',
 )
 
 
@@ -51,9 +51,9 @@ def build_query(name, **attrs):
     if name is not None:
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
-        if attr_name in ('textNot', 'typeNot'):
+        if attr_name in ('textMatches', 'typeMatches'):
             attr_name = attr_name[:-3]
-            op = 'attr!='
+            op = 'attr.*='
         else:
             op = 'attr='
         query.append((op, (attr_name, attr_val)))
