@@ -10,13 +10,13 @@ from hunter_cli.rpc.client import HunterRpcClient
 
 from .input import InputInterface
 from .proxy import UIObjectProxy
-from .logging import enable_tracing
+from .logging import HunterLoggingMixin
 from .exceptions import PocoTargetTimeout
 from .assertions import PocoAssertionMixin
 from .acceleration import PocoAccelerationMixin
 
 
-class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
+class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     def __init__(self, hunter, **kwargs):
         """
         实例化一个poco对象，一般每个testcase都实例化一个。
@@ -26,8 +26,9 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
             action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
             poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
         """
+
         super(Poco, self).__init__()
-        self.hunter = hunter
+        self._hunter = hunter
         self.rpc_client = HunterRpcClient(hunter)
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
@@ -40,8 +41,6 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
         # options
         self._post_action_interval = kwargs.get('action_interval', 1)
         self._poll_interval = kwargs.get('poll_interval', 2)
-
-        self.start_log_tracing()
 
     def _init_screen_info(self):
         self.screen_resolution = self.remote_poco.get_screen_size()
@@ -111,22 +110,6 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
     def sleep_for_polling_interval(self):
         time.sleep(self._poll_interval)
 
-    def command(self, script, lang='text', sleep_interval=None):
-        """
-        通过hunter调用gm指令，可调用hunter指令库中定义的所有指令，也可以调用text类型的gm指令
-        gm指令相关功能请参考safaia GM指令扩展模块
-
-        :param script: 指令
-        :param lang: 语言，默认text
-        :param sleep_interval: 调用指令后的等待间隔时间
-        :return: None
-        """
-        self.hunter.script(script, lang=lang)
-        if sleep_interval:
-            time.sleep(sleep_interval)
-        else:
-            self.wait_stable()
-
     # input interface
     def snapshot(self, filename='sshot.png'):
         screen = self.rpc_client.remote('safaia-screen-addon')
@@ -145,6 +128,3 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin):
                         f.write(base64.b64decode(imgdata))
                     break
                 time.sleep(1)
-
-    def start_log_tracing(self):
-        enable_tracing(self.hunter.tokenid, self.hunter.devid)
