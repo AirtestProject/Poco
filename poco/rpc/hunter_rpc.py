@@ -26,8 +26,8 @@ class HunterRpc(RpcCient):
     def setattr(self, nodes, name, value):
         return self.attributor.setattr(nodes, name, value)
 
-    def make_selection(self, query):
-        return self.selector.make_selection(query)
+    def make_selection(self, node):
+        return self.selector.make_selection(node)
 
     def select(self, query, multiple=True):
         return self.selector.select(query, multiple)

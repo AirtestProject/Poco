@@ -30,7 +30,7 @@ class AirtestPoco(Poco):
             h = min(real_w, real_h)
         else:
             w, h = real_w, real_h
-        self.touch_panel_resolution = [float(w), float(h)]
+        self.touch_panel_resolution = [float(w), float(h)]  # 用于进行输入的分辨率，与设备输入接口对应
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
