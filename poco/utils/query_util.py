@@ -52,7 +52,7 @@ def build_query(name, **attrs):
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
         if attr_name in ('textMatches', 'typeMatches'):
-            attr_name = attr_name[:-3]
+            attr_name = attr_name[:-7]  # textMatches -> (attr.*=, text)
             op = 'attr.*='
         else:
             op = 'attr='
