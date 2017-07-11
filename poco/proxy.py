@@ -7,7 +7,7 @@ import numbers
 import six
 import time
 
-from hunter_cli.rpc.exceptions import HunterRpcRemoteException, HunterRpcTimeoutException
+from hrpc.exceptions import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
@@ -121,7 +121,7 @@ class UIObjectProxy(object):
                 uiobj._nodes = self.poco._rpc_client.make_selection(nodes[i])
                 try:
                     pos = self.poco._rpc_client.getattr(uiobj._nodes, 'screenPosition')
-                except HunterRpcRemoteException as e:
+                except RpcRemoteException as e:
                     if e.error_type == 'NodeHasBeenRemovedException':
                         raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
                     else:
@@ -174,7 +174,7 @@ class UIObjectProxy(object):
             uiobj._nodes = self.poco._rpc_client.make_selection(nodes[i])
             try:
                 pos = self.poco._rpc_client.getattr(uiobj._nodes, 'screenPosition')
-            except HunterRpcRemoteException as e:
+            except RpcRemoteException as e:
                 if e.error_type == 'NodeHasBeenRemovedException':
                     raise PocoTargetRemovedException('iteration (index={})'.format(i), self.query)
                 else:
@@ -185,7 +185,7 @@ class UIObjectProxy(object):
         for obj, _ in sorted_nodes:
             yield obj
 
-    @retries_when(HunterRpcTimeoutException)
+    @retries_when(RpcTimeoutException)
     def click(self, anchor='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
@@ -311,7 +311,7 @@ class UIObjectProxy(object):
             if time.time() - start > timeout:
                 raise PocoTargetTimeout('disappearance', self.query)
 
-    @retries_when(HunterRpcTimeoutException)
+    @retries_when(RpcTimeoutException)
     def attr(self, name):
         """
         获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
@@ -337,7 +337,7 @@ class UIObjectProxy(object):
         nodes = self._do_query(multiple=False)
         try:
             val = self.poco._rpc_client.getattr(nodes, name)
-        except HunterRpcRemoteException as e:
+        except RpcRemoteException as e:
             # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
             if e.error_type == 'NodeHasBeenRemovedException':
                 nodes = self._do_query(multiple=False, refresh=True)
@@ -351,12 +351,12 @@ class UIObjectProxy(object):
                 return -val
         return val
 
-    @retries_when(HunterRpcTimeoutException)
+    @retries_when(RpcTimeoutException)
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
         try:
             self.poco._rpc_client.setattr(nodes, name, val)
-        except HunterRpcRemoteException as e:
+        except RpcRemoteException as e:
             # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
             if e.error_type == 'NodeHasBeenRemovedException':
                 nodes = self._do_query(multiple=False, refresh=True)
@@ -373,7 +373,7 @@ class UIObjectProxy(object):
 
         try:
             return self.attr('visible')
-        except (HunterRpcRemoteException, PocoNoSuchNodeException):
+        except (RpcRemoteException, PocoNoSuchNodeException):
             return False
 
     def visible(self):
@@ -425,7 +425,7 @@ class UIObjectProxy(object):
 
         try:
             self.setattr('text', text)
-        except HunterRpcRemoteException as e:
+        except RpcRemoteException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
     def get_name(self):

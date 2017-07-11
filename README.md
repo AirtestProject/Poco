@@ -16,6 +16,10 @@ pip install -e airtest
 git clone -b open-source ssh://git@git-qa.gz.netease.com:32200/airtest-projects/aircv.git
 pip install -e aircv
 
+# hrpc
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/hrpc.git
+pip install -e hrpc
+
 # hunter-cli
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
 pip install -e hunter-cli
