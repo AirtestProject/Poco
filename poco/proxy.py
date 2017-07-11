@@ -118,9 +118,9 @@ class UIObjectProxy(object):
                 uiobj.query = ('index', (self.query, i))
                 uiobj._evaluated = True
                 uiobj._query_multiple = True
-                uiobj._nodes = self.poco.selector.make_selection(nodes[i])
+                uiobj._nodes = self.poco._rpc_client.make_selection(nodes[i])
                 try:
-                    pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
+                    pos = self.poco._rpc_client.getattr(uiobj._nodes, 'screenPosition')
                 except HunterRpcRemoteException as e:
                     if e.error_type == 'NodeHasBeenRemovedException':
                         raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
@@ -171,9 +171,9 @@ class UIObjectProxy(object):
             uiobj.query = ('index', (self.query, i))
             uiobj._evaluated = True
             uiobj._query_multiple = True
-            uiobj._nodes = self.poco.selector.make_selection(nodes[i])
+            uiobj._nodes = self.poco._rpc_client.make_selection(nodes[i])
             try:
-                pos = self.poco.attributor.getattr(uiobj._nodes, 'screenPosition')
+                pos = self.poco._rpc_client.getattr(uiobj._nodes, 'screenPosition')
             except HunterRpcRemoteException as e:
                 if e.error_type == 'NodeHasBeenRemovedException':
                     raise PocoTargetRemovedException('iteration (index={})'.format(i), self.query)
@@ -336,12 +336,12 @@ class UIObjectProxy(object):
         # 优化速度，只选择第一个匹配到的节点
         nodes = self._do_query(multiple=False)
         try:
-            val = self.poco.attributor.getattr(nodes, name)
+            val = self.poco._rpc_client.getattr(nodes, name)
         except HunterRpcRemoteException as e:
             # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
             if e.error_type == 'NodeHasBeenRemovedException':
                 nodes = self._do_query(multiple=False, refresh=True)
-                val = self.poco.attributor.getattr(nodes, name)
+                val = self.poco._rpc_client.getattr(nodes, name)
             else:
                 raise
         if self._negative:
@@ -355,12 +355,12 @@ class UIObjectProxy(object):
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
         try:
-            self.poco.attributor.setattr(nodes, name, val)
+            self.poco._rpc_client.setattr(nodes, name, val)
         except HunterRpcRemoteException as e:
             # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
             if e.error_type == 'NodeHasBeenRemovedException':
                 nodes = self._do_query(multiple=False, refresh=True)
-                self.poco.attributor.setattr(nodes, name, val)
+                self.poco._rpc_client.setattr(nodes, name, val)
             else:
                 raise
 
@@ -474,7 +474,7 @@ class UIObjectProxy(object):
 
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:
-            self._nodes = self.poco.selector.select(self.query, multiple)
+            self._nodes = self.poco._rpc_client.select(self.query, multiple)
             if len(self._nodes) == 0:
                 raise PocoNoSuchNodeException(self)
             self._evaluated = True

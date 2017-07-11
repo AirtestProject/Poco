@@ -17,7 +17,7 @@ from .acceleration import PocoAccelerationMixin
 
 
 class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
-    def __init__(self, hunter, **kwargs):
+    def __init__(self, rpc_client, **kwargs):
         """
         实例化一个poco对象，一般每个testcase都实例化一个。
 
@@ -28,12 +28,12 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
         """
 
         super(Poco, self).__init__()
-        self._hunter = hunter
-        self.rpc_client = HunterRpcClient(hunter)
-        self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
-        self.selector = self.remote_poco.selector
-        self.attributor = self.remote_poco.attributor
-
+        # self._hunter = hunter
+        # self.rpc_client = HunterRpcClient(hunter)
+        # self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
+        # self.selector = self.remote_poco.selector
+        # self.attributor = self.remote_poco.attributor
+        self._rpc_client = rpc_client
         self.screen_resolution = None  # 引擎接口获取的分辨率，与UI坐标值换算对应
         self.touch_panel_resolution = None  # 用于进行输入的分辨率，与设备输入接口对应
         self._init_screen_info()
@@ -43,7 +43,7 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
         self._poll_interval = kwargs.get('poll_interval', 2)
 
     def _init_screen_info(self):
-        self.screen_resolution = self.remote_poco.get_screen_size()
+        self.screen_resolution = self._rpc_client.get_screen_size()
         self.screen_resolution = [float(v) for v in self.screen_resolution]
         self.touch_panel_resolution = self.screen_resolution
 

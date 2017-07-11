@@ -9,18 +9,20 @@ from airtest.cli.runner import device as current_device
 from airtest_hunter import AirtestHunter, open_platform
 from poco import Poco
 from poco.exceptions import InvalidOperationException
+from poco.rpc.hunter_rpc import HunterRpc
 
 
 class AirtestPoco(Poco):
     def __init__(self, process, hunter=None):
         apitoken = open_platform.get_api_token(process)
         hunter = hunter or AirtestHunter(apitoken, process)
-        super(AirtestPoco, self).__init__(hunter)
+        self._rpc_client = HunterRpc(hunter)
+        super(AirtestPoco, self).__init__(self._rpc_client)
 
     def _init_screen_info(self):
         super(AirtestPoco, self)._init_screen_info()
 
-        engine_w, engine_h = self.remote_poco.get_screen_size()
+        engine_w, engine_h = self._rpc_client.get_screen_size()
         display_info = current_device().get_display_info()
         real_w, real_h = display_info['width'], display_info['height']
         if engine_w > engine_h:
