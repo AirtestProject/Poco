@@ -7,7 +7,7 @@ import numbers
 import six
 import time
 
-from hrpc.exceptions import RpcRemoteException, RpcTimeoutException
+from .rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
@@ -36,8 +36,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            HunterRpcRemoteException.NoSuchTargetException
-            HunterRpcRemoteException.NoSuchAttributeException
+            RpcRemoteException.NoSuchTargetException
+            RpcRemoteException.NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -65,8 +65,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            HunterRpcRemoteException.NoSuchTargetException
-            HunterRpcRemoteException.NoSuchAttributeException
+            RpcRemoteException.NoSuchTargetException
+            RpcRemoteException.NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -85,8 +85,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            HunterRpcRemoteException.NoSuchTargetException
-            HunterRpcRemoteException.NoSuchAttributeException
+            RpcRemoteException.NoSuchTargetException
+            RpcRemoteException.NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -105,7 +105,7 @@ class UIObjectProxy(object):
         :param item: <int> 数组索引
         :return: ui对象
 
-        :raise: HunterRpcRemoteException.NoSuchTargetException
+        :raise: RpcRemoteException.NoSuchTargetException
         :raise: PocoTargetRemovedException
         """
 
@@ -330,7 +330,7 @@ class UIObjectProxy(object):
             direction_vector: <list[2]> 节点极轴在在屏幕坐标上的向量，单位向量
         :return: 以上属性值为空时返回None，否则返回对应属性值
 
-        :raise HunterRpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
+        :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
 
         # 优化速度，只选择第一个匹配到的节点
@@ -398,7 +398,7 @@ class UIObjectProxy(object):
 
         :return: True/False
 
-        :raise HunterRpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
+        :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
         return self.attr('touchenable')
 
@@ -468,7 +468,7 @@ class UIObjectProxy(object):
         """
         访问所选择对象的远程节点对象
 
-        :return: HunterRpcRemoteObjectProxy. HunterRpc远程对象代理
+        :return: RpcRemoteObjectProxy. Rpc远程对象代理
         """
         return self._do_query()
 

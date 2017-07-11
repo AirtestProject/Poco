@@ -28,3 +28,11 @@ class RpcCient(object):
     def select(self, query, multiple=False):
         """select nodes by query"""
         raise NotImplementedError
+
+
+class RpcRemoteException(Exception):
+    pass
+
+
+class RpcTimeoutException(Exception):
+    pass
