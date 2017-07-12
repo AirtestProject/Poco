@@ -38,8 +38,8 @@ def query_expr(query):
 
 
 QueryAttributeNames = (
-    'type', 'text', 'enable', 'visable', 'touchenable',
-    'textMatches', 'typeMatches',
+    'type', 'text', 'enable', 'visable', 'touchenable', 'name',
+    'textMatches', 'typeMatches', 'nameMatches',
 )
 
 
@@ -51,7 +51,7 @@ def build_query(name, **attrs):
     if name is not None:
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
-        if attr_name in ('textMatches', 'typeMatches'):
+        if attr_name.endswith('Matches'):
             attr_name = attr_name[:-7]  # textMatches -> (attr.*=, text)
             op = 'attr.*='
         else:
