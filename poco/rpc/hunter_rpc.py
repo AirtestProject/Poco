@@ -6,7 +6,7 @@
 
 import types
 from functools import wraps
-from . import RpcCient, RpcRemoteException, RpcTimeoutException
+from . import RpcInterface, RpcRemoteException, RpcTimeoutException
 
 from hrpc.exceptions import RpcRemoteException as HRpcRemoteException, RpcTimeoutException as HRpcTimeoutException
 from hunter_cli.rpc.client import HunterRpcClient
@@ -48,10 +48,10 @@ def member_func_exception_transform(Origin, Target):
 
 @member_func_exception_transform(HRpcRemoteException, RpcRemoteException)
 @member_func_exception_transform(HRpcTimeoutException, RpcTimeoutException)
-class HunterRpc(RpcCient):
+class HunterRpc(RpcInterface):
     """hunter implementaion of rpc client"""
     def __init__(self, hunter):
-        RpcCient.__init__(self)
+        RpcInterface.__init__(self)
         self.rpc_client = HunterRpcClient(hunter)
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
