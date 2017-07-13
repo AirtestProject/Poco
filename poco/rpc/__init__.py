@@ -4,10 +4,10 @@
 # @Date:   2017-07-11 14:25:58
 
 
-class RpcCient(object):
+class RpcInterface(object):
     """Base Rpc Client"""
     def __init__(self):
-        super(RpcCient, self).__init__()
+        super(RpcInterface, self).__init__()
 
     def get_screen_size(self):
         """get screen size"""
