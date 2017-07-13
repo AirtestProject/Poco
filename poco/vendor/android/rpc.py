@@ -2,7 +2,7 @@
 __author__ = 'lxn3032'
 
 
-from poco.rpc import RpcCient as RpcInterface
+from poco.rpc import RpcInterface
 
 from hrpc.client import RpcClient
 from hrpc.http_transport import HttpTransport
