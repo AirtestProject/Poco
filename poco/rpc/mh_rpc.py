@@ -64,6 +64,7 @@ class MhRpc(RpcInterface):
 
     @sync_wrapper
     def click(self, pos, op="left"):
+        print(pos, op)
         return self.c.call("click", pos, op)
 
     @classmethod
