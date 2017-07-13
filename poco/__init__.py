@@ -52,7 +52,7 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
             type: 节点类型，Button、Sprite、Node等,
             text: 节点文本值，比如按钮上面的字之类的,
             enable: 是否使能，True/False,
-            touchenable: 是否可点击，True/False,
+            touchable: 是否可点击，True/False,
             textMatches: 正则文本匹配,
             typeMatches: 正则类型名匹配,
         :return: UI代理对象

@@ -322,7 +322,7 @@ class UIObjectProxy(object):
             text: <str(utf-8)/NoneType> 节点文本值
             type: <str> 节点类型
             enable: <bool> 节点正常可用，通常是对于可操作的控件类
-            touchenable: <bool> 是否可点击，目前没什么用
+            touchable: <bool> 是否可点击，目前没什么用
             screenPosition: <list[2]> 节点包围盒中心点在屏幕上的坐标
             anchorPosition: <list[2]> 节点anchor点在屏幕上的坐标
             size: <list[2]> 节点换算到屏幕上的尺寸，[width, height]
@@ -400,7 +400,7 @@ class UIObjectProxy(object):
 
         :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
-        return self.attr('touchenable')
+        return self.attr('touchable')
 
     def get_text(self):
         """

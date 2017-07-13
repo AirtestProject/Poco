@@ -38,7 +38,7 @@ def query_expr(query):
 
 
 QueryAttributeNames = (
-    'type', 'text', 'enable', 'visable', 'touchenable', 'name',
+    'type', 'text', 'enable', 'visible', 'touchable', 'name',
     'textMatches', 'typeMatches', 'nameMatches',
 )
 
