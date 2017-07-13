@@ -9,6 +9,7 @@ from . import RpcInterface, RpcRemoteException, RpcTimeoutException
 from rpcclient import RpcClient as AsyncRpc
 from rpcclient import AsyncConn
 from functools import wraps
+import re
 
 
 def sync_wrapper(func):
@@ -43,7 +44,6 @@ class MhRpc(RpcInterface):
         dump = self.dump()
         root = dict_2_node(dump)
         print(query)
-
         nodes = self._select(query, root=root)
         return nodes
 
@@ -63,8 +63,8 @@ class MhRpc(RpcInterface):
         return self.c.call("setattr", node_id, name, val)
 
     @sync_wrapper
-    def click(self, pos):
-        return self.c.call("click", pos)
+    def click(self, pos, op="left"):
+        return self.c.call("click", pos, op)
 
     @classmethod
     def _select(cls, cond, multiple=True, root=None, matcher=None, max_depth=99999, onlyVisibleNode=True, includeRoot=True):
