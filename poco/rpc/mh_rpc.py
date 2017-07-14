@@ -2,12 +2,8 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-import sys
-sys.path.append(r"D:\dev\snippet\tcpserver")
-
-from . import RpcInterface, RpcRemoteException, RpcTimeoutException
-from rpcclient import RpcClient as AsyncRpc
-from rpcclient import AsyncConn
+from . import RpcInterface, RpcRemoteException
+from .simplerpc.rpcclient import AsyncConn, RpcClient
 from functools import wraps
 import re
 
@@ -29,7 +25,7 @@ class MhRpc(RpcInterface):
     def __init__(self):
         super(MhRpc, self).__init__()
         conn = AsyncConn(("localhost", 5001))
-        self.c = AsyncRpc(conn)
+        self.c = RpcClient(conn)
         self.c.run(backend=True)
 
     @sync_wrapper
