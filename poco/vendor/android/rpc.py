@@ -5,7 +5,7 @@ __author__ = 'lxn3032'
 from poco.rpc import RpcInterface
 
 from hrpc.client import RpcClient
-from hrpc.http_transport import HttpTransport
+from hrpc.transport.http import HttpTransport
 
 
 __all__ = ['AndroidRpcClient']
@@ -16,8 +16,8 @@ class Client(RpcClient):
         self.endpoint = endpoint
         super(Client, self).__init__(HttpTransport)
 
-    def connect(self):
-        self.transport = HttpTransport(self.endpoint, self)
+    def initialize_transport(self):
+        return HttpTransport(self.endpoint, self)
 
 
 class AndroidRpcClient(RpcInterface):

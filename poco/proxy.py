@@ -21,7 +21,7 @@ class UIObjectProxy(object):
 
         self._evaluated = False
         self._query_multiple = False
-        self._nodes = None
+        self._nodes = None  # 可能是远程node代理，也可能是远程[node]代理
         self._sorted_childres = None  # 仅用于__getitem__时保存好已排序的child代理对象
 
         self._anchor = None  # 相对于包围盒的anchor定义，用于touch/swipe/drag操作的局部相对定位
@@ -196,7 +196,15 @@ class UIObjectProxy(object):
         :return: None
         """
 
-        pos = self._position_of_anchor(anchor)
+        try:
+            pos = self._position_of_anchor(anchor)
+        except PocoNoSuchNodeException as e:
+            # 等待目标出现再点击
+            try:
+                self.wait_for_appearance(5)
+                pos = self._position_of_anchor(anchor)
+            except PocoTargetTimeout:
+                raise e
         self.poco.click(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
@@ -330,6 +338,7 @@ class UIObjectProxy(object):
             direction_vector: <list[2]> 节点极轴在在屏幕坐标上的向量，单位向量
         :return: 以上属性值为空时返回None，否则返回对应属性值
 
+        :raise PocoNoSuchNodeException: 当查询节点不存在是
         :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
 

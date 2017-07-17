@@ -5,7 +5,7 @@ __author__ = 'lxn3032'
 from poco import Poco
 
 from poco.exceptions import InvalidOperationException
-from rpc import AndroidRpcClient
+from .rpc import AndroidRpcClient
 
 
 class AndroidUiautomationPoco(Poco):
