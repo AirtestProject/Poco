@@ -1,1 +1,2 @@
 hunter_cli
+json-rpc

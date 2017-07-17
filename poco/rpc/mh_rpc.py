@@ -2,13 +2,10 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-import sys
-sys.path.append(r"D:\dev\snippet\tcpserver")
-
-from . import RpcInterface, RpcRemoteException, RpcTimeoutException
-from rpcclient import RpcClient as AsyncRpc
-from rpcclient import AsyncConn
+from . import RpcInterface, RpcRemoteException
+from .simplerpc.rpcclient import AsyncConn, RpcClient
 from functools import wraps
+import re
 
 
 def sync_wrapper(func):
@@ -28,7 +25,7 @@ class MhRpc(RpcInterface):
     def __init__(self):
         super(MhRpc, self).__init__()
         conn = AsyncConn(("localhost", 5001))
-        self.c = AsyncRpc(conn)
+        self.c = RpcClient(conn)
         self.c.run(backend=True)
 
     @sync_wrapper
@@ -43,7 +40,6 @@ class MhRpc(RpcInterface):
         dump = self.dump()
         root = dict_2_node(dump)
         print(query)
-
         nodes = self._select(query, root=root)
         return nodes
 
@@ -63,8 +59,9 @@ class MhRpc(RpcInterface):
         return self.c.call("setattr", node_id, name, val)
 
     @sync_wrapper
-    def click(self, pos):
-        return self.c.call("click", pos)
+    def click(self, pos, op="left"):
+        print(pos, op)
+        return self.c.call("click", pos, op)
 
     @classmethod
     def _select(cls, cond, multiple=True, root=None, matcher=None, max_depth=99999, onlyVisibleNode=True, includeRoot=True):

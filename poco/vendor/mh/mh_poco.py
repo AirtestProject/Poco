@@ -10,13 +10,8 @@ class MhPoco(Poco):
     """docstring for MhPoco"""
     def __init__(self):
         self._rpc_client = MhRpc()
-        super(MhPoco, self).__init__(self._rpc_client)
+        self._rpc_client.c.DEBUG = False
+        super(MhPoco, self).__init__(self._rpc_client, action_interval=0.01)
 
-    def click(self, pos):
-        self._rpc_client.click(pos)
-
-
-if __name__ == '__main__':
-    p = MhPoco()
-    p(name=u"超级神虎").click((0,0))
-    p(text=u"超级神虎").sibling(type="Button").click()
+    def click(self, pos, op):
+        self._rpc_client.click(pos, op)
