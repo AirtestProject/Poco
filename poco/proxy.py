@@ -210,6 +210,24 @@ class UIObjectProxy(object):
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
+    
+    def wait_click(self, timeout=30, safe=False):
+        """
+        wait appearance and then click
+
+        :param timeout: maximum wait time
+        :param safe: not raise exception when not found object
+        :return bool, if successfully clicked
+        """
+        try:
+            self.wait_for_appearance(timeout)
+            self.click()
+            return True
+        except:
+            if not safe:
+                raise
+            return False
+
 
     def swipe(self, dir, anchor='anchor', duration=0.5):
         """
