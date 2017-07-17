@@ -186,7 +186,7 @@ class UIObjectProxy(object):
             yield obj
 
     @retries_when(RpcTimeoutException)
-    def click(self, anchor='anchor', sleep_interval=None, op="left"):
+    def click(self, anchor='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
@@ -197,7 +197,7 @@ class UIObjectProxy(object):
         """
 
         pos = self._position_of_anchor(anchor)
-        self.poco.click(pos, op)
+        self.poco.click(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
