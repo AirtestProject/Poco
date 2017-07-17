@@ -6,11 +6,27 @@ import copy
 import numbers
 import six
 import time
+from functools import wraps
 
 from .rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
+
+
+def wait_for_appearance(func):
+    @wraps(func)
+    def wrapped(proxy, *args, **kwargs):
+        try:
+            return func(proxy, *args, **kwargs)
+        except PocoNoSuchNodeException as e:
+            try:
+                proxy.wait_for_appearance(timeout=proxy.poco._pre_action_wait_for_appearance)
+                return func(proxy, *args, **kwargs)
+            except PocoTargetTimeout:
+                raise e
+
+    return wrapped
 
 
 class UIObjectProxy(object):
@@ -186,6 +202,7 @@ class UIObjectProxy(object):
             yield obj
 
     @retries_when(RpcTimeoutException)
+    @wait_for_appearance
     def click(self, anchor='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
@@ -194,23 +211,18 @@ class UIObjectProxy(object):
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为[0, 0]，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
+        
+        :raise PocoNoSuchNodeException:
         """
 
-        try:
-            pos = self._position_of_anchor(anchor)
-        except PocoNoSuchNodeException as e:
-            # 等待目标出现再点击
-            try:
-                self.wait_for_appearance(5)
-                pos = self._position_of_anchor(anchor)
-            except PocoTargetTimeout:
-                raise e
+        pos = self._position_of_anchor(anchor)
         self.poco.click(pos)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
 
+    @wait_for_appearance
     def swipe(self, dir, anchor='anchor', duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离
@@ -220,6 +232,8 @@ class UIObjectProxy(object):
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param duration: 滑动持续时间
         :return: None
+        
+        :raise PocoNoSuchNodeException:
         """
 
         dir_vec = self._direction_vector_of(dir)
@@ -233,6 +247,8 @@ class UIObjectProxy(object):
         :param target: 目标对象/归一化坐标
         :param duration: 持续时间
         :return: None
+        
+        :raise PocoNoSuchNodeException:
         """
 
         if type(target) in (list, tuple):

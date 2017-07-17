@@ -17,12 +17,12 @@ from .acceleration import PocoAccelerationMixin
 
 
 class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
-    def __init__(self, rpc_client, **kwargs):
+    def __init__(self, rpc_client, **options):
         """
         实例化一个poco对象，一般每个testcase都实例化一个。
 
         :param hunter:  hunter对象，通过hunter_cli.Hunter构造
-        :param kwargs:
+        :param options:
             action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
             poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
         """
@@ -33,8 +33,9 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
         self._init_screen_info()
 
         # options
-        self._post_action_interval = kwargs.get('action_interval', 1)
-        self._poll_interval = kwargs.get('poll_interval', 2)
+        self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
+        self._post_action_interval = options.get('action_interval', 1)
+        self._poll_interval = options.get('poll_interval', 2)
 
     def _init_screen_info(self):
         self.screen_resolution = self._rpc_client.get_screen_size()
