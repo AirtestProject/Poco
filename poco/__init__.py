@@ -34,8 +34,8 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
 
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
-        self._post_action_interval = options.get('action_interval', 1)
-        self._poll_interval = options.get('poll_interval', 2)
+        self._post_action_interval = options.get('action_interval', 0.5)
+        self._poll_interval = options.get('poll_interval', 1.2)
 
     def _init_screen_info(self):
         self.screen_resolution = self._rpc_client.get_screen_size()
@@ -107,6 +107,9 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
 
     def sleep_for_polling_interval(self):
         time.sleep(self._poll_interval)
+
+    def get_rpc_interface(self):
+        return self._rpc_client
 
     # input interface
     def snapshot(self, filename='sshot.png'):

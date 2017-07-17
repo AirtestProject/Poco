@@ -66,8 +66,8 @@ class HunterRpc(RpcInterface):
     def setattr(self, nodes, name, value):
         return self.attributor.setattr(nodes, name, value)
 
-    def make_selection(self, node):
-        return self.selector.make_selection(node)
-
     def select(self, query, multiple=True):
         return self.selector.select(query, multiple)
+
+    def evaluate(self, obj_proxy):
+        return self.rpc_client.evaluate(obj_proxy)

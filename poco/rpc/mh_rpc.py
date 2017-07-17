@@ -43,15 +43,17 @@ class MhRpc(RpcInterface):
         nodes = self._select(query, root=root)
         return nodes
 
-    def make_selection(self, node):
-        return [node]
-
-    def getattr(self, nodes, name):
-        node = nodes[0]
+    def getattr(self, node, name):
+        if isinstance(node, (list, tuple)):
+            node = node[0]
+        else:
+            node = node
         return node.getAttr(name)
 
-    def setattr(self, nodes, name, val):
-        node_id = nodes[0]["desc"]
+    def setattr(self, node, name, val):
+        if isinstance(node, (list, tuple)):
+            node = node[0]
+        node_id = node[0]["desc"]
         self._setattr(node_id, name, val)
 
     @sync_wrapper
@@ -105,11 +107,6 @@ class MhRpc(RpcInterface):
             cls._selectTraverse(cond, root, matcher, result, multiple, max_depth, onlyVisibleNode, includeRoot)
 
         return result
-
-    @classmethod
-    def make_selection(cls, obj):
-        # 仅仅用list包一下，为了让poco那边能直接生成一个select的结果
-        return [obj]
 
     @classmethod
     def _selectTraverse(cls, cond, node, matcher, outResult, multiple, max_depth, onlyVisibleNode, includeRoot):

@@ -21,10 +21,6 @@ class RpcInterface(object):
         """set node attribute"""
         raise NotImplementedError
 
-    def make_selection(self, node):
-        """get remote list of nodes by node proxy"""
-        raise NotImplementedError
-
     def select(self, query, multiple=False):
         """select nodes by query"""
         raise NotImplementedError

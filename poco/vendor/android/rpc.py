@@ -39,10 +39,6 @@ class AndroidRpcClient(RpcInterface):
         """set node attribute"""
         self.remote_poco.attributor.setAttr(nodes, name, val)
 
-    def make_selection(self, node):
-        """get remote list of nodes by node proxy"""
-        return self.remote_poco.selector.make_selection(node)
-
     def select(self, query, multiple=False):
         """select nodes by query"""
         return self.remote_poco.selector.select(query, multiple)
