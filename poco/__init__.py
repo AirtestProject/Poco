@@ -6,7 +6,7 @@ import base64
 import re
 import time
 import os
-from hunter_cli.rpc.client import HunterRpcClient
+import warnings
 
 from .input import InputInterface
 from .proxy import UIObjectProxy
@@ -57,6 +57,10 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
             typeMatches: 正则类型名匹配,
         :return: UI代理对象
         """
+
+        if not name and len(kw) == 0:
+            warnings.warn("Wildcard selector may cause performance trouble. Please give at least one condition to "
+                          "shrink range of results")
         return UIObjectProxy(self, name, **kw)
 
     def wait_for_any(self, objects, timeout=120):
