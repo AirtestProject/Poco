@@ -25,6 +25,16 @@ class RpcInterface(object):
         """select nodes by query"""
         raise NotImplementedError
 
+    def evaluate(self, obj_proxy):
+        """
+        临时接口，排除bug后移除
+        返回对象本身即可
+
+        :param obj_proxy: 
+        :return: 
+        """
+        return obj_proxy
+
 
 class RpcRemoteException(Exception):
     pass
