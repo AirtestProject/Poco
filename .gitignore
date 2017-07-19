@@ -45,7 +45,7 @@ htmlcov/
 cover/
 
 .idea/
-
+.DS_Store
 auto-doc/
 DocBuilder/source
 

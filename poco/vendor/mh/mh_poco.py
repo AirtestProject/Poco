@@ -13,5 +13,5 @@ class MhPoco(Poco):
         self._rpc_client.c.DEBUG = False
         super(MhPoco, self).__init__(self._rpc_client, action_interval=0.01)
 
-    def click(self, pos, op):
-        self._rpc_client.click(pos, op)
+    def click(self, pos):
+        self._rpc_client.click(pos)
