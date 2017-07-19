@@ -26,19 +26,35 @@ class AndroidRpcClient(RpcInterface):
         self.endpoint = endpoint
         self.client = Client(endpoint)
         self.remote_poco = self.client.remote('poco-uiautomation-framework')
+        self.inputer = self.remote_poco.inputer
 
+    # screen interface
     def get_screen_size(self):
-        """get screen size"""
         return self.remote_poco.get_screen_size()
 
+    # node/hierarchy interface
     def getattr(self, nodes, name):
-        """get node attribute"""
         return self.remote_poco.attributor.getAttr(nodes, name)
 
     def setattr(self, nodes, name, val):
-        """set node attribute"""
         self.remote_poco.attributor.setAttr(nodes, name, val)
 
     def select(self, query, multiple=False):
-        """select nodes by query"""
         return self.remote_poco.selector.select(query, multiple)
+
+    def dump(self):
+        return self.remote_poco.dumper.dumpHierarchy()
+
+    # input interface
+    def click(self, x, y):
+        return self.inputer.click(int(x), int(y))
+
+    def long_click(self, x, y, duration=3):
+        # 目标设备duration以毫秒为单位
+        return self.inputer.longClick(int(x), int(y), int(duration * 1000))
+
+    def swipe(self, x1, y1, x2, y2, duration):
+        return self.inputer.swipe(int(x1), int(y1), int(x2), int(y2), int(duration * 1000))
+
+    def get_input_panel_size(self):
+        return self.inputer.getPortSize()

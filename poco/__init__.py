@@ -3,20 +3,22 @@ __author__ = 'lxn3032'
 
 
 import base64
+import os
 import re
 import time
-import os
 import warnings
 
-from .input import InputInterface
-from .proxy import UIObjectProxy
-from .logging import HunterLoggingMixin
-from .exceptions import PocoTargetTimeout
-from .assertions import PocoAssertionMixin
+from poco.interfaces.input import InputInterface
+from poco.interfaces.screen import ScreenInterface
+
 from .acceleration import PocoAccelerationMixin
+from .assertions import PocoAssertionMixin
+from .exceptions import PocoTargetTimeout
+from .logging import HunterLoggingMixin
+from .proxy import UIObjectProxy
 
 
-class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
+class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     def __init__(self, rpc_client, **options):
         """
         实例化一个poco对象，一般每个testcase都实例化一个。
@@ -29,17 +31,15 @@ class Poco(InputInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLogg
 
         super(Poco, self).__init__()
         self._rpc_client = rpc_client
-        self.screen_resolution = None  # 引擎接口获取的分辨率，与UI坐标值换算对应
-        self._init_screen_info()
+
+        # 按照下面这个顺序初始化，以后这个尺寸随着屏幕旋转可能需要刷新
+        self.screen_resolution = self.get_screen_size()  # [width: float, height: float]
+        self.input_resulution = self.get_input_panel_size()  # [width: float, height: float]
 
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
         self._post_action_interval = options.get('action_interval', 0.5)
         self._poll_interval = options.get('poll_interval', 1.2)
-
-    def _init_screen_info(self):
-        self.screen_resolution = self._rpc_client.get_screen_size()
-        self.screen_resolution = [float(v) for v in self.screen_resolution]
 
     def __call__(self, name=None, **kw):
         """

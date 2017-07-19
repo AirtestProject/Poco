@@ -57,9 +57,11 @@ class HunterRpc(RpcInterface):
         self.selector = self.remote_poco.selector
         self.attributor = self.remote_poco.attributor
 
+    # screen interface
     def get_screen_size(self):
         return self.remote_poco.get_screen_size()
 
+    # node/hierarchy interface
     def getattr(self, nodes, name):
         return self.attributor.getattr(nodes, name)
 

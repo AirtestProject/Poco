@@ -5,11 +5,12 @@ __author__ = 'lxn3032'
 from poco import Poco
 
 from poco.exceptions import InvalidOperationException
-from .rpc import AndroidRpcClient
+from rpc import AndroidRpcClient
 
 
 class AndroidUiautomationPoco(Poco):
     def __init__(self, serial):
+        # TODO: android 初始化
         endpoint = "http://10.254.245.31:10081"
         rpc_client = AndroidRpcClient(endpoint)
         super(AndroidUiautomationPoco, self).__init__(rpc_client)
@@ -18,8 +19,8 @@ class AndroidUiautomationPoco(Poco):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.screen_resolution
-        pos = int(pos[0] * panel_size[0]), int(pos[1] * panel_size[1])
-        self._rpc_client.remote_poco.inputer.click(*pos)
+        pos = pos[0] * panel_size[0], pos[1] * panel_size[1]
+        self.get_rpc_interface().click(*pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
@@ -32,22 +33,25 @@ class AndroidUiautomationPoco(Poco):
             sp2 = [(p1[0] + direction[0]) * panel_size[0], (p1[1] + direction[1]) * panel_size[1]]
         else:
             raise RuntimeError("p2 and direction cannot be None at the same time.")
+        self.get_rpc_interface().swipe(sp1[0], sp1[1], sp2[0], sp2[1], duration)
 
-        # 目标设备duration以毫秒为单位
-        self._rpc_client.remote_poco.inputer.swipe(int(sp1[0]), int(sp1[1]), int(sp2[0]), int(sp2[1]), int(duration * 1000))
+    def long_click(self, pos, duration=2):
+        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
+            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
+        panel_size = self.screen_resolution
+        pos = int(pos[0] * panel_size[0]), int(pos[1] * panel_size[1])
+        self.get_rpc_interface().long_click(pos[0], pos[1], duration)
 
     def snapshot(self, filename='sshot.png'):
         pass
-        # windows系统文件名最大长度有限制
-        # if len(filename) > 220:
-        #     filename = filename[:220]
-        # if not filename.endswith('.png'):
-        #     filename += '.png'
-        # snapshot(filename)
 
 
+import time
 poco = AndroidUiautomationPoco("")
-# print poco._rpc_client.remote_poco.dumper.dumpHierarchy()
-# print poco._rpc_client.remote_poco.selector.select(["and",[["attr=",["text","WLAN"]]]])
+print poco.get_rpc_interface().remote_poco.dump()
+
 # print poco('android:id/action_bar').get_bounds()
-print poco(text='更多').drag_to(poco(text='WLAN'))
+# print poco(text='更多').drag_to(poco(text='WLAN'))
+# poco(text='WLAN').click()
+# poco(text='netease_game').click()
+# poco(text='完成').click()
