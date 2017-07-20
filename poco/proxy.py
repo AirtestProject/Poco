@@ -460,14 +460,10 @@ class UIObjectProxy(object):
         :return: 格式为[width, height]的list, width,height ∈ [0, 1]
         """
 
-        size_in_screen = self.attr('size')
-        screen_resolution = self.poco.screen_resolution
-        return [size_in_screen[0] / screen_resolution[0], size_in_screen[1] / screen_resolution[1]]
+        return self.attr('size')
 
     def get_position(self):
-        position_in_screen = self.attr('pos')
-        screen_resolution = self.poco.screen_resolution
-        return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
+        return self.attr('pos')
 
     def get_bounds(self):
         size = self.get_size()

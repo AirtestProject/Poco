@@ -13,11 +13,3 @@ class ScreenInterface(object):
 
         raise NotImplementedError
 
-    def get_screen_size(self):
-        """
-        获取渲染屏幕的实际尺寸，type float
-
-        :return:  [width, height] as floats 
-        """
-
-        raise NotImplementedError

@@ -15,6 +15,3 @@ class MhPoco(Poco):
 
     def click(self, pos):
         self.rpc.click(pos)
-
-    def get_screen_size(self):
-        return self.rpc.get_screen_size()
