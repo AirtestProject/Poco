@@ -6,7 +6,9 @@
 
 import types
 from functools import wraps
+
 from . import RpcInterface, RpcRemoteException, RpcTimeoutException
+from poco.exceptions import PocoTargetRemovedException
 
 from hrpc.exceptions import RpcRemoteException as HRpcRemoteException, RpcTimeoutException as HRpcTimeoutException
 from hunter_cli.rpc.client import HunterRpcClient
@@ -46,10 +48,29 @@ def member_func_exception_transform(Origin, Target):
     return wrapper
 
 
+def transform_node_has_been_removed_exception(func):
+    """
+    将HRpcRemoteException.NodeHasBeenRemovedException转换成PocoTargetRemovedException
+
+    :param func: 仅限getattr和setattr两个接口方法
+    :return: 
+    """
+
+    @wraps(func)
+    def wrapped(self, nodes, name, *args, **kwargs):
+        try:
+            return func(self, nodes, name, *args, **kwargs)
+        except HRpcRemoteException as e:
+            if e.error_type == 'NodeHasBeenRemovedException':
+                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), nodes)
+            else:
+                raise
+    return wrapped
+
+
 @member_func_exception_transform(HRpcRemoteException, RpcRemoteException)
 @member_func_exception_transform(HRpcTimeoutException, RpcTimeoutException)
 class HunterRpc(RpcInterface):
-    """hunter implementaion of rpc client"""
     def __init__(self, hunter):
         RpcInterface.__init__(self)
         self.rpc_client = HunterRpcClient(hunter)
@@ -62,9 +83,11 @@ class HunterRpc(RpcInterface):
         return self.remote_poco.get_screen_size()
 
     # node/hierarchy interface
+    @transform_node_has_been_removed_exception
     def getattr(self, nodes, name):
         return self.attributor.getattr(nodes, name)
 
+    @transform_node_has_been_removed_exception
     def setattr(self, nodes, name, value):
         return self.attributor.setattr(nodes, name, value)
 

@@ -3,7 +3,6 @@ __author__ = 'lxn3032'
 
 
 import copy
-import numbers
 import six
 import time
 from functools import wraps
@@ -30,19 +29,15 @@ def wait_for_appearance(func):
     return wrapped
 
 
-def refresh_when(error_type_str):
+def refresh_when(err_type):
     def wrapper(func):
         @wraps(func)
         def wrapped(self, *args, **kwargs):
             try:
                 return func(self, *args, **kwargs)
-            except RpcRemoteException as e:
-                if e.error_type == error_type_str:
-                    # refresh node cache
-                    self._do_query(multiple=False, refresh=True)
-                    return func(self, *args, **kwargs)
-                else:
-                    raise
+            except err_type:
+                self._do_query(multiple=False, refresh=True)
+                return func(self, *args, **kwargs)
         return wrapped
     return wrapper
 
@@ -342,7 +337,7 @@ class UIObjectProxy(object):
                 raise PocoTargetTimeout('disappearance', self.query)
 
     @retries_when(RpcTimeoutException)
-    @refresh_when("NodeHasBeenRemovedException")
+    @refresh_when(PocoTargetRemovedException)
     def attr(self, name):
         """
         获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
@@ -374,7 +369,7 @@ class UIObjectProxy(object):
         return val
 
     @retries_when(RpcTimeoutException)
-    @refresh_when("NodeHasBeenRemovedException")
+    @refresh_when(PocoTargetRemovedException)
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
         self.poco.rpc.setattr(nodes, name, val)
