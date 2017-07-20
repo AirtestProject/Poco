@@ -3,8 +3,6 @@ __author__ = 'lxn3032'
 
 
 class ScreenInterface(object):
-    def snapshot(self, width):
-        raise NotImplementedError
 
-    def get_screen_size(self):
+    def snapshot(self, width):
         raise NotImplementedError

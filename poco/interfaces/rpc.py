@@ -55,14 +55,7 @@ class RpcInterface(object):
     def swipe(self, x1, y1, x2, y2, duration):
         raise NotImplementedError
 
-    def get_input_panel_size(self):
-        return self.get_screen_size()
-
     # screen interface
-    @required
-    def get_screen_size(self):
-        raise NotImplementedError
-
     def get_screen(self):
         raise NotImplementedError
 

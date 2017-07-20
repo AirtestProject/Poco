@@ -32,14 +32,6 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         super(Poco, self).__init__()
         self._rpc_client = rpc_client
 
-        # 按照下面这个顺序初始化，以后这个尺寸随着屏幕旋转可能需要刷新
-        w, h = self.get_screen_size()  # [width: float, height: float]
-        self.screen_resolution = (float(w), float(h))
-        try:
-            self.input_resulution = self.get_input_panel_size()  # [width: float, height: float]
-        except NotImplementedError:
-            self.input_resulution = self.screen_resolution
-
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
         self._post_action_interval = options.get('action_interval', 0.5)
@@ -115,22 +107,3 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
     @property
     def rpc(self):
         return self._rpc_client
-
-    # input interface
-    def snapshot(self, filename='sshot.png'):
-        screen = self.rpc_client.remote('safaia-screen-addon')
-        screen_fetcher = screen.snapshot(self.screen_resolution[0] / 2)  # 以半分辨率截图
-        if screen_fetcher is not None:
-            for i in range(10):
-                imgdata, fmt = screen_fetcher()
-                if imgdata:
-                    if len(filename) > 220:
-                        filename = filename[:220]
-                    if not filename.endswith('.' + fmt):
-                        filename += '.' + fmt
-                    filename = re.sub(r'''[*?":<>']''', '_', filename)
-                    filename = os.path.normpath(filename)
-                    with open(filename, 'wb') as f:
-                        f.write(base64.b64decode(imgdata))
-                    break
-                time.sleep(1)

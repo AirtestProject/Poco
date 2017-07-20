@@ -20,14 +20,14 @@ if __name__ == '__main__':
     import time
 
     p = MhPoco()
-    p(textMatches="^长安城\[.+\]$").click("center")
+    p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
     # p("超级神虎").click()
     # p("超级神虎").anchor((0, 0)).click()
     # p(text="超级神虎").sibling(type="Button").click()
-    # l = p(type="CBuffPanel").offspring(type="CDisableImage")
-    # for i in l:
-    #     i.click()
+    l = p(type="CBuffPanel").offspring(type="CDisableImage")
+    for i in l:
+        i.click()
     # d = p(type="VDialog")
     # while True:
     #     l = d.offspring(type="Button")
