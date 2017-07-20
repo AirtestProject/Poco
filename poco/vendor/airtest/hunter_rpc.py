@@ -7,7 +7,7 @@
 import types
 from functools import wraps
 
-from . import RpcInterface, RpcRemoteException, RpcTimeoutException
+from poco.interfaces.rpc import RpcInterface, RpcRemoteException, RpcTimeoutException
 from poco.exceptions import PocoTargetRemovedException
 
 from hrpc.exceptions import RpcRemoteException as HRpcRemoteException, RpcTimeoutException as HRpcTimeoutException

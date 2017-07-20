@@ -11,6 +11,7 @@ from .interfaces.rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
+from .utils.suppression import deprecated
 
 
 def wait_for_appearance(func):
@@ -52,7 +53,7 @@ class UIObjectProxy(object):
         self._nodes_proxy_is_list = True
         self._sorted_childres = None  # 仅用于__getitem__时保存好已排序的child代理对象
 
-        self._anchor = None  # 相对于包围盒的anchor定义，用于touch/swipe/drag操作的局部相对定位
+        self._focus = None  # 相对于包围盒的focus point定义，用于touch/swipe/drag操作的局部相对定位
 
     def child(self, name=None, **attrs):
         """
@@ -202,11 +203,11 @@ class UIObjectProxy(object):
 
     @retries_when(RpcTimeoutException)
     @wait_for_appearance
-    def click(self, anchor='anchor', sleep_interval=None):
+    def click(self, focus='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
-        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+        :param focus: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为[0, 0]，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
@@ -217,7 +218,7 @@ class UIObjectProxy(object):
         # from airtest.core.main import snapshot
         # snapshot(msg=str(self))
 
-        pos_in_percentage = self._position_of_focus(anchor)
+        pos_in_percentage = self.get_position(focus)
         self.poco.click(pos_in_percentage)
         if sleep_interval:
             time.sleep(sleep_interval)
@@ -225,12 +226,12 @@ class UIObjectProxy(object):
             self.poco.wait_stable()
 
     @wait_for_appearance
-    def swipe(self, dir, anchor='anchor', duration=0.5):
+    def swipe(self, dir, focus='anchor', duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离
 
         :param dir: 滑动方向，坐标系与屏幕坐标系相同。
-        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+        :param focus: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param duration: 滑动持续时间
         :return: None
@@ -239,7 +240,7 @@ class UIObjectProxy(object):
         """
 
         dir_vec = self._direction_vector_of(dir)
-        origin = self._position_of_focus(anchor)
+        origin = self.get_position(focus)
         self.poco.swipe(origin, direction=dir_vec, duration=duration)
 
     def drag_to(self, target, duration=2):
@@ -256,37 +257,43 @@ class UIObjectProxy(object):
         if type(target) in (list, tuple):
             target_pos = target
         else:
-            target_pos = target._position_of_focus('anchor')
-        origin_pos = self._position_of_focus('anchor')
+            target_pos = target.get_position()
+        origin_pos = self.get_position()
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         self.swipe(dir, duration=duration)
 
+    @deprecated("`anchor` is deprecated, please use equivalent method `focus` instead.")
     def anchor(self, a):
+        return self.focus(a)
+
+    def focus(self, f):
         """
         设置对象的操作定位点，相对于对象包围盒。Immutable操作，返回一个新的对象代理，原对象不受影响
 
-        :param a: anchor，anchor/center，或其余list[2]
+        :param f: focus point，'anchor'/'center'，或其余list[2]
         :return: 新的对象代理
         """
 
         ret = copy.copy(self)
-        ret._anchor = a
+        ret._focus = f
         return ret
 
-    def _position_of_focus(self, focus="anchor"):
-        focus = self._anchor or focus
+    def get_position(self, focus='anchor'):
+        focus = self._focus or focus
         if focus == 'anchor':
-            pos = self.get_position()
+            pos = self.attr('pos')
         elif focus == 'center':
-            x, y = self.get_position()
+            x, y = self.attr('pos')
             w, h = self.get_size()
             ap_x, ap_y = self.attr("anchorPoint")
-            pos = [x + w * (0.5 - ap_x), y + h * (0.5 - ap_y)]
+            fx, fy = 0.5, 0.5
+            pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
         elif type(focus) in (list, tuple):
-            x, y = self.get_position()
+            x, y = self.attr('pos')
             w, h = self.get_size()
-            ap_x, ap_y = focus
-            pos = [x + w * (0.5 - ap_x), y + h * (0.5 - ap_y)]
+            ap_x, ap_y = self.attr("anchorPoint")
+            fx, fy = focus
+            pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
         else:
             raise TypeError('Unsupported focus type {}. '
                             'Only "anchor/center" or 2 elements list/tuple available.'.format(type(focus)))
@@ -462,12 +469,9 @@ class UIObjectProxy(object):
 
         return self.attr('size')
 
-    def get_position(self):
-        return self.attr('pos')
-
     def get_bounds(self):
         size = self.get_size()
-        top_left = self._position_of_focus([0, 0])
+        top_left = self.get_position([0, 0])
 
         # t, r, b, l
         bounds = [top_left[1], top_left[0] + size[0], top_left[1] + size[1], top_left[0]]
