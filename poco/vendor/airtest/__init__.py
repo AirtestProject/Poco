@@ -38,7 +38,7 @@ class AirtestPoco(Poco):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.input_resulution
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
-        snapshot()
+        # snapshot()
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):

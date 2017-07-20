@@ -12,17 +12,17 @@ class InvalidOperationException(Exception):
 
 class PocoTargetTimeout(Exception):
     def __init__(self, action, poco_obj_proxy):
-        msg = u'Timeout when waiting for {} of "{}"'.format(action, poco_obj_proxy)
+        msg = 'Timeout when waiting for {} of "{}"'.format(action, poco_obj_proxy)
         super(PocoTargetTimeout, self).__init__(msg)
 
 
 class PocoNoSuchNodeException(Exception):
     def __init__(self, objproxy):
-        msg = u'Cannot find any visible node by query {}'.format(objproxy)
+        msg = 'Cannot find any visible node by query {}'.format(objproxy)
         super(PocoNoSuchNodeException, self).__init__(msg)
 
 
 class PocoTargetRemovedException(Exception):
     def __init__(self, action, objproxy):
-        msg = u'Remote ui object "{}" has been removed from hierarchy during {}.'.format(objproxy, action)
+        msg = 'Remote ui object "{}" has been removed from hierarchy during {}.'.format(objproxy, action)
         super(PocoTargetRemovedException, self).__init__(msg)

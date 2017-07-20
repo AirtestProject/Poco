@@ -7,6 +7,7 @@ import numbers
 import six
 import time
 from functools import wraps
+from airtest.core.main import snapshot
 
 from .rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
@@ -218,6 +219,7 @@ class UIObjectProxy(object):
         
         :raise PocoNoSuchNodeException:
         """
+        snapshot(msg=str(self))
 
         pos = self._position_of_anchor(anchor)
         self.poco.click(pos)
@@ -479,7 +481,7 @@ class UIObjectProxy(object):
         return bounds
 
     def __str__(self):
-        return u'UIObjectProxy of "{}"'.format(query_expr(self.query))
+        return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
 
     __repr__ = __str__
 
