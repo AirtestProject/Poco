@@ -36,12 +36,3 @@ class InputInterface(object):
         """
 
         raise NotImplementedError
-
-    def get_input_panel_size(self):
-        """
-        获取输入面板的实际尺寸，type float
-
-        :return:  [width, height] as floats 
-        """
-
-        raise NotImplementedError
