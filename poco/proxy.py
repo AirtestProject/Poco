@@ -6,7 +6,6 @@ import copy
 import six
 import time
 from functools import wraps
-from airtest.core.main import snapshot
 
 from .rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
@@ -214,7 +213,9 @@ class UIObjectProxy(object):
         
         :raise PocoNoSuchNodeException:
         """
-        snapshot(msg=str(self))
+
+        # from airtest.core.main import snapshot
+        # snapshot(msg=str(self))
 
         pos = self._position_of_anchor(anchor)
         self.poco.click(pos)
@@ -463,7 +464,7 @@ class UIObjectProxy(object):
         return [size_in_screen[0] / screen_resolution[0], size_in_screen[1] / screen_resolution[1]]
 
     def get_position(self):
-        position_in_screen = self.attr('screenPosition')
+        position_in_screen = self.attr('pos')
         screen_resolution = self.poco.screen_resolution
         return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
 
@@ -476,7 +477,7 @@ class UIObjectProxy(object):
         return bounds
 
     def __str__(self):
-        return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
+        return u'UIObjectProxy of "{}"'.format(query_expr(self.query))
 
     __repr__ = __str__
 

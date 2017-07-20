@@ -20,21 +20,18 @@ if __name__ == '__main__':
     import time
 
     p = MhPoco()
-    p(name=u"超级神虎").click(anchor=(0.5, 0.5))
-    p(text=u"超级神虎").sibling(type="Button").click()
-    # p(text=u"手机也能玩").click()
-    # l = p(type="CBuffPanel").offspring(type="CDisableImage")
-    # while True:
-    #     l = p(typeMatches="^.*$")
-    #     r = random.randint(0, len(l.nodes))
-    #     print(len(l.nodes), r)
-    #     try:
-    #         i = l[r]
-    #     except:
-    #         continue
-    #     r2 = random.randint(0, 100)
-    #     if r2 < 15:
-    #         op = "right"
-    #     else:
-    #         op = "left"
-    #     i.click(op=op)
+    # p("超级神虎").click(anchor=(0, 0))
+    # p(text="超级神虎").sibling(type="Button").click()
+    # # p(text="手机也能玩").click()
+    l = p(type="CBuffPanel").offspring(type="CDisableImage")
+    for i in l:
+        i.click()
+    d = p(type="VDialog")
+    while True:
+        l = d.offspring(type="Button")
+        r = random.randint(0, len(l.nodes))
+        try:
+            i = l[r]
+        except:
+            continue
+        i.click()

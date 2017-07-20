@@ -33,8 +33,12 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         self._rpc_client = rpc_client
 
         # 按照下面这个顺序初始化，以后这个尺寸随着屏幕旋转可能需要刷新
-        self.screen_resolution = self.get_screen_size()  # [width: float, height: float]
-        self.input_resulution = self.get_input_panel_size()  # [width: float, height: float]
+        w, h = self.get_screen_size()  # [width: float, height: float]
+        self.screen_resolution = (float(w), float(h))
+        try:
+            self.input_resulution = self.get_input_panel_size()  # [width: float, height: float]
+        except NotImplementedError:
+            self.input_resulution = self.screen_resolution
 
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
