@@ -6,12 +6,12 @@ import copy
 import six
 import time
 from functools import wraps
-from airtest.core.main import snapshot
 
-from .rpc import RpcRemoteException, RpcTimeoutException
+from .interfaces.rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
+from .utils.suppression import deprecated
 
 
 def wait_for_appearance(func):
@@ -53,7 +53,7 @@ class UIObjectProxy(object):
         self._nodes_proxy_is_list = True
         self._sorted_childres = None  # 仅用于__getitem__时保存好已排序的child代理对象
 
-        self._anchor = None  # 相对于包围盒的anchor定义，用于touch/swipe/drag操作的局部相对定位
+        self._focus = None  # 相对于包围盒的focus point定义，用于touch/swipe/drag操作的局部相对定位
 
     def child(self, name=None, **attrs):
         """
@@ -128,7 +128,7 @@ class UIObjectProxy(object):
         """
         索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个。
         该函数默认按照空间排序（从左到右从上到下）后才进行选择
-        
+
         警告：此方法有极大延迟，请勿频繁调用此方法。
 
         :param item: <int> 数组索引
@@ -179,7 +179,7 @@ class UIObjectProxy(object):
         遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
         :yield: ui对象
-        
+
         :raise: PocoTargetRemovedException
         """
 
@@ -203,42 +203,44 @@ class UIObjectProxy(object):
 
     @retries_when(RpcTimeoutException)
     @wait_for_appearance
-    def click(self, anchor='anchor', sleep_interval=None):
+    def click(self, focus='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
-        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+        :param focus: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为[0, 0]，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
-        snapshot(msg=str(self))
 
-        pos = self._position_of_anchor(anchor)
-        self.poco.click(pos)
+        # from airtest.core.main import snapshot
+        # snapshot(msg=str(self))
+
+        pos_in_percentage = self.get_position(focus)
+        self.poco.click(pos_in_percentage)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
 
     @wait_for_appearance
-    def swipe(self, dir, anchor='anchor', duration=0.5):
+    def swipe(self, dir, focus='anchor', duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离
 
         :param dir: 滑动方向，坐标系与屏幕坐标系相同。
-        :param anchor: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
+        :param focus: 点击对象的局部坐标系，'anchor'表示对象本身的节点anchor，'center'表示对象包围盒中心点，
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param duration: 滑动持续时间
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
 
         dir_vec = self._direction_vector_of(dir)
-        origin = self._position_of_anchor(anchor)
+        origin = self.get_position(focus)
         self.poco.swipe(origin, direction=dir_vec, duration=duration)
 
     def drag_to(self, target, duration=2):
@@ -248,46 +250,53 @@ class UIObjectProxy(object):
         :param target: 目标对象/归一化坐标
         :param duration: 持续时间
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
 
         if type(target) in (list, tuple):
             target_pos = target
         else:
-            target_pos = target._position_of_anchor('anchor')
-        origin_pos = self._position_of_anchor('anchor')
+            target_pos = target.get_position()
+        origin_pos = self.get_position()
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         self.swipe(dir, duration=duration)
 
+    @deprecated("`anchor` is deprecated, please use equivalent method `focus` instead.")
     def anchor(self, a):
+        return self.focus(a)
+
+    def focus(self, f):
         """
         设置对象的操作定位点，相对于对象包围盒。Immutable操作，返回一个新的对象代理，原对象不受影响
 
-        :param a: anchor，anchor/center，或其余list[2]
+        :param f: focus point，'anchor'/'center'，或其余list[2]
         :return: 新的对象代理
         """
 
         ret = copy.copy(self)
-        ret._anchor = a
+        ret._focus = f
         return ret
 
-    def _position_of_anchor(self, anchor):
-        anchor = self._anchor or anchor
-        screen_resolution = self.poco.screen_resolution
-        if anchor == 'anchor':
-            pos = self.attr('anchorPosition')
-            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
-        elif anchor == 'center':
-            pos = self.attr('screenPosition')
-            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
-        elif type(anchor) in (list, tuple):
-            center = self.get_position()
-            size = self.get_size()
-            pos = [(anchor[0] - 0.5) * size[0] + center[0], (anchor[1] - 0.5) * size[1] + center[1]]
+    def get_position(self, focus='anchor'):
+        focus = self._focus or focus
+        if focus == 'anchor':
+            pos = self.attr('pos')
+        elif focus == 'center':
+            x, y = self.attr('pos')
+            w, h = self.get_size()
+            ap_x, ap_y = self.attr("anchorPoint")
+            fx, fy = 0.5, 0.5
+            pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
+        elif type(focus) in (list, tuple):
+            x, y = self.attr('pos')
+            w, h = self.get_size()
+            ap_x, ap_y = self.attr("anchorPoint")
+            fx, fy = focus
+            pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
         else:
-            raise TypeError('Unsupported anchor type {}. '
-                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
+            raise TypeError('Unsupported focus type {}. '
+                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(focus)))
         return pos
 
     def _direction_vector_of(self, dir):
@@ -458,25 +467,18 @@ class UIObjectProxy(object):
         :return: 格式为[width, height]的list, width,height ∈ [0, 1]
         """
 
-        size_in_screen = self.attr('size')
-        screen_resolution = self.poco.screen_resolution
-        return [size_in_screen[0] / screen_resolution[0], size_in_screen[1] / screen_resolution[1]]
-
-    def get_position(self):
-        position_in_screen = self.attr('screenPosition')
-        screen_resolution = self.poco.screen_resolution
-        return [position_in_screen[0] / screen_resolution[0], position_in_screen[1] / screen_resolution[1]]
+        return self.attr('size')
 
     def get_bounds(self):
         size = self.get_size()
-        top_left = self._position_of_anchor([0, 0])
+        top_left = self.get_position([0, 0])
 
         # t, r, b, l
         bounds = [top_left[1], top_left[0] + size[0], top_left[1] + size[1], top_left[0]]
         return bounds
 
     def __str__(self):
-        return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
+        return u'UIObjectProxy of "{}"'.format(query_expr(self.query))
 
     __repr__ = __str__
 

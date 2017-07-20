@@ -33,7 +33,7 @@ def query_expr(query):
             if k == 'name':
                 exprs.append(v)
             else:
-                exprs.append('{}{}{}'.format(k, TranslatePred[pred], v))
+                exprs.append(u'{}{}{}'.format(k, TranslatePred[pred], v))
         return TranslateOp[op].join(exprs)
 
 
@@ -43,14 +43,23 @@ QueryAttributeNames = (
 )
 
 
+def ensure_unicode(value):
+    if isinstance(value, str):
+        return value.decode("utf-8")
+    else:
+        return value
+
+
 def build_query(name, **attrs):
     for attr_name in attrs.keys():
         if attr_name not in QueryAttributeNames:
             raise Exception('Unsupported Attribute name for query  !!!')
     query = []
     if name is not None:
+        name = ensure_unicode(name)
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
+        attr_val = ensure_unicode(attr_val)
         if attr_name.endswith('Matches'):
             attr_name = attr_name[:-7]  # textMatches -> (attr.*=, text)
             op = 'attr.*='

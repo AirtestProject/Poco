@@ -133,7 +133,7 @@ print(mission_btn.exists())  # True，表示是否存在界面中
 
 #### click
 
-点击对象，默认以anchor对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。
+点击对象，默认以挂接点(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。
 
 ```python
 poco('bg_mission').click()
@@ -229,3 +229,14 @@ Safaia().install(require('safaia.init.poco'))
 ## API Reference
 
 ...
+
+
+## SDK Standard
+
+由于每个引擎的坐标系有所不同，SDK dump出来的值需要统一，特别是下面这三个：
+```
+size: (width, height)      # 对象的包围盒大小
+pos: (x, y)                # 对象挂接点(anchor)的屏幕坐标
+anchorPoint: (ap_x, ap_y)  # 对象挂接点相对于包围盒的相对坐标，左上角为(0, 0)，右下角为(1, 1)
+```
+**请严格按照此标准实现SDK，如果引擎坐标系有所不同请在sdk里面进行转换**，这样inspector和poco脚本可以正确运作

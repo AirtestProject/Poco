@@ -55,16 +55,7 @@ class RpcInterface(object):
     def swipe(self, x1, y1, x2, y2, duration):
         raise NotImplementedError
 
-    def get_input_panel_size(self):
-        """
-        输入面板的尺寸，type float
-        :return: [width, height] as floats 
-        """
-
-        return self.get_screen_size()
-
     # screen interface
-    @required
     def get_screen_size(self):
         """
         获取渲染屏幕的尺寸，type float

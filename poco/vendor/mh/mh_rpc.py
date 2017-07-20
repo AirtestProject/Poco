@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-from . import RpcInterface, RpcRemoteException
+from poco.interfaces.rpc import RpcInterface, RpcRemoteException
 from .simplerpc.rpcclient import AsyncConn, RpcClient
 from functools import wraps
 import re
@@ -135,7 +135,7 @@ class MhRpc(RpcInterface):
                     return True
 
     Predicates = {
-        'attr=':  lambda l, r: l == r,
+        'attr=': lambda l, r: l == r,
         'attr.*=': lambda origin, pattern: re.match(pattern, origin) is not None,
     }
 
@@ -165,6 +165,8 @@ class MhRpc(RpcInterface):
             pred = cls.Predicates.get(op)
             attribute, value = args
             attrVal = node.getAttr(attribute, None)
+            if attrVal is None:
+                return False
             return pred(attrVal, value)
 
         return False
