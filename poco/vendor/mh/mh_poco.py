@@ -3,7 +3,7 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 20:29:56
 from poco import Poco
-from poco.rpc.mh_rpc import MhRpc
+from .mh_rpc import MhRpc
 
 
 class MhPoco(Poco):

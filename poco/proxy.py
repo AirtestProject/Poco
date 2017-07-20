@@ -7,7 +7,7 @@ import six
 import time
 from functools import wraps
 
-from .rpc import RpcRemoteException, RpcTimeoutException
+from .interfaces.rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query

@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-from . import RpcInterface, RpcRemoteException
+from poco.interfaces.rpc import RpcInterface, RpcRemoteException
 from .simplerpc.rpcclient import AsyncConn, RpcClient
 from functools import wraps
 import re
