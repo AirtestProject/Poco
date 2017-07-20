@@ -38,7 +38,6 @@ class AirtestPoco(Poco):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.input_resulution
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
-        # snapshot()
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
@@ -54,13 +53,14 @@ class AirtestPoco(Poco):
         else:
             swipe(p1, vector=direction, duration=duration, steps=steps)
 
-    def snapshot(self, filename='sshot.png'):
-        # windows系统文件名最大长度有限制
-        if len(filename) > 220:
-            filename = filename[:220]
-        if not filename.endswith('.png'):
-            filename += '.png'
-        snapshot(filename)
+    def snapshot(self, width):
+        # # windows系统文件名最大长度有限制
+        # if len(filename) > 220:
+        #     filename = filename[:220]
+        # if not filename.endswith('.png'):
+        #     filename += '.png'
+        # snapshot(filename)
+        pass
 
     def command(self, script, lang='text', sleep_interval=None):
         """

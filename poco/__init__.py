@@ -115,22 +115,3 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
     @property
     def rpc(self):
         return self._rpc_client
-
-    # input interface
-    def snapshot(self, filename='sshot.png'):
-        screen = self.rpc_client.remote('safaia-screen-addon')
-        screen_fetcher = screen.snapshot(self.screen_resolution[0] / 2)  # 以半分辨率截图
-        if screen_fetcher is not None:
-            for i in range(10):
-                imgdata, fmt = screen_fetcher()
-                if imgdata:
-                    if len(filename) > 220:
-                        filename = filename[:220]
-                    if not filename.endswith('.' + fmt):
-                        filename += '.' + fmt
-                    filename = re.sub(r'''[*?":<>']''', '_', filename)
-                    filename = os.path.normpath(filename)
-                    with open(filename, 'wb') as f:
-                        f.write(base64.b64decode(imgdata))
-                    break
-                time.sleep(1)
