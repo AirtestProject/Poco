@@ -33,7 +33,7 @@ def query_expr(query):
             if k == 'name':
                 exprs.append(v)
             else:
-                exprs.append(u'{}{}{}'.format(k, TranslatePred[pred], v))
+                exprs.append('{}{}{}'.format(k, TranslatePred[pred], v))
         return TranslateOp[op].join(exprs)
 
 

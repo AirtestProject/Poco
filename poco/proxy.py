@@ -491,7 +491,7 @@ class UIObjectProxy(object):
         return bounds
 
     def __str__(self):
-        return u'UIObjectProxy of "{}"'.format(query_expr(self.query))
+        return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
 
     __repr__ = __str__
 
