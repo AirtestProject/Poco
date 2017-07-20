@@ -135,7 +135,7 @@ class MhRpc(RpcInterface):
                     return True
 
     Predicates = {
-        'attr=':  lambda l, r: l == r,
+        'attr=': lambda l, r: l == r,
         'attr.*=': lambda origin, pattern: re.match(pattern, origin) is not None,
     }
 
@@ -165,6 +165,8 @@ class MhRpc(RpcInterface):
             pred = cls.Predicates.get(op)
             attribute, value = args
             attrVal = node.getAttr(attribute, None)
+            if attrVal is None:
+                return False
             return pred(attrVal, value)
 
         return False

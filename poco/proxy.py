@@ -127,7 +127,7 @@ class UIObjectProxy(object):
         """
         索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个。
         该函数默认按照空间排序（从左到右从上到下）后才进行选择
-        
+
         警告：此方法有极大延迟，请勿频繁调用此方法。
 
         :param item: <int> 数组索引
@@ -178,7 +178,7 @@ class UIObjectProxy(object):
         遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
         :yield: ui对象
-        
+
         :raise: PocoTargetRemovedException
         """
 
@@ -210,15 +210,15 @@ class UIObjectProxy(object):
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为[0, 0]，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param sleep_interval: 点击后的静候时间，默认为poco的操作间隔
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
 
         # from airtest.core.main import snapshot
         # snapshot(msg=str(self))
 
-        pos = self._position_of_anchor(anchor)
-        self.poco.click(pos)
+        pos_in_percentage = self._position_of_focus(anchor)
+        self.poco.click(pos_in_percentage)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
@@ -234,12 +234,12 @@ class UIObjectProxy(object):
             其余anchor类型为list[2]/tuple[2]，以屏幕坐标系轴方向相同，对象包围盒左上角为原点，右下角为[1, 1]点。默认点击对象节点的anchor。
         :param duration: 滑动持续时间
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
 
         dir_vec = self._direction_vector_of(dir)
-        origin = self._position_of_anchor(anchor)
+        origin = self._position_of_focus(anchor)
         self.poco.swipe(origin, direction=dir_vec, duration=duration)
 
     def drag_to(self, target, duration=2):
@@ -249,15 +249,15 @@ class UIObjectProxy(object):
         :param target: 目标对象/归一化坐标
         :param duration: 持续时间
         :return: None
-        
+
         :raise PocoNoSuchNodeException:
         """
 
         if type(target) in (list, tuple):
             target_pos = target
         else:
-            target_pos = target._position_of_anchor('anchor')
-        origin_pos = self._position_of_anchor('anchor')
+            target_pos = target._position_of_focus('anchor')
+        origin_pos = self._position_of_focus('anchor')
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         self.swipe(dir, duration=duration)
 
@@ -273,22 +273,23 @@ class UIObjectProxy(object):
         ret._anchor = a
         return ret
 
-    def _position_of_anchor(self, anchor):
-        anchor = self._anchor or anchor
-        screen_resolution = self.poco.screen_resolution
-        if anchor == 'anchor':
-            pos = self.attr('anchorPosition')
-            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
-        elif anchor == 'center':
-            pos = self.attr('screenPosition')
-            pos = [pos[0] / screen_resolution[0], pos[1] / screen_resolution[1]]
-        elif type(anchor) in (list, tuple):
-            center = self.get_position()
-            size = self.get_size()
-            pos = [(anchor[0] - 0.5) * size[0] + center[0], (anchor[1] - 0.5) * size[1] + center[1]]
+    def _position_of_focus(self, focus="anchor"):
+        focus = self._anchor or focus
+        if focus == 'anchor':
+            pos = self.get_position()
+        elif focus == 'center':
+            x, y = self.get_position()
+            w, h = self.get_size()
+            ap_x, ap_y = self.attr("anchorPoint")
+            pos = [x + w * (0.5 - ap_x), y + h * (0.5 - ap_y)]
+        elif type(focus) in (list, tuple):
+            x, y = self.get_position()
+            w, h = self.get_size()
+            ap_x, ap_y = focus
+            pos = [x + w * (0.5 - ap_x), y + h * (0.5 - ap_y)]
         else:
-            raise TypeError('Unsupported anchor type {}. '
-                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(anchor)))
+            raise TypeError('Unsupported focus type {}. '
+                            'Only "anchor/center" or 2 elements list/tuple available.'.format(type(focus)))
         return pos
 
     def _direction_vector_of(self, dir):
@@ -470,7 +471,7 @@ class UIObjectProxy(object):
 
     def get_bounds(self):
         size = self.get_size()
-        top_left = self._position_of_anchor([0, 0])
+        top_left = self._position_of_focus([0, 0])
 
         # t, r, b, l
         bounds = [top_left[1], top_left[0] + size[0], top_left[1] + size[1], top_left[0]]
