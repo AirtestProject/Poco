@@ -9,9 +9,9 @@ from poco.rpc.mh_rpc import MhRpc
 class MhPoco(Poco):
     """docstring for MhPoco"""
     def __init__(self):
-        self._rpc_client = MhRpc()
-        self._rpc_client.c.DEBUG = False
-        super(MhPoco, self).__init__(self._rpc_client, action_interval=0.01)
+        rpc_client = MhRpc()
+        rpc_client.c.DEBUG = False
+        super(MhPoco, self).__init__(rpc_client, action_interval=0.01)
 
     def click(self, pos):
-        self._rpc_client.click(pos)
+        self.rpc.click(pos)

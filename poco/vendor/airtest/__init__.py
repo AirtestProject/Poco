@@ -20,7 +20,7 @@ class AirtestPoco(Poco):
         super(AirtestPoco, self).__init__(rpc_client)
 
     def get_screen_size(self):
-        return [float(s) for s in self.get_rpc_interface().get_screen_size()]
+        return [float(s) for s in self.rpc.get_screen_size()]
 
     def get_input_panel_size(self):
         screen_w, screen_h = self.screen_resolution
@@ -38,6 +38,7 @@ class AirtestPoco(Poco):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.input_resulution
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
+        snapshot()
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):

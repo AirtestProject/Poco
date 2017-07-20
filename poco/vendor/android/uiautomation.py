@@ -20,7 +20,7 @@ class AndroidUiautomationPoco(Poco):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.screen_resolution
         pos = pos[0] * panel_size[0], pos[1] * panel_size[1]
-        self.get_rpc_interface().click(*pos)
+        self.rpc.click(*pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
@@ -33,14 +33,14 @@ class AndroidUiautomationPoco(Poco):
             sp2 = [(p1[0] + direction[0]) * panel_size[0], (p1[1] + direction[1]) * panel_size[1]]
         else:
             raise RuntimeError("p2 and direction cannot be None at the same time.")
-        self.get_rpc_interface().swipe(sp1[0], sp1[1], sp2[0], sp2[1], duration)
+        self.rpc.swipe(sp1[0], sp1[1], sp2[0], sp2[1], duration)
 
     def long_click(self, pos, duration=2):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         panel_size = self.screen_resolution
         pos = int(pos[0] * panel_size[0]), int(pos[1] * panel_size[1])
-        self.get_rpc_interface().long_click(pos[0], pos[1], duration)
+        self.rpc.long_click(pos[0], pos[1], duration)
 
     def snapshot(self, filename='sshot.png'):
         pass
@@ -48,7 +48,7 @@ class AndroidUiautomationPoco(Poco):
 
 import time
 poco = AndroidUiautomationPoco("")
-print poco.get_rpc_interface().remote_poco.dump()
+print poco.rpc.remote_poco.dump()
 
 # print poco('android:id/action_bar').get_bounds()
 # print poco(text='更多').drag_to(poco(text='WLAN'))

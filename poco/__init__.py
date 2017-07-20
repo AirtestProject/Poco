@@ -108,7 +108,8 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
     def sleep_for_polling_interval(self):
         time.sleep(self._poll_interval)
 
-    def get_rpc_interface(self):
+    @property
+    def rpc(self):
         return self._rpc_client
 
     # input interface

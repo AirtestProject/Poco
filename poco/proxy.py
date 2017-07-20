@@ -29,11 +29,27 @@ def wait_for_appearance(func):
     return wrapped
 
 
+def refresh_when(error_type_str):
+    def wrapper(func):
+        @wraps(func)
+        def wrapped(self, *args, **kwargs):
+            try:
+                return func(self, *args, **kwargs)
+            except RpcRemoteException as e:
+                if e.error_type == error_type_str:
+                    # refresh node cache
+                    self._do_query(multiple=False, refresh=True)
+                    return func(self, *args, **kwargs)
+                else:
+                    raise
+        return wrapped
+    return wrapper
+
+
 class UIObjectProxy(object):
     def __init__(self, poco, name=None, **attrs):
         self.query = build_query(name, **attrs)
         self.poco = poco
-        self._negative = False
 
         self._evaluated = False
         self._query_multiple = False
@@ -135,15 +151,9 @@ class UIObjectProxy(object):
                 uiobj.query = ('index', (self.query, i))
                 uiobj._evaluated = True
                 uiobj._query_multiple = True
-                uiobj._nodes = self.poco.get_rpc_interface().evaluate(nodes[i])
+                uiobj._nodes = self.poco.rpc.evaluate(nodes[i])
                 uiobj._nodes_proxy_is_list = False
-                try:
-                    pos = uiobj.get_position()
-                except RpcRemoteException as e:
-                    if e.error_type == 'NodeHasBeenRemovedException':
-                        raise PocoTargetRemovedException('indexing (index={})'.format(i), self.query)
-                    else:
-                        raise
+                pos = uiobj.get_position()
                 self._sorted_childres.append((uiobj, pos))
         self._sorted_childres.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
         return self._sorted_childres[item][0]
@@ -164,12 +174,6 @@ class UIObjectProxy(object):
         else:
             nodes = self._nodes
         return len(nodes)
-
-    def __neg__(self):
-        ret = UIObjectProxy(self.poco)
-        ret.query = self.query
-        ret._negative = True
-        return ret
 
     def __iter__(self):
         """
@@ -192,15 +196,9 @@ class UIObjectProxy(object):
             uiobj.query = ('index', (self.query, i))
             uiobj._evaluated = True
             uiobj._query_multiple = True
-            uiobj._nodes = self.poco.get_rpc_interface().evaluate(nodes[i])
+            uiobj._nodes = self.poco.rpc.evaluate(nodes[i])
             uiobj._nodes_proxy_is_list = False
-            try:
-                pos = uiobj.get_position()
-            except RpcRemoteException as e:
-                if e.error_type == 'NodeHasBeenRemovedException':
-                    raise PocoTargetRemovedException('iteration (index={})'.format(i), self.query)
-                else:
-                    raise
+            pos = uiobj.get_position()
             sorted_nodes.append((uiobj, pos))
         sorted_nodes.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
 
@@ -342,6 +340,7 @@ class UIObjectProxy(object):
                 raise PocoTargetTimeout('disappearance', self.query)
 
     @retries_when(RpcTimeoutException)
+    @refresh_when("NodeHasBeenRemovedException")
     def attr(self, name):
         """
         获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
@@ -362,38 +361,21 @@ class UIObjectProxy(object):
 
         :raise PocoNoSuchNodeException: 当查询节点不存在是
         :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
+        
+        :note: 自动捕获RpcRemoteException.NodeHasBeenRemovedException
+               远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
         """
 
         # 优化速度，只选择第一个匹配到的节点
         nodes = self._do_query(multiple=False)
-        try:
-            val = self.poco.get_rpc_interface().getattr(nodes, name)
-        except RpcRemoteException as e:
-            # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
-            if e.error_type == 'NodeHasBeenRemovedException':
-                nodes = self._do_query(multiple=False, refresh=True)
-                val = self.poco.get_rpc_interface().getattr(nodes, name)
-            else:
-                raise
-        if self._negative:
-            if type(val) is bool:
-                return not val
-            elif isinstance(val, numbers.Number):
-                return -val
+        val = self.poco.rpc.getattr(nodes, name)
         return val
 
     @retries_when(RpcTimeoutException)
+    @refresh_when("NodeHasBeenRemovedException")
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
-        try:
-            self.poco.get_rpc_interface().setattr(nodes, name, val)
-        except RpcRemoteException as e:
-            # 远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
-            if e.error_type == 'NodeHasBeenRemovedException':
-                nodes = self._do_query(multiple=False, refresh=True)
-                self.poco.get_rpc_interface().setattr(nodes, name, val)
-            else:
-                raise
+        self.poco.rpc.setattr(nodes, name, val)
 
     def exists(self):
         """
@@ -413,6 +395,7 @@ class UIObjectProxy(object):
 
         :return: True/False
         """
+
         return self.attr('visible')
 
     def enabled(self):
@@ -421,6 +404,7 @@ class UIObjectProxy(object):
 
         :return: True/False
         """
+
         return self.attr('enable')
 
     def touchable(self):
@@ -431,6 +415,7 @@ class UIObjectProxy(object):
 
         :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
+
         return self.attr('touchable')
 
     def get_text(self):
@@ -439,6 +424,7 @@ class UIObjectProxy(object):
 
         :return: 节点上的文本值，以utf-8编码
         """
+
         text = self.attr('text')
         if six.PY2 and type(text) is unicode:
             text = text.encode('utf-8')
@@ -465,6 +451,7 @@ class UIObjectProxy(object):
 
         :return: 节点名
         """
+
         return self.attr('name')
 
     def get_size(self):
@@ -473,6 +460,7 @@ class UIObjectProxy(object):
 
         :return: 格式为[width, height]的list, width,height ∈ [0, 1]
         """
+
         size_in_screen = self.attr('size')
         screen_resolution = self.poco.screen_resolution
         return [size_in_screen[0] / screen_resolution[0], size_in_screen[1] / screen_resolution[1]]
@@ -506,7 +494,7 @@ class UIObjectProxy(object):
 
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:
-            self._nodes = self.poco.get_rpc_interface().select(self.query, multiple)
+            self._nodes = self.poco.rpc.select(self.query, multiple)
             if len(self._nodes) == 0:
                 raise PocoNoSuchNodeException(self)
             self._evaluated = True
