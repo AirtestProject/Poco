@@ -41,8 +41,14 @@ class AndroidUiautomationPoco(Poco):
 
 
 import time
+import json
+
 poco = AndroidUiautomationPoco("")
-print poco.rpc.remote_poco.dump()
+t1 = time.time()
+r = poco.rpc.dump()
+t2 = time.time()
+print t2 - t1
+print(len(json.dumps(r)))
 
 # print poco('android:id/action_bar').get_bounds()
 # print poco(text='更多').drag_to(poco(text='WLAN'))

@@ -102,7 +102,7 @@ class MhRpc(RpcInterface):
             try:
                 result = [cls._select(cond, multiple, root, matcher, max_depth, onlyVisibleNode, includeRoot)[i]]
             except IndexError:
-                raise RpcRemoteException(u'Query results index out of range. Index={} condition "{}" from root "{}".'.format(i, cond, cls.root()))
+                raise RpcRemoteException('Query results index out of range. Index={} condition "{}" from root "{}".'.format(i, cond, cls.root()))
         else:
             cls._selectTraverse(cond, root, matcher, result, multiple, max_depth, onlyVisibleNode, includeRoot)
 
@@ -221,6 +221,6 @@ if __name__ == '__main__':
     # pprint(root)
     # pprint(root.getParent())
     # pprint(root.getChildren())
-    # nodes = r.select(["and",[["attr=",["text",u"手机也能玩"]]]])
+    # nodes = r.select(["and",[["attr=",["text","手机也能玩"]]]])
     # nodes = r.select(["and",[["attr=",["type", "Text"]]]])
     # pprint(nodes)
