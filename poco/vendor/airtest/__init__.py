@@ -58,7 +58,8 @@ class AirtestPoco(Poco):
             swipe(p1, vector=direction, duration=duration, steps=steps)
 
     def snapshot(self, width):
-        raise NotImplementedError
+        # width as massage
+        snapshot(msg=width.decode('utf-8'))
 
     def command(self, script, lang='text', sleep_interval=None):
         """
