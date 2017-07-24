@@ -74,6 +74,7 @@ class HunterRpc(RpcInterface):
     def __init__(self, hunter):
         RpcInterface.__init__(self)
         self.rpc_client = HunterRpcClient(hunter)
+        self.rpc_client.set_timeout(25)  # 把timeout设置长一点，避免有些游戏切场景时耗时太久，来不及响应rpc请求
         self.remote_poco = self.rpc_client.remote('poco-uiautomation-framework')
         self.selector = self.remote_poco.selector
         self.attributor = self.remote_poco.attributor
