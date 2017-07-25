@@ -22,9 +22,9 @@ def sync_wrapper(func):
 class MhRpc(RpcInterface):
     """docstring for MhRpc"""
 
-    def __init__(self):
+    def __init__(self, addr=("localhost", 5001)):
         super(MhRpc, self).__init__()
-        conn = AsyncConn(("localhost", 5001))
+        conn = AsyncConn(addr)
         self.c = RpcClient(conn)
         self.c.run(backend=True)
 

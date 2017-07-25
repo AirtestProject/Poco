@@ -8,8 +8,8 @@ from .mh_rpc import MhRpc
 
 class MhPoco(Poco):
     """docstring for MhPoco"""
-    def __init__(self):
-        rpc_client = MhRpc()
+    def __init__(self, addr=("localhost", 5001)):
+        rpc_client = MhRpc(addr)
         rpc_client.c.DEBUG = False
         super(MhPoco, self).__init__(rpc_client, action_interval=0.01)
 
