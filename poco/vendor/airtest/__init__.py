@@ -62,7 +62,7 @@ class AirtestPoco(Poco):
         width = width.decode('utf-8')
         if not width.endswith('.png'):
             width += '.png'
-        snapshot(width)
+        snapshot(msg=width)
 
     def command(self, script, lang='text', sleep_interval=None):
         """
