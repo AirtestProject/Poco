@@ -166,13 +166,13 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-drag.png)
 
-#### anchor (局部定位)
+#### focus (局部定位)
 
-与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用anchor操作。anchor同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
+与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
 
 ```python
-poco('bg_mission').anchor('center').click()  # 点击中心点
-poco(type='ScrollView').anchor([0.5, 0.8]).drag_to(poco(type='ScrollView').anchor([0.5, 0.2]))  # ScrollView卷动翻页
+poco('bg_mission').focus('center').click()  # 点击中心点
+poco(type='ScrollView').focus([0.5, 0.8]).drag_to(poco(type='ScrollView').focus([0.5, 0.2]))  # ScrollView卷动翻页
 ```
 
 
@@ -233,7 +233,8 @@ Safaia().install(require('safaia.init.poco'))
 
 ## SDK Standard
 
-由于每个引擎的坐标系有所不同，SDK dump出来的值需要统一，特别是下面这三个：
+由于每个引擎的坐标系有所不同，SDK dump出来的值需要统一，特别是下面这三个：  
+尺度均为相对于屏幕宽高的百分比值
 ```
 size: (width, height)      # 对象的包围盒大小
 pos: (x, y)                # 对象挂接点(anchor)的屏幕坐标
