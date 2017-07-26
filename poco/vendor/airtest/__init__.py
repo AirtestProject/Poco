@@ -59,7 +59,10 @@ class AirtestPoco(Poco):
 
     def snapshot(self, width):
         # width as massage
-        snapshot(width.decode('utf-8'))
+        width = width.decode('utf-8')
+        if not width.endswith('.png'):
+            width += '.png'
+        snapshot(width)
 
     def command(self, script, lang='text', sleep_interval=None):
         """
