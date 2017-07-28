@@ -21,23 +21,31 @@ class Client(RpcClient):
 
 
 class AndroidRpcClient(RpcInterface):
-    def __init__(self, endpoint):
+    def __init__(self, endpoint, ime):
         super(AndroidRpcClient, self).__init__()
         self.endpoint = endpoint
         self.client = Client(endpoint)
         self.remote_poco = self.client.remote('poco-uiautomation-framework')
         self.inputer = self.remote_poco.inputer
+        self.ime = ime
 
     # screen interface
     def get_screen_size(self):
         return self.remote_poco.get_screen_size()
+
+    def get_screen(self, width):
+        assert type(width) is int
+        return self.remote_poco.screen.getScreen(width)
 
     # node/hierarchy interface
     def getattr(self, nodes, name):
         return self.remote_poco.attributor.getAttr(nodes, name)
 
     def setattr(self, nodes, name, val):
-        self.remote_poco.attributor.setAttr(nodes, name, val)
+        if name == 'text':
+            self.ime.text(val)
+        else:
+            self.remote_poco.attributor.setAttr(nodes, name, val)
 
     def select(self, query, multiple=False):
         return self.remote_poco.selector.select(query, multiple)
@@ -47,14 +55,14 @@ class AndroidRpcClient(RpcInterface):
 
     # input interface
     def click(self, x, y):
-        return self.inputer.click(int(x), int(y))
+        return self.inputer.click(x, y)
 
-    def long_click(self, x, y, duration=3):
-        # 目标设备duration以毫秒为单位
-        return self.inputer.longClick(int(x), int(y), int(duration * 1000))
+    def long_click(self, x, y, duration=3.0):
+        return self.inputer.longClick(x, y, duration)
 
-    def swipe(self, x1, y1, x2, y2, duration):
-        return self.inputer.swipe(int(x1), int(y1), int(x2), int(y2), int(duration * 1000))
+    def swipe(self, x1, y1, x2, y2, duration=2.0):
+        return self.inputer.swipe(x1, y1, x2, y2, duration)
 
     def get_input_panel_size(self):
         return self.inputer.getPortSize()
+
