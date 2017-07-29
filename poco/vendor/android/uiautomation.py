@@ -48,21 +48,21 @@ class AndroidUiautomationPoco(Poco):
         p1, _ = self.adb_client.setup_forward("tcp:10081")
 
         # start
-        if updated or not self._is_running(PocoServicePackage):
-            if self._is_running('com.github.uiautomator'):
-                warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
-                              .format(self.__class__.__name__))
-                self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
-
+        if updated:
             self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
-            self.instrument_proc = self.adb_client.shell([
-                'am', 'instrument', '-w', '-e', 'class',
-                '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
-                '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
-                not_wait=True)
-            time.sleep(2)
-            self._wait_for_remote_ready(p0)
-            time.sleep(1)
+
+        if self._is_running('com.github.uiautomator'):
+            warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
+                          .format(self.__class__.__name__))
+            self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
+        self.adb_client.shell([
+            'am', 'instrument', '-w', '-e', 'class',
+            '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+            '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
+            not_wait=True)
+        time.sleep(2)
+        self._wait_for_remote_ready(p0)
+        time.sleep(1)
 
         endpoint = "http://127.0.0.1:{}".format(p1)
         rpc_client = AndroidRpcClient(endpoint, self.ime)
