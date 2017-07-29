@@ -63,7 +63,7 @@ class RpcInterface(object):
         """
         raise NotImplementedError
 
-    def get_screen(self):
+    def get_screen(self, width):
         raise NotImplementedError
 
 
