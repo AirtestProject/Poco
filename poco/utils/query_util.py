@@ -39,12 +39,6 @@ def query_expr(query):
         raise RuntimeError('Bad query format. "{}"'.format(repr(query)))
 
 
-QueryAttributeNames = (
-    'type', 'text', 'enable', 'visible', 'touchable', 'name',
-    'textMatches', 'typeMatches', 'nameMatches',
-)
-
-
 # def ensure_unicode(value):
 #     if isinstance(value, str):
 #         return value.decode("utf-8")
@@ -53,9 +47,6 @@ QueryAttributeNames = (
 
 
 def build_query(name, **attrs):
-    for attr_name in attrs.keys():
-        if attr_name not in QueryAttributeNames:
-            raise Exception('Unsupported Attribute name for query  !!!')
     query = []
     if name is not None:
         attrs['name'] = name

@@ -4,6 +4,8 @@ __author__ = 'lxn3032'
 
 import os
 import time
+import numbers
+import warnings
 
 from poco import Poco
 from poco.exceptions import InvalidOperationException
@@ -47,7 +49,12 @@ class AndroidUiautomationPoco(Poco):
             pass
 
         # start
-        if not self._started():
+        if updated or not self._is_running(PocoServicePackage):
+            if self._is_running('com.github.uiautomator'):
+                warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
+                              .format(self.__class__.__name__))
+                self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
+
             self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
             self.instrument_proc = self.adb_client.shell([
                 'am', 'instrument', '-w', '-e', 'class',
@@ -60,11 +67,11 @@ class AndroidUiautomationPoco(Poco):
         rpc_client = AndroidRpcClient(endpoint, self.ime)
         super(AndroidUiautomationPoco, self).__init__(rpc_client)
 
-    def _started(self):
+    def _is_running(self, package_name):
         processes = self.adb_client.shell(['ps']).splitlines()
         for ps in processes:
             ps = ps.strip()
-            if ps.endswith(PocoServicePackage):
+            if ps.endswith(package_name):
                 return True
         return False
 
@@ -90,4 +97,8 @@ class AndroidUiautomationPoco(Poco):
         self.rpc.long_click(pos[0], pos[1], duration)
 
     def snapshot(self, width=720):
+        # snapshot接口暂时还补统一
+        if not isinstance(width, numbers.Number):
+            return None
+
         return self.rpc.get_screen(int(width))
