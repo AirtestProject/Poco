@@ -60,8 +60,9 @@ class AndroidUiautomationPoco(Poco):
                 '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
                 not_wait=True)
+            time.sleep(2)
             self._wait_for_remote_ready(p0)
-            time.sleep(3)
+            time.sleep(1)
 
         endpoint = "http://127.0.0.1:{}".format(p1)
         rpc_client = AndroidRpcClient(endpoint, self.ime)
