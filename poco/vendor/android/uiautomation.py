@@ -6,6 +6,7 @@ import os
 import time
 import numbers
 import warnings
+import requests
 
 from poco import Poco
 from poco.exceptions import InvalidOperationException
@@ -43,10 +44,8 @@ class AndroidUiautomationPoco(Poco):
         install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug-androidTest.apk'), updated)
 
         # forward
-        try:
-            self.adb_client.forward("tcp:10081", "tcp:10081")  # TODO： 处理本地端口被占用的情况
-        except:
-            pass
+        p0, _ = self.adb_client.setup_forward("tcp:10080")
+        p1, _ = self.adb_client.setup_forward("tcp:10081")
 
         # start
         if updated or not self._is_running(PocoServicePackage):
@@ -61,9 +60,9 @@ class AndroidUiautomationPoco(Poco):
                 '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
                 not_wait=True)
-            time.sleep(3.5)  # TODO： 通过shell的输出判断要等多久，或者用ping检测
+            self._wait_for_remote_ready(p0)
 
-        endpoint = "http://127.0.0.1:10081"
+        endpoint = "http://127.0.0.1:{}".format(p1)
         rpc_client = AndroidRpcClient(endpoint, self.ime)
         super(AndroidUiautomationPoco, self).__init__(rpc_client)
 
@@ -74,6 +73,13 @@ class AndroidUiautomationPoco(Poco):
             if ps.endswith(package_name):
                 return True
         return False
+
+    @staticmethod
+    def _wait_for_remote_ready(port):
+        try:
+            requests.get('http://127.0.0.1:{}'.format(port), timeout=20)
+        except requests.exceptions.Timeout:
+            raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
