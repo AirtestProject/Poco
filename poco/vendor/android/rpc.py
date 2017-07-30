@@ -2,13 +2,37 @@
 __author__ = 'lxn3032'
 
 
-from poco.interfaces.rpc import RpcInterface
+from functools import wraps
 
+from poco.interfaces.rpc import RpcInterface
+from poco.exceptions import PocoTargetRemovedException
+
+from hrpc.exceptions import RpcRemoteException
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 
 
 __all__ = ['AndroidRpcClient']
+
+
+def transform_node_has_been_removed_exception(func):
+    """
+    将HRpcRemoteException.NodeHasBeenRemovedException转换成PocoTargetRemovedException
+
+    :param func: 仅限getattr和setattr两个接口方法
+    :return: 
+    """
+
+    @wraps(func)
+    def wrapped(self, nodes, name, *args, **kwargs):
+        try:
+            return func(self, nodes, name, *args, **kwargs)
+        except RpcRemoteException as e:
+            if e.error_type == 'NodeHasBeenRemovedException':
+                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), nodes)
+            else:
+                raise
+    return wrapped
 
 
 class Client(RpcClient):
@@ -31,16 +55,18 @@ class AndroidRpcClient(RpcInterface):
 
     # screen interface
     def get_screen_size(self):
-        return self.remote_poco.get_screen_size()
+        return self.remote_poco.screen.getPortSize()
 
     def get_screen(self, width):
         assert type(width) is int
         return self.remote_poco.screen.getScreen(width)
 
     # node/hierarchy interface
+    @transform_node_has_been_removed_exception
     def getattr(self, nodes, name):
         return self.remote_poco.attributor.getAttr(nodes, name)
 
+    @transform_node_has_been_removed_exception
     def setattr(self, nodes, name, val):
         if name == 'text':
             self.ime.text(val)
