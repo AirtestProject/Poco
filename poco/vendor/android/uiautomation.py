@@ -4,6 +4,7 @@ __author__ = 'lxn3032'
 
 import os
 import time
+import threading
 import numbers
 import warnings
 import requests
@@ -48,18 +49,13 @@ class AndroidUiautomationPoco(Poco):
         p1, _ = self.adb_client.setup_forward("tcp:10081")
 
         # start
-        if updated:
-            self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
-
         if self._is_running('com.github.uiautomator'):
             warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
                           .format(self.__class__.__name__))
             self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
-        self.adb_client.shell([
-            'am', 'instrument', '-w', '-e', 'class',
-            '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
-            '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
-            not_wait=True)
+
+        self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+        self._keep_running_instrumentation()
         time.sleep(2)
         self._wait_for_remote_ready(p0)
         time.sleep(1)
@@ -76,12 +72,29 @@ class AndroidUiautomationPoco(Poco):
                 return True
         return False
 
+    def _keep_running_instrumentation(self):
+        def loop():
+            while True:
+                proc = self.adb_client.shell([
+                    'am', 'instrument', '-w', '-e', 'class',
+                    '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+                    '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
+                    not_wait=True)
+                stdout, stderr = proc.communicate()
+                print(stdout)
+                print(stderr)
+                time.sleep(1)
+        t = threading.Thread(target=loop)
+        t.daemon = True
+        t.start()
+
     @staticmethod
     def _wait_for_remote_ready(port):
         for i in range(10):
             try:
-                requests.get('http://127.0.0.1:{}'.format(port), timeout=20)
+                requests.get('http://127.0.0.1:{}'.format(port), timeout=10)
             except requests.exceptions.Timeout:
+                # 这里可以尝试卸载了重新安装，有些手机上就是这样，有时候会启动不了，uiautomation内部机制的问题
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
             except requests.exceptions.ConnectionError:
                 time.sleep(1)
