@@ -78,10 +78,16 @@ class AndroidUiautomationPoco(Poco):
 
     @staticmethod
     def _wait_for_remote_ready(port):
-        try:
-            requests.get('http://127.0.0.1:{}'.format(port), timeout=20)
-        except requests.exceptions.Timeout:
-            raise RuntimeError("unable to launch AndroidUiautomationPoco")
+        for i in range(10):
+            try:
+                requests.get('http://127.0.0.1:{}'.format(port), timeout=20)
+            except requests.exceptions.Timeout:
+                raise RuntimeError("unable to launch AndroidUiautomationPoco")
+            except requests.exceptions.ConnectionError:
+                time.sleep(1)
+                print("still waiting for uiautomation ready.")
+                continue
+            break
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
