@@ -104,6 +104,9 @@ class AndroidUiautomationPoco(Poco):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
         self.rpc.long_click(pos[0], pos[1], duration)
 
+    def get_screen_size(self):
+        return self.rpc.get_screen_size()
+
     def snapshot(self, width=720):
         # snapshot接口暂时还补统一
         if not isinstance(width, numbers.Number):

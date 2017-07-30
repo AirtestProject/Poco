@@ -62,7 +62,3 @@ class AndroidRpcClient(RpcInterface):
 
     def swipe(self, x1, y1, x2, y2, duration=2.0):
         return self.inputer.swipe(x1, y1, x2, y2, duration)
-
-    def get_input_panel_size(self):
-        return self.inputer.getPortSize()
-
