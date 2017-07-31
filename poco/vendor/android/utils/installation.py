@@ -31,3 +31,6 @@ def install(adb_client, localpath, force_reinstall=False):
         return True
     return False
 
+
+def uninstall(adb_client, package):
+    adb_client.uninstall(package)
