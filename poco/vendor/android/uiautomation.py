@@ -15,7 +15,7 @@ from rpc import AndroidRpcClient
 
 from airtest.core.android import Android, ADB
 from airtest.core.android.ime_helper import YosemiteIme
-from poco.vendor.android.utils.installation import install
+from poco.vendor.android.utils.installation import install, uninstall
 
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
@@ -41,8 +41,8 @@ class AndroidUiautomationPoco(Poco):
         self.ime.start()
 
         # install
-        updated = install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug.apk'))
-        install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug-androidTest.apk'), updated)
+        self._instrument_proc = None
+        self._install_service()
 
         # forward
         p0, _ = self.adb_client.setup_forward("tcp:10080")
@@ -54,15 +54,23 @@ class AndroidUiautomationPoco(Poco):
                           .format(self.__class__.__name__))
             self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
 
-        self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
-        self._keep_running_instrumentation()
-        time.sleep(2)
-        self._wait_for_remote_ready(p0)
-        time.sleep(1)
+        ready = self._start_instrument(p0)
+        if not ready:
+            # 启动失败则需要卸载再重启，instrument的奇怪之处
+            uninstall(self.adb_client, PocoServicePackage)
+            self._install_service()
+            ready = self._start_instrument(p0)
+            if not ready:
+                raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
         endpoint = "http://127.0.0.1:{}".format(p1)
         rpc_client = AndroidRpcClient(endpoint, self.ime)
         super(AndroidUiautomationPoco, self).__init__(rpc_client)
+
+    def _install_service(self):
+        updated = install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug.apk'))
+        install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug-androidTest.apk'), updated)
+        return updated
 
     def _is_running(self, package_name):
         processes = self.adb_client.shell(['ps']).splitlines()
@@ -88,19 +96,30 @@ class AndroidUiautomationPoco(Poco):
         t.daemon = True
         t.start()
 
-    @staticmethod
-    def _wait_for_remote_ready(port):
-        for i in range(10):
+    def _start_instrument(self, port_to_ping):
+        if self._instrument_proc is not None:
+            self._instrument_proc.kill()
+            self._instrument_proc = None
+        ready = False
+        self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+        self._instrument_proc = self.adb_client.shell([
+            'am', 'instrument', '-w', '-e', 'class',
+            '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+            '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
+            not_wait=True)
+        time.sleep(2)
+        for i in range(5):
             try:
-                requests.get('http://127.0.0.1:{}'.format(port), timeout=10)
+                requests.get('http://127.0.0.1:{}'.format(port_to_ping), timeout=10)
+                ready = True
+                break
             except requests.exceptions.Timeout:
-                # 这里可以尝试卸载了重新安装，有些手机上就是这样，有时候会启动不了，uiautomation内部机制的问题
-                raise RuntimeError("unable to launch AndroidUiautomationPoco")
+                break
             except requests.exceptions.ConnectionError:
                 time.sleep(1)
                 print("still waiting for uiautomation ready.")
                 continue
-            break
+        return ready
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
