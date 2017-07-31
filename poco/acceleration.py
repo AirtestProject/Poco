@@ -1,11 +1,12 @@
 # coding=utf-8
-__author__ = 'lxn3032'
-
+from __future__ import unicode_literals
 
 import time
 import warnings
 
 from .exceptions import PocoTargetTimeout
+
+__author__ = 'lxn3032'
 
 
 class PocoAccelerationMixin(object):
