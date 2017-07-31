@@ -36,6 +36,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
         self._post_action_interval = options.get('action_interval', 0.5)
         self._poll_interval = options.get('poll_interval', 1.2)
+        self._last_proxy = None
 
     def __call__(self, name=None, **kw):
         """
@@ -58,7 +59,8 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         if not name and len(kw) == 0:
             warnings.warn("Wildcard selector may cause performance trouble. Please give at least one condition to "
                           "shrink range of results")
-        return UIObjectProxy(self, name, **kw)
+        self._last_proxy = UIObjectProxy(self, name, **kw)
+        return self._last_proxy
 
     def wait_for_any(self, objects, timeout=120):
         """

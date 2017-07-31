@@ -40,6 +40,10 @@ class AirtestPoco(Poco):
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
+
+        # Note: 临时使用，记得删掉
+        self.snapshot(str(self._last_proxy))
+
         panel_size = self._touch_resolution
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
         touch(pos)

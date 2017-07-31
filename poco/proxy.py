@@ -214,10 +214,6 @@ class UIObjectProxy(object):
 
         :raise PocoNoSuchNodeException:
         """
-
-        # Note: 临时使用，记得删掉
-        self.poco.snapshot(str(self))
-
         pos_in_percentage = self.get_position(focus)
         self.poco.click(pos_in_percentage)
         if sleep_interval:

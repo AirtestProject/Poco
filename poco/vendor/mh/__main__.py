@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     p = MhPoco(addr=("10.254.45.54", 5001))
     # p = MhPoco()
-    # p(text=u"长安城").click()
+    p(text=u"长安城").click()
     # p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
     # p(u"超级神羊").click()
@@ -31,11 +31,11 @@ if __name__ == '__main__':
     # for i in l:
     #     i.click()
     # d = p(type="VDialog")
-    while True:
-        l = p(type="Button")
-        r = random.randint(0, len(l.nodes))
-        try:
-            i = l[r]
-        except:
-            continue
-        i.click()
+    # while True:
+    #     l = p(type="Button")
+    #     r = random.randint(0, len(l.nodes))
+    #     try:
+    #         i = l[r]
+    #     except:
+    #         continue
+    #     i.click()
