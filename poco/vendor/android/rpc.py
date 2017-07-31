@@ -1,6 +1,5 @@
 # coding=utf-8
-__author__ = 'lxn3032'
-
+from __future__ import unicode_literals
 
 from functools import wraps
 
@@ -12,6 +11,7 @@ from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 
 
+__author__ = 'lxn3032'
 __all__ = ['AndroidRpcClient']
 
 
@@ -29,7 +29,7 @@ def transform_node_has_been_removed_exception(func):
             return func(self, nodes, name, *args, **kwargs)
         except RpcRemoteException as e:
             if e.error_type == 'NodeHasBeenRemovedException':
-                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), nodes)
+                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), repr(nodes).decode('utf-8'))
             else:
                 raise
     return wrapped

@@ -74,7 +74,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
                 if obj.exists():
                     return obj
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('any to appear', objects)
+                raise PocoTargetTimeout('any to appear', repr(objects).decode('utf-8'))
             self.sleep_for_polling_interval()
 
     def wait_for_all(self, objects, timeout=120):
@@ -95,7 +95,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
             if all_exist:
                 return
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('all to appear', objects)
+                raise PocoTargetTimeout('all to appear', repr(objects).decode('utf-8'))
             self.sleep_for_polling_interval()
 
     def wait_stable(self):

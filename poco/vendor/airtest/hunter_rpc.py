@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-11 14:34:46
-
+from __future__ import unicode_literals
 
 import types
 from functools import wraps
@@ -62,7 +62,7 @@ def transform_node_has_been_removed_exception(func):
             return func(self, nodes, name, *args, **kwargs)
         except HRpcRemoteException as e:
             if e.error_type == 'NodeHasBeenRemovedException':
-                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), nodes)
+                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), repr(nodes).decode('utf-8'))
             else:
                 raise
     return wrapped
