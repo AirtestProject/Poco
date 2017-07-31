@@ -16,9 +16,6 @@ def set_forground(title):
 
 
 if __name__ == '__main__':
-    import random
-    import time
-
     # p = MhPoco(addr=("10.254.45.54", 5001))  # android: Meizu
     p = MhPoco(addr=("10.254.42.28", 5001))  # ios: ff's iPad
     # p = MhPoco()
@@ -32,9 +29,13 @@ if __name__ == '__main__':
     # for i in l:
     #     i.click()
 
+    # 点日历里的每一项
     l = p(type="CPanel").child(type="AttendanceItem")
     for i in l:
         i.click(focus="center")
+
+    # import random
+    # import time
 
     # d = p(type="VDialog")
     # while True:
