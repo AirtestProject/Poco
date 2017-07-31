@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 __author__ = 'lxn3032'
 
 
@@ -39,18 +40,21 @@ def query_expr(query):
         raise RuntimeError('Bad query format. "{}"'.format(repr(query)))
 
 
-# def ensure_unicode(value):
-#     if isinstance(value, str):
-#         return value.decode("utf-8")
-#     else:
-#         return value
+def ensure_unicode(value):
+    # py3 to be supported
+    if isinstance(value, str):
+        return value.decode("utf-8")
+    else:
+        return value
 
 
 def build_query(name, **attrs):
     query = []
     if name is not None:
+        name = ensure_unicode(name)
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
+        attr_val = ensure_unicode(attr_val)
         if attr_name.endswith('Matches'):
             attr_name = attr_name[:-7]  # textMatches -> (attr.*=, text)
             op = 'attr.*='

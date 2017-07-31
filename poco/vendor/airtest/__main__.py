@@ -8,3 +8,4 @@ if __name__ == '__main__':
     set_serialno()
     p = AirtestPoco("g18")
     p(text="化生寺").click()
+    p(text="生寺").click()

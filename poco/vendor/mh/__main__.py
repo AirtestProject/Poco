@@ -21,7 +21,8 @@ if __name__ == '__main__':
 
     p = MhPoco(addr=("10.254.45.54", 5001))
     # p = MhPoco()
-    p(text=u"长安城").click()
+    p(text="长安城").click()
+    p(text="安城").click()
     # p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
     # p(u"超级神羊").click()

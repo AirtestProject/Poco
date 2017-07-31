@@ -1,10 +1,6 @@
 # coding=utf-8
-__author__ = 'lxn3032'
+from __future__ import unicode_literals
 
-
-import base64
-import os
-import re
 import time
 import warnings
 
@@ -16,6 +12,8 @@ from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout
 from .logging import HunterLoggingMixin
 from .proxy import UIObjectProxy
+
+__author__ = 'lxn3032'
 
 
 class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):

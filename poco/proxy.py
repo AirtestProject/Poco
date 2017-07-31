@@ -1,6 +1,5 @@
 # coding=utf-8
-__author__ = 'lxn3032'
-
+from __future__ import unicode_literals
 
 import copy
 import six
@@ -12,6 +11,8 @@ from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuch
 from .utils.retry import retries_when
 from .utils.query_util import query_expr, build_query
 from .utils.suppression import deprecated
+
+__author__ = 'lxn3032'
 
 
 def wait_for_appearance(func):
@@ -474,7 +475,9 @@ class UIObjectProxy(object):
         return bounds
 
     def __str__(self):
-        # 不能返回unicode
+        return unicode(self).encode("utf-8")
+
+    def __unicode__(self):
         return 'UIObjectProxy of "{}"'.format(query_expr(self.query))
 
     __repr__ = __str__
