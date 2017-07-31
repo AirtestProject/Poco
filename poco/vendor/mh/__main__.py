@@ -16,13 +16,10 @@ def set_forground(title):
 
 
 if __name__ == '__main__':
-    import random
-    import time
-
-    p = MhPoco(addr=("10.254.45.54", 5001))
+    # p = MhPoco(addr=("10.254.45.54", 5001))  # android: Meizu
+    p = MhPoco(addr=("10.254.42.28", 5001))  # ios: ff's iPad
     # p = MhPoco()
-    p(text="长安城").click()
-    p(text="安城").click()
+    # p(text="长安城").click()
     # p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
     # p(u"超级神羊").click()
@@ -31,6 +28,15 @@ if __name__ == '__main__':
     # l = p(type="CBuffPanel").offspring(type="CDisableImage")
     # for i in l:
     #     i.click()
+
+    # 点日历里的每一项
+    l = p(type="CPanel").child(type="AttendanceItem")
+    for i in l:
+        i.click(focus="center")
+
+    # import random
+    # import time
+
     # d = p(type="VDialog")
     # while True:
     #     l = p(type="Button")
