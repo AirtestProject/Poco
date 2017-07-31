@@ -325,7 +325,7 @@ class UIObjectProxy(object):
         while not self.exists():
             self.poco.sleep_for_polling_interval()
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('appearance', self.query)
+                raise PocoTargetTimeout('appearance', self)
 
     def wait_for_disappearance(self, timeout=120):
         """
@@ -340,7 +340,7 @@ class UIObjectProxy(object):
         while self.exists():
             self.poco.sleep_for_polling_interval()
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('disappearance', self.query)
+                raise PocoTargetTimeout('disappearance', self)
 
     @retries_when(RpcTimeoutException)
     @refresh_when(PocoTargetRemovedException)
