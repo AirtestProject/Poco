@@ -1,2 +1,2 @@
-hunter_cli
 json-rpc
+git+ssh://git@git-qa.gz.netease.com:32200/maki/hrpc.git
