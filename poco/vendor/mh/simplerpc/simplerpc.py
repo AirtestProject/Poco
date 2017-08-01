@@ -18,6 +18,20 @@ def echo(*args):
     return args
 
 
+@dispatcher.add_method
+def delayecho(*args):
+    r = DelayResult()
+    raise
+    from threading import Thread
+
+    def func(r):
+        time.sleep(5)
+        r.set_result(args)
+
+    Thread(target=func, args=(r,)).start()
+    return r
+
+
 class Callback(object):
     """Callback Proxy"""
     def __init__(self, rid):
@@ -48,6 +62,10 @@ class Callback(object):
             self.result = rpc_result
             self.called = True
 
+    def make_error(self, data):
+        msg = "rid:%s error:%s" % (self.rid, data)
+        print(msg)
+
     def cancel(self):
         self.func = None
 
@@ -60,17 +78,36 @@ class Callback(object):
                 return (self.result, self.error)
 
 
+class DelayResult(object):
+    """docstring for DelayResult"""
+    def __init__(self):
+        super(DelayResult, self).__init__()
+        self.finished = False
+        self._result = None
+
+    def get_result(self):
+        if not self.finished:
+            raise RuntimeError("Delay Result not Ready")
+        return self._result
+
+    def set_result(self, ret):
+        self.finished = True
+        self._result = ret
+
+
 class RpcBaseClient(object):
     """docstring for RpcClient"""
 
     REQUEST = 0
     RESPONSE = 1
+    REQUEST_DELAYRET = 2
     DEBUG = True
 
     def __init__(self):
         super(RpcBaseClient, self).__init__()
         self._id = 0
         self._callbacks = {}
+        self._delayresults = {}
 
     def call(self, *args, **kwargs):
         raise NotImplementedError
@@ -94,7 +131,9 @@ class RpcBaseClient(object):
         return req, cb
 
     def handle_request(self, req):
-        return JSONRPCResponseManager.handle(req, dispatcher).json
+        res = JSONRPCResponseManager.handle(req, dispatcher).data
+        # print("handle_request", req, res)
+        return res
 
     def handle_message(self, msg):
         data = json.loads(msg)
@@ -104,6 +143,11 @@ class RpcBaseClient(object):
             # rpc request
             message_type = self.REQUEST
             result = self.handle_request(msg)
+
+            if isinstance(result["result"], DelayResult):
+                self._delayresults[data["id"]] = result
+                message_type = self.REQUEST_DELAYRET
+
         else:
             # rpc response
             message_type = self.RESPONSE
@@ -111,9 +155,24 @@ class RpcBaseClient(object):
             if "result" in data:
                 callback.call(data["result"])
                 result = (callback.result, callback.error)
+            elif "error" in data:
+                callback.make_error(data["error"])
+                result = None
             else:
                 result = None
         return message_type, result
+
+    def handle_delay_result(self):
+        # 轮询有点挫，后面优化
+        for rid, res in self._delayresults.items():
+            delay_result = res["result"]
+            try:
+                result = delay_result.get_result()
+            except RuntimeError:
+                continue
+            self._delayresults.pop(rid)
+            res["result"] = result
+            yield res
 
     def update(self):
         raise NotImplementedError
