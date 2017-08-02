@@ -3,6 +3,7 @@ from simplerpc import RpcBaseClient, Connection
 from protocol import SimpleProtocolFilter
 from simplesocket import SafeSocket
 from asyncsocket import Client, init_loop
+import json
 
 
 class SafeSocketConn(Connection):
@@ -62,7 +63,7 @@ class RpcClient(RpcBaseClient):
         for msg in data:
             message_type, result = self.handle_message(msg)
             if message_type == self.REQUEST:
-                self.conn.send(result)
+                self.conn.send(json.dumps(result))
 
 
 if __name__ == '__main__':
@@ -70,6 +71,8 @@ if __name__ == '__main__':
     # conn = SafeSocketConn(("localhost", 5001))
     conn = AsyncConn(("localhost", 5001))
     c = RpcClient(conn)
+
+    c.run(backend=True)
     # simply call rpc
     c.call("foobar", foo="aaa", bar="bbb")
     # call rpc and wait for rpc result
@@ -81,6 +84,10 @@ if __name__ == '__main__':
     cb = c.call("foobar", foo="aaa", bar="bbb")
     cb.callback(pprint)
     cb.wait()
-    # c.run()
+    # call rpc and wait for delay result
+    cb = c.call("delayecho", 111, 222)
+    cb.callback(pprint)
+    cb.wait()
+
     # run python console
-    c.console_run({"c": c})
+    # c.console_run({"c": c})

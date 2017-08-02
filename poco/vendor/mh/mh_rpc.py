@@ -33,6 +33,10 @@ class MhRpc(RpcInterface):
         return self.c.call("get_size")
 
     @sync_wrapper
+    def get_screen(self):
+        return self.c.call("get_screen")
+
+    @sync_wrapper
     def dump(self):
         return self.c.call("dump")
 

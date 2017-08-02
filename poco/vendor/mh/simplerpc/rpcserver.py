@@ -2,6 +2,7 @@
 from asyncsocket import Host, init_loop
 from simplerpc import RpcBaseClient
 from protocol import SimpleProtocolFilter
+import json
 
 
 class RpcServer(RpcBaseClient):
@@ -20,7 +21,11 @@ class RpcServer(RpcBaseClient):
             for msg in self.prot.input(message):
                 message_type, result = self.handle_message(msg)
                 if message_type == self.REQUEST:
-                    client.say(self.prot.pack(result))
+                    client.say(self.prot.pack(json.dumps(result)))
+
+        for r in self.handle_delay_result():
+            # broadcast有点挫，后面在delay_result里面传client，主动send
+            self.host.broadcast(self.prot.pack(json.dumps(r)))
 
     def call(self, cid, func, *args, **kwargs):
         req, cb = self.format_request(func, *args, **kwargs)

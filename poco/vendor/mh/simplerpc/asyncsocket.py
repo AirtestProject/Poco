@@ -68,7 +68,7 @@ class Host(asyncore.dispatcher):
     CLIENT_ID_COUNTER = 1
     CLIENT_MAX_COUNT = 10
 
-    def __init__(self, address=('localhost', 5001)):
+    def __init__(self, address=('0.0.0.0', 5001)):
         asyncore.dispatcher.__init__(self)
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
         self.bind(address)
@@ -96,7 +96,7 @@ class Host(asyncore.dispatcher):
         return msg_queue
 
     def broadcast(self, message):
-        print('Broadcasting message: %s', len(message))
+        print('Broadcasting message: %s' % len(message))
         for remote_client in self.remote_clients.values():
             remote_client.say(message)
 
