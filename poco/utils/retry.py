@@ -15,6 +15,7 @@ def retries_when(exctypes, count=3):
                     return func(*args, **kwargs)
                 except exctypes as e:
                     ex = e
-            raise ex
+            if ex:
+                raise ex
         return wrapped
     return wrapper

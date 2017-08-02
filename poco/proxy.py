@@ -15,7 +15,7 @@ from .utils.suppression import deprecated
 __author__ = 'lxn3032'
 
 
-def wait_for_appearance(func):
+def wait(func):
     @wraps(func)
     def wrapped(proxy, *args, **kwargs):
         try:
@@ -203,7 +203,7 @@ class UIObjectProxy(object):
             yield obj
 
     @retries_when(RpcTimeoutException)
-    @wait_for_appearance
+    @wait
     def click(self, focus='anchor', sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
@@ -222,7 +222,7 @@ class UIObjectProxy(object):
         else:
             self.poco.wait_stable()
 
-    @wait_for_appearance
+    @wait
     def swipe(self, dir, focus='anchor', duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离

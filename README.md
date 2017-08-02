@@ -1,4 +1,6 @@
-# Poco Flexible Automation Framework
+# Poco
+
+**Cross-Engine UI Automation Framework**
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
@@ -200,27 +202,18 @@ except PocoTargetTimeout:
 ## 接入参考
 
 1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在[项目](http://hunter.nie.netease.com/mywork/project#/)页直接下载最新版的接入模块。
-1. 在项目的`__init__`指令后面插入以下代码片段，然后重启游戏即可
+1. 在项目的`__init__`指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
 
 ```python
-
-screen_handler = require('safaia.neox.screen')()  # 根据实际情况选择neox/messiah
-
-# screen 扩展，提供屏幕相关的信息和操作
-ScreenExtension = require('safaia.init.screen')
-ScreenExtension.screen_handler = screen_handler
-Safaia().install(ScreenExtension)
+# poco uiautomation
+PocoUiautomation = require('support.poco.neox.uiautomation')
+Safaia().install(PocoUiautomation)
 
 # inspector extension
-# 提供hunter终端里的检视器面板
-InspectorExt = require('safaia.init.inspect')
-InspectorExt.screen = screen_handler
-InspectorExt.ui2d = require('safaia.cocos2dx.utils')  # 目前ui2d选择器只实现了cocosui，其他的ui框架可另外单独实现
+InspectorExt = require('support.poco.safaia.inspector')
+InspectorExt.screen = require('support.poco.neox.screen')()
+InspectorExt.dumper = require('support.poco.cocos2dx.Dumper')()
 Safaia().install(InspectorExt)
-
-# poco automation framework
-# 提供poco自动化框架的rpc对象导出
-Safaia().install(require('safaia.init.poco'))
 ```
 
 3. [hunter终端](http://hunter.nie.netease.com) 右上角点击**Inspector**按钮打开检视器面板。
