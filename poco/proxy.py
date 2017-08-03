@@ -202,7 +202,7 @@ class UIObjectProxy(object):
         for obj, _ in sorted_nodes:
             yield obj
 
-    @retries_when(RpcTimeoutException)
+    @retries_when((RpcTimeoutException, InvalidOperationException))
     @wait
     def click(self, focus='anchor', sleep_interval=None):
         """
@@ -215,6 +215,7 @@ class UIObjectProxy(object):
 
         :raise PocoNoSuchNodeException:
         """
+
         pos_in_percentage = self.get_position(focus)
         self.poco.click(pos_in_percentage)
         if sleep_interval:
@@ -222,6 +223,7 @@ class UIObjectProxy(object):
         else:
             self.poco.wait_stable()
 
+    @retries_when(InvalidOperationException)
     @wait
     def swipe(self, dir, focus='anchor', duration=0.5):
         """
@@ -240,6 +242,7 @@ class UIObjectProxy(object):
         origin = self.get_position(focus)
         self.poco.swipe(origin, direction=dir_vec, duration=duration)
 
+    @retries_when(InvalidOperationException)
     def drag_to(self, target, duration=2):
         """
         以当前对象节点anchor为起点，拖动到目标对象节点anchor
