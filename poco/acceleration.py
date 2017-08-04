@@ -27,11 +27,12 @@ class PocoAccelerationMixin(object):
 
         :raise PocoTargetTimeout: 当处于dismiss切超时时，会报这个错，因为正常情况下不可能这么长时间还没把该消的消掉
         """
+
         try:
             self.wait_for_any(targets, timeout=appearance_timeout)
         except PocoTargetTimeout:
             # 仅当超时时自动退出
-            warnings.warn('尝试dismiss前等待对象出现但超时 "{}"'.format(repr(targets).decode('utf-8')))
+            warnings.warn('尝试dismiss前等待对象出现但超时 "{}"'.encode('utf-8').format(targets))
             return
 
         start_time = time.time()
@@ -39,11 +40,12 @@ class PocoAccelerationMixin(object):
             no_target = True
             for t in targets:
                 if t.exists():
-                    try:
-                        t.click(sleep_interval=sleep_interval)
-                        no_target = False
-                    except:
-                        pass
+                    for n in t:
+                        try:
+                            n.click(sleep_interval=sleep_interval)
+                            no_target = False
+                        except:
+                            pass
             time.sleep(sleep_interval)
             should_exit = exit_when() if exit_when else False
             if no_target or should_exit:
