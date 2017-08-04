@@ -1,38 +1,19 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from functools import wraps
+from poco.utils.exception_transform import member_func_exception_transform, transform_node_has_been_removed_exception
+from poco.interfaces.rpc import RpcInterface, RpcRemoteException, RpcTimeoutException
 
-from poco.interfaces.rpc import RpcInterface
-from poco.exceptions import PocoTargetRemovedException
+from hrpc.exceptions import \
+    RpcRemoteException as HRpcRemoteException, \
+    RpcTimeoutException as HRpcTimeoutException
 
-from hrpc.exceptions import RpcRemoteException
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 
 
 __author__ = 'lxn3032'
 __all__ = ['AndroidRpcClient']
-
-
-def transform_node_has_been_removed_exception(func):
-    """
-    将HRpcRemoteException.NodeHasBeenRemovedException转换成PocoTargetRemovedException
-
-    :param func: 仅限getattr和setattr两个接口方法
-    :return: 
-    """
-
-    @wraps(func)
-    def wrapped(self, nodes, name, *args, **kwargs):
-        try:
-            return func(self, nodes, name, *args, **kwargs)
-        except RpcRemoteException as e:
-            if e.error_type == 'NodeHasBeenRemovedException':
-                raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), repr(nodes).decode('utf-8'))
-            else:
-                raise
-    return wrapped
 
 
 class Client(RpcClient):
@@ -44,9 +25,11 @@ class Client(RpcClient):
         return HttpTransport(self.endpoint, self)
 
 
+@member_func_exception_transform(HRpcRemoteException, RpcRemoteException)
+@member_func_exception_transform(HRpcTimeoutException, RpcTimeoutException)
 class AndroidRpcClient(RpcInterface):
     def __init__(self, endpoint, ime):
-        super(AndroidRpcClient, self).__init__()
+        RpcInterface.__init__(self)
         self.endpoint = endpoint
         self.client = Client(endpoint)
         self.remote_poco = self.client.remote('poco-uiautomation-framework')
