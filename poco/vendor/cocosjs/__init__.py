@@ -23,7 +23,11 @@ class CocosJsPoco(Poco):
         self._rpc_client = SocketIORpc(addr)
         super(CocosJsPoco, self).__init__(self._rpc_client, action_interval=0.01)
         size = current_device().get_display_info()
-        self._touch_resolution = size["width"], size["height"]
+        w, h = size["width"], size["height"]
+        if size["orientation"] in (1, 3):
+            self._touch_resolution = h, w
+        else:
+            self._touch_resolution = w, h
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
