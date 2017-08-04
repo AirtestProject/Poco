@@ -45,6 +45,7 @@ class MhRpc(RpcInterface):
         root = dict_2_node(dump)
         print(query)
         nodes = self._select(query, root=root)
+        print(nodes, nodes[0].data)
         return nodes
 
     def getattr(self, node, name):

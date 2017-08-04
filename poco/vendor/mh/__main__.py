@@ -17,9 +17,10 @@ def set_forground(title):
 
 if __name__ == '__main__':
     # p = MhPoco(addr=("10.254.45.54", 5001))  # android: Meizu
+    p = MhPoco(addr=("10.254.245.124", 5001))  # android: Meizu
     # p = MhPoco(addr=("10.254.42.28", 5001))  # ios: ff's iPad
     # p = MhPoco(addr=("10.211.55.1", 5001))  # windows: parallel
-    p = MhPoco()
+    # p = MhPoco()
     # p(text="长安城").click()
     # p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
@@ -31,9 +32,9 @@ if __name__ == '__main__':
     #     i.click()
 
     # 点日历里的每一项
-    # l = p(type="CPanel").child(type="AttendanceItem")
-    # for i in l:
-    #     i.click(focus="center")
+    l = p(type="CPanel").child(type="AttendanceItem")
+    for i in l:
+        i.click(focus="center")
 
     # import random
     # import time
@@ -48,9 +49,9 @@ if __name__ == '__main__':
     #         continue
     #     i.click()
 
-    # 测试截图接口
-    p._rpc_client.get_screen_size()
-    from base64 import b64decode
-    d = p._rpc_client.get_screen()
-    with open("screen.png", "wb") as f:
-        f.write(b64decode(d))
+    # # 测试截图接口
+    # p._rpc_client.get_screen_size()
+    # from base64 import b64decode
+    # d = p._rpc_client.get_screen()
+    # with open("screen.png", "wb") as f:
+    #     f.write(b64decode(d))

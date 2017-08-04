@@ -3,6 +3,7 @@ from simplerpc import RpcBaseClient, Connection
 from protocol import SimpleProtocolFilter
 from simplesocket import SafeSocket
 from asyncsocket import Client, init_loop
+import traceback
 import json
 
 
@@ -61,9 +62,12 @@ class RpcClient(RpcBaseClient):
         if not data:
             return
         for msg in data:
-            message_type, result = self.handle_message(msg)
-            if message_type == self.REQUEST:
-                self.conn.send(json.dumps(result))
+            try:
+                message_type, result = self.handle_message(msg)
+                if message_type == self.REQUEST:
+                    self.conn.send(json.dumps(result))
+            except:
+                traceback.print_exc()
 
 
 if __name__ == '__main__':
