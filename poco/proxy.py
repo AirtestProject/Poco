@@ -139,7 +139,10 @@ class UIObjectProxy(object):
         :raise: PocoTargetRemovedException
         """
 
-        nodes = self.nodes
+        if not self._query_multiple:
+            nodes = self._do_query(multiple=True, refresh=True)
+        else:
+            nodes = self._nodes
         length = len(nodes)
         if not self._sorted_childres:
             self._sorted_childres = []
@@ -185,7 +188,10 @@ class UIObjectProxy(object):
         """
 
         # 节点数量太多时，就不按照控件顺序排序了
-        nodes = self.nodes
+        if not self._query_multiple:
+            nodes = self._do_query(multiple=True, refresh=True)
+        else:
+            nodes = self._nodes
         length = len(nodes)
         sorted_nodes = []
         for i in range(length):

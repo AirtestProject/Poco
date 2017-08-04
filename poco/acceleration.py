@@ -39,11 +39,12 @@ class PocoAccelerationMixin(object):
             no_target = True
             for t in targets:
                 if t.exists():
-                    try:
-                        t.click(sleep_interval=sleep_interval)
-                        no_target = False
-                    except:
-                        pass
+                    for n in t:
+                        try:
+                            n.click(sleep_interval=sleep_interval)
+                            no_target = False
+                        except:
+                            pass
             time.sleep(sleep_interval)
             should_exit = exit_when() if exit_when else False
             if no_target or should_exit:
