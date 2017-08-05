@@ -68,6 +68,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         :param timeout: 最长等待时间
         :return: 等到的那个对象
         """
+
         start = time.time()
         while True:
             for obj in objects:
@@ -85,6 +86,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         :param timeout: 最长等待时间
         :return: None
         """
+
         start = time.time()
         while True:
             all_exist = True
