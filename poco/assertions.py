@@ -11,29 +11,29 @@ class PocoAssertionMixin(object):
     @staticmethod
     def assert_equal(l, r, msg=''):
         if l != r:
-            raise PocoAssertionError('断言失败于"{}". {} != {}.'.format(msg, repr(l), repr(r)))
+            raise PocoAssertionError('断言失败于"{}". {} != {}.'.format(msg.decode('utf-8'), repr(l), repr(r)))
 
     @staticmethod
     def assert_greater(l, r, msg=''):
         if l <= r:
-            raise PocoAssertionError('断言失败于"{}". {} <= {}.'.format(msg, repr(l), repr(r)))
+            raise PocoAssertionError('断言失败于"{}". {} <= {}.'.format(msg.decode('utf-8'), repr(l), repr(r)))
 
     @staticmethod
     def assert_greater_equal(l, r, msg=''):
         if l <= r:
-            raise PocoAssertionError('断言失败于"{}". {} < {}.'.format(msg, repr(l), repr(r)))
+            raise PocoAssertionError('断言失败于"{}". {} < {}.'.format(msg.decode('utf-8'), repr(l), repr(r)))
 
     @staticmethod
     def assert_less(l, r, msg=''):
         if l <= r:
-            raise PocoAssertionError('断言失败于"{}". {} >= {}.'.format(msg, repr(l), repr(r)))
+            raise PocoAssertionError('断言失败于"{}". {} >= {}.'.format(msg.decode('utf-8'), repr(l), repr(r)))
 
     @staticmethod
     def assert_less_equal(l, r, msg=''):
         if l <= r:
-            raise PocoAssertionError('断言失败于"{}". {} > {}.'.format(msg, repr(l), repr(r)))
+            raise PocoAssertionError('断言失败于"{}". {} > {}.'.format(msg.decode('utf-8'), repr(l), repr(r)))
 
     @staticmethod
     def assert_true(l, msg=''):
         if l is not True:
-            raise PocoAssertionError('断言失败于"{}". {} is not True.'.format(msg, repr(l)))
+            raise PocoAssertionError('断言失败于"{}". {} is not True.'.format(msg.decode('utf-8'), repr(l)))
