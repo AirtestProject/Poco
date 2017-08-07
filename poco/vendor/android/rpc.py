@@ -51,12 +51,13 @@ class AndroidRpcClient(RpcInterface):
 
     @transform_node_has_been_removed_exception
     def setattr(self, nodes, name, val):
-        self.remote_poco.attributor.setAttr(nodes, name, val)
         if name == 'text':
-            check_val = self.getattr(nodes, 'text')
-            if check_val != val:
-                raise Exception('调用android uiautomator setText失败，希望设置"{}"，但得到"{}"'.encode('utf-8').format(val, check_val))
-            # self.ime.text(val)
+            self.ime.text(val)
+        # self.remote_poco.attributor.setAttr(nodes, name, val)
+        # if name == 'text':
+        #     check_val = self.getattr(nodes, 'text')
+        #     if check_val != val:
+        #         raise Exception('调用android uiautomator setText失败，希望设置"{}"，但得到"{}"'.encode('utf-8').format(val, check_val))
 
     def select(self, query, multiple=False):
         return self.remote_poco.selector.select(query, multiple)
