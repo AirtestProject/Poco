@@ -151,3 +151,13 @@ class AndroidUiautomationPoco(Poco):
             return None
 
         return self.rpc.get_screen(int(width))
+
+
+class AndroidUiautomationHelper(object):
+    _nuis = {}
+
+    @classmethod
+    def get_instance(cls, serialno):
+        if cls._nuis.get(serialno) is None:
+            cls._nuis[serialno] = AndroidUiautomationPoco(serialno)
+        return cls._nuis[serialno]
