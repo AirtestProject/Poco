@@ -38,6 +38,7 @@ class HunterRpc(RpcInterface):
     def setattr(self, nodes, name, value):
         return self.attributor.setAttr(nodes, name, value)
 
+    @transform_node_has_been_removed_exception
     def select(self, query, multiple=True):
         return self.selector.select(query, multiple)
 

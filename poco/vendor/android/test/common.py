@@ -1,6 +1,7 @@
 # coding=utf-8
 
 
+import time
 import base64
 import unittest
 
@@ -19,3 +20,11 @@ class TextCommonCases(unittest.TestCase):
 
     def test_existence(self):
         print self.poco('登录').exists()
+
+    def test_existence_after_hide(self):
+        btn = self.poco(text='快速游戏', type='android.widget.TextView').focus([0.5, -3])
+        print btn.exists()
+        btn.click()
+        time.sleep(2)
+        btn.invalidate()
+        print btn.exists()
