@@ -41,5 +41,8 @@ class HunterRpc(RpcInterface):
     def select(self, query, multiple=True):
         return self.selector.select(query, multiple)
 
+    def dump(self):
+        return self.remote_poco.dumper.dumpHierarchy()
+
     def evaluate(self, obj_proxy):
         return self.rpc_client.evaluate(obj_proxy)
