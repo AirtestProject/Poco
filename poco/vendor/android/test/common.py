@@ -23,8 +23,13 @@ class TextCommonCases(unittest.TestCase):
 
     def test_existence_after_hide(self):
         btn = self.poco(text='快速游戏', type='android.widget.TextView').focus([0.5, -3])
-        print btn.exists()
         btn.click()
-        time.sleep(2)
+        self.assertEqual(btn.exists(), True)
         btn.invalidate()
-        print btn.exists()
+        self.assertEqual(btn.exists(), False)
+        time.sleep(1)
+        btn2 = self.poco(text='快速游戏', type='android.widget.Button')
+        self.assertEqual(btn2.exists(), True)
+
+    def test_any(self):
+        self.poco(resourceIdMatches='^.*switch_account$').click()

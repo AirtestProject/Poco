@@ -19,12 +19,14 @@ __author__ = 'lxn3032'
 class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     def __init__(self, rpc_client, **options):
         """
-        实例化一个poco对象，一般每个testcase都实例化一个。
+        实例化一个poco对象
 
         :param hunter:  hunter对象，通过hunter_cli.Hunter构造
         :param options:
             action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
             poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
+            pre_action_wait_for_appearance: 在执行非幂等操作（如click、swipe）前，如果对象还没有出现，那么最长会等待出现的时间
+                如果这段时间内还没出现则抛出PocoNoSuchNodeException异常
         """
 
         super(Poco, self).__init__()
@@ -32,8 +34,8 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
 
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
-        self._post_action_interval = options.get('action_interval', 0.5)
-        self._poll_interval = options.get('poll_interval', 1.2)
+        self._post_action_interval = options.get('action_interval', 0.8)
+        self._poll_interval = options.get('poll_interval', 1.44)
         self._last_proxy = None
 
     def __call__(self, name=None, **kw):
