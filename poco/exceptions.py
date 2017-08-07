@@ -24,6 +24,10 @@ class PocoException(Exception):
     __repr__ = __str__
 
 
+class PocoAssertionError(PocoException):
+    pass
+
+
 class InvalidOperationException(PocoException):
     """
     操作无效

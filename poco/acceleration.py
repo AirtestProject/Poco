@@ -32,7 +32,7 @@ class PocoAccelerationMixin(object):
             self.wait_for_any(targets, timeout=appearance_timeout)
         except PocoTargetTimeout:
             # 仅当超时时自动退出
-            warnings.warn('尝试dismiss前等待对象出现但超时 "{}"'.encode('utf-8').format(targets))
+            warnings.warn('尝试dismiss前等待对象出现但超时 {}'.encode('utf-8').format(targets))
             return
 
         start_time = time.time()
