@@ -3,37 +3,50 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-11 14:25:58
 
+import types
+
+from poco.sdk.Attributor import Attributor
+from poco.sdk.Selector import Selector
+
 
 __all__ = ['RpcInterface', 'RpcRemoteException', 'RpcTimeoutException']
 
 
-def required(func):
-    return func
-
-
 class RpcInterface(object):
     """Base Rpc Client"""
-    def __init__(self):
+    def __init__(self, dumper=None, selector=None, attributor=None, inputer=None, screen=None):
         super(RpcInterface, self).__init__()
+        self.dumper = dumper
+        if not isinstance(dumper, types.NoneType) and isinstance(selector, types.NoneType):
+            self.selector = Selector(self.dumper)
+        else:
+            self.selector = selector
+        if isinstance(attributor, types.NoneType):
+            self.attributor = Attributor()
+        else:
+            self.attributor = attributor
+        self.inputer = inputer
+        self.screen = screen
 
     # node/hierarchy interface
-    @required
     def getattr(self, nodes, name):
         """get node attribute"""
-        raise NotImplementedError
+        return self.attributor.getAttr(nodes, name)
 
-    @required
-    def setattr(self, nodes, name, val):
+    def setattr(self, nodes, name, value):
         """set node attribute"""
-        raise NotImplementedError
+        return self.attributor.setAttr(nodes, name, value)
 
-    @required
     def select(self, query, multiple=False):
         """select nodes by query"""
-        raise NotImplementedError
+        if isinstance(self.selector, types.NoneType):
+            raise NotImplementedError
+        return self.selector.select(query, multiple)
 
     def dump(self):
-        raise NotImplementedError
+        if isinstance(self.dumper, types.NoneType):
+            raise NotImplementedError
+        raise self.dumper.dumpHierarchy()
 
     def evaluate(self, obj_proxy):
         """
@@ -47,13 +60,19 @@ class RpcInterface(object):
 
     # input interface
     def click(self, x, y):
-        raise NotImplementedError
+        if isinstance(self.inputer, types.NoneType):
+            raise NotImplementedError
+        self.inputer.click(x, y)
 
     def long_click(self, x, y, duration):
-        raise NotImplementedError
+        if isinstance(self.inputer, types.NoneType):
+            raise NotImplementedError
+        self.inputer.longClick(x, y, duration)
 
     def swipe(self, x1, y1, x2, y2, duration):
-        raise NotImplementedError
+        if isinstance(self.inputer, types.NoneType):
+            raise NotImplementedError
+        self.inputer.swipe(x1, y1, x2, y2, duration)
 
     # screen interface
     def get_screen_size(self):
@@ -61,10 +80,15 @@ class RpcInterface(object):
         获取渲染屏幕的尺寸，type float
         :return: [width, height] as floats 
         """
-        raise NotImplementedError
+
+        if isinstance(self.screen, types.NoneType):
+            raise NotImplementedError
+        return self.screen.getPortSize()
 
     def get_screen(self, width):
-        raise NotImplementedError
+        if isinstance(self.screen, types.NoneType):
+            raise NotImplementedError
+        return self.screen.getScreen(width)
 
 
 class RpcRemoteException(Exception):
