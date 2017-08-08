@@ -48,11 +48,11 @@ class UIObjectProxy(object):
         self.query = build_query(name, **attrs)
         self.poco = poco
 
-        self._evaluated = False
         self._query_multiple = False
+        self._evaluated = False
         self._nodes = None  # 可能是远程node代理，也可能是远程[node]代理
         self._nodes_proxy_is_list = True
-        self._sorted_childres = None  # 仅用于__getitem__时保存好已排序的child代理对象
+        self._sorted_children = None  # 仅用于__getitem__时保存好已排序的child代理对象
 
         self._focus = None  # 相对于包围盒的focus point定义，用于touch/swipe/drag操作的局部相对定位
 
@@ -144,8 +144,8 @@ class UIObjectProxy(object):
         else:
             nodes = self._nodes
         length = len(nodes)
-        if not self._sorted_childres:
-            self._sorted_childres = []
+        if not self._sorted_children:
+            self._sorted_children = []
             for i in range(length):
                 uiobj = UIObjectProxy(self.poco)
                 uiobj.query = ('index', (self.query, i))
@@ -154,9 +154,9 @@ class UIObjectProxy(object):
                 uiobj._nodes = self.poco.rpc.evaluate(nodes[i])
                 uiobj._nodes_proxy_is_list = False
                 pos = uiobj.get_position()
-                self._sorted_childres.append((uiobj, pos))
-        self._sorted_childres.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
-        return self._sorted_childres[item][0]
+                self._sorted_children.append((uiobj, pos))
+        self._sorted_children.sort(lambda a, b: cmp(list(reversed(a)), list(reversed(b))), key=lambda v: v[1])
+        return self._sorted_children[item][0]
 
     def __len__(self):
         """
@@ -497,6 +497,10 @@ class UIObjectProxy(object):
         :return: RpcRemoteObjectProxy. Rpc远程对象代理
         """
         return self._do_query()
+
+    def invalidate(self):
+        self._evaluated = False
+        self._nodes = None
 
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:

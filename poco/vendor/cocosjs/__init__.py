@@ -22,12 +22,14 @@ class CocosJsPoco(Poco):
     def __init__(self, addr=DEFAULT_ADDR):
         self._rpc_client = SocketIORpc(addr)
         super(CocosJsPoco, self).__init__(self._rpc_client, action_interval=0.01)
-        size = current_device().get_display_info()
+
+    def _get_touch_resolution(self):
+        size = current_device().size
         w, h = size["width"], size["height"]
         if size["orientation"] in (1, 3):
-            self._touch_resolution = h, w
+            return h, w
         else:
-            self._touch_resolution = w, h
+            return w, h
 
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
@@ -36,14 +38,14 @@ class CocosJsPoco(Poco):
         # Note: 临时使用，记得删掉
         self.snapshot(str(self._last_proxy))
 
-        panel_size = self._touch_resolution
+        panel_size = self._get_touch_resolution()
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
         touch(pos)
 
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
-        panel_size = self._touch_resolution
+        panel_size = self._get_touch_resolution()
         p1 = [p1[0] * panel_size[0], p1[1] * panel_size[1]]
         if p2:
             p2 = [p2[0] * panel_size[0], p2[1] * panel_size[1]]

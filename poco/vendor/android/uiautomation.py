@@ -36,6 +36,11 @@ class AndroidUiautomationPoco(Poco):
                 raise RuntimeError('Too much devices connected. Please specified one by serialno.')
             self.adb_client.set_serialno(devices[0][0])
 
+        # save current top activity (@nullable)
+        current_top_activity_package = self.android.get_top_activity_name()
+        if current_top_activity_package is not None:
+            current_top_activity_package = current_top_activity_package.split('/')[0]
+
         # install ime
         self.ime = YosemiteIme(self.android)
         self.ime.start()
@@ -60,6 +65,11 @@ class AndroidUiautomationPoco(Poco):
             uninstall(self.adb_client, PocoServicePackage)
             self._install_service()
             ready = self._start_instrument(p0)
+
+            current_top_activity2 = self.android.get_top_activity_name()
+            if current_top_activity2 is None or current_top_activity_package not in current_top_activity2:
+                self.android.start_app(current_top_activity_package, activity=True)
+
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
@@ -151,3 +161,13 @@ class AndroidUiautomationPoco(Poco):
             return None
 
         return self.rpc.get_screen(int(width))
+
+
+class AndroidUiautomationHelper(object):
+    _nuis = {}
+
+    @classmethod
+    def get_instance(cls, serialno):
+        if cls._nuis.get(serialno) is None:
+            cls._nuis[serialno] = AndroidUiautomationPoco(serialno)
+        return cls._nuis[serialno]
