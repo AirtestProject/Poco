@@ -22,7 +22,7 @@ class TextCommonCases(unittest.TestCase):
         self.poco('com.netease.my:id/netease_mpay__login_urs').set_text('adolli@163.com')
 
     def test_existence(self):
-        print(self.poco('登录').exists())
+        self.assertTrue(self.poco('登录').exists())
 
     def test_existence_after_hide(self):
         btn = self.poco(text='快速游戏', type='android.widget.TextView').focus([0.5, -3])
@@ -35,8 +35,7 @@ class TextCommonCases(unittest.TestCase):
         self.assertEqual(btn2.exists(), True)
 
     def test_any(self):
-        btn = self.poco(text='快速游戏').focus([0.5, -3])
-        print btn.exists()
+        btn = self.poco(text='快速游戏', type='android.widget.TextView').focus([0.5, -3])
         btn.click()
         time.sleep(1)
         print btn.exists()
