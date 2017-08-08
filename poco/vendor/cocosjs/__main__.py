@@ -19,7 +19,16 @@ def quick_game(p):
 
 
 if __name__ == '__main__':
-    # r = SocketIORpc()
+
+    '''adb reverse tcp:5002 tcp:5002'''
+    # addr = ('', 5002)
+    # r = SocketIORpc(addr)
+    # d = (r.dump())
+    # pprint(d)
+
+    # 默认的就是5001
+    '''adb reverse tcp:5001 tcp:5001'''
+    # r = SocketIORpc(addr)
     # d = (r.dump())
     # with open("test.log", "w") as f:
     #     f.write(json.dumps(d, indent=4))

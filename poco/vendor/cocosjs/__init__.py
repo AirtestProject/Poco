@@ -84,14 +84,18 @@ class SimpleWS(WebSocket):
 
 class SocketIORpc(MhRpc):
     def __init__(self, addr=DEFAULT_ADDR):
-        conn = SocketIOConnection(addr)
-        self.c = RpcClient(conn)
+        self.conn = SocketIOConnection(addr)
+        self.c = RpcClient(self.conn)
         self.c.DEBUG = False
         self.c.run(backend=True)
 
     @sync_wrapper
     def dump(self):
         return self.c.call("dump")
+
+    def close(self):
+        """关闭server."""
+        self.conn.server.close()
 
 
 class SocketIOConnection(Connection):
@@ -119,7 +123,7 @@ class SocketIOConnection(Connection):
         for i in range(10):
             if self.server.connections:
                 return True
-            time.sleep(1)
+            time.sleep(2)
             print("wait for client")
         raise RuntimeError("no client connected")
 
