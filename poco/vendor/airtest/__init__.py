@@ -10,9 +10,19 @@ from airtest_hunter import AirtestHunter, open_platform
 from poco import Poco
 from poco.exceptions import InvalidOperationException
 from hunter_rpc import HunterRpc
+from functools import wraps
+
+
+def airtestlog(func):
+    @wraps(func)
+    def wrapper(poco, *args, **kwargs):
+        snapshot(msg=unicode(poco._last_proxy))
+        return func(poco, *args, **kwargs)
+    return wrapper
 
 
 class AirtestPoco(Poco):
+
     def __init__(self, process, hunter=None):
         apitoken = open_platform.get_api_token(process)
         self._hunter = hunter or AirtestHunter(apitoken, process)
@@ -37,17 +47,16 @@ class AirtestPoco(Poco):
             w, h = real_w, real_h
         return [float(w), float(h)]  # 用于进行输入的分辨率，与设备输入接口对应
 
+    @airtestlog
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-
-        # Note: 临时使用，记得删掉
-        self.snapshot(str(self._last_proxy))
 
         panel_size = self._touch_resolution
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
         touch(pos)
 
+    @airtestlog
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
@@ -62,11 +71,7 @@ class AirtestPoco(Poco):
             swipe(p1, vector=direction, duration=duration, steps=steps)
 
     def snapshot(self, width):
-        # width as massage
-        width = width.decode('utf-8')
-        if not width.endswith('.png'):
-            width += '.png'
-        snapshot(msg=width)
+        snapshot()
 
     def command(self, script, lang='text', sleep_interval=None):
         """
