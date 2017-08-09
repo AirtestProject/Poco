@@ -24,7 +24,8 @@ class CocosJsPoco(Poco):
         super(CocosJsPoco, self).__init__(self._rpc_client, action_interval=0.01)
 
     def _get_touch_resolution(self):
-        size = current_device().size
+        # size = current_device().size
+        size = current_device().get_display_info()
         w, h = size["width"], size["height"]
         if size["orientation"] in (1, 3):
             return h, w
