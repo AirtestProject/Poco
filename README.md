@@ -4,6 +4,10 @@
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
+## 提醒(notice)
+
+UI自动化有风险，请务必等待UI freeze阶段后再投入生产和使用。
+
 ## 安装(install)
 
 虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖。
@@ -42,7 +46,20 @@ pip install -e poco
 ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
 ```
 
-## 基本概念
+## 基本概念(concepts)
+
+### 测试
+
+**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本
+**TestSuite**: 多个TestCase构成的一系列脚本文件
+**TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境
+**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏
+
+**TestFramework**:  测试框架，Poco就是一个测试框架
+**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK
+
+
+### Poco测试框架相关
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-text-attribute.png)

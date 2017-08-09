@@ -14,10 +14,11 @@ class Dumper(AbstractDumper):
             self._build_tree(child)
 
     def getRoot(self):
+        # 每次获取root时，就给一个新的root
         root = Node(self.dumpable.dumpHierarchy())
         for child in root.getChildren():
             child.setParent(root)
         return root
 
     def getPortSize(self):
-        raise RuntimeError("Local dumper does not have port size.")
+        return 1.0, 1.0
