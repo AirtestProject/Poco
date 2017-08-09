@@ -66,7 +66,7 @@ class AndroidUiautomationPoco(Poco):
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
-        endpoint = "http://127.0.0.1:{}".format(p1)
+        endpoint = "http://{}:{}".format(self.adb_client.host, p1)
         rpc_client = AndroidRpcClient(endpoint, self.ime)
         super(AndroidUiautomationPoco, self).__init__(rpc_client)
 
@@ -113,7 +113,7 @@ class AndroidUiautomationPoco(Poco):
         time.sleep(2)
         for i in range(5):
             try:
-                requests.get('http://127.0.0.1:{}'.format(port_to_ping), timeout=10)
+                requests.get('http://{}:{}'.format(self.adb_client.host, port_to_ping), timeout=10)
                 ready = True
                 break
             except requests.exceptions.Timeout:
