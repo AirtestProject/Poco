@@ -13,7 +13,7 @@ from poco import Poco
 from poco.exceptions import InvalidOperationException
 from rpc import AndroidRpcClient
 
-from airtest.core.android import Android, ADB
+from airtest.core.android import Android
 from airtest.core.android.ime_helper import YosemiteIme
 from poco.vendor.android.utils.installation import install, uninstall
 
@@ -24,17 +24,10 @@ PocoServicePackageTest = 'com.netease.open.pocoservice.test'
 
 
 class AndroidUiautomationPoco(Poco):
-    def __init__(self, serial=None):
+    def __init__(self, device=None):
         # TODO: 临时用着airtest的方案
-        self.android = Android(serial, init_display=False, minicap=False, minicap_stream=False, minitouch=False, shell_ime=False)
+        self.android = device or Android()
         self.adb_client = self.android.adb
-        if not serial:
-            devices = self.adb_client.devices("device")
-            if len(devices) == 0:
-                raise RuntimeError('No available device connected. Please check your adb connection.')
-            elif len(devices) > 1:
-                raise RuntimeError('Too much devices connected. Please specified one by serialno.')
-            self.adb_client.set_serialno(devices[0][0])
 
         # save current top activity (@nullable)
         current_top_activity_package = self.android.get_top_activity_name()
@@ -167,7 +160,7 @@ class AndroidUiautomationHelper(object):
     _nuis = {}
 
     @classmethod
-    def get_instance(cls, serialno):
-        if cls._nuis.get(serialno) is None:
-            cls._nuis[serialno] = AndroidUiautomationPoco(serialno)
-        return cls._nuis[serialno]
+    def get_instance(cls, device):
+        if cls._nuis.get(device) is None:
+            cls._nuis[device] = AndroidUiautomationPoco(device)
+        return cls._nuis[device]
