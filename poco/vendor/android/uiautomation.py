@@ -14,7 +14,7 @@ from poco.exceptions import InvalidOperationException
 from rpc import AndroidRpcClient
 
 from airtest.core.android import Android
-from airtest.core.android.ime_helper import YosemiteIme
+from airtest.core.android.ime import YosemiteIme
 from poco.vendor.android.utils.installation import install, uninstall
 
 

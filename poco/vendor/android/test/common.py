@@ -6,9 +6,10 @@ import base64
 import unittest
 
 from poco.vendor.android.uiautomation import AndroidUiautomationPoco
+from airtest.core.android import Android
 
 
-class TextCommonCases(unittest.TestCase):
+class TestCommonCases(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.poco = AndroidUiautomationPoco()
@@ -39,3 +40,15 @@ class TextCommonCases(unittest.TestCase):
         btn.click()
         time.sleep(1)
         print btn.exists()
+
+
+class TestRemoteDevice(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.device = Android('a6c29d2b', adbhost=('10.250.190.230', 5038))
+        cls.poco = AndroidUiautomationPoco(cls.device)
+
+    def test_any(self):
+        for n in self.poco():
+            print n.get_name()
+
