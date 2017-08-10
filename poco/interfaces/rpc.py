@@ -42,14 +42,14 @@ class RpcInterface(object):
         return obj_proxy
 
     # input interface
-    def click(self, x, y):
-        self.inputer.click(x, y)
+    def click(self, pos):
+        self.inputer.click(pos)
 
-    def long_click(self, x, y, duration):
-        self.inputer.longClick(x, y, duration)
+    def long_click(self, pos, duration=2):
+        self.inputer.longClick(pos, duration)
 
-    def swipe(self, x1, y1, x2, y2, duration):
-        self.inputer.swipe(x1, y1, x2, y2, duration)
+    def swipe(self, p1, p2=None, direction=None, duration=1):
+        self.inputer.swipe(p1, p2, direction, duration)
 
     # screen interface
     def get_screen_size(self):

@@ -9,35 +9,34 @@ import time
 
 def airtestlog(func):
     @wraps(func)
-    def wrapper(poco, *args, **kwargs):
-        snapshot(msg=unicode(poco._last_proxy))
-        return func(poco, *args, **kwargs)
+    def wrapper(self, *args, **kwargs):
+        if self.poco:
+            snapshot(msg=unicode(self.poco._last_proxy))
+        return func(self, *args, **kwargs)
     return wrapper
 
 
 class AirtestInputer(InputerInterface):
 
-    def __init__(self, process, hunter=None):
-        # 初始化时记录下来，不重复获取了
-        self._touch_resolution = self.get_input_panel_size()
+    def __init__(self, poco):
+        super(AirtestInputer, self).__init__()
+        self.poco = poco
 
-    def _get_input_panel_size(self):
-        screen_w, screen_h = self.get_screen_size()
-        display_info = current_device().get_display_info()
-        real_w, real_h = display_info['width'], display_info['height']
-        if screen_w > screen_h:
-            w = max(real_w, real_h)
-            h = min(real_w, real_h)
+    def _get_touch_resolution(self):
+        """get real time resolution on android"""
+        size = current_device().get_display_info()
+        w, h = size["width"], size["height"]
+        if size["orientation"] in (1, 3):
+            return h, w
         else:
-            w, h = real_w, real_h
-        return [float(w), float(h)]  # 用于进行输入的分辨率，与设备输入接口对应
+            return w, h
 
     @airtestlog
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(pos))
 
-        panel_size = self._touch_resolution
+        panel_size = self._get_touch_resolution()
         pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
         touch(pos)
 
@@ -45,7 +44,7 @@ class AirtestInputer(InputerInterface):
     def swipe(self, p1, p2=None, direction=None, duration=1):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
-        panel_size = self._touch_resolution
+        panel_size = self._get_touch_resolution()
         p1 = [p1[0] * panel_size[0], p1[1] * panel_size[1]]
         if p2:
             p2 = [p2[0] * panel_size[0], p2[1] * panel_size[1]]
@@ -77,11 +76,6 @@ class AirtestInputer(InputerInterface):
 
 
 class AirtestScreen(ScreenInterface):
-
-    def __init__(self, process, hunter=None):
-        # 初始化时记录下来，不重复获取了
-        self._screen_resolution = self.get_screen_size()
-        self._touch_resolution = self.get_input_panel_size()
 
     def get_screen_size(self):
         return [float(s) for s in self.rpc.get_screen_size()]
