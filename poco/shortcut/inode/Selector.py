@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from poco.sdk.DefaultMatcher import DefaultMatcher
-from poco.sdk.exceptions import NoSuchTargetException
+from .DefaultMatcher import DefaultMatcher
+from .exceptions import NoSuchTargetException
 
 
 __author__ = 'lxn3032'

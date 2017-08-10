@@ -16,7 +16,7 @@ from .proxy import UIObjectProxy
 __author__ = 'lxn3032'
 
 
-class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
+class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     def __init__(self, rpc_client, **options):
         """
         实例化一个poco对象

@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # p = MhPoco(addr=("10.254.42.28", 5001))  # ios: ff's iPad
     # p = MhPoco(addr=("10.211.55.1", 5001))  # windows: parallel
     # p = MhPoco()
-    # p(text="长安城").click()
+    p(text="长安城").click()
     # p(textMatches="^比武场\[.+\]$").click("center")
     # p(text="手机也能玩").click()
     # p(u"超级神羊").click()

@@ -2,7 +2,7 @@
 
 import re
 
-from poco.sdk.exceptions import NoSuchComparatorException
+from .exceptions import NoSuchComparatorException
 
 
 __author__ = 'lxn3032'
