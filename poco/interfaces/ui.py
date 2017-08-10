@@ -3,7 +3,7 @@
 
 class UIHierarchyInterface(object):
 
-    def select(self, query):
+    def select(self, query, multiple):
         """
         在UI Hierarchy中根据query选取对象
 

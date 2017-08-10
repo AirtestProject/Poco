@@ -111,3 +111,12 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     @property
     def rpc(self):
         return self._rpc_client
+
+    def click(self, pos):
+        self.rpc.click(pos)
+
+    def swipe(self, *args, **kwargs):
+        self.rpc.swipe(*args, **kwargs)
+
+    def snapshot(self, width):
+        self.rpc.snapshot(msg=width)

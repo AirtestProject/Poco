@@ -25,14 +25,6 @@ class CocosJsPoco(Poco):
         self._rpc_client = SocketIORpc(addr, self)
         super(CocosJsPoco, self).__init__(self._rpc_client, action_interval=0.01)
 
-    def click(self, pos):
-        self.rpc.click(pos)
-
-    def swipe(self, *args, **kwargs):
-        self.rpc.swipe(*args, **kwargs)
-
-    def snapshot(self, width):
-        self.rpc.snapshot(msg=width)
 
 
 class SimpleWS(WebSocket):
