@@ -31,16 +31,6 @@ class RpcInterface(object):
     def dump(self):
         return self.ui.dump()
 
-    def evaluate(self, obj_proxy):
-        """
-        临时接口，排除bug后移除
-        返回对象本身即可
-
-        :param obj_proxy:
-        :return:
-        """
-        return obj_proxy
-
     # input interface
     def click(self, pos):
         self.inputer.click(pos)

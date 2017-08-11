@@ -39,10 +39,6 @@ class AirtestPocoAgent(PocoAgent):
         super(AirtestPocoAgent, self).__init__(hierarchy, input, screen, command)
         self._rpc_client = client
 
-    def evaluate(self, obj_proxy):
-        # TODO 临时方法，马上移除
-        return self._rpc_client.evaluate(obj_proxy)
-
 
 class AirtestPoco(Poco):
 

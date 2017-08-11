@@ -22,7 +22,5 @@ if __name__ == '__main__':
     panels = poco('MainPanel').offspring('Panel').child('Panel')
     print len(panels.nodes)
     # n = panels.nodes[1]
-    # # n = poco.agent._rpc_client.evaluate(n)
     # print n
     # # n = panels[1].nodes
-    # print '+++', '_evaluated__:', n._evaluated__, 'uri:', n._uri__, 'is_intermediate:', n._is_intermediate_uri__

@@ -10,6 +10,3 @@ class PocoAgent(object):
         self.input = input
         self.screen = screen
         self.command = command
-
-    def evaluate(self, obj):
-        return obj
