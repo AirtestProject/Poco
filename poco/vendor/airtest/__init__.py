@@ -3,7 +3,7 @@
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.vendor.airtest.hierarchy import RemotePocoHierarchy
-from poco.vendor.airtest.input import AirtestInputer
+from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.command import HunterCommand
 from poco.vendor.airtest.logutil import airtestlog
@@ -28,7 +28,7 @@ class AirtestPocoAgent(PocoAgent):
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
 
         # input
-        input = AirtestInputer()
+        input = AirtestInput()
 
         # screen
         screen = AirtestScreen(remote_poco.screen)

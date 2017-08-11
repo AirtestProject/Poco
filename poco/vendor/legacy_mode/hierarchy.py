@@ -2,24 +2,24 @@
 from poco.interfaces.hierarchy import HierarchyInterface
 from poco.sdk.Selector import Selector
 
-from .inode.AbstractDumper import AbstractDumper
-from .inode.AbstractNode import AbstractNode
-from .inode.Attributor import Attributor
-from .inode.exceptions import UnableToSetAttributeException
+from poco.sdk.AbstractDumper import AbstractDumper
+from poco.sdk.AbstractNode import AbstractNode
+from poco.sdk.Attributor import Attributor
+from poco.sdk.exceptions import UnableToSetAttributeException
 
 
-class LocalUIHierarchy(HierarchyInterface):
+class LegacyModeHierarchy(HierarchyInterface):
     """local implementation of UIInterface
-        `dump` is the only method to be implemented
+        `dumpHierarchy` is the only method to be implemented
     """
-    def __init__(self, dumper):
-        super(LocalUIHierarchy, self).__init__()
-        self.dumper = Dumper(dumper)
+    def __init__(self, dumpable):
+        super(LegacyModeHierarchy, self).__init__()
+        self.dumper = Dumper(dumpable)
         self.selector = Selector(self.dumper)
         self.attributor = Attributor()
 
     def dump(self):
-        return self.dumper.dumpable()
+        return self.dumper.dumpHierarchy()
 
     def getattr(self, nodes, name):
         """get node attribute"""
@@ -82,7 +82,7 @@ class Dumper(AbstractDumper):
 
     def getRoot(self):
         # 每次获取root时，就给一个新的root
-        root = Node(self.dumpable())
+        root = Node(self.dumpable.dumpHierarchy())
         for child in root.getChildren():
             child.setParent(root)
         return root

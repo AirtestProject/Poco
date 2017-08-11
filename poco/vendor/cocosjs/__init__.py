@@ -2,37 +2,27 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:47:51
-from poco.interfaces.rpc import RpcInterface
-from poco.vendor.mh.simplerpc.simplerpc import Connection
-from poco.vendor.mh.simplerpc.rpcclient import RpcClient
-from poco.vendor.mh.mh_rpc import sync_wrapper
-from poco.shortcut.localui import LocalUIHierarchy
-from poco.shortcut.airtester import AirtestInputer, AirtestScreen
-from poco import Poco
-from threading import Thread
-import websocket
-import time
 import json
+import time
+import websocket
+from threading import Thread
+
+from poco import Poco
+from poco.agent import PocoAgent
+from poco.sdk.Dumpable import Dumpable
+from poco.vendor.legacy_mode.hierarchy import LegacyModeHierarchy
+from poco.vendor.airtest.screen import AirtestScreen
+from poco.vendor.airtest.input import AirtestInput
+from poco.vendor.mh.mh_rpc import sync_wrapper
+from poco.vendor.mh.simplerpc.rpcclient import RpcClient
+from poco.vendor.mh.simplerpc.simplerpc import Connection
+
 
 DEFAULT_ADDR = "ws://localhost:5003"
 
 
-class CocosJsPoco(Poco):
-    """docstring for CocosJsPoco"""
-
+class CocosJsPocoAgent(PocoAgent, Dumpable):
     def __init__(self, addr=DEFAULT_ADDR):
-        self._rpc_client = SocketIORpc(addr, self)
-        super(CocosJsPoco, self).__init__(self._rpc_client, action_interval=0.01)
-
-
-class SocketIORpc(RpcInterface):
-
-    def __init__(self, addr=DEFAULT_ADDR, poco=None):
-        super(SocketIORpc, self).__init__(
-            uihierarchy=LocalUIHierarchy(self.dump),
-            inputer=AirtestInputer(poco),
-            screen=AirtestScreen(),
-        )
         # init airtest env
         from airtest.core.main import set_serialno
         from airtest.cli.runner import device as current_device
@@ -45,9 +35,22 @@ class SocketIORpc(RpcInterface):
         self.c.DEBUG = False
         self.c.run(backend=True)
 
+        hierarchy = LegacyModeHierarchy(self)
+        screen = AirtestScreen()
+        input = AirtestInput()
+        super(CocosJsPocoAgent, self).__init__(hierarchy, input, screen, None)
+
     @sync_wrapper
-    def dump(self):
+    def dumpHierarchy(self):
         return self.c.call("dump")
+
+
+class CocosJsPoco(Poco):
+    """docstring for CocosJsPoco"""
+
+    def __init__(self, addr=DEFAULT_ADDR):
+        agent = CocosJsPocoAgent(addr)
+        super(CocosJsPoco, self).__init__(agent, action_interval=0.01)
 
 
 class SocketIOConnection(Connection):
@@ -120,6 +123,7 @@ class WebSocketClient(object):
         return msg
 
 
+# test code
 def dump():
     from websocket import create_connection
     ws = create_connection(DEFAULT_ADDR, timeout=2)
@@ -135,6 +139,10 @@ def dump():
 
 if __name__ == '__main__':
     # ws = WebSocketClient("ws://echo.websocket.org/")
-    rpc = SocketIORpc()
-    rpc.dump()
+    rpc = CocosJsPocoAgent()
+    import time
+    t0 = time.time()
+    rpc.dumpHierarchy()
+    t1 = time.time()
+    print t1 - t0
     # print(dump())

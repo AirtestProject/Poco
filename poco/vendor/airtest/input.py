@@ -8,9 +8,9 @@ from airtest.core.main import touch, swipe
 from airtest.cli.runner import device as current_device
 
 
-class AirtestInputer(InputerInterface):
+class AirtestInput(InputerInterface):
     def __init__(self):
-        super(AirtestInputer, self).__init__()
+        super(AirtestInput, self).__init__()
 
     def _get_touch_resolution(self):
         """get real time resolution on android"""

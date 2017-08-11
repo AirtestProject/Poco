@@ -2,10 +2,12 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-from poco.interfaces.rpc import RpcInterface
-from .simplerpc.rpcclient import AsyncConn, RpcClient
-from poco.shortcut.localui import LocalUIHierarchy
 from functools import wraps
+
+from poco.interfaces.rpc import RpcInterface
+from poco.vendor.legacy_mode.hierarchy import LegacyModeHierarchy
+
+from .simplerpc.rpcclient import AsyncConn, RpcClient
 
 
 def sync_wrapper(func):
@@ -23,7 +25,7 @@ class MhRpc(RpcInterface):
     """docstring for MhRpc"""
 
     def __init__(self, addr=("localhost", 5001)):
-        super(MhRpc, self).__init__(uihierarchy=LocalUIHierarchy(self.dump))
+        super(MhRpc, self).__init__(uihierarchy=LegacyModeHierarchy(self.dump))
         conn = AsyncConn(addr)
         self.c = RpcClient(conn)
         self.c.run(backend=True)

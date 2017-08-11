@@ -3,14 +3,19 @@
 from poco.interfaces import ScreenInterface
 
 from airtest.core.main import snapshot
+from airtest.cli.runner import device as current_device
 
 
 class AirtestScreen(ScreenInterface):
-    def __init__(self, remote_screen_proxy):
+    def __init__(self, remote_screen_proxy=None):
         self.screen = remote_screen_proxy
 
     def get_screen_size(self):
-        return [float(s) for s in self.screen.getPortSize()]
+        if self.screen:
+            return [float(s) for s in self.screen.getPortSize()]
+        else:
+            disp = current_device().get_display_info()
+            return [disp['width'], disp['height']]
 
     def snapshot(self, width):
         snapshot()

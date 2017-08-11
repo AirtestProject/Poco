@@ -8,19 +8,24 @@ from hunter_cli import Hunter, open_platform
 from poco import Poco
 from poco.vendor.airtest import AirtestPoco
 from hrpc.client import RpcClient
+from poco.vendor.cocosjs import CocosJsPoco
 
 
 if __name__ == '__main__':
-    tokenid = open_platform.get_api_token('poco-test', 'g18')
-    hunter = Hunter(tokenid, 'g18', devid='g18_at_10-254-245-31', apihost='10.251.90.33:32022')
+    # tokenid = open_platform.get_api_token('poco-test', 'g18')
+    # hunter = Hunter(tokenid, 'g18', devid='g18_at_10-254-245-31', apihost='10.251.90.33:32022')
     # poco = Poco(hunter)
-    poco = AirtestPoco('g18', hunter)
-    # from airtest.core.main import set_serialno
-    # set_serialno()
+    # poco = AirtestPoco('g18', hunter)
+    from airtest.core.main import set_serialno
+    set_serialno()
     # ap('HeroIcon').click()
     # ap('Close').click()
-    panels = poco('MainPanel').offspring('Panel').child('Panel')
-    print len(panels.nodes)
+    # panels = poco('MainPanel').offspring('Panel').child('Panel')
+    # print len(panels.nodes)
     # n = panels.nodes[1]
     # print n
     # # n = panels[1].nodes
+
+    poco = CocosJsPoco()
+    for p in poco():
+        print p
