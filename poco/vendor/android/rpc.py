@@ -5,7 +5,7 @@ import numbers
 
 from poco.interfaces.hierarchy import HierarchyInterface
 from poco.interfaces.screen import ScreenInterface
-from poco.interfaces.inputer import InputerInterface
+from poco.interfaces.input import InputInterface
 from poco.vendor.hrpc.utils import transform_node_has_been_removed_exception
 
 
@@ -51,7 +51,7 @@ class AndroidScreen(ScreenInterface):
         return self.screen.getPortSize()
 
 
-class AndroidInput(InputerInterface):
+class AndroidInput(InputInterface):
     def __init__(self, inputer):
         super(AndroidInput, self).__init__()
         self.inputer = inputer

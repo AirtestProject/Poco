@@ -2,13 +2,13 @@
 
 import time
 
-from poco.interfaces import InputerInterface
+from poco.interfaces import InputInterface
 
 from airtest.core.main import touch, swipe
 from airtest.cli.runner import device as current_device
 
 
-class AirtestInput(InputerInterface):
+class AirtestInput(InputInterface):
     def __init__(self):
         super(AirtestInput, self).__init__()
 

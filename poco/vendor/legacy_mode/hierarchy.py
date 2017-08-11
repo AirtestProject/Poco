@@ -27,8 +27,7 @@ class LegacyModeHierarchy(HierarchyInterface):
 
     def setattr(self, nodes, name, value):
         """set node attribute"""
-        # return self.attributor.setAttr(nodes, name, value)
-        raise NotImplementedError
+        return self.attributor.setAttr(nodes, name, value)
 
     def select(self, query, multiple=False):
         """select nodes by query"""

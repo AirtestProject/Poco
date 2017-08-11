@@ -3,15 +3,27 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 20:29:56
 from poco import Poco
-from .mh_rpc import MhRpc
+from poco.agent import PocoAgent
+from poco.vendor.mh.mh_rpc import MhHierarchy, MhScreen, MhInput
+
+from .simplerpc.rpcclient import AsyncConn, RpcClient
+
+
+class MhPocoAgent(PocoAgent):
+    def __init__(self, addr=("localhost", 5001)):
+        conn = AsyncConn(addr)
+        self.c = RpcClient(conn)
+        self.c.DEBUG = False
+        self.c.run(backend=True)
+
+        hierarchy = MhHierarchy(self.c)
+        screen = MhScreen(self.c)
+        input = MhInput(self.c)
+        super(MhPocoAgent, self).__init__(hierarchy, input, screen, None)
 
 
 class MhPoco(Poco):
     """docstring for MhPoco"""
     def __init__(self, addr=("localhost", 5001)):
-        rpc_client = MhRpc(addr)
-        rpc_client.c.DEBUG = False
-        super(MhPoco, self).__init__(rpc_client, action_interval=0.01)
-
-    def click(self, pos):
-        self.agent.click(pos)
+        agent = MhPocoAgent(addr)
+        super(MhPoco, self).__init__(agent, action_interval=0.01)

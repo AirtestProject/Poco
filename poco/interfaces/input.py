@@ -2,7 +2,7 @@
 __author__ = 'lxn3032'
 
 
-class InputerInterface(object):
+class InputInterface(object):
     def click(self, pos):
         """
         在目标设备上进行click操作

@@ -1,4 +1,4 @@
 from .rpc import *
-from .inputer import InputerInterface
+from .input import InputInterface
 from .screen import ScreenInterface
 from .hierarchy import HierarchyInterface
