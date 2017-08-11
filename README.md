@@ -39,12 +39,14 @@ git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
 ```
 
-安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，git bash中使用以下脚本进行clone
+安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，**git bash**中使用以下脚本进行clone
 
 ```sh
 # 请根据实际情况填上deploy-key的路径和git仓库地址
 ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
 ```
+
+如果以上无效的话，可以将下载下来的deploy-key放到 `C:\User\<username>\.ssh\` 目录下，改名为`id_rsa`，然后再按照上面的install步骤重新install。
 
 ## 基本概念(concepts)
 
@@ -61,16 +63,16 @@ ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
 
 ### Poco测试框架相关
 
+**对象代理(UI proxy)**: 通过poco选择出来的代表游戏内的UI对象  
+**节点(Node)**: 游戏内UI对象的实例，按照树形结构渲染的每一个对象均表示一个节点  
+**选择器(选择表达式)(query expr)**: 使用poco进行选择的表达式，用于限定和匹配目标对象(节点)  
+
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-text-attribute.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-search.png)
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-relations.png)
 
-**对象代理**: 通过poco选择出来代表的游戏内对象  
-**对象集合**: 通过poco选择出来代表一组的游戏内对象  
-**节点**: 游戏内对象的实例，按照树形结构渲染的每一个对象均表示一个节点  
-**选择器**: 使用poco进行选择的表达式，用于限定和匹配目标对象(节点)  
-
+### 坐标系与度量空间定义
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-coordinate-system.png)
 
@@ -98,7 +100,7 @@ poco('bg_mission')
 
 # 节点名和属性选择
 poco('bg_mission', type='Button')
-poco(text='据点支援', type='Button', enable=True)
+poco(textMatches='^据点.*$', type='Button', enable=True)
 ```
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-simple.png)
@@ -115,7 +117,9 @@ poco('main_node').child('list_item').offspring('item')
 ``
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-relative.png)
 
-### 顺序选择器（索引选择器，不建议使用，推荐迭代遍历）
+### 顺序选择器（索引选择器，更推荐迭代遍历）
+
+索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
 ```python
 items = poco('main_node').child('list_item').offspring('item')
@@ -126,8 +130,6 @@ print(items[1].child('material_name').get_text())
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-sequence.png)
 
 ### 遍历对象集合
-
-遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
 ```python
 # 遍历每一个商品
@@ -152,12 +154,13 @@ print(mission_btn.exists())  # True，表示是否存在界面中
 
 #### click
 
-点击对象，默认以挂接点(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。
+点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。
 
 ```python
 poco('bg_mission').click()
 poco('bg_mission').click('center')
 poco('bg_mission').click([0.5, 0.5])    # 等价于center
+poco('bg_mission').focus([0.5, 0.5]).click()  # 等价于上面的表达式
 ```
 
 ![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-click.png)
@@ -169,7 +172,7 @@ poco('bg_mission').click([0.5, 0.5])    # 等价于center
 ```python
 joystick = poco('movetouch_panel').child('point_img')
 joystick.swipe('up')
-joystick.swipe([0.2, -0.2])
+joystick.swipe([0.2, -0.2])  # 向右上方45度滑动sqrt(0.08)单位距离
 joystick.swipe([0.2, -0.2], duration=0.5)
 ```
 
@@ -191,9 +194,15 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 ```python
 poco('bg_mission').focus('center').click()  # 点击中心点
-poco(type='ScrollView').focus([0.5, 0.8]).drag_to(poco(type='ScrollView').focus([0.5, 0.2]))  # ScrollView卷动翻页
 ```
 
+
+focus也可以用于一个对象的内部定位，例如实现一个ScrollView的卷动操作
+
+```
+scrollView = poco(type='ScollView')
+scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
+```
 
 ## 断言与异常
 
@@ -214,6 +223,18 @@ try:
 except PocoTargetTimeout:
     # 面板没有弹出来，有bug
     raise
+```
+
+```python
+from poco.exceptions import PocoNoSuchNodeException
+
+img = poco('guide_panel', type='ImageView')
+try:
+    if not img.exists():
+        img.click()
+except PocoNoSuchNodeException:
+    # 尝试对不存在的节点进行操作，会抛出此异常
+    pass
 ```
 
 ## 接入参考

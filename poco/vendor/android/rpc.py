@@ -1,48 +1,23 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from poco.utils.exception_transform import member_func_exception_transform, transform_node_has_been_removed_exception
-from poco.interfaces.rpc import RpcInterface, RpcRemoteException, RpcTimeoutException
+import numbers
 
-from hrpc.exceptions import \
-    RpcRemoteException as HRpcRemoteException, \
-    RpcTimeoutException as HRpcTimeoutException
-
-from hrpc.client import RpcClient
-from hrpc.transport.http import HttpTransport
+from poco.interfaces.hierarchy import HierarchyInterface
+from poco.interfaces.screen import ScreenInterface
+from poco.interfaces.inputer import InputerInterface
+from poco.vendor.hrpc.utils import transform_node_has_been_removed_exception
 
 
 __author__ = 'lxn3032'
-__all__ = ['AndroidRpcClient']
 
 
-class Client(RpcClient):
-    def __init__(self, endpoint):
-        self.endpoint = endpoint
-        super(Client, self).__init__(HttpTransport)
-
-    def initialize_transport(self):
-        return HttpTransport(self.endpoint, self)
-
-
-@member_func_exception_transform(HRpcRemoteException, RpcRemoteException)
-@member_func_exception_transform(HRpcTimeoutException, RpcTimeoutException)
-class AndroidRpcClient(RpcInterface):
-    def __init__(self, endpoint, ime):
-        self.endpoint = endpoint
-        self.client = Client(endpoint)
-        self.remote_poco = self.client.remote('poco-uiautomation-framework')
-        dumper = self.remote_poco.dumper
-        selector = self.remote_poco.selector
-        attributor = self.remote_poco.attributor
-        inputer = self.remote_poco.inputer
-        screen = self.remote_poco.screen
-        RpcInterface.__init__(self, dumper, selector, attributor, inputer, screen)
-        self.ime = ime
-
-    def get_screen(self, width):
-        assert type(width) is int
-        return self.screen.getScreen(width)
+class AndroidHierarchy(HierarchyInterface):
+    def __init__(self, dumper, selector, attributor):
+        HierarchyInterface.__init__(self)
+        self.dumper = dumper
+        self.selector = selector
+        self.attributor = attributor
 
     # node/hierarchy interface
     @transform_node_has_been_removed_exception
@@ -50,11 +25,43 @@ class AndroidRpcClient(RpcInterface):
         return self.attributor.getAttr(nodes, name)
 
     @transform_node_has_been_removed_exception
-    def setattr(self, nodes, name, val):
-        if name == 'text':
-            self.ime.text(val)
-        # self.remote_poco.attributor.setAttr(nodes, name, val)
-        # if name == 'text':
-        #     check_val = self.getattr(nodes, 'text')
-        #     if check_val != val:
-        #         raise Exception('调用android uiautomator setText失败，希望设置"{}"，但得到"{}"'.encode('utf-8').format(val, check_val))
+    def setattr(self, nodes, name, value):
+        return self.attributor.setAttr(nodes, name, value)
+
+    def select(self, query, multiple=False):
+        return self.selector.select(query, multiple)
+
+    def dump(self):
+        return self.dumper.dumpHierarchy()
+
+
+class AndroidScreen(ScreenInterface):
+    def __init__(self, screen):
+        super(AndroidScreen, self).__init__()
+        self.screen = screen
+
+    def snapshot(self, width=720):
+        # snapshot接口暂时还补统一
+        if not isinstance(width, numbers.Number):
+            raise TypeError('width should be numbers/')
+
+        return self.screen.getScreen(int(width))
+
+    def get_screen_size(self):
+        return self.screen.getPortSize()
+
+
+class AndroidInput(InputerInterface):
+    def __init__(self, inputer):
+        super(AndroidInput, self).__init__()
+        self.inputer = inputer
+
+    def click(self, pos):
+        self.inputer.click(*pos)
+
+    def swipe(self, p1, direction, duration=2.0):
+        p2 = [p1[0] + direction[0], p1[1] + direction[1]]
+        self.inputer.swipe(p1[0], p1[1], p2[0], p2[1], duration)
+
+    def long_click(self, pos, duration=3.0):
+        self.inputer.longClick(pos[0], pos[1], duration)

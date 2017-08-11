@@ -6,13 +6,13 @@ import six
 import time
 from functools import wraps
 
-from .interfaces.rpc import RpcRemoteException, RpcTimeoutException
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
-from .utils.retry import retries_when
+from .sdk.exceptions import UnableToSetAttributeException
 from .utils.query_util import query_expr, build_query
 from .utils.suppression import deprecated
 
 __author__ = 'lxn3032'
+__all__ = ['UIObjectProxy']
 
 
 def wait(func):
@@ -66,8 +66,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            RpcRemoteException.NoSuchTargetException
-            RpcRemoteException.NoSuchAttributeException
+            NoSuchTargetException
+            NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -95,8 +95,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            RpcRemoteException.NoSuchTargetException
-            RpcRemoteException.NoSuchAttributeException
+            NoSuchTargetException
+            NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -115,8 +115,8 @@ class UIObjectProxy(object):
         :return: ui对象
 
         :raises:
-            RpcRemoteException.NoSuchTargetException
-            RpcRemoteException.NoSuchAttributeException
+            NoSuchTargetException
+            NoSuchAttributeException
         """
 
         sub_query = build_query(name, **attrs)
@@ -135,7 +135,7 @@ class UIObjectProxy(object):
         :param item: <int> 数组索引
         :return: ui对象
 
-        :raise: RpcRemoteException.NoSuchTargetException
+        :raise: NoSuchTargetException
         :raise: PocoTargetRemovedException
         """
 
@@ -151,7 +151,7 @@ class UIObjectProxy(object):
                 uiobj.query = ('index', (self.query, i))
                 uiobj._evaluated = True
                 uiobj._query_multiple = True
-                uiobj._nodes = self.poco.rpc.evaluate(nodes[i])
+                uiobj._nodes = nodes[i]
                 uiobj._nodes_proxy_is_list = False
                 pos = uiobj.get_position()
                 self._sorted_children.append((uiobj, pos))
@@ -199,7 +199,7 @@ class UIObjectProxy(object):
             uiobj.query = ('index', (self.query, i))
             uiobj._evaluated = True
             uiobj._query_multiple = True
-            uiobj._nodes = self.poco.rpc.evaluate(nodes[i])
+            uiobj._nodes = nodes[i]
             uiobj._nodes_proxy_is_list = False
             pos = uiobj.get_position()
             sorted_nodes.append((uiobj, pos))
@@ -208,7 +208,6 @@ class UIObjectProxy(object):
         for obj, _ in sorted_nodes:
             yield obj
 
-    @retries_when(RpcTimeoutException)
     @wait
     def click(self, focus='anchor', sleep_interval=None):
         """
@@ -349,7 +348,6 @@ class UIObjectProxy(object):
             if time.time() - start > timeout:
                 raise PocoTargetTimeout('disappearance', self)
 
-    @retries_when(RpcTimeoutException)
     @refresh_when(PocoTargetRemovedException)
     def attr(self, name):
         """
@@ -370,22 +368,26 @@ class UIObjectProxy(object):
         :return: 以上属性值为空时返回None，否则返回对应属性值
 
         :raise PocoNoSuchNodeException: 当查询节点不存在是
-        :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
+        :raise NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         
-        :note: 自动捕获RpcRemoteException.NodeHasBeenRemovedException
+        :note: 自动捕获NodeHasBeenRemovedException
                远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
         """
 
         # 优化速度，只选择第一个匹配到的节点
         nodes = self._do_query(multiple=False)
-        val = self.poco.rpc.getattr(nodes, name)
+        val = self.poco.agent.hierarchy.getattr(nodes, name)
+        if six.PY2 and isinstance(val, unicode):
+            val = val.encode('utf-8')
         return val
 
-    @retries_when(RpcTimeoutException)
     @refresh_when(PocoTargetRemovedException)
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
-        self.poco.rpc.setattr(nodes, name, val)
+        try:
+            self.poco.agent.hierarchy.setattr(nodes, name, val)
+        except UnableToSetAttributeException as e:
+            raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
     def exists(self):
         """
@@ -396,7 +398,7 @@ class UIObjectProxy(object):
 
         try:
             return self.attr('visible')
-        except (RpcRemoteException, PocoNoSuchNodeException):
+        except (PocoTargetRemovedException, PocoNoSuchNodeException):
             return False
 
     def visible(self):
@@ -423,7 +425,7 @@ class UIObjectProxy(object):
 
         :return: True/False
 
-        :raise RpcRemoteException.NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
+        :raise NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
         """
 
         return self.attr('touchable')
@@ -450,10 +452,7 @@ class UIObjectProxy(object):
         :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
         """
 
-        try:
-            self.setattr('text', text)
-        except RpcRemoteException as e:
-            raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
+        self.setattr('text', text)
 
     def get_name(self):
         """
@@ -504,7 +503,7 @@ class UIObjectProxy(object):
 
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:
-            self._nodes = self.poco.rpc.select(self.query, multiple)
+            self._nodes = self.poco.agent.hierarchy.select(self.query, multiple)
             if len(self._nodes) == 0:
                 raise PocoNoSuchNodeException(self)
             self._evaluated = True

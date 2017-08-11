@@ -1,18 +1,19 @@
 # coding=utf-8 
-from poco.interfaces.ui import UIHierarchyInterface
-from .inode.Selector import Selector
-from .inode.Attributor import Attributor
-from .inode.AbstractNode import AbstractNode
-from .inode.exceptions import UnableToSetAttributeException
+from poco.interfaces.hierarchy import HierarchyInterface
+from poco.sdk.Selector import Selector
+
 from .inode.AbstractDumper import AbstractDumper
+from .inode.AbstractNode import AbstractNode
+from .inode.Attributor import Attributor
+from .inode.exceptions import UnableToSetAttributeException
 
 
-class LocalUIHierarchy(UIHierarchyInterface):
+class LocalHierarchy(HierarchyInterface):
     """local implementation of UIInterface
         `dump` is the only method to be implemented
     """
     def __init__(self, dumper):
-        super(LocalUIHierarchy, self).__init__()
+        super(LocalHierarchy, self).__init__()
         self.dumper = Dumper(dumper)
         self.selector = Selector(self.dumper)
         self.attributor = Attributor()

@@ -4,7 +4,7 @@
 # @Date:   2017-07-11 14:25:58
 
 
-__all__ = ['RpcInterface', 'RpcRemoteException', 'RpcTimeoutException']
+# deprecated
 
 
 class RpcInterface(object):
@@ -61,11 +61,3 @@ class RpcInterface(object):
 
     def get_screen(self, width):
         return self.screen.getScreen(width)
-
-
-class RpcRemoteException(Exception):
-    pass
-
-
-class RpcTimeoutException(Exception):
-    pass

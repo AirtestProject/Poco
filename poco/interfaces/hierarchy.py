@@ -1,7 +1,7 @@
 # coding=utf-8
 
 
-class UIHierarchyInterface(object):
+class HierarchyInterface(object):
 
     def select(self, query, multiple):
         """

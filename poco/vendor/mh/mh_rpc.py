@@ -2,11 +2,10 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-from poco.interfaces.rpc import RpcInterface, RpcRemoteException
+from poco.interfaces.rpc import RpcInterface
 from .simplerpc.rpcclient import AsyncConn, RpcClient
-from poco.shortcut.localui import LocalUIHierarchy
+from poco.shortcut.localui import LocalHierarchy
 from functools import wraps
-import re
 
 
 def sync_wrapper(func):
@@ -15,7 +14,7 @@ def sync_wrapper(func):
         cb = func(*args, **kwargs)
         ret, err = cb.wait()
         if err:
-            raise RpcRemoteException(err)
+            raise err
         return ret
     return new_func
 
@@ -24,7 +23,7 @@ class MhRpc(RpcInterface):
     """docstring for MhRpc"""
 
     def __init__(self, addr=("localhost", 5001)):
-        super(MhRpc, self).__init__(uihierarchy=LocalUIHierarchy(self.dump))
+        super(MhRpc, self).__init__(uihierarchy=LocalHierarchy(self.dump))
         conn = AsyncConn(addr)
         self.c = RpcClient(conn)
         self.c.run(backend=True)

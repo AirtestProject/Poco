@@ -1,16 +1,47 @@
 # coding=utf-8
+
+from poco import Poco
+from poco.agent import PocoAgent
+from poco.vendor.airtest.hierarchy import RemotePocoHierarchy
+from poco.vendor.airtest.input import AirtestInputer
+from poco.vendor.airtest.screen import AirtestScreen
+from poco.vendor.airtest.command import HunterCommand
+from poco.vendor.airtest.logutil import airtestlog
+
+from hunter_cli.rpc.client import HunterRpcClient
+from airtest_hunter import AirtestHunter, open_platform
+
+
 __author__ = 'lxn3032'
 
 
-import time
+class AirtestPocoAgent(PocoAgent):
+    def __init__(self, hunter):
+        client = HunterRpcClient(hunter)
+        client.set_timeout(25)
+        remote_poco = client.remote('poco-uiautomation-framework-2')
 
-from airtest.core.main import touch, swipe, snapshot
-from airtest.cli.runner import device as current_device
-from airtest_hunter import AirtestHunter, open_platform
-from poco import Poco
-from poco.exceptions import InvalidOperationException
-from hunter_rpc import HunterRpc
-from functools import wraps
+        # hierarchy
+        dumper = remote_poco.dumper
+        selector = remote_poco.selector
+        attributor = remote_poco.attributor
+        hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
+
+        # input
+        input = AirtestInputer()
+
+        # screen
+        screen = AirtestScreen(remote_poco.screen)
+
+        # command
+        command = HunterCommand(hunter)
+
+        super(AirtestPocoAgent, self).__init__(hierarchy, input, screen, command)
+        self._rpc_client = client
+
+    def evaluate(self, obj_proxy):
+        # TODO 临时方法，马上移除
+        return self._rpc_client.evaluate(obj_proxy)
 
 
 class AirtestPoco(Poco):
@@ -18,22 +49,25 @@ class AirtestPoco(Poco):
     def __init__(self, process, hunter=None):
         apitoken = open_platform.get_api_token(process)
         self._hunter = hunter or AirtestHunter(apitoken, process)
-        rpc_client = HunterRpc(self._hunter, self)
-        super(AirtestPoco, self).__init__(rpc_client)
+        agent = AirtestPocoAgent(self._hunter)
+        super(AirtestPoco, self).__init__(agent)
+        self._last_proxy = None
 
-    def command(self, script, lang='text', sleep_interval=None):
-        """
-        通过hunter调用gm指令，可调用hunter指令库中定义的所有指令，也可以调用text类型的gm指令
-        gm指令相关功能请参考safaia GM指令扩展模块
+    def __call__(self, *args, **kwargs):
+        ret = super(AirtestPoco, self).__call__(*args, **kwargs)
 
-        :param script: 指令
-        :param lang: 语言，默认text
-        :param sleep_interval: 调用指令后的等待间隔时间
-        :return: None
-        """
+        # last proxy 暂时也只能记录到这一层的，proxy.child.child就不行了
+        self._last_proxy = ret
+        return ret
 
-        self._hunter.script(script, lang=lang)
-        if sleep_interval:
-            time.sleep(sleep_interval)
-        else:
-            self.wait_stable()
+    @airtestlog
+    def click(self, pos):
+        super(AirtestPoco, self).click(pos)
+
+    @airtestlog
+    def swipe(self, p1, p2=None, direction=None, duration=2.0):
+        super(AirtestPoco, self).swipe(p1, p2, direction, duration)
+
+    @airtestlog
+    def snapshot(self, width):
+        return super(AirtestPoco, self).snapshot(width)

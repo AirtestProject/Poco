@@ -14,4 +14,4 @@ class MhPoco(Poco):
         super(MhPoco, self).__init__(rpc_client, action_interval=0.01)
 
     def click(self, pos):
-        self.rpc.click(pos)
+        self.agent.click(pos)

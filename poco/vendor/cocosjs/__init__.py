@@ -7,8 +7,9 @@ from poco.interfaces.rpc import RpcInterface
 from poco.vendor.mh.simplerpc.simplerpc import Connection
 from poco.vendor.mh.simplerpc.rpcclient import RpcClient
 from poco.vendor.mh.mh_rpc import sync_wrapper
-from poco.shortcut.localui import LocalUIHierarchy
-from poco.shortcut.airtester import AirtestInputer, AirtestScreen
+from poco.shortcut.localui import LocalHierarchy
+from poco.vendor.airtest.screen import AirtestScreen
+from poco.vendor.airtest.input import AirtestInputer
 from airtest.core.main import touch, swipe, snapshot
 from airtest.cli.runner import device as current_device
 from poco.exceptions import InvalidOperationException
@@ -51,7 +52,7 @@ class SimpleWS(WebSocket):
 class SocketIORpc(RpcInterface):
     def __init__(self, addr=DEFAULT_ADDR, poco=None):
         super(SocketIORpc, self).__init__(
-            uihierarchy=LocalUIHierarchy(self.dump),
+            uihierarchy=LocalHierarchy(self.dump),
             inputer=AirtestInputer(poco),
             screen=AirtestScreen(),
         )
