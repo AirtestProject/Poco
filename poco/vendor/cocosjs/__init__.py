@@ -33,6 +33,13 @@ class SocketIORpc(RpcInterface):
             inputer=AirtestInputer(poco),
             screen=AirtestScreen(),
         )
+        # init airtest env
+        from airtest.core.main import set_serialno
+        from airtest.cli.runner import device as current_device
+        if not current_device():
+            set_serialno()
+        current_device().adb.forward("tcp:5003", "tcp:5003", False)
+
         self.conn = SocketIOConnection(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
