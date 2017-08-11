@@ -8,12 +8,12 @@ from .inode.Attributor import Attributor
 from .inode.exceptions import UnableToSetAttributeException
 
 
-class LocalHierarchy(HierarchyInterface):
+class LocalUIHierarchy(HierarchyInterface):
     """local implementation of UIInterface
         `dump` is the only method to be implemented
     """
     def __init__(self, dumper):
-        super(LocalHierarchy, self).__init__()
+        super(LocalUIHierarchy, self).__init__()
         self.dumper = Dumper(dumper)
         self.selector = Selector(self.dumper)
         self.attributor = Attributor()

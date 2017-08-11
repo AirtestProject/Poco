@@ -4,7 +4,7 @@
 # @Date:   2017-07-13 18:01:23
 from poco.interfaces.rpc import RpcInterface
 from .simplerpc.rpcclient import AsyncConn, RpcClient
-from poco.shortcut.localui import LocalHierarchy
+from poco.shortcut.localui import LocalUIHierarchy
 from functools import wraps
 
 
@@ -23,7 +23,7 @@ class MhRpc(RpcInterface):
     """docstring for MhRpc"""
 
     def __init__(self, addr=("localhost", 5001)):
-        super(MhRpc, self).__init__(uihierarchy=LocalHierarchy(self.dump))
+        super(MhRpc, self).__init__(uihierarchy=LocalUIHierarchy(self.dump))
         conn = AsyncConn(addr)
         self.c = RpcClient(conn)
         self.c.run(backend=True)
