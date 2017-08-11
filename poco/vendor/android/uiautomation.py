@@ -5,22 +5,46 @@ __author__ = 'lxn3032'
 import os
 import time
 import threading
-import numbers
 import warnings
 import requests
 
 from poco import Poco
-from poco.exceptions import InvalidOperationException
-from rpc import AndroidRpcClient
+from poco.agent import PocoAgent
+from poco.vendor.android.rpc import AndroidHierarchy, AndroidScreen, AndroidInput
 
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
 from poco.vendor.android.utils.installation import install, uninstall
 
+from hrpc.client import RpcClient
+from hrpc.transport.http import HttpTransport
+
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
 PocoServicePackage = 'com.netease.open.pocoservice'
 PocoServicePackageTest = 'com.netease.open.pocoservice.test'
+
+
+class AndroidRpcClient(RpcClient):
+    def __init__(self, endpoint):
+        self.endpoint = endpoint
+        super(AndroidRpcClient, self).__init__(HttpTransport)
+
+    def initialize_transport(self):
+        return HttpTransport(self.endpoint, self)
+
+
+class AndroidPocoAgent(PocoAgent):
+    def __init__(self, endpoint):
+        self.client = AndroidRpcClient(endpoint)
+        remote_poco = self.client.remote('poco-uiautomation-framework')
+        dumper = remote_poco.dumper
+        selector = remote_poco.selector
+        attributor = remote_poco.attributor
+        hierarchy = AndroidHierarchy(dumper, selector, attributor)
+        screen = AndroidScreen(remote_poco.screen)
+        inputer = AndroidInput(remote_poco.inputer)
+        super(AndroidPocoAgent, self).__init__(hierarchy, screen, inputer, None)
 
 
 class AndroidUiautomationPoco(Poco):
@@ -67,8 +91,8 @@ class AndroidUiautomationPoco(Poco):
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
         endpoint = "http://{}:{}".format(self.adb_client.host, p1)
-        rpc_client = AndroidRpcClient(endpoint, self.ime)
-        super(AndroidUiautomationPoco, self).__init__(rpc_client)
+        agent = AndroidPocoAgent(endpoint)
+        super(AndroidUiautomationPoco, self).__init__(agent)
 
     def _install_service(self):
         updated = install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug.apk'))
@@ -123,37 +147,6 @@ class AndroidUiautomationPoco(Poco):
                 print("still waiting for uiautomation ready.")
                 continue
         return ready
-
-    def click(self, pos):
-        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
-            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-        self.rpc.click(*pos)
-
-    def swipe(self, p1, p2=None, direction=None, duration=1.0):
-        if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
-            raise InvalidOperationException('Swipe origin out of screen. {}'.format(p1))
-        if p2:
-            sp2 = p2
-        elif direction:
-            sp2 = [p1[0] + direction[0], p1[1] + direction[1]]
-        else:
-            raise RuntimeError("p2 and direction cannot be None at the same time.")
-        self.rpc.swipe(p1[0], p1[1], sp2[0], sp2[1], duration)
-
-    def long_click(self, pos, duration=3.0):
-        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
-            raise InvalidOperationException('Click position out of screen. {}'.format(pos))
-        self.rpc.long_click(pos[0], pos[1], duration)
-
-    def get_screen_size(self):
-        return self.rpc.get_screen_size()
-
-    def snapshot(self, width=720):
-        # snapshot接口暂时还补统一
-        if not isinstance(width, numbers.Number):
-            return None
-
-        return self.rpc.get_screen(int(width))
 
 
 class AndroidUiautomationHelper(object):

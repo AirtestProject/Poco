@@ -4,20 +4,19 @@ from __future__ import unicode_literals
 import time
 import warnings
 
-from poco.interfaces.input import InputInterface
 from poco.interfaces.screen import ScreenInterface
 
 from .acceleration import PocoAccelerationMixin
 from .assertions import PocoAssertionMixin
-from .exceptions import PocoTargetTimeout
+from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .logging import HunterLoggingMixin
 from .proxy import UIObjectProxy
 
 __author__ = 'lxn3032'
 
 
-class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
-    def __init__(self, rpc_client, **options):
+class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
+    def __init__(self, agent, **options):
         """
         实例化一个poco对象
 
@@ -30,13 +29,12 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         """
 
         super(Poco, self).__init__()
-        self._rpc_client = rpc_client
+        self._agent = agent
 
         # options
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
         self._post_action_interval = options.get('action_interval', 0.8)
         self._poll_interval = options.get('poll_interval', 1.44)
-        self._last_proxy = None
 
     def __call__(self, name=None, **kw):
         """
@@ -59,8 +57,7 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         if not name and len(kw) == 0:
             warnings.warn("Wildcard selector may cause performance trouble. Please give at least one condition to "
                           "shrink range of results")
-        self._last_proxy = UIObjectProxy(self, name, **kw)
-        return self._last_proxy
+        return UIObjectProxy(self, name, **kw)
 
     def wait_for_any(self, objects, timeout=120):
         """
@@ -109,5 +106,29 @@ class Poco(InputInterface, ScreenInterface, PocoAssertionMixin, PocoAcceleration
         time.sleep(self._poll_interval)
 
     @property
-    def rpc(self):
-        return self._rpc_client
+    def agent(self):
+        return self._agent
+
+    def click(self, pos):
+        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
+            raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
+        self.agent.input.click(pos)
+
+    def swipe(self, p1, p2=None, direction=None, duration=2.0):
+        if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
+            raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
+        if p2 is not None:
+            dir = [p2[0] - p1[0], p2[1] - p1[1]]
+        elif direction is not None:
+            dir = direction
+        else:
+            raise TypeError('Swipe end not set.')
+        self.agent.input.swipe(p1, dir, duration)
+
+    def long_click(self, pos):
+        if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
+            raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
+        self.agent.input.long_click(pos)
+
+    def snapshot(self, width):
+        return self.agent.screen.snapshot(msg=width)

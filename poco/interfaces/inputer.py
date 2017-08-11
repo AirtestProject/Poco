@@ -2,7 +2,7 @@
 __author__ = 'lxn3032'
 
 
-class InputInterface(object):
+class InputerInterface(object):
     def click(self, pos):
         """
         在目标设备上进行click操作
@@ -13,12 +13,11 @@ class InputInterface(object):
 
         raise NotImplementedError
 
-    def swipe(self, p1, p2=None, direction=None, duration=1):
+    def swipe(self, p1, direction, duration=1):
         """
         在目标设备上进行滑动操作
 
         :param p1: [x, y] 起始点，设备输入坐标系
-        :param p2: 终止点，设备输入坐标系
         :param direction: 以起始点为原点的向量，归一化坐标系
         :param duration: 整个滑动过程持续时间，单位秒
         :return: None 
