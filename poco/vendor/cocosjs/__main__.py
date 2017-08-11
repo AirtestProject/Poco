@@ -36,5 +36,6 @@ if __name__ == '__main__':
     p = CocosJsPoco()
     # ret = p._rpc_client.dump()
     # pprint(ret)
-    for i in range(3):
+    for i in range(300):
+        print(i * 100000000000)
         quick_game(p)
