@@ -59,7 +59,7 @@ if __name__ == '__main__':
     #     i.click()
 
     # # 测试截图接口
-    # p._rpc_client.get_screen_size()
+    # p._rpc_client.getPortSize()
     # from base64 import b64decode
     # d = p._rpc_client.get_screen()
     # with open("screen.png", "wb") as f:

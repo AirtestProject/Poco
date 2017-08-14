@@ -10,6 +10,7 @@ class HierarchyInterface(object):
         :param query: string built by poco
         :return: [list of nodes]
         """
+
         raise NotImplementedError
 
     def dump(self):
@@ -17,12 +18,15 @@ class HierarchyInterface(object):
         UI Hierarchy的JSON序列
         :return: json
         """
+
         raise NotImplementedError
 
-    def getattr(self, nodes, name):
+    def getAttr(self, nodes, name):
         """get node attribute"""
+
         raise NotImplementedError
 
-    def setattr(self, nodes, name, value):
+    def setAttr(self, nodes, name, value):
         """set node attribute"""
+
         raise NotImplementedError

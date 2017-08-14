@@ -1,11 +1,8 @@
 # coding=utf-8
 
-import time
-
-from poco.interfaces import InputInterface
-
-from airtest.core.main import touch, swipe
 from airtest.cli.runner import device as current_device
+from airtest.core.main import touch, swipe
+from poco.sdk.interfaces.input import InputInterface
 
 
 class AirtestInput(InputInterface):
@@ -21,16 +18,17 @@ class AirtestInput(InputInterface):
         else:
             return w, h
 
-    def click(self, pos):
-        panel_size = self._get_touch_resolution()
-        pos = [pos[0] * panel_size[0], pos[1] * panel_size[1]]
+    def click(self, x, y):
+        pw, ph = self._get_touch_resolution()
+        pos = [x * pw, y * ph]
         touch(pos)
 
-    def swipe(self, p1, direction, duration=2.0):
-        panel_size = self._get_touch_resolution()
-        p1 = [p1[0] * panel_size[0], p1[1] * panel_size[1]]
+    def swipe(self, x1, y1, x2, y2, duration=2.0):
+        direction = x2 - x1, y2 - y1
+        pw, ph = self._get_touch_resolution()
+        p1 = [x1 * pw, y1 * ph]
         steps = int(duration * 40) + 1
         swipe(p1, vector=direction, duration=duration, steps=steps)
 
-    def long_click(self, p, duration=2.0):
+    def longClick(self, x, y, duration=2.0):
         raise NotImplementedError

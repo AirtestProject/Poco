@@ -1,16 +1,14 @@
 # coding=utf-8
 
+from airtest_hunter import AirtestHunter, open_platform
+from hunter_cli.rpc.client import HunterRpcClient
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.vendor.airtest.hierarchy import RemotePocoHierarchy
 from poco.vendor.airtest.input import AirtestInput
-from poco.vendor.airtest.screen import AirtestScreen
-from poco.vendor.airtest.command import HunterCommand
 from poco.vendor.airtest.logutil import airtestlog
-
-from hunter_cli.rpc.client import HunterRpcClient
-from airtest_hunter import AirtestHunter, open_platform
-
+from poco.vendor.airtest.screen import AirtestScreen
+from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
+from poco.vendor.hunter.command import HunterCommand
 
 __author__ = 'lxn3032'
 
@@ -31,7 +29,7 @@ class AirtestPocoAgent(PocoAgent):
         input = AirtestInput()
 
         # screen
-        screen = AirtestScreen(remote_poco.screen)
+        screen = AirtestScreen()
 
         # command
         command = HunterCommand(hunter)

@@ -1,11 +1,10 @@
 # coding=utf-8 
-from poco.interfaces.hierarchy import HierarchyInterface
-from poco.sdk.Selector import Selector
-
 from poco.sdk.AbstractDumper import AbstractDumper
 from poco.sdk.AbstractNode import AbstractNode
 from poco.sdk.Attributor import Attributor
+from poco.sdk.Selector import Selector
 from poco.sdk.exceptions import UnableToSetAttributeException
+from poco.sdk.interfaces.hierarchy import HierarchyInterface
 
 
 class LegacyModeHierarchy(HierarchyInterface):
@@ -21,11 +20,11 @@ class LegacyModeHierarchy(HierarchyInterface):
     def dump(self):
         return self.dumper.dumpHierarchy()
 
-    def getattr(self, nodes, name):
+    def getAttr(self, nodes, name):
         """get node attribute"""
         return self.attributor.getAttr(nodes, name)
 
-    def setattr(self, nodes, name, value):
+    def setAttr(self, nodes, name, value):
         """set node attribute"""
         return self.attributor.setAttr(nodes, name, value)
 

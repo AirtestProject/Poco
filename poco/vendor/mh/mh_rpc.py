@@ -5,11 +5,9 @@
 from functools import wraps
 
 from poco.sdk.Dumpable import Dumpable
-from poco.interfaces.screen import ScreenInterface
-from poco.interfaces.input import InputInterface
+from poco.sdk.interfaces.input import InputInterface
+from poco.sdk.interfaces.screen import ScreenInterface
 from poco.vendor.legacy_mode.hierarchy import LegacyModeHierarchy
-
-
 
 
 def sync_wrapper(func):
@@ -29,11 +27,11 @@ class MhScreen(ScreenInterface):
         self.c = client
 
     @sync_wrapper
-    def get_screen_size(self):
+    def getPortSize(self):
         return self.c.call("get_size")
 
     @sync_wrapper
-    def snapshot(self, width):
+    def getScreen(self, width):
         return self.c.call("get_size")
 
 
@@ -43,9 +41,10 @@ class MhInput(InputInterface):
         self.c = client
 
     @sync_wrapper
-    def click(self, pos, op="left"):
-        print(pos, op)
-        return self.c.call("click", pos, op)
+    def click(self, x, y, op="left"):
+        # 这个函数签名不对
+        print((x, y), op)
+        return self.c.call("click", (x, y), op)
 
 
 class MhDumper(Dumpable):
@@ -63,7 +62,7 @@ class MhHierarchy(LegacyModeHierarchy):
         super(MhHierarchy, self).__init__(MhDumper(client))
         self.c = client
 
-    def setattr(self, node, name, val):
+    def setAttr(self, node, name, val):
         if isinstance(node, (list, tuple)):
             node = node[0]
         node_id = node[0]["desc"]
@@ -74,47 +73,10 @@ class MhHierarchy(LegacyModeHierarchy):
         return self.c.call("setattr", node_id, name, val)
 
 
-# class MhRpc(RpcInterface):
-#     """docstring for MhRpc"""
-#
-#     def __init__(self, addr=("localhost", 5001)):
-#         super(MhRpc, self).__init__(uihierarchy=LegacyModeHierarchy(self.dump))
-#         conn = AsyncConn(addr)
-#         self.c = RpcClient(conn)
-#         self.c.run(backend=True)
-#
-#     @sync_wrapper
-#     def get_screen_size(self):
-#         return self.c.call("get_size")
-#
-#     @sync_wrapper
-#     def get_screen(self, width):
-#         return self.c.call("get_screen")
-#
-#     @sync_wrapper
-#     def dump(self):
-#         return self.c.call("dump")
-#
-#     def setattr(self, node, name, val):
-#         if isinstance(node, (list, tuple)):
-#             node = node[0]
-#         node_id = node[0]["desc"]
-#         self._setattr(node_id, name, val)
-#
-#     @sync_wrapper
-#     def _setattr(self, node_id, name, val):
-#         return self.c.call("setattr", node_id, name, val)
-#
-#     @sync_wrapper
-#     def click(self, pos, op="left"):
-#         print(pos, op)
-#         return self.c.call("click", pos, op)
-
-
 if __name__ == '__main__':
     from pprint import pprint
     r = MhRpc(addr=("10.254.245.124", 5001))
-    # size = r.get_screen_size()
+    # size = r.getPortSize()
     # r.click((0.5, 0.5))
     # dump = r.dump()
     # pprint(dump)

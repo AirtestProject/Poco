@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:48:10
-from . import CocosJsPoco, SocketIORpc
+from poco.vendor.cocosjs import CocosJsPoco
 from pprint import pprint
 import json
 

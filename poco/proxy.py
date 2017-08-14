@@ -376,7 +376,7 @@ class UIObjectProxy(object):
 
         # 优化速度，只选择第一个匹配到的节点
         nodes = self._do_query(multiple=False)
-        val = self.poco.agent.hierarchy.getattr(nodes, name)
+        val = self.poco.agent.hierarchy.getAttr(nodes, name)
         if six.PY2 and isinstance(val, unicode):
             val = val.encode('utf-8')
         return val
@@ -385,7 +385,7 @@ class UIObjectProxy(object):
     def setattr(self, name, val):
         nodes = self._do_query(multiple=False)
         try:
-            self.poco.agent.hierarchy.setattr(nodes, name, val)
+            self.poco.agent.hierarchy.setAttr(nodes, name, val)
         except UnableToSetAttributeException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 

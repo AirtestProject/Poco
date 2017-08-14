@@ -4,8 +4,6 @@ from __future__ import unicode_literals
 import time
 import warnings
 
-from poco.interfaces.screen import ScreenInterface
-
 from .acceleration import PocoAccelerationMixin
 from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout, InvalidOperationException
@@ -112,23 +110,29 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
     def click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.click(pos)
+        self.agent.input.click(pos[0], pos[1])
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
-        if p2 is not None:
-            dir = [p2[0] - p1[0], p2[1] - p1[1]]
-        elif direction is not None:
-            dir = direction
+        if direction is not None:
+            p2 = [p1[0] + direction[0], p1[1] + direction[1]]
+        elif p2 is not None:
+            p2 = p2
         else:
             raise TypeError('Swipe end not set.')
-        self.agent.input.swipe(p1, dir, duration)
+        self.agent.input.swipe(p1[0], p1[1], p2[0], p2[1], duration)
 
     def long_click(self, pos):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.long_click(pos)
+        self.agent.input.longClick(pos[0], pos[1])
 
-    def snapshot(self, width):
-        return self.agent.screen.snapshot(msg=width)
+    def snapshot(self, width=720):
+        return self.agent.screen.getScreen(width)
+
+    def get_screen_size(self):
+        return self.agent.screen.getPortSize()
+
+    def command(self, cmd, type=None):
+        return self.agent.command.command(cmd, type)

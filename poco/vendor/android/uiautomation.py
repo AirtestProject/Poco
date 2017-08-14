@@ -43,8 +43,8 @@ class AndroidPocoAgent(PocoAgent):
         attributor = remote_poco.attributor
         hierarchy = AndroidHierarchy(dumper, selector, attributor)
         screen = AndroidScreen(remote_poco.screen)
-        inputer = AndroidInput(remote_poco.inputer)
-        super(AndroidPocoAgent, self).__init__(hierarchy, inputer, screen, None)
+        input = AndroidInput(remote_poco.inputer)
+        super(AndroidPocoAgent, self).__init__(hierarchy, input, screen, None)
 
 
 class AndroidUiautomationPoco(Poco):
