@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import time
+import traceback
 import warnings
 
 from .acceleration import PocoAccelerationMixin
@@ -136,3 +137,18 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
 
     def command(self, cmd, type=None):
         return self.agent.command.command(cmd, type)
+
+    def on_pre_action(self, action, proxy, args):
+        pass
+
+    def on_post_action(self, action, proxy, args):
+        pass
+
+    def pre_action(self, action, proxy, args):
+        try:
+            self.on_pre_action(action, proxy, args)
+        except:
+            warnings.warn("Error occurred at pre action stage.\n{}".format(traceback.format_exc()))
+
+    def post_action(self, action, proxy, args):
+        self.on_post_action(action, proxy, args)

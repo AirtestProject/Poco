@@ -9,7 +9,6 @@ from functools import wraps
 from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from .sdk.exceptions import UnableToSetAttributeException
 from .utils.query_util import query_expr, build_query
-from .utils.suppression import deprecated
 
 __author__ = 'lxn3032'
 __all__ = ['UIObjectProxy']
@@ -222,11 +221,13 @@ class UIObjectProxy(object):
         """
 
         pos_in_percentage = self.get_position(focus)
+        self.poco.pre_action('click', self, pos_in_percentage)
         self.poco.click(pos_in_percentage)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
+        self.poco.post_action('click', self, pos_in_percentage)
 
     @wait
     def swipe(self, dir, focus='anchor', duration=0.5):
@@ -244,7 +245,9 @@ class UIObjectProxy(object):
 
         dir_vec = self._direction_vector_of(dir)
         origin = self.get_position(focus)
+        self.poco.pre_action('swipe', self, (origin, dir_vec))
         self.poco.swipe(origin, direction=dir_vec, duration=duration)
+        self.poco.post_action('swipe', self, (origin, dir_vec))
 
     def drag_to(self, target, duration=2):
         """
@@ -264,10 +267,6 @@ class UIObjectProxy(object):
         origin_pos = self.get_position()
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         self.swipe(dir, duration=duration)
-
-    @deprecated("`anchor` is deprecated, please use equivalent method `focus` instead.")
-    def anchor(self, a):
-        return self.focus(a)
 
     def focus(self, f):
         """
