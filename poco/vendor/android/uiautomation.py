@@ -10,7 +10,7 @@ import requests
 
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.vendor.android.rpc import AndroidHierarchy, AndroidScreen, AndroidInput
+from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
 
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
@@ -41,10 +41,8 @@ class AndroidPocoAgent(PocoAgent):
         dumper = remote_poco.dumper
         selector = remote_poco.selector
         attributor = remote_poco.attributor
-        hierarchy = AndroidHierarchy(dumper, selector, attributor)
-        screen = AndroidScreen(remote_poco.screen)
-        input = AndroidInput(remote_poco.inputer)
-        super(AndroidPocoAgent, self).__init__(hierarchy, input, screen, None)
+        hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
+        super(AndroidPocoAgent, self).__init__(hierarchy, remote_poco.inputer, remote_poco.screen, None)
 
 
 class AndroidUiautomationPoco(Poco):
