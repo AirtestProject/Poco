@@ -105,21 +105,21 @@ class AndroidUiautomationPoco(Poco):
                 return True
         return False
 
-    def _keep_running_instrumentation(self):
-        def loop():
-            while True:
-                proc = self.adb_client.shell([
-                    'am', 'instrument', '-w', '-e', 'class',
-                    '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
-                    '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
-                    not_wait=True)
-                stdout, stderr = proc.communicate()
-                print(stdout)
-                print(stderr)
-                time.sleep(1)
-        t = threading.Thread(target=loop)
-        t.daemon = True
-        t.start()
+    # def _keep_running_instrumentation(self):
+    #     def loop():
+    #         while True:
+    #             proc = self.adb_client.shell([
+    #                 'am', 'instrument', '-w', '-e', 'class',
+    #                 '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+    #                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
+    #                 not_wait=True)
+    #             stdout, stderr = proc.communicate()
+    #             print(stdout)
+    #             print(stderr)
+    #             time.sleep(1)
+    #     t = threading.Thread(target=loop)
+    #     t.daemon = True
+    #     t.start()
 
     def _start_instrument(self, port_to_ping):
         if self._instrument_proc is not None:
@@ -133,7 +133,7 @@ class AndroidUiautomationPoco(Poco):
             '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
             not_wait=True)
         time.sleep(2)
-        for i in range(5):
+        for i in range(10):
             try:
                 requests.get('http://{}:{}'.format(self.adb_client.host, port_to_ping), timeout=10)
                 ready = True
