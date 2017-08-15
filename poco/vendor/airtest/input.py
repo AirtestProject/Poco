@@ -2,21 +2,32 @@
 
 from airtest.cli.runner import device as current_device
 from airtest.core.main import touch, swipe
+from airtest.core.helper import get_platform
 from poco.sdk.interfaces.input import InputInterface
 
 
 class AirtestInput(InputInterface):
-    def __init__(self):
+    def __init__(self, surface=None):
         super(AirtestInput, self).__init__()
+        self.surface = surface
 
     def _get_touch_resolution(self):
-        """get real time resolution on android"""
-        size = current_device().get_display_info()
-        w, h = size["width"], size["height"]
-        if size["orientation"] in (1, 3):
-            return h, w
+        """
+        get real time resolution on device if full screen
+         or window size if running in window mode
+        """
+        if get_platform() == 'Windows':
+            if self.surface is None:
+                raise RuntimeError('Please initialize AirtestInput with surface object, '
+                                   'when running test suites on windows as target device.')
+            return self.surface.getPortSize()
         else:
-            return w, h
+            size = current_device().get_display_info()
+            w, h = size["width"], size["height"]
+            if size["orientation"] in (1, 3):
+                return h, w
+            else:
+                return w, h
 
     def click(self, x, y):
         pw, ph = self._get_touch_resolution()

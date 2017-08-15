@@ -1,7 +1,11 @@
 # coding=utf-8
 
+import base64
+import os
+
 from airtest.cli.runner import device as current_device
 from airtest.core.main import snapshot
+from airtest.core.settings import Settings
 from poco.sdk.interfaces.screen import ScreenInterface
 
 
@@ -14,5 +18,7 @@ class AirtestScreen(ScreenInterface):
         return [disp['width'], disp['height']]
 
     def getScreen(self, width):
-        # TODO: 这里要把截图内容返回
-        snapshot()
+        filename = 'poco-screenshot.png'
+        filepath = os.path.join(Settings.LOG_DIR, Settings.SCREEN_DIR, filename)
+        snapshot(filepath)
+        return base64.b64encode(open(filepath, 'rb').read())
