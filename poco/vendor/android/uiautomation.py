@@ -67,6 +67,7 @@ class AndroidUiautomationPoco(Poco):
         # forward
         p0, _ = self.adb_client.setup_forward("tcp:10080")
         p1, _ = self.adb_client.setup_forward("tcp:10081")
+        print('p0: {},  p1: {}'.format(p0, p1))
 
         # start
         if self._is_running('com.github.uiautomator'):

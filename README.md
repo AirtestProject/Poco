@@ -31,7 +31,7 @@ git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
 pip install -e hunter-cli
 
 # hunter lib for airtest
-git clone -b dev ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
 pip install -e airtest-hunter
 
 # poco
