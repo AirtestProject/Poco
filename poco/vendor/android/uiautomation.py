@@ -14,6 +14,7 @@ from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
 
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
+from airtest.core.android.utils.iputils import get_ip_address
 from poco.vendor.android.utils.installation import install, uninstall
 
 from hrpc.client import RpcClient
@@ -50,6 +51,7 @@ class AndroidUiautomationPoco(Poco):
         # TODO: 临时用着airtest的方案
         self.android = device or Android()
         self.adb_client = self.android.adb
+        self.device_ip = get_ip_address(self.adb_client)
 
         # save current top activity (@nullable)
         current_top_activity_package = self.android.get_top_activity_name()
@@ -65,9 +67,10 @@ class AndroidUiautomationPoco(Poco):
         self._install_service()
 
         # forward
-        p0, _ = self.adb_client.setup_forward("tcp:10080")
-        p1, _ = self.adb_client.setup_forward("tcp:10081")
-        print('p0: {},  p1: {}'.format(p0, p1))
+        # p0, _ = self.adb_client.setup_forward("tcp:10080")
+        # p1, _ = self.adb_client.setup_forward("tcp:10081")
+        p0 = 10080
+        p1 = 10081
 
         # start
         if self._is_running('com.github.uiautomator'):
@@ -89,7 +92,7 @@ class AndroidUiautomationPoco(Poco):
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
-        endpoint = "http://{}:{}".format(self.adb_client.host, p1)
+        endpoint = "http://{}:{}".format(self.device_ip, p1)
         agent = AndroidPocoAgent(endpoint)
         super(AndroidUiautomationPoco, self).__init__(agent)
 
@@ -136,7 +139,7 @@ class AndroidUiautomationPoco(Poco):
         time.sleep(2)
         for i in range(10):
             try:
-                requests.get('http://{}:{}'.format(self.adb_client.host, port_to_ping), timeout=10)
+                requests.get('http://{}:{}'.format(self.device_ip, port_to_ping), timeout=10)
                 ready = True
                 break
             except requests.exceptions.Timeout:
