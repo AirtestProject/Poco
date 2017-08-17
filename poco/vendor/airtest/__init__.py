@@ -48,5 +48,4 @@ class AirtestPoco(Poco):
 
     def on_pre_action(self, action, proxy, args):
         # airteset log用
-        # snapshot(msg=unicode(proxy))
-        pass
+        snapshot(msg=unicode(proxy))
