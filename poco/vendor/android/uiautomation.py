@@ -85,9 +85,10 @@ class AndroidUiautomationPoco(Poco):
             self._install_service()
             ready = self._start_instrument(p0)
 
-            current_top_activity2 = self.android.get_top_activity_name()
-            if current_top_activity2 is None or current_top_activity_package not in current_top_activity2:
-                self.android.start_app(current_top_activity_package, activity=True)
+            if current_top_activity_package is not None:
+                current_top_activity2 = self.android.get_top_activity_name()
+                if current_top_activity2 is None or current_top_activity_package not in current_top_activity2:
+                    self.android.start_app(current_top_activity_package, activity=True)
 
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
