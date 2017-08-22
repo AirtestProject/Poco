@@ -30,11 +30,13 @@ if __name__ == '__main__':
     # l = p(type="CBuffPanel").offspring(type="CDisableImage")
     # for i in l:
     #     i.click()
+    l = p(type="CPanel").child(type="AttendanceItem").wait(10)
+    print(l.exists())
 
     # 点日历里的每一项
-    l = p(type="CPanel").child(type="AttendanceItem")
-    for i in l:
-        i.click("center")
+    # l = p(type="CPanel").child(type="AttendanceItem")
+    # for i in l:
+    #     i.click("center")
 
     # while True:
     #     p('loginext/进入互通幻境').click()
