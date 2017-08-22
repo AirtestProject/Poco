@@ -7,12 +7,12 @@ from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
 
 
-class LegacyModeHierarchy(HierarchyInterface):
+class LocalUIHierarchy(HierarchyInterface):
     """local implementation of UIInterface
         `dumpHierarchy` is the only method to be implemented
     """
     def __init__(self, dumpable):
-        super(LegacyModeHierarchy, self).__init__()
+        super(LocalUIHierarchy, self).__init__()
         self.dumper = Dumper(dumpable)
         self.selector = Selector(self.dumper)
         self.attributor = Attributor()
