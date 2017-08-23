@@ -26,7 +26,7 @@ class AirtestPocoAgent(PocoAgent):
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
 
         # input
-        input = AirtestInput()
+        input = AirtestInput(remote_poco.screen)
 
         # screen
         screen = AirtestScreen()
