@@ -414,35 +414,6 @@ class UIObjectProxy(object):
         except (PocoTargetRemovedException, PocoNoSuchNodeException):
             return False
 
-    def visible(self):
-        """
-        判断节点是否可见。TODO：功能还没确定，不要用这个方法，后面可能还会加上判断是否在屏幕外等
-
-        :return: True/False
-        """
-
-        return self.attr('visible')
-
-    def enabled(self):
-        """
-        判断节点是否使能、可用
-
-        :return: True/False
-        """
-
-        return self.attr('enable')
-
-    def touchable(self):
-        """
-        判断节点是否可点击，不是所有类型节点都有这个属性
-
-        :return: True/False
-
-        :raise NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
-        """
-
-        return self.attr('touchable')
-
     def get_text(self):
         """
         获取节点上的文本值，utf-8编码
