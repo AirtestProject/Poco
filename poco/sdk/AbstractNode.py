@@ -51,7 +51,8 @@ class AbstractNode(object):
         Required attributes are defined as follows:
             "name": the name of the node, a unique and meaningful name for each node recommended.
             "type": the type name of the node, can be any string. e.g. "android.widget.Button" or as simple as "Button"
-            "visible": whether the node is rendered on screen. If any offspring node is visible, this node must be set visible
+            "visible": whether the node is rendered on screen.
+                       If the return value is False, all children nodes will be ignored in Poco selector
             "pos": position of the node in screen. Return value should be 2-elements-list represents the percents of
                     the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,
                     this attribute will be [0.5f, 0.5f].
