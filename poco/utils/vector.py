@@ -6,12 +6,12 @@ import math
 
 
 class Vec2(object):
-    def __init__(self, x=0, y=0):
+    def __init__(self, x=0.0, y=0.0):
         self.x = x
         self.y = y
 
     @staticmethod
-    def from_randian(rad):
+    def from_radian(rad):
         x = math.cos(rad)
         y = math.sin(rad)
         return Vec2(x, y)

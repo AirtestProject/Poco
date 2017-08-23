@@ -12,12 +12,16 @@ from poco.vendor.cocosjs import CocosJsPoco
 
 
 if __name__ == '__main__':
-    # tokenid = open_platform.get_api_token('poco-test', 'g18')
-    # hunter = Hunter(tokenid, 'g18', devid='g18_at_10-254-245-31', apihost='10.251.90.33:32022')
-    # poco = Poco(hunter)
+    tokenid = open_platform.get_api_token('poco-test')
+    hunter = Hunter(tokenid, 'g62', devid='g62_at_408d5c117d0f')
+    poco = AirtestPoco('g62', hunter)
+
+    print poco(textMatches='.*入游戏').get_text()
+
+        # print ui.get_bounds()
     # poco = AirtestPoco('g18', hunter)
-    from airtest.core.main import set_serialno
-    set_serialno()
+    # from airtest.core.main import set_serialno
+    # set_serialno()
     # ap('HeroIcon').click()
     # ap('Close').click()
     # panels = poco('MainPanel').offspring('Panel').child('Panel')
@@ -25,7 +29,7 @@ if __name__ == '__main__':
     # n = panels.nodes[1]
     # print n
     # # n = panels[1].nodes
-
-    poco = CocosJsPoco()
-    for p in poco():
-        print p
+    #
+    # poco = CocosJsPoco()
+    # for p in poco():
+    #     print p

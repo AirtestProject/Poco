@@ -8,6 +8,8 @@ __author__ = 'lxn3032'
 class IDumper(Dumpable):
     def getRoot(self):
         """
+        Return the root node of the render tree wrapped by AbstractNode
+
         :rettype: support.poco.sdk.AbstractNode
         """
 
