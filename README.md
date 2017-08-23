@@ -204,6 +204,13 @@ scrollView = poco(type='ScollView')
 scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
 ```
 
+#### wait
+等待目标对象出现，总是返回对象自身，如果出现立即返回，否则timeout后返回
+```python
+poco('bg_mission').wait(5).click()  # 最多等待5秒，出现即点击
+poco('bg_mission').wait(5).exists()  # 最多等待5秒，返回是否exists
+```
+
 ## 断言与异常
 
 **基本断言**

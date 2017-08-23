@@ -7,7 +7,7 @@ from functools import wraps
 from poco.sdk.Dumpable import Dumpable
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
-from poco.vendor.legacy_mode.hierarchy import LegacyModeHierarchy
+from poco.vendor.localui.hierarchy import LocalUIHierarchy
 
 
 def sync_wrapper(func):
@@ -57,7 +57,7 @@ class MhDumper(Dumpable):
         return self.c.call("dump")
 
 
-class MhHierarchy(LegacyModeHierarchy):
+class MhHierarchy(LocalUIHierarchy):
     def __init__(self, client):
         super(MhHierarchy, self).__init__(MhDumper(client))
         self.c = client

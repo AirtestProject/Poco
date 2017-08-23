@@ -317,6 +317,20 @@ class UIObjectProxy(object):
                             'Only "up/down/left/right" or 2 elements list/tuple available.'.format(type(dir)))
         return dir_vec
 
+    def wait(self, timeout=3):
+        """
+        等待当前ui对象出现，总是返回自身，如果目标出现即时返回，否则超时后返回
+        :param timeout: 最长等待时间
+        :return: 新的对象代理
+        """
+
+        start = time.time()
+        while not self.exists():
+            self.poco.sleep_for_polling_interval()
+            if time.time() - start > timeout:
+                break
+        return self
+
     def wait_for_appearance(self, timeout=120):
         """
         等待当前ui对象出现
@@ -368,7 +382,7 @@ class UIObjectProxy(object):
 
         :raise PocoNoSuchNodeException: 当查询节点不存在是
         :raise NoSuchAttributeException: 当查询不是以上的属性名时抛出该异常
-        
+
         :note: 自动捕获NodeHasBeenRemovedException
                远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
         """

@@ -10,7 +10,7 @@ from threading import Thread
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.sdk.Dumpable import Dumpable
-from poco.vendor.legacy_mode.hierarchy import LegacyModeHierarchy
+from poco.vendor.localui.hierarchy import LocalUIHierarchy
 from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.mh.mh_rpc import sync_wrapper
@@ -35,7 +35,7 @@ class CocosJsPocoAgent(PocoAgent, Dumpable):
         self.c.DEBUG = False
         self.c.run(backend=True)
 
-        hierarchy = LegacyModeHierarchy(self)
+        hierarchy = LocalUIHierarchy(self)
         screen = AirtestScreen()
         input = AirtestInput()
         super(CocosJsPocoAgent, self).__init__(hierarchy, input, screen, None)
