@@ -8,13 +8,12 @@ import warnings
 from .acceleration import PocoAccelerationMixin
 from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout, InvalidOperationException
-from .logging import HunterLoggingMixin
 from .proxy import UIObjectProxy
 
 __author__ = 'lxn3032'
 
 
-class Poco(PocoAssertionMixin, PocoAccelerationMixin, HunterLoggingMixin):
+class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def __init__(self, agent, **options):
         """
         实例化一个poco对象

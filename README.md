@@ -52,13 +52,13 @@ ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
 
 ### 测试
 
-**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本
-**TestSuite**: 多个TestCase构成的一系列脚本文件
-**TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境
-**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏
+**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本  
+**TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件  
+**TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境  
+**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏  
 
-**TestFramework**:  测试框架，Poco就是一个测试框架
-**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK
+**TestFramework**:  测试框架，Poco就是一个测试框架  
+**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK  
 
 
 ### Poco测试框架相关

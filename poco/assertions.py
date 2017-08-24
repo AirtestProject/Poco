@@ -7,6 +7,7 @@ from poco.exceptions import PocoAssertionError
 __author__ = 'lxn3032'
 
 
+# deprecated, use assertion method in unittest.case.PocoTestCase instead
 class PocoAssertionMixin(object):
     @staticmethod
     def assert_equal(l, r, msg=b''):
