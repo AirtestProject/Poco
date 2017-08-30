@@ -34,15 +34,6 @@ class LocalUIHierarchy(HierarchyInterface):
 
 
 class Node(AbstractNode):
-    SecondaryAttributes = (
-        'text',
-        'touchable',
-        'enabled',
-        'tag',
-        'desc',
-        'rotation',
-    )
-
     def __init__(self, node):
         super(Node, self).__init__()
         self.node = node
@@ -64,19 +55,20 @@ class Node(AbstractNode):
         # cannot set any attributes on local nodes
         raise UnableToSetAttributeException(attrName, self.node)
 
-    def enumerateAttrs(self):
-        for attrName in self.RequiredAttributes + self.SecondaryAttributes:
-            yield attrName, self.getAttr(attrName)
+    def getAvailableAttributeNames(self):
+        return super(Node, self).getAvailableAttributeNames() + (
+            'text',
+            'touchable',
+            'enabled',
+            'tag',
+            'desc',
+            'rotation',
+        )
 
 
 class Dumper(AbstractDumper):
     def __init__(self, dumpable):
         self.dumpable = dumpable
-
-    def _build_tree(self, root):
-        for child in root.getChildren():
-            child.setParent(root)
-            self._build_tree(child)
 
     def getRoot(self):
         # 每次获取root时，就给一个新的root

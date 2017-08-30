@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from poco.sdk.exceptions import UnableToSetAttributeException
+
 __author__ = 'lxn3032'
 __all__ = ['AbstractNode']
 
@@ -11,17 +13,6 @@ class AbstractNode(object):
     This class has node parent/children/attribute methods,
     """
 
-    RequiredAttributes = (
-        "name",
-        "type",
-        "visible",
-        "pos",
-        "size",
-        "scale",
-        "anchorPoint",
-        "zOrders",
-    )
-
     def getParent(self):
         """
         Return the parent node of this node. If no parent or this is the root node, return None.
@@ -30,7 +21,7 @@ class AbstractNode(object):
         :rettype: AbstractNode/None
         """
 
-        raise NotImplementedError
+        return None
 
     def getChildren(self):
         """
@@ -73,7 +64,18 @@ class AbstractNode(object):
         :return: Attribute value. None if no such attribute.
         """
 
-        raise NotImplementedError
+        attrs = {
+            'name': '<Root>',
+            'type': 'Root',
+            'visible': True,
+            'pos': [0.0, 0.0],
+            'size': [0.0, 0.0],
+            'scale': [1.0, 1.0],
+            'anchorPoint': [0.5, 0.5],
+            'zOrders': {'local': 0, 'global': 0},
+        }
+
+        return attrs.get(attrName)
 
     def setAttr(self, attrName, val):
         """
@@ -87,11 +89,30 @@ class AbstractNode(object):
         :retval: None
         """
 
-        raise NotImplementedError
+        raise UnableToSetAttributeException(attrName, None)
+
+    def getAvailableAttributeNames(self):
+        """
+        enumerate all available attributes' name of this node
+
+        :rettype: Iterable<string>
+        """
+
+        return (
+            "name",
+            "type",
+            "visible",
+            "pos",
+            "size",
+            "scale",
+            "anchorPoint",
+            "zOrders",
+        )
 
     def enumerateAttrs(self):
         """
         :rettype: Iterable<string, ValueType>
         """
 
-        raise NotImplementedError
+        for attrName in self.getAvailableAttributeNames():
+            yield attrName, self.getAttr(attrName)

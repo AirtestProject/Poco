@@ -10,6 +10,7 @@ def make_tracer(filename):
             line_num = frame.f_lineno
             # TODO 定一下标准格式
             print(time.time(), line_num)
+            return None
         return tracer
     return tracer
 

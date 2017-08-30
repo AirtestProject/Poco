@@ -211,16 +211,7 @@ poco('bg_mission').wait(5).click()  # 最多等待5秒，出现即点击
 poco('bg_mission').wait(5).exists()  # 最多等待5秒，返回是否exists
 ```
 
-## 断言与异常
-
-**基本断言**
-
-```
-poco.assert_equal(expr1, expr2, 'message')
-poco.assert_greater(…)
-```
-
-**捕获异常**
+## 捕获异常
 
 ```python
 from poco.exceptions import PocoTargetTimeout
@@ -244,6 +235,12 @@ except PocoNoSuchNodeException:
     pass
 ```
 
+# 断言
+
+poco不包含TestRunner，断言请参考python标准库unittest的断言部分。
+
+关于TestRunner更详细的部分请参考[...还没写好...]()
+
 ## 接入参考
 
 1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在[项目](http://hunter.nie.netease.com/mywork/project#/)页直接下载最新版的接入模块。
@@ -262,20 +259,3 @@ Safaia().install(InspectorExt)
 ```
 
 3. [hunter终端](http://hunter.nie.netease.com) 右上角点击**Inspector**按钮打开检视器面板。
-
-
-## API Reference
-
-...
-
-
-## SDK Standard
-
-由于每个引擎的坐标系有所不同，SDK dump出来的值需要统一，特别是下面这三个：  
-尺度均为相对于屏幕宽高的百分比值
-```
-size: (width, height)      # 对象的包围盒大小
-pos: (x, y)                # 对象挂接点(anchor)的屏幕坐标
-anchorPoint: (ap_x, ap_y)  # 对象挂接点相对于包围盒的相对坐标，左上角为(0, 0)，右下角为(1, 1)
-```
-**请严格按照此标准实现SDK，如果引擎坐标系有所不同请在sdk里面进行转换**，这样inspector和poco脚本可以正确运作
