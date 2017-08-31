@@ -25,9 +25,3 @@ class NoSuchComparatorException(Exception):
     def __init__(self, matchingMethod, matcherName):
         super(NoSuchComparatorException, self).__init__()
         self.message = 'No such matching method "{}" of this Matcher ("{}")'.format(matchingMethod, matcherName)
-
-
-class NoSuchAttributeException(Exception):
-    def __init__(self, attrName, node):
-        msg = 'Cannot evalute attribute "{}" of node "{}".'.format(attrName, node)
-        super(NoSuchAttributeException, self).__init__(msg)

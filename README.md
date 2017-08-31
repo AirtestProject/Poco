@@ -254,7 +254,7 @@ Safaia().install(PocoUiautomation)
 # inspector extension
 InspectorExt = require('support.poco.safaia.inspector')
 InspectorExt.screen = require('support.poco.neox.screen')()
-InspectorExt.dumper = require('support.poco.cocos2dx.Dumper')()
+InspectorExt.dumper = require('support.poco.neox.Dumper')()
 Safaia().install(InspectorExt)
 ```
 
