@@ -1,11 +1,18 @@
 # coding=utf-8
-from poco.sdk.ISelector import ISelector
-
 from .DefaultMatcher import DefaultMatcher
 from .exceptions import NoSuchTargetException
 
 __author__ = 'lxn3032'
 __all__ = ['Selector']
+
+
+class ISelector(object):
+    def select(self, cond, multiple=False):
+        """
+        :rettype: list of support.poco.sdk.AbstractNode
+        """
+
+        raise NotImplementedError
 
 
 class Selector(ISelector):

@@ -50,6 +50,7 @@ class SimpleProtocolFilter(object):
 if __name__ == '__main__':
     s = SimpleProtocolFilter()
     r = s.pack("nimei")
+    print(repr(r))
     u = s.unpack(r)
     g = s.input(r[:1])
     for i in g:

@@ -1,13 +1,19 @@
 # coding=utf-8
 
 import re
-
-from poco.sdk.IMatcher import IMatcher
-
 from .exceptions import NoSuchComparatorException
 
 __author__ = 'lxn3032'
 __all__ = ['DefaultMatcher']
+
+
+class IMatcher(object):
+    def match(self, cond, node):
+        """
+        :rettype: bool
+        """
+
+        raise NotImplementedError
 
 
 class EqualizationComparator(object):
