@@ -9,7 +9,7 @@ from poco.sdk.interfaces.input import InputInterface
 class AirtestInput(InputInterface):
     def __init__(self, surface=None):
         super(AirtestInput, self).__init__()
-        self.surface = surface
+        self.surface = surface  # {.getPortSize}
 
     def _get_touch_resolution(self):
         """
