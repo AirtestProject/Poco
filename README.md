@@ -37,16 +37,13 @@ pip install -e airtest-hunter
 # poco
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
+
+# poco unittest framework
+git clone ssh://git@git-qa.gz.netease.com:32200/maki/PocoUnit.git
+pip install -e PocoUnit
 ```
 
-安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，**git bash**中使用以下脚本进行clone
-
-```sh
-# 请根据实际情况填上deploy-key的路径和git仓库地址
-ssh-agent $(ssh-add /path/to/deploy-key; git clone git@xxxx.git)
-```
-
-如果以上无效的话，可以将下载下来的deploy-key放到 `C:\User\<username>\.ssh\` 目录下，改名为`id_rsa`，然后再按照上面的install步骤重新install。
+安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，将下载下来的deploy-key放到 `C:\User\<username>\.ssh\` 目录下，改名为`id_rsa`，再重新运行上面的命令。
 
 ## 基本概念(concepts)
 
@@ -239,7 +236,7 @@ except PocoNoSuchNodeException:
 
 poco不包含TestRunner，断言请参考python标准库unittest的断言部分。
 
-关于TestRunner更详细的部分请参考[...还没写好...]()
+关于TestRunner更详细的部分请参考[PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit)
 
 ## 接入参考
 
