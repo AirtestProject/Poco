@@ -34,6 +34,9 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         self._post_action_interval = options.get('action_interval', 0.8)
         self._poll_interval = options.get('poll_interval', 1.44)
 
+        self._pre_action_callbacks = [self.on_pre_action.__func__]
+        self._post_action_callbacks = [self.on_post_action.__func__]
+
     def __call__(self, name=None, **kw):
         """
         选择ui对象或对象集合。可通过节点名和其余节点属性共同选择。例如 poco('close', type='Button')
@@ -143,11 +146,22 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def on_post_action(self, action, proxy, args):
         pass
 
+    def add_pre_action_callback(self, cb):
+        self._pre_action_callbacks.append(cb)
+
+    def add_post_action_callback(self, cb):
+        self._post_action_callbacks.append(cb)
+
     def pre_action(self, action, proxy, args):
-        try:
-            self.on_pre_action(action, proxy, args)
-        except:
-            warnings.warn("Error occurred at pre action stage.\n{}".format(traceback.format_exc()))
+        for cb in self._pre_action_callbacks:
+            try:
+                cb(self, action, proxy, args)
+            except:
+                warnings.warn("Error occurred at pre action stage.\n{}".format(traceback.format_exc()))
 
     def post_action(self, action, proxy, args):
-        self.on_post_action(action, proxy, args)
+        for cb in self._post_action_callbacks:
+            try:
+                cb(self, action, proxy, args)
+            except:
+                warnings.warn("Error occurred at post action stage.\n{}".format(traceback.format_exc()))
