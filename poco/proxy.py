@@ -47,8 +47,8 @@ class UIObjectProxy(object):
         self.query = build_query(name, **attrs)
         self.poco = poco
 
-        self._query_multiple = False
-        self._evaluated = False
+        self._query_multiple = False  # 是否按照multiple的模式查找，仅在已经self._evaluated == True时才有意义
+        self._evaluated = False  # 是否已经查找到对应的node了
         self._nodes = None  # 可能是远程node代理，也可能是远程[node]代理
         self._nodes_proxy_is_list = True
         self._sorted_children = None  # 仅用于__getitem__时保存好已排序的child代理对象
