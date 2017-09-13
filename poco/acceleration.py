@@ -40,12 +40,17 @@ class PocoAccelerationMixin(object):
             no_target = True
             for t in targets:
                 if t.exists():
-                    for n in t:
-                        try:
-                            n.click(sleep_interval=sleep_interval)
-                            no_target = False
-                        except:
-                            pass
+                    try:
+                        for n in t:
+                            try:
+                                n.click(sleep_interval=sleep_interval)
+                                no_target = False
+                            except:
+                                pass
+                    except:
+                        # 遍历(__iter__: for n in t)过程中如果节点正好被移除了，可能会报远程节点被移除的异常
+                        # 这个报错忽略就行
+                        pass
             time.sleep(sleep_interval)
             should_exit = exit_when() if exit_when else False
             if no_target or should_exit:
