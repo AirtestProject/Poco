@@ -76,6 +76,3 @@ class Dumper(AbstractDumper):
         for child in root.getChildren():
             child.setParent(root)
         return root
-
-    def getPortSize(self):
-        return 1.0, 1.0

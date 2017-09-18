@@ -208,7 +208,7 @@ class UIObjectProxy(object):
             yield obj
 
     @wait
-    def click(self, focus='anchor', sleep_interval=None):
+    def click(self, focus=None, sleep_interval=None):
         """
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
@@ -220,6 +220,7 @@ class UIObjectProxy(object):
         :raise PocoNoSuchNodeException:
         """
 
+        focus = focus or self._focus or 'anchor'
         pos_in_percentage = self.get_position(focus)
         self.poco.pre_action('click', self, pos_in_percentage)
         self.poco.click(pos_in_percentage)
@@ -230,7 +231,7 @@ class UIObjectProxy(object):
         self.poco.post_action('click', self, pos_in_percentage)
 
     @wait
-    def swipe(self, dir, focus='anchor', duration=0.5):
+    def swipe(self, dir, focus=None, duration=0.5):
         """
         以当前对象的anchor为起点，swipe一段距离
 
@@ -243,6 +244,7 @@ class UIObjectProxy(object):
         :raise PocoNoSuchNodeException:
         """
 
+        focus = focus or self._focus or 'anchor'
         dir_vec = self._direction_vector_of(dir)
         origin = self.get_position(focus)
         self.poco.pre_action('swipe', self, (origin, dir_vec))
@@ -280,8 +282,8 @@ class UIObjectProxy(object):
         ret._focus = f
         return ret
 
-    def get_position(self, focus='anchor'):
-        focus = self._focus or focus
+    def get_position(self, focus=None):
+        focus = focus or self._focus or 'anchor'
         if focus == 'anchor':
             pos = self.attr('pos')
         elif focus == 'center':

@@ -10,6 +10,7 @@ import requests
 
 from poco import Poco
 from poco.agent import PocoAgent
+from poco.sdk.Attributor import Attributor
 from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
 
 from airtest.core.android import Android
@@ -35,13 +36,33 @@ class AndroidRpcClient(RpcClient):
         return HttpTransport(self.endpoint, self)
 
 
+class AttributorWrapper(Attributor):
+    """
+    部分手机上仍不支持Accessibility.ACTION_SET_TEXT，使用YosemiteIme还是兼容性最好的方案
+    这个class会hook住set_text，然后改用ime的text方法
+    """
+
+    def __init__(self, remote, ime):
+        self.remote = remote
+        self.ime = ime
+
+    def getAttr(self, node, attrName):
+        return self.remote.getAttr(node, attrName)
+
+    def setAttr(self, node, attrName, attrVal):
+        if attrName == 'text':
+            self.ime.text(attrVal)
+        else:
+            self.remote.setAttr(node, attrName, attrVal)
+
+
 class AndroidPocoAgent(PocoAgent):
-    def __init__(self, endpoint):
+    def __init__(self, endpoint, ime):
         self.client = AndroidRpcClient(endpoint)
         remote_poco = self.client.remote('poco-uiautomation-framework')
         dumper = remote_poco.dumper
         selector = remote_poco.selector
-        attributor = remote_poco.attributor
+        attributor = AttributorWrapper(remote_poco.attributor, ime)
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
         super(AndroidPocoAgent, self).__init__(hierarchy, remote_poco.inputer, remote_poco.screen, None)
 
@@ -94,7 +115,7 @@ class AndroidUiautomationPoco(Poco):
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
         endpoint = "http://{}:{}".format(self.device_ip, p1)
-        agent = AndroidPocoAgent(endpoint)
+        agent = AndroidPocoAgent(endpoint, self.ime)
         super(AndroidUiautomationPoco, self).__init__(agent)
 
     def _install_service(self):
