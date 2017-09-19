@@ -3,6 +3,7 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-12 17:58:23
 import socket
+import errno
 
 
 class SafeSocket(object):
@@ -44,18 +45,17 @@ class SafeSocket(object):
             ret, self.buf = self.buf, ""
         except socket.error, e:
             #  10035 no data when nonblocking
-            if e.args[0] == 10035:  # errno.EWOULDBLOCK: 尼玛errno似乎不一致
+            # if e.args[0] in [35, 10035]:  # errno.EWOULDBLOCK: 尼玛errno似乎不一致
+            if e.args[0] == errno.EWOULDBLOCK:
                 ret, self.buf = self.buf, ""
             #  10053 connection abort by client
             #  10054 connection reset by peer
             elif e.args[0] in [10053, 10054]:  # errno.ECONNABORTED:
-                raise
+                raise e
             else:
-                raise
+                raise e
         finally:
             self.sock.settimeout(None)
-        if ret == "":
-            ret = None
         return ret
 
     def recv_nonblocking(self, size=4096):

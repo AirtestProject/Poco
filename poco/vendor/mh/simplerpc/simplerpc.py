@@ -2,10 +2,13 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-12 16:56:14
-from jsonrpc import JSONRPCResponseManager, dispatcher
 import json
 import time
 import traceback
+
+from jsonrpc import JSONRPCResponseManager, dispatcher
+from jsonrpc.jsonrpc2 import JSONRPC20Response
+from jsonrpc.exceptions import JSONRPCServerError
 
 
 @dispatcher.add_method
@@ -14,19 +17,31 @@ def foobar(**kwargs):
 
 
 @dispatcher.add_method
-def echo(*args):
-    return args
+def make_error(*args):
+    raise
 
 
 @dispatcher.add_method
 def delayecho(*args):
-    r = DelayResult()
-    raise
+    r = AsyncResponse()
     from threading import Thread
 
     def func(r):
         time.sleep(5)
-        r.set_result(args)
+        r.result(args)
+
+    Thread(target=func, args=(r,)).start()
+    return r
+
+
+@dispatcher.add_method
+def delayerror(*args):
+    r = AsyncResponse()
+    from threading import Thread
+
+    def func(r):
+        time.sleep(5)
+        r.error(RuntimeError("something wrong here"))
 
     Thread(target=func, args=(r,)).start()
     return r
@@ -34,80 +49,97 @@ def delayecho(*args):
 
 class Callback(object):
     """Callback Proxy"""
+
+    WAITING, RESULT, ERROR, CANCELED = 0, 1, 2, 3
+
     def __init__(self, rid):
         super(Callback, self).__init__()
         self.rid = rid
-        self.func = None
-        self.called = False
+        self.result_callback = None
+        self.error_callback = None
+        self.status = self.WAITING
         self.result = None
         self.error = None
 
-    def callback(self, func):
+    def on_result(self, func):
         if not callable(func):
-            raise RuntimeError("func should be callbale", func)
-        self.func = func
+            raise RuntimeError("%s should be callbale" % func)
+        self.result_callback = func
 
-    def call(self, rpc_result):
-        if callable(self.func):
+    def on_error(self, func):
+        if not callable(func):
+            raise RuntimeError("%s should be callbale" % func)
+        self.error_callback = func
+
+    def rpc_result(self, data):
+        self.result = data
+        if callable(self.result_callback):
             # callback function, set result as function return value
             try:
-                self.result = self.func(rpc_result)
+                self.result_callback(data)
             except Exception:
-                self.error = traceback.format_exc()
-                print(self.error)
-            finally:
-                self.called = True
-        else:
-            # no callback, set result as rpc_result
-            self.result = rpc_result
-            self.called = True
+                traceback.print_exc()
+        self.status = self.RESULT
 
-    def make_error(self, data):
-        msg = "rid:%s error:%s" % (self.rid, data)
-        print(msg)
+    def rpc_error(self, data):
+        self.error = data
+        if callable(self.error_callback):
+            try:
+                self.error_callback(data)
+            except Exception:
+                traceback.print_exc()
+        self.status = self.ERROR
 
     def cancel(self):
-        self.func = None
+        self.result_callback = None
+        self.error_callback = None
+        self.status = self.CANCELED
 
     def wait(self):
         while True:
-            # print(self.called)
-            if not self.called:
+            if self.status == self.WAITING:
                 time.sleep(0.1)
             else:
-                return (self.result, self.error)
+                break
+        return (self.result, self.error)
 
 
-class DelayResult(object):
-    """docstring for DelayResult"""
+class AsyncResponse(object):
+
     def __init__(self):
-        super(DelayResult, self).__init__()
-        self.finished = False
-        self._result = None
+        self.conn = None
+        self.rid = None
 
-    def get_result(self):
-        if not self.finished:
-            raise RuntimeError("Delay Result not Ready")
-        return self._result
+    def setup(self, conn, rid):
+        self.conn = conn
+        self.rid = rid
 
-    def set_result(self, ret):
-        self.finished = True
-        self._result = ret
+    def result(self, result):
+        ret = JSONRPC20Response(_id=self.rid, result=result)
+        self.conn.send(ret.json)
+
+    def error(self, error):
+        assert isinstance(error, Exception), "%s must be Exception" % error
+        data = {
+            "type": error.__class__.__name__,
+            "args": error.args,
+            "message": str(error),
+        }
+        ret = JSONRPC20Response( _id=self.rid, error=JSONRPCServerError(data=data)._data)
+        self.conn.send(ret.json)
 
 
-class RpcBaseClient(object):
-    """docstring for RpcClient"""
+class RpcAgent(object):
+    """docstring for RpcAgent"""
 
     REQUEST = 0
     RESPONSE = 1
-    REQUEST_DELAYRET = 2
     DEBUG = True
 
     def __init__(self):
-        super(RpcBaseClient, self).__init__()
+        super(RpcAgent, self).__init__()
         self._id = 0
         self._callbacks = {}
-        self._delayresults = {}
 
     def call(self, *args, **kwargs):
         raise NotImplementedError
@@ -132,10 +164,9 @@ class RpcBaseClient(object):
 
     def handle_request(self, req):
         res = JSONRPCResponseManager.handle(req, dispatcher).data
-        # print("handle_request", req, res)
         return res
 
-    def handle_message(self, msg):
+    def handle_message(self, msg, conn):
         data = json.loads(msg)
         if self.DEBUG:
             print("<--", data)
@@ -144,35 +175,24 @@ class RpcBaseClient(object):
             message_type = self.REQUEST
             result = self.handle_request(msg)
 
-            if isinstance(result["result"], DelayResult):
-                self._delayresults[data["id"]] = result
-                message_type = self.REQUEST_DELAYRET
+            if isinstance(result.get("result"), AsyncResponse):
+                result["result"].setup(conn, result["id"])
+            else:
+                conn.send(json.dumps(result))
 
         else:
             # rpc response
             message_type = self.RESPONSE
+            result = None
+            # handle callback
             callback = self._callbacks.pop(data["id"])
             if "result" in data:
-                callback.call(data["result"])
-                result = (callback.result, callback.error)
+                callback.rpc_result(data["result"])
             elif "error" in data:
-                callback.make_error(data["error"])
-                result = None
+                callback.rpc_error(data["error"])
             else:
-                result = None
+                pass
         return message_type, result
-
-    def handle_delay_result(self):
-        # 轮询有点挫，后面优化
-        for rid, res in self._delayresults.items():
-            delay_result = res["result"]
-            try:
-                result = delay_result.get_result()
-            except RuntimeError:
-                continue
-            self._delayresults.pop(rid)
-            res["result"] = result
-            yield res
 
     def update(self):
         raise NotImplementedError
@@ -202,16 +222,3 @@ class RpcBaseClient(object):
                 print("closing..")
                 return
             i.runcode(line)
-
-
-class Connection(object):
-    """docstring for Connection"""
-
-    def connect(self):
-        raise NotImplementedError
-
-    def send(self, msg):
-        raise NotImplementedError
-
-    def recv(self):
-        raise NotImplementedError

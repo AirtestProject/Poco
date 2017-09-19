@@ -1,41 +1,60 @@
 # encoding=utf-8
-from asyncsocket import Host, init_loop
-from simplerpc import RpcBaseClient
-from protocol import SimpleProtocolFilter
 import json
 
+from .transport.asynctcp.asynctcp import Host, init_loop
+from .transport.protocol import SimpleProtocolFilter
+from .transport.interfaces import IServer, IConnection
+from .simplerpc import RpcAgent
 
-class RpcServer(RpcBaseClient):
-    """docstring for RpcServer"""
-    def __init__(self):
-        super(RpcServer, self).__init__()
-        self.host = Host()
+
+class TcpConn(IConnection):
+    """docstring for AsyncConn"""
+    def __init__(self, client):
+        super(TcpConn, self).__init__()
+        self.client = client
         self.prot = SimpleProtocolFilter()
+
+    def send(self, msg):
+        msg_bytes = self.prot.pack(msg)
+        self.client.say(msg_bytes)
+
+    def recv(self):
+        msg_bytes = self.client.read_message()
+        return self.prot.input(msg_bytes)
+
+
+class TcpServer(IServer):
+    def __init__(self, addr=("0.0.0.0", 5001)):
+        self.host = Host(addr)
+
+    def start(self):
         init_loop()
 
-    def update(self):
-        for client in self.host.remote_clients.values():
-            message = client.read_message()
-            if not message:
-                continue
-            # ！！！这里似乎有个bug，不同的client的prot混到一起了。。
-            for msg in self.prot.input(message):
-                message_type, result = self.handle_message(msg)
-                if message_type == self.REQUEST:
-                    client.say(self.prot.pack(json.dumps(result)))
+    def connections(self):
+        return {cid: TcpConn(client) for (cid, client) in self.host.remote_clients.items()}
 
-        for r in self.handle_delay_result():
-            # broadcast有点挫，后面在delay_result里面传client，主动send
-            self.host.broadcast(self.prot.pack(json.dumps(r)))
+
+class RpcServer(RpcAgent):
+    """docstring for RpcServer"""
+    def __init__(self, server):
+        super(RpcServer, self).__init__()
+        self.server = server
+        self.server.start()
+
+    def update(self):
+        for conn in self.server.connections().values():
+            messages = conn.recv()
+            for msg in messages:
+                self.handle_message(msg, conn)
 
     def call(self, cid, func, *args, **kwargs):
         req, cb = self.format_request(func, *args, **kwargs)
-        msg = self.prot.pack(req)
-        self.host.say(cid, msg)
+        client = self.server.connections[cid]
+        client.send(req)
         return cb
 
 
 if __name__ == '__main__':
-    s = RpcServer()
-    # s.run()
-    s.console_run({"s": s})
+    s = RpcServer(TcpServer())
+    s.run()
+    # s.console_run({"s": s})
