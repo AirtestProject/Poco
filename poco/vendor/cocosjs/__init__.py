@@ -14,8 +14,7 @@ from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.mh.mh_rpc import sync_wrapper
 from poco.vendor.mh.simplerpc.rpcclient import RpcClient
-from poco.vendor.mh.simplerpc.simplerpc import Connection
-
+from poco.vendor.mh.simplerpc.transport.interfaces import IClient
 
 DEFAULT_ADDR = "ws://localhost:5003"
 
@@ -23,10 +22,11 @@ DEFAULT_ADDR = "ws://localhost:5003"
 class CocosJsPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
         # init airtest env
-        from airtest.core.main import set_serialno
+        from airtest.core.main import init_device
         from airtest.cli.runner import device as current_device
         if not current_device():
-            set_serialno()
+            # set_serialno()
+            init_device()
         current_device().adb.forward("tcp:5003", "tcp:5003", False)
 
         self.conn = SocketIOConnection(addr)
@@ -59,7 +59,7 @@ class CocosJsPoco(Poco):
         super(CocosJsPoco, self).__init__(agent, action_interval=0.01)
 
 
-class SocketIOConnection(Connection):
+class SocketIOConnection(IClient):
 
     def __init__(self, addr):
         self.client = WebSocketClient(addr)

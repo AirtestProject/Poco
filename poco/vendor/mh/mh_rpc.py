@@ -82,6 +82,6 @@ if __name__ == '__main__':
     # pprint(root)
     # pprint(root.getParent())
     # pprint(root.getChildren())
-    nodes = r.select(["and",[["attr=",["text", u"长安城"]]]])
+    nodes = r.select(["and", [["attr=", ["text", u"长安城"]]]])
     # nodes = r.select(["and",[["attr=",["type", "Text"]]]])
     pprint(nodes[0].node)
