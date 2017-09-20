@@ -11,42 +11,6 @@ from jsonrpc.jsonrpc2 import JSONRPC20Response
 from jsonrpc.exceptions import JSONRPCServerError
 
 
-@dispatcher.add_method
-def foobar(**kwargs):
-    return kwargs["foo"] + kwargs["bar"]
-
-
-@dispatcher.add_method
-def make_error(*args):
-    raise
-
-
-@dispatcher.add_method
-def delayecho(*args):
-    r = AsyncResponse()
-    from threading import Thread
-
-    def func(r):
-        time.sleep(5)
-        r.result(args)
-
-    Thread(target=func, args=(r,)).start()
-    return r
-
-
-@dispatcher.add_method
-def delayerror(*args):
-    r = AsyncResponse()
-    from threading import Thread
-
-    def func(r):
-        time.sleep(5)
-        r.error(RuntimeError("something wrong here"))
-
-    Thread(target=func, args=(r,)).start()
-    return r
-
-
 class Callback(object):
     """Callback Proxy"""
 

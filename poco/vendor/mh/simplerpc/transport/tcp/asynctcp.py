@@ -60,7 +60,7 @@ class RemoteClient(BaseClient):
 
     def handle_close(self):
         BaseClient.handle_close(self)
-        self.host.remote_clients.pop(self.cid)
+        self.host.close_client(self.cid)
 
 
 class Host(asyncore.dispatcher):
@@ -85,6 +85,7 @@ class Host(asyncore.dispatcher):
         client = RemoteClient(self, socket, addr, client_id)
         self.remote_clients[client_id] = client
         print('connected clients', self.remote_clients)
+        return client
 
     def swap_msg_queue(self):
         for client in self.remote_clients.values():
@@ -104,9 +105,10 @@ class Host(asyncore.dispatcher):
         self.remote_clients[client_id].say(message)
 
     def close_client(self, client_id):
-        print('Close client:', client_id)
+        print('Closing client:', client_id)
         client = self.remote_clients.pop(client_id)
         client.close()
+        return client
 
 
 class Client(BaseClient):

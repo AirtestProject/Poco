@@ -26,7 +26,6 @@ def test_with_sszmq():
 
 
 def test_client(c):
-    # simply call rpc
     """
     print c.call("Add", 1, 2).wait()
     print(222)
@@ -35,6 +34,7 @@ def test_client(c):
     print json.dumps(j)
     """
 
+    # simply call rpc
     c.call("foobar", foo="aaa", bar="bbb")
     # call rpc and wait for rpc result
     cb = c.call("foo", foo=1, bar=2)
@@ -63,5 +63,5 @@ def test_client(c):
 
 
 if __name__ == '__main__':
-    test_with_tcp()
-    # test_with_sszmq()
+    # test_with_tcp()
+    test_with_sszmq()

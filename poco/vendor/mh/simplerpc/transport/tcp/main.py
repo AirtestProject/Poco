@@ -20,18 +20,29 @@ class TcpConn(IConnection):
         return self.prot.input(msg_bytes)
 
 
-class TcpServer(IServer):
+class TcpServer(IServer, Host):  # 多重继承比较坑
     def __init__(self, addr=("0.0.0.0", 5001)):
         super(TcpServer, self).__init__()
-        self.host = Host(addr)
+        Host.__init__(self, addr)
+        self._connections = {}
 
     def start(self):
         init_loop()
 
+    @property
     def connections(self):
-        """每次重新构造有点不好, to be fixed"""
-        return {cid: TcpConn(client) for (cid, client) in self.host.remote_clients.items()}
+        return self._connections
 
+    def handle_accept(self):
+        client = super(TcpServer, self).handle_accept()
+        conn = TcpConn(client)
+        self._connections[client.cid] = conn
+        self.on_client_connect(conn)
+
+    def close_client(self, client_id):
+        client = super(TcpServer, self).close_client(client_id)
+        conn = self._connections.pop(client.cid)
+        self.on_client_disconnect(conn)
 
 class TcpClient(IClient):
     """docstring for TcpClient"""

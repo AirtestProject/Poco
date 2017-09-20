@@ -8,8 +8,10 @@ import time
 
 class ServerHandler(ZMQHandler):
 
-    def __init__(self):
+    def __init__(self, client_connect_cb=None, client_disconnect_cb=None):
         super(ServerHandler, self).__init__()
+        self.on_client_connect = client_connect_cb
+        self.on_client_disconnect = client_disconnect_cb
         self.online_clients = {}
 
     def on_init_finish(self, rtn):
@@ -26,9 +28,9 @@ class ServerHandler(ZMQHandler):
 
             conn = self.online_clients.get(cid)
             if not conn:
-                # self.on_client_connect(cid)
                 conn = SSZmqConn(cid, self)
                 self.online_clients[cid] = conn
+                self.on_client_connect(cid)
             conn.lastHeartBeat = time.time()
             if data != _HEARTBEAT_DATA:
                 data = self._unpack_data(data)
@@ -42,6 +44,7 @@ class ServerHandler(ZMQHandler):
 
         for cli in list(self.online_clients):
             if time.time() - self.online_clients[cli].lastHeartBeat > _HEARTBEAT_SEC * 2:
+                self.on_client_disconnect(cli)
                 self.online_clients.pop(cli)
 
 
@@ -86,13 +89,15 @@ class SSZmqConn(IConnection):
 
 class SSZmqServer(IServer):
     def __init__(self, addr=("g68", "ff_server")):
+        super(SSZmqServer, self).__init__()
         self.addr = addr
-        self.sh = ServerHandler()
+        self.sh = ServerHandler(client_connect_cb=self.on_client_connect, client_disconnect_cb=self.on_client_disconnect)
 
     def start(self):
-        init(self.addr[0], err_handler=my_err_handler)
+        init(self.addr[0], err_handler=init_err_handler)
         setup_server(self.addr[1], self.sh, SERV_MODE_ALL_GET_MSG)
 
+    @property
     def connections(self):
         return self.sh.online_clients
 
@@ -103,7 +108,7 @@ class SSZmqClient(IClient):
         self.ch = ClientHandler()
 
     def connect(self):
-        init(self.addr[0], err_handler=my_err_handler)
+        init(self.addr[0], err_handler=init_err_handler)
         setup_client(self.addr[1], self.ch)
 
     def send(self, msg):
@@ -113,20 +118,5 @@ class SSZmqClient(IClient):
         return self.ch.recv()
 
 
-def my_err_handler(code, msg):
+def init_err_handler(code, msg):
     print("my_err_handler %d %s"%(code, msg))
-
-
-if __name__ == '__main__':
-    import sys
-    if sys.argv[1] == "0":
-        s = SSZmqServer()
-        s.start()
-    else:
-        c = SSZmqClient()
-        c.connect()
-        time.sleep(2)
-        c.send("aaa")
-    while True:
-        tick()
-        time.sleep(0.1)
