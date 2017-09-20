@@ -167,6 +167,7 @@ class RpcAgent(object):
         return res
 
     def handle_message(self, msg, conn):
+        print(msg, conn)
         data = json.loads(msg)
         if self.DEBUG:
             print("<--", data)

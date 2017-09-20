@@ -2,9 +2,10 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:48:10
-from poco.vendor.cocosjs import CocosJsPoco
+from poco.vendor.cocosjs import CocosJsPoco, CocosJsPocoAgent
 from pprint import pprint
 import json
+import time
 
 
 def quick_game(p):
@@ -18,6 +19,12 @@ def quick_game(p):
 
 
 if __name__ == '__main__':
+    rpc = CocosJsPocoAgent()
+    t0 = time.time()
+    rpc.hierarchy.dump()
+    t1 = time.time()
+    print t1 - t0
+    # print(dump())
 
     '''adb reverse tcp:5002 tcp:5002'''
     # addr = ('', 5002)

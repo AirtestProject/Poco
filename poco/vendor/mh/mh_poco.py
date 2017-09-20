@@ -6,12 +6,13 @@ from poco import Poco
 from poco.agent import PocoAgent
 from poco.vendor.mh.mh_rpc import MhHierarchy, MhScreen, MhInput
 
-from .simplerpc.rpcclient import AsyncConn, RpcClient
+from .simplerpc.rpcclient import RpcClient
+from poco.vendor.mh.simplerpc.transport.tcp.main import TcpClient
 
 
 class MhPocoAgent(PocoAgent):
     def __init__(self, addr=("localhost", 5001)):
-        conn = AsyncConn(addr)
+        conn = TcpClient(addr)
         self.c = RpcClient(conn)
         self.c.DEBUG = False
         self.c.run(backend=True)

@@ -8,8 +8,8 @@ from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
 from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.mh.mh_rpc import sync_wrapper
-from poco.vendor.mh.simplerpc.rpcclient import RpcClient, AsyncConn
-
+from poco.vendor.mh.simplerpc.rpcclient import RpcClient
+from poco.vendor.mh.simplerpc.transport.tcp.main import TcpClient
 
 DEFAULT_ADDR = ("localhost", 5003)
 
@@ -23,7 +23,7 @@ class UnityPocoAgent(PocoAgent):
         if not current_device():
             set_serialno()
 
-        self.conn = AsyncConn(addr)
+        self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
         self.c.run(backend=True)
