@@ -21,7 +21,7 @@ def test_with_sszmq():
     client = SSZmqClient()
     c = RpcClient(client)
     c.run(backend=True)
-    time.sleep(3)
+    c.wait_connected()
     test_client(c)
 
 

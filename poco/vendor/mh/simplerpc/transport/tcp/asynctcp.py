@@ -36,8 +36,8 @@ class BaseClient(asyncore.dispatcher):
         self.inbox += message
 
     def handle_close(self):
+        asyncore.dispatcher.handle_close(self)
         print("Closed", self)
-        self.close()
         self.closed = True
 
     def read_message(self, length=None):
@@ -117,11 +117,11 @@ class Client(BaseClient):
         BaseClient.__init__(self)
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
         self.name = name
-        print('Connecting to host at %s', host_address)
+        print('Connecting to host at:', host_address)
         self.connect(host_address)
 
     def handle_connect(self):
-        print(self.name + " is connected")
+        print(self, " is connected")
 
 
 def start_thread(target, *args, **kwargs):

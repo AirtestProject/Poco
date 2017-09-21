@@ -20,10 +20,13 @@ class TcpConn(IConnection):
         return self.prot.input(msg_bytes)
 
 
-class TcpServer(IServer, Host):  # 多重继承比较坑
+class TcpServer(IServer):
     def __init__(self, addr=("0.0.0.0", 5001)):
         super(TcpServer, self).__init__()
-        Host.__init__(self, addr)
+        self.s = Host(addr)
+        # extend server's methods, not using multi-inheritance to prevent method name conflict
+        self._s_handle_accept, self._s_close_client = self.s.handle_accept, self.s.close_client
+        self.s.handle_accept, self.s.close_client = self._handle_accept, self._close_client
         self._connections = {}
 
     def start(self):
@@ -33,31 +36,43 @@ class TcpServer(IServer, Host):  # 多重继承比较坑
     def connections(self):
         return self._connections
 
-    def handle_accept(self):
-        client = super(TcpServer, self).handle_accept()
+    def _handle_accept(self):
+        client = self._s_handle_accept()
         conn = TcpConn(client)
         self._connections[client.cid] = conn
         self.on_client_connect(conn)
 
-    def close_client(self, client_id):
-        client = super(TcpServer, self).close_client(client_id)
+    def _close_client(self, client_id):
+        client = self._s_close_client(client_id)
         conn = self._connections.pop(client.cid)
-        self.on_client_disconnect(conn)
+        self.on_client_close(conn)
+
 
 class TcpClient(IClient):
     """docstring for TcpClient"""
-    def __init__(self, address):
+    def __init__(self, addr):
         super(TcpClient, self).__init__()
-        self.s = Client(address)
         self.prot = SimpleProtocolFilter()
+        self.c = Client(addr)
+        # extends client's methods
+        self._c_handle_connect, self._c_handle_close = self.c.handle_connect, self.c.handle_close
+        self.c.handle_connect, self.c.handle_close = self._handle_connect, self._handle_close
 
     def connect(self):
         init_loop()
 
     def send(self, msg):
         msg_bytes = self.prot.pack(msg)
-        self.s.say(msg_bytes)
+        self.c.say(msg_bytes)
 
     def recv(self):
-        msg_bytes = self.s.read_message()
+        msg_bytes = self.c.read_message()
         return self.prot.input(msg_bytes)
+
+    def _handle_connect(self):
+        self._c_handle_connect()
+        self.on_connect()
+
+    def _handle_close(self):
+        self._c_handle_close()
+        self.on_close()

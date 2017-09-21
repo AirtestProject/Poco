@@ -31,6 +31,7 @@ class CocosJsPocoAgent(PocoAgent):
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
         self.c.run(backend=True)
+        self.c.wait_connected()
 
         hierarchy = LocalUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()

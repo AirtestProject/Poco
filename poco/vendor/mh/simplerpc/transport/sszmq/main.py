@@ -8,10 +8,10 @@ import time
 
 class ServerHandler(ZMQHandler):
 
-    def __init__(self, client_connect_cb=None, client_disconnect_cb=None):
+    def __init__(self, client_connect_cb=None, client_close_cb=None):
         super(ServerHandler, self).__init__()
         self.on_client_connect = client_connect_cb
-        self.on_client_disconnect = client_disconnect_cb
+        self.on_client_close = client_close_cb
         self.online_clients = {}
 
     def on_init_finish(self, rtn):
@@ -44,17 +44,21 @@ class ServerHandler(ZMQHandler):
 
         for cli in list(self.online_clients):
             if time.time() - self.online_clients[cli].lastHeartBeat > _HEARTBEAT_SEC * 2:
-                self.on_client_disconnect(cli)
+                self.on_client_close(cli)
                 self.online_clients.pop(cli)
 
 
 class ClientHandler(ZMQHandler):
-    def __init__(self):
+    def __init__(self, connect_cb=None, close_cb=None):
         super(ClientHandler, self).__init__()
         self.inbox = []
+        self.on_connect = connect_cb
+        self.on_close = close_cb
 
     def on_init_finish(self, rtn):
-        print("on_init_finish", rtn)
+        print("on_init_finish", self.on_connect, rtn)
+        if callable(self.on_connect) and rtn is True:
+            self.on_connect()
 
     def _on_raw_data(self, data):
         data = self._unpack_data(data)
@@ -91,7 +95,7 @@ class SSZmqServer(IServer):
     def __init__(self, addr=("g68", "ff_server")):
         super(SSZmqServer, self).__init__()
         self.addr = addr
-        self.sh = ServerHandler(client_connect_cb=self.on_client_connect, client_disconnect_cb=self.on_client_disconnect)
+        self.sh = ServerHandler(client_connect_cb=self.on_client_connect, client_close_cb=self.on_client_close)
 
     def start(self):
         init(self.addr[0], err_handler=init_err_handler)
@@ -104,8 +108,9 @@ class SSZmqServer(IServer):
 
 class SSZmqClient(IClient):
     def __init__(self, addr=("g68", "ff_server")):
+        super(SSZmqClient, self).__init__()
         self.addr = addr
-        self.ch = ClientHandler()
+        self.ch = ClientHandler(connect_cb=self.on_connect, close_cb=self.on_close)  # close_cb notimplemented yet
 
     def connect(self):
         init(self.addr[0], err_handler=init_err_handler)
