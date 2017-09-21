@@ -4,6 +4,9 @@ from .asynctcp import Host, Client, init_loop
 from .protocol import SimpleProtocolFilter
 
 
+DEFAULT_ADDR = ("0.0.0.0", 5001)
+
+
 class TcpConn(IConnection):
     """docstring for TcpConn"""
     def __init__(self, client):
@@ -21,7 +24,7 @@ class TcpConn(IConnection):
 
 
 class TcpServer(IServer):
-    def __init__(self, addr=("0.0.0.0", 5001)):
+    def __init__(self, addr=DEFAULT_ADDR):
         super(TcpServer, self).__init__()
         self.s = Host(addr)
         # extend server's methods, not using multi-inheritance to prevent method name conflict
@@ -50,7 +53,7 @@ class TcpServer(IServer):
 
 class TcpClient(IClient):
     """docstring for TcpClient"""
-    def __init__(self, addr):
+    def __init__(self, addr=DEFAULT_ADDR):
         super(TcpClient, self).__init__()
         self.prot = SimpleProtocolFilter()
         self.c = Client(addr)

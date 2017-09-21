@@ -3,6 +3,7 @@ from simplerpc import RpcAgent
 import time
 
 
+
 class RpcClient(RpcAgent):
     """docstring for RpcClient"""
     def __init__(self, conn):

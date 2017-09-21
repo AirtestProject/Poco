@@ -1,7 +1,11 @@
 import sys
+
+from poco.vendor.mh.simplerpc.ssrpc.plugin import Plugin
+
 sys.path.append("../..")
 from simplerpc.rpcserver import RpcServer
 from simplerpc.simplerpc import dispatcher, AsyncResponse
+from simplerpc.ssrpc.plugin import PluginRepo, Plugin, SSRpcServer
 import time
 
 
@@ -41,6 +45,31 @@ def delayerror(*args):
     return r
 
 
+class AAAPlugin(Plugin):
+    UUID = "AAAAAAA"
+    ROLE = "CLIENT"
+
+    def _on_rpc_ready(self, agent):
+        agent.call("add", 1, 2)
+
+    def add(self, a, b):
+        print(self)
+        return a + b
+
+
+class BBBPlugin(Plugin):
+    UUID = "BBBBBBB"
+    ROLE = "CLIENT"
+
+    def add(self, a, b):
+        print(self)
+        return a + b
+
+    def minus(self, a, b):
+        print(self)
+        return a - b
+
+
 def test_with_tcp():
     from simplerpc.transport.tcp import TcpServer
     s = RpcServer(TcpServer())
@@ -54,6 +83,16 @@ def test_with_sszmq():
     s.run()
 
 
+def test_ssrpc():
+    PluginRepo.register(AAAPlugin())
+    PluginRepo.register(BBBPlugin())
+
+    from simplerpc.transport.tcp import TcpServer
+    s = SSRpcServer(TcpServer())
+    s.run()
+    # s.console_run({"s": s})
+
 if __name__ == '__main__':
     # test_with_tcp()
-    test_with_sszmq()
+    # test_with_sszmq()
+    test_ssrpc()
