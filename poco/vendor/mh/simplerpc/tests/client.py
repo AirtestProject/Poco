@@ -2,7 +2,7 @@ import sys
 sys.path.append("../..")
 from simplerpc.rpcclient import RpcClient
 from pprint import pprint
-from simplerpc.ssrpc.plugin import PluginRepo, Plugin, SSRpcClient
+from simplerpc.ssrpc.plugin import PluginRepo, Plugin, SSRpcClient, AgentManager
 from simplerpc.simplerpc import dispatcher
 import time
 
@@ -79,13 +79,14 @@ def add(a, b):
 
 def test_ssrpc():
     from simplerpc.transport.tcp import TcpClient
-
     PluginRepo.register(AAAPlugin())
+    AgentManager.ROLE = "CLIENT"
 
     client = TcpClient()
     c = SSRpcClient(client)
-    c.run(backend=True)
-    test_client(c)
+    # c.run(backend=True)
+    # test_client(c)
+    c.console_run({"c": c})
 
 
 if __name__ == '__main__':
