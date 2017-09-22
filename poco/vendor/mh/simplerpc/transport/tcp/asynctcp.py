@@ -33,6 +33,8 @@ class BaseClient(asyncore.dispatcher):
 
     def handle_read(self):
         message = self.recv(MAX_MESSAGE_LENGTH)
+        if message == b"":
+            return
         self.inbox += message
 
     def handle_close(self):
@@ -105,18 +107,16 @@ class Host(asyncore.dispatcher):
         self.remote_clients[client_id].say(message)
 
     def close_client(self, client_id):
-        print('Closing client:', client_id)
+        print('Closing client:', client_id, self.remote_clients)
         client = self.remote_clients.pop(client_id)
-        client.close()
         return client
 
 
 class Client(BaseClient):
 
-    def __init__(self, host_address, name=""):
+    def __init__(self, host_address):
         BaseClient.__init__(self)
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.name = name
         print('Connecting to host at:', host_address)
         self.connect(host_address)
 
@@ -132,9 +132,11 @@ def start_thread(target, *args, **kwargs):
 
 
 def init_loop():
+    global LOOP_STARTED
     if LOOP_STARTED:
         print("LOOP_STARTED")
     else:
+        LOOP_STARTED = True
         start_thread(asyncore.loop, timeout=0.001)
 
 

@@ -1,10 +1,8 @@
 # encoding=utf-8
 import sys
-
-sys.path.append("../..")
+sys.path.append("../../..")
 from simplerpc.rpcserver import RpcServer
 from simplerpc.simplerpc import dispatcher, AsyncResponse
-from simplerpc.ssrpc.plugin import PluginRepo, Plugin, SSRpcServer, AgentManager
 import time
 
 
@@ -44,30 +42,6 @@ def delayerror(*args):
     return r
 
 
-class AAAPlugin(Plugin):
-    UUID = "AAAAAAA"
-
-    def _on_rpc_ready(self, agent):
-        agent.call("add", 1, 2)
-        # print agent.call("get_role").wait()
-
-    def add(self, a, b):
-        print(self)
-        return a + b
-
-
-class BBBPlugin(Plugin):
-    UUID = "BBBBBBB"
-
-    def add(self, a, b):
-        print(self)
-        return a + b
-
-    def minus(self, a, b):
-        print(self)
-        return a - b
-
-
 def test_with_tcp():
     from simplerpc.transport.tcp import TcpServer
     s = RpcServer(TcpServer())
@@ -81,16 +55,6 @@ def test_with_sszmq():
     s.run()
 
 
-def test_ssrpc():
-    PluginRepo.register(AAAPlugin())
-    PluginRepo.register(BBBPlugin())
-    AgentManager.ROLE = "SERVER"
-    from simplerpc.transport.tcp import TcpServer
-    s = SSRpcServer(TcpServer())
-    s.run()
-    # s.console_run({"s": s})
-
 if __name__ == '__main__':
     # test_with_tcp()
-    # test_with_sszmq()
-    test_ssrpc()
+    test_with_sszmq()

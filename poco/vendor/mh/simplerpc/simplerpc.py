@@ -11,14 +11,18 @@ from jsonrpc.jsonrpc2 import JSONRPC20Response
 from jsonrpc.exceptions import JSONRPCServerError
 
 
+DEBUG = True
+
+
 class Callback(object):
     """Callback Proxy"""
 
     WAITING, RESULT, ERROR, CANCELED = 0, 1, 2, 3
 
-    def __init__(self, rid):
+    def __init__(self, rid, agent=None):
         super(Callback, self).__init__()
         self.rid = rid
+        self.agent = agent
         self.result_callback = None
         self.error_callback = None
         self.status = self.WAITING
@@ -80,6 +84,9 @@ class AsyncResponse(object):
 
     def result(self, result):
         ret = JSONRPC20Response(_id=self.rid, result=result)
+        if DEBUG:
+            print("-->", ret)
+
         self.conn.send(ret.json)
 
     def error(self, error):
@@ -90,6 +97,8 @@ class AsyncResponse(object):
             "message": str(error),
         }
         ret = JSONRPC20Response( _id=self.rid, error=JSONRPCServerError(data=data)._data)
+        if DEBUG:
+            print("-->", ret)
         self.conn.send(ret.json)
 
 
@@ -98,7 +107,6 @@ class RpcAgent(object):
 
     REQUEST = 0
     RESPONSE = 1
-    DEBUG = True
 
     def __init__(self):
         super(RpcAgent, self).__init__()
@@ -119,10 +127,10 @@ class RpcAgent(object):
         self._id += 1
         # send rpc
         req = json.dumps(payload)
-        if self.DEBUG:
+        if DEBUG:
             print("-->", req)
         # init cb
-        cb = Callback(rid)
+        cb = Callback(rid, self)
         self._callbacks[rid] = cb
         return req, cb
 
@@ -131,9 +139,8 @@ class RpcAgent(object):
         return res
 
     def handle_message(self, msg, conn):
-        print(msg, conn)
         data = json.loads(msg)
-        if self.DEBUG:
+        if DEBUG:
             print("<--", data)
         if "method" in data:
             # rpc request
@@ -143,6 +150,8 @@ class RpcAgent(object):
             if isinstance(result.get("result"), AsyncResponse):
                 result["result"].setup(conn, result["id"])
             else:
+                if DEBUG:
+                    print("-->", result)
                 conn.send(json.dumps(result))
 
         else:
