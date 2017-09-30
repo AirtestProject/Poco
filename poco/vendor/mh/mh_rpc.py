@@ -3,11 +3,9 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
 from functools import wraps
-
-from poco.sdk.Dumpable import Dumpable
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
-from poco.vendor.localui.hierarchy import LocalUIHierarchy
+from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
 
 
 def sync_wrapper(func):
@@ -47,7 +45,7 @@ class MhInput(InputInterface):
         return self.c.call("click", (x, y), op)
 
 
-class MhDumper(Dumpable):
+class MhDumper(LocalUIDumper):
     def __init__(self, client):
         super(MhDumper, self).__init__()
         self.c = client
@@ -75,7 +73,7 @@ class MhHierarchy(LocalUIHierarchy):
 
 if __name__ == '__main__':
     from pprint import pprint
-    r = MhRpc(addr=("10.254.245.124", 5001))
+    r = MhHierarchy(addr=("10.254.245.124", 5001))
     # size = r.getPortSize()
     # r.click((0.5, 0.5))
     # dump = r.dump()

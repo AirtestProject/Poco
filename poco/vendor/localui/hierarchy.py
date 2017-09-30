@@ -9,11 +9,11 @@ from poco.sdk.interfaces.hierarchy import HierarchyInterface
 
 class LocalUIHierarchy(HierarchyInterface):
     """local implementation of UIInterface
-        `dumpHierarchy` is the only method to be implemented
+        `dump` of dumper is the only method to be implemented
     """
-    def __init__(self, dumpable):
+    def __init__(self, dumper):
         super(LocalUIHierarchy, self).__init__()
-        self.dumper = Dumper(dumpable)
+        self.dumper = dumper
         self.selector = Selector(self.dumper)
         self.attributor = Attributor()
 
@@ -66,13 +66,14 @@ class Node(AbstractNode):
         )
 
 
-class Dumper(AbstractDumper):
-    def __init__(self, dumpable):
-        self.dumpable = dumpable
+class LocalUIDumper(AbstractDumper):
+
+    def dumpHierarchy(self):
+        raise NotImplementedError
 
     def getRoot(self):
         # 每次获取root时，就给一个新的root
-        root = Node(self.dumpable.dumpHierarchy())
+        root = Node(self.dumpHierarchy())
         for child in root.getChildren():
             child.setParent(root)
         return root

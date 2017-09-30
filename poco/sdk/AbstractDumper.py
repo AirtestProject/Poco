@@ -1,13 +1,30 @@
 # coding=utf-8
 
-from poco.sdk.IDumper import IDumper
-
-
 __author__ = 'lxn3032'
 __all__ = ['AbstractDumper']
 
 
+class IDumper(object):
+
+    def getRoot(self):
+        """
+        Return the root node of the UI Hierarchy
+
+        :rettype: support.poco.sdk.AbstractNode
+        """
+
+        raise NotImplementedError
+
+    def dumpHierarchy(self):
+        """
+        :rettype: dict or NoneType
+        """
+
+        raise NotImplementedError
+
+
 class AbstractDumper(IDumper):
+
     def dumpHierarchy(self):
         return self.dumpHierarchyImpl(self.getRoot())
 

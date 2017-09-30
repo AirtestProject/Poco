@@ -18,6 +18,7 @@ class RpcServer(RpcBaseClient):
             message = client.read_message()
             if not message:
                 continue
+            # ！！！这里似乎有个bug，不同的client的prot混到一起了。。
             for msg in self.prot.input(message):
                 message_type, result = self.handle_message(msg)
                 if message_type == self.REQUEST:

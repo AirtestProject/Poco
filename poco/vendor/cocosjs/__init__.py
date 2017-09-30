@@ -9,8 +9,7 @@ from threading import Thread
 
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.sdk.Dumpable import Dumpable
-from poco.vendor.localui.hierarchy import LocalUIHierarchy
+from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
 from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.mh.mh_rpc import sync_wrapper
@@ -21,7 +20,7 @@ from poco.vendor.mh.simplerpc.simplerpc import Connection
 DEFAULT_ADDR = "ws://localhost:5003"
 
 
-class CocosJsPocoAgent(PocoAgent, Dumpable):
+class CocosJsPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
         # init airtest env
         from airtest.core.main import set_serialno
@@ -35,14 +34,21 @@ class CocosJsPocoAgent(PocoAgent, Dumpable):
         self.c.DEBUG = False
         self.c.run(backend=True)
 
-        hierarchy = LocalUIHierarchy(self)
+        hierarchy = LocalUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
         input = AirtestInput()
         super(CocosJsPocoAgent, self).__init__(hierarchy, input, screen, None)
 
+
+class Dumper(LocalUIDumper):
+
+    def __init__(self, rpcclient):
+        super(Dumper, self).__init__()
+        self.rpcclient = rpcclient
+
     @sync_wrapper
     def dumpHierarchy(self):
-        return self.c.call("dump")
+        return self.rpcclient.call("dump")
 
 
 class CocosJsPoco(Poco):
@@ -140,7 +146,6 @@ def dump():
 if __name__ == '__main__':
     # ws = WebSocketClient("ws://echo.websocket.org/")
     rpc = CocosJsPocoAgent()
-    import time
     t0 = time.time()
     rpc.dumpHierarchy()
     t1 = time.time()

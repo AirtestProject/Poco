@@ -73,11 +73,16 @@ class RpcClient(RpcBaseClient):
 if __name__ == '__main__':
     from pprint import pprint
     # conn = SafeSocketConn(("localhost", 5001))
-    conn = AsyncConn(("localhost", 5001))
+    # conn = AsyncConn(("localhost", 5001))
+    conn = AsyncConn(("10.254.46.45", 5001))
     c = RpcClient(conn)
-
     c.run(backend=True)
     # simply call rpc
+    print c.call("Add", 1, 2).wait()
+    print c.call("Screen", 1, 2).wait()
+    j, e = c.call("Dump", 1, 2).wait()
+    print json.dumps(j)
+    """
     c.call("foobar", foo="aaa", bar="bbb")
     # call rpc and wait for rpc result
     cb = c.call("foobar", foo="aaa", bar="bbb")
@@ -92,6 +97,7 @@ if __name__ == '__main__':
     cb = c.call("delayecho", 111, 222)
     cb.callback(pprint)
     cb.wait()
-
+    """
     # run python console
     # c.console_run({"c": c})
+

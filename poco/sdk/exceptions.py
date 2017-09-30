@@ -2,7 +2,7 @@
 
 __author__ = 'lxn3032'
 __all__ = ['NoSuchTargetException', 'NodeHasBeenRemovedException', 'UnableToSetAttributeException',
-           'NoSuchComparatorException', 'NoSuchAttributeException']
+           'NoSuchComparatorException']
 
 
 class NodeHasBeenRemovedException(Exception):
