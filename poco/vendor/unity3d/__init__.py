@@ -11,7 +11,7 @@ from poco.vendor.mh.mh_rpc import sync_wrapper
 from poco.vendor.mh.simplerpc.rpcclient import RpcClient
 from poco.vendor.mh.simplerpc.transport.tcp.main import TcpClient
 
-DEFAULT_ADDR = ("localhost", 5003)
+DEFAULT_ADDR = ("localhost", 5001)
 
 
 class UnityPocoAgent(PocoAgent):
@@ -50,3 +50,11 @@ class UnityPoco(Poco):
     def __init__(self, addr=DEFAULT_ADDR):
         agent = UnityPocoAgent(addr)
         super(UnityPoco, self).__init__(agent, action_interval=0.01)
+
+
+def dump():
+    conn = TcpClient(DEFAULT_ADDR)
+    c = RpcClient(conn)
+    c.DEBUG = False
+    c.run(backend=True)
+    return Dumper(c).dumpHierarchy()
