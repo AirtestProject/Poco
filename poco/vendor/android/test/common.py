@@ -41,6 +41,10 @@ class TestCommonCases(unittest.TestCase):
         time.sleep(1)
         print btn.exists()
 
+    def test_dump(self):
+        hierarchy = self.poco.agent.hierarchy.dump()
+        print hierarchy
+
 
 class TestRemoteDevice(unittest.TestCase):
     @classmethod

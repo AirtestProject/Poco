@@ -14,14 +14,25 @@ from poco.vendor.cocosjs import CocosJsPoco
 if __name__ == '__main__':
     tokenid = open_platform.get_api_token('poco-test')
     # hunter = Hunter(tokenid, 'g62', devid='g62_at_408d5c117d0f')
-    hunter = Hunter(tokenid, 'g37', devid='g37_at_863542037875892')
-    poco = AirtestPoco('g37', hunter)
+    hunter = Hunter(tokenid, 'g62', devid='g62_at_408d5c117d0f')
+    poco = AirtestPoco('g62', hunter)
 
     # print poco(textMatches='.*入游戏').get_text()
-    for n in poco('root').child('Layout').child('Layout').child('Layout').offspring('Label', textMatches='^\d\d:\d\d$').sibling(type='Sprite'):
-        print n.get_position()
+    nodes = poco('entry_bg').nodes
+    length = len(nodes)
+    for i in range(length):
+        t0 = time.time()
+        print poco.agent.hierarchy.getAttr(nodes[i], 'pos')
+        t1 = time.time()
+        print t1 - t0
+        print poco.agent._rpc_client._evaluated_count
 
-        # print ui.get_bounds()
+    # t0 = time.time()
+    # for n in poco('entry_bg'):
+    #     print n
+    # t1 = time.time()
+    # print t1 - t0
+
     # poco = AirtestPoco('g18', hunter)
     # from airtest.core.main import set_serialno
     # set_serialno()
