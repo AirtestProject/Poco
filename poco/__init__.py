@@ -9,6 +9,8 @@ from .acceleration import PocoAccelerationMixin
 from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .proxy import UIObjectProxy
+from .agent import PocoAgent
+from .freezeui.utils import create_immutable_hierarchy
 
 __author__ = 'lxn3032'
 
@@ -16,14 +18,16 @@ __author__ = 'lxn3032'
 class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def __init__(self, agent, **options):
         """
-        实例化一个poco对象
+        Poco standard initializer.
 
-        :param hunter:  hunter对象，通过hunter_cli.Hunter构造
+        :param agent: a handler class object for poco to communication with target device. See `PocoAgent`'s definition.
         :param options:
-            action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
-            poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
-            pre_action_wait_for_appearance: 在执行非幂等操作（如click、swipe）前，如果对象还没有出现，那么最长会等待出现的时间
-                如果这段时间内还没出现则抛出PocoNoSuchNodeException异常
+            action_interval: The time after an action operated in order to wait for the UI becoming stable. default 0.8s.
+            poll_interval: The minimum time between each poll event. Such as waiting for some UI to appear and it will 
+                           be polling periodically.
+            pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
+                                            wait for appearance. If the target still not exists after that, 
+                                            `PocoNoSuchNodeException` will raise
         """
 
         super(Poco, self).__init__()
@@ -99,6 +103,24 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             if time.time() - start > timeout:
                 raise PocoTargetTimeout('all to appear', repr(objects).decode('utf-8'))
             self.sleep_for_polling_interval()
+
+    def freeze(this):
+        class FreezedPoco(Poco):
+            def __init__(self):
+                hierarchy_dict = this.agent.hierarchy.dump()
+                hierarchy = create_immutable_hierarchy(hierarchy_dict)
+                agent_ = PocoAgent(hierarchy, this.agent.input, this.agent.screen)
+                super(FreezedPoco, self).__init__(agent_, action_interval=0.01, pre_action_wait_for_appearance=0)
+                self._pre_action_callbacks = this._pre_action_callbacks
+                self._post_action_callbacks = this._post_action_callbacks
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_val, exc_tb):
+                pass
+
+        return FreezedPoco()
 
     def wait_stable(self):
         time.sleep(self._post_action_interval)

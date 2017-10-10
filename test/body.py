@@ -18,14 +18,15 @@ if __name__ == '__main__':
     poco = AirtestPoco('g62', hunter)
 
     # print poco(textMatches='.*入游戏').get_text()
-    nodes = poco('entry_bg').nodes
-    length = len(nodes)
-    for i in range(length):
-        t0 = time.time()
-        print poco.agent.hierarchy.getAttr(nodes[i], 'pos')
-        t1 = time.time()
-        print t1 - t0
-        print poco.agent._rpc_client._evaluated_count
+    for n in poco('entry_bg'):
+        print n.get_position()
+
+    t0 = time.time()
+    with poco.freeze() as pz:
+        for n in pz('entry_bg'):
+            print n.get_position()
+    t1 = time.time()
+    print t1 - t0
 
     # t0 = time.time()
     # for n in poco('entry_bg'):
