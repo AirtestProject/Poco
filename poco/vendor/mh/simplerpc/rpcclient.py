@@ -1,5 +1,6 @@
 # encoding=utf-8
 from simplerpc import RpcAgent
+import simplerpc
 import time
 
 
@@ -11,12 +12,19 @@ class RpcClient(RpcAgent):
     """docstring for RpcClient"""
     def __init__(self, conn):
         super(RpcClient, self).__init__()
-        print(conn, "rpcclient")
         self.conn = conn
         self.conn.connect_cb = self.on_connect
         self.conn.close_cb = self.on_close
         self._status = self.CONNECTING
         self.conn.connect()
+
+    @property
+    def DEBUG(self):
+        return simplerpc.DEBUG
+
+    @DEBUG.setter
+    def DEBUG(self, value):
+        simplerpc.DEBUG = value
 
     def on_connect(self):
         print("on_connect")
