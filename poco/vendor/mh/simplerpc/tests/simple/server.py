@@ -56,5 +56,5 @@ def test_with_sszmq():
 
 
 if __name__ == '__main__':
-    # test_with_tcp()
-    test_with_sszmq()
+    test_with_tcp()
+    # test_with_sszmq()

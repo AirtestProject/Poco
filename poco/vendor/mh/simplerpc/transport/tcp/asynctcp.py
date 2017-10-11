@@ -23,6 +23,8 @@ class BaseClient(asyncore.dispatcher):
         self.outbox.append(message)
 
     def writable(self):
+        if self.connecting:  # is it a bug in asynccore? handle_connect_event triggered only when writable is True
+            return True
         return bool(self.outbox)
 
     def handle_write(self):

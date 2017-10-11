@@ -28,7 +28,8 @@ class CocosJsPocoAgent(PocoAgent):
                 connect_device("Android:///")
         except ImportError:
             from airtest.core.main import set_serialno
-            set_serialno()
+            if not current_device():
+                set_serialno()
         current_device().adb.forward("tcp:5003", "tcp:5003", False)
 
         self.conn = WebSocketClient(addr)

@@ -1,6 +1,8 @@
 import sys
 sys.path.append("../../..")
 from simplerpc.rpcclient import RpcClient
+from time import sleep
+
 from pprint import pprint
 
 
@@ -10,8 +12,8 @@ def test_with_tcp():
     client = TcpClient()
     c = RpcClient(client)
     c.run(backend=True)
+    c.wait_connected()
     test_client(c)
-
 
 def test_with_sszmq():
     from simplerpc.transport.sszmq import SSZmqClient
@@ -32,7 +34,6 @@ def test_client(c):
     j, e = c.call("Dump", 1, 2).wait()
     print json.dumps(j)
     """
-
     # simply call rpc
     c.call("foobar", foo="aaa", bar="bbb")
     # call rpc and wait for rpc result
@@ -61,5 +62,5 @@ def test_client(c):
 
 
 if __name__ == '__main__':
-    # test_with_tcp()
-    test_with_sszmq()
+    test_with_tcp()
+    # test_with_sszmq()
