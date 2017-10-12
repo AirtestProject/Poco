@@ -21,4 +21,4 @@ class AirtestScreen(ScreenInterface):
         filename = 'poco-screenshot.png'
         filepath = os.path.join(Settings.LOG_DIR, Settings.SCREEN_DIR, filename)
         snapshot(filepath)
-        return base64.b64encode(open(filepath, 'rb').read())
+        return base64.b64encode(open(filepath, 'rb').read()), 'png'

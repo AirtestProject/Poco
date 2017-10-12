@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import copy
 import time
 import traceback
 import warnings
@@ -66,11 +67,13 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_any(self, objects, timeout=120):
         """
-        等待任一对象出现，对给定objects中的每个对象依次轮询，直到某个对象出现（可见），并返回该对象
+        Wait until any of given UI proxies become appearance within timeout and return the first appeared UI proxy.
+        All UI proxies will be polled periodically. See option `poll_interval` in `Poco` initialization.
 
-        :param objects: 等待的目标的集合
-        :param timeout: 最长等待时间
-        :return: 等到的那个对象
+        :param objects: iterable of the given UI proxies.
+        :param timeout: timeout in seconds. 120s by default.
+        :return: the first appeared UI proxy.
+        :raise PocoTargetTimeout: This exception raises when none of UI proxies appeared before timeout.
         """
 
         start = time.time()
@@ -84,10 +87,11 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_all(self, objects, timeout=120):
         """
-        等待所有给定对象出现，对给定objects中的每个对象依次轮询，直到所有对象都出现
+        Wait until all of given UI proxies become appearance within timeout.
+        All UI proxies will be polled periodically. See option `poll_interval` in `Poco` initialization.
 
-        :param objects: 等待的目标的集合
-        :param timeout: 最长等待时间
+        :param objects: iterable of the given UI proxies.
+        :param timeout: timeout in seconds. 120s by default.
         :return: None
         """
 
@@ -105,6 +109,14 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             self.sleep_for_polling_interval()
 
     def freeze(this):
+        """
+        Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current 
+        poco instance (`self`). The hierarchy of the new poco instance is fixed and immutable. It will return directly
+        when invoking `dump`.
+
+        :return: A new poco instance copy from current poco instance (`self`).
+        """
+
         class FreezedPoco(Poco):
             def __init__(self):
                 hierarchy_dict = this.agent.hierarchy.dump()
@@ -123,21 +135,74 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         return FreezedPoco()
 
     def wait_stable(self):
+        """
+        Sleep fixed seconds in order to wait for the UI stable.
+        There is no need to call this method manually. It's automatically invoked in cases.  
+
+        :return: None 
+        """
+
         time.sleep(self._post_action_interval)
 
     def sleep_for_polling_interval(self):
+        """
+        Sleep fixed seconds after each polling.
+        There is no need to call this method manually. It's automatically invoked in cases.  
+
+        :return: None 
+        """
+
         time.sleep(self._poll_interval)
 
     @property
     def agent(self):
+        """
+        Get poco agent instance. See `PocoAgent` to get more details.
+        
+        :return: poco agent instance.
+        """
+
         return self._agent
 
     def click(self, pos):
+        """
+        Perform click(touch, tap, etc.) action on target device with given coordinate. The coordinate is a 2-list or
+        2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of 
+        the screen. For example, [0.5, 0.5] is the center of the screen, [0, 0] represents the top left corner. 
+        See `CoordinateSystem` to get more details about coordinate system.
+
+        e.g. Click a point of (100, 100) of screen whose resolution is (1920, 1080), the statement as follows.
+            `poco.click([100.0 / 1920, 100.0 / 1080])`
+
+        :param pos: a 2-list/2-tuple of coordinate in range of 0 to 1.
+        :return: None 
+        """
+
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
         self.agent.input.click(pos[0], pos[1])
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
+        """
+        Perform swipe action on target device with given start and end point, or a 2-list/2-tuple value as direction 
+        vector. The coordinate definition of points is the same as `click`. The components of direction vector (x, y)
+        is also represents the range of the screen from 0 to 1.
+        See `CoordinateSystem` to get more details about coordinate system.
+        Should provide at least one of the end point or direction.
+
+        e.g. Here is a screen with resolution 1920x1080. Swipe from (100, 100) to (100, 200) could be a statement as
+        follows.
+            `poco.swipe([100.0 / 1920, 100.0 / 1080], [100.0 / 1920, 200.0 / 1080])`
+        Or give a specific direction instead of end point.
+            `poco.swipe([100.0 / 1920, 100.0 / 1080], direction=[0, 100.0 / 1080])`
+
+        :param p1: 2-list/2-tuple of the start point.
+        :param p2: 2-list/2-tuple of the end point.
+        :param direction: 2-list/2-tuple of the direction.
+        :param duration: The time over the whole action.
+        :return: None
+        """
+
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
         if direction is not None:
@@ -148,15 +213,37 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             raise TypeError('Swipe end not set.')
         self.agent.input.swipe(p1[0], p1[1], p2[0], p2[1], duration)
 
-    def long_click(self, pos):
+    def long_click(self, pos, duration=2.0):
+        """
+        Similar to click, hold for a given duration and then release.
+
+        :param pos: 2-tuple/2-list of coordinate in range of 0 to 1.
+        :param duration: The time over the whole action.
+        :return: None
+        """
+
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.longClick(pos[0], pos[1])
+        self.agent.input.longClick(pos[0], pos[1], duration)
 
     def snapshot(self, width=720):
+        """
+        Take a screen shot from the target device. The format (png, jpg, etc.) depends on the agent implementation.
+        
+        :param width: Expected width of the screen shot. The real size is depending on agent implementation. It may not
+                      be able to get a expected width of the screen shot.
+        :return: 2-tuple, (screen shot data with base64 encoded string, format ('png', 'jpg', etc.) in string)
+        """
+
         return self.agent.screen.getScreen(width)
 
     def get_screen_size(self):
+        """
+        Get real physical resolution of the screen of target device.
+
+        :return: 2-tuple (w, h), screen physical resolution in pixels.
+        """
+
         return self.agent.screen.getPortSize()
 
     def command(self, cmd, type=None):
