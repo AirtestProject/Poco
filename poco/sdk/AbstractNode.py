@@ -15,10 +15,10 @@ class AbstractNode(object):
 
     def getParent(self):
         """
-        Return the parent node of this node. If no parent or this is the root node, return None.
-        This method will be invoked by Selector or Dumper to get the UI Hierarchy
+        Return the parent node of this node. Return None if no parent or this is the root node.
+        This method will be invoked by Selector or Dumper when traversing UI hierarchy.
 
-        :rettype: AbstractNode/None
+        :rettype: AbstractNode/NoneType
         """
 
         return None
@@ -80,7 +80,7 @@ class AbstractNode(object):
     def setAttr(self, attrName, val):
         """
         Apply changes of the attribute value to this node.
-        Only limited attributes may be modified, such as text.
+        Only limited attributes can be modified, such as text.
         Some others are not recommended to modified, such as position/name, which may hard to understand for testers
         and results in unexpected exceptions.
 
@@ -93,7 +93,7 @@ class AbstractNode(object):
 
     def getAvailableAttributeNames(self):
         """
-        enumerate all available attributes' name of this node
+        Enumerate all available attributes' name of this node.
 
         :rettype: Iterable<string>
         """
@@ -111,6 +111,8 @@ class AbstractNode(object):
 
     def enumerateAttrs(self):
         """
+        Enumerate all available attributes and yielding in 2-tuple (name, value).
+
         :rettype: Iterable<string, ValueType>
         """
 

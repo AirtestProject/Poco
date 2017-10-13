@@ -429,6 +429,7 @@ class UIObjectProxy(object):
     def attr(self, name):
         """
         Retrieve attribute of UI element by attribute name.
+        Return None if attribute does not exist.
         If attribute value is a string, it will be encode to utf-8 as <type str> in PY2.  
 
         获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
@@ -461,6 +462,16 @@ class UIObjectProxy(object):
 
     @refresh_when(PocoTargetRemovedException)
     def setattr(self, name, val):
+        """
+        Change the attribute value of UI element. Only a few attributes can be mutated such as text. If changes 
+        an immutable attributes or attributes not exist, InvalidOperationException will raise. 
+        
+        :param name: Attribute name.
+        :param val: New attribute value to mutate.
+        :return: None
+        :raise InvalidOperationException: Raises when fail to set attribute on UI element.
+        """
+
         nodes = self._do_query(multiple=False)
         try:
             self.poco.agent.hierarchy.setAttr(nodes, name, val)
@@ -469,6 +480,7 @@ class UIObjectProxy(object):
 
     def exists(self):
         """
+        Test whether the UI element is in the hierarchy. The same as `.attr('visible')`.
         判断节点是否存在visible节点树中。只要在节点树中的可见节点均为exists，包括屏幕外的和被遮挡的
 
         :return: 节点是否存在， True/False
@@ -481,6 +493,7 @@ class UIObjectProxy(object):
 
     def get_text(self):
         """
+        Get the text attribute on UI element. Return None if no such attribute. The same as `.attr('text')`.
         获取节点上的文本值，utf-8编码
 
         :return: 节点上的文本值，以utf-8编码
@@ -493,9 +506,10 @@ class UIObjectProxy(object):
 
     def set_text(self, text):
         """
+        Get the text attribute on UI element. If this UI element does not support mutation, a exception will raise.
         给TextField节点设置text值
 
-        :param text: 要设置的text值
+        :param text: The text value to set.
         :return: None
 
         :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
@@ -522,6 +536,12 @@ class UIObjectProxy(object):
         return self.attr('size')
 
     def get_bounds(self):
+        """
+        Get the parameters of bounding box of the UI element.
+        
+        :return: 4-list (top, right, bottom, left) to the edge of screen in UniformCoordinate.
+        """
+
         size = self.get_size()
         top_left = self.get_position([0, 0])
 
@@ -540,13 +560,21 @@ class UIObjectProxy(object):
     @property
     def nodes(self):
         """
+        Access the UI element in remote runtime if using RPC.
         访问所选择对象的远程节点对象
 
         :return: RpcRemoteObjectProxy. Rpc远程对象代理
         """
+
         return self._do_query()
 
     def invalidate(self):
+        """
+        Clear the flag to indicate to re-query or re-select the UI element(s) from hierarchy.
+
+        :return: None
+        """
+
         self._evaluated = False
         self._nodes = None
 
