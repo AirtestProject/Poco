@@ -51,6 +51,11 @@ class UnityPoco(Poco):
         agent = UnityPocoAgent(addr)
         super(UnityPoco, self).__init__(agent, action_interval=0.01)
 
+    def on_pre_action(self, action, proxy, args):
+        # airteset log用
+        from airtest.core.main import snapshot
+        snapshot(msg=unicode(proxy))
+
 
 def dump():
     conn = TcpClient(DEFAULT_ADDR)

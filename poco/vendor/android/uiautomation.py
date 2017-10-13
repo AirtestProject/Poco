@@ -17,7 +17,6 @@ from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
 from airtest.core.android.utils.iputils import get_ip_address
 from poco.vendor.android.utils.installation import install, uninstall
-
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 
@@ -65,6 +64,9 @@ class AndroidPocoAgent(PocoAgent):
         attributor = AttributorWrapper(remote_poco.attributor, ime)
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
         super(AndroidPocoAgent, self).__init__(hierarchy, remote_poco.inputer, remote_poco.screen, None)
+        # from poco.vendor.airtest.input import AirtestInput
+        # inputer = AirtestInput()  # 黑边手机还有问题，坐标不对
+        # super(AndroidPocoAgent, self).__init__(hierarchy, inputer, remote_poco.screen, None)
 
 
 class AndroidUiautomationPoco(Poco):
@@ -171,6 +173,11 @@ class AndroidUiautomationPoco(Poco):
                 print("still waiting for uiautomation ready.")
                 continue
         return ready
+
+    def on_pre_action(self, action, proxy, args):
+        # airteset log用
+        from airtest.core.main import snapshot
+        snapshot(msg=unicode(proxy))
 
 
 class AndroidUiautomationHelper(object):
