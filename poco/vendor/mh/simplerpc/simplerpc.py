@@ -63,12 +63,16 @@ class Callback(object):
         self.error_callback = None
         self.status = self.CANCELED
 
-    def wait(self):
+    def wait(self, timeout=None):
+        start_time = time.time()
         while True:
             if self.status == self.WAITING:
                 time.sleep(0.1)
+                if timeout and time.time() - start_time > timeout:
+                    raise RuntimeError("%s timeout error" % self)
             else:
                 break
+
         return (self.result, self.error)
 
 
@@ -140,8 +144,8 @@ class RpcAgent(object):
 
     def handle_message(self, msg, conn):
         data = json.loads(msg)
-        if DEBUG:
-            print("<--", data)
+        # if DEBUG:
+        #     print("<--", data)
         if "method" in data:
             # rpc request
             message_type = self.REQUEST
@@ -150,8 +154,8 @@ class RpcAgent(object):
             if isinstance(result.get("result"), AsyncResponse):
                 result["result"].setup(conn, result["id"])
             else:
-                if DEBUG:
-                    print("-->", result)
+                # if DEBUG:
+                #     print("-->", result)
                 conn.send(json.dumps(result))
 
         else:
