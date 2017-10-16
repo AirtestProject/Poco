@@ -44,7 +44,18 @@ class RegexpComparator(object):
 
 class DefaultMatcher(IMatcher):
     """
-    Default matcher implementation for poco hierarchy traversing.
+    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate  
+    expression. When traversing through the hierarchy tree, matcher will apply match method on each tree node.
+
+    The formal definition of query condition as follows. 'op0' is logical operator ('or' or 'and'). 'op1' is comparator 
+    predicate ('attr=' or 'attr.*=').
+    'attr=' corresponds to `EqualizationComparator`.
+    'attr.*=' corresponds to `RegexpComparator`.
+
+    ```
+    expr := (op0, (expr0, expr1, ...))
+    expr := (op1, (arg1, arg2))
+    ```
     """
 
     def __init__(self):

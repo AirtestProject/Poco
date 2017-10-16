@@ -8,7 +8,16 @@ from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
 
 
+__all__ = ['FreezedUIDumper', 'FreezedUIHierarchy']
+
+
 class FreezedUIDumper(AbstractDumper):
+    """
+    Partially implementation of IDumper. This is only a helper that helps to make dumper work with local nodes just 
+    like with remote nodes. The local nodes is an implementation of `AbstractNode` locally with fixed hierarchy data in 
+    arbitrary data type. In a word, this class is not going to crawl hierarchy from target app, but to perform like a 
+    ordinary dumper.
+    """
 
     def dumpHierarchy(self):
         raise NotImplementedError
@@ -23,8 +32,15 @@ class FreezedUIDumper(AbstractDumper):
 
 class FreezedUIHierarchy(HierarchyInterface):
     """
-    local implementation of UIInterface
-    `dump` of dumper is the only method to be implemented
+    Locally implementation of hierarchy interface with a given dumper and all other behaviours by default. As all 
+    information can only be retrieve from a fixed UI hierarchy data created by dumper and all UI elements are immutable, 
+    this class is called freezed hierarchy. With the help of this class, only very few of the methods are required to 
+    implement. See `AbstractNode` or poco-sdk integration guide to get more details about this. 
+     
+    This class makes it much easier to integrate poco-sdk and optimizes performance in some situations, but it is not 
+    sensitive enough to the changes of UI hierarchy in the app. For example, you should call `select` explicitly to 
+    re-crawl a new UI hierarchy when some UI elements changed on screen. Otherwise you are using attributes that are 
+    out of date.
     """
 
     def __init__(self, dumper):

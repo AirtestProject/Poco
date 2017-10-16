@@ -64,14 +64,14 @@ pip install -e PocoUnit
 **节点(Node)**: 游戏内UI对象的实例，按照树形结构渲染的每一个对象均表示一个节点  
 **选择器(选择表达式)(query expr)**: 使用poco进行选择的表达式，用于限定和匹配目标对象(节点)  
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector.png)
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-text-attribute.png)
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-search.png)
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-inspector-hierarchy-relations.png)
+![image](doc/img/hunter-inspector.png)
+![image](doc/img/hunter-inspector-text-attribute.png)
+![image](doc/img/hunter-inspector-hierarchy-search.png)
+![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
 ### 坐标系与度量空间定义
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-coordinate-system.png)
+![image](doc/img/hunter-poco-coordinate-system.png)
 
 ## 对象选择与操作
 
@@ -100,7 +100,7 @@ poco('bg_mission', type='Button')
 poco(textMatches='^据点.*$', type='Button', enable=True)
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-simple.png)
+![image](doc/img/hunter-poco-select-simple.png)
 
 
 ### 相对选择器
@@ -112,7 +112,7 @@ poco(textMatches='^据点.*$', type='Button', enable=True)
 poco('main_node').child('list_item').offspring('item')
 ```
 ``
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-relative.png)
+![image](doc/img/hunter-poco-select-relative.png)
 
 ### 顺序选择器（索引选择器，更推荐迭代遍历）
 
@@ -124,7 +124,7 @@ print(items[0].child('material_name').get_text())
 print(items[1].child('material_name').get_text())
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-select-sequence.png)
+![image](doc/img/hunter-poco-select-sequence.png)
 
 ### 遍历对象集合
 
@@ -135,7 +135,7 @@ for item in items:
     item.child('icn_item')
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-iteration.png)
+![image](doc/img/hunter-poco-iteration.png)
 
 ### 获取对象代理属性
 
@@ -160,7 +160,7 @@ poco('bg_mission').click([0.5, 0.5])    # 等价于center
 poco('bg_mission').focus([0.5, 0.5]).click()  # 等价于上面的表达式
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-click.png)
+![image](doc/img/hunter-poco-click.png)
 
 #### swipe
 
@@ -173,7 +173,7 @@ joystick.swipe([0.2, -0.2])  # 向右上方45度滑动sqrt(0.08)单位距离
 joystick.swipe([0.2, -0.2], duration=0.5)
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-swipe.png)
+![image](doc/img/hunter-poco-swipe.png)
 
 #### drag
  
@@ -183,7 +183,7 @@ joystick.swipe([0.2, -0.2], duration=0.5)
 poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 ```
 
-![image](http://init.nie.netease.com/images/hunter/inspector/hunter-poco-drag.png)
+![image](doc/img/hunter-poco-drag.png)
 
 #### focus (局部定位)
 
