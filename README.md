@@ -2,16 +2,11 @@
 
 **Cross-engine UI Automation Framework**
 
-一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
+[中文README(Chinese README)](README-CN.md)在此。
 
-## 提醒(notice)
+## Installation
 
-UI自动化有风险，请务必等待UI freeze阶段后再投入生产和使用。
-
-## 安装(install)
-
-虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖。
-
+To use `poco` full functionality (Netease internal engine implementations), please install the following modules with scripts given below before installing `poco`.
 
 ```sh
 # airtest runtime
@@ -33,7 +28,11 @@ pip install -e hunter-cli
 # hunter lib for airtest
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
 pip install -e airtest-hunter
+```
 
+Install `poco` and `PocoUnit` for unittest.
+
+```sh
 # poco
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
@@ -43,80 +42,99 @@ git clone ssh://git@git-qa.gz.netease.com:32200/maki/PocoUnit.git
 pip install -e PocoUnit
 ```
 
-安装遇到权限问题请下载我们的[deploy-key](http://init.nie.netease.com/downloads/deploy/deploy-key)，将下载下来的deploy-key放到 `C:\User\<username>\.ssh\` 目录下，改名为`id_rsa`，再重新运行上面的命令。
 
-## 基本概念(concepts)
+## Basic Concepts
 
-### 测试
-
-**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本  
-**TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件  
-**TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境  
-**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏  
-
-**TestFramework**:  测试框架，Poco就是一个测试框架  
-**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK  
-
-
-### Poco测试框架相关
-
-**对象代理(UI proxy)**: 通过poco选择出来的代表游戏内的UI对象  
-**节点(Node)**: 游戏内UI对象的实例，按照树形结构渲染的每一个对象均表示一个节点  
-**选择器(选择表达式)(query expr)**: 使用poco进行选择的表达式，用于限定和匹配目标对象(节点)  
+**Target device**: A host that the app/game running on. Usually a PC or a cell phone.  
+**UI proxy**: An object in poco that represents zero, one or more than one UI element(s) in target app/game. A proxy object acts as an intermediary between the test code and UI elements represent.  
+**UI element/node**: An object in app's/game's runtime which is rendered on screen. That is what we call the UI as usual.  
+**Query condition/expression**: A serializable object for poco to select specific UI element. It is a nested tuple by default. This is handled by poco that developers/testers do not need to care its internal structure, unless you are going to customize your own `Selector`.  
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
 ![image](doc/img/hunter-inspector-hierarchy-search.png)
 ![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
-### 坐标系与度量空间定义
+### Definition of coordinate system and metric space
 
 ![image](doc/img/hunter-poco-coordinate-system.png)
 
-## 对象选择与操作
+#### UniformCoordinateSystem
 
-### 选择器实例初始化
+To measure position or dimension in poco, we use a new scale of coordinates called UniformCoordinateSystem. UniformCoordinateSystem normalizes the metric space that width or length of screen always measures unit one, the top left corner of screen is the origin, right direction is x-axis, down direction is y-axis. This helps you to write cross-resolution code and makes you never care about the hundreds of different resolution devices.
+
+The scales are average of each axis that the center is always (0.5, 0.5). Scalars and vectors are easily deduced.
+
+#### LocalCoordinateSystem
+
+Bounding box indicates the coordinate (x, y) range of the **first** selected UI element of UI proxy. The top left corner is the origin of LocalCoordinateSystem, right direction is x-axis, down direction is y-axis. The width or height in LocalCoordinateSystem always measures unit one. Besides, other definitions are similar to UniformCoordinateSystem.
+
+LocalCoordinateSystem helps you locate accurately and flexibly inside UI element. (0.5, 0.5) in LocalCoordinate represents the center of the UI element.
+
+## Interaction with UI
+
+### Poco instance initialization
+
+Initialization for each engine implementations are different. Take Unity3D as example. Other engines see:
+
+* [cocos2dx-js]()
+* [android-native]()
+* unreal (in development)
+* (others see [INTEGRATION guide]() for more details)
+
 
 ```python
-from airtest.core.main import set_serialno
-from poco.vendor.airtest import AirtestPoco
+from poco.vendor.unity3d import UnityPoco
 
-set_serialno()  # 初始化连在电脑上的默认设备
-poco = AirtestPoco('g62')  # 传入hunter中的项目代号
-
-target = poco('...')
+poco = UnityPoco()
+ui = poco('...')
 ```
 
-### 基本选择器
+### Selection
 
-`poco`对象的`__call__`方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考API Reference。
+Add a pair of brackets after `poco` instance to select UI element with given arguments as query condition. This expression always returns a UI proxy. A UI proxy also has some selection methods which return another UI proxy so that the selection can be chained. 
+
+#### Basic selection
+
+There are many types of query conditions. Basic selection are only to select UI elements that satisfy the given attribute condition. 
 
 ```python
-# 根据节点名选择
+# select by name (Select by the attribute named 'name' of UI element.)
 poco('bg_mission')
 
-# 节点名和属性选择
+# the same as above (The first parameter are name attribute)
+poco(name='bg_mission')
+
+# select by multiple attributes
 poco('bg_mission', type='Button')
+
+# select by multiple attributes with regular expression matching comparison
+# add 'Matches' following by attribute name indicates using regular expression matching comparison rather than equivalence comparison
 poco(textMatches='^据点.*$', type='Button', enable=True)
 ```
 
 ![image](doc/img/hunter-poco-select-simple.png)
 
 
-### 相对选择器
+#### Parenting relative selection
 
-直接通过节点名或节点类型选择的对象容易产生歧义或无法选择时，可通过相对的方式按层级进行选择
+For a tree-like UI hierarchy, It is also available to select UI elements based on hierarchical relationships (kinship). These selector are methods of UI proxy. Each method can be treated as a basic selector.
 
 ```python
-# 直系孩子/后代选择
+# Straight children/Descendants including children
 poco('main_node').child('list_item').offspring('item')
 ```
 ``
 ![image](doc/img/hunter-poco-select-relative.png)
 
-### 顺序选择器（索引选择器，更推荐迭代遍历）
+```python
+# sibling for brother nodes
+poco('main_node').child('list_item').sibling('tab_top')
+```
 
-索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
+#### Sequential index selection
+
+Select the specific one from all UI elements as a new UI proxy. The sequence/index is related to space arrangement. It is always from left to right, from top to bottom, regardless of its sequence in the hierarchy tree.
 
 ```python
 items = poco('main_node').child('list_item').offspring('item')
@@ -126,10 +144,12 @@ print(items[1].child('material_name').get_text())
 
 ![image](doc/img/hunter-poco-select-sequence.png)
 
-### 遍历对象集合
+### Iteration over UI elements
+
+Iteration sequence is the same as sequential index selection. If position changed or UI element rearranged during the iteration, the sequence will not change. Once the iteration begins, all iteratees are fixed. That means all of the UI elements selected at this moment will be iterated over except recycled by engine. Iteration stops immediately When iterating on UI element that is recycled.  
 
 ```python
-# 遍历每一个商品
+# iterate over each item
 items = poco('main_node').child('list_item').offspring('item')
 for item in items:
     item.child('icn_item')
@@ -137,47 +157,57 @@ for item in items:
 
 ![image](doc/img/hunter-poco-iteration.png)
 
-### 获取对象代理属性
+### Retrieving attribute values
+
 
 ```python
 mission_btn = poco('bg_mission')
 print(mission_btn.attr('type'))  # 'Button'
 print(mission_btn.get_text())  # '据点支援'
-print(mission_btn.attr('text'))  # '据点支援'，与get_text方法等价
-print(mission_btn.exists())  # True，表示是否存在界面中
+print(mission_btn.attr('text'))  # '据点支援', equvilent to `.get_text()`
+print(mission_btn.exists())  # True, whether or not it's rendered on screen
 ```
 
-### 对象代理操作
+### Actions
 
-#### click
+Performing actions are simulating and injecting a motion event or key event to the target device. All actions will only apply at the **first** UI element of the UI proxy. If multiple UI elements selected, others except the first will be ignored.
 
-点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为`[0, 0]`，右下角为`[1, 1]`。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。
+For easy maintenance, you'd better select unique UI element before performing actions.
+ 
+```python
+# only the first element
+proxy.action() <=> proxy[0].action()
+```
+
+#### Click
+
+Perform an action of the **first** UI element selected by UI proxy.
 
 ```python
 poco('bg_mission').click()
 poco('bg_mission').click('center')
-poco('bg_mission').click([0.5, 0.5])    # 等价于center
-poco('bg_mission').focus([0.5, 0.5]).click()  # 等价于上面的表达式
+poco('bg_mission').click([0.5, 0.5])  # quivilent above
+poco('bg_mission').focus([0.5, 0.5]).click()  # quivilent above
 ```
 
 ![image](doc/img/hunter-poco-click.png)
 
-#### swipe
+#### Swipe
 
-以对象anchor为起点，朝某个方向滑动一段距离
+Start from focus point of UI proxy, move your finger to a given direction measured by vector.
 
 ```python
 joystick = poco('movetouch_panel').child('point_img')
 joystick.swipe('up')
-joystick.swipe([0.2, -0.2])  # 向右上方45度滑动sqrt(0.08)单位距离
+joystick.swipe([0.2, -0.2])  # 45 deg towards top right
 joystick.swipe([0.2, -0.2], duration=0.5)
 ```
 
 ![image](doc/img/hunter-poco-swipe.png)
 
-#### drag
+#### Drag
  
-从当前对象拖拽到目标对象
+Similar to `swipe`, but the movement is specified by another UI proxy.
 
 ```python
 poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
@@ -185,30 +215,34 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 ![image](doc/img/hunter-poco-drag.png)
 
-#### focus (局部定位)
+#### Focus (Local positioning, not setting focus on text input.)
 
-与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
+Set a focus point related to selected UI element. This is not going to change the attribute of UI element, but create a new UI proxy with given focus point. When perform actions on the UI proxy, the major action point is the focus point. The coordinate of focus point can be larger than 1 or smaller than 0 that indicates outside the bounding box. The default focus point is the anchor of UI element (position of UI element).
+
+Take `click` as example, the following shows clicking the center of UI element whose name is 'bg_mission'.
 
 ```python
-poco('bg_mission').focus('center').click()  # 点击中心点
+poco('bg_mission').focus('center').click()  # click the center of UI element whose name is 'bg_mission'
 ```
 
-
-focus也可以用于一个对象的内部定位，例如实现一个ScrollView的卷动操作
+`focus` can also be used within the same UI proxy and simulate scroll action using `drag`.
 
 ```
 scrollView = poco(type='ScollView')
 scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
 ```
 
-#### wait
-等待目标对象出现，总是返回对象自身，如果出现立即返回，否则timeout后返回
+
+#### Wait
+
+Wait until UI element appears or timeout. This method always return the UI proxy itself not a new one.
+
 ```python
-poco('bg_mission').wait(5).click()  # 最多等待5秒，出现即点击
-poco('bg_mission').wait(5).exists()  # 最多等待5秒，返回是否exists
+poco('bg_mission').wait(5).click()  # wait at most 5s, click at once 'bg_mission' appears within 5s
+poco('bg_mission').wait(5).exists()  # wait at most 5s
 ```
 
-## 捕获异常
+## Exceptions
 
 ```python
 from poco.exceptions import PocoTargetTimeout
@@ -216,7 +250,7 @@ from poco.exceptions import PocoTargetTimeout
 try:
     poco('guide_panel', type='ImageView').wait_for_appearance()
 except PocoTargetTimeout:
-    # 面板没有弹出来，有bug
+    # bugs here as the panel not shown
     raise
 ```
 
@@ -228,31 +262,18 @@ try:
     if not img.exists():
         img.click()
 except PocoNoSuchNodeException:
-    # 尝试对不存在的节点进行操作，会抛出此异常
+    # perform actions on non-existence UI element will raise this exception
     pass
 ```
 
-# 断言
+## Assertions
 
-poco不包含TestRunner，断言请参考python标准库unittest的断言部分。
+Assertions are part of the unittest. Poco is automation framework. For unittest, see [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertions methods and it is drop in with python stdlib unittest.
 
-关于TestRunner更详细的部分请参考[PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit)
+## Ingrations guide
 
-## 接入参考
+See [INTEGRATION guide](). This guide helps you implement and integrate poco-sdk with your app step by step.
 
-1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在[项目](http://hunter.nie.netease.com/mywork/project#/)页直接下载最新版的接入模块。
-1. 在项目的`__init__`指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
+## LICENSE
 
-```python
-# poco uiautomation
-PocoUiautomation = require('support.poco.neox.uiautomation')
-Safaia().install(PocoUiautomation)
-
-# inspector extension
-InspectorExt = require('support.poco.safaia.inspector')
-InspectorExt.screen = require('support.poco.neox.screen')()
-InspectorExt.dumper = require('support.poco.neox.Dumper')()
-Safaia().install(InspectorExt)
-```
-
-3. [hunter终端](http://hunter.nie.netease.com) 右上角点击**Inspector**按钮打开检视器面板。
+TODO
