@@ -2,7 +2,7 @@
 
 **A cross-engine UI Automation Framework**
 
-Here is [English README](README-CN.md).
+[English README](README-CN.md) here.
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
@@ -65,7 +65,6 @@ pip install -e PocoUnit
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
-![image](doc/img/hunter-inspector-hierarchy-search.png)
 ![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
 ### 坐标系与度量空间定义

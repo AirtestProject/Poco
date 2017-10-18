@@ -52,7 +52,6 @@ pip install -e PocoUnit
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
-![image](doc/img/hunter-inspector-hierarchy-search.png)
 ![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
 ### Definition of coordinate system and metric space
