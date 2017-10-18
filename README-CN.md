@@ -2,7 +2,7 @@
 
 **A cross-engine UI Automation Framework**
 
-[English README](README-CN.md) here.
+[English README](README.md) here.
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
