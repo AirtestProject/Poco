@@ -1,6 +1,8 @@
 # Poco ポコ
 
-**Cross-engine UI Automation Framework**
+**A cross-engine UI Automation Framework**
+
+Here is [English README](README-CN.md).
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了[hunter](http://hunter.nie.netease.com)的项目可直接使用该测试框架。
 
@@ -8,10 +10,7 @@
 
 UI自动化有风险，请务必等待UI freeze阶段后再投入生产和使用。
 
-## 安装(install)
-
-虽然airtest在未来不是必须的，但是目前版本需要安装airtest依赖。
-
+## 安装(installation)
 
 ```sh
 # airtest runtime
