@@ -14,9 +14,12 @@ class CommandInterface(object):
         """
         Emit a command to remote runtime (target device). 
 
-        :param cmd: Any json serializable data.
-        :param type: A string value indicated the command type (command tag).
-        :return: None (recommended).
+        Args:
+            cmd: Any json serializable data.
+            type (:obj:`str`): A string value indicated the command type (command tag).
+
+        Returns:
+            None (recommended).
         """
 
         pass

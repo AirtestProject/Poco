@@ -12,9 +12,9 @@ __all__ = ['NoSuchTargetException', 'NodeHasBeenRemovedException', 'UnableToSetA
 
 class NodeHasBeenRemovedException(Exception):
     """
-    If node (UI element) died when retrieving attributes at traversing, this will be raised. For some engines, the UI 
-    hierarchy is refreshing in another thread when poco is traversing. At the moment poco is retrieving attribute on the 
-    UI element that is refreshed (updated, recycled or destroyed), this may trigger an engine error. Poco sdk catches 
+    Raises if node (UI element) refreshed (updated, recycled or destroyed) when retrieving attributes at traversing. 
+    For some engines, the UI hierarchy is refreshing in another thread when poco is traversing. At the moment poco is 
+    retrieving attribute on the UI element that is refreshed, this may trigger an engine error. Poco sdk catches 
     this engine error and transform into this exception.
     """
 
@@ -38,7 +38,9 @@ class UnableToSetAttributeException(Exception):
 class NoSuchTargetException(Exception):
     """
     Raises when index out of range on selecting UI element by given index. 
-    TODO: Maybe this is a little bit redundant to `PocoNoSuchNodeException`. Should be optimized.
+    
+    .. TODO:: Maybe this is a little bit redundant to :py:class:`poco.exceptions.PocoNoSuchNodeException`. 
+     Should be optimized.
     """
 
     pass

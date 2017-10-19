@@ -29,15 +29,17 @@ class PocoException(Exception):
 
 class PocoAssertionError(PocoException):
     """
-    :deprecated: Deprecated, do not use.
+    Warning:
+        Deprecated, do not use.
     """
+
     pass
 
 
 class InvalidOperationException(PocoException):
     """
     When an operation performing on target device is foreseen, this exceptions will raise.
-    For example, click outside the screen is definitely meaningless, an `InvalidOperationException` raised.
+    For example, click outside the screen is definitely meaningless, an ``InvalidOperationException`` raised.
 
     操作无效
     通常超出屏幕之外的点击或者滑动会判定为操作无效

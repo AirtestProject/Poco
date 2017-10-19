@@ -8,7 +8,11 @@ class Attributor(object):
     """
     This is a helper class to access node's attribute. In some cases it is not able to explicitly invoke node's member  
     function thus the following 2 functions are introduced.
-    The instance of this class will be used in implementation of `HierarchyInterface`.
+
+    The instance of this class will be used in implementation of :py:class:`HierarchyInterface \
+    <poco.sdk.interfaces.hierarchy.HierarchyInterface>`.
+
+    .. note:: Do not call these methods explicitly in test codes.
     """
 
     def getAttr(self, node, attrName):

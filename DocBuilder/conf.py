@@ -30,7 +30,13 @@ sys.path.insert(0, os.path.abspath('../poco'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.napoleon',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -38,16 +44,18 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
+source_parsers = {
+   '.md': 'recommonmark.parser.CommonMarkParser',
+}
 
 # The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
-project = 'Sunshine'
-copyright = '2017, lxn3032'
-author = 'lxn3032'
+project = 'poco'
+copyright = '2017, NetEase Co, Ltd.'
+author = ['lxn3032@corp.netease.com', 'gzliuxin@corp.netease.com']
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -148,9 +156,17 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'poco', 'poco Documentation',
-     author, 'poco', 'One line description of project.',
+     author, 'poco', 'A cross-engine UI automation framework.',
      'Miscellaneous'),
 ]
 
+napoleon_include_special_with_doc = True
+napoleon_include_init_with_doc = True
+napoleon_use_param = True
+napoleon_use_rtype = True
 
-
+# if True:
+#     class poco.sdk.AbstractDumper.IDumper
+# if False:
+#     class IDumper
+add_module_names = False

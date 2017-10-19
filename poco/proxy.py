@@ -48,11 +48,12 @@ class UIObjectProxy(object):
         UI proxy class implementation. This class instance is only a proxy that represents UI element on target device. 
         Any action performing on this instance is handled by poco. 
         It is unnecessary to initialize this object manually.
-        See `QueryCondition` to get more details about how to select UI elements.
+        See ``QueryCondition`` to get more details about how to select UI elements.
 
         :param poco: The poco instance.
-        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is `name`.
-        :param attrs: The other query conditions except `name`.
+        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is 
+        ``name``.
+        :param attrs: The other query conditions except ``name``.
         """
 
         # query object in tuple
@@ -85,13 +86,14 @@ class UIObjectProxy(object):
     def child(self, name=None, **attrs):
         """
         Select straight child(ren) from this UI element(s) with given query conditions.
-        See `QueryCondition` to get more details about selectors.
+        See ``QueryCondition`` to get more details about selectors.
 
         以当前ui对象为基准，选择直系ui对象。可通过节点名和其余节点属性共同选择
         选择器规则同PocoUI.__call__
 
-        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is `name`.
-        :param attrs: The other query conditions except `name`.
+        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is 
+        ``name``.
+        :param attrs: The other query conditions except ``name``.
         :return: A new UI proxy object represents the child(ren) of current UI elements.
         """
 
@@ -103,7 +105,7 @@ class UIObjectProxy(object):
 
     def children(self):
         """
-        The same as `child` but select all children from this UI element(s).
+        The same as ``.child()`` but select all children from this UI element(s).
         获取当前节点的所有孩子节点
 
         :return: A new UI proxy object.
@@ -114,7 +116,7 @@ class UIObjectProxy(object):
     def offspring(self, name=None, **attrs):
         """
         Select any offsprings include straight child(ren) from this UI element(s) with given query conditions.
-        See `QueryCondition` to get more details about selectors.
+        See ``QueryCondition`` to get more details about selectors.
 
         以当前ui对象为基准，选择后代ui对象（所有后代）。可通过节点名和其余节点属性共同选择
         选择器规则同PocoUI.__call__
@@ -133,13 +135,13 @@ class UIObjectProxy(object):
     def sibling(self, name=None, **attrs):
         """
         Select sibling(s) from this UI element(s) with given query conditions.
-        See `QueryCondition` to get more details about selectors.
+        See ``QueryCondition`` to get more details about selectors.
 
         以当前ui对象为基准，选择兄弟ui对象。可通过节点名和其余节点属性共同选择
         选择器规则同PocoUI.__call__
 
-        :param name: <same as `.child()'>
-        :param attrs: <same as `.child()'>
+        :param name: <same as ``.child()``>
+        :param attrs: <same as ``.child()``>
         :return: A new UI proxy object represents the sibling(s) of current UI elements.
         """
 
@@ -157,13 +159,18 @@ class UIObjectProxy(object):
         The order of UI elements are determined by its position on screen not the selection sequence. We call this rule 
         "L2R U2D" (left to right one by one, up to down line by line) which means the most top left UI element is always 
          the first one.
-        See `IterationOverUI` to get more details.
+        See ``IterationOverUI`` to get more details.
 
         索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个。
         该函数默认按照空间排序（从左到右从上到下）后才进行选择
 
-        WARNING: This method may cause performance issue depending on implementation of PocoAgent.
-        警告：此方法有极大延迟，请勿频繁调用此方法。
+        WARNING
+        
+        This method may cause performance issue depending on implementation of PocoAgent.
+
+        警告
+        
+        此方法有极大延迟，请勿频繁调用此方法。
 
         :param item: An integer of the index.
         :return: A new UI proxy object represents the nth of current UI elements.
@@ -209,9 +216,9 @@ class UIObjectProxy(object):
 
     def __iter__(self):
         """
-        Similar to `__getitem__` but this method helps to iterate over all UI elements.
-        The order rules of UI elements is the same as `__getitem__`.
-        See `IterationOverUI` to get more details.
+        Similar to ``__getitem__`` but this method helps to iterate over all UI elements.
+        The order rules of UI elements is the same as ``__getitem__``.
+        See ``IterationOverUI`` to get more details.
 
         ui集合的节点迭代器，遍历所有满足选择条件的ui对象。
         遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。
@@ -250,15 +257,15 @@ class UIObjectProxy(object):
         """
         Perform a click action on the UI element this UI proxy represents. If this UI proxy represent a set of UI 
         elements, click the first one. Will click the anchor point of the UI element by default. It is able to click
-        another point offset by the UI element by providing argument `focus`.
-        See `CoordinateSystem` to get more details.
+        another point offset by the UI element by providing argument ``focus``.
+        See ``CoordinateSystem`` to get more details.
         点击当前ui对象，如果是ui对象集合则默认点击第一个
 
         :param focus: An offset point by the top left corner of the UI elements as 2-list/2-tuple (x, y) whose component 
              in range of 0~1. This argument can also be 'anchor' or 'center'. 'Center' means to click the center of 
              bounding box of UI element. 
         :param sleep_interval: Seconds to wait after this action. If not provides, it will wait by default. The default 
-            value can be configured by poco initialization. See `PocoConfiguration`.
+            value can be configured by poco initialization. See ``PocoConfiguration``.
         :return: None
 
         :raise PocoNoSuchNodeException: Raises when the UI element does not exists.
@@ -277,13 +284,13 @@ class UIObjectProxy(object):
     @wait
     def swipe(self, dir, focus=None, duration=0.5):
         """
-        Perform a swipe action by given direction from this UI element. Notices and limitations see `.click()`. 
+        Perform a swipe action by given direction from this UI element. Notices and limitations see ``.click()``. 
         以当前对象的anchor为起点，swipe一段距离
 
         :param dir: 2-list/2-tuple (x, y) coordinate in UniformCoordinate. Can also be one of 'up', 'down', 'left',
             'right', 'up' equivalent to [0, -0.1], 'down' equivalent to [0, 0.1], 'left' equivalent to [-0.1, 0],
             'right' equivalent to [0, 0.1]
-        :param focus: see `.click()`
+        :param focus: see ``.click()``
         :param duration: The time over the whole action.
         :return: None
 
@@ -392,7 +399,7 @@ class UIObjectProxy(object):
 
     def wait_for_appearance(self, timeout=120):
         """
-        Block and wait until this UI element appears within given timeout. Once timeout, `PocoTargetTimeout` will raise.
+        Block and wait until this UI element appears within given timeout. Once timeout, ``PocoTargetTimeout`` will raise.
         等待当前ui对象出现
 
         :param timeout: Maximum waiting time in seconds.
@@ -409,7 +416,7 @@ class UIObjectProxy(object):
 
     def wait_for_disappearance(self, timeout=120):
         """
-        Block and wait until this UI element disappears within given timeout. Once timeout, `PocoTargetTimeout` will 
+        Block and wait until this UI element disappears within given timeout. Once timeout, ``PocoTargetTimeout`` will 
         raise.
         等待当前ui对象消失
 
@@ -480,7 +487,7 @@ class UIObjectProxy(object):
 
     def exists(self):
         """
-        Test whether the UI element is in the hierarchy. The same as `.attr('visible')`.
+        Test whether the UI element is in the hierarchy. The same as ``.attr('visible')``.
         判断节点是否存在visible节点树中。只要在节点树中的可见节点均为exists，包括屏幕外的和被遮挡的
 
         :return: 节点是否存在， True/False

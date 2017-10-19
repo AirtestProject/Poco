@@ -3,10 +3,10 @@
 """
 package brief:
 
-This is package (poco.sdk.interfaces) defines the main communication interfaces that standardize between poco and 
+This package (:py:mod:`poco.sdk.interfaces`) defines the main communication interfaces that standardize between poco and 
 poco-sdk. When poco-sdk is integrated with an app running on another machine or in different language, poco-sdk is 
 called remote runtime. The implementations of these interfaces can be remotely or locally, depending on you. If locally, 
-please checkout `poco.freezeui.*` to get more information.
+please checkout :any:`poco.freezeui` to get more information.
 
 Poco needs to communicated with app's runtime under the convention of these interfaces. These interfaces should be 
 implemented properly. Any object implemented the same interface is replaceable. The communication protocol or transport 

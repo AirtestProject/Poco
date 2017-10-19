@@ -12,20 +12,24 @@ class ScreenInterface(object):
     def getScreen(self, width):
         """
         Take a screen shot of target device or target app's window.
-        获取渲染屏幕的截图。
 
-        :param width: Expected screen shot width in pixels.
-        :return: Base64 encoded screen data in <type str>. 
+        Args:
+            width (:obj:`int`): Expected screen shot width in pixels.
+
+        Returns:
+            :obj:`str`: Base64 encoded screen data.
         """
 
         raise NotImplementedError
 
     def getPortSize(self):
         """
-        Get the real resolution in pixles of the screen.
-        获取渲染屏幕的实际尺寸。
+        Get the real resolution in pixels of the screen.
 
-        :return: [width, height] in pixels in <type float>.
+        Returns:
+            2-:obj:`list` (:obj:`float`, :obj:`float`): 
+                - width
+                - height
         """
 
         raise NotImplementedError

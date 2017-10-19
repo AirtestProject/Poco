@@ -1,6 +1,6 @@
 # Poco ポコ
 
-**A cross-engine UI Automation Framework**
+**A cross-engine UI automation framework**
 
 [中文README(Chinese README)](README-CN.md)在此。
 

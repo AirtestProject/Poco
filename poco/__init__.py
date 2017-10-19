@@ -1,7 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import copy
 import time
 import traceback
 import warnings
@@ -17,20 +16,22 @@ __author__ = 'lxn3032'
 
 
 class Poco(PocoAssertionMixin, PocoAccelerationMixin):
+    """
+    Poco standard initializer.
+
+    Args:
+        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): A handler class object for poco to communication with 
+        target device. See :py:class:`PocoAgent <poco.agent.PocoAgent>`'s definition.
+        options:
+            - action_interval: The time after an action operated in order to wait for the UI becoming stable. default 
+              0.8s.
+            - poll_interval: The minimum time between each poll event. Such as waiting for some UI to appear and it will 
+              be polling periodically.
+            - pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
+              wait for appearance. If the target still not exists after that, ``PocoNoSuchNodeException`` will raise.
+    """
+
     def __init__(self, agent, **options):
-        """
-        Poco standard initializer.
-
-        :param agent: a handler class object for poco to communication with target device. See `PocoAgent`'s definition.
-        :param options:
-            action_interval: The time after an action operated in order to wait for the UI becoming stable. default 0.8s.
-            poll_interval: The minimum time between each poll event. Such as waiting for some UI to appear and it will 
-                           be polling periodically.
-            pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
-                                            wait for appearance. If the target still not exists after that, 
-                                            `PocoNoSuchNodeException` will raise
-        """
-
         super(Poco, self).__init__()
         self._agent = agent
 
@@ -49,14 +50,13 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         节点名与节点属性值由具体ui框架定义。
 
         :param name: ui节点名，默认None则不通过name进行选择
-        :param kw:
-            ui其他属性选择器
-            type: 节点类型，Button、Sprite、Node等,
-            text: 节点文本值，比如按钮上面的字之类的,
-            enable: 是否使能，True/False,
-            touchable: 是否可点击，True/False,
-            textMatches: 正则文本匹配,
-            typeMatches: 正则类型名匹配,
+        :param kw: 其他属性选择器
+            - type: 节点类型，Button、Sprite、Node等,
+            - text: 节点文本值，比如按钮上面的字之类的,
+            - enable: 是否使能，True/False,
+            - touchable: 是否可点击，True/False,
+            - textMatches: 正则文本匹配,
+            - typeMatches: 正则类型名匹配,
         :return: UI代理对象
         """
 
@@ -68,7 +68,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def wait_for_any(self, objects, timeout=120):
         """
         Wait until any of given UI proxies become appearance within timeout and return the first appeared UI proxy.
-        All UI proxies will be polled periodically. See option `poll_interval` in `Poco` initialization.
+        All UI proxies will be polled periodically. See option ``poll_interval`` in ``Poco`` initialization.
 
         :param objects: iterable of the given UI proxies.
         :param timeout: timeout in seconds. 120s by default.
@@ -88,7 +88,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def wait_for_all(self, objects, timeout=120):
         """
         Wait until all of given UI proxies become appearance within timeout.
-        All UI proxies will be polled periodically. See option `poll_interval` in `Poco` initialization.
+        All UI proxies will be polled periodically. See option ``poll_interval`` in ``Poco`` initialization.
 
         :param objects: iterable of the given UI proxies.
         :param timeout: timeout in seconds. 120s by default.
@@ -111,10 +111,10 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def freeze(this):
         """
         Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current 
-        poco instance (`self`). The hierarchy of the new poco instance is fixed and immutable. It will return directly
-        when invoking `dump`.
+        poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will return directly
+        when invoking ``dump``.
 
-        :return: A new poco instance copy from current poco instance (`self`).
+        :return: A new poco instance copy from current poco instance (``self``).
         """
 
         class FreezedPoco(Poco):
@@ -157,8 +157,8 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     @property
     def agent(self):
         """
-        Get poco agent instance. See `PocoAgent` to get more details.
-        
+        Poco agent instance. See :py:class:`poco.agent.PocoAgent` to get more details.
+
         :return: poco agent instance.
         """
 
@@ -169,10 +169,10 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         Perform click(touch, tap, etc.) action on target device with given coordinate. The coordinate is a 2-list or
         2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of 
         the screen. For example, [0.5, 0.5] is the center of the screen, [0, 0] represents the top left corner. 
-        See `CoordinateSystem` to get more details about coordinate system.
+        See ``CoordinateSystem`` to get more details about coordinate system.
 
         e.g. Click a point of (100, 100) of screen whose resolution is (1920, 1080), the statement as follows.
-            `poco.click([100.0 / 1920, 100.0 / 1080])`
+        ``poco.click([100.0 / 1920, 100.0 / 1080])``
 
         :param pos: a 2-list/2-tuple of coordinate in range of 0 to 1.
         :return: None 
@@ -185,9 +185,9 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
         Perform swipe action on target device with given start and end point, or a 2-list/2-tuple value as direction 
-        vector. The coordinate definition of points is the same as `click`. The components of direction vector (x, y)
+        vector. The coordinate definition of points is the same as ``click``. The components of direction vector (x, y)
         is also represents the range of the screen from 0 to 1.
-        See `CoordinateSystem` to get more details about coordinate system.
+        See ``CoordinateSystem`` to get more details about coordinate system.
         Should provide at least one of the end point or direction.
 
         e.g. Here is a screen with resolution 1920x1080. Swipe from (100, 100) to (100, 200) could be a statement as
@@ -229,10 +229,15 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     def snapshot(self, width=720):
         """
         Take a screen shot from the target device. The format (png, jpg, etc.) depends on the agent implementation.
-        
-        :param width: Expected width of the screen shot. The real size is depending on agent implementation. It may not
-                      be able to get a expected width of the screen shot.
-        :return: 2-tuple, (screen shot data with base64 encoded string, format ('png', 'jpg', etc.) in string)
+
+        Args:
+            width (:obj:`int`): Expected width of the screen shot. The real size is depending on agent implementation. 
+             It may not be able to get a expected width of the screen shot.
+
+        Returns:
+            2-tuple: 
+                - screen_shot (:obj:`str/bytes`): Screen shot data with base64 encoded.
+                - format (:obj:`str`): 'png', 'jpg', etc.
         """
 
         return self.agent.screen.getScreen(width)
