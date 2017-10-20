@@ -1,4 +1,5 @@
 :: copy readme.md
+mkdir source\
 copy /Y ..\README.md source\
 
 sphinx-apidoc -Me -o source/ ../poco ../poco/vendor

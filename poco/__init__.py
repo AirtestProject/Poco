@@ -53,7 +53,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         exactly when UI elements' info is needed (like position to click, or attribute to retrieve).
 
         Examples:
-            This example shows selecting a Button whose name is 'close'::
+            This example shows selecting a Button named 'close'::
 
                 poco = Poco(...)
                 close_btn = poco('close', type='Button')
