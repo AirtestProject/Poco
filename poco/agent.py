@@ -19,10 +19,9 @@ def _assign(val, default_val):
 
 class PocoAgent(object):
     """
-    This is a aggregation class of 4 major interfaces for poco to communicate with target device. PocoAgent is
-    introduced to handle scattered control units and provider a uniform entry to assess target device.
+    This is the agent class for poco to communicate with target device.
 
-    There are 4 major parts at the moment.
+    This class is an aggregation of 4 major interfaces for now.
 
     - :py:class:`HierarchyInterface <poco.sdk.interfaces.hierarchy.HierarchyInterface>`: Defines some hierarchy 
       accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name).

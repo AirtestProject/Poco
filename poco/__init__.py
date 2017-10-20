@@ -20,15 +20,15 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     Poco standard initializer.
 
     Args:
-        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): A handler class object for poco to communication with 
+        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): An agent object for poco to communication with 
          target device. See :py:class:`PocoAgent <poco.agent.PocoAgent>`'s definition.
         options:
-            - action_interval: The time after an action operated in order to wait for the UI becoming stable. default 
+            - action_interval: The time after an action(like touch/swipe) performed on device to wait for the UI becoming stable. default 
               0.8s.
-            - poll_interval: The minimum time between each poll event. Such as waiting for some UI to appear and it will 
+            - poll_interval: The minimal time between each poll event. Such as waiting for some UI to appear and it will 
               be polling periodically.
             - pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
-              wait for appearance. If the target still not exists after that, :py:class:`PocoNoSuchNodeException  
+              wait for appearance. If the target does not show up after that, raise :py:class:`PocoNoSuchNodeException  
               <poco.exceptions.PocoNoSuchNodeException>` will raise.
     """
 
@@ -49,8 +49,8 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         Simply call poco instance to select UI element by query conditions. You can specify the name or other 
         attributes together in query condition. Invisible UI element will be skipped even "visible=False" is given.  
 
-        Selecting is not executing at once. The query condition will be store in the UI proxy. Selecting can be executed 
-        any time when specific UI elements' detail needed.
+        Selection is not executed instantly. The query string will be store in the UI proxy. Selection can be executed 
+        exactly when UI elements' info is needed (like position to click, or attribute to retrieve).
 
         Examples:
             This example shows selecting a Button whose name is 'close'::
@@ -73,7 +73,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             arb_close_btn = poco(textMatches='^close.*$')
 
         Returns:
-            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element from \
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element matches \
              given query condition.
         """
 
@@ -84,7 +84,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_any(self, objects, timeout=120):
         """
-        Wait until any of given UI proxies become appearance within timeout and return the first appeared UI proxy.
+        Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.
         All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
         ``Poco``'s initialization.
 
@@ -110,7 +110,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_all(self, objects, timeout=120):
         """
-        Wait until all of given UI proxies become appearance within timeout.
+        Wait until all of given UI proxies show up before timeout.
         All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
         ``Poco``'s initialization.
 
@@ -164,7 +164,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_stable(self):
         """
-        Sleep fixed seconds in order to wait for the UI stable.
+        Sleep fixed seconds in order to wait for the UI becoming stable.
         There is no need to call this method manually. It's automatically invoked in cases.  
         """
 
@@ -191,7 +191,9 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def click(self, pos):
         """
-        Perform click(touch, tap, etc.) action on target device with given coordinate. The coordinate is a 2-list or
+        Perform click(touch, tap, etc.) action on target device at given coordinate. 
+
+        The coordinate is a 2-list or
         2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of 
         the screen. For example, ``[0.5, 0.5]`` is the center of the screen, ``[0, 0]`` represents the top left corner. 
         See ``CoordinateSystem`` to get more details about coordinate system.
@@ -214,8 +216,10 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
-        Perform swipe action on target device with given start and end point, or a 2-list/2-tuple value as direction 
-        vector. The coordinate definition of points is the same as ``click``. The components of direction vector (x, y)
+        Perform swipe action on target device from given start to end point, or a 2-list/2-tuple value as direction
+        vector.
+
+        The coordinate definition of points is the same as ``click``. The components of direction vector (x, y)
         is also represents the range of the screen from 0 to 1.
         See ``CoordinateSystem`` to get more details about coordinate system.
         Should provide at least one of the end point or direction.
@@ -265,14 +269,14 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def snapshot(self, width=720):
         """
-        Take a screen shot from the target device. The format (png, jpg, etc.) depends on the agent implementation.
+        Take a screenshot from the target device. The format (png, jpg, etc.) depends on the agent implementation.
 
         Args:
-            width (:obj:`int`): Expected width of the screen shot. The real size is depending on agent implementation. 
+            width (:obj:`int`): Expected width of the screen shot. The real size is depending on agent implementation.
              It may not be able to get a expected width of the screen shot.
 
         Returns:
-            2-tuple: 
+            2-tuple:
                 - screen_shot (:obj:`str/bytes`): Screen shot data with base64 encoded.
                 - format (:obj:`str`): 'png', 'jpg', etc.
         """
@@ -300,29 +304,30 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def add_pre_action_callback(self, cb):
         """
-        Register a callback function. No matter what happens, this function is invoked before each action with 3 given 
-        arguments.
+        Register a callback function to be invoked before each action(like touch/swipe).
 
-        The callback function's parameter defines as follows:
+        The callback function's arguments defines as follows:
 
         - action (:obj:`str`): The action's name or tag.
-        - proxy (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): The related UI proxy that 
+        - proxy (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): The related UI proxy that
           involves in the action.
         - args (:obj:`tuple`): All arguments of the specific action function.
 
         Args:
-            cb: the callback function 
+            cb: the callback function
         """
 
         self._pre_action_callbacks.append(cb)
 
     def add_post_action_callback(self, cb):
         """
-        3 arguments that passes to callback functions is identical to the callback function in 
+        Register a callback function to be invoked after each action(like touch/swipe).
+
+        3 arguments that passes to callback functions is identical to the callback function in
         :py:meth:`add_pre_action_callback <poco.Poco.add_pre_action_callback>`.
 
         Args:
-            cb: the callback function 
+            cb: the callback function
         """
 
         self._post_action_callbacks.append(cb)
