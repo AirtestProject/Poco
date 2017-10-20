@@ -8,7 +8,7 @@ class InputInterface(object):
     device. There are only some simple and basic method defined as follows which is enough for simple features. To 
     fully support on mobile device, motion event will be introduced in the future.
     
-    The coordinates are all in UniformCoordinate, see ``UniformCoordinate`` for more details.
+    The coordinates are all in NormalizedCoordinate, see ``NormalizedCoordinate`` for more details.
     """
 
     def click(self, x, y):

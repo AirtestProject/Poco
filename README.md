@@ -58,15 +58,15 @@ pip install -e PocoUnit
 
 ![image](doc/img/hunter-poco-coordinate-system.png)
 
-#### UniformCoordinateSystem
+#### NormalizedCoordinateSystem
 
-To measure position or dimension in poco, we use a new scale of coordinates called UniformCoordinateSystem. UniformCoordinateSystem normalizes the metric space that width or length of screen always measures unit one, the top left corner of screen is the origin, right direction is x-axis, down direction is y-axis. This helps you to write cross-resolution code and makes you never care about the hundreds of different resolution devices.
+To measure position or dimension in poco, we use a new scale of coordinates called NormalizedCoordinateSystem. NormalizedCoordinateSystem normalizes the metric space that width or length of screen always measures unit one, the top left corner of screen is the origin, right direction is x-axis, down direction is y-axis. This helps you to write cross-resolution code and makes you never care about the hundreds of different resolution devices.
 
 The scales are average of each axis that the center is always (0.5, 0.5). Scalars and vectors are easily deduced.
 
 #### LocalCoordinateSystem
 
-Bounding box indicates the coordinate (x, y) range of the **first** selected UI element of UI proxy. The top left corner is the origin of LocalCoordinateSystem, right direction is x-axis, down direction is y-axis. The width or height in LocalCoordinateSystem always measures unit one. Besides, other definitions are similar to UniformCoordinateSystem.
+Bounding box indicates the coordinate (x, y) range of the **first** selected UI element of UI proxy. The top left corner is the origin of LocalCoordinateSystem, right direction is x-axis, down direction is y-axis. The width or height in LocalCoordinateSystem always measures unit one. Besides, other definitions are similar to NormalizedCoordinateSystem.
 
 LocalCoordinateSystem helps you locate accurately and flexibly inside UI element. (0.5, 0.5) in LocalCoordinate represents the center of the UI element.
 
@@ -120,7 +120,7 @@ poco(textMatches='^据点.*$', type='Button', enable=True)
 For a tree-like UI hierarchy, It is also available to select UI elements based on hierarchical relationships (kinship). These selector are methods of UI proxy. Each method can be treated as a basic selector.
 
 ```python
-# Straight children/Descendants including children
+# Direct children/Descendants including children
 poco('main_node').child('list_item').offspring('item')
 ```
 ``

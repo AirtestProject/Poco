@@ -87,7 +87,7 @@ class UIObjectProxy(object):
 
     def child(self, name=None, **attrs):
         """
-        Select straight child(ren) from this UI element(s) with given query conditions.
+        Select direct child(ren) from this UI element(s) with given query conditions.
         See ``QueryCondition`` to get more details about selectors.
 
         Args:
@@ -118,7 +118,7 @@ class UIObjectProxy(object):
 
     def offspring(self, name=None, **attrs):
         """
-        Select any offsprings include straight child(ren) from this UI element(s) with given query conditions.
+        Select any offsprings include direct child(ren) from this UI element(s) with given query conditions.
         See ``QueryCondition`` to get more details about selectors.
 
         Args:
@@ -290,7 +290,7 @@ class UIObjectProxy(object):
         :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`. 
 
         Args:
-            dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): 2-list/2-tuple (x, y) coordinate in UniformCoordinate. Can 
+            dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): 2-list/2-tuple (x, y) coordinate in NormalizedCoordinate. Can 
              also be one of 'up', 'down', 'left', 'right', 'up' equivalent to [0, -0.1], 'down' equivalent to [0, 0.1], 
              'left' equivalent to [-0.1, 0], 'right' equivalent to [0, 0.1].
             focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`. 
@@ -313,7 +313,7 @@ class UIObjectProxy(object):
 
         Args:
             target (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`): A UI proxy or 2-list/2-tuple (x, y) 
-             coordinate in UniformCoordinate.
+             coordinate in NormalizedCoordinate.
             duration: The time over the whole action.
 
         Raises:
@@ -334,7 +334,7 @@ class UIObjectProxy(object):
 
         Args:
             f (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): The focus point. Can be 2-list/2-tuple (x, y) coordinate in 
-             UniformCoordinate, 'center' or 'anchor'.
+             NormalizedCoordinate, 'center' or 'anchor'.
 
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy copy.
@@ -352,7 +352,7 @@ class UIObjectProxy(object):
             focus: Focus point of UI proxy. See :py:meth:`.focus() <poco.proxy.UIObjectProxy.focus>`.
 
         Returns:
-            2-list/2-tuple: coordinate (x, y) in UniformCoordinate.
+            2-list/2-tuple: coordinate (x, y) in NormalizedCoordinate.
 
         Raises:
             TypeError: If unsupported focus type given.
@@ -509,10 +509,11 @@ class UIObjectProxy(object):
 
     def exists(self):
         """
-        Test whether the UI element is in the hierarchy. The same as ``.attr('visible')``.
-        判断节点是否存在visible节点树中。只要在节点树中的可见节点均为exists，包括屏幕外的和被遮挡的
+        Test whether the UI element is in the hierarchy. The same as :py:meth:`.attr('visible') 
+        <poco.proxy.UIObjectProxy.attr>`.
 
-        :return: 节点是否存在， True/False
+        Returns:
+            bool: True if exists otherwise False.
         """
 
         try:
@@ -522,10 +523,11 @@ class UIObjectProxy(object):
 
     def get_text(self):
         """
-        Get the text attribute on UI element. Return None if no such attribute. The same as `.attr('text')`.
-        获取节点上的文本值，utf-8编码
+        Get the text attribute on UI element. Return None if no such attribute. The same as :py:meth:`.attr('text') 
+        <poco.proxy.UIObjectProxy.attr>`.
 
-        :return: 节点上的文本值，以utf-8编码
+        Returns:
+            :obj:`str`: Text value with utf-8 encoded or None if does not have text attribute.
         """
 
         text = self.attr('text')
@@ -536,30 +538,32 @@ class UIObjectProxy(object):
     def set_text(self, text):
         """
         Get the text attribute on UI element. If this UI element does not support mutation, a exception will raise.
-        给TextField节点设置text值
 
-        :param text: The text value to set.
-        :return: None
+        Args:
+            text: The text value to set.
 
-        :raise InvalidOperationException: 在一个不可设置文本值的节点上设置节点时会抛出该异常
+        Raises:
+            InvalidOperationException: If unable to mutate text value on UI element.
         """
 
         self.setattr('text', text)
 
     def get_name(self):
         """
-        获取节点名
+        Get the UI element's name attribute.
 
-        :return: 节点名
+        Returns:
+            :obj:`str`: UI element's name attribute.
         """
 
         return self.attr('name')
 
     def get_size(self):
         """
-        获取节点在屏幕上的归一化尺寸
+        Get the UI element's size in ``NormalizedCoordinate``.
 
-        :return: 格式为[width, height]的list, width,height ∈ [0, 1]
+        Returns:
+            2-:obj:`list`: [width, height] in range of 0 ~ 1.
         """
 
         return self.attr('size')
@@ -567,8 +571,9 @@ class UIObjectProxy(object):
     def get_bounds(self):
         """
         Get the parameters of bounding box of the UI element.
-        
-        :return: 4-list (top, right, bottom, left) to the edge of screen in UniformCoordinate.
+
+        Returns:
+            :obj:`list` <:obj:`float`>: 4-list (top, right, bottom, left) to the edge of screen in NormalizedCoordinate.
         """
 
         size = self.get_size()
@@ -589,10 +594,7 @@ class UIObjectProxy(object):
     @property
     def nodes(self):
         """
-        Access the UI element in remote runtime if using RPC.
-        访问所选择对象的远程节点对象
-
-        :return: RpcRemoteObjectProxy. Rpc远程对象代理
+        Readonly property accessing the UI element in remote runtime.
         """
 
         return self._do_query()
@@ -600,8 +602,6 @@ class UIObjectProxy(object):
     def invalidate(self):
         """
         Clear the flag to indicate to re-query or re-select the UI element(s) from hierarchy.
-
-        :return: None
         """
 
         self._evaluated = False
