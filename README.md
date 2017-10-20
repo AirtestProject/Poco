@@ -45,9 +45,9 @@ pip install -e PocoUnit
 
 ## Basic Concepts
 
-**Target device**: A host that the app/game running on. Usually a PC or a cell phone.  
-**UI proxy**: An object in poco that represents zero, one or more than one UI element(s) in target app/game. A proxy object acts as an intermediary between the test code and UI elements represent.  
-**UI element/node**: An object in app's/game's runtime which is rendered on screen. That is what we call the UI as usual.  
+**Target device**: Host device that the app/game runs on. Usually a PC or a mobile phone.  
+**UI proxy**: Proxy object in poco that represents zero, one or more than one UI element(s) in target app/game. A proxy object acts as an intermediary between the test code and UI elements represent.  
+**UI element/node**: An object in app's/game's runtime rendered on screen. That is what we called UI as usual.  
 **Query condition/expression**: A serializable object for poco to select specific UI element. It is a nested tuple by default. This is handled by poco that developers/testers do not need to care its internal structure, unless you are going to customize your own `Selector`.  
 
 ![image](doc/img/hunter-inspector.png)

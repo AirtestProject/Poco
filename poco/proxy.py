@@ -44,7 +44,8 @@ def refresh_when(err_type):
 
 class UIObjectProxy(object):
     """
-    UI proxy class implementation. This class instance is only a proxy that represents UI element on target device. 
+    UI Proxy class that represents UI element on target device.
+
     Any action performing on this instance is handled by poco. It is unnecessary to initialize this object manually.
     See ``QueryCondition`` to get more details about how to select UI elements.
 
