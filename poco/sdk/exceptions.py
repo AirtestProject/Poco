@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-This module provides several exceptions for poco sdk. These exceptions are only raised on sdk corresponding runtime.
+This module provides several exceptions for poco sdk. These exceptions are only raised in sdk corresponding runtime.
 """
 
 
