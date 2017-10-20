@@ -18,6 +18,22 @@ def _assign(val, default_val):
 
 
 class PocoAgent(object):
+    """
+    This is a aggregation class of 4 major interfaces for poco to communicate with target device. PocoAgent is
+    introduced to handle scattered control units and provider a uniform entry to assess target device.
+
+    There are 4 major parts at the moment.
+
+    - :py:class:`HierarchyInterface <poco.sdk.interfaces.hierarchy.HierarchyInterface>`: Defines some hierarchy 
+      accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name).
+    - :py:class:`InputInterface <poco.sdk.interfaces.input.InputInterface>`: Defines simulated input methods to make 
+      it possible to inject simulated input on target device.
+    - :py:class:`ScreenInterface <poco.sdk.interfaces.screen.ScreenInterface>`: Defines methods to access the screen 
+      surface.
+    - :py:class:`CommandInterface <poco.sdk.interfaces.command.CommandInterface>`: Defines methods to communicate 
+      with target device in arbitrary way. This is optional.
+    """
+
     def __init__(self, hierarchy, input, screen, command=None):
         self.hierarchy = _assign(hierarchy, HierarchyInterface())
         self.input = _assign(input, InputInterface())

@@ -9,23 +9,30 @@ from .acceleration import PocoAccelerationMixin
 from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .proxy import UIObjectProxy
+from .agent import PocoAgent
+from .freezeui.utils import create_immutable_hierarchy
 
 __author__ = 'lxn3032'
 
 
 class Poco(PocoAssertionMixin, PocoAccelerationMixin):
+    """
+    Poco standard initializer.
+
+    Args:
+        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): A handler class object for poco to communication with 
+         target device. See :py:class:`PocoAgent <poco.agent.PocoAgent>`'s definition.
+        options:
+            - action_interval: The time after an action operated in order to wait for the UI becoming stable. default 
+              0.8s.
+            - poll_interval: The minimum time between each poll event. Such as waiting for some UI to appear and it will 
+              be polling periodically.
+            - pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
+              wait for appearance. If the target still not exists after that, :py:class:`PocoNoSuchNodeException  
+              <poco.exceptions.PocoNoSuchNodeException>` will raise.
+    """
+
     def __init__(self, agent, **options):
-        """
-        实例化一个poco对象
-
-        :param hunter:  hunter对象，通过hunter_cli.Hunter构造
-        :param options:
-            action_interval: 操作间隙，主要为点击操作之后要等待的一个间隙时间，默认1s
-            poll_interval: 轮询间隔，通过轮询等待某个事件发生时的一个时间间隔，如每poll_interval秒判断一次某按钮是否出现或消失
-            pre_action_wait_for_appearance: 在执行非幂等操作（如click、swipe）前，如果对象还没有出现，那么最长会等待出现的时间
-                如果这段时间内还没出现则抛出PocoNoSuchNodeException异常
-        """
-
         super(Poco, self).__init__()
         self._agent = agent
 
@@ -39,20 +46,35 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def __call__(self, name=None, **kw):
         """
-        选择ui对象或对象集合。可通过节点名和其余节点属性共同选择。例如 poco('close', type='Button')
-        总是选择可见的节点，不可见的已自动过滤
-        节点名与节点属性值由具体ui框架定义。
+        Simply call poco instance to select UI element by query conditions. You can specify the name or other 
+        attributes together in query condition. Invisible UI element will be skipped even "visible=False" is given.  
 
-        :param name: ui节点名，默认None则不通过name进行选择
-        :param kw:
-            ui其他属性选择器
-            type: 节点类型，Button、Sprite、Node等,
-            text: 节点文本值，比如按钮上面的字之类的,
-            enable: 是否使能，True/False,
-            touchable: 是否可点击，True/False,
-            textMatches: 正则文本匹配,
-            typeMatches: 正则类型名匹配,
-        :return: UI代理对象
+        Selecting is not executing at once. The query condition will be store in the UI proxy. Selecting can be executed 
+        any time when specific UI elements' detail needed.
+
+        Examples:
+            This example shows selecting a Button whose name is 'close'::
+
+                poco = Poco(...)
+                close_btn = poco('close', type='Button')
+
+        Args:
+            name (:obj:`str`): Select UI element(s) by name.
+
+        Keyword Args:
+            xx: Arbitrary key value pairs stands for selecting by ``UI.xx``'s value matching.
+            xxMatches (:obj:`str`): Arbitrary key value pairs stands for selecting by ``UI.xx``'s value matching the 
+             regular pattern
+
+        In keyword args, xx is the attribute name and should be unique that is to choose only one matching way. ::
+
+            # select UI element(s) whose text attribute matches the pattern '^close.*$'
+            poco = Poco(...)
+            arb_close_btn = poco(textMatches='^close.*$')
+
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element from \
+             given query condition.
         """
 
         if not name and len(kw) == 0:
@@ -62,11 +84,19 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_any(self, objects, timeout=120):
         """
-        等待任一对象出现，对给定objects中的每个对象依次轮询，直到某个对象出现（可见），并返回该对象
+        Wait until any of given UI proxies become appearance within timeout and return the first appeared UI proxy.
+        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
+        ``Poco``'s initialization.
 
-        :param objects: 等待的目标的集合
-        :param timeout: 最长等待时间
-        :return: 等到的那个对象
+        Args:
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): Iterable of the given UI proxies.
+            timeout (:obj:`float`): timeout in seconds. 120s by default.
+
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: the first appeared UI proxy.
+
+        Raises:
+            PocoTargetTimeout: When none of UI proxies appeared before timeout.
         """
 
         start = time.time()
@@ -80,11 +110,16 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def wait_for_all(self, objects, timeout=120):
         """
-        等待所有给定对象出现，对给定objects中的每个对象依次轮询，直到所有对象都出现
+        Wait until all of given UI proxies become appearance within timeout.
+        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
+        ``Poco``'s initialization.
 
-        :param objects: 等待的目标的集合
-        :param timeout: 最长等待时间
-        :return: None
+        Args:
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): Iterable of the given UI proxies.
+            timeout (:obj:`float`): timeout in seconds. 120s by default.
+
+        Raises:
+            PocoTargetTimeout: When not all of UI proxies appeared before timeout.
         """
 
         start = time.time()
@@ -100,22 +135,111 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
                 raise PocoTargetTimeout('all to appear', repr(objects).decode('utf-8'))
             self.sleep_for_polling_interval()
 
+    def freeze(this):
+        """
+        Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current 
+        poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will return directly
+        when invoking ``dump``.
+
+        Returns:
+            :py:class:`Poco <poco.Poco>`: A new poco instance copy from current poco instance (``self``).
+        """
+
+        class FreezedPoco(Poco):
+            def __init__(self):
+                hierarchy_dict = this.agent.hierarchy.dump()
+                hierarchy = create_immutable_hierarchy(hierarchy_dict)
+                agent_ = PocoAgent(hierarchy, this.agent.input, this.agent.screen)
+                super(FreezedPoco, self).__init__(agent_, action_interval=0.01, pre_action_wait_for_appearance=0)
+                self._pre_action_callbacks = this._pre_action_callbacks
+                self._post_action_callbacks = this._post_action_callbacks
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc_val, exc_tb):
+                pass
+
+        return FreezedPoco()
+
     def wait_stable(self):
+        """
+        Sleep fixed seconds in order to wait for the UI stable.
+        There is no need to call this method manually. It's automatically invoked in cases.  
+        """
+
         time.sleep(self._post_action_interval)
 
     def sleep_for_polling_interval(self):
+        """
+        Sleep fixed seconds after each polling.
+        There is no need to call this method manually. It's automatically invoked in cases.  
+        """
+
         time.sleep(self._poll_interval)
 
     @property
     def agent(self):
+        """
+        Readonly property to access poco agent instance. See :py:class:`poco.agent.PocoAgent` to get more details.
+
+        Returns:
+            :py:class:`poco.agent.PocoAgent`: poco agent instance.
+        """
+
         return self._agent
 
     def click(self, pos):
+        """
+        Perform click(touch, tap, etc.) action on target device with given coordinate. The coordinate is a 2-list or
+        2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of 
+        the screen. For example, ``[0.5, 0.5]`` is the center of the screen, ``[0, 0]`` represents the top left corner. 
+        See ``CoordinateSystem`` to get more details about coordinate system.
+
+        Examples:
+            Click a point of ``(100, 100)`` of screen whose resolution is ``(1920, 1080)``, the statement as follows::
+
+                poco.click([100.0 / 1920, 100.0 / 1080])
+
+        Args:
+            pos (:obj:`list(float, float)` / :obj:`tuple(float, float)`): coordinate (x, y) in range of 0 to 1.
+
+        Raises:
+            InvalidOperationException: When click outside screen.
+        """
+
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
         self.agent.input.click(pos[0], pos[1])
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
+        """
+        Perform swipe action on target device with given start and end point, or a 2-list/2-tuple value as direction 
+        vector. The coordinate definition of points is the same as ``click``. The components of direction vector (x, y)
+        is also represents the range of the screen from 0 to 1.
+        See ``CoordinateSystem`` to get more details about coordinate system.
+        Should provide at least one of the end point or direction.
+
+        Examples:
+            Here is a screen with resolution 1920x1080. Swipe from (100, 100) to (100, 200) could be a statement as
+            follows::
+
+                poco.swipe([100.0 / 1920, 100.0 / 1080], [100.0 / 1920, 200.0 / 1080])
+
+            Or give a specific direction instead of end point::
+
+                poco.swipe([100.0 / 1920, 100.0 / 1080], direction=[0, 100.0 / 1080])
+
+        Args:
+            p1 (:obj:`2-list/2-tuple`): start point.
+            p2: end point.
+            direction: swipe direction.
+            duration (:obj:`float`): The time over the whole action.
+
+        Raises:
+            InvalidOperationException: When swipe start point outside the screen.
+        """
+
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
         if direction is not None:
@@ -126,15 +250,43 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             raise TypeError('Swipe end not set.')
         self.agent.input.swipe(p1[0], p1[1], p2[0], p2[1], duration)
 
-    def long_click(self, pos):
+    def long_click(self, pos, duration=2.0):
+        """
+        Similar to click, but hold for a given duration and then release.
+
+        Args:
+            pos (:obj:`2-list/2-tuple`): coordinate (x, y) in range of 0 to 1.
+            duration: The time over the whole action.
+        """
+
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.longClick(pos[0], pos[1])
+        self.agent.input.longClick(pos[0], pos[1], duration)
 
     def snapshot(self, width=720):
+        """
+        Take a screen shot from the target device. The format (png, jpg, etc.) depends on the agent implementation.
+
+        Args:
+            width (:obj:`int`): Expected width of the screen shot. The real size is depending on agent implementation. 
+             It may not be able to get a expected width of the screen shot.
+
+        Returns:
+            2-tuple: 
+                - screen_shot (:obj:`str/bytes`): Screen shot data with base64 encoded.
+                - format (:obj:`str`): 'png', 'jpg', etc.
+        """
+
         return self.agent.screen.getScreen(width)
 
     def get_screen_size(self):
+        """
+        Get real physical resolution of the screen of target device.
+
+        Returns:
+            tuple: screen physical resolution in pixels in floats.
+        """
+
         return self.agent.screen.getPortSize()
 
     def command(self, cmd, type=None):
@@ -147,9 +299,32 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         pass
 
     def add_pre_action_callback(self, cb):
+        """
+        Register a callback function. No matter what happens, this function is invoked before each action with 3 given 
+        arguments.
+
+        The callback function's parameter defines as follows:
+
+        - action (:obj:`str`): The action's name or tag.
+        - proxy (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): The related UI proxy that 
+          involves in the action.
+        - args (:obj:`tuple`): All arguments of the specific action function.
+
+        Args:
+            cb: the callback function 
+        """
+
         self._pre_action_callbacks.append(cb)
 
     def add_post_action_callback(self, cb):
+        """
+        3 arguments that passes to callback functions is identical to the callback function in 
+        :py:meth:`add_pre_action_callback <poco.Poco.add_pre_action_callback>`.
+
+        Args:
+            cb: the callback function 
+        """
+
         self._post_action_callbacks.append(cb)
 
     def pre_action(self, action, proxy, args):

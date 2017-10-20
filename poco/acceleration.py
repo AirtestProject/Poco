@@ -11,6 +11,9 @@ __author__ = 'lxn3032'
 
 class PocoAccelerationMixin(object):
     """
+    This class provides some high-level method to reduce redundant code implementations.
+    As this is a MixinClass, please do not introduce new state in the following methods.
+
     该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。
     """
 

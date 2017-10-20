@@ -30,7 +30,8 @@ class MhScreen(ScreenInterface):
 
     @sync_wrapper
     def getScreen(self, width):
-        return self.c.call("get_size")
+        # get screen 是 get_size ？
+        return self.c.call("get_size"), 'png'
 
 
 class MhInput(InputInterface):

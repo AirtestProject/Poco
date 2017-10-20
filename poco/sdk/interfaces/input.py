@@ -3,47 +3,59 @@ __author__ = 'lxn3032'
 
 
 class InputInterface(object):
+    """
+    This is one of the main communication interfaces. This interface ensure the ability of simulated input on target 
+    device. There are only some simple and basic method defined as follows which is enough for simple features. To 
+    fully support on mobile device, motion event will be introduced in the future.
+    
+    The coordinates are all in UniformCoordinate, see ``UniformCoordinate`` for more details.
+    """
+
     def click(self, x, y):
         """
-        在目标设备上进行click操作
+        Perform click action as simulated input on target device. Coordinates arguments are all in range of 0~1.
 
-        :param y: y in range of 0~1 
-        :param x: x in range of 0~1 
-        :return: None
+        Args:
+            y (:obj:`float`): y
+            x (:obj:`float`): x
         """
 
         raise NotImplementedError
 
     def swipe(self, x1, y1, x2, y2, duration):
         """
-        在目标设备上进行滑动操作
+        Perform swipe action as simulated input on target device from point A to B within given seconds. Coordinates 
+        arguments are all in range of 0~1.
 
-        :param x1, y1: 起始点，归一化坐标系
-        :param x2, y2: 终止点，归一化坐标系
-        :param duration: 整个滑动过程持续时间，单位秒
-        :return: None 
+        Args:
+            x1 (:obj:`float`): start point x
+            y1 (:obj:`float`): start point y
+            x2 (:obj:`float`): end point x
+            y2 (:obj:`float`): end point y
+            duration (:obj:`float`): Time over the whole action.
         """
 
         raise NotImplementedError
 
     def longClick(self, x, y, duration):
         """
-        在目标设备上长按
+        Perform long click action as simulated input on target device within given seconds. Coordinates arguments are 
+        all in range of 0~1.
 
-        :param x:  
-        :param y: [x, y] in range of 0~1
-        :param duration: 持续时间，单位秒
-        :return: None
+        Args:
+            y (:obj:`float`): y
+            x (:obj:`float`): x
+            duration (:obj:`float`): Time over the whole action.
         """
 
         raise NotImplementedError
 
     def keyevent(self, keycode):
         """
-        模拟设备按键
+        Send a key event to target device.
 
-        :param keycode: 
-        :return: 
+        Args:
+            keycode (:obj:`int` or :obj:`char`): Ascii key code.
         """
 
         raise NotImplementedError

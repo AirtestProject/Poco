@@ -10,6 +10,11 @@ __author__ = 'lxn3032'
 
 # deprecated, use assertion method in unittest.case.PocoTestCase instead
 class PocoAssertionMixin(object):
+    """
+    Warnings:
+        Deprecated, do not use! Use assertion method in ``pocounit.PocoTestCase`` instead.
+    """
+
     @staticmethod
     @deprecated('use assertion method in unittest.case.PocoTestCase instead')
     def assert_equal(l, r, msg=b''):
