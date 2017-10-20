@@ -30,9 +30,9 @@ class IDumper(object):
         Structure of the dict::
 
             {
-                'name': '<a recognizable string, can be duplicated. meaningful is better.>'
+                'name': '<a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.>'
                 
-                # All available attributes of this node in the form of key-value pairs.
+                # All available attributes of this node in form of key-value pairs.
                 'payload': {
                     'name': '',
                     'pos': [0, 0],

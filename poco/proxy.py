@@ -43,19 +43,21 @@ def refresh_when(err_type):
 
 
 class UIObjectProxy(object):
+    """
+    UI proxy class implementation. This class instance is only a proxy that represents UI element on target device. 
+    Any action performing on this instance is handled by poco. It is unnecessary to initialize this object manually.
+    See ``QueryCondition`` to get more details about how to select UI elements.
+
+    Args:
+        poco: The poco instance.
+        name: Query condition of attribute "name". This means you gonna select UI elements whose name is ``name``.
+        attrs: The other query conditions except ``name``.
+
+    See Also:
+        :py:meth:`select UI element(s) by poco <poco.Poco.__call__>`
+    """
+
     def __init__(self, poco, name=None, **attrs):
-        """
-        UI proxy class implementation. This class instance is only a proxy that represents UI element on target device. 
-        Any action performing on this instance is handled by poco. 
-        It is unnecessary to initialize this object manually.
-        See ``QueryCondition`` to get more details about how to select UI elements.
-
-        :param poco: The poco instance.
-        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is 
-        ``name``.
-        :param attrs: The other query conditions except ``name``.
-        """
-
         # query object in tuple
         self.query = build_query(name, **attrs)
         self.poco = poco
@@ -88,13 +90,13 @@ class UIObjectProxy(object):
         Select straight child(ren) from this UI element(s) with given query conditions.
         See ``QueryCondition`` to get more details about selectors.
 
-        以当前ui对象为基准，选择直系ui对象。可通过节点名和其余节点属性共同选择
-        选择器规则同PocoUI.__call__
+        Args:
+            name: Query condition of attribute "name". This means you gonna select UI elements whose name is ``name``.
+            attrs: The other query conditions except ``name``.
 
-        :param name: Query condition of attribute "name". This means you gonna select UI elements whose name is 
-        ``name``.
-        :param attrs: The other query conditions except ``name``.
-        :return: A new UI proxy object represents the child(ren) of current UI elements.
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy object represents the child(ren) of \
+             current UI elements.
         """
 
         sub_query = build_query(name, **attrs)
@@ -105,10 +107,11 @@ class UIObjectProxy(object):
 
     def children(self):
         """
-        The same as ``.child()`` but select all children from this UI element(s).
-        获取当前节点的所有孩子节点
+        The same as :py:meth:`.child() <poco.proxy.UIObjectProxy.child>` but select all children from this UI 
+        element(s).
 
-        :return: A new UI proxy object.
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy object.
         """
 
         return self.child()
@@ -118,12 +121,13 @@ class UIObjectProxy(object):
         Select any offsprings include straight child(ren) from this UI element(s) with given query conditions.
         See ``QueryCondition`` to get more details about selectors.
 
-        以当前ui对象为基准，选择后代ui对象（所有后代）。可通过节点名和其余节点属性共同选择
-        选择器规则同PocoUI.__call__
+        Args:
+            name: Query condition of attribute "name". This means you gonna select UI elements whose name is ``name``.
+            attrs: The other query conditions except ``name``.
 
-        :param name: <same as `.child()'>
-        :param attrs: <same as `.child()'>
-        :return: A new UI proxy object represents the offspring(s) of current UI elements.
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy object represents the child(ren) of \
+             current UI elements.
         """
 
         sub_query = build_query(name, **attrs)
@@ -137,12 +141,13 @@ class UIObjectProxy(object):
         Select sibling(s) from this UI element(s) with given query conditions.
         See ``QueryCondition`` to get more details about selectors.
 
-        以当前ui对象为基准，选择兄弟ui对象。可通过节点名和其余节点属性共同选择
-        选择器规则同PocoUI.__call__
+        Args:
+            name: Query condition of attribute "name". This means you gonna select UI elements whose name is ``name``.
+            attrs: The other query conditions except ``name``.
 
-        :param name: <same as ``.child()``>
-        :param attrs: <same as ``.child()``>
-        :return: A new UI proxy object represents the sibling(s) of current UI elements.
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy object represents the child(ren) of \
+             current UI elements.
         """
 
         sub_query = build_query(name, **attrs)
@@ -153,27 +158,22 @@ class UIObjectProxy(object):
 
     def __getitem__(self, item):
         """
-        Select specific UI element by index. If this UI proxy represents a set of UI elements, you could use this method
-         to access specific UI element. The new UI element will be wrapped by UIObjectProxy instance. So the return
+        Select specific UI element by index. If this UI proxy represents a set of UI elements, you could use this method 
+        to access specific UI element. The new UI element will be wrapped by UIObjectProxy instance. So the return
         value is also a UI proxy object.
+
         The order of UI elements are determined by its position on screen not the selection sequence. We call this rule 
         "L2R U2D" (left to right one by one, up to down line by line) which means the most top left UI element is always 
-         the first one.
-        See ``IterationOverUI`` to get more details.
+        the first one. See ``IterationOverUI`` to get more details.
 
-        索引当前ui对象集合的第N个节点。在一个选择器的选择中可能会有多个满足条件的节点，例如物品栏的物品格子，使用数组索引可选出具体某一个。
-        该函数默认按照空间排序（从左到右从上到下）后才进行选择
+        Warnings:
+            This method may cause performance issue depending on implementation of PocoAgent.
 
-        WARNING
-        
-        This method may cause performance issue depending on implementation of PocoAgent.
+        Args:
+            item (:obj:`int`): the index.
 
-        警告
-        
-        此方法有极大延迟，请勿频繁调用此方法。
-
-        :param item: An integer of the index.
-        :return: A new UI proxy object represents the nth of current UI elements.
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy object represents the nth of current UI elements.
         """
 
         if not self._query_multiple:
@@ -198,10 +198,10 @@ class UIObjectProxy(object):
     def __len__(self):
         """
         Count how many UI elements selected.
-        获取满足当前选择器的ui集合的节点个数
 
-        :return: Number of selected UI elements.
-        :raise PocoNoSuchNodeException: Raises when none of the UI element matches the query condition.
+        Returns:
+            :obj:`int`: Number of selected UI elements. 0 if none of the UI element matches the query condition of \
+             this UI proxy.
         """
 
         if not self._nodes_proxy_is_list:
@@ -209,26 +209,27 @@ class UIObjectProxy(object):
 
         # 获取长度时总是multiple的
         if not self._query_multiple:
-            nodes = self._do_query(multiple=True, refresh=True)
+            try:
+                nodes = self._do_query(multiple=True, refresh=True)
+            except PocoNoSuchNodeException:
+                nodes = []
         else:
             nodes = self._nodes
         return len(nodes)
 
     def __iter__(self):
         """
-        Similar to ``__getitem__`` but this method helps to iterate over all UI elements.
-        The order rules of UI elements is the same as ``__getitem__``.
-        See ``IterationOverUI`` to get more details.
+        Similar to :py:meth:`.__getitem__() <poco.proxy.UIObjectProxy.__getitem__>` but this method helps to iterate 
+        over all UI elements. The order rules of UI elements is the same as :py:meth:`.__getitem__() 
+        <poco.proxy.UIObjectProxy.__getitem__>`. See ``IterationOverUI`` to get more details.
 
-        ui集合的节点迭代器，遍历所有满足选择条件的ui对象。
-        遍历会默认按照从左到右从上到下的顺序，进行按顺序遍历。
-        遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。
-        遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
+        Yields:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A generator yielding new UI proxy represents the \
+             specific UI element iterated over.
 
-        :return: A generator yielding new UI proxy represents the specific UI element iterated over.
-
-        :raise PocoTargetRemovedException: Raises when hierarchy structure changed and attempt to access to an 
-            non-exists UI element over the iteration.
+        Raises:
+            PocoTargetRemovedException: When hierarchy structure changed and attempt to access to an 
+             nonexistent UI element over the iteration.
         """
 
         # 节点数量太多时，就不按照控件顺序排序了
@@ -259,16 +260,17 @@ class UIObjectProxy(object):
         elements, click the first one. Will click the anchor point of the UI element by default. It is able to click
         another point offset by the UI element by providing argument ``focus``.
         See ``CoordinateSystem`` to get more details.
-        点击当前ui对象，如果是ui对象集合则默认点击第一个
 
-        :param focus: An offset point by the top left corner of the UI elements as 2-list/2-tuple (x, y) whose component 
-             in range of 0~1. This argument can also be 'anchor' or 'center'. 'Center' means to click the center of 
-             bounding box of UI element. 
-        :param sleep_interval: Seconds to wait after this action. If not provides, it will wait by default. The default 
-            value can be configured by poco initialization. See ``PocoConfiguration``.
-        :return: None
+        Args:
+            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): An offset point by the top left corner of the UI elements 
+             as 2-list/2-tuple (x, y) whose component in range of 0~1. This argument can also be 'anchor' or 'center'. 
+             'Center' means to click the center of bounding box of UI element. 
+            sleep_interval: Seconds to wait after this action. If not provides, it will wait by default. The default 
+             value can be configured by poco initialization. See configuration at poco 
+             :py:class:`initialization <poco.Poco>`.
 
-        :raise PocoNoSuchNodeException: Raises when the UI element does not exists.
+        Raises:
+            PocoNoSuchNodeException: Raises when the UI element does not exist.
         """
 
         focus = focus or self._focus or 'anchor'
@@ -284,17 +286,18 @@ class UIObjectProxy(object):
     @wait
     def swipe(self, dir, focus=None, duration=0.5):
         """
-        Perform a swipe action by given direction from this UI element. Notices and limitations see ``.click()``. 
-        以当前对象的anchor为起点，swipe一段距离
+        Perform a swipe action by given direction from this UI element. Notices and limitations see  
+        :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`. 
 
-        :param dir: 2-list/2-tuple (x, y) coordinate in UniformCoordinate. Can also be one of 'up', 'down', 'left',
-            'right', 'up' equivalent to [0, -0.1], 'down' equivalent to [0, 0.1], 'left' equivalent to [-0.1, 0],
-            'right' equivalent to [0, 0.1]
-        :param focus: see ``.click()``
-        :param duration: The time over the whole action.
-        :return: None
+        Args:
+            dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): 2-list/2-tuple (x, y) coordinate in UniformCoordinate. Can 
+             also be one of 'up', 'down', 'left', 'right', 'up' equivalent to [0, -0.1], 'down' equivalent to [0, 0.1], 
+             'left' equivalent to [-0.1, 0], 'right' equivalent to [0, 0.1].
+            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`. 
+            duration: The time over the whole action.
 
-        :raise PocoNoSuchNodeException:
+        Raises:
+            PocoNoSuchNodeException: Raises when the UI element does not exist.
         """
 
         focus = focus or self._focus or 'anchor'
@@ -307,13 +310,14 @@ class UIObjectProxy(object):
     def drag_to(self, target, duration=2):
         """
         Similar to swipe, but the end point is provide by a UI proxy or a fixed coordinate.
-        以当前对象节点anchor为起点，拖动到目标对象节点anchor
 
-        :param target: A UI proxy or 2-list/2-tuple (x, y) coordinate in UniformCoordinate.
-        :param duration: The time over the whole action.
-        :return: None
+        Args:
+            target (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`): A UI proxy or 2-list/2-tuple (x, y) 
+             coordinate in UniformCoordinate.
+            duration: The time over the whole action.
 
-        :raise PocoNoSuchNodeException:
+        Raises:
+            PocoNoSuchNodeException: Raises when the UI element does not exist.
         """
 
         if type(target) in (list, tuple):
@@ -327,10 +331,13 @@ class UIObjectProxy(object):
     def focus(self, f):
         """
         Get a new UI proxy copy from this with given focus. As UI proxy is immutable, a new UI proxy is always returned.
-        设置对象的操作定位点，相对于对象包围盒。Immutable操作，返回一个新的对象代理，原对象不受影响
 
-        :param f: The focus point. Can be 2-list/2-tuple (x, y) coordinate in UniformCoordinate, 'center' or 'anchor'.
-        :return: A new UI proxy copy.
+        Args:
+            f (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): The focus point. Can be 2-list/2-tuple (x, y) coordinate in 
+             UniformCoordinate, 'center' or 'anchor'.
+
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: A new UI proxy copy.
         """
 
         ret = copy.copy(self)
@@ -341,8 +348,14 @@ class UIObjectProxy(object):
         """
         Get the position of this UI elements.
 
-        :param focus: 
-        :return: 2-list/2-tuple (x, y) coordinate in UniformCoordinate.
+        Args:
+            focus: Focus point of UI proxy. See :py:meth:`.focus() <poco.proxy.UIObjectProxy.focus>`.
+
+        Returns:
+            2-list/2-tuple: coordinate (x, y) in UniformCoordinate.
+
+        Raises:
+            TypeError: If unsupported focus type given.
         """
 
         focus = focus or self._focus or 'anchor'
@@ -384,10 +397,12 @@ class UIObjectProxy(object):
     def wait(self, timeout=3):
         """
         Block and wait at most given time before this UI element appears.
-        等待当前ui对象出现，总是返回自身，如果目标出现即时返回，否则超时后返回
 
-        :param timeout: Maximum waiting time in seconds.
-        :return: self
+        Args:
+            timeout: Maximum waiting time in seconds.
+
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: self.
         """
 
         start = time.time()
@@ -399,13 +414,14 @@ class UIObjectProxy(object):
 
     def wait_for_appearance(self, timeout=120):
         """
-        Block and wait until this UI element appears within given timeout. Once timeout, ``PocoTargetTimeout`` will raise.
-        等待当前ui对象出现
+        Block and wait until this UI element **appears** within given timeout. Once timeout, 
+        :py:class:`PocoTargetTimeout <poco.exceptions.PocoTargetTimeout>` will raise.
 
-        :param timeout: Maximum waiting time in seconds.
-        :return: None
+        Args:
+            timeout: Maximum waiting time in seconds.
 
-        :raise PocoTargetTimeout: Raises if timeout.
+        Raises:
+            PocoTargetTimeout: If timeout.
         """
 
         start = time.time()
@@ -416,14 +432,13 @@ class UIObjectProxy(object):
 
     def wait_for_disappearance(self, timeout=120):
         """
-        Block and wait until this UI element disappears within given timeout. Once timeout, ``PocoTargetTimeout`` will 
-        raise.
-        等待当前ui对象消失
+        Block and wait until this UI element **disappears** within given timeout. 
 
-        :param timeout: Maximum waiting time in seconds.
-        :return: None
+        Args:
+            timeout: Maximum waiting time in seconds.
 
-        :raise PocoTargetTimeout: Raises if timeout.
+        Raises:
+            PocoTargetTimeout: If timeout.
         """
 
         start = time.time()
@@ -437,26 +452,31 @@ class UIObjectProxy(object):
         """
         Retrieve attribute of UI element by attribute name.
         Return None if attribute does not exist.
-        If attribute value is a string, it will be encode to utf-8 as <type str> in PY2.  
+        If attribute type is :obj:`str`, it will be encoded to utf-8 as :obj:`str` in PY2.  
 
-        获取当前ui对象属性，如果为ui集合时，默认只取第一个ui对象的属性。
-        坐标、向量、尺寸均为屏幕坐标系的下的值，并非归一化值，字符串均为utf-8编码
+        Args:
+            name: 
+                Attribute name, can be one of the following or other customized related to sdk implementation.
 
-        :param name: Attribute name, can be one of the following. 属性名，只可能是下列之一
-            visible: <bool> Whether or not it is visible to user. 是否可见
-            text: <str(utf-8)/NoneType> String value of the UI element. 节点文本值
-            type: <str> The type name of UI element from remote runtime. 节点类型
-            pos: <list[2]> The position of the UI element. 节点包围盒中心点在屏幕上的坐标
-            size: <list[2]> The percentage size [width, height] in range of 0~1 according to the screen.
-            name: <str> The name of UI element. 节点名称
-        :return: None if no such attribute or it value is None/null/nil/etc. Otherwise its value will return.
-            The value type should be json serializable.
-            以上属性值为空时返回None，否则返回对应属性值
+                - visible: Whether or not it is visible to user. 
+                - text: String value of the UI element. 
+                - type: The type name of UI element from remote runtime. 
+                - pos: The position of the UI element. 
+                - size: The percentage size [width, height] in range of 0~1 according to the screen.
+                - name: The name of UI element. 
+                - ...: Other sdk implemented attributes. 
 
-        :raise PocoNoSuchNodeException: Raises when the UI element does not exists.
+        Returns:
+            None if no such attribute or it value is None/null/nil/etc. Otherwise its value will return. \
+             The value type should be json serializable.
 
-        :note: 自动捕获NodeHasBeenRemovedException
-               远程节点对象可能已经从渲染树中移除，这样需要重新选择这个节点了
+        Raises:
+            PocoNoSuchNodeException: When the UI element does not exists.
+
+        .. note:: :py:class:`NodeHasBeenRemovedException` will be caught automatically.
+        
+        See Also:
+            :py:meth:`UI element's attributes in poco sdk definition <poco.sdk.AbstractNode.AbstractNode.getAttr>`.
         """
 
         # to optimize speed, retrieve only the first matched element.
@@ -472,11 +492,13 @@ class UIObjectProxy(object):
         """
         Change the attribute value of UI element. Only a few attributes can be mutated such as text. If changes 
         an immutable attributes or attributes not exist, InvalidOperationException will raise. 
-        
-        :param name: Attribute name.
-        :param val: New attribute value to mutate.
-        :return: None
-        :raise InvalidOperationException: Raises when fail to set attribute on UI element.
+
+        Args:
+            name: Attribute name.
+            val: New attribute value to mutate.
+
+        Raises:
+            InvalidOperationException: When fail to set attribute on UI element.
         """
 
         nodes = self._do_query(multiple=False)

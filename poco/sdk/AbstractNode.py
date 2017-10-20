@@ -38,38 +38,53 @@ class AbstractNode(object):
 
     def getAttr(self, attrName):
         """
-        Return the attributes of the node.
-        All attributes in `cls.RequiredAttributes` are required to be implemented in this method.
-        Other engine-specific attributes are optional, which will be used in poco query.
+        Return the attributes of the node. The following list shows the most basic attributes that will be used during 
+        the test run. The implementation class should return correct value as possible as it can. If cannot determine 
+        the value, return the invocation from super class to use default value. See the example below. More attributes 
+        can be added in order to enhance the selection and displaying in ``Inspector``.
 
-        Required attributes are defined as follows:
-            - ``name``: the name of the node, a unique and meaningful name for each node recommended.
+        Most basic attributes defines as follows:
 
-            - ``type``: the type name of the node, can be any string. e.g. "android.widget.Button" or as simple as 
-              "Button"
+        - ``name``: The name of the node, a unique and meaningful name for each node recommended.
+        - ``type``: The type name of the node, can be any string. e.g. "android.widget.Button" or as simple as 
+          "Button"
+        - ``visible``: Whether the node is rendered on screen. If the return value is False, all children nodes 
+          will be ignored in Poco selector
+        - ``pos``: Position of the node in screen. Return value should be 2-list represents the percents of
+          the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,
+          this attribute will be ``[0.5f, 0.5f]``.
+          position can be negative which means the node is outside the screen
+        - ``size``: Size of node's bounding box. similar to ``pos``, value is also a 2-list of percents of 
+          the screen size, e.g. the screen's size is always ``[1.0f, 1.0f]``.
+          if the node in left half side of the screen, its size will be ``[0.5f, 1.0f]``.
+          size should always be nonnegative.
+        - ``scale``: The scale factor applied to the node itself. leave it ``[1.0f, 1.0f]`` by default.
+        - ``anchorPoint``: The percentage of the key-point related to the bounding box of the node. leave it 
+          ``[0.5f, 0.5f]`` by default.
+        - ``zOrders``: The rendering order of this node. value is a dictionary like ``{"global": 0, "local": 0}``.
+          Global zOrder is compared with all nodes in the hierarchy, Local zOrder is compared with its parent and 
+          siblings. Topmost nodes have the largest value.
 
-            - ``visible``: whether the node is rendered on screen. If the return value is False, all children nodes 
-              will be ignored in Poco selector
+        Examples:
+            The following code gives some idea about implementing this method::
+                
+                def getAttr(self, attrName):
+                    # basic attributes
+                    if attrName == 'name':
+                        return self.node.get_name() or '<no name>'
 
-            - ``pos``: position of the node in screen. Return value should be 2-list represents the percents of
-              the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,
-              this attribute will be ``[0.5f, 0.5f]``.
-              position can be negative which means the node is outside the screen
+                    elif attrName == 'pos':
+                        return self.node.get_position()
 
-            - ``size``: size of node's bounding box. similar to ``pos``, value is also a 2-list of percents of 
-              the screen size, e.g. the screen's size is always ``[1.0f, 1.0f]``.
-              if the node in left half side of the screen, its size will be ``[0.5f, 1.0f]``.
-              size should always be nonnegative.
+                    # ...
 
-            - ``scale``: the scale factor applied to the node itself. leave it ``[1.0f, 1.0f]`` by default.
+                    # extra engine-specific attributes
+                    elif attrName == 'rotation':
+                        return self.node.get_rotation()
 
-            - ``anchorPoint``: the percentage of the key-point related to the bounding box of the node. leave it 
-              ``[0.5f, 0.5f]`` by default.
-
-            - ``zOrders``: the rendering order of this node. value is a dictionary like ``{"global": 0, "local": 0}``.
-              the global zOrder is compared with all nodes in the hierarchy,
-              the local zOrder is compared with its parent and siblings.
-              topmost nodes have the largest value.
+                    # call the super method by default
+                    else:
+                        return super().getAttr(attrName)
 
         Args:
             attrName (:obj:`str`): attribute name
@@ -111,7 +126,19 @@ class AbstractNode(object):
 
     def getAvailableAttributeNames(self):
         """
-        Enumerate all available attributes' name of this node.
+        Enumerate all available attributes' name of this node. This method in base class returns the most basic 
+        attribute name by default. You can add other customized or engine-specific attributes. See the example above.
+
+        .. note:: Please always call super method and return should contain the part from super method.
+
+        Examples:
+            This code shows a way about implementing this method::
+
+                def getAvailableAttributeNames(self):
+                    return super().getAvailableAttributeNames() + (
+                        # add other engine-specific attribute names here if need.
+                        'rotation',
+                    )
 
         Returns:
             Iterable<:obj:`str`>

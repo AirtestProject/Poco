@@ -20,7 +20,7 @@ class ISelector(object):
              multiple is True, returns after traversing through all nodes otherwise.
 
         Returns:
-            :obj:`list`<inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>: 
+            :obj:`list` <inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`> : 
         """
 
         raise NotImplementedError
@@ -36,7 +36,7 @@ class Selector(ISelector):
 
         expr := (op0, (expr0, expr1))
         expr := ('index', (expr, :obj:`int`))
-        expr := <query condition> See implementation of ``Matcher``.
+        expr := <other query condition> See implementation of Matcher.
 
     - ``op0`` can be one of the following ('>', '/', '-'), each operator stands for as follows::
 
@@ -93,7 +93,7 @@ class Selector(ISelector):
             includeRoot (:obj:`bool`): Whether not not include the root node if its child node matched.
 
         Returns:
-            :obj:`list` <inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>` >: The same as \
+            :obj:`list` <inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>: The same as \
              :py:meth:`select <poco.sdk.Selector.ISelector.select>`.
         """
 

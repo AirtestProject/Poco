@@ -40,9 +40,6 @@ class InvalidOperationException(PocoException):
     """
     When an operation performing on target device is foreseen, this exceptions will raise.
     For example, click outside the screen is definitely meaningless, an ``InvalidOperationException`` raised.
-
-    操作无效
-    通常超出屏幕之外的点击或者滑动会判定为操作无效
     """
 
     pass
@@ -74,12 +71,12 @@ class PocoTargetRemovedException(PocoException):
     recycled. In many cases there is no need to handle this exception by hand. Once this exception occurred, please
     check your code carefully. Most of misuses as follows.
     
-    e.g.
-    ```py
-    button1 = poco('button1')
-    time.sleep(10)   # waiting for long enough before the UI hierarchy changing
-    button1.click()  # PocoTargetRemovedException will raise at this line. Because the 'button1' is not on the screen.
-    ```
+    Examples:
+        ::
+
+            button1 = poco('button1')
+            time.sleep(10)   # waiting for long enough before the UI hierarchy changing
+            button1.click()  # PocoTargetRemovedException will raise at this line. Because the 'button1' is not on the screen.
     """
 
     def __init__(self, action, objproxy):
