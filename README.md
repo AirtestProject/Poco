@@ -265,9 +265,9 @@ except PocoNoSuchNodeException:
     pass
 ```
 
-## Assertions
+## Unittest
 
-Assertions are part of the unittest. Poco is automation framework. For unittest, see [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertions methods and it is drop in with python stdlib unittest.
+Poco is automation framework. For unittest, see [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertions methods and it is drop in with python stdlib unittest.
 
 ## Ingrations guide
 

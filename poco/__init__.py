@@ -28,7 +28,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             - poll_interval: The minimal time between each poll event. Such as waiting for some UI to appear and it will 
               be polling periodically.
             - pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to 
-              wait for appearance. If the target does not show up after that, raise :py:class:`PocoNoSuchNodeException  
+              wait for appearance. If the target does not show up after that, :py:class:`PocoNoSuchNodeException  
               <poco.exceptions.PocoNoSuchNodeException>` will raise.
     """
 
@@ -49,7 +49,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         Simply call poco instance to select UI element by query conditions. You can specify the name or other 
         attributes together in query condition. Invisible UI element will be skipped even "visible=False" is given.  
 
-        Selection is not executed instantly. The query string will be store in the UI proxy. Selection can be executed 
+        Selection is not executed instantly. The query string will be stored in the UI proxy. Selection can be executed 
         exactly when UI elements' info is needed (like position to click, or attribute to retrieve).
 
         Examples:

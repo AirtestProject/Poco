@@ -1,4 +1,5 @@
 :: copy readme.md
+rmdir /S /Q source\
 mkdir source\
 copy /Y ..\README.md source\
 
