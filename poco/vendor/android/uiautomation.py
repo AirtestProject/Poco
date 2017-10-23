@@ -70,11 +70,14 @@ class AndroidPocoAgent(PocoAgent):
 
 
 class AndroidUiautomationPoco(Poco):
-    def __init__(self, device=None):
+    def __init__(self, device=None, using_proxy=True):
         # TODO: 临时用着airtest的方案
         self.android = device or Android()
         self.adb_client = self.android.adb
-        self.device_ip = get_ip_address(self.adb_client)
+        if using_proxy:
+            self.device_ip = self.adb_client.host or "127.0.0.1"
+        else:
+            self.device_ip = get_ip_address(self.adb_client)
 
         # save current top activity (@nullable)
         current_top_activity_package = self.android.get_top_activity_name()
@@ -90,10 +93,12 @@ class AndroidUiautomationPoco(Poco):
         self._install_service()
 
         # forward
-        # p0, _ = self.adb_client.setup_forward("tcp:10080")
-        # p1, _ = self.adb_client.setup_forward("tcp:10081")
-        p0 = 10080
-        p1 = 10081
+        if using_proxy:
+            p0, _ = self.adb_client.setup_forward("tcp:10080")
+            p1, _ = self.adb_client.setup_forward("tcp:10081")
+        else:
+            p0 = 10080
+            p1 = 10081
 
         # start
         if self._is_running('com.github.uiautomator'):
