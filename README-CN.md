@@ -140,7 +140,7 @@ poco(textMatches='^据点.*$', type='Button', enable=True)
 # 直系孩子/后代选择
 poco('main_node').child('list_item').offspring('item')
 ```
-``
+
 ![image](doc/img/hunter-poco-select-relative.png)
 
 ### 顺序选择器（索引选择器，更推荐迭代遍历）
