@@ -8,9 +8,9 @@ import time
 
 from poco import Poco
 from poco.agent import PocoAgent
+from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.airtest.screen import AirtestScreen
-from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
 from poco.vendor.mh.mh_rpc import sync_wrapper
 from poco.vendor.mh.simplerpc.rpcclient import RpcClient
 from poco.vendor.mh.simplerpc.transport.ws import WebSocketClient
@@ -38,13 +38,13 @@ class CocosJsPocoAgent(PocoAgent):
         self.c.run(backend=True)
         self.c.wait_connected()
 
-        hierarchy = LocalUIHierarchy(Dumper(self.c))
+        hierarchy = FreezedUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
         input = AirtestInput()
         super(CocosJsPocoAgent, self).__init__(hierarchy, input, screen, None)
 
 
-class Dumper(LocalUIDumper):
+class Dumper(FreezedUIDumper):
 
     def __init__(self, rpcclient):
         super(Dumper, self).__init__()

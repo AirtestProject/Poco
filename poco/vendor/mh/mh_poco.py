@@ -27,4 +27,4 @@ class MhPoco(Poco):
     """docstring for MhPoco"""
     def __init__(self, addr=("localhost", 5001)):
         agent = MhPocoAgent(addr)
-        super(MhPoco, self).__init__(agent, action_interval=0.01)
+        super(MhPoco, self).__init__(agent, action_interval=0.2)

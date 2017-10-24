@@ -33,9 +33,15 @@ class FreezedUIDumper(AbstractDumper):
         """
 
         root = Node(self.dumpHierarchy())
-        for child in root.getChildren():
-            child.setParent(root)
+        self._linkParent(root)
         return root
+
+    def _linkParent(self, root):
+        parent = root.getChildren()
+        if parent:
+            for child in parent:
+                child.setParent(root)
+                self._linkParent(child)
 
 
 class FreezedUIHierarchy(HierarchyInterface):

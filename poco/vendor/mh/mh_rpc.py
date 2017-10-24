@@ -5,7 +5,7 @@
 from functools import wraps
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
-from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
+from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
 
 
 def sync_wrapper(func):
@@ -46,7 +46,7 @@ class MhInput(InputInterface):
         return self.c.call("click", (x, y), op)
 
 
-class MhDumper(LocalUIDumper):
+class MhDumper(FreezedUIDumper):
     def __init__(self, client):
         super(MhDumper, self).__init__()
         self.c = client
@@ -56,7 +56,7 @@ class MhDumper(LocalUIDumper):
         return self.c.call("dump")
 
 
-class MhHierarchy(LocalUIHierarchy):
+class MhHierarchy(FreezedUIHierarchy):
     def __init__(self, client):
         super(MhHierarchy, self).__init__(MhDumper(client))
         self.c = client

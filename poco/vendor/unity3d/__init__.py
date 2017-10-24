@@ -4,7 +4,7 @@
 # @Date:   2017-07-14 19:47:51
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.vendor.localui.hierarchy import LocalUIHierarchy, LocalUIDumper
+from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
 from poco.vendor.airtest.screen import AirtestScreen
 from poco.vendor.airtest.input import AirtestInput
 from poco.vendor.mh.mh_rpc import sync_wrapper
@@ -28,13 +28,13 @@ class UnityPocoAgent(PocoAgent):
         self.c.DEBUG = False
         self.c.run(backend=True)
 
-        hierarchy = LocalUIHierarchy(Dumper(self.c))
+        hierarchy = FreezedUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
         input = AirtestInput()
         super(UnityPocoAgent, self).__init__(hierarchy, input, screen, None)
 
 
-class Dumper(LocalUIDumper):
+class Dumper(FreezedUIDumper):
 
     def __init__(self, rpcclient):
         super(Dumper, self).__init__()
