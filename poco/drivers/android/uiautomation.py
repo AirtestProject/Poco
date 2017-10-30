@@ -15,7 +15,7 @@ from hrpc.transport.http import HttpTransport
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.sdk.Attributor import Attributor
-from poco.utils.hrpc import RemotePocoHierarchy
+from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.drivers.android.utils.installation import install, uninstall
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
