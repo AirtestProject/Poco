@@ -6,49 +6,18 @@
 
 ## Installation
 
-To use `poco` full functionality (Netease internal engine implementations), please install the following modules with scripts given below before installing `poco`.
-
 ```sh
-# airtest runtime
-git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
-pip install -e airtest
-
-# aircv for airtest
-git clone -b open-source ssh://git@git-qa.gz.netease.com:32200/airtest-projects/aircv.git
-pip install -e aircv
-
-# hrpc
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/hrpc.git
-pip install -e hrpc
-
-# hunter-cli
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
-pip install -e hunter-cli
-
-# hunter lib for airtest
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
-pip install -e airtest-hunter
-```
-
-Install `poco` and `PocoUnit` for unittest.
-
-```sh
-# poco
 git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
-
-# poco unittest framework
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/PocoUnit.git
-pip install -e PocoUnit
 ```
 
 
 ## Basic Concepts
 
-**Target device**: test devices apps or games will run on, usually refers to mobile phones  
-**UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements  
-**Node/UI element**: UI element instances within apps/games, namely UI  
-**query condition/expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.  
+*	**Target device**: test devices apps or games will run on, usually refers to mobile phones  
+*	**UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements  
+*	**Node/UI element**: UI element instances within apps/games, namely UI  
+*	**query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.  
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
@@ -71,7 +40,7 @@ The aim of introducing local coordinate system is to express coordinates with re
 Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.
 
 
-## Initialization of `poco` Instances
+## Poco Instance
 
 The instantiation methods of poco with various engines are slightly different. This part will take Unity3D as an example. For other engines, please refer to:
 
@@ -92,7 +61,7 @@ ui = poco('...')
 
 ### Basic Selector
 
-The invocation `poco(...)` instance is to traverse through the render tree structure and select all the UI elements matching given query condition. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
+The invocation `poco(...)` instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
 
 ```python
 # select by node name
@@ -237,7 +206,6 @@ except PocoNoSuchNodeException:
     pass
 ```
 
-# Unit Test
+## Unit Test
 
 poco is an automation framework. For unit testing, please refer to [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
-

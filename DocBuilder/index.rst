@@ -4,30 +4,36 @@ Welcome to Poco's documentation!
 
 **Poco is a cross-engine UI automation framework.**
 
-`Quick start <source/README.html>`_
+
+Quickstart 
+==================
+
+.. toctree::
+   :maxdepth: 2
+
+   source/README
+
 
 API reference
 =============
 
-Using poco in test code 
+Poco
 -----------------------
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
     
     source/poco
     source/poco.proxy
     source/poco.exceptions
 
 
-Poco sdk
+Poco SDK
 --------
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
     :titlesonly:
     
     source/poco.sdk
     source/poco.sdk.interfaces
-      
-      
