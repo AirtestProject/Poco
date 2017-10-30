@@ -6,7 +6,7 @@ cp ../README.md source/
 
 # exclude undoc members
 export SPHINX_APIDOC_OPTIONS=members,show-inheritance
-sphinx-apidoc -Me -o source/ ../poco ../poco/vendor
+sphinx-apidoc -Me -o source/ ../poco ../poco/utils/simplerpc
 sphinx-build -b html . ../auto-doc
 
 # copy readme.md to auto-doc
