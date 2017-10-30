@@ -7,17 +7,45 @@
 ## Installation
 
 ```sh
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-pip install -e poco
+pip install poco
 ```
 
+## Features
+
+* Support mainstream game engines, like Unity3D, cocos2dx-js, cocos2dx-lua, Android native, etc.
+* Super fast and impact-less to the game.
+* Simple powerful APIs across all engines.
+* Customizable by [poco-sdk]().
+* Alternative rpc interface.
+* No extra dependencies.
+
+## Example
+
+The following example shows a simple test script on demo game using Unity3D. More examples [here]().
+
+```python
+from poco.drivers.unity3d import UnityPoco as Poco
+
+poco = Poco(('localhost', 5001))
+
+# tap start button
+poco('start_btn', type='Button').click()
+
+# collect all 'stars' to my 'bag' by dragging the star icon
+bag = poco('bag_area')
+for star in poco(type='MPanel').child('star'):
+    star.drag_to(bag)
+
+# click Text starting with 'finish' to finish collecting
+poco(textMatches='finish.*').click()
+```
 
 ## Basic Concepts
 
-*	**Target device**: test devices apps or games will run on, usually refers to mobile phones  
-*	**UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements  
-*	**Node/UI element**: UI element instances within apps/games, namely UI  
-*	**query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.  
+* **Target device**: test devices apps or games will run on, usually refers to mobile phones
+* **UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements
+* **Node/UI element**: UI element instances within apps/games, namely UI
+* **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
