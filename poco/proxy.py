@@ -6,9 +6,9 @@ import six
 import time
 from functools import wraps
 
-from .exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
-from .sdk.exceptions import UnableToSetAttributeException
-from .utils.query_util import query_expr, build_query
+from poco.exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
+from poco.sdk.exceptions import UnableToSetAttributeException
+from poco.utils.query_util import query_expr, build_query
 
 __author__ = 'lxn3032'
 __all__ = ['UIObjectProxy']

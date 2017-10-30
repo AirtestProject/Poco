@@ -5,7 +5,7 @@ import time
 import base64
 import unittest
 
-from poco.vendor.android.uiautomation import AndroidUiautomationPoco
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from airtest.core.android import Android
 
 

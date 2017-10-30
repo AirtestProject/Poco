@@ -4,22 +4,19 @@ __author__ = 'lxn3032'
 
 import os
 import time
-import threading
 import warnings
+
 import requests
-
-from poco import Poco
-from poco.agent import PocoAgent
-from poco.sdk.Attributor import Attributor
-from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
-
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
 from airtest.core.android.utils.iputils import get_ip_address
-from poco.vendor.android.utils.installation import install, uninstall
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
-
+from poco import Poco
+from poco.agent import PocoAgent
+from poco.sdk.Attributor import Attributor
+from poco.utils.hrpc import RemotePocoHierarchy
+from poco.drivers.android.utils.installation import install, uninstall
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
 PocoServicePackage = 'com.netease.open.pocoservice'
@@ -64,9 +61,6 @@ class AndroidPocoAgent(PocoAgent):
         attributor = AttributorWrapper(remote_poco.attributor, ime)
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
         super(AndroidPocoAgent, self).__init__(hierarchy, remote_poco.inputer, remote_poco.screen, None)
-        # from poco.vendor.airtest.input import AirtestInput
-        # inputer = AirtestInput()  # 黑边手机还有问题，坐标不对
-        # super(AndroidPocoAgent, self).__init__(hierarchy, inputer, remote_poco.screen, None)
 
 
 class AndroidUiautomationPoco(Poco):

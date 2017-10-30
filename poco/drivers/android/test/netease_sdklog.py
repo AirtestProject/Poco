@@ -2,7 +2,7 @@
 
 
 import unittest
-from poco.vendor.android.uiautomation import AndroidUiautomationPoco
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 
 class TestNeteaseSdkLogin(unittest.TestCase):

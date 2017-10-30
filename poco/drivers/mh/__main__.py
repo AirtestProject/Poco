@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:48:10
-from poco.vendor.mh import MhPoco
+from poco.drivers.mh import MhPoco
 
 
 def set_forground(title):

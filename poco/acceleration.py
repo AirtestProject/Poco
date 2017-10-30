@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import time
 import warnings
 
-from .exceptions import PocoTargetTimeout
+from poco.exceptions import PocoTargetTimeout
 
 __author__ = 'lxn3032'
 

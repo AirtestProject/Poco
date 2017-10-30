@@ -5,11 +5,7 @@ import time
 
 # from tokenid import tokenid, tokenid_g18, tokenid_for_mh
 from hunter_cli import Hunter, open_platform
-from poco import Poco
-from poco.vendor.airtest import AirtestPoco
-from hrpc.client import RpcClient
-from poco.vendor.cocosjs import CocosJsPoco
-
+from poco.utils.airtest import AirtestPoco
 
 if __name__ == '__main__':
     tokenid = open_platform.get_api_token('poco-test')
@@ -34,7 +30,7 @@ if __name__ == '__main__':
     # t1 = time.time()
     # print t1 - t0
 
-    # poco = AirtestPoco('g18', hunter)
+    # poco = NeteasePoco('g18', hunter)
     # from airtest.core.main import set_serialno
     # set_serialno()
     # ap('HeroIcon').click()

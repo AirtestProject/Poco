@@ -3,17 +3,15 @@
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:47:51
 import json
-import time
-
 
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
-from poco.vendor.airtest.input import AirtestInput
-from poco.vendor.airtest.screen import AirtestScreen
-from poco.vendor.mh.mh_rpc import sync_wrapper
-from poco.vendor.mh.simplerpc.rpcclient import RpcClient
-from poco.vendor.mh.simplerpc.transport.ws import WebSocketClient
+from poco.utils.airtest.input import AirtestInput
+from poco.utils.airtest.screen import AirtestScreen
+from poco.utils.simplerpc.rpcclient import RpcClient
+from poco.utils.simplerpc.transport.ws import WebSocketClient
+from poco.drivers.mh.mh_rpc import sync_wrapper
 
 DEFAULT_ADDR = "ws://localhost:5003"
 

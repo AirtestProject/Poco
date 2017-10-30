@@ -1,19 +1,19 @@
 # coding=utf-8
+from airtest.core.main import snapshot
+from airtest_hunter import open_platform, AirtestHunter
+from hunter_cli.rpc.client import HunterRpcClient
+
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.vendor.airtest.input import AirtestInput
-from poco.vendor.airtest.screen import AirtestScreen
-from poco.vendor.hrpc.hierarchy import RemotePocoHierarchy
-from poco.vendor.hunter.command import HunterCommand
-
-from airtest_hunter import AirtestHunter, open_platform
-from hunter_cli.rpc.client import HunterRpcClient
-from airtest.core.main import snapshot
+from poco.utils.airtest.input import AirtestInput
+from poco.utils.airtest.screen import AirtestScreen
+from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
+from poco.utils.hunter.command import HunterCommand
 
 __author__ = 'lxn3032'
 
 
-class AirtestPocoAgent(PocoAgent):
+class NeteasePocoAgent(PocoAgent):
     def __init__(self, hunter):
         client = HunterRpcClient(hunter)
         client.set_timeout(25)
@@ -34,16 +34,16 @@ class AirtestPocoAgent(PocoAgent):
         # command
         command = HunterCommand(hunter)
 
-        super(AirtestPocoAgent, self).__init__(hierarchy, input, screen, command)
+        super(NeteasePocoAgent, self).__init__(hierarchy, input, screen, command)
         self._rpc_client = client
 
 
-class AirtestPoco(Poco):
+class NeteasePoco(Poco):
     def __init__(self, process, hunter=None):
         apitoken = open_platform.get_api_token(process)
         self._hunter = hunter or AirtestHunter(apitoken, process)
-        agent = AirtestPocoAgent(self._hunter)
-        super(AirtestPoco, self).__init__(agent)
+        agent = NeteasePocoAgent(self._hunter)
+        super(NeteasePoco, self).__init__(agent)
         self._last_proxy = None
 
     def on_pre_action(self, action, proxy, args):

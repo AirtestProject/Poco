@@ -2,7 +2,7 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-14 19:48:10
-from poco.vendor.cocosjs import CocosJsPoco, CocosJsPocoAgent
+from poco.drivers.cocosjs import CocosJsPoco, CocosJsPocoAgent
 from pprint import pprint
 import json
 import time

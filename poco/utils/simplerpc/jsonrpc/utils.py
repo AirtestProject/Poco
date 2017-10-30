@@ -1,9 +1,9 @@
 """ Utility functions for package."""
-from abc import ABCMeta, abstractmethod
 import datetime
 import decimal
 import inspect
 import json
+from abc import ABCMeta, abstractmethod
 
 from . import six
 

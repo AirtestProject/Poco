@@ -4,7 +4,7 @@
 # @Date:   2017-07-11 14:34:46
 
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
-from poco.vendor.hrpc.utils import transform_node_has_been_removed_exception
+from poco.utils.hrpc.utils import transform_node_has_been_removed_exception
 
 
 class RemotePocoHierarchy(HierarchyInterface):

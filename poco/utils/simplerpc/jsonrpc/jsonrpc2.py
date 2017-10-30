@@ -1,8 +1,8 @@
-﻿from . import six
-import json
+﻿import json
 
-from .exceptions import JSONRPCError, JSONRPCInvalidRequestException
+from . import six
 from .base import JSONRPCBaseRequest, JSONRPCBaseResponse
+from .exceptions import JSONRPCError, JSONRPCInvalidRequestException
 
 
 class JSONRPC20Request(JSONRPCBaseRequest):

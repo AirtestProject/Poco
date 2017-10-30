@@ -5,11 +5,11 @@
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
-from poco.vendor.airtest.screen import AirtestScreen
-from poco.vendor.airtest.input import AirtestInput
+from poco.utils.airtest.input import AirtestInput
+from poco.utils.airtest.screen import AirtestScreen
+from poco.utils.simplerpc.rpcclient import RpcClient
+from poco.utils.simplerpc.transport.tcp.main import TcpClient
 from poco.vendor.mh.mh_rpc import sync_wrapper
-from poco.vendor.mh.simplerpc.rpcclient import RpcClient
-from poco.vendor.mh.simplerpc.transport.tcp.main import TcpClient
 
 DEFAULT_ADDR = ("localhost", 5001)
 

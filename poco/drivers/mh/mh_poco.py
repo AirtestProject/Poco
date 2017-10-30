@@ -4,10 +4,9 @@
 # @Date:   2017-07-13 20:29:56
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.vendor.mh.mh_rpc import MhHierarchy, MhScreen, MhInput
-
-from .simplerpc.rpcclient import RpcClient
-from poco.vendor.mh.simplerpc.transport.tcp.main import TcpClient
+from poco.utils.simplerpc.rpcclient import RpcClient
+from poco.utils.simplerpc.transport.tcp.main import TcpClient
+from poco.drivers.mh.mh_rpc import MhHierarchy, MhScreen, MhInput
 
 
 class MhPocoAgent(PocoAgent):
