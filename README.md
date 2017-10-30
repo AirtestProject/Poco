@@ -14,7 +14,11 @@ pip install poco
 
 * Support mainstream game engines, like Unity3D, cocos2dx-js, cocos2dx-lua, Android native, etc.
 * Super fast and impact-less to the game.
+* Very easy to integrate sdk in the game.
 * Simple powerful APIs across all engines.
+* Support multi-touch (fling/pinch/etc.).
+* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.
+* Support retrieve UI properties and send text as input.
 * Customizable by [poco-sdk]().
 * Alternative rpc interface.
 * No extra dependencies.
@@ -61,7 +65,7 @@ In normalized coordinate system, the height and width of the screen are measured
 
 The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.
 
-#### Local Coordinate System（local positioning）
+#### Local Coordinate System (local positioning)
 
 The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.
 
@@ -70,7 +74,7 @@ Local coordinate system is more flexible to be used to locate the position withi
 
 ## Poco Instance
 
-The instantiation methods of poco with various engines are slightly different. This part will take Unity3D as an example. For other engines, please refer to:
+For different engines, please initialize different `poco` instance. This part will take Unity3D as an example. For other engines, please refer to:
 
 * [cocos2dx-js]()
 * [android-native]()
@@ -126,7 +130,7 @@ print(items[1].child('material_name').get_text())
 
 ![image](doc/img/hunter-poco-select-sequence.png)
 
-### Traverse through a collection of objects
+### Iterate over a collection of objects
 
 ```python
 # traverse through every item
@@ -208,6 +212,43 @@ Wait for the target object to appear and always return  the object itself. If it
 ```python
 poco('bg_mission').wait(5).click()  # wait 5 seconds at most，click once the object appears
 poco('bg_mission').wait(5).exists()  # wait 5 seconds at most，return Exists or Not Exists
+```
+
+### Global Operation
+
+Can also perform a global operation without any UI elements selected. 
+
+#### click
+
+```python
+poco.click([0.5, 0.5])  # click the center of screen
+poco.long_click([0.5, 0.5], duration=3)
+```
+
+#### swipe
+
+```python
+# swipe from A to B
+point_a = [0.1, 0.1]
+center = [0.5, 0.5]
+poco.swipe(point_a, center)
+
+# swipe from A by given direction
+direction = [0.1, 0]
+poco.swipe(point_a, direction=direction)
+```
+
+#### snapshot
+
+Take a screenshot of the current screen and save it to file.
+
+**Note**: `snapshot` does not support in some engine implementation of poco.
+
+```python
+from base64 import b64decode
+
+b64img = poco.snapshot(width=720)
+open('screen.png', 'wb').write(b64decode(b64img))
 ```
 
 ## Exceptions
