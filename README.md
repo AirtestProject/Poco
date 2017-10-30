@@ -45,36 +45,35 @@ pip install -e PocoUnit
 
 ## Basic Concepts
 
-**Target device**: Host device that the app/game runs on. Usually a PC or a mobile phone.  
-**UI proxy**: Proxy object in poco that represents zero, one or more than one UI element(s) in target app/game. A proxy object acts as an intermediary between the test code and UI elements represent.  
-**UI element/node**: An object in app's/game's runtime rendered on screen. That is what we called UI as usual.  
-**Query condition/expression**: A serializable object for poco to select specific UI element. It is a nested tuple by default. This is handled by poco that developers/testers do not need to care its internal structure, unless you are going to customize your own `Selector`.  
+**Target device**: test devices apps or games will run on, usually refers to mobile phones  
+**UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements  
+**Node/UI element**: UI element instances within apps/games, namely UI  
+**query condition/expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.  
 
 ![image](doc/img/hunter-inspector.png)
 ![image](doc/img/hunter-inspector-text-attribute.png)
 ![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
-### Definition of coordinate system and metric space
+### Definitions of coordinate system and metric space
 
 ![image](doc/img/hunter-poco-coordinate-system.png)
 
-#### NormalizedCoordinateSystem
+#### Normalized Coordinate System
 
-To measure position or dimension in poco, we use a new scale of coordinates called NormalizedCoordinateSystem. NormalizedCoordinateSystem normalizes the metric space that width or length of screen always measures unit one, the top left corner of screen is the origin, right direction is x-axis, down direction is y-axis. This helps you to write cross-resolution code and makes you never care about the hundreds of different resolution devices.
+In normalized coordinate system, the height and width of the screen are measured in the range of 1 unit and these two parameters of UI within poco correspond to certain percentage of the screen size. Hence the same UI on devices with different resolution will have same position and size within normalized coordinate system, which is very helpful to write cross-device test cases.
 
-The scales are average of each axis that the center is always (0.5, 0.5). Scalars and vectors are easily deduced.
+The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.
 
-#### LocalCoordinateSystem
+#### Local Coordinate System（local positioning）
 
-Bounding box indicates the coordinate (x, y) range of the **first** selected UI element of UI proxy. The top left corner is the origin of LocalCoordinateSystem, right direction is x-axis, down direction is y-axis. The width or height in LocalCoordinateSystem always measures unit one. Besides, other definitions are similar to NormalizedCoordinateSystem.
+The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.
 
-LocalCoordinateSystem helps you locate accurately and flexibly inside UI element. (0.5, 0.5) in LocalCoordinate represents the center of the UI element.
+Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.
 
-## Interaction with UI
 
-### Poco instance initialization
+## Initialization of `poco` Instances
 
-Initialization for each engine implementations are different. Take Unity3D as example. Other engines see:
+The instantiation methods of poco with various engines are slightly different. This part will take Unity3D as an example. For other engines, please refer to:
 
 * [cocos2dx-js]()
 * [android-native]()
@@ -89,51 +88,38 @@ poco = UnityPoco()
 ui = poco('...')
 ```
 
-### Selection
+## Object Selection and Operation
 
-Add a pair of brackets after `poco` instance to select UI element with given arguments as query condition. This expression always returns a UI proxy. A UI proxy also has some selection methods which return another UI proxy so that the selection can be chained. 
+### Basic Selector
 
-#### Basic selection
-
-There are many types of query conditions. Basic selection are only to select UI elements that satisfy the given attribute condition. 
+The invocation `poco(...)` instance is to traverse through the render tree structure and select all the UI elements matching given query condition. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
 
 ```python
-# select by name (Select by the attribute named 'name' of UI element.)
+# select by node name
 poco('bg_mission')
 
-# the same as above (The first parameter are name attribute)
-poco(name='bg_mission')
-
-# select by multiple attributes
+# select by name and oyther properties
 poco('bg_mission', type='Button')
-
-# select by multiple attributes with regular expression matching comparison
-# add 'Matches' following by attribute name indicates using regular expression matching comparison rather than equivalence comparison
 poco(textMatches='^据点.*$', type='Button', enable=True)
 ```
 
 ![image](doc/img/hunter-poco-select-simple.png)
 
 
-#### Parenting relative selection
+### Relative Selector
 
-For a tree-like UI hierarchy, It is also available to select UI elements based on hierarchical relationships (kinship). These selector are methods of UI proxy. Each method can be treated as a basic selector.
+When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner
 
 ```python
-# Direct children/Descendants including children
+# select by direct child/offspring
 poco('main_node').child('list_item').offspring('item')
 ```
-``
+
 ![image](doc/img/hunter-poco-select-relative.png)
 
-```python
-# sibling for brother nodes
-poco('main_node').child('list_item').sibling('tab_top')
-```
+### Sequence Selector (index selector, iterator is more recommended for use)
 
-#### Sequential index selection
-
-Select the specific one from all UI elements as a new UI proxy. The sequence/index is related to space arrangement. It is always from left to right, from top to bottom, regardless of its sequence in the hierarchy tree.
+Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.
 
 ```python
 items = poco('main_node').child('list_item').offspring('item')
@@ -143,12 +129,10 @@ print(items[1].child('material_name').get_text())
 
 ![image](doc/img/hunter-poco-select-sequence.png)
 
-### Iteration over UI elements
-
-Iteration sequence is the same as sequential index selection. If position changed or UI element rearranged during the iteration, the sequence will not change. Once the iteration begins, all iteratees are fixed. That means all of the UI elements selected at this moment will be iterated over except recycled by engine. Iteration stops immediately When iterating on UI element that is recycled.  
+### Traverse through a collection of objects
 
 ```python
-# iterate over each item
+# traverse through every item
 items = poco('main_node').child('list_item').offspring('item')
 for item in items:
     item.child('icn_item')
@@ -156,57 +140,47 @@ for item in items:
 
 ![image](doc/img/hunter-poco-iteration.png)
 
-### Retrieving attribute values
-
+### Get object properties
 
 ```python
 mission_btn = poco('bg_mission')
 print(mission_btn.attr('type'))  # 'Button'
 print(mission_btn.get_text())  # '据点支援'
-print(mission_btn.attr('text'))  # '据点支援', equvilent to `.get_text()`
-print(mission_btn.exists())  # True, whether or not it's rendered on screen
+print(mission_btn.attr('text'))  # '据点支援' equivalent to .get_text()
+print(mission_btn.exists())  # True/False, exists in the screen or not
 ```
 
-### Actions
+### Object Proxy Related Operation
 
-Performing actions are simulating and injecting a motion event or key event to the target device. All actions will only apply at the **first** UI element of the UI proxy. If multiple UI elements selected, others except the first will be ignored.
+#### click
 
-For easy maintenance, you'd better select unique UI element before performing actions.
- 
-```python
-# only the first element
-proxy.action() <=> proxy[0].action()
-```
-
-#### Click
-
-Perform an action of the **first** UI element selected by UI proxy.
+The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be `[0, 0]` and the bottom right corner `[1, 1]`. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.
 
 ```python
 poco('bg_mission').click()
 poco('bg_mission').click('center')
-poco('bg_mission').click([0.5, 0.5])  # quivilent above
-poco('bg_mission').focus([0.5, 0.5]).click()  # quivilent above
+poco('bg_mission').click([0.5, 0.5])    # equivalent to center
+poco('bg_mission').focus([0.5, 0.5]).click()  # equivalent to above expression
 ```
 
 ![image](doc/img/hunter-poco-click.png)
 
-#### Swipe
+#### swipe
 
-Start from focus point of UI proxy, move your finger to a given direction measured by vector.
+Take the anchor of UI element as origin and swipe a certain distance towards a direction
 
 ```python
 joystick = poco('movetouch_panel').child('point_img')
 joystick.swipe('up')
-joystick.swipe([0.2, -0.2])  # 45 deg towards top right
+joystick.swipe([0.2, -0.2])  # swipe sqrt(0.08) unit distance at 45 degree angle up-and-right
 joystick.swipe([0.2, -0.2], duration=0.5)
 ```
 
 ![image](doc/img/hunter-poco-swipe.png)
 
-#### Drag
+#### drag
  
-Similar to `swipe`, but the movement is specified by another UI proxy.
+Drag to target UI from current UI
 
 ```python
 poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
@@ -214,31 +188,29 @@ poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 ![image](doc/img/hunter-poco-drag.png)
 
-#### Focus (Local positioning, not setting focus on text input.)
+#### focus (local positioning)
 
-Set a focus point related to selected UI element. This is not going to change the attribute of UI element, but create a new UI proxy with given focus point. When perform actions on the UI proxy, the major action point is the focus point. The coordinate of focus point can be larger than 1 or smaller than 0 that indicates outside the bounding box. The default focus point is the anchor of UI element (position of UI element).
-
-Take `click` as example, the following shows clicking the center of UI element whose name is 'bg_mission'.
+The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being `[0.5, 0.5]`, the bottom right corner`[1, 1]`, and so on.
 
 ```python
-poco('bg_mission').focus('center').click()  # click the center of UI element whose name is 'bg_mission'
+poco('bg_mission').focus('center').click()  # click the center
 ```
 
-`focus` can also be used within the same UI proxy and simulate scroll action using `drag`.
 
-```
+focus can also be used as internal positioning within an objects, as instanced by the example of implementing a scroll operation in ScrollView
+
+```python
 scrollView = poco(type='ScollView')
 scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
 ```
 
+#### wait
 
-#### Wait
-
-Wait until UI element appears or timeout. This method always return the UI proxy itself not a new one.
+Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout
 
 ```python
-poco('bg_mission').wait(5).click()  # wait at most 5s, click at once 'bg_mission' appears within 5s
-poco('bg_mission').wait(5).exists()  # wait at most 5s
+poco('bg_mission').wait(5).click()  # wait 5 seconds at most，click once the object appears
+poco('bg_mission').wait(5).exists()  # wait 5 seconds at most，return Exists or Not Exists
 ```
 
 ## Exceptions
@@ -261,18 +233,11 @@ try:
     if not img.exists():
         img.click()
 except PocoNoSuchNodeException:
-    # perform actions on non-existence UI element will raise this exception
+    # If attempt to operate inexistent nodes, an exception will be thrown
     pass
 ```
 
-## Unittest
+# Unit Test
 
-Poco is automation framework. For unittest, see [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertions methods and it is drop in with python stdlib unittest.
+poco is an automation framework. For unit testing, please refer to [PocoUnit](http://git-qa.gz.netease.com/maki/PocoUnit). PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
 
-## Ingrations guide
-
-See [INTEGRATION guide](). This guide helps you implement and integrate poco-sdk with your app step by step.
-
-## LICENSE
-
-TODO
