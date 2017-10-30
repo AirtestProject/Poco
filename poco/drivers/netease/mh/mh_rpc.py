@@ -2,21 +2,10 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-13 18:01:23
-from functools import wraps
+from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
-from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
-
-
-def sync_wrapper(func):
-    @wraps(func)
-    def new_func(*args, **kwargs):
-        cb = func(*args, **kwargs)
-        ret, err = cb.wait(timeout=5)
-        if err:
-            raise err
-        return ret
-    return new_func
+from poco.utils.simplerpc.utils import sync_wrapper
 
 
 class MhScreen(ScreenInterface):

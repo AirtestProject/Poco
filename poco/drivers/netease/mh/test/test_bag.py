@@ -3,7 +3,7 @@
 import unittest
 
 from hunter_cli import Hunter, open_platform
-from poco.drivers.mh import MhPoco
+from poco.drivers.netease.mh import MhPoco
 
 
 class TestBag(unittest.TestCase):

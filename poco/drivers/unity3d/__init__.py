@@ -4,12 +4,12 @@
 # @Date:   2017-07-14 19:47:51
 from poco import Poco
 from poco.agent import PocoAgent
+from poco.utils.simplerpc.utils import sync_wrapper
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
 from poco.utils.airtest.input import AirtestInput
 from poco.utils.airtest.screen import AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
-from poco.drivers.mh.mh_rpc import sync_wrapper
 
 DEFAULT_ADDR = ("localhost", 5001)
 
