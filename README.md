@@ -22,6 +22,7 @@ pip install poco
 * Customizable by [poco-sdk]().
 * Alternative rpc interface.
 * No extra dependencies.
+* Compatible with Python 2.7 and Python 3.3+.
 
 ## Example
 
@@ -99,7 +100,7 @@ The invocation `poco(...)` instance is to traverse through the render tree struc
 # select by node name
 poco('bg_mission')
 
-# select by name and oyther properties
+# select by name and other properties
 poco('bg_mission', type='Button')
 poco(textMatches='^据点.*$', type='Button', enable=True)
 ```

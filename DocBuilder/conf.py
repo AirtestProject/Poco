@@ -21,6 +21,9 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../poco'))
 
+from recommonmark.parser import CommonMarkParser
+
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -46,7 +49,7 @@ templates_path = ['_templates']
 #
 source_suffix = ['.rst', '.md']
 source_parsers = {
-   '.md': 'recommonmark.parser.CommonMarkParser',
+   '.md': CommonMarkParser,
 }
 
 # The master toctree document.

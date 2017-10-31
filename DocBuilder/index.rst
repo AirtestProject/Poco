@@ -5,14 +5,18 @@ Welcome to Poco's documentation!
 **Poco is a cross-engine UI automation framework.**
 
 
-Quickstart 
-==========
+Getting Started
+===============
 
 .. toctree::
    :maxdepth: 2
 
    source/README
 
+
+poco can be installed with pip::
+
+    pip install poco
 
 Features
 ========
@@ -27,6 +31,29 @@ Features
 * Customizable by poco-sdk.
 * Alternative rpc interface.
 * No extra dependencies.
+* Compatible with Python 2.7 and Python 3.3+.
+
+Example
+=======
+
+The following example shows a simple test script on demo game using Unity3D.
+::
+
+    from poco.drivers.unity3d import UnityPoco as Poco
+
+    poco = Poco(('localhost', 5001))
+
+    # tap start button
+    poco('start_btn', type='Button').click()
+
+    # collect all 'stars' to my 'bag' by dragging the star icon
+    bag = poco('bag_area')
+    for star in poco(type='MPanel').child('star'):
+        star.drag_to(bag)
+
+    # click Text starting with 'finish' to finish collecting
+    poco(textMatches='finish.*').click()
+
 
 
 API reference
