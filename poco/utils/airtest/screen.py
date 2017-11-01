@@ -2,9 +2,8 @@
 
 import base64
 import os
-
 from airtest.cli.runner import device as current_device
-from airtest.core.main import snapshot
+from airtest.core.api import snapshot
 from airtest.core.settings import Settings
 from poco.sdk.interfaces.screen import ScreenInterface
 

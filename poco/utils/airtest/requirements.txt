@@ -1,2 +1,1 @@
 airtest
-airtest_hunter

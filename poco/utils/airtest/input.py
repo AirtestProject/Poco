@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from airtest.cli.runner import device as current_device
-from airtest.core.main import touch, swipe
-from airtest.core.helper import get_platform
+from airtest.core.api import device as current_device
+from airtest.core.api import touch, swipe
+from airtest.core.helper import device_platform
 from poco.sdk.interfaces.input import InputInterface
 
 
@@ -16,7 +16,7 @@ class AirtestInput(InputInterface):
         get real time resolution on device if full screen
          or window size if running in window mode
         """
-        if get_platform() == 'Windows':
+        if device_platform() == 'Windows':
             if self.surface is None:
                 raise RuntimeError('Please initialize AirtestInput with surface object, '
                                    'when running test suites on windows as target device.')

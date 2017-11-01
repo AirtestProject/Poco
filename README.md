@@ -6,21 +6,19 @@
 
 ## Features
 
-* Support mainstream game engines, like Unity3D, cocos2dx-js, cocos2dx-lua, Android native, etc.
-* Super fast and impact-less to the game.
-* Very easy to integrate sdk in the game.
-* Simple powerful APIs across all engines.
-* Support multi-touch (fling/pinch/etc.).
-* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.
-* Support retrieve UI properties and send text as input.
-* Customizable by [poco-sdk]().
-* Alternative rpc interface.
-* No extra dependencies.
+* Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.
+* Retrieve UI Elements Hierarchy in game's runtime.
+* Super fast and impact-free to the game.
+* Super easy sdk integration to the game in 5 minutes.
+* Powerful APIs which are engine independent.
+* Support multi-touch e.g. fling/pinch/etc. (in development)
+* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
+* Extensible to other private engines by implementing [poco-sdk]().
 * Compatible with Python 2.7 and Python 3.3+.
 
 ## Installation
 
-To use poco, you should install poco in your host as a python library and install [poco-sdk](source/doc/integration.html) in your game/app.
+To use poco, you should install poco on your host as a python library and integrate [poco-sdk](source/doc/integration.html) in your game.
 
 **poco** can be installed with pip:
 
@@ -30,7 +28,7 @@ pip install poco
 ```
 
 ```
-# Currently, it is only available on git repo. So please clone the repo and install
+# Currently, it is only available in git repo. So please clone the repo and install
 git clone xxx/poco.git
 pip install -e poco
 ```

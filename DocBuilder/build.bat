@@ -10,12 +10,12 @@ xcopy /Y /S /E ..\doc source\doc\
 :: exclude undoc members
 SET SPHINX_APIDOC_OPTIONS=members,show-inheritance
 sphinx-apidoc -Me -o source/ ../poco ../poco/utils/simplerpc
-sphinx-build -b html . ../auto-doc
+sphinx-build -b html . ../doc-auto
 
-:: copy readme.md to auto-doc
-xcopy /Y /T ..\doc ..\auto-doc\source\source\doc\
-xcopy /Y /S /E ..\doc ..\auto-doc\source\source\doc\
+:: copy readme.md to doc-auto
+xcopy /Y /T ..\doc ..\doc-auto\source\source\doc\
+xcopy /Y /S /E ..\doc ..\doc-auto\source\source\doc\
 
 :: copy readme-built from .html to .md to ensure links are working well
-copy /Y ..\auto-doc\source\README.html ..\auto-doc\source\README.md
-copy /Y ..\auto-doc\source\README-CN.html ..\auto-doc\source\README-CN.md
+copy /Y ..\doc-auto\source\README.html ..\doc-auto\source\README.md
+copy /Y ..\doc-auto\source\README-CN.html ..\doc-auto\source\README-CN.md

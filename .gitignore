@@ -45,7 +45,7 @@ cover/
 
 .idea/
 .DS_Store
-auto-doc/
+doc-auto/
 DocBuilder/source
 
 tokenid.py

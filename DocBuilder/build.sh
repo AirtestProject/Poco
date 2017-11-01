@@ -11,12 +11,12 @@ cp -r ../doc source/
 # exclude undoc members
 export SPHINX_APIDOC_OPTIONS=members,show-inheritance
 sphinx-apidoc -Me -o source/ ../poco ../poco/utils/simplerpc
-sphinx-build -b html . ../auto-doc
+sphinx-build -b html . ../doc-auto
 
-# copy readme.md to auto-doc
-mkdir ../auto-doc/source/source
-cp -r ../doc ../auto-doc/source/source
+# copy readme.md to doc-auto
+mkdir ../doc-auto/source/source
+cp -r ../doc ../doc-auto/source/source
 
 # copy readme-built from .html to .md to ensure links are working well
-cp ../auto-doc/source/README.html ../auto-doc/source/README.md
-cp ../auto-doc/source/README-CN.html ../auto-doc/source/README-CN.md
+cp ../doc-auto/source/README.html ../doc-auto/source/README.md
+cp ../doc-auto/source/README-CN.html ../doc-auto/source/README-CN.md

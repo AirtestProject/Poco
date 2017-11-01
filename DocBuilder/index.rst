@@ -7,17 +7,16 @@ Welcome to Poco's documentation!
 Features
 ========
 
-* Support mainstream game engines, like Unity3D, cocos2dx-js, cocos2dx-lua, Android native, etc.
-* Super fast and impact-less to the game/app.
-* Very easy to integrate sdk in the game/app.
-* Simple powerful APIs across all engines.
-* Support multi-touch (fling/pinch/etc.) (in development).
-* Support gps, gyros, rotation (landscape/portrait) and other sensors as input (in development).
-* Support retrieve UI properties and send text as input.
-* Customizable by poco-sdk.
-* Alternative rpc interface.
-* No extra dependencies.
+* Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.
+* Retrieve UI Elements Hierarchy in game's runtime.
+* Super fast and impact-free to the game.
+* Super easy sdk integration to the game in 5 minutes.
+* Powerful APIs which are engine independent.
+* Support multi-touch e.g. fling/pinch/etc. (in development)
+* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
+* Extensible to other private engines by implementing [poco-sdk]().
 * Compatible with Python 2.7 and Python 3.3+.
+
 
 Getting Started
 ===============
@@ -68,6 +67,45 @@ The following example shows a simple test script on demo game using Unity3D. `Mo
     poco(textMatches='finish.*').click()
 
 
+Dump UI Hierarchy
+======================
+
+Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to dump ui hierarchy.
+::
+
+    from poco.drivers.unity3d import UnityPoco as Poco
+    from pprint import pprint
+
+    poco = Poco()
+    ui = poco.agent.hierarchy.dump()
+    pprint(ui)
+
+
+
+The following is part of ui heirarchy. All ui elements are organized in dict like tree structure. Properties are described in `README <source/README.html#basic-concepts>`_.
+::
+
+    ...
+    {
+        u'name': u'OctopusArea',
+        u'payload': {u'anchorPoint': [0.5,
+                                    0.5],
+                   u'clickable': True,
+                   u'name': u'OctopusArea',
+                   u'pos': [0.130729169,
+                            0.44907406],
+                   u'scale': [1,
+                              1],
+                   u'size': [0.0859375,
+                             0.125],
+                   u'type': u'GameObject',
+                   u'visible': True,
+                   u'zOrders': {u'global': 0,
+                                u'local': -10}}}],
+        u'children': [{...}, {...}]
+    }
+    ...
+
 
 API reference
 =============
@@ -81,14 +119,4 @@ Poco
     source/poco
     source/poco.proxy
     source/poco.exceptions
-
-
-Poco SDK
---------
-
-.. toctree::
-    :maxdepth: 2
-    :titlesonly:
-    
     source/poco.sdk
-    source/poco.sdk.interfaces

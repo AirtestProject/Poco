@@ -6,8 +6,7 @@ from poco import Poco
 from poco.agent import PocoAgent
 from poco.utils.simplerpc.utils import sync_wrapper
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
-from poco.utils.airtest.input import AirtestInput
-from poco.utils.airtest.screen import AirtestScreen
+from poco.utils.airtest import AirtestInput, AirtestScreen, connect_device, airtest_device
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
 
@@ -18,15 +17,16 @@ class UnityPocoAgent(PocoAgent):
 
     def __init__(self, addr=DEFAULT_ADDR):
         # init airtest env
-        from airtest.core.main import set_serialno
-        from airtest.cli.runner import device as current_device
-        if not current_device():
-            set_serialno()
+        if not airtest_device():
+            connect_device("Android:///")
+        # unity games poco sdk listens on Android localhost:5001 
+        airtest_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
 
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
         self.c.run(backend=True)
+        self.c.wait_connected()
 
         hierarchy = FreezedUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
