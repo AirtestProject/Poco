@@ -4,19 +4,6 @@
 
 [中文README(Chinese README)](README-CN.md)在此。
 
-## Installation
-
-To use poco, you should install poco in your host as a python library and install [poco-sdk](source/doc/integration.html) in your game/app.
-
-**poco** can be installed with pip:
-
-```
-pip install poco
-```
-
-**poco-sdk** integration please refer to [Integration Guide](source/doc/integration.html).
-
-
 ## Features
 
 * Support mainstream game engines, like Unity3D, cocos2dx-js, cocos2dx-lua, Android native, etc.
@@ -30,6 +17,26 @@ pip install poco
 * Alternative rpc interface.
 * No extra dependencies.
 * Compatible with Python 2.7 and Python 3.3+.
+
+## Installation
+
+To use poco, you should install poco in your host as a python library and install [poco-sdk](source/doc/integration.html) in your game/app.
+
+**poco** can be installed with pip:
+
+```
+# In the future
+pip install poco
+```
+
+```
+# Currently, it is only available on git repo. So please clone the repo and install
+git clone xxx/poco.git
+pip install -e poco
+```
+
+**poco-sdk** integration please refer to [Integration Guide](source/doc/integration.html).
+
 
 ## Example
 
