@@ -1,8 +1,11 @@
-:: copy readme.md
+
+:: build my doc together
 rmdir /S /Q source\
 mkdir source\
 copy /Y ..\README.md source\
 copy /Y ..\README-CN.md source\
+xcopy /Y /T ..\doc source\doc\
+xcopy /Y /S /E ..\doc source\doc\
 
 :: exclude undoc members
 SET SPHINX_APIDOC_OPTIONS=members,show-inheritance

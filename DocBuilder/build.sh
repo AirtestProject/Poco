@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
+
+# build my doc together
 rm -rf source/
 mkdir source/
 cp ../README.md source/
 cp ../README-CN.md source/
-
+cp -r ../doc source/
+cp -r ../doc source/
 
 # exclude undoc members
 export SPHINX_APIDOC_OPTIONS=members,show-inheritance

@@ -6,9 +6,16 @@
 
 ## Installation
 
-```sh
+To use poco, you should install poco in your host as a python library and install [poco-sdk](source/doc/integration.html) in your game/app.
+
+**poco** can be installed with pip:
+
+```
 pip install poco
 ```
+
+**poco-sdk** integration please refer to [Integration Guide](source/doc/integration.html).
+
 
 ## Features
 
@@ -254,6 +261,8 @@ open('screen.png', 'wb').write(b64decode(b64img))
 
 ## Exceptions
 
+### PocoTargetTimeout
+
 ```python
 from poco.exceptions import PocoTargetTimeout
 
@@ -263,6 +272,8 @@ except PocoTargetTimeout:
     # bugs here as the panel not shown
     raise
 ```
+
+### PocoNoSuchNodeException
 
 ```python
 from poco.exceptions import PocoNoSuchNodeException

@@ -13,10 +13,16 @@ Getting Started
 
    source/README
 
+Install Poco and PocoSDK
+------------------------
 
-poco can be installed with pip::
+To use poco, you should install poco in your host as a python library and install `poco-sdk <source/doc/integration.html>`_ in your game/app.
+
+**poco** can be installed with pip::
 
     pip install poco
+
+**poco-sdk** integration please refer to `Integration Guide <source/doc/integration.html>`_
 
 Features
 ========
@@ -36,7 +42,7 @@ Features
 Example
 =======
 
-The following example shows a simple test script on demo game using Unity3D.
+The following example shows a simple test script on demo game using Unity3D. `More examples are here <source/doc/poco-example/index.html>`_.
 ::
 
     from poco.drivers.unity3d import UnityPoco as Poco
@@ -63,7 +69,7 @@ Poco
 ----
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
     source/poco
     source/poco.proxy
