@@ -1,0 +1,6 @@
+poco\.utils\.suppression module
+===============================
+
+.. automodule:: poco.utils.suppression
+    :members:
+    :show-inheritance:

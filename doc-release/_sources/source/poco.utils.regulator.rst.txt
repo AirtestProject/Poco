@@ -1,0 +1,6 @@
+poco\.utils\.regulator module
+=============================
+
+.. automodule:: poco.utils.regulator
+    :members:
+    :show-inheritance:

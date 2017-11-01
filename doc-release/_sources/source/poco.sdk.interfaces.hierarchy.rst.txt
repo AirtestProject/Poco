@@ -1,0 +1,6 @@
+poco\.sdk\.interfaces\.hierarchy module
+=======================================
+
+.. automodule:: poco.sdk.interfaces.hierarchy
+    :members:
+    :show-inheritance:

@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.AbstractNode &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.sdk.AbstractNode</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.sdk.AbstractNode</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+
+<span class="kn">from</span> <span class="nn">poco.sdk.exceptions</span> <span class="k">import</span> <span class="n">UnableToSetAttributeException</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AbstractNode&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="AbstractNode"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode">[docs]</a><span class="k">class</span> <span class="nc">AbstractNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    AbstractNode is a wrapper class that provides ui hierarchy and node info in game engine.</span>
+
+<span class="sd">    This class uniformly specifies node-related methods such as retrieving attribute or accessing up to parent or down </span>
+<span class="sd">    to children.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AbstractNode.getParent"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getParent">[docs]</a>    <span class="k">def</span> <span class="nf">getParent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the parent node of this node. Return None if no parent or parent is not accessible or this is the root </span>
+<span class="sd">        node. This method will be invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`AbstractNode or NoneType &lt;poco.sdk.AbstractNode&gt;`: Parent node of this node or None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="AbstractNode.getChildren"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getChildren">[docs]</a>    <span class="k">def</span> <span class="nf">getChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return an iterator over all children nodes of this node. Will be invoked by ``Selector`` or ``Dumper`` to get </span>
+<span class="sd">        the UI hierarchy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Iterable&lt;:py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="AbstractNode.getAttr"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getAttr">[docs]</a>    <span class="k">def</span> <span class="nf">getAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the attributes of the node. The following list shows the most basic attributes that will be used during </span>
+<span class="sd">        the test run. The implementation class should return correct value as possible as it can. If cannot determine </span>
+<span class="sd">        the value, return the invocation from super class to use default value. See the example below. More attributes </span>
+<span class="sd">        can be added in order to enhance the selection and displaying in ``Inspector``.</span>
+
+<span class="sd">        Most basic attributes defines as follows:</span>
+
+<span class="sd">        - ``name``: The name of the node, a unique and meaningful name for each node recommended.</span>
+<span class="sd">        - ``type``: The type name of the node, can be any string. e.g. &quot;android.widget.Button&quot; or as simple as </span>
+<span class="sd">          &quot;Button&quot;</span>
+<span class="sd">        - ``visible``: Whether the node is rendered on screen. If the return value is False, all children nodes </span>
+<span class="sd">          will be ignored in Poco selector</span>
+<span class="sd">        - ``pos``: Position of the node in screen. Return value should be 2-list represents the percents of</span>
+<span class="sd">          the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,</span>
+<span class="sd">          this attribute will be ``[0.5f, 0.5f]``.</span>
+<span class="sd">          position can be negative which means the node is outside the screen</span>
+<span class="sd">        - ``size``: Size of node&#39;s bounding box. similar to ``pos``, value is also a 2-list of percents of </span>
+<span class="sd">          the screen size, e.g. the screen&#39;s size is always ``[1.0f, 1.0f]``.</span>
+<span class="sd">          if the node in left half side of the screen, its size will be ``[0.5f, 1.0f]``.</span>
+<span class="sd">          size should always be nonnegative.</span>
+<span class="sd">        - ``scale``: The scale factor applied to the node itself. leave it ``[1.0f, 1.0f]`` by default.</span>
+<span class="sd">        - ``anchorPoint``: The percentage of the key-point related to the bounding box of the node. leave it </span>
+<span class="sd">          ``[0.5f, 0.5f]`` by default.</span>
+<span class="sd">        - ``zOrders``: The rendering order of this node. value is a dictionary like ``{&quot;global&quot;: 0, &quot;local&quot;: 0}``.</span>
+<span class="sd">          Global zOrder is compared with all nodes in the hierarchy, Local zOrder is compared with its parent and </span>
+<span class="sd">          siblings. Topmost nodes have the largest value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            The following code gives some idea about implementing this method::</span>
+<span class="sd">                </span>
+<span class="sd">                def getAttr(self, attrName):</span>
+<span class="sd">                    # basic attributes</span>
+<span class="sd">                    if attrName == &#39;name&#39;:</span>
+<span class="sd">                        return self.node.get_name() or &#39;&lt;no name&gt;&#39;</span>
+
+<span class="sd">                    elif attrName == &#39;pos&#39;:</span>
+<span class="sd">                        return self.node.get_position()</span>
+
+<span class="sd">                    # ...</span>
+
+<span class="sd">                    # extra engine-specific attributes</span>
+<span class="sd">                    elif attrName == &#39;rotation&#39;:</span>
+<span class="sd">                        return self.node.get_rotation()</span>
+
+<span class="sd">                    # call the super method by default</span>
+<span class="sd">                    else:</span>
+<span class="sd">                        return super().getAttr(attrName)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            attrName (:obj:`str`): attribute name</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JsonSerializable attribute value or None if no such attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;Root&gt;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;Root&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;pos&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+            <span class="s1">&#39;anchorPoint&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+            <span class="s1">&#39;zOrders&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;global&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attrName</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AbstractNode.setAttr"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.setAttr">[docs]</a>    <span class="k">def</span> <span class="nf">setAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply changes of the attribute value to this node.</span>
+<span class="sd">        Only limited attributes can be modified, such as text.</span>
+<span class="sd">        Some others are not recommended to modified, such as position/name, which may hard to understand for testers</span>
+<span class="sd">        and results in unexpected exceptions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            attrName (:obj:`str`): attribute name</span>
+<span class="sd">            val: attribute value</span>
+
+<span class="sd">        See Also:</span>
+<span class="sd">            :py:meth:`setAttr &lt;poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr&gt;` in \</span>
+<span class="sd">             ``poco.sdk.interfaces.hierarchy``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="n">UnableToSetAttributeException</span><span class="p">(</span><span class="n">attrName</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AbstractNode.getAvailableAttributeNames"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames">[docs]</a>    <span class="k">def</span> <span class="nf">getAvailableAttributeNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enumerate all available attributes&#39; name of this node. This method in base class returns the most basic </span>
+<span class="sd">        attribute name by default. You can add other customized or engine-specific attributes. See the example above.</span>
+
+<span class="sd">        .. note:: Please always call super method and return should contain the part from super method.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            This code shows a way about implementing this method::</span>
+
+<span class="sd">                def getAvailableAttributeNames(self):</span>
+<span class="sd">                    return super().getAvailableAttributeNames() + (</span>
+<span class="sd">                        # add other engine-specific attribute names here if need.</span>
+<span class="sd">                        &#39;rotation&#39;,</span>
+<span class="sd">                    )</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Iterable&lt;:obj:`str`&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;visible&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pos&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;size&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;scale&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;anchorPoint&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;zOrders&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="AbstractNode.enumerateAttrs"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.enumerateAttrs">[docs]</a>    <span class="k">def</span> <span class="nf">enumerateAttrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enumerate all available attributes and yielding in 2-tuple (name, value).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Iterable&lt;:obj:`str`, :obj:`ValueType`&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">attrName</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getAvailableAttributeNames</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">attrName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="n">attrName</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

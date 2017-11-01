@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.assertions &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.assertions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.assertions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">poco.exceptions</span> <span class="k">import</span> <span class="n">PocoAssertionError</span>
+<span class="kn">from</span> <span class="nn">poco.utils.suppression</span> <span class="k">import</span> <span class="n">deprecated</span>
+
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+
+
+<span class="c1"># deprecated, use assertion method in unittest.case.PocoTestCase instead</span>
+<div class="viewcode-block" id="PocoAssertionMixin"><a class="viewcode-back" href="../../source/poco.assertions.html#poco.assertions.PocoAssertionMixin">[docs]</a><span class="k">class</span> <span class="nc">PocoAssertionMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Warnings:</span>
+<span class="sd">        Deprecated, do not use! Use assertion method in ``pocounit.PocoTestCase`` instead.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> != </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_greater</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &lt;= </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_greater_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &lt; </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_less</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &gt;= </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_less_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &gt; </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">assert_true</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> is not True.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

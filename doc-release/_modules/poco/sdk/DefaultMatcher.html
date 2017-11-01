@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.DefaultMatcher &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.sdk.DefaultMatcher</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.sdk.DefaultMatcher</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">NoSuchComparatorException</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IMatcher&#39;</span><span class="p">,</span> <span class="s1">&#39;DefaultMatcher&#39;</span><span class="p">,</span> <span class="s1">&#39;EqualizationComparator&#39;</span><span class="p">,</span> <span class="s1">&#39;RegexpComparator&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">IMatcher</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test whether or not the node matches the given condition.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cond (:obj:`tuple`): Query condition.</span>
+<span class="sd">            node (:py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`): Node to be tested.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if matches otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+
+<div class="viewcode-block" id="EqualizationComparator"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.EqualizationComparator">[docs]</a><span class="k">class</span> <span class="nc">EqualizationComparator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare two object using native equivalence (==) comparison.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">l</span> <span class="o">==</span> <span class="n">r</span></div>
+
+
+<div class="viewcode-block" id="RegexpComparator"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.RegexpComparator">[docs]</a><span class="k">class</span> <span class="nc">RegexpComparator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compare two object using regular expression matching comparison. Available only when origin value is string. Result</span>
+<span class="sd">    in False if origin value or given pattern is not :obj:`str`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RegexpComparator.compare"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.RegexpComparator.compare">[docs]</a>    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            origin (:obj:`str`): Origin string.</span>
+<span class="sd">            pattern (:obj:`str`): Regexp pattern string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if matches otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="DefaultMatcher"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.DefaultMatcher">[docs]</a><span class="k">class</span> <span class="nc">DefaultMatcher</span><span class="p">(</span><span class="n">IMatcher</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate  </span>
+<span class="sd">    expression. When traversing through the hierarchy tree, matcher will apply match method on each tree node.</span>
+
+<span class="sd">    The formal definition of query condition as follows::</span>
+
+<span class="sd">        expr := (op0, (expr0, expr1, ...))  </span>
+<span class="sd">        expr := (op1, (arg1, arg2))  </span>
+
+<span class="sd">    - ``op0``:obj:`str` is logical operator (&#39;or&#39; or &#39;and&#39;) which has the same semantics as in python. e.g. &#39;or&#39; </span>
+<span class="sd">      means this expression/condition matches if any of the exprN matches.</span>
+<span class="sd">    - ``op1``:obj:`str` is comparator, can be one of as follows::</span>
+
+<span class="sd">        op1 := &#39;attr=&#39;</span>
+<span class="sd">        op1 := &#39;attr.*=&#39;</span>
+<span class="sd">        op1 := ... (other customized)</span>
+
+<span class="sd">      - ``attr=`` corresponds to :py:class:`EqualizationComparator &lt;poco.sdk.DefaultMatcher.EqualizationComparator&gt;`.</span>
+<span class="sd">      - ``attr.*=`` corresponds to :py:class:`RegexpComparator &lt;poco.sdk.DefaultMatcher.RegexpComparator&gt;`.</span>
+<span class="sd">      </span>
+<span class="sd">      The ``op1`` is only a string. ``Matcher`` will help to map to ``Comparator`` object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DefaultMatcher</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;attr=&#39;</span><span class="p">:</span> <span class="n">EqualizationComparator</span><span class="p">(),</span>
+            <span class="s1">&#39;attr.*=&#39;</span><span class="p">:</span> <span class="n">RegexpComparator</span><span class="p">(),</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="DefaultMatcher.match"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.DefaultMatcher.match">[docs]</a>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See Also: :py:meth:`IMatcher.match &lt;poco.sdk.DefaultMatcher.IMatcher.match&gt;`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">cond</span>
+
+        <span class="c1"># 条件匹配</span>
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s1">&#39;and&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s1">&#39;or&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># 属性匹配</span>
+        <span class="n">comparator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">comparators</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comparator</span><span class="p">:</span>
+            <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">args</span>
+            <span class="n">targetValue</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="n">attribute</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">comparator</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="n">targetValue</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="n">NoSuchComparatorException</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="s1">&#39;poco.sdk.DefaultMatcher&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

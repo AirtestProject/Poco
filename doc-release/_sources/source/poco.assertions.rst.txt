@@ -1,0 +1,6 @@
+poco\.assertions module
+=======================
+
+.. automodule:: poco.assertions
+    :members:
+    :show-inheritance:

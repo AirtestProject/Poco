@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.pocofw module &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="poco  documentation" href="../index.html"/>
+        <link rel="up" title="poco package" href="poco.html"/>
+        <link rel="next" title="poco.proxy module" href="poco.proxy.html"/>
+        <link rel="prev" title="poco.exceptions module" href="poco.exceptions.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="poco.html">poco package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="poco.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="poco.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="poco.acceleration.html">poco.acceleration module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.agent.html">poco.agent module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.assertions.html">poco.assertions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.pocofw module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poco.html">poco package</a> &raquo;</li>
+        
+      <li>poco.pocofw module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/poco.pocofw.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-poco.pocofw">
+<span id="poco-pocofw-module"></span><h1>poco.pocofw module<a class="headerlink" href="#module-poco.pocofw" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="poco.pocofw.Poco">
+<em class="property">class </em><code class="descname">Poco</code><span class="sig-paren">(</span><em>agent</em>, <em>**options</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="poco.assertions.html#poco.assertions.PocoAssertionMixin" title="poco.assertions.PocoAssertionMixin"><code class="xref py py-class docutils literal"><span class="pre">poco.assertions.PocoAssertionMixin</span></code></a>, <a class="reference internal" href="poco.acceleration.html#poco.acceleration.PocoAccelerationMixin" title="poco.acceleration.PocoAccelerationMixin"><code class="xref py py-class docutils literal"><span class="pre">poco.acceleration.PocoAccelerationMixin</span></code></a></p>
+<p>Poco standard initializer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>agent</strong> (<a class="reference internal" href="poco.agent.html#poco.agent.PocoAgent" title="poco.agent.PocoAgent"><code class="xref py py-class docutils literal"><span class="pre">PocoAgent</span></code></a>) – An agent object for poco to communication with
+target device. See <a class="reference internal" href="poco.agent.html#poco.agent.PocoAgent" title="poco.agent.PocoAgent"><code class="xref py py-class docutils literal"><span class="pre">PocoAgent</span></code></a>’s definition.</li>
+<li><strong>options</strong> – <ul>
+<li>action_interval: The time after an action(like touch/swipe) performed on device to wait for the UI becoming stable. default
+0.8s.</li>
+<li>poll_interval: The minimal time between each poll event. Such as waiting for some UI to appear and it will
+be polling periodically.</li>
+<li>pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to
+wait for appearance. If the target does not show up after that, <a class="reference internal" href="poco.exceptions.html#poco.exceptions.PocoNoSuchNodeException" title="poco.exceptions.PocoNoSuchNodeException"><code class="xref py py-class docutils literal"><span class="pre">PocoNoSuchNodeException</span></code></a> will raise.</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="poco.pocofw.Poco.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>name=None</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply call poco instance to select UI element by query conditions. You can specify the name or other
+attributes together in query condition. Invisible UI element will be skipped even “visible=False” is given.</p>
+<p>Selection is not executed instantly. The query string will be stored in the UI proxy. Selection can be executed
+exactly when UI elements’ info is needed (like position to click, or attribute to retrieve).</p>
+<p class="rubric">Examples</p>
+<p>This example shows selecting a Button named ‘close’:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">close_btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Button&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Select UI element(s) by name.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
+<li><strong>xx</strong> – Arbitrary key value pairs stands for selecting by <code class="docutils literal"><span class="pre">UI.xx</span></code>’s value matching.</li>
+<li><strong>xxMatches</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Arbitrary key value pairs stands for selecting by <code class="docutils literal"><span class="pre">UI.xx</span></code>’s value matching the
+regular pattern</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In keyword args, xx is the attribute name and should be unique that is to choose only one matching way.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># select UI element(s) whose text attribute matches the pattern &#39;^close.*$&#39;</span>
+<span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">arb_close_btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="n">textMatches</span><span class="o">=</span><span class="s1">&#39;^close.*$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">UI proxy object representing the UI element matches              given query condition.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.add_post_action_callback">
+<code class="descname">add_post_action_callback</code><span class="sig-paren">(</span><em>cb</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.add_post_action_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.add_post_action_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a callback function to be invoked after each action(like touch/swipe).</p>
+<p>3 arguments that passes to callback functions is identical to the callback function in
+<code class="xref py py-meth docutils literal"><span class="pre">add_pre_action_callback</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cb</strong> – the callback function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.add_pre_action_callback">
+<code class="descname">add_pre_action_callback</code><span class="sig-paren">(</span><em>cb</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.add_pre_action_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.add_pre_action_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a callback function to be invoked before each action(like touch/swipe).</p>
+<p>The callback function’s arguments defines as follows:</p>
+<ul class="simple">
+<li>action (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): The action’s name or tag.</li>
+<li>proxy (<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a> or <code class="xref py py-obj docutils literal"><span class="pre">NoneType</span></code>): The related UI proxy that
+involves in the action.</li>
+<li>args (<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>): All arguments of the specific action function.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cb</strong> – the callback function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="poco.pocofw.Poco.agent">
+<code class="descname">agent</code><a class="headerlink" href="#poco.pocofw.Poco.agent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Readonly property to access poco agent instance. See <a class="reference internal" href="poco.agent.html#poco.agent.PocoAgent" title="poco.agent.PocoAgent"><code class="xref py py-class docutils literal"><span class="pre">poco.agent.PocoAgent</span></code></a> to get more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">poco agent instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="poco.agent.html#poco.agent.PocoAgent" title="poco.agent.PocoAgent"><code class="xref py py-class docutils literal"><span class="pre">poco.agent.PocoAgent</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.click">
+<code class="descname">click</code><span class="sig-paren">(</span><em>pos</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.click"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform click(touch, tap, etc.) action on target device at given coordinate.</p>
+<p>The coordinate is a 2-list or
+2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of
+the screen. For example, <code class="docutils literal"><span class="pre">[0.5,</span> <span class="pre">0.5]</span></code> is the center of the screen, <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">0]</span></code> represents the top left corner.
+See <code class="docutils literal"><span class="pre">CoordinateSystem</span></code> to get more details about coordinate system.</p>
+<p class="rubric">Examples</p>
+<p>Click a point of <code class="docutils literal"><span class="pre">(100,</span> <span class="pre">100)</span></code> of screen whose resolution is <code class="docutils literal"><span class="pre">(1920,</span> <span class="pre">1080)</span></code>, the statement as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="o">.</span><span class="n">click</span><span class="p">([</span><span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1920</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1080</span><span class="p">])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<code class="xref py py-obj docutils literal"><span class="pre">list(float,</span> <span class="pre">float)</span></code> / <code class="xref py py-obj docutils literal"><span class="pre">tuple(float,</span> <span class="pre">float)</span></code>) – coordinate (x, y) in range of 0 to 1.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">InvalidOperationException</span></code> – When click outside screen.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.freeze">
+<code class="descname">freeze</code><span class="sig-paren">(</span><em>this</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.freeze" title="Permalink to this definition">¶</a></dt>
+<dd><p>Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current
+poco instance (<code class="docutils literal"><span class="pre">self</span></code>). The hierarchy of the new poco instance is fixed and immutable. It will return directly
+when invoking <code class="docutils literal"><span class="pre">dump</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A new poco instance copy from current poco instance (<code class="docutils literal"><span class="pre">self</span></code>).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Poco</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.get_screen_size">
+<code class="descname">get_screen_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.get_screen_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.get_screen_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get real physical resolution of the screen of target device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">screen physical resolution in pixels in floats.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.long_click">
+<code class="descname">long_click</code><span class="sig-paren">(</span><em>pos</em>, <em>duration=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.long_click"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.long_click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to click, but hold for a given duration and then release.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pos</strong> (<code class="xref py py-obj docutils literal"><span class="pre">2-list/2-tuple</span></code>) – coordinate (x, y) in range of 0 to 1.</li>
+<li><strong>duration</strong> – The time over the whole action.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.sleep_for_polling_interval">
+<code class="descname">sleep_for_polling_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.sleep_for_polling_interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.sleep_for_polling_interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sleep fixed seconds after each polling.
+There is no need to call this method manually. It’s automatically invoked in cases.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.snapshot">
+<code class="descname">snapshot</code><span class="sig-paren">(</span><em>width=720</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.snapshot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a screenshot from the target device. The format (png, jpg, etc.) depends on the agent implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>width</strong> (<code class="xref py py-obj docutils literal"><span class="pre">int</span></code>) – Expected width of the screen shot. The real size is depending on agent implementation.
+It may not be able to get a expected width of the screen shot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li>screen_shot (<code class="xref py py-obj docutils literal"><span class="pre">str/bytes</span></code>): Screen shot data with base64 encoded.</li>
+<li>format (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): ‘png’, ‘jpg’, etc.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">2-tuple</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.swipe">
+<code class="descname">swipe</code><span class="sig-paren">(</span><em>p1</em>, <em>p2=None</em>, <em>direction=None</em>, <em>duration=2.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.swipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.swipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform swipe action on target device from given start to end point, or a 2-list/2-tuple value as direction
+vector.</p>
+<p>The coordinate definition of points is the same as <code class="docutils literal"><span class="pre">click</span></code>. The components of direction vector (x, y)
+is also represents the range of the screen from 0 to 1.
+See <code class="docutils literal"><span class="pre">CoordinateSystem</span></code> to get more details about coordinate system.
+Should provide at least one of the end point or direction.</p>
+<p class="rubric">Examples</p>
+<p>Here is a screen with resolution 1920x1080. Swipe from (100, 100) to (100, 200) could be a statement as
+follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="o">.</span><span class="n">swipe</span><span class="p">([</span><span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1920</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1080</span><span class="p">],</span> <span class="p">[</span><span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1920</span><span class="p">,</span> <span class="mf">200.0</span> <span class="o">/</span> <span class="mi">1080</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Or give a specific direction instead of end point:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="o">.</span><span class="n">swipe</span><span class="p">([</span><span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1920</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1080</span><span class="p">],</span> <span class="n">direction</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">/</span> <span class="mi">1080</span><span class="p">])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p1</strong> (<code class="xref py py-obj docutils literal"><span class="pre">2-list/2-tuple</span></code>) – start point.</li>
+<li><strong>p2</strong> – end point.</li>
+<li><strong>direction</strong> – swipe direction.</li>
+<li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – The time over the whole action.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">InvalidOperationException</span></code> – When swipe start point outside the screen.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.wait_for_all">
+<code class="descname">wait_for_all</code><span class="sig-paren">(</span><em>objects</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.wait_for_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.wait_for_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until all of given UI proxies show up before timeout.
+All UI proxies will be polled periodically. See option <code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code> in
+<code class="docutils literal"><span class="pre">Poco</span></code>’s initialization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – Iterable of the given UI proxies.</li>
+<li><strong>timeout</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – timeout in seconds. 120s by default.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">PocoTargetTimeout</span></code> – When not all of UI proxies appeared before timeout.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.wait_for_any">
+<code class="descname">wait_for_any</code><span class="sig-paren">(</span><em>objects</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.wait_for_any"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.wait_for_any" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.
+All UI proxies will be polled periodically. See option <code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code> in
+<code class="docutils literal"><span class="pre">Poco</span></code>’s initialization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – Iterable of the given UI proxies.</li>
+<li><strong>timeout</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – timeout in seconds. 120s by default.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the first appeared UI proxy.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">PocoTargetTimeout</span></code> – When none of UI proxies appeared before timeout.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.pocofw.Poco.wait_stable">
+<code class="descname">wait_stable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.wait_stable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.wait_stable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sleep fixed seconds in order to wait for the UI becoming stable.
+There is no need to call this method manually. It’s automatically invoked in cases.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.proxy.html" class="btn btn-neutral float-right" title="poco.proxy module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poco.exceptions.html" class="btn btn-neutral" title="poco.exceptions module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

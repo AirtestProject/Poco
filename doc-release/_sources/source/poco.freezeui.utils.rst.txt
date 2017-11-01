@@ -1,0 +1,6 @@
+poco\.freezeui\.utils module
+============================
+
+.. automodule:: poco.freezeui.utils
+    :members:
+    :show-inheritance:

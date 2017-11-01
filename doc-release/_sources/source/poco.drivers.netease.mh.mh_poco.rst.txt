@@ -1,0 +1,6 @@
+poco\.drivers\.netease\.mh\.mh\_poco module
+===========================================
+
+.. automodule:: poco.drivers.netease.mh.mh_poco
+    :members:
+    :show-inheritance:

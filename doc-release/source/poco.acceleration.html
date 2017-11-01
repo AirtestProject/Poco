@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.acceleration module &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="poco  documentation" href="../index.html"/>
+        <link rel="up" title="poco package" href="poco.html"/>
+        <link rel="next" title="poco.agent module" href="poco.agent.html"/>
+        <link rel="prev" title="poco.utils.vector module" href="poco.utils.vector.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="poco.html">poco package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="poco.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="poco.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.acceleration module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.agent.html">poco.agent module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.assertions.html">poco.assertions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.pocofw.html">poco.pocofw module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poco.html">poco package</a> &raquo;</li>
+        
+      <li>poco.acceleration module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/poco.acceleration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-poco.acceleration">
+<span id="poco-acceleration-module"></span><h1>poco.acceleration module<a class="headerlink" href="#module-poco.acceleration" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="poco.acceleration.PocoAccelerationMixin">
+<em class="property">class </em><code class="descname">PocoAccelerationMixin</code><a class="reference internal" href="../_modules/poco/acceleration.html#PocoAccelerationMixin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.acceleration.PocoAccelerationMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class provides some high-level method to reduce redundant code implementations.
+As this is a MixinClass, please do not introduce new state in methods.</p>
+<p>该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。</p>
+<dl class="method">
+<dt id="poco.acceleration.PocoAccelerationMixin.dismiss">
+<code class="descname">dismiss</code><span class="sig-paren">(</span><em>targets</em>, <em>exit_when=None</em>, <em>sleep_interval=0.5</em>, <em>appearance_timeout=20</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/acceleration.html#PocoAccelerationMixin.dismiss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.acceleration.PocoAccelerationMixin.dismiss" title="Permalink to this definition">¶</a></dt>
+<dd><p>自动点掉目标对象，即一直点点到全都消失为止，适用于无脑点点点的界面。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>targets</strong> – &lt;list&gt; 目标对象列表，poco选择的对象</li>
+<li><strong>exit_when</strong> – 结束条件，默认为targets中所有节点都消失后自动退出</li>
+<li><strong>sleep_interval</strong> – 点击动作间隔，点了之后等待一段时间后再找下一个target进行点击</li>
+<li><strong>appearance_timeout</strong> – 在进行dismiss之前会等待targets中任意一个target出现，超过了这个时间还没出现就自动退出了</li>
+<li><strong>timeout</strong> – dismiss阶段超时时长</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="poco.exceptions.html#poco.exceptions.PocoTargetTimeout" title="poco.exceptions.PocoTargetTimeout"><strong>PocoTargetTimeout</strong></a> – 当处于dismiss切超时时，会报这个错，因为正常情况下不可能这么长时间还没把该消的消掉</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.agent.html" class="btn btn-neutral float-right" title="poco.agent module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poco.utils.vector.html" class="btn btn-neutral" title="poco.utils.vector module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

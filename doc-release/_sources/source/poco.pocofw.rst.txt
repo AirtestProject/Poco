@@ -1,0 +1,6 @@
+poco\.pocofw module
+===================
+
+.. automodule:: poco.pocofw
+    :members:
+    :show-inheritance:

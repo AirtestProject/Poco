@@ -1,0 +1,17 @@
+poco\.sdk\.interfaces package
+=============================
+
+.. automodule:: poco.sdk.interfaces
+    :members:
+    :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+
+   poco.sdk.interfaces.command
+   poco.sdk.interfaces.hierarchy
+   poco.sdk.interfaces.input
+   poco.sdk.interfaces.screen
+

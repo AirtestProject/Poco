@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.AbstractDumper &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.sdk.AbstractDumper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.sdk.AbstractDumper</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IDumper&#39;</span><span class="p">,</span> <span class="s1">&#39;AbstractDumper&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="IDumper"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper">[docs]</a><span class="k">class</span> <span class="nc">IDumper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This interface defines standard dumper behavior. Dumper is only introduced to get the hierarchy information and</span>
+<span class="sd">    convert it into serializable data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IDumper.getRoot"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.getRoot">[docs]</a>    <span class="k">def</span> <span class="nf">getRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the root node of the UI Hierarchy. The node&#39;s information is wrapped by </span>
+<span class="sd">        :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`.</span>
+<span class="sd">        See definition of :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;` for more details.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`: An instance holds the hierarchy data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="IDumper.dumpHierarchy"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a dict holding the hierarchy data and its structure should be as follows. The dict should be json </span>
+<span class="sd">        serializable.</span>
+
+<span class="sd">        Structure of the dict::</span>
+
+<span class="sd">            {</span>
+<span class="sd">                &#39;name&#39;: &#39;&lt;a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.&gt;&#39;</span>
+<span class="sd">                </span>
+<span class="sd">                # All available attributes of this node in form of key-value pairs.</span>
+<span class="sd">                &#39;payload&#39;: {</span>
+<span class="sd">                    &#39;name&#39;: &#39;&#39;,</span>
+<span class="sd">                    &#39;pos&#39;: [0, 0],</span>
+<span class="sd">                    &#39;size&#39;: [1, 1],</span>
+<span class="sd">                    ...</span>
+<span class="sd">                },</span>
+<span class="sd">                </span>
+<span class="sd">                # If no child, do not assign this entry.</span>
+<span class="sd">                &#39;children&#39;: [</span>
+<span class="sd">                    {...},  # Same structure as this dict. </span>
+<span class="sd">                ],</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`dict` or :obj:`NoneType`: Hierarchy data or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+
+
+<div class="viewcode-block" id="AbstractDumper"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper">[docs]</a><span class="k">class</span> <span class="nc">AbstractDumper</span><span class="p">(</span><span class="n">IDumper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class partially implements ``IDumper`` using general traversal algorithm. To dump the hierarchy from a root </span>
+<span class="sd">    node, this dumper retrieves all available attributes of this root node and list all its children. Then apply the </span>
+<span class="sd">    same procedure on each child (treat each child as root node) until a node which has no child.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AbstractDumper.dumpHierarchy"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`dict`: A json serializable dict holds the whole hierarchy data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getRoot</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="AbstractDumper.dumpHierarchyImpl"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Crawl the hierarchy tree using the simple BFS algorithm. ``dump`` is engine independent as the hierarchy </span>
+<span class="sd">        structure is wrapped by :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`, so ``dump`` can be algorithmized. </span>
+<span class="sd">        Here shows the simplest implementation by default. If you like, you can implement your own algorithm to optimize </span>
+<span class="sd">        the speed.</span>
+
+<span class="sd">        .. note:: Do not call this method in explicitly as this is an internal impl function, call \</span>
+<span class="sd">         :py:meth:`dumpHierarchy() &lt;poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy&gt;` if you want to dump a </span>
+<span class="sd">         hierarchy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            node: Root node of the hierarchy to be dumped.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`dict`: A json serializable dict holds the whole hierarchy data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">attrVal</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">enumerateAttrs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">attrVal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">payload</span><span class="p">[</span><span class="n">attrName</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrVal</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">getChildren</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">):</span>
+                <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">children</span>
+
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;payload&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span>
+
+        <span class="k">return</span> <span class="n">result</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

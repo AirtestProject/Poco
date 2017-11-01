@@ -1,0 +1,22 @@
+poco\.drivers\.android package
+==============================
+
+.. automodule:: poco.drivers.android
+    :members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    poco.drivers.android.test
+    poco.drivers.android.utils
+
+Submodules
+----------
+
+.. toctree::
+
+   poco.drivers.android.uiautomation
+

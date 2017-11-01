@@ -1,0 +1,21 @@
+poco\.drivers\.netease package
+==============================
+
+.. automodule:: poco.drivers.netease
+    :members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    poco.drivers.netease.mh
+
+Submodules
+----------
+
+.. toctree::
+
+   poco.drivers.netease.internal
+

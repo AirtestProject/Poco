@@ -1,0 +1,6 @@
+poco\.drivers\.android\.uiautomation module
+===========================================
+
+.. automodule:: poco.drivers.android.uiautomation
+    :members:
+    :show-inheritance:

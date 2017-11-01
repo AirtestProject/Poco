@@ -1,0 +1,6 @@
+poco\.sdk\.interfaces\.input module
+===================================
+
+.. automodule:: poco.sdk.interfaces.input
+    :members:
+    :show-inheritance:

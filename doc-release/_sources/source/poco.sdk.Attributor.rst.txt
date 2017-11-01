@@ -1,0 +1,6 @@
+poco\.sdk\.Attributor module
+============================
+
+.. automodule:: poco.sdk.Attributor
+    :members:
+    :show-inheritance:

@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.DefaultMatcher module &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="poco  documentation" href="../index.html"/>
+        <link rel="up" title="poco.sdk package" href="poco.sdk.html"/>
+        <link rel="next" title="poco.sdk.Selector module" href="poco.sdk.Selector.html"/>
+        <link rel="prev" title="poco.sdk.Attributor module" href="poco.sdk.Attributor.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="poco.sdk.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="poco.sdk.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.AbstractDumper.html">poco.sdk.AbstractDumper module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.AbstractNode.html">poco.sdk.AbstractNode module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.Attributor.html">poco.sdk.Attributor module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.sdk.DefaultMatcher module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.Selector.html">poco.sdk.Selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.exceptions.html">poco.sdk.exceptions module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poco.html">poco package</a> &raquo;</li>
+        
+          <li><a href="poco.sdk.html">poco.sdk package</a> &raquo;</li>
+        
+      <li>poco.sdk.DefaultMatcher module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/poco.sdk.DefaultMatcher.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-poco.sdk.DefaultMatcher">
+<span id="poco-sdk-defaultmatcher-module"></span><h1>poco.sdk.DefaultMatcher module<a class="headerlink" href="#module-poco.sdk.DefaultMatcher" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="poco.sdk.DefaultMatcher.DefaultMatcher">
+<em class="property">class </em><code class="descname">DefaultMatcher</code><a class="reference internal" href="../_modules/poco/sdk/DefaultMatcher.html#DefaultMatcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.DefaultMatcher.DefaultMatcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">poco.sdk.DefaultMatcher.IMatcher</span></code></p>
+<p>Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate
+expression. When traversing through the hierarchy tree, matcher will apply match method on each tree node.</p>
+<p>The formal definition of query condition as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span><span class="n">op0</span><span class="p">,</span> <span class="p">(</span><span class="n">expr0</span><span class="p">,</span> <span class="n">expr1</span><span class="p">,</span> <span class="o">...</span><span class="p">))</span>
+<span class="n">expr</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span><span class="n">op1</span><span class="p">,</span> <span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">op0</span></code><code class="xref py py-obj docutils literal"><span class="pre">str</span></code> is logical operator (‘or’ or ‘and’) which has the same semantics as in python. e.g. ‘or’
+means this expression/condition matches if any of the exprN matches.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">op1</span></code><code class="xref py py-obj docutils literal"><span class="pre">str</span></code> is comparator, can be one of as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">op1</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;attr=&#39;</span>
+<span class="n">op1</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;attr.*=&#39;</span>
+<span class="n">op1</span> <span class="p">:</span><span class="o">=</span> <span class="o">...</span> <span class="p">(</span><span class="n">other</span> <span class="n">customized</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">attr=</span></code> corresponds to <a class="reference internal" href="#poco.sdk.DefaultMatcher.EqualizationComparator" title="poco.sdk.DefaultMatcher.EqualizationComparator"><code class="xref py py-class docutils literal"><span class="pre">EqualizationComparator</span></code></a>.</li>
+<li><code class="docutils literal"><span class="pre">attr.*=</span></code> corresponds to <a class="reference internal" href="#poco.sdk.DefaultMatcher.RegexpComparator" title="poco.sdk.DefaultMatcher.RegexpComparator"><code class="xref py py-class docutils literal"><span class="pre">RegexpComparator</span></code></a>.</li>
+</ul>
+<p>The <code class="docutils literal"><span class="pre">op1</span></code> is only a string. <code class="docutils literal"><span class="pre">Matcher</span></code> will help to map to <code class="docutils literal"><span class="pre">Comparator</span></code> object.</p>
+</li>
+</ul>
+<dl class="method">
+<dt id="poco.sdk.DefaultMatcher.DefaultMatcher.match">
+<code class="descname">match</code><span class="sig-paren">(</span><em>cond</em>, <em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/DefaultMatcher.html#DefaultMatcher.match"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.DefaultMatcher.DefaultMatcher.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>See Also: <code class="xref py py-meth docutils literal"><span class="pre">IMatcher.match</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="poco.sdk.DefaultMatcher.EqualizationComparator">
+<em class="property">class </em><code class="descname">EqualizationComparator</code><a class="reference internal" href="../_modules/poco/sdk/DefaultMatcher.html#EqualizationComparator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.DefaultMatcher.EqualizationComparator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Compare two object using native equivalence (==) comparison.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="poco.sdk.DefaultMatcher.RegexpComparator">
+<em class="property">class </em><code class="descname">RegexpComparator</code><a class="reference internal" href="../_modules/poco/sdk/DefaultMatcher.html#RegexpComparator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.DefaultMatcher.RegexpComparator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Compare two object using regular expression matching comparison. Available only when origin value is string. Result
+in False if origin value or given pattern is not <code class="xref py py-obj docutils literal"><span class="pre">str</span></code>.</p>
+<dl class="method">
+<dt id="poco.sdk.DefaultMatcher.RegexpComparator.compare">
+<code class="descname">compare</code><span class="sig-paren">(</span><em>origin</em>, <em>pattern</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/DefaultMatcher.html#RegexpComparator.compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.DefaultMatcher.RegexpComparator.compare" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>origin</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Origin string.</li>
+<li><strong>pattern</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – Regexp pattern string.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if matches otherwise False.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.sdk.Selector.html" class="btn btn-neutral float-right" title="poco.sdk.Selector module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poco.sdk.Attributor.html" class="btn btn-neutral" title="poco.sdk.Attributor module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

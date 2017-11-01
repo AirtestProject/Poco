@@ -1,0 +1,6 @@
+poco\.utils\.hrpc\.hierarchy module
+===================================
+
+.. automodule:: poco.utils.hrpc.hierarchy
+    :members:
+    :show-inheritance:

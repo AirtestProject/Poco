@@ -1,0 +1,6 @@
+poco\.sdk\.AbstractDumper module
+================================
+
+.. automodule:: poco.sdk.AbstractDumper
+    :members:
+    :show-inheritance:

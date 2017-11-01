@@ -1,0 +1,6 @@
+poco\.sdk\.Selector module
+==========================
+
+.. automodule:: poco.sdk.Selector
+    :members:
+    :show-inheritance:

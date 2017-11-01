@@ -1,0 +1,6 @@
+poco\.drivers\.android\.utils\.installation module
+==================================================
+
+.. automodule:: poco.drivers.android.utils.installation
+    :members:
+    :show-inheritance:

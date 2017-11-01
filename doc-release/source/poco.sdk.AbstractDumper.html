@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.AbstractDumper module &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="poco  documentation" href="../index.html"/>
+        <link rel="up" title="poco.sdk package" href="poco.sdk.html"/>
+        <link rel="next" title="poco.sdk.AbstractNode module" href="poco.sdk.AbstractNode.html"/>
+        <link rel="prev" title="poco.sdk.interfaces.screen module" href="poco.sdk.interfaces.screen.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="poco.sdk.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="poco.sdk.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.sdk.AbstractDumper module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.AbstractNode.html">poco.sdk.AbstractNode module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.Attributor.html">poco.sdk.Attributor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.DefaultMatcher.html">poco.sdk.DefaultMatcher module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.Selector.html">poco.sdk.Selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.exceptions.html">poco.sdk.exceptions module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poco.html">poco package</a> &raquo;</li>
+        
+          <li><a href="poco.sdk.html">poco.sdk package</a> &raquo;</li>
+        
+      <li>poco.sdk.AbstractDumper module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/poco.sdk.AbstractDumper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-poco.sdk.AbstractDumper">
+<span id="poco-sdk-abstractdumper-module"></span><h1>poco.sdk.AbstractDumper module<a class="headerlink" href="#module-poco.sdk.AbstractDumper" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="poco.sdk.AbstractDumper.IDumper">
+<em class="property">class </em><code class="descname">IDumper</code><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This interface defines standard dumper behavior. Dumper is only introduced to get the hierarchy information and
+convert it into serializable data.</p>
+<dl class="method">
+<dt id="poco.sdk.AbstractDumper.IDumper.dumpHierarchy">
+<code class="descname">dumpHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper.dumpHierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper.dumpHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dict holding the hierarchy data and its structure should be as follows. The dict should be json
+serializable.</p>
+<p>Structure of the dict:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.&gt;&#39;</span>
+
+    <span class="c1"># All available attributes of this node in form of key-value pairs.</span>
+    <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pos&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="o">...</span>
+    <span class="p">},</span>
+
+    <span class="c1"># If no child, do not assign this entry.</span>
+    <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="o">...</span><span class="p">},</span>  <span class="c1"># Same structure as this dict.</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Hierarchy data or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">NoneType</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.sdk.AbstractDumper.IDumper.getRoot">
+<code class="descname">getRoot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper.getRoot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper.getRoot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the root node of the UI Hierarchy. The node’s information is wrapped by
+<a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>.
+See definition of <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a> for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An instance holds the hierarchy data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">inherit</span> <span class="pre">from</span> <span class="pre">AbstractNode</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="poco.sdk.AbstractDumper.AbstractDumper">
+<em class="property">class </em><code class="descname">AbstractDumper</code><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#poco.sdk.AbstractDumper.IDumper" title="poco.sdk.AbstractDumper.IDumper"><code class="xref py py-class docutils literal"><span class="pre">poco.sdk.AbstractDumper.IDumper</span></code></a></p>
+<p>This class partially implements <code class="docutils literal"><span class="pre">IDumper</span></code> using general traversal algorithm. To dump the hierarchy from a root
+node, this dumper retrieves all available attributes of this root node and list all its children. Then apply the
+same procedure on each child (treat each child as root node) until a node which has no child.</p>
+<dl class="method">
+<dt id="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy">
+<code class="descname">dumpHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper.dumpHierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json serializable dict holds the whole hierarchy data.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">
+<code class="descname">dumpHierarchyImpl</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper.dumpHierarchyImpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crawl the hierarchy tree using the simple BFS algorithm. <code class="docutils literal"><span class="pre">dump</span></code> is engine independent as the hierarchy
+structure is wrapped by <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>, so <code class="docutils literal"><span class="pre">dump</span></code> can be algorithmized.
+Here shows the simplest implementation by default. If you like, you can implement your own algorithm to optimize
+the speed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not call this method in explicitly as this is an internal impl function, call          <a class="reference internal" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy" title="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">dumpHierarchy()</span></code></a> if you want to dump a
+hierarchy.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – Root node of the hierarchy to be dumped.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A json serializable dict holds the whole hierarchy data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.sdk.AbstractNode.html" class="btn btn-neutral float-right" title="poco.sdk.AbstractNode module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poco.sdk.interfaces.screen.html" class="btn btn-neutral" title="poco.sdk.interfaces.screen module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

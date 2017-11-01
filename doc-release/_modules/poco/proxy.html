@@ -1,0 +1,842 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.proxy &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.proxy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.proxy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span> <span class="nn">poco.exceptions</span> <span class="k">import</span> <span class="n">PocoTargetTimeout</span><span class="p">,</span> <span class="n">InvalidOperationException</span><span class="p">,</span> <span class="n">PocoNoSuchNodeException</span><span class="p">,</span> <span class="n">PocoTargetRemovedException</span>
+<span class="kn">from</span> <span class="nn">poco.sdk.exceptions</span> <span class="k">import</span> <span class="n">UnableToSetAttributeException</span>
+<span class="kn">from</span> <span class="nn">poco.utils.query_util</span> <span class="k">import</span> <span class="n">query_expr</span><span class="p">,</span> <span class="n">build_query</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;UIObjectProxy&#39;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">PocoNoSuchNodeException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">proxy</span><span class="o">.</span><span class="n">wait_for_appearance</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">proxy</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">_pre_action_wait_for_appearance</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">proxy</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">PocoTargetTimeout</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+    <span class="k">return</span> <span class="n">wrapped</span>
+
+
+<span class="k">def</span> <span class="nf">refresh_when</span><span class="p">(</span><span class="n">err_type</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">err_type</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapped</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<div class="viewcode-block" id="UIObjectProxy"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy">[docs]</a><span class="k">class</span> <span class="nc">UIObjectProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    UI Proxy class that represents UI element on target device.</span>
+
+<span class="sd">    Any action performing on this instance is handled by poco. It is unnecessary to initialize this object manually.</span>
+<span class="sd">    See ``QueryCondition`` to get more details about how to select UI elements.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        poco: The poco instance.</span>
+<span class="sd">        name: Query condition of attribute &quot;name&quot;. This means you gonna select UI elements whose name is ``name``.</span>
+<span class="sd">        attrs: The other query conditions except ``name``.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        :py:meth:`select UI element(s) by poco &lt;poco.Poco.__call__&gt;`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poco</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+        <span class="c1"># query object in tuple</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">build_query</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span> <span class="o">=</span> <span class="n">poco</span>
+
+        <span class="c1"># Whether multiple UI elements are selected. This will is only a result flag. It would not effect the selection</span>
+        <span class="c1"># results. In order to make the selection faster, this flag is introduced.</span>
+        <span class="c1"># 上一次选择是否是多选，如果不是多选但需要访问所有UI elements时会进行重新选择。</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_query_multiple</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Whether the corresponding UI elements of this UI proxy (self) has been selected.</span>
+        <span class="c1"># 此UI proxy是否已经查找到对应的UI elements了</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluated</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Proxy object of UI elements. May be proxy of `node` or proxy of `[node]`. `self._nodes_proxy_is_list` tells</span>
+        <span class="c1"># the proxy type.</span>
+        <span class="c1"># 可能是远程node代理，也可能是远程[node]代理, 由`self._nodes_proxy_is_list`指定是何种peoxy类型</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_proxy_is_list</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Only use for caching some proxies of sorted node in `self.__getitem__`</span>
+        <span class="c1"># 仅用于__getitem__时保存好已排序的child代理对象</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># The focus point of this UI element. See `CoordinateSystem` to get more details.</span>
+        <span class="c1"># 相对于包围盒的focus point定义，用于touch/swipe/drag操作的局部相对定位</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_focus</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="UIObjectProxy.child"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.child">[docs]</a>    <span class="k">def</span> <span class="nf">child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Select direct child(ren) from this UI element(s) with given query conditions.</span>
+<span class="sd">        See ``QueryCondition`` to get more details about selectors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Query condition of attribute &quot;name&quot;. This means you gonna select UI elements whose name is ``name``.</span>
+<span class="sd">            attrs: The other query conditions except ``name``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy object represents the child(ren) of \</span>
+<span class="sd">             current UI elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sub_query</span> <span class="o">=</span> <span class="n">build_query</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">sub_query</span><span class="p">))</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">UIObjectProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">query</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.children"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.children">[docs]</a>    <span class="k">def</span> <span class="nf">children</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The same as :py:meth:`.child() &lt;poco.proxy.UIObjectProxy.child&gt;` but select all children from this UI </span>
+<span class="sd">        element(s).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.offspring"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.offspring">[docs]</a>    <span class="k">def</span> <span class="nf">offspring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Select any offsprings include direct child(ren) from this UI element(s) with given query conditions.</span>
+<span class="sd">        See ``QueryCondition`` to get more details about selectors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Query condition of attribute &quot;name&quot;. This means you gonna select UI elements whose name is ``name``.</span>
+<span class="sd">            attrs: The other query conditions except ``name``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy object represents the child(ren) of \</span>
+<span class="sd">             current UI elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sub_query</span> <span class="o">=</span> <span class="n">build_query</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">sub_query</span><span class="p">))</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">UIObjectProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">query</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.sibling"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.sibling">[docs]</a>    <span class="k">def</span> <span class="nf">sibling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Select sibling(s) from this UI element(s) with given query conditions.</span>
+<span class="sd">        See ``QueryCondition`` to get more details about selectors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Query condition of attribute &quot;name&quot;. This means you gonna select UI elements whose name is ``name``.</span>
+<span class="sd">            attrs: The other query conditions except ``name``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy object represents the child(ren) of \</span>
+<span class="sd">             current UI elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sub_query</span> <span class="o">=</span> <span class="n">build_query</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">)</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">sub_query</span><span class="p">))</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">UIObjectProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="n">query</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.__getitem__"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Select specific UI element by index. If this UI proxy represents a set of UI elements, you could use this method </span>
+<span class="sd">        to access specific UI element. The new UI element will be wrapped by UIObjectProxy instance. So the return</span>
+<span class="sd">        value is also a UI proxy object.</span>
+
+<span class="sd">        The order of UI elements are determined by its position on screen not the selection sequence. We call this rule </span>
+<span class="sd">        &quot;L2R U2D&quot; (left to right one by one, up to down line by line) which means the most top left UI element is always </span>
+<span class="sd">        the first one. See ``IterationOverUI`` to get more details.</span>
+
+<span class="sd">        Warnings:</span>
+<span class="sd">            This method may cause performance issue depending on implementation of PocoAgent.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            item (:obj:`int`): the index.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy object represents the nth of current UI elements.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_multiple</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+                <span class="n">uiobj</span> <span class="o">=</span> <span class="n">UIObjectProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="p">)</span>
+                <span class="n">uiobj</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+                <span class="n">uiobj</span><span class="o">.</span><span class="n">_evaluated</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">uiobj</span><span class="o">.</span><span class="n">_query_multiple</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">uiobj</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">uiobj</span><span class="o">.</span><span class="n">_nodes_proxy_is_list</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">uiobj</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">uiobj</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">cmp</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">b</span><span class="p">))),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sorted_children</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.__len__"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.__len__">[docs]</a>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count how many UI elements selected.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`int`: Number of selected UI elements. 0 if none of the UI element matches the query condition of \</span>
+<span class="sd">             this UI proxy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes_proxy_is_list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+
+        <span class="c1"># 获取长度时总是multiple的</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_multiple</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">PocoNoSuchNodeException</span><span class="p">:</span>
+                <span class="n">nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.__iter__"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.__iter__">[docs]</a>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Similar to :py:meth:`.__getitem__() &lt;poco.proxy.UIObjectProxy.__getitem__&gt;` but this method helps to iterate </span>
+<span class="sd">        over all UI elements. The order rules of UI elements is the same as :py:meth:`.__getitem__() </span>
+<span class="sd">        &lt;poco.proxy.UIObjectProxy.__getitem__&gt;`. See ``IterationOverUI`` to get more details.</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A generator yielding new UI proxy represents the \</span>
+<span class="sd">             specific UI element iterated over.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoTargetRemovedException: When hierarchy structure changed and attempt to access to an </span>
+<span class="sd">             nonexistent UI element over the iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># 节点数量太多时，就不按照控件顺序排序了</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_query_multiple</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+        <span class="n">sorted_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="n">uiobj</span> <span class="o">=</span> <span class="n">UIObjectProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="p">)</span>
+            <span class="n">uiobj</span><span class="o">.</span><span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+            <span class="n">uiobj</span><span class="o">.</span><span class="n">_evaluated</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">uiobj</span><span class="o">.</span><span class="n">_query_multiple</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">uiobj</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">uiobj</span><span class="o">.</span><span class="n">_nodes_proxy_is_list</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">uiobj</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+            <span class="n">sorted_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">uiobj</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span>
+        <span class="n">sorted_nodes</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">cmp</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">b</span><span class="p">))),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">obj</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">sorted_nodes</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">obj</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.click"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.click">[docs]</a>    <span class="nd">@wait</span>
+    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sleep_interval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a click action on the UI element this UI proxy represents. If this UI proxy represent a set of UI </span>
+<span class="sd">        elements, click the first one. Will click the anchor point of the UI element by default. It is able to click</span>
+<span class="sd">        another point offset by the UI element by providing argument ``focus``.</span>
+<span class="sd">        See ``CoordinateSystem`` to get more details.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): An offset point by the top left corner of the UI elements </span>
+<span class="sd">             as 2-list/2-tuple (x, y) whose component in range of 0~1. This argument can also be &#39;anchor&#39; or &#39;center&#39;. </span>
+<span class="sd">             &#39;Center&#39; means to click the center of bounding box of UI element. </span>
+<span class="sd">            sleep_interval: Seconds to wait after this action. If not provides, it will wait by default. The default </span>
+<span class="sd">             value can be configured by poco initialization. See configuration at poco </span>
+<span class="sd">             :py:class:`initialization &lt;poco.Poco&gt;`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoNoSuchNodeException: Raises when the UI element does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">focus</span> <span class="o">=</span> <span class="n">focus</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_focus</span> <span class="ow">or</span> <span class="s1">&#39;anchor&#39;</span>
+        <span class="n">pos_in_percentage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="n">focus</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">pre_action</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">pos_in_percentage</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="n">pos_in_percentage</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sleep_interval</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_interval</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">wait_stable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">post_action</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">pos_in_percentage</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.swipe"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.swipe">[docs]</a>    <span class="nd">@wait</span>
+    <span class="k">def</span> <span class="nf">swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">focus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a swipe action by given direction from this UI element. Notices and limitations see  </span>
+<span class="sd">        :py:meth:`.click() &lt;poco.proxy.UIObjectProxy.click&gt;`. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): 2-list/2-tuple (x, y) coordinate in NormalizedCoordinate. Can </span>
+<span class="sd">             also be one of &#39;up&#39;, &#39;down&#39;, &#39;left&#39;, &#39;right&#39;, &#39;up&#39; equivalent to [0, -0.1], &#39;down&#39; equivalent to [0, 0.1], </span>
+<span class="sd">             &#39;left&#39; equivalent to [-0.1, 0], &#39;right&#39; equivalent to [0, 0.1].</span>
+<span class="sd">            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() &lt;poco.proxy.UIObjectProxy.click&gt;`. </span>
+<span class="sd">            duration: The time over the whole action.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoNoSuchNodeException: Raises when the UI element does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">focus</span> <span class="o">=</span> <span class="n">focus</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_focus</span> <span class="ow">or</span> <span class="s1">&#39;anchor&#39;</span>
+        <span class="n">dir_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_direction_vector_of</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span>
+        <span class="n">origin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_position</span><span class="p">(</span><span class="n">focus</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">pre_action</span><span class="p">(</span><span class="s1">&#39;swipe&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">dir_vec</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="n">dir_vec</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">post_action</span><span class="p">(</span><span class="s1">&#39;swipe&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">dir_vec</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.drag_to"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.drag_to">[docs]</a>    <span class="k">def</span> <span class="nf">drag_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Similar to swipe, but the end point is provide by a UI proxy or a fixed coordinate.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            target (:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`): A UI proxy or 2-list/2-tuple (x, y) </span>
+<span class="sd">             coordinate in NormalizedCoordinate.</span>
+<span class="sd">            duration: The time over the whole action.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoNoSuchNodeException: Raises when the UI element does not exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">target_pos</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target_pos</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+        <span class="n">origin_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+        <span class="nb">dir</span> <span class="o">=</span> <span class="p">[</span><span class="n">target_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">origin_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">origin_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="nb">dir</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">duration</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.focus"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.focus">[docs]</a>    <span class="k">def</span> <span class="nf">focus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a new UI proxy copy from this with given focus. As UI proxy is immutable, a new UI proxy is always returned.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            f (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): The focus point. Can be 2-list/2-tuple (x, y) coordinate in </span>
+<span class="sd">             NormalizedCoordinate, &#39;center&#39; or &#39;anchor&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: A new UI proxy copy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ret</span><span class="o">.</span><span class="n">_focus</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.get_position"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.get_position">[docs]</a>    <span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">focus</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the position of this UI elements.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            focus: Focus point of UI proxy. See :py:meth:`.focus() &lt;poco.proxy.UIObjectProxy.focus&gt;`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            2-list/2-tuple: coordinate (x, y) in NormalizedCoordinate.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError: If unsupported focus type given.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">focus</span> <span class="o">=</span> <span class="n">focus</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_focus</span> <span class="ow">or</span> <span class="s1">&#39;anchor&#39;</span>
+        <span class="k">if</span> <span class="n">focus</span> <span class="o">==</span> <span class="s1">&#39;anchor&#39;</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">focus</span> <span class="o">==</span> <span class="s1">&#39;center&#39;</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+            <span class="n">ap_x</span><span class="p">,</span> <span class="n">ap_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;anchorPoint&quot;</span><span class="p">)</span>
+            <span class="n">fx</span><span class="p">,</span> <span class="n">fy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="p">(</span><span class="n">fx</span> <span class="o">-</span> <span class="n">ap_x</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">fy</span> <span class="o">-</span> <span class="n">ap_y</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">focus</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+            <span class="n">ap_x</span><span class="p">,</span> <span class="n">ap_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s2">&quot;anchorPoint&quot;</span><span class="p">)</span>
+            <span class="n">fx</span><span class="p">,</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">focus</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="p">(</span><span class="n">fx</span> <span class="o">-</span> <span class="n">ap_x</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">fy</span> <span class="o">-</span> <span class="n">ap_y</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unsupported focus type </span><span class="si">{}</span><span class="s1">. &#39;</span>
+                            <span class="s1">&#39;Only &quot;anchor/center&quot; or 2-list/2-tuple available.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">focus</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">pos</span></div>
+
+    <span class="k">def</span> <span class="nf">_direction_vector_of</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s1">&#39;up&#39;</span><span class="p">:</span>
+            <span class="n">dir_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s1">&#39;down&#39;</span><span class="p">:</span>
+            <span class="n">dir_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+            <span class="n">dir_vec</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">dir</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
+            <span class="n">dir_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="nb">dir</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">dir_vec</span> <span class="o">=</span> <span class="nb">dir</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Unsupported direction type </span><span class="si">{}</span><span class="s1">. &#39;</span>
+                            <span class="s1">&#39;Only &quot;up/down/left/right&quot; or 2-list/2-tuple available.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">dir</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">dir_vec</span>
+
+<div class="viewcode-block" id="UIObjectProxy.wait"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.wait">[docs]</a>    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Block and wait at most given time before this UI element appears.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout: Maximum waiting time in seconds.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: self.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">sleep_for_polling_interval</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.wait_for_appearance"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.wait_for_appearance">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for_appearance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Block and wait until this UI element **appears** within given timeout. Once timeout, </span>
+<span class="sd">        :py:class:`PocoTargetTimeout &lt;poco.exceptions.PocoTargetTimeout&gt;` will raise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout: Maximum waiting time in seconds.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoTargetTimeout: If timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">sleep_for_polling_interval</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PocoTargetTimeout</span><span class="p">(</span><span class="s1">&#39;appearance&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.wait_for_disappearance"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.wait_for_disappearance">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for_disappearance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Block and wait until this UI element **disappears** within given timeout. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            timeout: Maximum waiting time in seconds.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoTargetTimeout: If timeout.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">sleep_for_polling_interval</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">timeout</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PocoTargetTimeout</span><span class="p">(</span><span class="s1">&#39;disappearance&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.attr"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.attr">[docs]</a>    <span class="nd">@refresh_when</span><span class="p">(</span><span class="n">PocoTargetRemovedException</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve attribute of UI element by attribute name.</span>
+<span class="sd">        Return None if attribute does not exist.</span>
+<span class="sd">        If attribute type is :obj:`str`, it will be encoded to utf-8 as :obj:`str` in PY2.  </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: </span>
+<span class="sd">                Attribute name, can be one of the following or other customized related to sdk implementation.</span>
+
+<span class="sd">                - visible: Whether or not it is visible to user. </span>
+<span class="sd">                - text: String value of the UI element. </span>
+<span class="sd">                - type: The type name of UI element from remote runtime. </span>
+<span class="sd">                - pos: The position of the UI element. </span>
+<span class="sd">                - size: The percentage size [width, height] in range of 0~1 according to the screen.</span>
+<span class="sd">                - name: The name of UI element. </span>
+<span class="sd">                - ...: Other sdk implemented attributes. </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None if no such attribute or it value is None/null/nil/etc. Otherwise its value will return. \</span>
+<span class="sd">             The value type should be json serializable.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoNoSuchNodeException: When the UI element does not exists.</span>
+
+<span class="sd">        .. note:: :py:class:`NodeHasBeenRemovedException` will be caught automatically.</span>
+<span class="sd">        </span>
+<span class="sd">        See Also:</span>
+<span class="sd">            :py:meth:`UI element&#39;s attributes in poco sdk definition &lt;poco.sdk.AbstractNode.AbstractNode.getAttr&gt;`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># to optimize speed, retrieve only the first matched element.</span>
+        <span class="c1"># 优化速度，只选择第一个匹配到的节点</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.setattr"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.setattr">[docs]</a>    <span class="nd">@refresh_when</span><span class="p">(</span><span class="n">PocoTargetRemovedException</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change the attribute value of UI element. Only a few attributes can be mutated such as text. If changes </span>
+<span class="sd">        an immutable attributes or attributes not exist, InvalidOperationException will raise. </span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: Attribute name.</span>
+<span class="sd">            val: New attribute value to mutate.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidOperationException: When fail to set attribute on UI element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">(</span><span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">UnableToSetAttributeException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidOperationException</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot; of &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.exists"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test whether the UI element is in the hierarchy. The same as :py:meth:`.attr(&#39;visible&#39;) </span>
+<span class="sd">        &lt;poco.proxy.UIObjectProxy.attr&gt;`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if exists otherwise False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">PocoTargetRemovedException</span><span class="p">,</span> <span class="n">PocoNoSuchNodeException</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.get_text"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.get_text">[docs]</a>    <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the text attribute on UI element. Return None if no such attribute. The same as :py:meth:`.attr(&#39;text&#39;) </span>
+<span class="sd">        &lt;poco.proxy.UIObjectProxy.attr&gt;`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`str`: Text value with utf-8 encoded or None if does not have text attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="n">unicode</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.set_text"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.set_text">[docs]</a>    <span class="k">def</span> <span class="nf">set_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the text attribute on UI element. If this UI element does not support mutation, a exception will raise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: The text value to set.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidOperationException: If unable to mutate text value on UI element.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setattr</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.get_name"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the UI element&#39;s name attribute.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`str`: UI element&#39;s name attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.get_size"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.get_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the UI element&#39;s size in ``NormalizedCoordinate``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            2-:obj:`list`: [width, height] in range of 0 ~ 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UIObjectProxy.get_bounds"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.get_bounds">[docs]</a>    <span class="k">def</span> <span class="nf">get_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the parameters of bounding box of the UI element.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :obj:`list` &lt;:obj:`float`&gt;: 4-list (top, right, bottom, left) to the edge of screen in NormalizedCoordinate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_position</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># t, r, b, l</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">bounds</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;UIObjectProxy of &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">query_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">))</span>
+
+    <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Readonly property accessing the UI element in remote runtime.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_query</span><span class="p">()</span>
+
+<div class="viewcode-block" id="UIObjectProxy.invalidate"><a class="viewcode-back" href="../../source/poco.proxy.html#poco.proxy.UIObjectProxy.invalidate">[docs]</a>    <span class="k">def</span> <span class="nf">invalidate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear the flag to indicate to re-query or re-select the UI element(s) from hierarchy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluated</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_do_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluated</span> <span class="ow">or</span> <span class="n">refresh</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poco</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">,</span> <span class="n">multiple</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PocoNoSuchNodeException</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_evaluated</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_query_multiple</span> <span class="o">=</span> <span class="n">multiple</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nodes</span></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+poco\.acceleration module
+=========================
+
+.. automodule:: poco.acceleration
+    :members:
+    :show-inheritance:

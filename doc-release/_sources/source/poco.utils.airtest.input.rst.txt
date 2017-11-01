@@ -1,0 +1,6 @@
+poco\.utils\.airtest\.input module
+==================================
+
+.. automodule:: poco.utils.airtest.input
+    :members:
+    :show-inheritance:

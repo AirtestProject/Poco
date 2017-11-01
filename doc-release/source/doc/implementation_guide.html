@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Implementation Guide &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../poco.exceptions.html">poco.exceptions module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../poco.sdk.html">poco.sdk package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../poco.sdk.interfaces.html">poco.sdk.interfaces package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Implementation Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/source/doc/implementation_guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="implementation-guide">
+<h1>Implementation Guide<a class="headerlink" href="#implementation-guide" title="Permalink to this headline">¶</a></h1>
+<p>This guide helps you implement and integrate poco-sdk with your game/app step by step.</p>
+<div class="section" id="getting-poco-sdk">
+<h2>Getting Poco SDK<a class="headerlink" href="#getting-poco-sdk" title="Permalink to this headline">¶</a></h2>
+<p>First clone the poco repo according to your script language.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># TODO: complete the git repo addr</span>
+<span class="c1"># for python</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">xxxx</span><span class="o">/</span><span class="n">poco</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>You can just copy the source code to your project or install it as 3rd party dependency.</p>
+</div>
+<div class="section" id="object-model">
+<h2>Object Model<a class="headerlink" href="#object-model" title="Permalink to this headline">¶</a></h2>
+<p>This section shows key models and relationship between them.</p>
+</div>
+</div>
+<div class="section" id="abstract-class-interface-implementation">
+<h1>Abstract Class/Interface Implementation<a class="headerlink" href="#abstract-class-interface-implementation" title="Permalink to this headline">¶</a></h1>
+<p>To implement your own version of poco sdk, you only need to implement the following 2 classes/interfaces and override its abstract method. This section shows the details about implementing the abstract method in classes or interfaces.</p>
+<div class="section" id="abstractnode">
+<h2><a class="reference internal" href="../poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a><a class="headerlink" href="#abstractnode" title="Permalink to this headline">¶</a></h2>
+<p>4 methods should be override</p>
+</div>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="../poco.sdk.AbstractDumper.html#module-poco.sdk.AbstractDumper" title="poco.sdk.AbstractDumper"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>1 method should be override</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

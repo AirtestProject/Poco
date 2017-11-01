@@ -1,0 +1,6 @@
+poco\.sdk\.interfaces\.command module
+=====================================
+
+.. automodule:: poco.sdk.interfaces.command
+    :members:
+    :show-inheritance:

@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.sdk.Selector module &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="poco  documentation" href="../index.html"/>
+        <link rel="up" title="poco.sdk package" href="poco.sdk.html"/>
+        <link rel="next" title="poco.sdk.exceptions module" href="poco.sdk.exceptions.html"/>
+        <link rel="prev" title="poco.sdk.DefaultMatcher module" href="poco.sdk.DefaultMatcher.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="poco.sdk.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="poco.sdk.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.AbstractDumper.html">poco.sdk.AbstractDumper module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.AbstractNode.html">poco.sdk.AbstractNode module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.Attributor.html">poco.sdk.Attributor module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.DefaultMatcher.html">poco.sdk.DefaultMatcher module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.sdk.Selector module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poco.sdk.exceptions.html">poco.sdk.exceptions module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="poco.html">poco package</a> &raquo;</li>
+        
+          <li><a href="poco.sdk.html">poco.sdk package</a> &raquo;</li>
+        
+      <li>poco.sdk.Selector module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/poco.sdk.Selector.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-poco.sdk.Selector">
+<span id="poco-sdk-selector-module"></span><h1>poco.sdk.Selector module<a class="headerlink" href="#module-poco.sdk.Selector" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="poco.sdk.Selector.ISelector">
+<em class="property">class </em><code class="descname">ISelector</code><a class="reference internal" href="../_modules/poco/sdk/Selector.html#ISelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.ISelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This interface defines standard selector behavior. Selector is used for selecting specific UI element by given query
+condition (formal definitions are in specific implementation classes).</p>
+<dl class="method">
+<dt id="poco.sdk.Selector.ISelector.select">
+<code class="descname">select</code><span class="sig-paren">(</span><em>cond</em>, <em>multiple=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/Selector.html#ISelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.ISelector.select" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cond</strong> (<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>) – query conditions.</li>
+<li><strong>multiple</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – Whether or not to select element multiple. This method returns once a node found if
+multiple is True, returns after traversing through all nodes otherwise.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> &lt;inherit from <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>&gt;</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="poco.sdk.Selector.Selector">
+<em class="property">class </em><code class="descname">Selector</code><span class="sig-paren">(</span><em>dumper</em>, <em>matcher=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/Selector.html#Selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.Selector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#poco.sdk.Selector.ISelector" title="poco.sdk.Selector.ISelector"><code class="xref py py-class docutils literal"><span class="pre">poco.sdk.Selector.ISelector</span></code></a></p>
+<p>This class implements standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy
+structure. It supports flexible query conditions such as parental relationship, attribute predicate and etc. Any
+combinations of expressions are also an query conditions.</p>
+<p>The query condition (query expression) defines as following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>expr := (op0, (expr0, expr1))
+expr := (&#39;index&#39;, (expr, :obj:`int`))
+expr := &lt;other query condition&gt; See implementation of Matcher.
+</pre></div>
+</div>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">op0</span></code> can be one of the following (‘&gt;’, ‘/’, ‘-‘), each operator stands for as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;&gt;&#39;</span><span class="p">:</span> <span class="n">offsprings</span><span class="p">,</span> <span class="n">to</span> <span class="n">select</span> <span class="nb">all</span> <span class="n">offsprings</span> <span class="n">matched</span> <span class="n">expr1</span> <span class="kn">from</span> <span class="nn">all</span> <span class="n">roots</span> <span class="n">matched</span> <span class="n">expr0</span><span class="o">.</span>
+<span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="n">children</span><span class="p">,</span> <span class="n">to</span> <span class="n">select</span> <span class="nb">all</span> <span class="n">children</span> <span class="n">matched</span> <span class="n">expr1</span> <span class="kn">from</span> <span class="nn">all</span> <span class="n">roots</span> <span class="n">matched</span> <span class="n">expr0</span><span class="o">.</span>
+<span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="n">siblings</span><span class="p">,</span> <span class="n">to</span> <span class="n">select</span> <span class="nb">all</span> <span class="n">siblings</span> <span class="n">matched</span> <span class="n">expr1</span> <span class="kn">from</span> <span class="nn">all</span> <span class="n">roots</span> <span class="n">matched</span> <span class="n">expr0</span><span class="o">.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">'index'</span></code>: to select specific nth UI element from previous results.</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">others</span></code>: will pass expression to matcher.</p>
+</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dumper</strong> (any implements <a class="reference internal" href="poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper" title="poco.sdk.AbstractDumper.IDumper"><code class="xref py py-class docutils literal"><span class="pre">IDumper</span></code></a>) – The dumper for selector.</li>
+<li><strong>matcher</strong> (any implements <code class="xref py py-class docutils literal"><span class="pre">IMatcher</span></code>) – <a class="reference internal" href="poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.DefaultMatcher" title="poco.sdk.DefaultMatcher.DefaultMatcher"><code class="xref py py-class docutils literal"><span class="pre">DefaultMatcher</span></code></a> instance by default.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="poco.sdk.Selector.Selector.getRoot">
+<code class="descname">getRoot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/Selector.html#Selector.getRoot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.Selector.getRoot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a default root node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Default root node from dumper.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.sdk.Selector.Selector.select">
+<code class="descname">select</code><span class="sig-paren">(</span><em>cond</em>, <em>multiple=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/Selector.html#Selector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.Selector.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>See Also: <a class="reference internal" href="#poco.sdk.Selector.ISelector.select" title="poco.sdk.Selector.ISelector.select"><code class="xref py py-meth docutils literal"><span class="pre">select</span></code></a> method in <code class="docutils literal"><span class="pre">ISelector</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.sdk.Selector.Selector.selectImpl">
+<code class="descname">selectImpl</code><span class="sig-paren">(</span><em>cond</em>, <em>multiple</em>, <em>root</em>, <em>maxDepth</em>, <em>onlyVisibleNode</em>, <em>includeRoot</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/Selector.html#Selector.selectImpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.Selector.Selector.selectImpl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selector internal implementation.
+TODO: add later.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This doc string only shows the outline of the algorithm. Do not call this method in your code as this
+is a internal impl method.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cond</strong> (<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>) – Query condition.</li>
+<li><strong>multiple</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – Whether or not only select the first matched Node.</li>
+<li><strong>root</strong> (inherit from <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>) – Start traversing from the given root.</li>
+<li><strong>maxDepth</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – Max traversing depth.</li>
+<li><strong>onlyVisibleNode</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – If True, skip the Node whose visibility (the value of visible attribute) is
+False.</li>
+<li><strong>includeRoot</strong> (<code class="xref py py-obj docutils literal"><span class="pre">bool</span></code>) – Whether not not include the root node if its child node matched.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The same as              <a class="reference internal" href="#poco.sdk.Selector.ISelector.select" title="poco.sdk.Selector.ISelector.select"><code class="xref py py-meth docutils literal"><span class="pre">select</span></code></a>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><code class="xref py py-obj docutils literal"><span class="pre">list</span></code> &lt;inherit from <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>&gt;</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.sdk.exceptions.html" class="btn btn-neutral float-right" title="poco.sdk.exceptions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="poco.sdk.DefaultMatcher.html" class="btn btn-neutral" title="poco.sdk.DefaultMatcher module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

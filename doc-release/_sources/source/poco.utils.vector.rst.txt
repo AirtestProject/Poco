@@ -1,0 +1,6 @@
+poco\.utils\.vector module
+==========================
+
+.. automodule:: poco.utils.vector
+    :members:
+    :show-inheritance:

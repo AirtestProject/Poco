@@ -1,0 +1,6 @@
+poco\.drivers\.netease\.mh\.test\.test\_bag module
+==================================================
+
+.. automodule:: poco.drivers.netease.mh.test.test_bag
+    :members:
+    :show-inheritance:
