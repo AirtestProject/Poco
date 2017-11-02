@@ -1,10 +1,13 @@
-# Poco ポコ
+
+Poco ポコ
+=======
 
 **A cross-engine UI automation framework**
 
 `中文README(Chinese README) <README-CN.rst>`_ 在此。
 
-## Features
+Features
+--------
 
 * Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.
 * Retrieve UI Elements Hierarchy in game's runtime.
@@ -16,7 +19,8 @@
 * Extensible to other private engines by implementing [poco-sdk]().
 * Compatible with Python 2.7 and Python 3.3+.
 
-## Installation
+Installation
+------------
 
 To use poco, you should install poco on your host as a python library and integrate `poco-sdk` <source/doc/integration.html>`_ in your game.
 
@@ -31,12 +35,13 @@ To use poco, you should install poco on your host as a python library and integr
     git clone xxx/poco.git
     pip install -e poco
 
-**poco-sdk** integration please refer to `Integration Guide <source/doc/integration.html>`_.
+**poco-sdk** integration please refer to `Integration Guide <source/doc/integration.html>`_ .
 
 
-## Example
+Example
+-------
 
-The following example shows a simple test script on demo game using Unity3D. More examples `here <source/doc/poco-example/index.html>`_.
+The following example shows a simple test script on demo game using Unity3D. More examples `here <source/doc/poco-example/index.html>`_ .
 ::
 
     from poco.drivers.unity3d import UnityPoco as Poco
@@ -55,7 +60,8 @@ The following example shows a simple test script on demo game using Unity3D. Mor
     poco(textMatches='finish.*').click()
 
 
-## Basic Concepts
+Basic Concepts
+--------------
 
 * **Target device**: test devices apps or games will run on, usually refers to mobile phones
 * **UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements
@@ -66,24 +72,28 @@ The following example shows a simple test script on demo game using Unity3D. Mor
 ![image](doc/img/hunter-inspector-text-attribute.png)
 ![image](doc/img/hunter-inspector-hierarchy-relations.png)
 
-### Definitions of coordinate system and metric space
+Definitions of coordinate system and metric space
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 ![image](doc/img/hunter-poco-coordinate-system.png)
 
-#### Normalized Coordinate System
+Normalized Coordinate System
+''''''''''''''''''''''''''''
 
 In normalized coordinate system, the height and width of the screen are measured in the range of 1 unit and these two parameters of UI within poco correspond to certain percentage of the screen size. Hence the same UI on devices with different resolution will have same position and size within normalized coordinate system, which is very helpful to write cross-device test cases.
 
 The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.
 
-#### Local Coordinate System (local positioning)
+Local Coordinate System (local positioning)
+'''''''''''''''''''''''''''''''''''''''''''
 
 The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.
 
 Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.
 
 
-## Poco Instance
+Poco Instance
+-------------
 
 For different engines, please initialize different ``poco`` instance. This part will take Unity3D as an example. For other engines, please refer to:
 
@@ -100,9 +110,11 @@ For different engines, please initialize different ``poco`` instance. This part 
     ui = poco('...')
 
 
-## Object Selection and Operation
+Object Selection and Operation
+------------------------------
 
-### Basic Selector
+Basic Selector
+""""""""""""""
 
 The invocation ``poco(...)`` instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
 ::
@@ -118,7 +130,8 @@ The invocation ``poco(...)`` instance is to traverse through the render tree str
 ![image](doc/img/hunter-poco-select-simple.png)
 
 
-### Relative Selector
+Relative Selector
+"""""""""""""""""
 
 When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner
 ::
@@ -129,7 +142,8 @@ When there is an ambiguity in the objects selected by node names/node types or f
 
 ![image](doc/img/hunter-poco-select-relative.png)
 
-### Sequence Selector (index selector, iterator is more recommended for use)
+Sequence Selector (index selector, iterator is more recommended for use)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.
 ::
@@ -140,7 +154,9 @@ Index and traversal will be performed in default up-down or left-right space ord
 
 ![image](doc/img/hunter-poco-select-sequence.png)
 
-### Iterate over a collection of objects
+Iterate over a collection of objects
+""""""""""""""""""""""""""""""""""""
+
 ::
 
     # traverse through every item
@@ -151,7 +167,9 @@ Index and traversal will be performed in default up-down or left-right space ord
 
 ![image](doc/img/hunter-poco-iteration.png)
 
-### Get object properties
+Get object properties
+"""""""""""""""""""""
+
 ::
     
     mission_btn = poco('bg_mission')
@@ -161,9 +179,11 @@ Index and traversal will be performed in default up-down or left-right space ord
     print(mission_btn.exists())  # True/False, exists in the screen or not
 
 
-### Object Proxy Related Operation
+Object Proxy Related Operation
+""""""""""""""""""""""""""""""
 
-#### click
+click
+'''''
 
 The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be `[0, 0]` and the bottom right corner `[1, 1]`. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.
 ::
@@ -176,7 +196,8 @@ The anchorPoint of UI element defaults to the click point. When the first argume
 
 ![image](doc/img/hunter-poco-click.png)
 
-#### swipe
+swipe
+'''''
 
 Take the anchor of UI element as origin and swipe a certain distance towards a direction
 ::
@@ -189,7 +210,8 @@ Take the anchor of UI element as origin and swipe a certain distance towards a d
 
 ![image](doc/img/hunter-poco-swipe.png)
 
-#### drag
+drag
+''''
  
 Drag to target UI from current UI
 ::
@@ -199,7 +221,8 @@ Drag to target UI from current UI
 
 ![image](doc/img/hunter-poco-drag.png)
 
-#### focus (local positioning)
+focus (local positioning)
+'''''''''''''''''''''''''
 
 The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being `[0.5, 0.5]`, the bottom right corner`[1, 1]`, and so on.
 ::
@@ -215,7 +238,8 @@ focus can also be used as internal positioning within an objects, as instanced b
     scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
 
 
-#### wait
+wait
+''''
 
 Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout
 ::
@@ -224,18 +248,23 @@ Wait for the target object to appear and always return  the object itself. If it
     poco('bg_mission').wait(5).exists()  # wait 5 seconds at most，return Exists or Not Exists
 
 
-### Global Operation
+Global Operation
+""""""""""""""""
 
 Can also perform a global operation without any UI elements selected. 
 
-#### click
+click
+'''''
+
 ::
 
     poco.click([0.5, 0.5])  # click the center of screen
     poco.long_click([0.5, 0.5], duration=3)
 
 
-#### swipe
+swipe
+'''''
+
 ::
 
     # swipe from A to B
@@ -248,7 +277,8 @@ Can also perform a global operation without any UI elements selected.
     poco.swipe(point_a, direction=direction)
 
 
-#### snapshot
+snapshot
+''''''''
 
 Take a screenshot of the current screen and save it to file.
 
@@ -261,9 +291,12 @@ Take a screenshot of the current screen and save it to file.
     open('screen.png', 'wb').write(b64decode(b64img))
 
 
-## Exceptions
+Exceptions
+----------
 
-### PocoTargetTimeout
+PocoTargetTimeout
+"""""""""""""""""
+
 ::
 
     from poco.exceptions import PocoTargetTimeout
@@ -275,7 +308,9 @@ Take a screenshot of the current screen and save it to file.
         raise
 
 
-### PocoNoSuchNodeException
+PocoNoSuchNodeException
+"""""""""""""""""""""""
+
 ::
 
     from poco.exceptions import PocoNoSuchNodeException
@@ -289,6 +324,7 @@ Take a screenshot of the current screen and save it to file.
         pass
 
 
-## Unit Test
+Unit Test
+---------
 
 poco is an automation framework. For unit testing, please refer to `PocoUnit <http://git-qa.gz.netease.com/maki/PocoUnit>`_. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
