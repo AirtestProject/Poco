@@ -69,6 +69,9 @@ Basic Concepts
 * **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the ``Selector`` class.
 
 .. image: doc/img/hunter-inspector.png
+    :alt: hunter-inspector
+    :width: 100%
+
 .. image: doc/img/hunter-inspector-text-attribute.png
 .. image: doc/img/hunter-inspector-hierarchy-relations.png
 
@@ -97,8 +100,8 @@ Poco Instance
 
 For different engines, please initialize different ``poco`` instance. This part will take Unity3D as an example. For other engines, please refer to:
 
-* `cocos2dx-js <>`_
-* `android-native <>`_
+* `cocos2dx-js`_
+* `android-native`_
 * unreal (in development)
 * (others see `INTEGRATION guide`_ for more details)
 
@@ -329,8 +332,16 @@ Unit Test
 
 poco is an automation framework. For unit testing, please refer to `PocoUnit`_. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
 
+..
+ 下面的连接要替换成绝对路径
 
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+
+..
+ 下面是对应sdk的下载链接
+
+.. _cocos2dx-js:
+.. _android-native:
