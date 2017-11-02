@@ -170,7 +170,7 @@
 <li>Powerful APIs which are engine independent.</li>
 <li>Support multi-touch e.g. fling/pinch/etc. (in development)</li>
 <li>Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)</li>
-<li>Extensible to other private engines by implementing [poco-sdk]().</li>
+<li>Extensible to other private engines by implementing <a class="reference external" href="source/doc/integration.html">poco-sdk</a>.</li>
 <li>Compatible with Python 2.7 and Python 3.3+.</li>
 </ul>
 </div>
@@ -194,14 +194,19 @@
 <div class="section" id="install-poco-and-pocosdk">
 <h2>Install Poco and PocoSDK<a class="headerlink" href="#install-poco-and-pocosdk" title="Permalink to this headline">¶</a></h2>
 <p>To use poco, you should install poco in your host as a python library and install <a class="reference external" href="source/doc/integration.html">poco-sdk</a> in your game/app.</p>
-<p><strong>poco</strong> can be installed with pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">poco</span>
+<p><strong>poco</strong> can be installed with pip</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
+pip install poco
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Currently, it is only available on git repo. So please clone the repo and install</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">xxx</span><span class="o">/</span><span class="n">poco</span><span class="o">.</span><span class="n">git</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">poco</span>
+<p>Currently, it is only available in git repo. So please clone the repo and install</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/Meteorix/poco.git
+pip install -e poco
+</pre></div>
+</div>
+<p>For NetEase internally use, please execute the following command.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
+pip install -e poco
 </pre></div>
 </div>
 <p><strong>poco-sdk</strong> integration please refer to <a class="reference external" href="source/doc/integration.html">Integration Guide</a></p>
@@ -209,8 +214,8 @@
 </div>
 <div class="section" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
-<p>The following example shows a simple test script on demo game using Unity3D. <a class="reference external" href="source/doc/poco-example/index.html">More examples are here</a>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="k">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
+<p>The following example shows a simple test script on demo game using Unity3D. <a class="reference external" href="source/doc/poco-example/index.html">More examples</a> are here.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
 
 <span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">5001</span><span class="p">))</span>
 
@@ -227,36 +232,51 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="retrieve-ui-hierarchy">
-<h1>Retrieve UI Hierarchy<a class="headerlink" href="#retrieve-ui-hierarchy" title="Permalink to this headline">¶</a></h1>
-<p>Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to retrieve ui hierarchy.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="k">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
-<span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<div class="section" id="dump-ui-hierarchy">
+<h1>Dump UI Hierarchy<a class="headerlink" href="#dump-ui-hierarchy" title="Permalink to this headline">¶</a></h1>
+<p>Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to dump ui hierarchy.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">()</span>
 <span class="n">ui</span> <span class="o">=</span> <span class="n">poco</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">dump</span><span class="p">()</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ui</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The following is part of ui heirarchy. All ui elements are organized in dict like tree structure. Properties are described in <a class="reference external" href="source/README.html#basic-concepts">README</a>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<p>The following is part of ui heirarchy. All ui elements are organized in dict like tree structure. Properties are described in <a class="reference external" href="source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy">README</a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;OctopusArea&#39;</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;anchorPoint&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span>
-                                <span class="mf">0.5</span><span class="p">],</span>
-               <span class="sa">u</span><span class="s1">&#39;clickable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-               <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;OctopusArea&#39;</span><span class="p">,</span>
-               <span class="sa">u</span><span class="s1">&#39;pos&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.130729169</span><span class="p">,</span>
-                        <span class="mf">0.44907406</span><span class="p">],</span>
-               <span class="sa">u</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span>
-                          <span class="mi">1</span><span class="p">],</span>
-               <span class="sa">u</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0859375</span><span class="p">,</span>
-                         <span class="mf">0.125</span><span class="p">],</span>
-               <span class="sa">u</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;GameObject&#39;</span><span class="p">,</span>
-               <span class="sa">u</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-               <span class="sa">u</span><span class="s1">&#39;zOrders&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;global&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                            <span class="sa">u</span><span class="s1">&#39;local&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">}}}],</span>
-    <span class="sa">u</span><span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">}]</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;OctopusArea&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;payload&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;OctopusArea&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;GameObject&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;clickable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;zOrders&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;global&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="mi">1</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;anchorPoint&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">0.5</span><span class="p">,</span>
+            <span class="mf">0.5</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;pos&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">0.130729169</span><span class="p">,</span>
+            <span class="mf">0.44907406</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">0.0859375</span><span class="p">,</span>
+            <span class="mf">0.125</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
 <span class="p">}</span>
 <span class="o">...</span>
 </pre></div>
@@ -274,7 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="source/poco.sdk.html">poco.sdk package</a></li>
 </ul>
 </div>
-</div>
+<span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
 </div>
 
 

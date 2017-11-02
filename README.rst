@@ -24,15 +24,26 @@ Installation
 
 To use poco, you should install poco on your host as a python library and integrate `poco-sdk`_ in your game.
 
-**poco** can be installed with pip::
+**poco** can be installed with pip
+
+.. code-block:: bash
 
     # In the future
     pip install poco
 
-::
 
-    # Currently, it is only available in git repo. So please clone the repo and install
-    git clone xxx/poco.git
+Currently, it is only available in git repo. So please clone the repo and install
+
+.. code-block:: bash
+
+    git clone https://github.com/Meteorix/poco.git
+    pip install -e poco
+
+For NetEase internally use, please execute the following command.
+
+.. code-block:: bash
+
+    git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
     pip install -e poco
 
 **poco-sdk** integration please refer to `Integration Guide`_.
@@ -42,7 +53,8 @@ Example
 -------
 
 The following example shows a simple test script on demo game using Unity3D. `More examples`_ here.
-::
+
+.. code-block:: python
 
     from poco.drivers.unity3d import UnityPoco as Poco
     
@@ -102,7 +114,7 @@ For different engines, please initialize different ``poco`` instance. This part 
 * unreal (in development)
 * (others see `INTEGRATION guide`_ for more details)
 
-::
+.. code-block:: python
 
     from poco.vendor.unity3d import UnityPoco
     
@@ -117,7 +129,8 @@ Basic Selector
 """"""""""""""
 
 The invocation ``poco(...)`` instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
-::
+
+.. code-block:: python
 
     # select by node name
     poco('bg_mission')
@@ -134,7 +147,8 @@ Relative Selector
 """""""""""""""""
 
 When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner
-::
+
+.. code-block:: python
 
     # select by direct child/offspring
     poco('main_node').child('list_item').offspring('item')
@@ -146,7 +160,8 @@ Sequence Selector (index selector, iterator is more recommended for use)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.
-::
+
+.. code-block:: python
 
     items = poco('main_node').child('list_item').offspring('item')
     print(items[0].child('material_name').get_text())
@@ -157,7 +172,7 @@ Index and traversal will be performed in default up-down or left-right space ord
 Iterate over a collection of objects
 """"""""""""""""""""""""""""""""""""
 
-::
+.. code-block:: python
 
     # traverse through every item
     items = poco('main_node').child('list_item').offspring('item')
@@ -170,7 +185,7 @@ Iterate over a collection of objects
 Get object properties
 """""""""""""""""""""
 
-::
+.. code-block:: python
     
     mission_btn = poco('bg_mission')
     print(mission_btn.attr('type'))  # 'Button'
@@ -186,7 +201,8 @@ click
 '''''
 
 The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be `[0, 0]` and the bottom right corner `[1, 1]`. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.
-::
+
+.. code-block:: python
 
     poco('bg_mission').click()
     poco('bg_mission').click('center')
@@ -200,7 +216,8 @@ swipe
 '''''
 
 Take the anchor of UI element as origin and swipe a certain distance towards a direction
-::
+
+.. code-block:: python
 
     joystick = poco('movetouch_panel').child('point_img')
     joystick.swipe('up')
@@ -214,7 +231,8 @@ drag
 ''''
  
 Drag to target UI from current UI
-::
+
+.. code-block:: python
 
     poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
@@ -225,14 +243,16 @@ focus (local positioning)
 '''''''''''''''''''''''''
 
 The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being `[0.5, 0.5]`, the bottom right corner`[1, 1]`, and so on.
-::
+
+.. code-block:: python
 
     poco('bg_mission').focus('center').click()  # click the center
 
 
 
 focus can also be used as internal positioning within an objects, as instanced by the example of implementing a scroll operation in ScrollView
-::
+
+.. code-block:: python
 
     scrollView = poco(type='ScollView')
     scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
@@ -242,7 +262,8 @@ wait
 ''''
 
 Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout
-::
+
+.. code-block:: python
 
     poco('bg_mission').wait(5).click()  # wait 5 seconds at most，click once the object appears
     poco('bg_mission').wait(5).exists()  # wait 5 seconds at most，return Exists or Not Exists
@@ -256,7 +277,7 @@ Can also perform a global operation without any UI elements selected.
 click
 '''''
 
-::
+.. code-block:: python
 
     poco.click([0.5, 0.5])  # click the center of screen
     poco.long_click([0.5, 0.5], duration=3)
@@ -265,7 +286,7 @@ click
 swipe
 '''''
 
-::
+.. code-block:: python
 
     # swipe from A to B
     point_a = [0.1, 0.1]
@@ -283,7 +304,8 @@ snapshot
 Take a screenshot of the current screen and save it to file.
 
 **Note**: ``snapshot`` does not support in some engine implementation of poco.
-::
+
+.. code-block:: python
 
     from base64 import b64decode
     
@@ -297,7 +319,7 @@ Exceptions
 PocoTargetTimeout
 """""""""""""""""
 
-::
+.. code-block:: python
 
     from poco.exceptions import PocoTargetTimeout
     
@@ -311,7 +333,7 @@ PocoTargetTimeout
 PocoNoSuchNodeException
 """""""""""""""""""""""
 
-::
+.. code-block:: python
 
     from poco.exceptions import PocoNoSuchNodeException
     

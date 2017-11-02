@@ -115,8 +115,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#global-operation">Global Operation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#click">click</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#swipe">swipe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">click</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">swipe</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#snapshot">snapshot</a></li>
 </ul>
 </li>
@@ -186,7 +186,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/source/README.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/source/README.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -200,41 +200,46 @@
            <div itemprop="articleBody">
             
   <div class="section" id="poco">
-<span id="poco"></span><h1>Poco ポコ<a class="headerlink" href="#poco" title="Permalink to this headline">¶</a></h1>
+<h1>Poco ポコ<a class="headerlink" href="#poco" title="Permalink to this headline">¶</a></h1>
 <p><strong>A cross-engine UI automation framework</strong></p>
-<p><a class="reference external" href="README-CN.md">中文README(Chinese README)</a>在此。</p>
+<p><a class="reference external" href="doc/integration.html">中文README(Chinese README)</a> 在此。</p>
 <div class="section" id="features">
-<span id="features"></span><h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.</li>
-<li>Retrieve UI Elements Hierarchy in game's runtime.</li>
+<li>Retrieve UI Elements Hierarchy in game’s runtime.</li>
 <li>Super fast and impact-free to the game.</li>
 <li>Super easy sdk integration to the game in 5 minutes.</li>
 <li>Powerful APIs which are engine independent.</li>
 <li>Support multi-touch e.g. fling/pinch/etc. (in development)</li>
 <li>Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)</li>
-<li>Extensible to other private engines by implementing <a class="reference external" href="#">poco-sdk</a>.</li>
+<li>Extensible to other private engines by implementing <a class="reference external" href="doc/integration.html">poco-sdk</a> .</li>
 <li>Compatible with Python 2.7 and Python 3.3+.</li>
 </ul>
 </div>
 <div class="section" id="installation">
-<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>To use poco, you should install poco on your host as a python library and integrate <a class="reference external" href="source/doc/integration.html">poco-sdk</a> in your game.</p>
-<p><strong>poco</strong> can be installed with pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">poco</span>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To use poco, you should install poco on your host as a python library and integrate <a class="reference external" href="doc/integration.html">poco-sdk</a> in your game.</p>
+<p><strong>poco</strong> can be installed with pip</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
+pip install poco
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Currently, it is only available in git repo. So please clone the repo and install</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">xxx</span><span class="o">/</span><span class="n">poco</span><span class="o">.</span><span class="n">git</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="n">poco</span>
+<p>Currently, it is only available in git repo. So please clone the repo and install</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/Meteorix/poco.git
+pip install -e poco
 </pre></div>
 </div>
-<p><strong>poco-sdk</strong> integration please refer to <a class="reference external" href="source/doc/integration.html">Integration Guide</a>.</p>
+<p>For NetEase internally use, please execute the following command.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
+pip install -e poco
+</pre></div>
+</div>
+<p><strong>poco-sdk</strong> integration please refer to <a class="reference external" href="doc/integration.html">Integration Guide</a>.</p>
 </div>
 <div class="section" id="example">
-<span id="example"></span><h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>The following example shows a simple test script on demo game using Unity3D. More examples <a class="reference external" href="#">here</a>.</p>
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The following example shows a simple test script on demo game using Unity3D. <a class="reference external" href="doc/poco-example/index.html">More examples</a> here.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
 
 <span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">5001</span><span class="p">))</span>
@@ -253,39 +258,39 @@
 </div>
 </div>
 <div class="section" id="basic-concepts">
-<span id="basic-concepts"></span><h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>Target device</strong>: test devices apps or games will run on, usually refers to mobile phones</li>
 <li><strong>UI proxy</strong>: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements</li>
 <li><strong>Node/UI element</strong>: UI element instances within apps/games, namely UI</li>
-<li><strong>query expression</strong>: a serializable data structure through which poco interacts with <strong>target devices</strong> and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</li>
+<li><strong>query expression</strong>: a serializable data structure through which poco interacts with <strong>target devices</strong> and selects the corresponding UI elements. Tester usually don’t need to pay attention to the internal structure of this expression unless they need to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</li>
 </ul>
-<p><img alt="image" src="../_images/hunter-inspector.png" />
-<img alt="image" src="../_images/hunter-inspector-text-attribute.png" />
-<img alt="image" src="../_images/hunter-inspector-hierarchy-relations.png" /></p>
+<img alt="../_images/hunter-inspector.png" src="../_images/hunter-inspector.png" />
+<img alt="../_images/hunter-inspector-text-attribute.png" src="../_images/hunter-inspector-text-attribute.png" />
+<img alt="../_images/hunter-inspector-hierarchy-relations.png" src="../_images/hunter-inspector-hierarchy-relations.png" />
 <div class="section" id="definitions-of-coordinate-system-and-metric-space">
-<span id="definitions-of-coordinate-system-and-metric-space"></span><h3>Definitions of coordinate system and metric space<a class="headerlink" href="#definitions-of-coordinate-system-and-metric-space" title="Permalink to this headline">¶</a></h3>
-<p><img alt="image" src="../_images/hunter-poco-coordinate-system.png" /></p>
+<h3>Definitions of coordinate system and metric space<a class="headerlink" href="#definitions-of-coordinate-system-and-metric-space" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/hunter-poco-coordinate-system.png" src="../_images/hunter-poco-coordinate-system.png" />
 <div class="section" id="normalized-coordinate-system">
-<span id="normalized-coordinate-system"></span><h4>Normalized Coordinate System<a class="headerlink" href="#normalized-coordinate-system" title="Permalink to this headline">¶</a></h4>
+<h4>Normalized Coordinate System<a class="headerlink" href="#normalized-coordinate-system" title="Permalink to this headline">¶</a></h4>
 <p>In normalized coordinate system, the height and width of the screen are measured in the range of 1 unit and these two parameters of UI within poco correspond to certain percentage of the screen size. Hence the same UI on devices with different resolution will have same position and size within normalized coordinate system, which is very helpful to write cross-device test cases.</p>
 <p>The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.</p>
 </div>
 <div class="section" id="local-coordinate-system-local-positioning">
-<span id="local-coordinate-system-local-positioning"></span><h4>Local Coordinate System (local positioning)<a class="headerlink" href="#local-coordinate-system-local-positioning" title="Permalink to this headline">¶</a></h4>
+<h4>Local Coordinate System (local positioning)<a class="headerlink" href="#local-coordinate-system-local-positioning" title="Permalink to this headline">¶</a></h4>
 <p>The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.</p>
 <p>Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.</p>
 </div>
 </div>
 </div>
 <div class="section" id="poco-instance">
-<span id="poco-instance"></span><h2>Poco Instance<a class="headerlink" href="#poco-instance" title="Permalink to this headline">¶</a></h2>
+<h2>Poco Instance<a class="headerlink" href="#poco-instance" title="Permalink to this headline">¶</a></h2>
 <p>For different engines, please initialize different <code class="docutils literal"><span class="pre">poco</span></code> instance. This part will take Unity3D as an example. For other engines, please refer to:</p>
 <ul class="simple">
-<li><a class="reference external" href="#">cocos2dx-js</a></li>
-<li><a class="reference external" href="#">android-native</a></li>
+<li><a class="reference internal" href="#cocos2dx-js">cocos2dx-js</a></li>
+<li><a class="reference internal" href="#android-native">android-native</a></li>
 <li>unreal (in development)</li>
-<li>(others see <a class="reference external" href="#">INTEGRATION guide</a> for more details)</li>
+<li>(others see <a class="reference external" href="doc/integration.html">INTEGRATION guide</a> for more details)</li>
 </ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.vendor.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span>
 
@@ -295,9 +300,9 @@
 </div>
 </div>
 <div class="section" id="object-selection-and-operation">
-<span id="object-selection-and-operation"></span><h2>Object Selection and Operation<a class="headerlink" href="#object-selection-and-operation" title="Permalink to this headline">¶</a></h2>
+<h2>Object Selection and Operation<a class="headerlink" href="#object-selection-and-operation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="basic-selector">
-<span id="basic-selector"></span><h3>Basic Selector<a class="headerlink" href="#basic-selector" title="Permalink to this headline">¶</a></h3>
+<h3>Basic Selector<a class="headerlink" href="#basic-selector" title="Permalink to this headline">¶</a></h3>
 <p>The invocation <code class="docutils literal"><span class="pre">poco(...)</span></code> instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># select by node name</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span>
@@ -307,39 +312,39 @@
 <span class="n">poco</span><span class="p">(</span><span class="n">textMatches</span><span class="o">=</span><span class="s1">&#39;^据点.*$&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Button&#39;</span><span class="p">,</span> <span class="n">enable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-select-simple.png" /></p>
+<img alt="../_images/hunter-poco-select-simple.png" src="../_images/hunter-poco-select-simple.png" />
 </div>
 <div class="section" id="relative-selector">
-<span id="relative-selector"></span><h3>Relative Selector<a class="headerlink" href="#relative-selector" title="Permalink to this headline">¶</a></h3>
+<h3>Relative Selector<a class="headerlink" href="#relative-selector" title="Permalink to this headline">¶</a></h3>
 <p>When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># select by direct child/offspring</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-select-relative.png" /></p>
+<img alt="../_images/hunter-poco-select-relative.png" src="../_images/hunter-poco-select-relative.png" />
 </div>
 <div class="section" id="sequence-selector-index-selector-iterator-is-more-recommended-for-use">
-<span id="sequence-selector-index-selector-iterator-is-more-recommended-for-use"></span><h3>Sequence Selector (index selector, iterator is more recommended for use)<a class="headerlink" href="#sequence-selector-index-selector-iterator-is-more-recommended-for-use" title="Permalink to this headline">¶</a></h3>
+<h3>Sequence Selector (index selector, iterator is more recommended for use)<a class="headerlink" href="#sequence-selector-index-selector-iterator-is-more-recommended-for-use" title="Permalink to this headline">¶</a></h3>
 <p>Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;material_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
 <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;material_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-select-sequence.png" /></p>
+<img alt="../_images/hunter-poco-select-sequence.png" src="../_images/hunter-poco-select-sequence.png" />
 </div>
 <div class="section" id="iterate-over-a-collection-of-objects">
-<span id="iterate-over-a-collection-of-objects"></span><h3>Iterate over a collection of objects<a class="headerlink" href="#iterate-over-a-collection-of-objects" title="Permalink to this headline">¶</a></h3>
+<h3>Iterate over a collection of objects<a class="headerlink" href="#iterate-over-a-collection-of-objects" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># traverse through every item</span>
 <span class="n">items</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
     <span class="n">item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;icn_item&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-iteration.png" /></p>
+<img alt="../_images/hunter-poco-iteration.png" src="../_images/hunter-poco-iteration.png" />
 </div>
 <div class="section" id="get-object-properties">
-<span id="get-object-properties"></span><h3>Get object properties<a class="headerlink" href="#get-object-properties" title="Permalink to this headline">¶</a></h3>
+<h3>Get object properties<a class="headerlink" href="#get-object-properties" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mission_btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mission_btn</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">))</span>  <span class="c1"># &#39;Button&#39;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mission_btn</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>  <span class="c1"># &#39;据点支援&#39;</span>
@@ -349,20 +354,20 @@
 </div>
 </div>
 <div class="section" id="object-proxy-related-operation">
-<span id="object-proxy-related-operation"></span><h3>Object Proxy Related Operation<a class="headerlink" href="#object-proxy-related-operation" title="Permalink to this headline">¶</a></h3>
+<h3>Object Proxy Related Operation<a class="headerlink" href="#object-proxy-related-operation" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="click">
-<span id="click"></span><h4>click<a class="headerlink" href="#click" title="Permalink to this headline">¶</a></h4>
-<p>The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">0]</span></code> and the bottom right corner <code class="docutils literal"><span class="pre">[1,</span> <span class="pre">1]</span></code>. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.</p>
+<h4>click<a class="headerlink" href="#click" title="Permalink to this headline">¶</a></h4>
+<p>The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be <cite>[0, 0]</cite> and the bottom right corner <cite>[1, 1]</cite>. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>    <span class="c1"># equivalent to center</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">focus</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># equivalent to above expression</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-click.png" /></p>
+<img alt="../_images/hunter-poco-click.png" src="../_images/hunter-poco-click.png" />
 </div>
 <div class="section" id="swipe">
-<span id="swipe"></span><h4>swipe<a class="headerlink" href="#swipe" title="Permalink to this headline">¶</a></h4>
+<h4>swipe<a class="headerlink" href="#swipe" title="Permalink to this headline">¶</a></h4>
 <p>Take the anchor of UI element as origin and swipe a certain distance towards a direction</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">joystick</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;movetouch_panel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;point_img&#39;</span><span class="p">)</span>
 <span class="n">joystick</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">)</span>
@@ -370,19 +375,19 @@
 <span class="n">joystick</span><span class="o">.</span><span class="n">swipe</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-swipe.png" /></p>
+<img alt="../_images/hunter-poco-swipe.png" src="../_images/hunter-poco-swipe.png" />
 </div>
 <div class="section" id="drag">
-<span id="drag"></span><h4>drag<a class="headerlink" href="#drag" title="Permalink to this headline">¶</a></h4>
+<h4>drag<a class="headerlink" href="#drag" title="Permalink to this headline">¶</a></h4>
 <p>Drag to target UI from current UI</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;突破芯片&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drag_to</span><span class="p">(</span><span class="n">poco</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;岩石司康饼&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="image" src="../_images/hunter-poco-drag.png" /></p>
+<img alt="../_images/hunter-poco-drag.png" src="../_images/hunter-poco-drag.png" />
 </div>
 <div class="section" id="focus-local-positioning">
-<span id="focus-local-positioning"></span><h4>focus (local positioning)<a class="headerlink" href="#focus-local-positioning" title="Permalink to this headline">¶</a></h4>
-<p>The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being <code class="docutils literal"><span class="pre">[0.5,</span> <span class="pre">0.5]</span></code>, the bottom right corner<code class="docutils literal"><span class="pre">[1,</span> <span class="pre">1]</span></code>, and so on.</p>
+<h4>focus (local positioning)<a class="headerlink" href="#focus-local-positioning" title="Permalink to this headline">¶</a></h4>
+<p>The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being <cite>[0.5, 0.5]</cite>, the bottom right corner`[1, 1]`, and so on.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># click the center</span>
 </pre></div>
 </div>
@@ -393,7 +398,7 @@
 </div>
 </div>
 <div class="section" id="wait">
-<span id="wait"></span><h4>wait<a class="headerlink" href="#wait" title="Permalink to this headline">¶</a></h4>
+<h4>wait<a class="headerlink" href="#wait" title="Permalink to this headline">¶</a></h4>
 <p>Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># wait 5 seconds at most，click once the object appears</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>  <span class="c1"># wait 5 seconds at most，return Exists or Not Exists</span>
@@ -402,17 +407,17 @@
 </div>
 </div>
 <div class="section" id="global-operation">
-<span id="global-operation"></span><h3>Global Operation<a class="headerlink" href="#global-operation" title="Permalink to this headline">¶</a></h3>
+<h3>Global Operation<a class="headerlink" href="#global-operation" title="Permalink to this headline">¶</a></h3>
 <p>Can also perform a global operation without any UI elements selected.</p>
-<div class="section" id="click">
-<span id="id1"></span><h4>click<a class="headerlink" href="#click" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id1">
+<h4>click<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="o">.</span><span class="n">click</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>  <span class="c1"># click the center of screen</span>
 <span class="n">poco</span><span class="o">.</span><span class="n">long_click</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="swipe">
-<span id="id2"></span><h4>swipe<a class="headerlink" href="#swipe" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h4>swipe<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># swipe from A to B</span>
 <span class="n">point_a</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
 <span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
@@ -425,7 +430,7 @@
 </div>
 </div>
 <div class="section" id="snapshot">
-<span id="snapshot"></span><h4>snapshot<a class="headerlink" href="#snapshot" title="Permalink to this headline">¶</a></h4>
+<h4>snapshot<a class="headerlink" href="#snapshot" title="Permalink to this headline">¶</a></h4>
 <p>Take a screenshot of the current screen and save it to file.</p>
 <p><strong>Note</strong>: <code class="docutils literal"><span class="pre">snapshot</span></code> does not support in some engine implementation of poco.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
@@ -438,9 +443,9 @@
 </div>
 </div>
 <div class="section" id="exceptions">
-<span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="pocotargettimeout">
-<span id="pocotargettimeout"></span><h3>PocoTargetTimeout<a class="headerlink" href="#pocotargettimeout" title="Permalink to this headline">¶</a></h3>
+<h3>PocoTargetTimeout<a class="headerlink" href="#pocotargettimeout" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.exceptions</span> <span class="kn">import</span> <span class="n">PocoTargetTimeout</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -452,7 +457,7 @@
 </div>
 </div>
 <div class="section" id="poconosuchnodeexception">
-<span id="poconosuchnodeexception"></span><h3>PocoNoSuchNodeException<a class="headerlink" href="#poconosuchnodeexception" title="Permalink to this headline">¶</a></h3>
+<h3>PocoNoSuchNodeException<a class="headerlink" href="#poconosuchnodeexception" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.exceptions</span> <span class="kn">import</span> <span class="n">PocoNoSuchNodeException</span>
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;guide_panel&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ImageView&#39;</span><span class="p">)</span>
@@ -467,9 +472,9 @@
 </div>
 </div>
 <div class="section" id="unit-test">
-<span id="unit-test"></span><h2>Unit Test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h2>
+<h2>Unit Test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h2>
 <p>poco is an automation framework. For unit testing, please refer to <a class="reference external" href="http://git-qa.gz.netease.com/maki/PocoUnit">PocoUnit</a>. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library.</p>
-</div>
+<span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
 </div>
 
 

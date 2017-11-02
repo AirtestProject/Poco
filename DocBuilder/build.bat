@@ -9,5 +9,5 @@ xcopy /Y /S /E ..\doc source\doc\
 
 :: exclude undoc members
 SET SPHINX_APIDOC_OPTIONS=members,show-inheritance
-sphinx-apidoc -Me -o source/ ../poco ../poco/utils/simplerpc
+sphinx-apidoc -Me -o source/ ../poco ../poco/utils
 sphinx-build -b html . ../doc-auto

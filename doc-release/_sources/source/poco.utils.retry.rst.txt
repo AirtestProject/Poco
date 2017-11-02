@@ -1,6 +1,0 @@
-poco\.utils\.retry module
-=========================
-
-.. automodule:: poco.utils.retry
-    :members:
-    :show-inheritance:

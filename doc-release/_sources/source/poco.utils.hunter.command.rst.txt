@@ -1,6 +1,0 @@
-poco\.utils\.hunter\.command module
-===================================
-
-.. automodule:: poco.utils.hunter.command
-    :members:
-    :show-inheritance:

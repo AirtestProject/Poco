@@ -13,7 +13,6 @@ Subpackages
     poco.drivers
     poco.freezeui
     poco.sdk
-    poco.utils
 
 Submodules
 ----------

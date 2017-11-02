@@ -1,6 +1,0 @@
-poco\.utils\.airtest\.screen module
-===================================
-
-.. automodule:: poco.utils.airtest.screen
-    :members:
-    :show-inheritance:

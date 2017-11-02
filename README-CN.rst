@@ -11,7 +11,7 @@ Poco ポコ
 安装(installation)
 ----------------
 
-::
+.. code-block:: bash
 
     # airtest runtime
     git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
@@ -106,7 +106,7 @@ Poco测试框架相关
 * (others see `INTEGRATION guide`_ for more details)
 * `NetEase Internal Engines`_ 公司内所有引擎请点此链接
 
-::
+.. code-block:: python
 
     from poco.vendor.unity3d import UnityPoco
     
@@ -119,7 +119,7 @@ Poco测试框架相关
 
 ``poco`` 对象的 ``__call__`` 方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 `API Reference`_ 。
 
-::
+.. code-block:: python
 
     # 根据节点名选择
     poco('bg_mission')
@@ -136,7 +136,8 @@ Poco测试框架相关
 """"""""
 
 直接通过节点名或节点类型选择的对象容易产生歧义或无法选择时，可通过相对的方式按层级进行选择
-::
+
+.. code-block:: python
 
     # 直系孩子/后代选择
     poco('main_node').child('list_item').offspring('item')
@@ -148,7 +149,8 @@ Poco测试框架相关
 """"""""""""""""""""""""""""""""""
 
 索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
-::
+
+.. code-block:: python
 
     items = poco('main_node').child('list_item').offspring('item')
     print(items[0].child('material_name').get_text())
@@ -160,7 +162,7 @@ Poco测试框架相关
 遍历对象集合
 """"""""""
 
-::
+.. code-block:: python
 
     # 遍历每一个商品
     items = poco('main_node').child('list_item').offspring('item')
@@ -173,7 +175,7 @@ Poco测试框架相关
 获取对象属性
 """"""""""
 
-::
+.. code-block:: python
 
     mission_btn = poco('bg_mission')
     print(mission_btn.attr('type'))  # 'Button'
@@ -189,7 +191,8 @@ click
 '''''
 
 点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为 ``[0, 0]`` ，右下角为 ``[1, 1]`` 。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。
-::
+
+.. code-block:: python
 
     poco('bg_mission').click()
     poco('bg_mission').click('center')
@@ -203,7 +206,8 @@ swipe
 '''''
 
 以对象anchor为起点，朝某个方向滑动一段距离
-::
+
+.. code-block:: python
 
     joystick = poco('movetouch_panel').child('point_img')
     joystick.swipe('up')
@@ -217,7 +221,8 @@ drag
 ''''
  
 从当前对象拖拽到目标对象
-::
+
+.. code-block:: python
 
     poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
@@ -228,14 +233,16 @@ focus (局部定位)
 ''''''''''''''
 
 与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` ，以此类推。
-::
+
+.. code-block:: python
 
     poco('bg_mission').focus('center').click()  # 点击中心点
 
 
 
 focus也可以用于一个对象的内部定位，例如实现一个ScrollView的卷动操作
-::
+
+.. code-block:: python
 
     scrollView = poco(type='ScollView')
     scrollView.focus([0.5, 0.8]).drag_to(scrollView.focus([0.5, 0.2]))
@@ -245,7 +252,8 @@ wait
 ''''
 
 等待目标对象出现，总是返回对象自身，如果出现立即返回，否则timeout后返回
-::
+
+.. code-block:: python
 
     poco('bg_mission').wait(5).click()  # 最多等待5秒，出现即点击
     poco('bg_mission').wait(5).exists()  # 最多等待5秒，返回是否exists
@@ -254,7 +262,7 @@ wait
 捕获异常
 ----
 
-::
+.. code-block:: python
 
     from poco.exceptions import PocoTargetTimeout
     
@@ -265,7 +273,7 @@ wait
         raise
     
 
-::
+.. code-block:: python
 
     from poco.exceptions import PocoNoSuchNodeException
     
@@ -290,7 +298,7 @@ poco是自动化框架，关于单元测试请见 `PocoUnit`_ 。PocoUnit提供�
 1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 <http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载最新版的接入模块。
 2. 在项目的 ``__init__`` 指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
 
-::
+.. code-block:: python
 
     # poco uiautomation
     PocoUiautomation = require('support.poco.neox.uiautomation')
