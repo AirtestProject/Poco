@@ -16,13 +16,13 @@ Features
 * Powerful APIs which are engine independent.
 * Support multi-touch e.g. fling/pinch/etc. (in development)
 * Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
-* Extensible to other private engines by implementing [poco-sdk]().
+* Extensible to other private engines by implementing `poco-sdk`_ .
 * Compatible with Python 2.7 and Python 3.3+.
 
 Installation
 ------------
 
-To use poco, you should install poco on your host as a python library and integrate `poco-sdk` <source/doc/integration.html>`_ in your game.
+To use poco, you should install poco on your host as a python library and integrate `poco-sdk`_ in your game.
 
 **poco** can be installed with pip::
 
@@ -35,13 +35,13 @@ To use poco, you should install poco on your host as a python library and integr
     git clone xxx/poco.git
     pip install -e poco
 
-**poco-sdk** integration please refer to `Integration Guide <source/doc/integration.html>`_ .
+**poco-sdk** integration please refer to `Integration Guide`_.
 
 
 Example
 -------
 
-The following example shows a simple test script on demo game using Unity3D. More examples `here <source/doc/poco-example/index.html>`_ .
+The following example shows a simple test script on demo game using Unity3D. `More examples`_ here.
 ::
 
     from poco.drivers.unity3d import UnityPoco as Poco
@@ -66,16 +66,16 @@ Basic Concepts
 * **Target device**: test devices apps or games will run on, usually refers to mobile phones
 * **UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements
 * **Node/UI element**: UI element instances within apps/games, namely UI
-* **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the `Selector` class.
+* **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the ``Selector`` class.
 
-![image](doc/img/hunter-inspector.png)
-![image](doc/img/hunter-inspector-text-attribute.png)
-![image](doc/img/hunter-inspector-hierarchy-relations.png)
+.. image: doc/img/hunter-inspector.png
+.. image: doc/img/hunter-inspector-text-attribute.png
+.. image: doc/img/hunter-inspector-hierarchy-relations.png
 
 Definitions of coordinate system and metric space
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-![image](doc/img/hunter-poco-coordinate-system.png)
+.. image: doc/img/hunter-poco-coordinate-system.png
 
 Normalized Coordinate System
 ''''''''''''''''''''''''''''
@@ -100,7 +100,7 @@ For different engines, please initialize different ``poco`` instance. This part 
 * `cocos2dx-js <>`_
 * `android-native <>`_
 * unreal (in development)
-* (others see `INTEGRATION guide <>`_ for more details)
+* (others see `INTEGRATION guide`_ for more details)
 
 ::
 
@@ -127,7 +127,7 @@ The invocation ``poco(...)`` instance is to traverse through the render tree str
     poco(textMatches='^据点.*$', type='Button', enable=True)
 
 
-![image](doc/img/hunter-poco-select-simple.png)
+.. image: doc/img/hunter-poco-select-simple.png
 
 
 Relative Selector
@@ -140,7 +140,7 @@ When there is an ambiguity in the objects selected by node names/node types or f
     poco('main_node').child('list_item').offspring('item')
 
 
-![image](doc/img/hunter-poco-select-relative.png)
+.. image: doc/img/hunter-poco-select-relative.png
 
 Sequence Selector (index selector, iterator is more recommended for use)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -152,7 +152,7 @@ Index and traversal will be performed in default up-down or left-right space ord
     print(items[0].child('material_name').get_text())
     print(items[1].child('material_name').get_text())
 
-![image](doc/img/hunter-poco-select-sequence.png)
+.. image: doc/img/hunter-poco-select-sequence.png
 
 Iterate over a collection of objects
 """"""""""""""""""""""""""""""""""""
@@ -165,7 +165,7 @@ Iterate over a collection of objects
         item.child('icn_item')
 
 
-![image](doc/img/hunter-poco-iteration.png)
+.. image: doc/img/hunter-poco-iteration.png
 
 Get object properties
 """""""""""""""""""""
@@ -194,7 +194,7 @@ The anchorPoint of UI element defaults to the click point. When the first argume
     poco('bg_mission').focus([0.5, 0.5]).click()  # equivalent to above expression
 
 
-![image](doc/img/hunter-poco-click.png)
+.. image: doc/img/hunter-poco-click.png
 
 swipe
 '''''
@@ -208,7 +208,7 @@ Take the anchor of UI element as origin and swipe a certain distance towards a d
     joystick.swipe([0.2, -0.2], duration=0.5)
 
 
-![image](doc/img/hunter-poco-swipe.png)
+.. image: doc/img/hunter-poco-swipe.png
 
 drag
 ''''
@@ -219,7 +219,7 @@ Drag to target UI from current UI
     poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 
-![image](doc/img/hunter-poco-drag.png)
+.. image: doc/img/hunter-poco-drag.png
 
 focus (local positioning)
 '''''''''''''''''''''''''
@@ -327,4 +327,10 @@ PocoNoSuchNodeException
 Unit Test
 ---------
 
-poco is an automation framework. For unit testing, please refer to `PocoUnit <http://git-qa.gz.netease.com/maki/PocoUnit>`_. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
+poco is an automation framework. For unit testing, please refer to `PocoUnit`_. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
+
+
+.. _poco-sdk: source/doc/integration.html
+.. _Integration Guide: source/doc/integration.html
+.. _More examples: source/doc/poco-example/index.html
+.. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
