@@ -43,7 +43,7 @@ Poco ポコ
 
 
 
-安装遇到权限问题请下载我们的 `deploy-key`_ ，将下载下来的deploy-key放到 ``C:\User\<username>\.ssh\`` 目录下，改名为``id_rsa``，再重新运行上面的命令。
+安装遇到权限问题请下载我们的 `deploy-key`_ ，将下载下来的deploy-key放到 ``C:\User\<username>\.ssh\`` 目录下，改名为 ``id_rsa`` ，再重新运行上面的命令。
 
 基本概念(concepts)
 --------------
@@ -117,7 +117,7 @@ Poco测试框架相关
 基本选择器
 """"""""
 
-``poco``对象的``__call__``方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 `API Reference`_ 。
+``poco`` 对象的 ``__call__`` 方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 `API Reference`_ 。
 
 ::
 
@@ -188,7 +188,7 @@ Poco测试框架相关
 click
 '''''
 
-点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为``[0, 0]``，右下角为``[1, 1]``。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。
+点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为 ``[0, 0]`` ，右下角为 ``[1, 1]`` 。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。
 ::
 
     poco('bg_mission').click()
@@ -227,7 +227,7 @@ drag
 focus (局部定位)
 ''''''''''''''
 
-与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为`[0.5, 0.5]`，右下角为`[1, 1]`，以此类推。
+与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` ，以此类推。
 ::
 
     poco('bg_mission').focus('center').click()  # 点击中心点
@@ -281,14 +281,14 @@ wait
 单元测试
 ----
 
-poco是自动化框架，关于单元测试请见`PocoUnit`_ 。PocoUnit提供了一整套完整的断言方法，并且和python标准库unittest是兼容的。
+poco是自动化框架，关于单元测试请见 `PocoUnit`_ 。PocoUnit提供了一整套完整的断言方法，并且和python标准库unittest是兼容的。
 
 
 接入参考
 ----
 
 1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 <http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载最新版的接入模块。
-#. 在项目的``__init__``指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
+2. 在项目的 ``__init__`` 指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
 
 ::
 
@@ -303,9 +303,8 @@ poco是自动化框架，关于单元测试请见`PocoUnit`_ 。PocoUnit提供�
     Safaia().install(InspectorExt)
 
 
-#. `hunter终端`_ 右上角点击**Inspector**按钮打开检视器面板。
+3. `hunter终端`_ 右上角点击**Inspector**按钮打开检视器面板。
 
-<!-- end of chinese only -->
 
 
 .. _English README: README.rst
@@ -316,10 +315,11 @@ poco是自动化框架，关于单元测试请见`PocoUnit`_ 。PocoUnit提供�
 ..
  下面的连接要替换成绝对路径
 
-.. _poco-sdk: source/doc/integration.html
-.. _Integration Guide: source/doc/integration.html
-.. _More examples: source/doc/poco-example/index.html
+.. _poco-sdk: doc/integration.html
+.. _Integration Guide: doc/integration.html
+.. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+.. _API Reference: 
 
 ..
  下面是对应sdk的下载链接

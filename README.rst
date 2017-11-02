@@ -4,7 +4,7 @@ Poco ポコ
 
 **A cross-engine UI automation framework**
 
-`中文README(Chinese README) <README-CN.rst>`_ 在此。
+`中文README(Chinese README)`_ 在此。
 
 Features
 --------
@@ -332,9 +332,10 @@ poco is an automation framework. For unit testing, please refer to `PocoUnit`_. 
 ..
  下面的连接要替换成绝对路径
 
-.. _poco-sdk: source/doc/integration.html
-.. _Integration Guide: source/doc/integration.html
-.. _More examples: source/doc/poco-example/index.html
+.. _中文README(Chinese README): 
+.. _poco-sdk: doc/integration.html
+.. _Integration Guide: doc/integration.html
+.. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 
 ..
