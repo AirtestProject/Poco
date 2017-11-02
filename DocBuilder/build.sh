@@ -3,7 +3,7 @@
 # build my doc together
 rm -rf source/
 mkdir source/
-cp ../README.md source/
+cp ../README.rst source/
 cp ../README-CN.md source/
 cp -r ../doc source/
 cp -r ../doc source/
@@ -18,5 +18,5 @@ mkdir ../doc-auto/source/source
 cp -r ../doc ../doc-auto/source/source
 
 # copy readme-built from .html to .md to ensure links are working well
-cp ../doc-auto/source/README.html ../doc-auto/source/README.md
+cp ../doc-auto/source/README.html ../doc-auto/source/README.rst
 cp ../doc-auto/source/README-CN.html ../doc-auto/source/README-CN.md

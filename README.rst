@@ -68,17 +68,14 @@ Basic Concepts
 * **Node/UI element**: UI element instances within apps/games, namely UI
 * **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the ``Selector`` class.
 
-.. image: doc/img/hunter-inspector.png
-    :alt: hunter-inspector
-    :width: 100%
-
-.. image: doc/img/hunter-inspector-text-attribute.png
-.. image: doc/img/hunter-inspector-hierarchy-relations.png
+.. image:: doc/img/hunter-inspector.png
+.. image:: doc/img/hunter-inspector-text-attribute.png
+.. image:: doc/img/hunter-inspector-hierarchy-relations.png
 
 Definitions of coordinate system and metric space
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-.. image: doc/img/hunter-poco-coordinate-system.png
+.. image:: doc/img/hunter-poco-coordinate-system.png
 
 Normalized Coordinate System
 ''''''''''''''''''''''''''''
@@ -130,7 +127,7 @@ The invocation ``poco(...)`` instance is to traverse through the render tree str
     poco(textMatches='^据点.*$', type='Button', enable=True)
 
 
-.. image: doc/img/hunter-poco-select-simple.png
+.. image:: doc/img/hunter-poco-select-simple.png
 
 
 Relative Selector
@@ -143,7 +140,7 @@ When there is an ambiguity in the objects selected by node names/node types or f
     poco('main_node').child('list_item').offspring('item')
 
 
-.. image: doc/img/hunter-poco-select-relative.png
+.. image:: doc/img/hunter-poco-select-relative.png
 
 Sequence Selector (index selector, iterator is more recommended for use)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -155,7 +152,7 @@ Index and traversal will be performed in default up-down or left-right space ord
     print(items[0].child('material_name').get_text())
     print(items[1].child('material_name').get_text())
 
-.. image: doc/img/hunter-poco-select-sequence.png
+.. image:: doc/img/hunter-poco-select-sequence.png
 
 Iterate over a collection of objects
 """"""""""""""""""""""""""""""""""""
@@ -168,7 +165,7 @@ Iterate over a collection of objects
         item.child('icn_item')
 
 
-.. image: doc/img/hunter-poco-iteration.png
+.. image:: doc/img/hunter-poco-iteration.png
 
 Get object properties
 """""""""""""""""""""
@@ -197,7 +194,7 @@ The anchorPoint of UI element defaults to the click point. When the first argume
     poco('bg_mission').focus([0.5, 0.5]).click()  # equivalent to above expression
 
 
-.. image: doc/img/hunter-poco-click.png
+.. image:: doc/img/hunter-poco-click.png
 
 swipe
 '''''
@@ -211,7 +208,7 @@ Take the anchor of UI element as origin and swipe a certain distance towards a d
     joystick.swipe([0.2, -0.2], duration=0.5)
 
 
-.. image: doc/img/hunter-poco-swipe.png
+.. image:: doc/img/hunter-poco-swipe.png
 
 drag
 ''''
@@ -222,7 +219,7 @@ Drag to target UI from current UI
     poco(text='突破芯片').drag_to(poco(text='岩石司康饼'))
 
 
-.. image: doc/img/hunter-poco-drag.png
+.. image:: doc/img/hunter-poco-drag.png
 
 focus (local positioning)
 '''''''''''''''''''''''''

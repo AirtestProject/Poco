@@ -14,7 +14,7 @@ Features
 * Powerful APIs which are engine independent.
 * Support multi-touch e.g. fling/pinch/etc. (in development)
 * Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
-* Extensible to other private engines by implementing [poco-sdk]().
+* Extensible to other private engines by implementing `poco-sdk`_.
 * Compatible with Python 2.7 and Python 3.3+.
 
 
@@ -29,7 +29,7 @@ Getting Started
 Install Poco and PocoSDK
 ------------------------
 
-To use poco, you should install poco in your host as a python library and install `poco-sdk <source/doc/integration.html>`_ in your game/app.
+To use poco, you should install poco in your host as a python library and install `poco-sdk`_ in your game/app.
 
 **poco** can be installed with pip::
 
@@ -42,13 +42,13 @@ To use poco, you should install poco in your host as a python library and instal
     git clone xxx/poco.git
     pip install -e poco
 
-**poco-sdk** integration please refer to `Integration Guide <source/doc/integration.html>`_
+**poco-sdk** integration please refer to `Integration Guide`_
 
 
 Example
 =======
 
-The following example shows a simple test script on demo game using Unity3D. `More examples are here <source/doc/poco-example/index.html>`_.
+The following example shows a simple test script on demo game using Unity3D. `More examples`_ are here.
 ::
 
     from poco.drivers.unity3d import UnityPoco as Poco
@@ -68,7 +68,7 @@ The following example shows a simple test script on demo game using Unity3D. `Mo
 
 
 Dump UI Hierarchy
-======================
+=================
 
 Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to dump ui hierarchy.
 ::
@@ -120,3 +120,18 @@ Poco
     source/poco.proxy
     source/poco.exceptions
     source/poco.sdk
+
+
+..
+ 下面的连接要替换成绝对路径
+
+.. _poco-sdk: source/doc/integration.html
+.. _Integration Guide: source/doc/integration.html
+.. _More examples: source/doc/poco-example/index.html
+.. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+
+..
+ 下面是对应sdk的下载链接
+
+.. _cocos2dx-js:
+.. _android-native:
