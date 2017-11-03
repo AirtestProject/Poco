@@ -1,21 +1,9 @@
 
-Welcome to Poco's documentation!
+Welcome to Poco ポコ documentation!
 ================================
 
-**Poco is a cross-engine UI automation framework.**
-
-Features
-========
-
-* Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.
-* Retrieve UI Elements Hierarchy in game's runtime.
-* Super fast and impact-free to the game.
-* Super easy sdk integration to the game in 5 minutes.
-* Powerful APIs which are engine independent.
-* Support multi-touch e.g. fling/pinch/etc. (in development)
-* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
-* Extensible to other private engines by implementing `poco-sdk`_.
-* Compatible with Python 2.7 and Python 3.3+.
+This document provides all the basic information that are needed to start using Poco ポコ cross-engine UI
+automation framework. It covers the main framework ideas and concepts and shows examples for various use cases as well.
 
 
 Getting Started
@@ -29,36 +17,54 @@ Getting Started
 Install Poco and PocoSDK
 ------------------------
 
-To use poco, you should install poco in your host as a python library and install `poco-sdk`_ in your game/app.
+This section describes how to install `Poco` and `PocoSDK`.
 
-**poco** can be installed with pip
+**System Requirements**
+
+* Operating System:
+    * Windows
+    * MacOS X
+    * Linux
+
+* Python2.7 & Python3.3+
+
+**Installing the Python package**
+
+In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
+your game/app.
+
+**Poco** can be installed straightforward with ``pip`` command
 
 .. code-block:: bash
 
     # In the future
     pip install poco
 
-Currently, it is only available in git repo. So please clone the repo and install
+Currently, the code is available only in `Git` repository and can be installed as follows
 
 .. code-block:: bash
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
 
-For NetEase internally use, please execute the following command.
+For NetEase internal use, clone the repository from following location
 
 .. code-block:: bash
 
     git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
     pip install -e poco
 
-**poco-sdk** integration please refer to `Integration Guide`_
+For **poco-sdk** integration please refer to `Integration Guide`_
 
 
-Example
-=======
+Using Poco as Python package
+=============================
 
-The following example shows a simple test script on demo game using Unity3D. `More examples`_ are here.
+Simple demo
+-----------
+
+The following example shows a simple script on demo game using Unity3D. Check `More examples`_ section for more detailed
+info.
 
 .. code-block:: python
 
@@ -78,10 +84,11 @@ The following example shows a simple test script on demo game using Unity3D. `Mo
     poco(textMatches='finish.*').click()
 
 
-Dump UI Hierarchy
-=================
+Dump UI hierarchy example
+--------------------------
 
-Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to dump ui hierarchy.
+Poco defines an uniform format to serialize UI hierarchy for different game engines. This section shows how to dump
+UI hierarchy.
 
 .. code-block:: python
 
@@ -94,7 +101,9 @@ Poco defines an uniform format to serialize ui heirarchy for different game engi
 
 
 
-The following is part of ui heirarchy. All ui elements are organized in dict like tree structure. Properties are described in `README <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
+The following is the snippet of UI hierarchy. All UI elements are organized in `dict` representing the `tree` structure.
+More detailed info about properties are described in
+`README <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
 
 .. code-block:: python
 

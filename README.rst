@@ -1,6 +1,6 @@
 
 Poco ポコ
-=======
+=========
 
 **A cross-engine UI automation framework**
 
@@ -9,44 +9,58 @@ Poco ポコ
 Features
 --------
 
-* Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.
-* Retrieve UI Elements Hierarchy in game's runtime.
-* Super fast and impact-free to the game.
-* Super easy sdk integration to the game in 5 minutes.
-* Powerful APIs which are engine independent.
-* Support multi-touch e.g. fling/pinch/etc. (in development)
-* Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)
-* Extensible to other private engines by implementing `poco-sdk`_ .
-* Compatible with Python 2.7 and Python 3.3+.
+Main Poco features includes following:
+    * supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
+    * retrieves UI Elements Hierarchy in game's runtime
+    * is super fast and impact-free to the game
+    * allows straightforward SDK integration to the game (within in 5 minutes)
+    * provides powerful APIs taht are engine independent
+    * supports multi-touch e.g. fling/pinch/... (and more is coming soon)
+    * support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
+    * is extensible to other private engines by implementing `poco-sdk`_ .
+    * is compatible with Python 2.7 and Python 3.3+.
 
 Installation
 ------------
 
-To use poco, you should install poco on your host as a python library and integrate `poco-sdk`_ in your game.
+This section describes how to install `Poco` and `PocoSDK`.
 
-**poco** can be installed with pip
+**System Requirements**
+
+* Operating System:
+    * Windows
+    * MacOS X
+    * Linux
+
+* Python2.7 & Python3.3+
+
+**Installing the Python package**
+
+In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
+your game/app.
+
+**Poco** can be installed straightforward with ``pip`` command
 
 .. code-block:: bash
 
     # In the future
     pip install poco
 
-
-Currently, it is only available in git repo. So please clone the repo and install
+Currently, the code is available only in `Git` repository and can be installed as follows
 
 .. code-block:: bash
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
 
-For NetEase internally use, please execute the following command.
+For NetEase internal use, clone the repository from following location
 
 .. code-block:: bash
 
     git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
     pip install -e poco
 
-**poco-sdk** integration please refer to `Integration Guide`_.
+For **poco-sdk** integration please refer to `Integration Guide`_
 
 
 Example
@@ -75,10 +89,15 @@ The following example shows a simple test script on demo game using Unity3D. `Mo
 Basic Concepts
 --------------
 
-* **Target device**: test devices apps or games will run on, usually refers to mobile phones
-* **UI proxy**: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements
-* **Node/UI element**: UI element instances within apps/games, namely UI
-* **query expression**: a serializable data structure through which poco interacts with **target devices** and selects the corresponding UI elements. Tester usually don't need to pay attention to the internal structure of this expression unless they need to customize the ``Selector`` class.
+This section describes the basic concepts of Poco. Basic terminology used in following section
+
+* **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
+* **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
+* **Node/UI element**: UI element instances or nodes in app/game
+* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required
+to customize the ``Selector`` class.
+
+Following images show the UI hierarchy represented in Poco
 
 .. image:: doc/img/hunter-inspector.png
 .. image:: doc/img/hunter-inspector-text-attribute.png
@@ -87,32 +106,45 @@ Basic Concepts
 Definitions of coordinate system and metric space
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-.. image:: doc/img/hunter-poco-coordinate-system.png
-
 Normalized Coordinate System
 ''''''''''''''''''''''''''''
 
-In normalized coordinate system, the height and width of the screen are measured in the range of 1 unit and these two parameters of UI within poco correspond to certain percentage of the screen size. Hence the same UI on devices with different resolution will have same position and size within normalized coordinate system, which is very helpful to write cross-device test cases.
+In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
+width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
+In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
+position and size. This is especially very handy when writing cross-device test cases.
 
-The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.
+The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
+(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.
+
+.. image:: doc/img/hunter-poco-coordinate-system.png
 
 Local Coordinate System (local positioning)
 '''''''''''''''''''''''''''''''''''''''''''
 
-The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.
+The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
+The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
+rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
+length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
+coordinate system.
 
-Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.
+Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
+the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
+correspond to the position out of the UI element.
 
 
 Poco Instance
 -------------
 
-For different engines, please initialize different ``poco`` instance. This part will take Unity3D as an example. For other engines, please refer to:
+There are several engines supported and for each engine the different ``poco`` instance must be initialized.
 
-* `cocos2dx-js`_
-* `android-native`_
-* unreal (in development)
-* (others see `INTEGRATION guide`_ for more details)
+Supported engines are as follows
+    * `cocos2dx-js`_
+    * `android-native`_
+    * unreal (in development)
+    * for other engines, refer to `INTEGRATION guide`_ for more details
+
+Following example shows how to initialize popo instance for Unity3D.
 
 .. code-block:: python
 
@@ -122,13 +154,18 @@ For different engines, please initialize different ``poco`` instance. This part 
     ui = poco('...')
 
 
-Object Selection and Operation
-------------------------------
+Working with Poco Objects
+-------------------------
 
 Basic Selector
 """"""""""""""
 
-The invocation ``poco(...)`` instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.
+UI element objects can be selected by invoking ``poco(...)`` function instance. The function traverses through the
+render tree structure and selects all the corresponding UI elements matching the query expression.
+
+The function takes one mandatory argument `node name`, the optional arguments can be substituted too and they refer to
+specific node properties. For more information, refer to API reference.
+
 
 .. code-block:: python
 
@@ -146,7 +183,8 @@ The invocation ``poco(...)`` instance is to traverse through the render tree str
 Relative Selector
 """""""""""""""""
 
-When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner
+When there is any ambiguity in the selected objects by node names/node types or object unable to select, the relative
+selector tries to select the element object by hierarchy in following manner
 
 .. code-block:: python
 
@@ -156,10 +194,13 @@ When there is an ambiguity in the objects selected by node names/node types or f
 
 .. image:: doc/img/hunter-poco-select-relative.png
 
-Sequence Selector (index selector, iterator is more recommended for use)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Sequence Selector (index selector, iterator is recommended for use)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.
+Tree indexing and traversing is performed by default from up to down or from left to right. In case that
+the 'not-yet-traversed' nodes are removed from the screen, the exception is raised. The exception is not raised in case
+when the 'already-traversed' nodes are removed and in this case the traversing continues in previous order despite
+the fact that thenodes in views were rearranged during the travers process.
 
 .. code-block:: python
 
@@ -171,6 +212,8 @@ Index and traversal will be performed in default up-down or left-right space ord
 
 Iterate over a collection of objects
 """"""""""""""""""""""""""""""""""""
+
+Following code snippet shows how to iterate over the collection of UI objects
 
 .. code-block:: python
 
@@ -185,6 +228,8 @@ Iterate over a collection of objects
 Get object properties
 """""""""""""""""""""
 
+Following examples shows how to obtain various properties of an object
+
 .. code-block:: python
     
     mission_btn = poco('bg_mission')
@@ -197,10 +242,17 @@ Get object properties
 Object Proxy Related Operation
 """"""""""""""""""""""""""""""
 
+This section describes object proxy related operations
+
 click
 '''''
 
-The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be `[0, 0]` and the bottom right corner `[1, 1]`. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.
+The anchorPoint of UI element is put to the click point by default. When the first argument (relative click position)
+is passed to the function, the coordinates of the top-left corner of the bounding box will be `[0, 0]` and the bottom
+right corner coordinates will be `[1, 1]`. The deviation range can be less than 0 or larger than 1. If the deviation
+ range is in interval (0, 1), it means it lies beyond the bounding box.
+
+Following example demonstrates how to use ``click`` function
 
 .. code-block:: python
 
@@ -215,7 +267,9 @@ The anchorPoint of UI element defaults to the click point. When the first argume
 swipe
 '''''
 
-Take the anchor of UI element as origin and swipe a certain distance towards a direction
+The anchorPoint of UI element is put as origin and swipe the certain distance towards the given direction.
+
+Following example shows how to use the ``swipe`` function
 
 .. code-block:: python
 
@@ -230,7 +284,9 @@ Take the anchor of UI element as origin and swipe a certain distance towards a d
 drag
 ''''
  
-Drag to target UI from current UI
+Drag from current UI element to target UI element.
+
+Following example shows how to use the ``drag_to`` function
 
 .. code-block:: python
 
@@ -349,7 +405,8 @@ PocoNoSuchNodeException
 Unit Test
 ---------
 
-poco is an automation framework. For unit testing, please refer to `PocoUnit`_. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library. 
+Poco is an automation framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full set
+of assertion methods. Furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
 ..
  下面的连接要替换成绝对路径
