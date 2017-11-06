@@ -9,7 +9,7 @@ __author__ = 'lxn3032'
 
 class PocoException(Exception):
     """
-    Base class of exceptions of poco. PY3 compatible.
+    Base class for errors and exceptions of Poco. It is Python3 compatible.
     """
 
     def __str__(self):
@@ -38,8 +38,8 @@ class PocoAssertionError(PocoException):
 
 class InvalidOperationException(PocoException):
     """
-    When an operation performing on target device is foreseen, this exceptions will raise.
-    For example, click outside the screen is definitely meaningless, an ``InvalidOperationException`` raised.
+    Raised when the operation performing on target device is foreseen, e.g. instruction to click outside the screen is
+    definitely meaningless, then the ``InvalidOperationException`` is raised.
     """
 
     pass
@@ -47,7 +47,8 @@ class InvalidOperationException(PocoException):
 
 class PocoTargetTimeout(PocoException):
     """
-    Timeout when waiting for some condition to be matched. Such as waiting some UI element but it never appeared.
+    Raised when the timeout expired while waiting for some condition to be fulfilled, e.g. waiting for the specific
+    UI element but it has not appeared on the screen.
     """
 
     def __init__(self, action, poco_obj_proxy):
@@ -57,7 +58,7 @@ class PocoTargetTimeout(PocoException):
 
 class PocoNoSuchNodeException(PocoException):
     """
-    Cannot find any UI element of given query condition.
+    Raised when the UI element specified by query expression cannot be found.
     """
 
     def __init__(self, objproxy):
@@ -67,9 +68,12 @@ class PocoNoSuchNodeException(PocoException):
 
 class PocoTargetRemovedException(PocoException):
     """
-    This exception raises when hierarchy structure changed over the selection or access a UI element that is already
-    recycled. In many cases there is no need to handle this exception by hand. Once this exception occurred, please
-    check your code carefully. Most of misuses as follows.
+    Raised when the hierarchy structure changed over the selection or when accessing the UI element that is already
+    recycled.
+
+    In most cases, there is no need to handle this exception manually. If this exception occurs, it usually means it
+    is a bug in your code rather than application itself. Check your code first. The most of misuses comes from as
+    follows.
     
     Examples:
         ::
