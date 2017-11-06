@@ -10,23 +10,19 @@ Features
 --------
 
 Main Poco features includes following:
-    * supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
-    * retrieves UI Elements Hierarchy in game's runtime
-    * is super fast and impact-free to the game
-    * allows straightforward SDK integration to the game (within in 5 minutes)
-    * provides powerful APIs taht are engine independent
-    * supports multi-touch e.g. fling/pinch/... (and more is coming soon)
-    * support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
-    * is extensible to other private engines by implementing `poco-sdk`_ .
-    * is compatible with Python 2.7 and Python 3.3+.
+
+* supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
+* retrieves UI Elements Hierarchy in game's runtime
+* is super fast and impact-free to the game
+* allows straightforward SDK integration to the game (within in 5 minutes)
+* provides powerful APIs taht are engine independent
+* supports multi-touch e.g. fling/pinch/... (and more is coming soon)
+* support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
+* is extensible to other private engines by implementing `poco-sdk`_ .
+* is compatible with Python 2.7 and Python 3.3+.
 
 Installation
 ------------
-
-This section describes how to install `Poco` and `PocoSDK`.
-
-
-**Installing the Python package**
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app. Supported version are Python2.7 and Python3.3+.
@@ -187,7 +183,7 @@ selector tries to select the element object by hierarchy in following manner
 .. image:: doc/img/hunter-poco-select-relative.png
 
 Sequence Selector (index selector, iterator is recommended for use)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Tree indexing and traversing is performed by default from up to down or from left to right. In case that
 the 'not-yet-traversed' nodes are removed from the screen, the exception is raised. The exception is not raised in case

@@ -97,7 +97,7 @@ class UIObjectProxy(object):
 
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object representing the child(ren) of
-             current UI element(s)
+            current UI element(s)
         """
 
         sub_query = build_query(name, **attrs)
@@ -128,7 +128,7 @@ class UIObjectProxy(object):
 
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object representing the child(ren) of
-             current UI element(s)
+            current UI element(s)
         """
 
         sub_query = build_query(name, **attrs)
@@ -148,7 +148,7 @@ class UIObjectProxy(object):
 
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object representing the child(ren) of
-             current UI element(s)
+            current UI element(s)
         """
 
         sub_query = build_query(name, **attrs)
@@ -470,7 +470,7 @@ class UIObjectProxy(object):
                 - ...: other sdk implemented attributes
 
         Returns:
-            None if no such attribute or it value is None/null/nil/etc. Otherwise the attribute value is returned. The
+            None if no such attribute or its value is None/null/nil/etc. Otherwise the attribute value is returned. The
             returned value type is json serializable.
 
         Raises:

@@ -1,6 +1,6 @@
 
-Welcome to Poco ポコ documentation!
-================================
+Welcome to Poco (ポコ) documentation!
+===================================
 
 This document provides all the basic information that are needed to start using Poco ポコ cross-engine UI
 automation framework. It covers the main framework ideas and concepts and shows examples for various use cases as well.
@@ -16,11 +16,6 @@ Getting Started
 
 Install Poco and PocoSDK
 ------------------------
-
-This section describes how to install `Poco` and `PocoSDK`.
-
-
-**Installing the Python package**
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app. Supported version are Python2.7 and Python3.3+.
@@ -50,7 +45,7 @@ For **poco-sdk** integration please refer to `Integration Guide`_
 
 
 Using Poco as Python package
-=============================
+============================
 
 Simple demo
 -----------
@@ -77,7 +72,7 @@ info.
 
 
 Dump UI hierarchy example
---------------------------
+-------------------------
 
 Poco defines an uniform format to serialize UI hierarchy for different game engines. This section shows how to dump
 UI hierarchy.
