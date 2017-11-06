@@ -25,19 +25,11 @@ Installation
 
 This section describes how to install `Poco` and `PocoSDK`.
 
-**System Requirements**
-
-* Operating System:
-    * Windows
-    * MacOS X
-    * Linux
-
-* Python2.7 & Python3.3+
 
 **Installing the Python package**
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
-your game/app.
+your game/app. Supported version are Python2.7 and Python3.3+.
 
 **Poco** can be installed straightforward with ``pip`` command
 
@@ -247,10 +239,10 @@ This section describes object proxy related operations
 click
 '''''
 
-The anchorPoint of UI element is put to the click point by default. When the first argument (relative click position)
-is passed to the function, the coordinates of the top-left corner of the bounding box will be `[0, 0]` and the bottom
-right corner coordinates will be `[1, 1]`. The deviation range can be less than 0 or larger than 1. If the deviation
- range is in interval (0, 1), it means it lies beyond the bounding box.
+The anchorPoint of UI element is attached to the click point by default. When the first argument
+(the relative click position) is passed to the function, the coordinates of the top-left corner of the bounding box
+become `[0, 0]` and the bottom right corner coordinates are `[1, 1]`. The click range area can be less than 0 or larger
+than 1. If the click range area lies in the interval (0, 1), it means it is beyond the bounding box.
 
 Following example demonstrates how to use ``click`` function
 
@@ -267,7 +259,8 @@ Following example demonstrates how to use ``click`` function
 swipe
 '''''
 
-The anchorPoint of UI element is put as origin and swipe the certain distance towards the given direction.
+The anchorPoint of UI element is taken as the origin, the swipe action is performed towards the given direction with
+the certain distance.
 
 Following example shows how to use the ``swipe`` function
 
@@ -284,7 +277,7 @@ Following example shows how to use the ``swipe`` function
 drag
 ''''
  
-Drag from current UI element to target UI element.
+Drag from current UI element to the target UI element.
 
 Following example shows how to use the ``drag_to`` function
 
@@ -298,15 +291,18 @@ Following example shows how to use the ``drag_to`` function
 focus (local positioning)
 '''''''''''''''''''''''''
 
-The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being `[0.5, 0.5]`, the bottom right corner`[1, 1]`, and so on.
+The anchorPoint is set as the origin when conducting operations related to the node coordinates. If the the local click
+area is need, the focus function can be used. The coordinate system is similar to the screen coordinates - the origin
+is put to the top left corner of the bounding box and with length of unit of 1, i.e the coordinates of the center are
+then `[0.5, 0.5]` and the bottom right corner has coordinates `[1, 1]`.
+
 
 .. code-block:: python
 
     poco('bg_mission').focus('center').click()  # click the center
 
 
-
-focus can also be used as internal positioning within an objects, as instanced by the example of implementing a scroll operation in ScrollView
+The focus function can also be used as internal positioning within the objects. Following example demonstrates the implementation of `scroll` operation in `ScrollView`.
 
 .. code-block:: python
 
@@ -317,7 +313,8 @@ focus can also be used as internal positioning within an objects, as instanced b
 wait
 ''''
 
-Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout
+Wait for the target objects on the screen and return the object itself. If the object the object exists, return it
+immediately, otherwise return after timeout.
 
 .. code-block:: python
 
@@ -328,7 +325,8 @@ Wait for the target object to appear and always return  the object itself. If it
 Global Operation
 """"""""""""""""
 
-Can also perform a global operation without any UI elements selected. 
+`Poco` framework also allows to perform the operations without any UI elements selected. These operations are called
+`global` operations.
 
 click
 '''''
@@ -359,7 +357,7 @@ snapshot
 
 Take a screenshot of the current screen and save it to file.
 
-**Note**: ``snapshot`` does not support in some engine implementation of poco.
+**Note**: ``snapshot``  is not supported in some engine implementation of poco.
 
 .. code-block:: python
 
@@ -371,6 +369,8 @@ Take a screenshot of the current screen and save it to file.
 
 Exceptions
 ----------
+
+This sections describes the Poco framework errors and exceptions.
 
 PocoTargetTimeout
 """""""""""""""""
@@ -405,8 +405,8 @@ PocoNoSuchNodeException
 Unit Test
 ---------
 
-Poco is an automation framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full set
-of assertion methods. Furthermore, it is also compatible with the ``unittest`` in Python standard library.
+Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full set
+of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
 ..
  下面的连接要替换成绝对路径

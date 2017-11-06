@@ -19,19 +19,11 @@ Install Poco and PocoSDK
 
 This section describes how to install `Poco` and `PocoSDK`.
 
-**System Requirements**
-
-* Operating System:
-    * Windows
-    * MacOS X
-    * Linux
-
-* Python2.7 & Python3.3+
 
 **Installing the Python package**
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
-your game/app.
+your game/app. Supported version are Python2.7 and Python3.3+.
 
 **Poco** can be installed straightforward with ``pip`` command
 
