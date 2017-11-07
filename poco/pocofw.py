@@ -20,16 +20,16 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
     Poco standard initializer.
 
     Args:
-        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): an agent object for Poco to communicate with the target \
-        device. See :py:class:`PocoAgent <poco.agent.PocoAgent>`'s definition for more details. Arguments are as follows
-
-            * ``action_interval``: time interval to wait for the action (such as touch or swipe) completion \
-            performed on device and for the UI to become still (stable). Default value is 0.8s.
-            * ``poll_interval``: the minimum time needed between each poll events (such as waiting for UI element to \
-            appear on the screen). Polling is done periodically.
-            * ``pre_action_wait_for_appearance``: time interval to wait before the action (such as click or swipe) is \
-            performed. If the target UI element does not appear on the screen after this time interval, \
-            the :py:class:`PocoNoSuchNodeException <poco.exceptions.PocoNoSuchNodeException>` is raised
+        agent (:py:class:`PocoAgent <poco.agent.PocoAgent>`): an agent object for Poco to communicate with the target
+         device. See :py:class:`PocoAgent <poco.agent.PocoAgent>` definition for more details.
+        options:
+            - ``action_interval``: time interval to wait for the action (such as touch or swipe) completion performed
+              on device and for the UI to become still (stable). Default value is 0.8s.
+            - ``poll_interval``: the minimum time needed between each poll events (such as waiting for UI element to
+              appear on the screen). Polling is done periodically.
+            - ``pre_action_wait_for_appearance``: time interval to wait before the action (such as click or swipe) is
+              performed. If the target UI element does not appear on the screen after this time interval, the
+              :py:class:`PocoNoSuchNodeException <poco.exceptions.PocoNoSuchNodeException>` is raised
     """
 
     def __init__(self, agent, **options):

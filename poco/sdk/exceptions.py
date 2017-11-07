@@ -1,7 +1,7 @@
 # coding=utf-8
 
 """
-This module provides several exceptions for poco sdk. These exceptions are only raised in sdk corresponding runtime.
+This module provides several exceptions for poco-sdk. These exceptions are raised only in sdk corresponding runtime.
 """
 
 
@@ -12,10 +12,13 @@ __all__ = ['NoSuchTargetException', 'NodeHasBeenRemovedException', 'UnableToSetA
 
 class NodeHasBeenRemovedException(Exception):
     """
-    Raises if node (UI element) refreshed (updated, recycled or destroyed) when retrieving attributes at traversing. 
-    For some engines, the UI hierarchy is refreshing in another thread when poco is traversing. At the moment poco is 
-    retrieving attribute on the UI element that is refreshed, this may trigger an engine error. Poco sdk catches 
-    this engine error and transform into this exception.
+    Raised when the node (UI element) is refreshed (updated, recycled or destroyed) while retrieving the attributes
+    during traversing the hierarchy.
+
+    In some engines implementations, the UI hierarchy is refreshed in a stand-alone thread while poco is performing
+    the traverse process, so the engine error might be triggered when poco is trying to retrieve the attribute of
+    the UI element but the attribute is being updated at the same time. In this situation, poco sdk catches the engine
+    error and raises this exception.
     """
 
     def __init__(self, attrName, node):
@@ -25,9 +28,9 @@ class NodeHasBeenRemovedException(Exception):
 
 class UnableToSetAttributeException(Exception):
     """
-    Raises when fail to set attributes on UI element. Mostly, the reason may be the UI element is not support to mutate 
-    attribute. At the view of sdk implementation, you can throw this exception proactively to indicate that modification 
-    is not allowed.
+    Raised when settings the attribute of the given UI element failed. In most cases, the reason why it failed is that
+    the UI element does not support mutation. From the point of view of SDK implementation, this exception can be
+    raised proactively to indicate that the modification of the attribute is not allowed.
     """
 
     def __init__(self, attrName, node):
@@ -37,7 +40,7 @@ class UnableToSetAttributeException(Exception):
 
 class NoSuchTargetException(Exception):
     """
-    Raises when index out of range on selecting UI element by given index. 
+    Raised when the index is out of range for selecting the UI element by given index.
     
     .. TODO:: Maybe this is a little bit redundant to :py:class:`poco.exceptions.PocoNoSuchNodeException`. 
      Should be optimized.
@@ -48,7 +51,7 @@ class NoSuchTargetException(Exception):
 
 class NoSuchComparatorException(Exception):
     """
-    When the matcher does not support the given comparison method, this will be raised.
+    Raised when the matcher does not support the given comparison method.
     """
 
     def __init__(self, matchingMethod, matcherName):

@@ -13,8 +13,8 @@ class IMatcher(object):
         Test whether or not the node matches the given condition.
 
         Args:
-            cond (:obj:`tuple`): Query condition.
-            node (:py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`): Node to be tested.
+            cond (:obj:`tuple`): query expression
+            node (:py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`): node to be tested
 
         Returns:
             bool: True if matches otherwise False.
@@ -25,7 +25,7 @@ class IMatcher(object):
 
 class EqualizationComparator(object):
     """
-    Compare two object using native equivalence (==) comparison.
+    Compare two objects using the native equivalence (==) comparison operator
     """
 
     def compare(self, l, r):
@@ -34,15 +34,15 @@ class EqualizationComparator(object):
 
 class RegexpComparator(object):
     """
-    Compare two object using regular expression matching comparison. Available only when origin value is string. Result
-    in False if origin value or given pattern is not :obj:`str`.
+    Compare two objects using regular expression. Available only when the original value is string type. It always
+    returns False if the original value or given pattern are not :obj:`str` type.
     """
 
     def compare(self, origin, pattern):
         """
         Args:
-            origin (:obj:`str`): Origin string.
-            pattern (:obj:`str`): Regexp pattern string.
+            origin (:obj:`str`): original string
+            pattern (:obj:`str`): Regexp pattern string
 
         Returns:
             bool: True if matches otherwise False.
@@ -55,16 +55,16 @@ class RegexpComparator(object):
 
 class DefaultMatcher(IMatcher):
     """
-    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate  
-    expression. When traversing through the hierarchy tree, matcher will apply match method on each tree node.
+    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate
+    expression. When traversing through the hierarchy tree, matcher will apply the match method on each node of the tree.
 
     The formal definition of query condition as follows::
 
         expr := (op0, (expr0, expr1, ...))  
         expr := (op1, (arg1, arg2))  
 
-    - ``op0``:obj:`str` is logical operator ('or' or 'and') which has the same semantics as in python. e.g. 'or' 
-      means this expression/condition matches if any of the exprN matches.
+    - ``op0``:obj:`str` is logical operator ('or' or 'and') which has the same semantics as in python, e.g. 'or'
+      means this expression/condition matches if any of the exprN matches
     - ``op1``:obj:`str` is comparator, can be one of as follows::
 
         op1 := 'attr='
@@ -74,7 +74,7 @@ class DefaultMatcher(IMatcher):
       - ``attr=`` corresponds to :py:class:`EqualizationComparator <poco.sdk.DefaultMatcher.EqualizationComparator>`.
       - ``attr.*=`` corresponds to :py:class:`RegexpComparator <poco.sdk.DefaultMatcher.RegexpComparator>`.
       
-      The ``op1`` is only a string. ``Matcher`` will help to map to ``Comparator`` object.
+      The ``op1`` must be a string. The ``Matcher`` will help to map to ``Comparator`` object.
     """
 
     def __init__(self):

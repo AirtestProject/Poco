@@ -6,33 +6,35 @@ __all__ = ['IDumper', 'AbstractDumper']
 
 class IDumper(object):
     """
-    This interface defines standard dumper behavior. Dumper is only introduced to get the hierarchy information and
+    This interface defines the standard dumper behavior. Dumper class is introduced to get the hierarchy information and
     convert it into serializable data.
     """
 
     def getRoot(self):
         """
-        Return the root node of the UI Hierarchy. The node's information is wrapped by 
+        Return the root node of the UI Hierarchy. The node information is wrapped by
         :py:class:`AbstractNode <poco.sdk.AbstractNode>`.
         See definition of :py:class:`AbstractNode <poco.sdk.AbstractNode>` for more details.
 
         Returns:
-            :py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`: An instance holds the hierarchy data.
+            :py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`: instance that holds the hierarchy data
         """
 
         raise NotImplementedError
 
     def dumpHierarchy(self):
         """
-        Return a dict holding the hierarchy data and its structure should be as follows. The dict should be json 
-        serializable.
+        Return the json serializable dictionary holding the hierarchy data. Refer to sample of returned structure object
+        below.
 
         Structure of the dict::
 
             {
-                'name': '<a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.>'
+                # name can be duplicated from the original name or just left the default one
+                # if it cannot be determined, however providing some meaningful name is preferred
+                'name': '<a recognizable string>'
                 
-                # All available attributes of this node in form of key-value pairs.
+                # All available attributes of this node are in form of key-value pairs
                 'payload': {
                     'name': '',
                     'pos': [0, 0],
@@ -40,14 +42,14 @@ class IDumper(object):
                     ...
                 },
                 
-                # If no child, do not assign this entry.
+                # If there is no child, this part can be omitted
                 'children': [
                     {...},  # Same structure as this dict. 
                 ],
             }
 
         Returns:
-            :obj:`dict` or :obj:`NoneType`: Hierarchy data or None
+            :obj:`dict` or :obj:`NoneType`: hierarchy data or None
         """
 
         raise NotImplementedError
@@ -55,35 +57,38 @@ class IDumper(object):
 
 class AbstractDumper(IDumper):
     """
-    This class partially implements ``IDumper`` using general traversal algorithm. To dump the hierarchy from a root 
-    node, this dumper retrieves all available attributes of this root node and list all its children. Then apply the 
-    same procedure on each child (treat each child as root node) until a node which has no child.
+    This class partially implements ``IDumper`` using general traversal algorithm. In order to dump the hierarchy from
+    the root node, this dumper first retrieves all available attributes of the root node and also the list all its
+    children and then applies the same procedures as described on each child (i.e. treats each child as a root node)
+    until the node that has no child(ren) is reached.
     """
 
     def dumpHierarchy(self):
         """
         Returns:
-            :obj:`dict`: A json serializable dict holds the whole hierarchy data.
+            :obj:`dict`: json serializable dict holding the whole hierarchy data
         """
 
         return self.dumpHierarchyImpl(self.getRoot())
 
     def dumpHierarchyImpl(self, node):
         """
-        Crawl the hierarchy tree using the simple BFS algorithm. ``dump`` is engine independent as the hierarchy 
-        structure is wrapped by :py:class:`AbstractNode <poco.sdk.AbstractNode>`, so ``dump`` can be algorithmized. 
-        Here shows the simplest implementation by default. If you like, you can implement your own algorithm to optimize 
-        the speed.
+        Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` procedure is the engine independent as
+        the hierarchy structure is wrapped by :py:class:`AbstractNode <poco.sdk.AbstractNode>` and therefore the
+        ``dump`` procedure can be algorithmized.
 
-        .. note:: Do not call this method in explicitly as this is an internal impl function, call \
-         :py:meth:`dumpHierarchy() <poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy>` if you want to dump a 
-         hierarchy.
+        Following code demonstrates the simplest implementation. Feel free to implement your own algorithms to
+        optimize the performance.
+
+        .. note:: Do not explicitly call this method as this is an internal function, call
+                  :py:meth:`dumpHierarchy() <poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy>` function instead
+                  if you want to dump the hierarchy.
 
         Args:
-            node: Root node of the hierarchy to be dumped.
+            node: root node of the hierarchy to be dumped
 
         Returns:
-            :obj:`dict`: A json serializable dict holds the whole hierarchy data.
+            :obj:`dict`: json serializable dict holding the whole hierarchy data
         """
 
         if not node:
