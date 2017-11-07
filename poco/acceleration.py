@@ -13,9 +13,6 @@ class PocoAccelerationMixin(object):
     """
     This class provides some high-level method to reduce redundant code implementations.
     As this is a MixinClass, please do not introduce new state in methods.
-
-    # TODO: remove this??
-    该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。
     """
 
     def dismiss(self, targets, exit_when=None, sleep_interval=0.5, appearance_timeout=20, timeout=120):
@@ -25,40 +22,24 @@ class PocoAccelerationMixin(object):
         Args:
             targets (:obj:`list`): list of poco objects to be dropped
             exit_when: termination condition, default is None which means to automatically exit when list of
-            ``targets`` is empty
+             ``targets`` is empty
             sleep_interval: time interval between each actions for the given targets, default is 0.5s
             appearance_timeout: time interval to wait for given target to appear on the screen, automatically exit when
-            timeout, default is 20s
+             timeout, default is 20s
             timeout: dismiss function timeout, default is 120s
 
         Raises:
             PocoTargetTimeout: when dismiss time interval timeout, under normal circumstances, this should not happen
-            and if happens, it will be reported
-
-        Returns:
-            None
-
-        """
-        """
-        # TODO: check the translation above
-        自动点掉目标对象，即一直点点到全都消失为止，适用于无脑点点点的界面。
-
-        :param targets: <list> 目标对象列表，poco选择的对象
-        :param exit_when: 结束条件，默认为targets中所有节点都消失后自动退出
-        :param sleep_interval: 点击动作间隔，点了之后等待一段时间后再找下一个target进行点击
-        :param appearance_timeout: 在进行dismiss之前会等待targets中任意一个target出现，超过了这个时间还没出现就自动退出了
-        :param timeout: dismiss阶段超时时长
-        :return: None
-
-        :raise PocoTargetTimeout: 当处于dismiss切超时时，会报这个错，因为正常情况下不可能这么长时间还没把该消的消掉
+             and if happens, it will be reported
         """
 
         try:
             self.wait_for_any(targets, timeout=appearance_timeout)
         except PocoTargetTimeout:
+            # here returns only when timeout
             # 仅当超时时自动退出
-            # TODO: need proper EN translation
-            warnings.warn('尝试dismiss前等待对象出现但超时 {}'.encode('utf-8').format(targets))
+            warnings.warn('Waiting timeout when trying to dismiss something before them appear. Targets are {}'
+                          .encode('utf-8').format(targets))
             return
 
         start_time = time.time()
@@ -74,7 +55,8 @@ class PocoAccelerationMixin(object):
                             except:
                                 pass
                     except:
-                        # TODO: need proper EN translation
+                        # Catch the NodeHasBeenRemoved exception if some node was removed over the above iteration
+                        # and just ignore as this will not affect the result.
                         # 遍历(__iter__: for n in t)过程中如果节点正好被移除了，可能会报远程节点被移除的异常
                         # 这个报错忽略就行
                         pass
