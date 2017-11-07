@@ -136,9 +136,17 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def freeze(this):
         """
-        Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current 
-        poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. This poco instance is
-        returned directly by calling ``dump`` function
+        Snapshot current **hierarchy** and cache it into a new poco instance. This new poco instance is a copy from
+        current poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will be
+        super fast when calling ``dump`` function from freezed poco. See the example below.
+        
+        Examples:
+            ::
+
+                poco = Poco(...)
+                freezed_poco = poco.freeze()
+                hierarchy_dict = freezed_poco.agent.hierarchy.dump()  # will return the already cached hierarchy data
+                
 
         Returns:
             :py:class:`Poco <poco.Poco>`: new poco instance copy from current poco instance (``self``)

@@ -90,6 +90,8 @@ class AbstractDumper(IDumper):
             return None
 
         payload = {}
+
+        # filter out all None values
         for attrName, attrVal in node.enumerateAttrs():
             if attrVal is not None:
                 payload[attrName] = attrVal
@@ -97,12 +99,12 @@ class AbstractDumper(IDumper):
         result = {}
         children = []
         for child in node.getChildren():
-            if child.getAttr('visible'):
+            if payload.get('visible') or child.getAttr('visible'):
                 children.append(self.dumpHierarchyImpl(child))
         if len(children) > 0:
             result['children'] = children
 
-        result['name'] = node.getAttr('name')
+        result['name'] = payload.get('name') or node.getAttr('name')
         result['payload'] = payload
 
         return result
