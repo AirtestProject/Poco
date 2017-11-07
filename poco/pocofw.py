@@ -309,7 +309,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
         The callback function arguments are defined as follows:
 
-        * ``action`` (:obj:`str`): name of tag of the action
+        * ``action`` (:obj:`str`): name or tag of the action
         * ``proxy`` (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): related UI proxy which is
         involved in the action itself
         * ``args`` (:obj:`tuple`): all required arguments of the specific action function
