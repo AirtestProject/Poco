@@ -63,10 +63,10 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             name (:obj:`str`): name of the UI element to be selected
 
         Keyword Args:
-            xx: an arbitrary key value pair that stands for selecting the UI matching the value of ``UI.xx``
-            xxMatches (:obj:`str`): an arbitrary key value pair that stands for selecting the UI matching the regular expression pattern ``UI.xx``
+            xx: arbitrary key value pair that stands for selecting the UI matching the value of ``UI.xx``
+            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular expression pattern ``UI.xx``
 
-        In keyword args, the `xx` is the attribute name and it is supposed to be unique so the only one matching is found ::
+        In keyword args, the `xx` is the attribute name and it is supposed to be unique so the only one match is found ::
 
             # select the UI element(s) which text attribute matches the pattern '^close.*$'
             poco = Poco(...)
@@ -88,7 +88,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): an iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Returns:
@@ -114,7 +114,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): an iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Raises:
@@ -141,7 +141,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
         returned directly by calling ``dump`` function
 
         Returns:
-            :py:class:`Poco <poco.Poco>`: new poco instance copy from current poco instance (``self``).
+            :py:class:`Poco <poco.Poco>`: new poco instance copy from current poco instance (``self``)
         """
 
         class FreezedPoco(Poco):
@@ -194,7 +194,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
         The coordinates (x, y) are either a 2-list or 2-tuple. The coordinates values for x and y must be in the
         interval between 0 ~ 1 to represent the percentage of the screen. For example, the coordinates ``[0.5, 0.5]``
-        represents the `center` of the screen and the coordinates ``[0, 0]`` represents the `top left corner`.
+        represent the `center` of the screen and the coordinates ``[0, 0]`` represent the `top left corner`.
 
         See ``CoordinateSystem`` for more details about coordinate system.
 
@@ -230,7 +230,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
                 poco.swipe([100.0 / 1920, 100.0 / 1080], [100.0 / 1920, 200.0 / 1080])
 
-            Or given by direction instead of end point::
+            Or given by the specific direction instead of end point::
 
                 poco.swipe([100.0 / 1920, 100.0 / 1080], direction=[0, 100.0 / 1080])
 
@@ -241,7 +241,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
             duration (:obj:`float`): time interval in which the swipe action is performed
 
         Raises:
-            InvalidOperationException: when the start point of swipe lies outside the screen
+            InvalidOperationException: when the start point of the swipe action lies outside the screen
         """
 
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
@@ -269,7 +269,7 @@ class Poco(PocoAssertionMixin, PocoAccelerationMixin):
 
     def snapshot(self, width=720):
         """
-        Take the screenshot from the target device. The supported format output (png, jpg, etc.) depends on the agent
+        Take the screenshot from the target device. The supported output format (png, jpg, etc.) depends on the agent
         implementation.
 
         Args:
