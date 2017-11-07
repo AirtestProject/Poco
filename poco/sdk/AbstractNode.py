@@ -8,65 +8,65 @@ __all__ = ['AbstractNode']
 
 class AbstractNode(object):
     """
-    AbstractNode is a wrapper class that provides ui hierarchy and node info in game engine.
+    AbstractNode is a wrapper class that provides UI hierarchy and node info in game engine.
 
-    This class uniformly specifies node-related methods such as retrieving attribute or accessing up to parent or down 
-    to children.
+    This class uniformly specifies node-related methods such as retrieving the attributes or accessing the parent nodes
+    or their children.
     """
 
     def getParent(self):
         """
-        Return the parent node of this node. Return None if no parent or parent is not accessible or this is the root 
-        node. This method will be invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy.
+        Return the parent node of this node. Return None if there is no parent or parent is not accessible or this is
+        the root node. This method is invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy.
 
         Returns:
-            :py:class:`AbstractNode or NoneType <poco.sdk.AbstractNode>`: Parent node of this node or None.
+            :py:class:`AbstractNode or NoneType <poco.sdk.AbstractNode>`: parent node of this node or None.
         """
 
         return None
 
     def getChildren(self):
         """
-        Return an iterator over all children nodes of this node. Will be invoked by ``Selector`` or ``Dumper`` to get 
-        the UI hierarchy.
+        Return an iterator over all children nodes of this node. This method is invoked by ``Selector`` or ``Dumper``
+        to retrieve the UI hierarchy.
 
         Returns:
-            Iterable<:py:class:`AbstractNode <poco.sdk.AbstractNode>`>
+            Iterable <:py:class:`AbstractNode <poco.sdk.AbstractNode>`>
         """
 
         raise NotImplementedError
 
     def getAttr(self, attrName):
         """
-        Return the attributes of the node. The following list shows the most basic attributes that will be used during 
-        the test run. The implementation class should return correct value as possible as it can. If cannot determine 
-        the value, return the invocation from super class to use default value. See the example below. More attributes 
-        can be added in order to enhance the selection and displaying in ``Inspector``.
+        Return the attributes of the node. The list below shows the most used basic attributes used during while writing
+        test code. The implementation class should return the corresponding value as soon as it retrieves its value. If
+        the value cannot be determined, the default value is obtained from super class invocation and returned.  See the
+        example below for more detailed information. More attributes can be added in order to enhance the selection
+        and displaying in ``Inspector``.
 
-        Most basic attributes defines as follows:
+        The most used basic attributes are listed as follows:
 
-        - ``name``: The name of the node, a unique and meaningful name for each node recommended.
-        - ``type``: The type name of the node, can be any string. e.g. "android.widget.Button" or as simple as 
-          "Button"
-        - ``visible``: Whether the node is rendered on screen. If the return value is False, all children nodes 
-          will be ignored in Poco selector
-        - ``pos``: Position of the node in screen. Return value should be 2-list represents the percents of
-          the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,
-          this attribute will be ``[0.5f, 0.5f]``.
-          position can be negative which means the node is outside the screen
-        - ``size``: Size of node's bounding box. similar to ``pos``, value is also a 2-list of percents of 
-          the screen size, e.g. the screen's size is always ``[1.0f, 1.0f]``.
-          if the node in left half side of the screen, its size will be ``[0.5f, 1.0f]``.
-          size should always be nonnegative.
-        - ``scale``: The scale factor applied to the node itself. leave it ``[1.0f, 1.0f]`` by default.
-        - ``anchorPoint``: The percentage of the key-point related to the bounding box of the node. leave it 
-          ``[0.5f, 0.5f]`` by default.
-        - ``zOrders``: The rendering order of this node. value is a dictionary like ``{"global": 0, "local": 0}``.
-          Global zOrder is compared with all nodes in the hierarchy, Local zOrder is compared with its parent and 
-          siblings. Topmost nodes have the largest value.
+        - ``name``: name of the node, use the unique and meaningful name for each node is recommended
+        - ``type``: type of the name of the node, it can be either any string, e.g. "android.widget.Button" or just
+          simple as "Button"
+        - ``visible``: True or False whether the node is rendered on screen. In case the return value is False, all
+          children nodes are ignored in Poco selector
+        - ``pos``: position of the node in screen, return value should be 2-list coordinates (x, y) representing
+          the percentage of the screen. e.g. if the node lies in the center of the screen, the attribute will be
+          ``[0.5f, 0.5f]``. If the returned value for position is negative, it means the node lies out of the screen
+        - ``size``: size of the node bounding box, similar to ``pos``, value is also a 2-list of the percentage of
+          the screen size, e.g. the screen size is always ``[1.0f, 1.0f]``,
+          if the node lies in left half side of the screen, its size will be ``[0.5f, 1.0f]``, the returned value of
+          size should be always positive value
+        - ``scale``: scale factor applied to the node itself, leave it ``[1.0f, 1.0f]`` by default
+        - ``anchorPoint``: 2-list coordinates (x, y) of the anchor expressed in the percentage related to the bounding
+          box of the node, leave it ``[0.5f, 0.5f]`` by default.
+        - ``zOrders``: rendering order of this node, its value is a dictionary such as ``{"global": 0, "local": 0}``,
+          global zOrder value is compared with all nodes in the hierarchy, local zOrder value is compared with its
+          parent and siblings. The most top nodes have the largest values.
 
         Examples:
-            The following code gives some idea about implementing this method::
+            The following sample code demonstrates some ideas about the implementation of this method::
                 
                 def getAttr(self, attrName):
                     # basic attributes
@@ -108,17 +108,16 @@ class AbstractNode(object):
 
     def setAttr(self, attrName, val):
         """
-        Apply changes of the attribute value to this node.
-        Only limited attributes can be modified, such as text.
-        Some others are not recommended to modified, such as position/name, which may hard to understand for testers
-        and results in unexpected exceptions.
+        Apply changes of the attribute value to this node. Not all attributes can be modified. The most common
+        attribute to be modified is the `text`. It is not recommended to modify attributes such as position, name,
+        their modifications can lead to unexpected and false-positive errors.
 
         Args:
             attrName (:obj:`str`): attribute name
             val: attribute value
 
         See Also:
-            :py:meth:`setAttr <poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in \
+            :py:meth:`setAttr <poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in
              ``poco.sdk.interfaces.hierarchy``
         """
 
@@ -126,13 +125,14 @@ class AbstractNode(object):
 
     def getAvailableAttributeNames(self):
         """
-        Enumerate all available attributes' name of this node. This method in base class returns the most basic 
-        attribute name by default. You can add other customized or engine-specific attributes. See the example above.
+        Enumerate all available attribute names of this node. This method in base class returns the basic
+        attribute name by default. It is possible to add other customized or engine-specific attributes.
+        See the example below.
 
-        .. note:: Please always call super method and return should contain the part from super method.
+        .. note:: It is recommended to always call the super method and return should contain the part from super method.
 
         Examples:
-            This code shows a way about implementing this method::
+            This code demonstrates how to implement this method::
 
                 def getAvailableAttributeNames(self):
                     return super().getAvailableAttributeNames() + (
@@ -157,9 +157,9 @@ class AbstractNode(object):
 
     def enumerateAttrs(self):
         """
-        Enumerate all available attributes and yielding in 2-tuple (name, value).
+        Enumerate all available attributes and yield the 2-tuple (name, value).
 
-        Returns:
+        Yields:
             Iterable<:obj:`str`, :obj:`ValueType`>
         """
 

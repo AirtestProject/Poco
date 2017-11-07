@@ -8,19 +8,20 @@ __all__ = ['ISelector', 'Selector']
 
 class ISelector(object):
     """
-    This interface defines standard selector behavior. Selector is used for selecting specific UI element by given query 
-    condition (formal definitions are in specific implementation classes).
+    This interface defines the standard selector behavior. Selector is used for selecting the specific UI element(s)
+    by given query expression (formal definitions are in specific implementation classes).
     """
 
     def select(self, cond, multiple=False):
         """
         Args:
-            cond (:obj:`tuple`): query conditions.
-            multiple (:obj:`bool`): Whether or not to select element multiple. This method returns once a node found if 
-             multiple is True, returns after traversing through all nodes otherwise.
+            cond (:obj:`tuple`): query expressiom
+            multiple (:obj:`bool`): whether or not to select the multiple elements. If set to True, the method
+                                    terminates immediately once the node is found, otherwise it traverses through all
+                                    nodes and then exists
 
         Returns:
-            :obj:`list` <inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`> : 
+            :obj:`list`: list <inherited from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>
         """
 
         raise NotImplementedError
@@ -28,11 +29,11 @@ class ISelector(object):
 
 class Selector(ISelector):
     """
-    This class implements standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy 
-    structure. It supports flexible query conditions such as parental relationship, attribute predicate and etc. Any 
-    combinations of expressions are also an query conditions.
+    This class implements the standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy
+    structure. It supports flexible query expressions such as parental relationship, attribute predicate, etc. Any
+    combinations of expressions mentioned above are also allowed as the query conditions.
     
-    The query condition (query expression) defines as following::
+    The query expression can be defined as follows::
 
         expr := (op0, (expr0, expr1))
         expr := ('index', (expr, :obj:`int`))
@@ -40,17 +41,17 @@ class Selector(ISelector):
 
     - ``op0`` can be one of the following ('>', '/', '-'), each operator stands for as follows::
 
-        '>': offsprings, to select all offsprings matched expr1 from all roots matched expr0.
-        '/': children, to select all children matched expr1 from all roots matched expr0.
-        '-': siblings, to select all siblings matched expr1 from all roots matched expr0.
+        '>': offsprings, select all offsprings matched expr1 from all roots matched expr0.
+        '/': children, select all children matched expr1 from all roots matched expr0.
+        '-': siblings, select all siblings matched expr1 from all roots matched expr0.
     
-    - ``'index'``: to select specific nth UI element from previous results.
+    - ``'index'``: select specific n-th UI element from the previous results
 
-    - ``others``: will pass expression to matcher.
+    - ``others``: passes the expression to matcher
 
     Args:
-        dumper (any implements :py:class:`IDumper <poco.sdk.AbstractDumper.IDumper>`): The dumper for selector.
-        matcher (any implements :py:class:`IMatcher <poco.sdk.DefaultMatcher.IMatcher>`): :py:class:`DefaultMatcher \
+        dumper (any implementation of :py:class:`IDumper <poco.sdk.AbstractDumper.IDumper>`):  dumper for the selector
+        matcher (any implementation of :py:class:`IMatcher <poco.sdk.DefaultMatcher.IMatcher>`): :py:class:`DefaultMatcher
          <poco.sdk.DefaultMatcher.DefaultMatcher>` instance by default.
     """
 
@@ -63,7 +64,7 @@ class Selector(ISelector):
         Get a default root node.
 
         Returns:
-            Default root node from dumper. 
+            default root node from the dumper.
         """
 
         return self.dumper.getRoot()
@@ -80,20 +81,21 @@ class Selector(ISelector):
         Selector internal implementation. 
         TODO: add later.
 
-        .. note:: This doc string only shows the outline of the algorithm. Do not call this method in your code as this 
-         is a internal impl method.
+        .. note:: This doc shows only the outline of the algorithm. Do not call this method in your code as this
+         is an internal method.
 
         Args:
-            cond (:obj:`tuple`): Query condition.
-            multiple (:obj:`bool`): Whether or not only select the first matched Node.
-            root (inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`): Start traversing from the given root.
-            maxDepth (:obj:`bool`): Max traversing depth.
-            onlyVisibleNode (:obj:`bool`): If True, skip the Node whose visibility (the value of visible attribute) is 
+            cond (:obj:`tuple`): query expression
+            multiple (:obj:`bool`): whether or not to select multiple nodes #TODO: review this
+            root (inherited from :py:class:`AbstractNode <poco.sdk.AbstractNode>`): start traversing from the given
+             root node
+            maxDepth (:obj:`bool`): max traversing depth
+            onlyVisibleNode (:obj:`bool`): If True, skip those node which visibility (the value of visible attribute) is
              False.
-            includeRoot (:obj:`bool`): Whether not not include the root node if its child node matched.
+            includeRoot (:obj:`bool`): whether not not to include the root node if its child(ren) match(es) the node
 
         Returns:
-            :obj:`list` <inherit from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>: The same as \
+            :obj:`list` <inherited from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>: The same as
              :py:meth:`select <poco.sdk.Selector.ISelector.select>`.
         """
 
