@@ -23,13 +23,13 @@ class PocoAgent(object):
 
     This class is an aggregation of 4 major interfaces for now.
 
-    - :py:class:`HierarchyInterface <poco.sdk.interfaces.hierarchy.HierarchyInterface>`: Defines some hierarchy 
-      accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name).
-    - :py:class:`InputInterface <poco.sdk.interfaces.input.InputInterface>`: Defines simulated input methods to make 
-      it possible to inject simulated input on target device.
-    - :py:class:`ScreenInterface <poco.sdk.interfaces.screen.ScreenInterface>`: Defines methods to access the screen 
-      surface.
-    - :py:class:`CommandInterface <poco.sdk.interfaces.command.CommandInterface>`: Defines methods to communicate 
+    * :py:class:`HierarchyInterface <poco.sdk.interfaces.hierarchy.HierarchyInterface>`: defines the hierarchy
+      accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name)
+    * :py:class:`InputInterface <poco.sdk.interfaces.input.InputInterface>`: defines the simulated input methods to
+      allow inject simulated input on target device
+    * :py:class:`ScreenInterface <poco.sdk.interfaces.screen.ScreenInterface>`: defines methods to access the screen
+      surface
+    * :py:class:`CommandInterface <poco.sdk.interfaces.command.CommandInterface>`: defines methods to communicate
       with target device in arbitrary way. This is optional.
     """
 

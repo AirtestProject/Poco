@@ -14,11 +14,33 @@ class PocoAccelerationMixin(object):
     This class provides some high-level method to reduce redundant code implementations.
     As this is a MixinClass, please do not introduce new state in methods.
 
+    # TODO: remove this??
     该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。
     """
 
     def dismiss(self, targets, exit_when=None, sleep_interval=0.5, appearance_timeout=20, timeout=120):
         """
+        Automatically dismiss the target objects
+
+        Args:
+            targets (:obj:`list`): list of popo objects to be dropped
+            exit_when: termination condition, default is None which means to automatically exit when list of
+            ``targets`` is empty
+            sleep_interval: time interval between each actions for the given targets, default is 0.5s
+            appearance_timeout: time interval to wait for given target to appear on the screen, automatically exit when
+            timeout, default is 20s
+            timeout: dismiss function timeout, default is 120s
+
+        Raises:
+            PocoTargetTimeout: when dismiss time interval timeout, under normal circumstances, this should not happen
+            and if happens, it will be reported
+
+        Returns:
+            None
+
+        """
+        """
+        # TODO: check the translation above
         自动点掉目标对象，即一直点点到全都消失为止，适用于无脑点点点的界面。
 
         :param targets: <list> 目标对象列表，poco选择的对象
@@ -35,6 +57,7 @@ class PocoAccelerationMixin(object):
             self.wait_for_any(targets, timeout=appearance_timeout)
         except PocoTargetTimeout:
             # 仅当超时时自动退出
+            # TODO: need proper EN translation
             warnings.warn('尝试dismiss前等待对象出现但超时 {}'.encode('utf-8').format(targets))
             return
 
@@ -51,6 +74,7 @@ class PocoAccelerationMixin(object):
                             except:
                                 pass
                     except:
+                        # TODO: need proper EN translation
                         # 遍历(__iter__: for n in t)过程中如果节点正好被移除了，可能会报远程节点被移除的异常
                         # 这个报错忽略就行
                         pass

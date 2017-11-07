@@ -1,15 +1,16 @@
 # coding=utf-8
 
 """
-package brief:
+**The brief introduction**:
 
-This package (:py:mod:`poco.sdk.interfaces`) defines the main communication interfaces that standardize between poco and 
-poco-sdk. When poco-sdk is integrated with an app running on another machine or in different language, poco-sdk is 
-called remote runtime. The implementations of these interfaces can be remotely or locally, depending on you. If locally, 
-please checkout :py:mod:`poco.freezeui` to get more information.
+This package (:py:mod:`poco.sdk.interfaces`) defines the main standards for communication interfaces between poco and
+poco-sdk. If poco-sdk is integrated with an app running on another host or in different language, then poco-sdk is
+called `remote runtime`. The implementation of these interfaces can be done either remotely or locally depending on
+your own choice. If it is done locally, refer to :py:mod:`poco.freezeui` for more information.
 
-Poco needs to communicated with app's runtime under the convention of these interfaces. These interfaces should be 
-implemented properly. Any object implemented the same interface is replaceable. The communication protocol or transport 
-layer is not limited. Thus in many cases, it is customizable that part of the interface can be implemented using HTTP 
-and another part with TCP.
+Poco needs to communicate with the app runtime under the convention of interfaces described below and these interfaces
+must be properly implemented. Any object implementing the same interface is replaceable and the communication protocol
+or transport layer has no limitation. Furthermore, in many cases the communication can be customized that one part of
+interfaces can use HTTP protocol and other can use TCP.
+
 """
