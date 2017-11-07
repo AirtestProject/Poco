@@ -23,7 +23,7 @@ class PocoAccelerationMixin(object):
         Automatically dismiss the target objects
 
         Args:
-            targets (:obj:`list`): list of popo objects to be dropped
+            targets (:obj:`list`): list of poco objects to be dropped
             exit_when: termination condition, default is None which means to automatically exit when list of
             ``targets`` is empty
             sleep_interval: time interval between each actions for the given targets, default is 0.5s
