@@ -6,7 +6,6 @@ import traceback
 import warnings
 
 from .acceleration import PocoAccelerationMixin
-from .assertions import PocoAssertionMixin
 from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .proxy import UIObjectProxy
 from .agent import PocoAgent
@@ -15,7 +14,7 @@ from .freezeui.utils import create_immutable_hierarchy
 __author__ = 'lxn3032'
 
 
-class Poco(PocoAssertionMixin, PocoAccelerationMixin):
+class Poco(PocoAccelerationMixin):
     """
     Poco standard initializer.
 
