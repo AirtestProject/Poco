@@ -4,19 +4,37 @@ Implementation Guide
 
 This guide helps you implement and integrate poco-sdk with your game/app step by step.
 
+Poco-sdk now supports following languages:
+
+- python
+- js
+- lua
+- c#
+- java
+
+More language will come in future.
+
 Getting Poco SDK
 ----------------
 
-First clone the poco repo according to your script language.
+First clone the `poco-sdk repo`_.
 
-::
+.. code-block:: bash
 
-    # TODO: complete the git repo addr
-    # for python
-    git clone ssh://xxxx/poco.git
+    git clone https://github.com/Meteorix/poco-sdk.git
 
+You can just copy the source code of corresponding language to your project script folder.
 
-You can just copy the source code to your project or install it as 3rd party dependency.
+Implement the Abstract Method
+-----------------------------
+
+xxx
+
+Initialize poco-sdk
+-------------------
+
+xxx
+
 
 Object Model
 ------------
@@ -37,3 +55,6 @@ To implement your own version of poco sdk, you only need to implement the follow
 --------------------------------------------------
 
 1 method should be override
+
+
+.. _poco-sdk repo: https://github.com/Meteorix/poco-sdk
