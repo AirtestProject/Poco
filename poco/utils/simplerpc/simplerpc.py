@@ -67,7 +67,7 @@ class Callback(object):
         start_time = time.time()
         while True:
             if self.status == self.WAITING:
-                time.sleep(0.1)
+                time.sleep(0.005)
                 if timeout and time.time() - start_time > timeout:
                     raise RuntimeError("%s timeout error" % self)
             else:

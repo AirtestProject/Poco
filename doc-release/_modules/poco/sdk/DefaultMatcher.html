@@ -172,8 +172,8 @@
 <span class="sd">        Test whether or not the node matches the given condition.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            cond (:obj:`tuple`): Query condition.</span>
-<span class="sd">            node (:py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`): Node to be tested.</span>
+<span class="sd">            cond (:obj:`tuple`): query expression</span>
+<span class="sd">            node (:py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`): node to be tested</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: True if matches otherwise False.</span>
@@ -184,7 +184,7 @@
 
 <div class="viewcode-block" id="EqualizationComparator"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.EqualizationComparator">[docs]</a><span class="k">class</span> <span class="nc">EqualizationComparator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare two object using native equivalence (==) comparison.</span>
+<span class="sd">    Compare two objects using the native equivalence (==) comparison operator</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
@@ -193,15 +193,15 @@
 
 <div class="viewcode-block" id="RegexpComparator"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.RegexpComparator">[docs]</a><span class="k">class</span> <span class="nc">RegexpComparator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compare two object using regular expression matching comparison. Available only when origin value is string. Result</span>
-<span class="sd">    in False if origin value or given pattern is not :obj:`str`.</span>
+<span class="sd">    Compare two objects using regular expression. Available only when the original value is string type. It always</span>
+<span class="sd">    returns False if the original value or given pattern are not :obj:`str` type.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="RegexpComparator.compare"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.RegexpComparator.compare">[docs]</a>    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            origin (:obj:`str`): Origin string.</span>
-<span class="sd">            pattern (:obj:`str`): Regexp pattern string.</span>
+<span class="sd">            origin (:obj:`str`): original string</span>
+<span class="sd">            pattern (:obj:`str`): Regexp pattern string</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bool: True if matches otherwise False.</span>
@@ -214,16 +214,16 @@
 
 <div class="viewcode-block" id="DefaultMatcher"><a class="viewcode-back" href="../../../source/poco.sdk.DefaultMatcher.html#poco.sdk.DefaultMatcher.DefaultMatcher">[docs]</a><span class="k">class</span> <span class="nc">DefaultMatcher</span><span class="p">(</span><span class="n">IMatcher</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate  </span>
-<span class="sd">    expression. When traversing through the hierarchy tree, matcher will apply match method on each tree node.</span>
+<span class="sd">    Default matcher implementation for poco hierarchy traversing. Including logical query condition and predicate</span>
+<span class="sd">    expression. When traversing through the hierarchy tree, matcher will apply the match method on each node of the tree.</span>
 
 <span class="sd">    The formal definition of query condition as follows::</span>
 
 <span class="sd">        expr := (op0, (expr0, expr1, ...))  </span>
 <span class="sd">        expr := (op1, (arg1, arg2))  </span>
 
-<span class="sd">    - ``op0``:obj:`str` is logical operator (&#39;or&#39; or &#39;and&#39;) which has the same semantics as in python. e.g. &#39;or&#39; </span>
-<span class="sd">      means this expression/condition matches if any of the exprN matches.</span>
+<span class="sd">    - ``op0``:obj:`str` is logical operator (&#39;or&#39; or &#39;and&#39;) which has the same semantics as in python, e.g. &#39;or&#39;</span>
+<span class="sd">      means this expression/condition matches if any of the exprN matches</span>
 <span class="sd">    - ``op1``:obj:`str` is comparator, can be one of as follows::</span>
 
 <span class="sd">        op1 := &#39;attr=&#39;</span>
@@ -233,7 +233,7 @@
 <span class="sd">      - ``attr=`` corresponds to :py:class:`EqualizationComparator &lt;poco.sdk.DefaultMatcher.EqualizationComparator&gt;`.</span>
 <span class="sd">      - ``attr.*=`` corresponds to :py:class:`RegexpComparator &lt;poco.sdk.DefaultMatcher.RegexpComparator&gt;`.</span>
 <span class="sd">      </span>
-<span class="sd">      The ``op1`` is only a string. ``Matcher`` will help to map to ``Comparator`` object.</span>
+<span class="sd">      The ``op1`` must be a string. The ``Matcher`` will help to map to ``Comparator`` object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

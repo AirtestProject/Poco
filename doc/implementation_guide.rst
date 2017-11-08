@@ -17,7 +17,7 @@ More language will come in future.
 Getting Poco SDK
 ----------------
 
-First clone the `poco-sdk repo`_.
+First clone the `poco-sdk repo`_. Each languages are located in ``poco-sdk/sdk/*`` separately.
 
 .. code-block:: bash
 
@@ -30,8 +30,8 @@ Implement the Abstract Method
 
 xxx
 
-Initialize poco-sdk
--------------------
+Initialize poco-sdk after game launched
+---------------------------------------
 
 xxx
 

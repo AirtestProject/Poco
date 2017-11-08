@@ -158,32 +158,66 @@
   <div class="section" id="how-to-integrate-with-pocosdk">
 <h1>How to integrate with PocoSDK<a class="headerlink" href="#how-to-integrate-with-pocosdk" title="Permalink to this headline">¶</a></h1>
 <p>There are sdk implementations for some known game engines as follows.</p>
+<p>If you find something stuck on integration, feel free to open an issue.</p>
 <div class="section" id="unity">
 <h2>Unity<a class="headerlink" href="#unity" title="Permalink to this headline">¶</a></h2>
-<p>1. Download the sdk source code <a href="#id1"><span class="problematic" id="id2">`here &lt;&gt;`_</span></a>. It is actually a single .cs file.
-1. Create a new <code class="docutils literal"><span class="pre">gameobject</span></code> any where in your scene and attach with the cs file.</p>
-</div>
-<div class="section" id="cocos2dx">
-<h2>Cocos2dx<a class="headerlink" href="#cocos2dx" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Download the sdk source code according to your script language.</p>
-<blockquote>
-<div><ul class="simple">
-<li><a href="#id3"><span class="problematic" id="id4">`js &lt;&gt;`_</span></a></li>
-<li><a href="#id5"><span class="problematic" id="id6">`lua &lt;&gt;`_</span></a></li>
-<li><a href="#id7"><span class="problematic" id="id8">`python &lt;&gt;`_</span></a></li>
-<li><a href="#id9"><span class="problematic" id="id10">`java &lt;&gt;`_</span></a></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">xxx</p>
-</li>
+<ol class="arabic simple">
+<li>Clone the sdk source code from <a class="reference external" href="https://github.com/Meteorix/poco-sdk">poco-sdk repo</a>.</li>
+<li>Copy the <code class="docutils literal"><span class="pre">Unity3D</span></code> folder to your unity project script folder. You can rename the folder if you wish.</li>
+<li>If you are using <code class="docutils literal"><span class="pre">NGUI</span></code>, just remove the ugui sub folder. If you are using <code class="docutils literal"><span class="pre">UGUI</span></code>, just remove the ngui sub
+folder.</li>
+<li>Attach the <code class="docutils literal"><span class="pre">Unity3D/PocoManager.cs</span></code> to the root <code class="docutils literal"><span class="pre">gameObject</span></code> or any new created one of your scene . Remember to
+set <code class="docutils literal"><span class="pre">never</span> <span class="pre">destroy</span></code> flag on this <code class="docutils literal"><span class="pre">gameObject</span></code>.</li>
 </ol>
+<div class="section" id="not-ngui-or-ugui">
+<h3>Not NGUI or UGUI ?<a class="headerlink" href="#not-ngui-or-ugui" title="Permalink to this headline">¶</a></h3>
+<p>If your Unity3D project does not use NGUI or UGUI, you can still integrate poco-sdk and only some extra steps needed.
+See <a class="reference external" href="implementation_guide.html">implementation guide</a>. This guide helps you implement the poco-sdk in your own type
+of GUI. And also you can take a look at the source code in <code class="docutils literal"><span class="pre">poco-sdk/Unity3D/NGUI</span></code> which might make it more clear.</p>
+</div>
+</div>
+<div class="section" id="cocos2dx-js">
+<h2>Cocos2dx-js<a class="headerlink" href="#cocos2dx-js" title="Permalink to this headline">¶</a></h2>
+<p>The major version of cocos2dx should &gt;= 3. Poco-sdk js version is compatible with ES5.</p>
+<ol class="arabic simple">
+<li>Clone the sdk source code from <a class="reference external" href="https://github.com/Meteorix/poco-sdk">poco-sdk repo</a>.</li>
+<li>Copy the <code class="docutils literal"><span class="pre">cocos2dx-js</span></code> folder to your project script folder. You can rename the folder if you wish.</li>
+<li><strong>Extra Step</strong>: build the socket/websocket module?</li>
+<li>Initialize poco-sdk by copying following code to your game initialization script.</li>
+</ol>
+<div class="highlight-javascript"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">poco</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;poco-manager&#39;</span><span class="p">)</span>
+<span class="c1">// ???</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cocos2dx-lua">
+<h2>Cocos2dx-lua<a class="headerlink" href="#cocos2dx-lua" title="Permalink to this headline">¶</a></h2>
+<p>The major version of cocos2dx should &gt;= 3.</p>
+<ol class="arabic simple">
+<li>Clone the sdk source code from <a class="reference external" href="https://github.com/Meteorix/poco-sdk">poco-sdk repo</a>.</li>
+<li>Copy the <code class="docutils literal"><span class="pre">cocos2dx-lua</span></code> folder to your project script folder. You can rename the folder if you wish.</li>
+<li><strong>Extra Step</strong>: build the socket/websocket module?</li>
+<li>Initialize poco-sdk by copying following code to your game initialization script.</li>
+</ol>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">poco</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s1">&#39;poco-manager&#39;</span><span class="p">)</span>
+<span class="c1">-- ???</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unreal">
+<h2>Unreal<a class="headerlink" href="#unreal" title="Permalink to this headline">¶</a></h2>
+<p>(coming soon.)</p>
+</div>
+<div class="section" id="android-native-app">
+<h2>Android Native App<a class="headerlink" href="#android-native-app" title="Permalink to this headline">¶</a></h2>
+<p>It is not necessary to integrate poco-sdk to the app. Just simply write the test code and be happy with it.
+See <a class="reference internal" href="#poco-for-android-native-app">poco for Android Native App</a> section for more details.</p>
 </div>
 <div class="section" id="other-engines">
 <h2>Other engines<a class="headerlink" href="#other-engines" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference external" href="implementation_guide.html">implementation guide</a>. This guide helps you implement and integrate poco-sdk with your app step by step.</p>
-</div>
+<p>See <a class="reference external" href="implementation_guide.html">implementation guide</a>. This guide helps you implement and integrate poco-sdk with
+your app step by step.</p>
+<span class="target" id="poco-for-android-native-app"></span></div>
 </div>
 
 

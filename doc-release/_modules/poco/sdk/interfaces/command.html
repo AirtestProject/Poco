@@ -165,8 +165,8 @@
 <div class="viewcode-block" id="CommandInterface"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.command.html#poco.sdk.interfaces.command.CommandInterface">[docs]</a><span class="k">class</span> <span class="nc">CommandInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is one of the main communication interfaces. This interface defines command-level behaviours providing </span>
-<span class="sd">    abilities to control remote runtime by sending self-defined command. The command can be various from string type to </span>
-<span class="sd">    specific structure of a dict.</span>
+<span class="sd">    abilities to control remote runtime by sending self-defined command. The provided command can be various type -</span>
+<span class="sd">    from string type to specific structure of a dict.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="CommandInterface.command"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.command.html#poco.sdk.interfaces.command.CommandInterface.command">[docs]</a>    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
@@ -174,8 +174,8 @@
 <span class="sd">        Emit a command to remote runtime (target device). </span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            cmd: Any json serializable data.</span>
-<span class="sd">            type (:obj:`str`): A string value indicated the command type (command tag).</span>
+<span class="sd">            cmd: any json serializable data.</span>
+<span class="sd">            type (:obj:`str`): a string value indicated the command type (command tag).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None (recommended).</span>

@@ -180,18 +180,20 @@
 <dt id="poco.sdk.AbstractDumper.IDumper">
 <em class="property">class </em><code class="descname">IDumper</code><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>This interface defines standard dumper behavior. Dumper is only introduced to get the hierarchy information and
+<p>This interface defines the standard dumper behavior. Dumper class is introduced to get the hierarchy information and
 convert it into serializable data.</p>
 <dl class="method">
 <dt id="poco.sdk.AbstractDumper.IDumper.dumpHierarchy">
 <code class="descname">dumpHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper.dumpHierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper.dumpHierarchy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a dict holding the hierarchy data and its structure should be as follows. The dict should be json
-serializable.</p>
+<dd><p>Return the json serializable dictionary holding the hierarchy data. Refer to sample of returned structure object
+below.</p>
 <p>Structure of the dict:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.&gt;&#39;</span>
+    <span class="c1"># name can be duplicated from the original name or just left the default one</span>
+    <span class="c1"># if it cannot be determined, however providing some meaningful name is preferred</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;a recognizable string&gt;&#39;</span>
 
-    <span class="c1"># All available attributes of this node in form of key-value pairs.</span>
+    <span class="c1"># All available attributes of this node are in form of key-value pairs</span>
     <span class="s1">&#39;payload&#39;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="s1">&#39;pos&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -199,7 +201,7 @@ serializable.</p>
         <span class="o">...</span>
     <span class="p">},</span>
 
-    <span class="c1"># If no child, do not assign this entry.</span>
+    <span class="c1"># If there is no child, this part can be omitted</span>
     <span class="s1">&#39;children&#39;</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span><span class="o">...</span><span class="p">},</span>  <span class="c1"># Same structure as this dict.</span>
     <span class="p">],</span>
@@ -210,7 +212,7 @@ serializable.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Hierarchy data or None</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">hierarchy data or None</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">NoneType</span></code></td>
 </tr>
@@ -221,14 +223,14 @@ serializable.</p>
 <dl class="method">
 <dt id="poco.sdk.AbstractDumper.IDumper.getRoot">
 <code class="descname">getRoot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#IDumper.getRoot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.IDumper.getRoot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the root node of the UI Hierarchy. The node’s information is wrapped by
+<dd><p>Return the root node of the UI Hierarchy. The node information is wrapped by
 <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>.
 See definition of <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a> for more details.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An instance holds the hierarchy data.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">instance that holds the hierarchy data</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">inherit</span> <span class="pre">from</span> <span class="pre">AbstractNode</span></code></a></td>
 </tr>
@@ -242,9 +244,10 @@ See definition of <a class="reference internal" href="poco.sdk.AbstractNode.html
 <dt id="poco.sdk.AbstractDumper.AbstractDumper">
 <em class="property">class </em><code class="descname">AbstractDumper</code><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#poco.sdk.AbstractDumper.IDumper" title="poco.sdk.AbstractDumper.IDumper"><code class="xref py py-class docutils literal"><span class="pre">poco.sdk.AbstractDumper.IDumper</span></code></a></p>
-<p>This class partially implements <code class="docutils literal"><span class="pre">IDumper</span></code> using general traversal algorithm. To dump the hierarchy from a root
-node, this dumper retrieves all available attributes of this root node and list all its children. Then apply the
-same procedure on each child (treat each child as root node) until a node which has no child.</p>
+<p>This class partially implements <code class="docutils literal"><span class="pre">IDumper</span></code> using general traversal algorithm. In order to dump the hierarchy from
+the root node, this dumper first retrieves all available attributes of the root node and also the list all its
+children and then applies the same procedures as described on each child (i.e. treats each child as a root node)
+until the node that has no child(ren) is reached.</p>
 <dl class="method">
 <dt id="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy">
 <code class="descname">dumpHierarchy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper.dumpHierarchy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy" title="Permalink to this definition">¶</a></dt>
@@ -252,7 +255,7 @@ same procedure on each child (treat each child as root node) until a node which 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json serializable dict holds the whole hierarchy data.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json serializable dict holding the whole hierarchy data</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></td>
 </tr>
@@ -263,22 +266,24 @@ same procedure on each child (treat each child as root node) until a node which 
 <dl class="method">
 <dt id="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">
 <code class="descname">dumpHierarchyImpl</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/AbstractDumper.html#AbstractDumper.dumpHierarchyImpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crawl the hierarchy tree using the simple BFS algorithm. <code class="docutils literal"><span class="pre">dump</span></code> is engine independent as the hierarchy
-structure is wrapped by <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a>, so <code class="docutils literal"><span class="pre">dump</span></code> can be algorithmized.
-Here shows the simplest implementation by default. If you like, you can implement your own algorithm to optimize
-the speed.</p>
+<dd><p>Crawl the hierarchy tree using the simple BFS algorithm. The <code class="docutils literal"><span class="pre">dump</span></code> procedure is the engine independent as
+the hierarchy structure is wrapped by <a class="reference internal" href="poco.sdk.AbstractNode.html#module-poco.sdk.AbstractNode" title="poco.sdk.AbstractNode"><code class="xref py py-class docutils literal"><span class="pre">AbstractNode</span></code></a> and therefore the
+<code class="docutils literal"><span class="pre">dump</span></code> procedure can be algorithmized.</p>
+<p>Following code demonstrates the simplest implementation. Feel free to implement your own algorithms to
+optimize the performance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Do not call this method in explicitly as this is an internal impl function, call          <a class="reference internal" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy" title="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">dumpHierarchy()</span></code></a> if you want to dump a
-hierarchy.</p>
+<p class="last">Do not explicitly call this method as this is an internal function, call
+<a class="reference internal" href="#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy" title="poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">dumpHierarchy()</span></code></a> function instead
+if you want to dump the hierarchy.</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – Root node of the hierarchy to be dumped.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – root node of the hierarchy to be dumped</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A json serializable dict holds the whole hierarchy data.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">json serializable dict holding the whole hierarchy data</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">dict</span></code></td>
 </tr>

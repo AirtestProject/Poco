@@ -168,7 +168,7 @@
 
 <div class="viewcode-block" id="PocoException"><a class="viewcode-back" href="../../source/poco.exceptions.html#poco.exceptions.PocoException">[docs]</a><span class="k">class</span> <span class="nc">PocoException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Base class of exceptions of poco. PY3 compatible.</span>
+<span class="sd">    Base class for errors and exceptions of Poco. It is Python3 compatible.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -197,8 +197,8 @@
 
 <div class="viewcode-block" id="InvalidOperationException"><a class="viewcode-back" href="../../source/poco.exceptions.html#poco.exceptions.InvalidOperationException">[docs]</a><span class="k">class</span> <span class="nc">InvalidOperationException</span><span class="p">(</span><span class="n">PocoException</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    When an operation performing on target device is foreseen, this exceptions will raise.</span>
-<span class="sd">    For example, click outside the screen is definitely meaningless, an ``InvalidOperationException`` raised.</span>
+<span class="sd">    Raised when the operation performing on target device is foreseen, e.g. instruction to click outside the screen is</span>
+<span class="sd">    definitely meaningless, then the ``InvalidOperationException`` is raised.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">pass</span></div>
@@ -206,17 +206,18 @@
 
 <div class="viewcode-block" id="PocoTargetTimeout"><a class="viewcode-back" href="../../source/poco.exceptions.html#poco.exceptions.PocoTargetTimeout">[docs]</a><span class="k">class</span> <span class="nc">PocoTargetTimeout</span><span class="p">(</span><span class="n">PocoException</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Timeout when waiting for some condition to be matched. Such as waiting some UI element but it never appeared.</span>
+<span class="sd">    Raised when the timeout expired while waiting for some condition to be fulfilled, e.g. waiting for the specific</span>
+<span class="sd">    UI element but it has not appeared on the screen.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">poco_obj_proxy</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PocoTargetTimeout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Timeout when waiting for </span><span class="si">{}</span><span class="s1"> of &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">poco_obj_proxy</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s1">&#39;Waiting timeout for </span><span class="si">{}</span><span class="s1"> of &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">poco_obj_proxy</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PocoNoSuchNodeException"><a class="viewcode-back" href="../../source/poco.exceptions.html#poco.exceptions.PocoNoSuchNodeException">[docs]</a><span class="k">class</span> <span class="nc">PocoNoSuchNodeException</span><span class="p">(</span><span class="n">PocoException</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cannot find any UI element of given query condition.</span>
+<span class="sd">    Raised when the UI element specified by query expression cannot be found.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objproxy</span><span class="p">):</span>
@@ -226,9 +227,12 @@
 
 <div class="viewcode-block" id="PocoTargetRemovedException"><a class="viewcode-back" href="../../source/poco.exceptions.html#poco.exceptions.PocoTargetRemovedException">[docs]</a><span class="k">class</span> <span class="nc">PocoTargetRemovedException</span><span class="p">(</span><span class="n">PocoException</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This exception raises when hierarchy structure changed over the selection or access a UI element that is already</span>
-<span class="sd">    recycled. In many cases there is no need to handle this exception by hand. Once this exception occurred, please</span>
-<span class="sd">    check your code carefully. Most of misuses as follows.</span>
+<span class="sd">    Raised when the hierarchy structure changed over the selection or when accessing the UI element that is already</span>
+<span class="sd">    recycled.</span>
+
+<span class="sd">    In most cases, there is no need to handle this exception manually. If this exception occurs, it usually means it</span>
+<span class="sd">    is a bug in your code rather than application itself. Check your code first. The most of misuses comes from as</span>
+<span class="sd">    follows.</span>
 <span class="sd">    </span>
 <span class="sd">    Examples:</span>
 <span class="sd">        ::</span>

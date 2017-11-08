@@ -163,11 +163,11 @@
 
 <div class="viewcode-block" id="InputInterface"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface">[docs]</a><span class="k">class</span> <span class="nc">InputInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is one of the main communication interfaces. This interface ensure the ability of simulated input on target </span>
-<span class="sd">    device. There are only some simple and basic method defined as follows which is enough for simple features. To </span>
-<span class="sd">    fully support on mobile device, motion event will be introduced in the future.</span>
+<span class="sd">    This is one of the main communication interfaces. This interface ensures the ability for simulated input on target</span>
+<span class="sd">    device. So far, the interface supports only some basic methods definitions. The motion event will be added in future</span>
+<span class="sd">    to provide full support for mobile devices.</span>
 <span class="sd">    </span>
-<span class="sd">    The coordinates are all in NormalizedCoordinate, see ``NormalizedCoordinate`` for more details.</span>
+<span class="sd">    All coordinates are in NormalizedCoordinate system, see ``NormalizedCoordinate`` for more details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="InputInterface.click"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -175,36 +175,36 @@
 <span class="sd">        Perform click action as simulated input on target device. Coordinates arguments are all in range of 0~1.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            y (:obj:`float`): y</span>
-<span class="sd">            x (:obj:`float`): x</span>
+<span class="sd">            y (:obj:`float`): y-coordinate</span>
+<span class="sd">            x (:obj:`float`): x-coordinate</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="InputInterface.swipe"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface.swipe">[docs]</a>    <span class="k">def</span> <span class="nf">swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Perform swipe action as simulated input on target device from point A to B within given seconds. Coordinates </span>
-<span class="sd">        arguments are all in range of 0~1.</span>
+<span class="sd">        Perform swipe action as simulated input on target device from point A to B within given time interval to</span>
+<span class="sd">        perform the action. Coordinates  arguments are all in range of 0~1.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            x1 (:obj:`float`): start point x</span>
-<span class="sd">            y1 (:obj:`float`): start point y</span>
-<span class="sd">            x2 (:obj:`float`): end point x</span>
-<span class="sd">            y2 (:obj:`float`): end point y</span>
-<span class="sd">            duration (:obj:`float`): Time over the whole action.</span>
+<span class="sd">            x1 (:obj:`float`): x-coordinate of the start point</span>
+<span class="sd">            y1 (:obj:`float`): y-coordinate of the start point</span>
+<span class="sd">            x2 (:obj:`float`): x-coordinate of the end point</span>
+<span class="sd">            y2 (:obj:`float`): y-coordinate of the end point</span>
+<span class="sd">            duration (:obj:`float`): time interval to perform the swipe action</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="InputInterface.longClick"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface.longClick">[docs]</a>    <span class="k">def</span> <span class="nf">longClick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Perform long click action as simulated input on target device within given seconds. Coordinates arguments are </span>
+<span class="sd">        Perform press action as simulated input on target device within given seconds. Coordinates arguments are</span>
 <span class="sd">        all in range of 0~1.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            y (:obj:`float`): y</span>
-<span class="sd">            x (:obj:`float`): x</span>
-<span class="sd">            duration (:obj:`float`): Time over the whole action.</span>
+<span class="sd">            x (:obj:`float`): x-coordinate</span>
+<span class="sd">            y (:obj:`float`): y-coordinate</span>
+<span class="sd">            duration (:obj:`float`): time interval to perform the action</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
@@ -214,7 +214,7 @@
 <span class="sd">        Send a key event to target device.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            keycode (:obj:`int` or :obj:`char`): Ascii key code.</span>
+<span class="sd">            keycode (:obj:`int` or :obj:`char`): Ascii key code</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>

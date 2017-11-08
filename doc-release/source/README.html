@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="poco  documentation" href="../index.html"/>
         <link rel="next" title="poco package" href="poco.html"/>
-        <link rel="prev" title="Welcome to Poco’s documentation!" href="../index.html"/> 
+        <link rel="prev" title="Welcome to Poco (ポコ) documentation!" href="../index.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -100,10 +100,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#poco-instance">Poco Instance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#object-selection-and-operation">Object Selection and Operation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-poco-objects">Working with Poco Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#basic-selector">Basic Selector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#relative-selector">Relative Selector</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sequence-selector-index-selector-iterator-is-more-recommended-for-use">Sequence Selector (index selector, iterator is more recommended for use)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sequence-selector-index-selector-iterator-is-recommended-for-use">Sequence Selector (index selector, iterator is recommended for use)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#iterate-over-a-collection-of-objects">Iterate over a collection of objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get-object-properties">Get object properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#object-proxy-related-operation">Object Proxy Related Operation</a><ul>
@@ -205,37 +205,39 @@
 <p><a class="reference external" href="doc/integration.html">中文README(Chinese README)</a> 在此。</p>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>Main Poco features includes following:</p>
 <ul class="simple">
-<li>Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.</li>
-<li>Retrieve UI Elements Hierarchy in game’s runtime.</li>
-<li>Super fast and impact-free to the game.</li>
-<li>Super easy sdk integration to the game in 5 minutes.</li>
-<li>Powerful APIs which are engine independent.</li>
-<li>Support multi-touch e.g. fling/pinch/etc. (in development)</li>
-<li>Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)</li>
-<li>Extensible to other private engines by implementing <a class="reference external" href="doc/integration.html">poco-sdk</a> .</li>
-<li>Compatible with Python 2.7 and Python 3.3+.</li>
+<li>supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps</li>
+<li>retrieves UI Elements Hierarchy in game’s runtime</li>
+<li>is super fast and impact-free to the game</li>
+<li>allows straightforward SDK integration to the game (within in 5 minutes)</li>
+<li>provides powerful APIs taht are engine independent</li>
+<li>supports multi-touch e.g. fling/pinch/… (and more is coming soon)</li>
+<li>support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)</li>
+<li>is extensible to other private engines by implementing <a class="reference external" href="doc/integration.html">poco-sdk</a> .</li>
+<li>is compatible with Python 2.7 and Python 3.3+.</li>
 </ul>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>To use poco, you should install poco on your host as a python library and integrate <a class="reference external" href="doc/integration.html">poco-sdk</a> in your game.</p>
-<p><strong>poco</strong> can be installed with pip</p>
+<p>In order to use Poco, you must install Poco python library on your host and also install the <a class="reference external" href="doc/integration.html">poco-sdk</a> in
+your game/app. Supported version are Python2.7 and Python3.3+.</p>
+<p><strong>Poco</strong> can be installed straightforward with <code class="docutils literal"><span class="pre">pip</span></code> command</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
 pip install poco
 </pre></div>
 </div>
-<p>Currently, it is only available in git repo. So please clone the repo and install</p>
+<p>Currently, the code is available only in <cite>Git</cite> repository and can be installed as follows</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/Meteorix/poco.git
 pip install -e poco
 </pre></div>
 </div>
-<p>For NetEase internally use, please execute the following command.</p>
+<p>For NetEase internal use, clone the repository from following location</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
 </pre></div>
 </div>
-<p><strong>poco-sdk</strong> integration please refer to <a class="reference external" href="doc/integration.html">Integration Guide</a>.</p>
+<p>For <strong>poco-sdk</strong> integration please refer to <a class="reference external" href="doc/integration.html">Integration Guide</a></p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
@@ -259,39 +261,57 @@ pip install -e poco
 </div>
 <div class="section" id="basic-concepts">
 <h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the basic concepts of Poco. Basic terminology used in following section</p>
 <ul class="simple">
-<li><strong>Target device</strong>: test devices apps or games will run on, usually refers to mobile phones</li>
-<li><strong>UI proxy</strong>: proxy objects within poco framework, representing 0, 1 or multiple in-game UI elements</li>
-<li><strong>Node/UI element</strong>: UI element instances within apps/games, namely UI</li>
-<li><strong>query expression</strong>: a serializable data structure through which poco interacts with <strong>target devices</strong> and selects the corresponding UI elements. Tester usually don’t need to pay attention to the internal structure of this expression unless they need to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</li>
+<li><strong>Target device</strong>: test devices where the apps or games run on, it usually refers to mobile phone devices</li>
+<li><strong>UI proxy</strong>: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements</li>
+<li><strong>Node/UI element</strong>: UI element instances or nodes in app/game</li>
+<li><strong>query expression</strong>: a serializable internal data structure through which Poco interacts with <strong>target devices</strong> and selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required</li>
 </ul>
+<p>to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</p>
+<p>Following images show the UI hierarchy represented in Poco</p>
 <img alt="../_images/hunter-inspector.png" src="../_images/hunter-inspector.png" />
 <img alt="../_images/hunter-inspector-text-attribute.png" src="../_images/hunter-inspector-text-attribute.png" />
 <img alt="../_images/hunter-inspector-hierarchy-relations.png" src="../_images/hunter-inspector-hierarchy-relations.png" />
 <div class="section" id="definitions-of-coordinate-system-and-metric-space">
 <h3>Definitions of coordinate system and metric space<a class="headerlink" href="#definitions-of-coordinate-system-and-metric-space" title="Permalink to this headline">¶</a></h3>
-<img alt="../_images/hunter-poco-coordinate-system.png" src="../_images/hunter-poco-coordinate-system.png" />
 <div class="section" id="normalized-coordinate-system">
 <h4>Normalized Coordinate System<a class="headerlink" href="#normalized-coordinate-system" title="Permalink to this headline">¶</a></h4>
-<p>In normalized coordinate system, the height and width of the screen are measured in the range of 1 unit and these two parameters of UI within poco correspond to certain percentage of the screen size. Hence the same UI on devices with different resolution will have same position and size within normalized coordinate system, which is very helpful to write cross-device test cases.</p>
-<p>The space of normalized coordinate system is well distributed. By all means, the coordinate of the screen center is (0.5, 0.5) and the computing method of other scalars and vectors are the same as that of Euclidean space.</p>
+<p>In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
+width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
+In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
+position and size. This is especially very handy when writing cross-device test cases.</p>
+<p>The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
+(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.</p>
+<img alt="../_images/hunter-poco-coordinate-system.png" src="../_images/hunter-poco-coordinate-system.png" />
 </div>
 <div class="section" id="local-coordinate-system-local-positioning">
 <h4>Local Coordinate System (local positioning)<a class="headerlink" href="#local-coordinate-system-local-positioning" title="Permalink to this headline">¶</a></h4>
-<p>The aim of introducing local coordinate system is to express coordinates with reference to a certain UI. Local coordinate system  takes the top left corner  of UI bounding box as origin, the horizontal rightward as x-axis and the vertical downward as y-axis, with the height and width of the bounding box being 1 unit  and other definitions being similar with normalized  coordinate system.</p>
-<p>Local coordinate system is more flexible to be used to locate the position within or out of UI. For instance, the coordinate (0.5, 0.5)corresponds to the center of the UI while coordinates larger than 1 or less than 0 correspond to the position out of the UI.</p>
+<p>The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
+The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
+rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
+length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
+coordinate system.</p>
+<p>Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
+the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
+correspond to the position out of the UI element.</p>
 </div>
 </div>
 </div>
 <div class="section" id="poco-instance">
 <h2>Poco Instance<a class="headerlink" href="#poco-instance" title="Permalink to this headline">¶</a></h2>
-<p>For different engines, please initialize different <code class="docutils literal"><span class="pre">poco</span></code> instance. This part will take Unity3D as an example. For other engines, please refer to:</p>
-<ul class="simple">
+<p>There are several engines supported and for each engine the different <code class="docutils literal"><span class="pre">poco</span></code> instance must be initialized.</p>
+<dl class="docutils">
+<dt>Supported engines are as follows</dt>
+<dd><ul class="first last simple">
 <li><a class="reference internal" href="#cocos2dx-js">cocos2dx-js</a></li>
 <li><a class="reference internal" href="#android-native">android-native</a></li>
 <li>unreal (in development)</li>
-<li>(others see <a class="reference external" href="doc/integration.html">INTEGRATION guide</a> for more details)</li>
+<li>for other engines, refer to <a class="reference external" href="doc/integration.html">INTEGRATION guide</a> for more details</li>
 </ul>
+</dd>
+</dl>
+<p>Following example shows how to initialize popo instance for Unity3D.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.vendor.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span>
 
 <span class="n">poco</span> <span class="o">=</span> <span class="n">UnityPoco</span><span class="p">()</span>
@@ -299,11 +319,14 @@ pip install -e poco
 </pre></div>
 </div>
 </div>
-<div class="section" id="object-selection-and-operation">
-<h2>Object Selection and Operation<a class="headerlink" href="#object-selection-and-operation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="working-with-poco-objects">
+<h2>Working with Poco Objects<a class="headerlink" href="#working-with-poco-objects" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="basic-selector">
 <h3>Basic Selector<a class="headerlink" href="#basic-selector" title="Permalink to this headline">¶</a></h3>
-<p>The invocation <code class="docutils literal"><span class="pre">poco(...)</span></code> instance is to traverse through the render tree structure and select all the UI elements matching given query expression. The first argument is node name and other key word arguments are correspond to other properties of node. For more information, please refer to API Reference.</p>
+<p>UI element objects can be selected by invoking <code class="docutils literal"><span class="pre">poco(...)</span></code> function instance. The function traverses through the
+render tree structure and selects all the corresponding UI elements matching the query expression.</p>
+<p>The function takes one mandatory argument <cite>node name</cite>, the optional arguments can be substituted too and they refer to
+specific node properties. For more information, refer to API reference.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># select by node name</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span>
 
@@ -316,16 +339,20 @@ pip install -e poco
 </div>
 <div class="section" id="relative-selector">
 <h3>Relative Selector<a class="headerlink" href="#relative-selector" title="Permalink to this headline">¶</a></h3>
-<p>When there is an ambiguity in the objects selected by node names/node types or failing to select objects, try selecting by hierarchy in a corresponding manner</p>
+<p>When there is any ambiguity in the selected objects by node names/node types or object unable to select, the relative
+selector tries to select the element object by hierarchy in following manner</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># select by direct child/offspring</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/hunter-poco-select-relative.png" src="../_images/hunter-poco-select-relative.png" />
 </div>
-<div class="section" id="sequence-selector-index-selector-iterator-is-more-recommended-for-use">
-<h3>Sequence Selector (index selector, iterator is more recommended for use)<a class="headerlink" href="#sequence-selector-index-selector-iterator-is-more-recommended-for-use" title="Permalink to this headline">¶</a></h3>
-<p>Index and traversal will be performed in default up-down or left-right space orders. If the not-yet-traversed nodes are removed from the screen, an exception will be thrown whereas this is not the case for traversed nodes that are removed. As the traversal order has been determined before in advance, the traversal will be performed in a previous order even though the nodes in views are rearranged during the traversal process.</p>
+<div class="section" id="sequence-selector-index-selector-iterator-is-recommended-for-use">
+<h3>Sequence Selector (index selector, iterator is recommended for use)<a class="headerlink" href="#sequence-selector-index-selector-iterator-is-recommended-for-use" title="Permalink to this headline">¶</a></h3>
+<p>Tree indexing and traversing is performed by default from up to down or from left to right. In case that
+the ‘not-yet-traversed’ nodes are removed from the screen, the exception is raised. The exception is not raised in case
+when the ‘already-traversed’ nodes are removed and in this case the traversing continues in previous order despite
+the fact that thenodes in views were rearranged during the travers process.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">items</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;material_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
 <span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;material_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
@@ -335,6 +362,7 @@ pip install -e poco
 </div>
 <div class="section" id="iterate-over-a-collection-of-objects">
 <h3>Iterate over a collection of objects<a class="headerlink" href="#iterate-over-a-collection-of-objects" title="Permalink to this headline">¶</a></h3>
+<p>Following code snippet shows how to iterate over the collection of UI objects</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># traverse through every item</span>
 <span class="n">items</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;main_node&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;list_item&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">offspring</span><span class="p">(</span><span class="s1">&#39;item&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
@@ -345,6 +373,7 @@ pip install -e poco
 </div>
 <div class="section" id="get-object-properties">
 <h3>Get object properties<a class="headerlink" href="#get-object-properties" title="Permalink to this headline">¶</a></h3>
+<p>Following examples shows how to obtain various properties of an object</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">mission_btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mission_btn</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">))</span>  <span class="c1"># &#39;Button&#39;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">mission_btn</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>  <span class="c1"># &#39;据点支援&#39;</span>
@@ -355,9 +384,14 @@ pip install -e poco
 </div>
 <div class="section" id="object-proxy-related-operation">
 <h3>Object Proxy Related Operation<a class="headerlink" href="#object-proxy-related-operation" title="Permalink to this headline">¶</a></h3>
+<p>This section describes object proxy related operations</p>
 <div class="section" id="click">
 <h4>click<a class="headerlink" href="#click" title="Permalink to this headline">¶</a></h4>
-<p>The anchorPoint of UI element defaults to the click point. When the first argument is passed to the relative click position, the coordinate of the top-left corner of the bounding box will be <cite>[0, 0]</cite> and the bottom right corner <cite>[1, 1]</cite>. The deviation range can be less than 0 or larger than 1 and if it turns out to be out of 0~1, that means it is beyond the bounding box.</p>
+<p>The anchorPoint of UI element is attached to the click point by default. When the first argument
+(the relative click position) is passed to the function, the coordinates of the top-left corner of the bounding box
+become <cite>[0, 0]</cite> and the bottom right corner coordinates are <cite>[1, 1]</cite>. The click range area can be less than 0 or larger
+than 1. If the click range area lies in the interval (0, 1), it means it is beyond the bounding box.</p>
+<p>Following example demonstrates how to use <code class="docutils literal"><span class="pre">click</span></code> function</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>    <span class="c1"># equivalent to center</span>
@@ -368,7 +402,9 @@ pip install -e poco
 </div>
 <div class="section" id="swipe">
 <h4>swipe<a class="headerlink" href="#swipe" title="Permalink to this headline">¶</a></h4>
-<p>Take the anchor of UI element as origin and swipe a certain distance towards a direction</p>
+<p>The anchorPoint of UI element is taken as the origin, the swipe action is performed towards the given direction with
+the certain distance.</p>
+<p>Following example shows how to use the <code class="docutils literal"><span class="pre">swipe</span></code> function</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">joystick</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;movetouch_panel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="s1">&#39;point_img&#39;</span><span class="p">)</span>
 <span class="n">joystick</span><span class="o">.</span><span class="n">swipe</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">)</span>
 <span class="n">joystick</span><span class="o">.</span><span class="n">swipe</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">])</span>  <span class="c1"># swipe sqrt(0.08) unit distance at 45 degree angle up-and-right</span>
@@ -379,7 +415,8 @@ pip install -e poco
 </div>
 <div class="section" id="drag">
 <h4>drag<a class="headerlink" href="#drag" title="Permalink to this headline">¶</a></h4>
-<p>Drag to target UI from current UI</p>
+<p>Drag from current UI element to the target UI element.</p>
+<p>Following example shows how to use the <code class="docutils literal"><span class="pre">drag_to</span></code> function</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;突破芯片&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drag_to</span><span class="p">(</span><span class="n">poco</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;岩石司康饼&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -387,11 +424,14 @@ pip install -e poco
 </div>
 <div class="section" id="focus-local-positioning">
 <h4>focus (local positioning)<a class="headerlink" href="#focus-local-positioning" title="Permalink to this headline">¶</a></h4>
-<p>The origin defaults to anchor when conducting operations related to node coordinates. Therefore click the anchor directly. If local click deviation is needed, focus can be used. Similar with screen coordinate system, focus takes the upper left corner of bounding box as the origin with the length and width measuring 1, the coordinate of the center being <cite>[0.5, 0.5]</cite>, the bottom right corner`[1, 1]`, and so on.</p>
+<p>The anchorPoint is set as the origin when conducting operations related to the node coordinates. If the the local click
+area is need, the focus function can be used. The coordinate system is similar to the screen coordinates - the origin
+is put to the top left corner of the bounding box and with length of unit of 1, i.e the coordinates of the center are
+then <cite>[0.5, 0.5]</cite> and the bottom right corner has coordinates <cite>[1, 1]</cite>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">focus</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># click the center</span>
 </pre></div>
 </div>
-<p>focus can also be used as internal positioning within an objects, as instanced by the example of implementing a scroll operation in ScrollView</p>
+<p>The focus function can also be used as internal positioning within the objects. Following example demonstrates the implementation of <cite>scroll</cite> operation in <cite>ScrollView</cite>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">scrollView</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;ScollView&#39;</span><span class="p">)</span>
 <span class="n">scrollView</span><span class="o">.</span><span class="n">focus</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span><span class="o">.</span><span class="n">drag_to</span><span class="p">(</span><span class="n">scrollView</span><span class="o">.</span><span class="n">focus</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]))</span>
 </pre></div>
@@ -399,7 +439,8 @@ pip install -e poco
 </div>
 <div class="section" id="wait">
 <h4>wait<a class="headerlink" href="#wait" title="Permalink to this headline">¶</a></h4>
-<p>Wait for the target object to appear and always return  the object itself. If it appears, return it immediately, otherwise, return after timeout</p>
+<p>Wait for the target objects on the screen and return the object itself. If the object the object exists, return it
+immediately, otherwise return after timeout.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># wait 5 seconds at most，click once the object appears</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>  <span class="c1"># wait 5 seconds at most，return Exists or Not Exists</span>
 </pre></div>
@@ -408,7 +449,8 @@ pip install -e poco
 </div>
 <div class="section" id="global-operation">
 <h3>Global Operation<a class="headerlink" href="#global-operation" title="Permalink to this headline">¶</a></h3>
-<p>Can also perform a global operation without any UI elements selected.</p>
+<p><cite>Poco</cite> framework also allows to perform the operations without any UI elements selected. These operations are called
+<cite>global</cite> operations.</p>
 <div class="section" id="id1">
 <h4>click<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">poco</span><span class="o">.</span><span class="n">click</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>  <span class="c1"># click the center of screen</span>
@@ -432,7 +474,7 @@ pip install -e poco
 <div class="section" id="snapshot">
 <h4>snapshot<a class="headerlink" href="#snapshot" title="Permalink to this headline">¶</a></h4>
 <p>Take a screenshot of the current screen and save it to file.</p>
-<p><strong>Note</strong>: <code class="docutils literal"><span class="pre">snapshot</span></code> does not support in some engine implementation of poco.</p>
+<p><strong>Note</strong>: <code class="docutils literal"><span class="pre">snapshot</span></code>  is not supported in some engine implementation of poco.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
 
 <span class="n">b64img</span> <span class="o">=</span> <span class="n">poco</span><span class="o">.</span><span class="n">snapshot</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">720</span><span class="p">)</span>
@@ -444,6 +486,7 @@ pip install -e poco
 </div>
 <div class="section" id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<p>This sections describes the Poco framework errors and exceptions.</p>
 <div class="section" id="pocotargettimeout">
 <h3>PocoTargetTimeout<a class="headerlink" href="#pocotargettimeout" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.exceptions</span> <span class="kn">import</span> <span class="n">PocoTargetTimeout</span>
@@ -473,7 +516,8 @@ pip install -e poco
 </div>
 <div class="section" id="unit-test">
 <h2>Unit Test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h2>
-<p>poco is an automation framework. For unit testing, please refer to <a class="reference external" href="http://git-qa.gz.netease.com/maki/PocoUnit">PocoUnit</a>. PocoUnit provides a full set of assertion methods and it is compatible with the unittest in python standard library.</p>
+<p>Poco is an automation test framework. For unit testing, please refer to <a class="reference external" href="http://git-qa.gz.netease.com/maki/PocoUnit">PocoUnit</a> section. PocoUnit provides a full set
+of assertion methods and furthermore, it is also compatible with the <code class="docutils literal"><span class="pre">unittest</span></code> in Python standard library.</p>
 <span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
 </div>
 
@@ -490,7 +534,7 @@ pip install -e poco
         <a href="poco.html" class="btn btn-neutral float-right" title="poco package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Welcome to Poco’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral" title="Welcome to Poco (ポコ) documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -180,10 +180,10 @@
 <dt id="poco.sdk.interfaces.input.InputInterface">
 <em class="property">class </em><code class="descname">InputInterface</code><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>This is one of the main communication interfaces. This interface ensure the ability of simulated input on target
-device. There are only some simple and basic method defined as follows which is enough for simple features. To
-fully support on mobile device, motion event will be introduced in the future.</p>
-<p>The coordinates are all in NormalizedCoordinate, see <code class="docutils literal"><span class="pre">NormalizedCoordinate</span></code> for more details.</p>
+<p>This is one of the main communication interfaces. This interface ensures the ability for simulated input on target
+device. So far, the interface supports only some basic methods definitions. The motion event will be added in future
+to provide full support for mobile devices.</p>
+<p>All coordinates are in NormalizedCoordinate system, see <code class="docutils literal"><span class="pre">NormalizedCoordinate</span></code> for more details.</p>
 <dl class="method">
 <dt id="poco.sdk.interfaces.input.InputInterface.click">
 <code class="descname">click</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.click"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.click" title="Permalink to this definition">¶</a></dt>
@@ -193,8 +193,8 @@ fully support on mobile device, motion event will be introduced in the future.</
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>y</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y</li>
-<li><strong>x</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x</li>
+<li><strong>y</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y-coordinate</li>
+<li><strong>x</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x-coordinate</li>
 </ul>
 </td>
 </tr>
@@ -210,7 +210,7 @@ fully support on mobile device, motion event will be introduced in the future.</
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keycode</strong> (<code class="xref py py-obj docutils literal"><span class="pre">int</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">char</span></code>) – Ascii key code.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keycode</strong> (<code class="xref py py-obj docutils literal"><span class="pre">int</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">char</span></code>) – Ascii key code</td>
 </tr>
 </tbody>
 </table>
@@ -219,16 +219,16 @@ fully support on mobile device, motion event will be introduced in the future.</
 <dl class="method">
 <dt id="poco.sdk.interfaces.input.InputInterface.longClick">
 <code class="descname">longClick</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.longClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.longClick" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform long click action as simulated input on target device within given seconds. Coordinates arguments are
+<dd><p>Perform press action as simulated input on target device within given seconds. Coordinates arguments are
 all in range of 0~1.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>y</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y</li>
-<li><strong>x</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x</li>
-<li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – Time over the whole action.</li>
+<li><strong>x</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x-coordinate</li>
+<li><strong>y</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y-coordinate</li>
+<li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – time interval to perform the action</li>
 </ul>
 </td>
 </tr>
@@ -239,18 +239,18 @@ all in range of 0~1.</p>
 <dl class="method">
 <dt id="poco.sdk.interfaces.input.InputInterface.swipe">
 <code class="descname">swipe</code><span class="sig-paren">(</span><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.swipe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.swipe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Perform swipe action as simulated input on target device from point A to B within given seconds. Coordinates
-arguments are all in range of 0~1.</p>
+<dd><p>Perform swipe action as simulated input on target device from point A to B within given time interval to
+perform the action. Coordinates  arguments are all in range of 0~1.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x1</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – start point x</li>
-<li><strong>y1</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – start point y</li>
-<li><strong>x2</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – end point x</li>
-<li><strong>y2</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – end point y</li>
-<li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – Time over the whole action.</li>
+<li><strong>x1</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x-coordinate of the start point</li>
+<li><strong>y1</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y-coordinate of the start point</li>
+<li><strong>x2</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – x-coordinate of the end point</li>
+<li><strong>y2</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – y-coordinate of the end point</li>
+<li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – time interval to perform the swipe action</li>
 </ul>
 </td>
 </tr>

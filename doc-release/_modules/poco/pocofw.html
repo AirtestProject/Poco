@@ -165,7 +165,6 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">.acceleration</span> <span class="k">import</span> <span class="n">PocoAccelerationMixin</span>
-<span class="kn">from</span> <span class="nn">.assertions</span> <span class="k">import</span> <span class="n">PocoAssertionMixin</span>
 <span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">PocoTargetTimeout</span><span class="p">,</span> <span class="n">InvalidOperationException</span>
 <span class="kn">from</span> <span class="nn">.proxy</span> <span class="k">import</span> <span class="n">UIObjectProxy</span>
 <span class="kn">from</span> <span class="nn">.agent</span> <span class="k">import</span> <span class="n">PocoAgent</span>
@@ -174,21 +173,21 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
 
 
-<div class="viewcode-block" id="Poco"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco">[docs]</a><span class="k">class</span> <span class="nc">Poco</span><span class="p">(</span><span class="n">PocoAssertionMixin</span><span class="p">,</span> <span class="n">PocoAccelerationMixin</span><span class="p">):</span>
+<div class="viewcode-block" id="Poco"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco">[docs]</a><span class="k">class</span> <span class="nc">Poco</span><span class="p">(</span><span class="n">PocoAccelerationMixin</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Poco standard initializer.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        agent (:py:class:`PocoAgent &lt;poco.agent.PocoAgent&gt;`): An agent object for poco to communication with </span>
-<span class="sd">         target device. See :py:class:`PocoAgent &lt;poco.agent.PocoAgent&gt;`&#39;s definition.</span>
+<span class="sd">        agent (:py:class:`PocoAgent &lt;poco.agent.PocoAgent&gt;`): an agent object for Poco to communicate with the target</span>
+<span class="sd">         device. See :py:class:`PocoAgent &lt;poco.agent.PocoAgent&gt;` definition for more details.</span>
 <span class="sd">        options:</span>
-<span class="sd">            - action_interval: The time after an action(like touch/swipe) performed on device to wait for the UI becoming stable. default </span>
-<span class="sd">              0.8s.</span>
-<span class="sd">            - poll_interval: The minimal time between each poll event. Such as waiting for some UI to appear and it will </span>
-<span class="sd">              be polling periodically.</span>
-<span class="sd">            - pre_action_wait_for_appearance: Before actions like click or swipe, it will wait for at most this time to </span>
-<span class="sd">              wait for appearance. If the target does not show up after that, :py:class:`PocoNoSuchNodeException  </span>
-<span class="sd">              &lt;poco.exceptions.PocoNoSuchNodeException&gt;` will raise.</span>
+<span class="sd">            - ``action_interval``: time interval to wait for the action (such as touch or swipe) completion performed</span>
+<span class="sd">              on device and for the UI to become still (stable). Default value is 0.8s.</span>
+<span class="sd">            - ``poll_interval``: the minimum time needed between each poll events (such as waiting for UI element to</span>
+<span class="sd">              appear on the screen). Polling is done periodically.</span>
+<span class="sd">            - ``pre_action_wait_for_appearance``: time interval to wait before the action (such as click or swipe) is</span>
+<span class="sd">              performed. If the target UI element does not appear on the screen after this time interval, the</span>
+<span class="sd">              :py:class:`PocoNoSuchNodeException &lt;poco.exceptions.PocoNoSuchNodeException&gt;` is raised</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
@@ -205,11 +204,12 @@
 
 <div class="viewcode-block" id="Poco.__call__"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.__call__">[docs]</a>    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Simply call poco instance to select UI element by query conditions. You can specify the name or other </span>
-<span class="sd">        attributes together in query condition. Invisible UI element will be skipped even &quot;visible=False&quot; is given.  </span>
+<span class="sd">        Call Poco instance to select the UI element by query expression. Query expression can contain specific name</span>
+<span class="sd">        and/or other attributes. Invisible UI elements will be skipped even if &quot;visible=False&quot; argument is set.</span>
 
-<span class="sd">        Selection is not executed instantly. The query string will be stored in the UI proxy. Selection can be executed </span>
-<span class="sd">        exactly when UI elements&#39; info is needed (like position to click, or attribute to retrieve).</span>
+<span class="sd">        Selection process is not executed instantly, the query expression is stored in the UI proxy and the selection is</span>
+<span class="sd">        executed only then when the UI element(s) info is required (such get the point coordinates where to click, and/or</span>
+<span class="sd">        retrieve the specific attribute value).</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            This example shows selecting a Button named &#39;close&#39;::</span>
@@ -218,22 +218,20 @@
 <span class="sd">                close_btn = poco(&#39;close&#39;, type=&#39;Button&#39;)</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (:obj:`str`): Select UI element(s) by name.</span>
+<span class="sd">            name (:obj:`str`): name of the UI element to be selected</span>
 
 <span class="sd">        Keyword Args:</span>
-<span class="sd">            xx: Arbitrary key value pairs stands for selecting by ``UI.xx``&#39;s value matching.</span>
-<span class="sd">            xxMatches (:obj:`str`): Arbitrary key value pairs stands for selecting by ``UI.xx``&#39;s value matching the </span>
-<span class="sd">             regular pattern</span>
+<span class="sd">            xx: arbitrary key value pair that stands for selecting the UI matching the value of ``UI.xx``</span>
+<span class="sd">            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular expression pattern ``UI.xx``</span>
 
-<span class="sd">        In keyword args, xx is the attribute name and should be unique that is to choose only one matching way. ::</span>
+<span class="sd">        In keyword args, the `xx` is the attribute name and it is supposed to be unique so the only one match is found ::</span>
 
-<span class="sd">            # select UI element(s) whose text attribute matches the pattern &#39;^close.*$&#39;</span>
+<span class="sd">            # select the UI element(s) which text attribute matches the pattern &#39;^close.*$&#39;</span>
 <span class="sd">            poco = Poco(...)</span>
 <span class="sd">            arb_close_btn = poco(textMatches=&#39;^close.*$&#39;)</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: UI proxy object representing the UI element matches \</span>
-<span class="sd">             given query condition.</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: UI proxy object representing the UI element matches the given query expression.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -244,18 +242,18 @@
 <div class="viewcode-block" id="Poco.wait_for_any"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.wait_for_any">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for_any</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objects</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.</span>
-<span class="sd">        All UI proxies will be polled periodically. See option :py:class:`poll_interval &lt;poco.Poco&gt;` in </span>
-<span class="sd">        ``Poco``&#39;s initialization.</span>
+<span class="sd">        All UI proxies will be polled periodically. See options :py:class:`poll_interval &lt;poco.Poco&gt;` in</span>
+<span class="sd">        ``Poco``&#39;s initialization for more details.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            objects (Iterable&lt;:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`&gt;): Iterable of the given UI proxies.</span>
-<span class="sd">            timeout (:obj:`float`): timeout in seconds. 120s by default.</span>
+<span class="sd">            objects (Iterable&lt;:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`&gt;): iterable object of the given UI proxies</span>
+<span class="sd">            timeout (:obj:`float`): timeout in seconds, default is 120s</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: the first appeared UI proxy.</span>
+<span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: the first appeared UI proxy</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            PocoTargetTimeout: When none of UI proxies appeared before timeout.</span>
+<span class="sd">            PocoTargetTimeout: when none of UI proxies appeared before timeout</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -271,14 +269,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wait until all of given UI proxies show up before timeout.</span>
 <span class="sd">        All UI proxies will be polled periodically. See option :py:class:`poll_interval &lt;poco.Poco&gt;` in </span>
-<span class="sd">        ``Poco``&#39;s initialization.</span>
+<span class="sd">        ``Poco``&#39;s initialization for more details.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            objects (Iterable&lt;:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`&gt;): Iterable of the given UI proxies.</span>
-<span class="sd">            timeout (:obj:`float`): timeout in seconds. 120s by default.</span>
+<span class="sd">            objects (Iterable&lt;:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`&gt;): iterable object of the given UI proxies</span>
+<span class="sd">            timeout (:obj:`float`): timeout in seconds, default is 120s</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            PocoTargetTimeout: When not all of UI proxies appeared before timeout.</span>
+<span class="sd">            PocoTargetTimeout: when not all of UI proxies appeared before timeout</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -296,12 +294,20 @@
 
 <div class="viewcode-block" id="Poco.freeze"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.freeze">[docs]</a>    <span class="k">def</span> <span class="nf">freeze</span><span class="p">(</span><span class="n">this</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Snapshot current hierarchy and cache it into a new poco instance. This new poco instance is a copy from current </span>
-<span class="sd">        poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will return directly</span>
-<span class="sd">        when invoking ``dump``.</span>
+<span class="sd">        Snapshot current **hierarchy** and cache it into a new poco instance. This new poco instance is a copy from</span>
+<span class="sd">        current poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will be</span>
+<span class="sd">        super fast when calling ``dump`` function from freezed poco. See the example below.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples:</span>
+<span class="sd">            ::</span>
+
+<span class="sd">                poco = Poco(...)</span>
+<span class="sd">                freezed_poco = poco.freeze()</span>
+<span class="sd">                hierarchy_dict = freezed_poco.agent.hierarchy.dump()  # will return the already cached hierarchy data</span>
+<span class="sd">                </span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`Poco &lt;poco.Poco&gt;`: A new poco instance copy from current poco instance (``self``).</span>
+<span class="sd">            :py:class:`Poco &lt;poco.Poco&gt;`: new poco instance copy from current poco instance (``self``)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">class</span> <span class="nc">FreezedPoco</span><span class="p">(</span><span class="n">Poco</span><span class="p">):</span>
@@ -323,16 +329,16 @@
 
 <div class="viewcode-block" id="Poco.wait_stable"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.wait_stable">[docs]</a>    <span class="k">def</span> <span class="nf">wait_stable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sleep fixed seconds in order to wait for the UI becoming stable.</span>
-<span class="sd">        There is no need to call this method manually. It&#39;s automatically invoked in cases.  </span>
+<span class="sd">        Sleep for fixed number of seconds in order to wait for the UI to become still (stable).</span>
+<span class="sd">        There is no need to call this method manually. It&#39;s automatically invoked when required.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_post_action_interval</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poco.sleep_for_polling_interval"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.sleep_for_polling_interval">[docs]</a>    <span class="k">def</span> <span class="nf">sleep_for_polling_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sleep fixed seconds after each polling.</span>
-<span class="sd">        There is no need to call this method manually. It&#39;s automatically invoked in cases.  </span>
+<span class="sd">        Sleep for fixed number of seconds after each poll event.</span>
+<span class="sd">        There is no need to call this method manually. It&#39;s automatically invoked when required.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_poll_interval</span><span class="p">)</span></div>
@@ -340,33 +346,34 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">agent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Readonly property to access poco agent instance. See :py:class:`poco.agent.PocoAgent` to get more details.</span>
+<span class="sd">        Readonly property to access poco agent instance. See :py:class:`poco.agent.PocoAgent` for more details.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`poco.agent.PocoAgent`: poco agent instance.</span>
+<span class="sd">            :py:class:`poco.agent.PocoAgent`: poco agent instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span>
 
 <div class="viewcode-block" id="Poco.click"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.click">[docs]</a>    <span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Perform click(touch, tap, etc.) action on target device at given coordinate. </span>
+<span class="sd">        Perform click (touch, tap, etc.) action on target device at given coordinates.</span>
 
-<span class="sd">        The coordinate is a 2-list or</span>
-<span class="sd">        2-tuple (x, y). The coordinate value x, y should be in range of 0 ~ 1 that indicates the percentage range of </span>
-<span class="sd">        the screen. For example, ``[0.5, 0.5]`` is the center of the screen, ``[0, 0]`` represents the top left corner. </span>
-<span class="sd">        See ``CoordinateSystem`` to get more details about coordinate system.</span>
+<span class="sd">        The coordinates (x, y) are either a 2-list or 2-tuple. The coordinates values for x and y must be in the</span>
+<span class="sd">        interval between 0 ~ 1 to represent the percentage of the screen. For example, the coordinates ``[0.5, 0.5]``</span>
+<span class="sd">        represent the `center` of the screen and the coordinates ``[0, 0]`` represent the `top left corner`.</span>
+
+<span class="sd">        See ``CoordinateSystem`` for more details about coordinate system.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">            Click a point of ``(100, 100)`` of screen whose resolution is ``(1920, 1080)``, the statement as follows::</span>
+<span class="sd">            Click the point of ``(100, 100)`` of screen which resolution is ``(1920, 1080)``::</span>
 
 <span class="sd">                poco.click([100.0 / 1920, 100.0 / 1080])</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            pos (:obj:`list(float, float)` / :obj:`tuple(float, float)`): coordinate (x, y) in range of 0 to 1.</span>
+<span class="sd">            pos (:obj:`list(float, float)` / :obj:`tuple(float, float)`): coordinates (x, y) in range of 0 to 1</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            InvalidOperationException: When click outside screen.</span>
+<span class="sd">            InvalidOperationException: when clicked outside of the screen</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
@@ -375,32 +382,32 @@
 
 <div class="viewcode-block" id="Poco.swipe"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.swipe">[docs]</a>    <span class="k">def</span> <span class="nf">swipe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Perform swipe action on target device from given start to end point, or a 2-list/2-tuple value as direction</span>
-<span class="sd">        vector.</span>
+<span class="sd">        Perform swipe action on target device from point to point given by start point and end point, or by the</span>
+<span class="sd">        direction vector. At least one of the end point or direction must be provided.</span>
 
-<span class="sd">        The coordinate definition of points is the same as ``click``. The components of direction vector (x, y)</span>
-<span class="sd">        is also represents the range of the screen from 0 to 1.</span>
-<span class="sd">        See ``CoordinateSystem`` to get more details about coordinate system.</span>
-<span class="sd">        Should provide at least one of the end point or direction.</span>
+<span class="sd">        The coordinates (x, y) definition for points is the same as for ``click`` event. The components of the</span>
+<span class="sd">        direction vector (x, y) are also expressed in the range of the screen from 0 to 1.</span>
+
+<span class="sd">        See ``CoordinateSystem`` for more details about coordinate system.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">            Here is a screen with resolution 1920x1080. Swipe from (100, 100) to (100, 200) could be a statement as</span>
-<span class="sd">            follows::</span>
+<span class="sd">            Following example shows how to perform a swipe action from (100, 100) to (100, 200) on screen with</span>
+<span class="sd">            resolution 1920x1080::</span>
 
 <span class="sd">                poco.swipe([100.0 / 1920, 100.0 / 1080], [100.0 / 1920, 200.0 / 1080])</span>
 
-<span class="sd">            Or give a specific direction instead of end point::</span>
+<span class="sd">            Or given by the specific direction instead of end point::</span>
 
 <span class="sd">                poco.swipe([100.0 / 1920, 100.0 / 1080], direction=[0, 100.0 / 1080])</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            p1 (:obj:`2-list/2-tuple`): start point.</span>
-<span class="sd">            p2: end point.</span>
-<span class="sd">            direction: swipe direction.</span>
-<span class="sd">            duration (:obj:`float`): The time over the whole action.</span>
+<span class="sd">            p1 (:obj:`2-list/2-tuple`): start point</span>
+<span class="sd">            p2: end point</span>
+<span class="sd">            direction: swipe direction</span>
+<span class="sd">            duration (:obj:`float`): time interval in which the swipe action is performed</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            InvalidOperationException: When swipe start point outside the screen.</span>
+<span class="sd">            InvalidOperationException: when the start point of the swipe action lies outside the screen</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
@@ -415,11 +422,11 @@
 
 <div class="viewcode-block" id="Poco.long_click"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.long_click">[docs]</a>    <span class="k">def</span> <span class="nf">long_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Similar to click, but hold for a given duration and then release.</span>
+<span class="sd">        Similar to click but press the screen for the given time interval and then release</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            pos (:obj:`2-list/2-tuple`): coordinate (x, y) in range of 0 to 1.</span>
-<span class="sd">            duration: The time over the whole action.</span>
+<span class="sd">            pos (:obj:`2-list/2-tuple`): coordinates (x, y) in range from 0 to 1</span>
+<span class="sd">            duration: duration of press the screen</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
@@ -428,26 +435,27 @@
 
 <div class="viewcode-block" id="Poco.snapshot"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.snapshot">[docs]</a>    <span class="k">def</span> <span class="nf">snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">720</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Take a screenshot from the target device. The format (png, jpg, etc.) depends on the agent implementation.</span>
+<span class="sd">        Take the screenshot from the target device. The supported output format (png, jpg, etc.) depends on the agent</span>
+<span class="sd">        implementation.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            width (:obj:`int`): Expected width of the screen shot. The real size is depending on agent implementation.</span>
-<span class="sd">             It may not be able to get a expected width of the screen shot.</span>
+<span class="sd">            width (:obj:`int`): an expected width of the screenshot. The real size depends on the agent implementation</span>
+<span class="sd">            and might not be possible to obtain the expected width of the screenshot</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            2-tuple:</span>
-<span class="sd">                - screen_shot (:obj:`str/bytes`): Screen shot data with base64 encoded.</span>
-<span class="sd">                - format (:obj:`str`): &#39;png&#39;, &#39;jpg&#39;, etc.</span>
+<span class="sd">                - screen_shot (:obj:`str/bytes`): base64 encoded screenshot data</span>
+<span class="sd">                - format (:obj:`str`): output format &#39;png&#39;, &#39;jpg&#39;, etc.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">getScreen</span><span class="p">(</span><span class="n">width</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Poco.get_screen_size"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.get_screen_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_screen_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get real physical resolution of the screen of target device.</span>
+<span class="sd">        Get the real physical resolution of the screen of target device.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            tuple: screen physical resolution in pixels in floats.</span>
+<span class="sd">            tuple: float number indicating the screen physical resolution in pixels</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">screen</span><span class="o">.</span><span class="n">getPortSize</span><span class="p">()</span></div>
@@ -463,14 +471,14 @@
 
 <div class="viewcode-block" id="Poco.add_pre_action_callback"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.add_pre_action_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_pre_action_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register a callback function to be invoked before each action(like touch/swipe).</span>
+<span class="sd">        Register a callback function to be invoked before each action (such as touch or swipe).</span>
 
-<span class="sd">        The callback function&#39;s arguments defines as follows:</span>
+<span class="sd">        The callback function arguments are defined as follows:</span>
 
-<span class="sd">        - action (:obj:`str`): The action&#39;s name or tag.</span>
-<span class="sd">        - proxy (:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;` or :obj:`NoneType`): The related UI proxy that</span>
-<span class="sd">          involves in the action.</span>
-<span class="sd">        - args (:obj:`tuple`): All arguments of the specific action function.</span>
+<span class="sd">        * ``action`` (:obj:`str`): name or tag of the action</span>
+<span class="sd">        * ``proxy`` (:py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;` or :obj:`NoneType`): related UI proxy which is</span>
+<span class="sd">        involved in the action itself</span>
+<span class="sd">        * ``args`` (:obj:`tuple`): all required arguments of the specific action function</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            cb: the callback function</span>
@@ -480,9 +488,9 @@
 
 <div class="viewcode-block" id="Poco.add_post_action_callback"><a class="viewcode-back" href="../../source/poco.pocofw.html#poco.pocofw.Poco.add_post_action_callback">[docs]</a>    <span class="k">def</span> <span class="nf">add_post_action_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register a callback function to be invoked after each action(like touch/swipe).</span>
+<span class="sd">        Register a callback function to be invoked after each action (such as touch or swipe).</span>
 
-<span class="sd">        3 arguments that passes to callback functions is identical to the callback function in</span>
+<span class="sd">        The arguments to be passed are identical to the callback function in</span>
 <span class="sd">        :py:meth:`add_pre_action_callback &lt;poco.Poco.add_pre_action_callback&gt;`.</span>
 
 <span class="sd">        Args:</span>

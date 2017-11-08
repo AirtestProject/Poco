@@ -163,32 +163,30 @@
 
 <div class="viewcode-block" id="ScreenInterface"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface">[docs]</a><span class="k">class</span> <span class="nc">ScreenInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is one of the main communication interfaces. This interface ensure the ability of accessing the rendering </span>
-<span class="sd">    results presented on screen of target device. Rendering results are sometimes not used in automated testing </span>
-<span class="sd">    directly. The method defines as following can assist in obtaining information about the app.</span>
+<span class="sd">    This is one of the main communication interfaces. This interface ensures the ability for accessing the rendering</span>
+<span class="sd">    the results presented on screen of target device. Note that rendering results are very often not used in automated</span>
+<span class="sd">    testing directly. Following methods definitions can assist to obtain the information about the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ScreenInterface.getScreen"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen">[docs]</a>    <span class="k">def</span> <span class="nf">getScreen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Take a screen shot of target device or target app&#39;s window.</span>
+<span class="sd">        Take the screenshot of the target device screen or target app&#39;s window</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            width (:obj:`int`): Expected screen shot width in pixels.</span>
+<span class="sd">            width (:obj:`int`): expected width of the screenshot in pixels</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`str`: Base64 encoded screen data.</span>
+<span class="sd">            :obj:`str`: Base64 encoded screen data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="ScreenInterface.getPortSize"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getPortSize">[docs]</a>    <span class="k">def</span> <span class="nf">getPortSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get the real resolution in pixels of the screen.</span>
+<span class="sd">        Get the real resolution of the screen in pixels.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            2-:obj:`list` (:obj:`float`, :obj:`float`): </span>
-<span class="sd">                - width</span>
-<span class="sd">                - height</span>
+<span class="sd">            2-:obj:`list` (:obj:`float`, :obj:`float`): width and height in pixels</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>

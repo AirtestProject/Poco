@@ -37,7 +37,7 @@
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="poco  documentation" href="../index.html"/>
         <link rel="up" title="poco package" href="poco.html"/>
-        <link rel="next" title="poco.assertions module" href="poco.assertions.html"/>
+        <link rel="next" title="poco.exceptions module" href="poco.exceptions.html"/>
         <link rel="prev" title="poco.acceleration module" href="poco.acceleration.html"/> 
 
   
@@ -96,7 +96,6 @@
 <li class="toctree-l2 current"><a class="reference internal" href="poco.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="poco.acceleration.html">poco.acceleration module</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">poco.agent module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="poco.assertions.html">poco.assertions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
@@ -181,13 +180,13 @@
 <p>This is the agent class for poco to communicate with target device.</p>
 <p>This class is an aggregation of 4 major interfaces for now.</p>
 <ul class="simple">
-<li><a class="reference internal" href="poco.sdk.interfaces.hierarchy.html#poco.sdk.interfaces.hierarchy.HierarchyInterface" title="poco.sdk.interfaces.hierarchy.HierarchyInterface"><code class="xref py py-class docutils literal"><span class="pre">HierarchyInterface</span></code></a>: Defines some hierarchy
-accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name).</li>
-<li><a class="reference internal" href="poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface" title="poco.sdk.interfaces.input.InputInterface"><code class="xref py py-class docutils literal"><span class="pre">InputInterface</span></code></a>: Defines simulated input methods to make
-it possible to inject simulated input on target device.</li>
-<li><a class="reference internal" href="poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface" title="poco.sdk.interfaces.screen.ScreenInterface"><code class="xref py py-class docutils literal"><span class="pre">ScreenInterface</span></code></a>: Defines methods to access the screen
-surface.</li>
-<li><a class="reference internal" href="poco.sdk.interfaces.command.html#poco.sdk.interfaces.command.CommandInterface" title="poco.sdk.interfaces.command.CommandInterface"><code class="xref py py-class docutils literal"><span class="pre">CommandInterface</span></code></a>: Defines methods to communicate
+<li><a class="reference internal" href="poco.sdk.interfaces.hierarchy.html#poco.sdk.interfaces.hierarchy.HierarchyInterface" title="poco.sdk.interfaces.hierarchy.HierarchyInterface"><code class="xref py py-class docutils literal"><span class="pre">HierarchyInterface</span></code></a>: defines the hierarchy
+accessibility methods such as dump(crawl the whole UI tree), getAttr(retrieve attribute value by name)</li>
+<li><a class="reference internal" href="poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface" title="poco.sdk.interfaces.input.InputInterface"><code class="xref py py-class docutils literal"><span class="pre">InputInterface</span></code></a>: defines the simulated input methods to
+allow inject simulated input on target device</li>
+<li><a class="reference internal" href="poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface" title="poco.sdk.interfaces.screen.ScreenInterface"><code class="xref py py-class docutils literal"><span class="pre">ScreenInterface</span></code></a>: defines methods to access the screen
+surface</li>
+<li><a class="reference internal" href="poco.sdk.interfaces.command.html#poco.sdk.interfaces.command.CommandInterface" title="poco.sdk.interfaces.command.CommandInterface"><code class="xref py py-class docutils literal"><span class="pre">CommandInterface</span></code></a>: defines methods to communicate
 with target device in arbitrary way. This is optional.</li>
 </ul>
 </dd></dl>
@@ -204,7 +203,7 @@ with target device in arbitrary way. This is optional.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="poco.assertions.html" class="btn btn-neutral float-right" title="poco.assertions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="poco.exceptions.html" class="btn btn-neutral float-right" title="poco.exceptions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="poco.acceleration.html" class="btn btn-neutral" title="poco.acceleration module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

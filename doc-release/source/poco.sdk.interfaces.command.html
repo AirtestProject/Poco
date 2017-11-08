@@ -181,8 +181,8 @@
 <em class="property">class </em><code class="descname">CommandInterface</code><a class="reference internal" href="../_modules/poco/sdk/interfaces/command.html#CommandInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.command.CommandInterface" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>This is one of the main communication interfaces. This interface defines command-level behaviours providing
-abilities to control remote runtime by sending self-defined command. The command can be various from string type to
-specific structure of a dict.</p>
+abilities to control remote runtime by sending self-defined command. The provided command can be various type -
+from string type to specific structure of a dict.</p>
 <dl class="method">
 <dt id="poco.sdk.interfaces.command.CommandInterface.command">
 <code class="descname">command</code><span class="sig-paren">(</span><em>cmd</em>, <em>type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/command.html#CommandInterface.command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.command.CommandInterface.command" title="Permalink to this definition">¶</a></dt>
@@ -192,8 +192,8 @@ specific structure of a dict.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>cmd</strong> – Any json serializable data.</li>
-<li><strong>type</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – A string value indicated the command type (command tag).</li>
+<li><strong>cmd</strong> – any json serializable data.</li>
+<li><strong>type</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – a string value indicated the command type (command tag).</li>
 </ul>
 </td>
 </tr>

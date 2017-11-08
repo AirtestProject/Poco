@@ -160,7 +160,7 @@
 <span></span><span class="c1"># coding=utf-8</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">This module provides several exceptions for poco sdk. These exceptions are only raised in sdk corresponding runtime.</span>
+<span class="sd">This module provides several exceptions for poco-sdk. These exceptions are raised only in sdk corresponding runtime.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -171,10 +171,13 @@
 
 <div class="viewcode-block" id="NodeHasBeenRemovedException"><a class="viewcode-back" href="../../../source/poco.sdk.exceptions.html#poco.sdk.exceptions.NodeHasBeenRemovedException">[docs]</a><span class="k">class</span> <span class="nc">NodeHasBeenRemovedException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Raises if node (UI element) refreshed (updated, recycled or destroyed) when retrieving attributes at traversing. </span>
-<span class="sd">    For some engines, the UI hierarchy is refreshing in another thread when poco is traversing. At the moment poco is </span>
-<span class="sd">    retrieving attribute on the UI element that is refreshed, this may trigger an engine error. Poco sdk catches </span>
-<span class="sd">    this engine error and transform into this exception.</span>
+<span class="sd">    Raised when the node (UI element) is refreshed (updated, recycled or destroyed) while retrieving the attributes</span>
+<span class="sd">    during traversing the hierarchy.</span>
+
+<span class="sd">    In some engines implementations, the UI hierarchy is refreshed in a stand-alone thread while poco is performing</span>
+<span class="sd">    the traverse process, so the engine error might be triggered when poco is trying to retrieve the attribute of</span>
+<span class="sd">    the UI element but the attribute is being updated at the same time. In this situation, poco sdk catches the engine</span>
+<span class="sd">    error and raises this exception.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
@@ -184,9 +187,9 @@
 
 <div class="viewcode-block" id="UnableToSetAttributeException"><a class="viewcode-back" href="../../../source/poco.sdk.exceptions.html#poco.sdk.exceptions.UnableToSetAttributeException">[docs]</a><span class="k">class</span> <span class="nc">UnableToSetAttributeException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Raises when fail to set attributes on UI element. Mostly, the reason may be the UI element is not support to mutate </span>
-<span class="sd">    attribute. At the view of sdk implementation, you can throw this exception proactively to indicate that modification </span>
-<span class="sd">    is not allowed.</span>
+<span class="sd">    Raised when settings the attribute of the given UI element failed. In most cases, the reason why it failed is that</span>
+<span class="sd">    the UI element does not support mutation. From the point of view of SDK implementation, this exception can be</span>
+<span class="sd">    raised proactively to indicate that the modification of the attribute is not allowed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
@@ -196,7 +199,7 @@
 
 <div class="viewcode-block" id="NoSuchTargetException"><a class="viewcode-back" href="../../../source/poco.sdk.exceptions.html#poco.sdk.exceptions.NoSuchTargetException">[docs]</a><span class="k">class</span> <span class="nc">NoSuchTargetException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Raises when index out of range on selecting UI element by given index. </span>
+<span class="sd">    Raised when the index is out of range for selecting the UI element by given index.</span>
 <span class="sd">    </span>
 <span class="sd">    .. TODO:: Maybe this is a little bit redundant to :py:class:`poco.exceptions.PocoNoSuchNodeException`. </span>
 <span class="sd">     Should be optimized.</span>
@@ -207,7 +210,7 @@
 
 <div class="viewcode-block" id="NoSuchComparatorException"><a class="viewcode-back" href="../../../source/poco.sdk.exceptions.html#poco.sdk.exceptions.NoSuchComparatorException">[docs]</a><span class="k">class</span> <span class="nc">NoSuchComparatorException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    When the matcher does not support the given comparison method, this will be raised.</span>
+<span class="sd">    Raised when the matcher does not support the given comparison method.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matchingMethod</span><span class="p">,</span> <span class="n">matcherName</span><span class="p">):</span>

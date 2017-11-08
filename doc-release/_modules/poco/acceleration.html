@@ -172,29 +172,33 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class provides some high-level method to reduce redundant code implementations.</span>
 <span class="sd">    As this is a MixinClass, please do not introduce new state in methods.</span>
-
-<span class="sd">    该mixin中定义一些常用的操作方法，将一些通用的逻辑封装起来。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PocoAccelerationMixin.dismiss"><a class="viewcode-back" href="../../source/poco.acceleration.html#poco.acceleration.PocoAccelerationMixin.dismiss">[docs]</a>    <span class="k">def</span> <span class="nf">dismiss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">exit_when</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sleep_interval</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">appearance_timeout</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        自动点掉目标对象，即一直点点到全都消失为止，适用于无脑点点点的界面。</span>
+<span class="sd">        Automatically dismiss the target objects</span>
 
-<span class="sd">        :param targets: &lt;list&gt; 目标对象列表，poco选择的对象</span>
-<span class="sd">        :param exit_when: 结束条件，默认为targets中所有节点都消失后自动退出</span>
-<span class="sd">        :param sleep_interval: 点击动作间隔，点了之后等待一段时间后再找下一个target进行点击</span>
-<span class="sd">        :param appearance_timeout: 在进行dismiss之前会等待targets中任意一个target出现，超过了这个时间还没出现就自动退出了</span>
-<span class="sd">        :param timeout: dismiss阶段超时时长</span>
-<span class="sd">        :return: None</span>
+<span class="sd">        Args:</span>
+<span class="sd">            targets (:obj:`list`): list of poco objects to be dropped</span>
+<span class="sd">            exit_when: termination condition, default is None which means to automatically exit when list of</span>
+<span class="sd">             ``targets`` is empty</span>
+<span class="sd">            sleep_interval: time interval between each actions for the given targets, default is 0.5s</span>
+<span class="sd">            appearance_timeout: time interval to wait for given target to appear on the screen, automatically exit when</span>
+<span class="sd">             timeout, default is 20s</span>
+<span class="sd">            timeout: dismiss function timeout, default is 120s</span>
 
-<span class="sd">        :raise PocoTargetTimeout: 当处于dismiss切超时时，会报这个错，因为正常情况下不可能这么长时间还没把该消的消掉</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            PocoTargetTimeout: when dismiss time interval timeout, under normal circumstances, this should not happen</span>
+<span class="sd">             and if happens, it will be reported</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">wait_for_any</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">appearance_timeout</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">PocoTargetTimeout</span><span class="p">:</span>
+            <span class="c1"># here returns only when timeout</span>
             <span class="c1"># 仅当超时时自动退出</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;尝试dismiss前等待对象出现但超时 </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">targets</span><span class="p">))</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Waiting timeout when trying to dismiss something before them appear. Targets are </span><span class="si">{}</span><span class="s1">&#39;</span>
+                          <span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">targets</span><span class="p">))</span>
             <span class="k">return</span>
 
         <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -210,6 +214,8 @@
                             <span class="k">except</span><span class="p">:</span>
                                 <span class="k">pass</span>
                     <span class="k">except</span><span class="p">:</span>
+                        <span class="c1"># Catch the NodeHasBeenRemoved exception if some node was removed over the above iteration</span>
+                        <span class="c1"># and just ignore as this will not affect the result.</span>
                         <span class="c1"># 遍历(__iter__: for n in t)过程中如果节点正好被移除了，可能会报远程节点被移除的异常</span>
                         <span class="c1"># 这个报错忽略就行</span>
                         <span class="k">pass</span>

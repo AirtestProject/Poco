@@ -165,33 +165,35 @@
 
 <div class="viewcode-block" id="IDumper"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper">[docs]</a><span class="k">class</span> <span class="nc">IDumper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This interface defines standard dumper behavior. Dumper is only introduced to get the hierarchy information and</span>
+<span class="sd">    This interface defines the standard dumper behavior. Dumper class is introduced to get the hierarchy information and</span>
 <span class="sd">    convert it into serializable data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="IDumper.getRoot"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.getRoot">[docs]</a>    <span class="k">def</span> <span class="nf">getRoot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the root node of the UI Hierarchy. The node&#39;s information is wrapped by </span>
+<span class="sd">        Return the root node of the UI Hierarchy. The node information is wrapped by</span>
 <span class="sd">        :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`.</span>
 <span class="sd">        See definition of :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;` for more details.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`: An instance holds the hierarchy data.</span>
+<span class="sd">            :py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`: instance that holds the hierarchy data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="IDumper.dumpHierarchy"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return a dict holding the hierarchy data and its structure should be as follows. The dict should be json </span>
-<span class="sd">        serializable.</span>
+<span class="sd">        Return the json serializable dictionary holding the hierarchy data. Refer to sample of returned structure object</span>
+<span class="sd">        below.</span>
 
 <span class="sd">        Structure of the dict::</span>
 
 <span class="sd">            {</span>
-<span class="sd">                &#39;name&#39;: &#39;&lt;a recognizable string, can be duplicated or just leave by default if cannot determine. meaningful is better.&gt;&#39;</span>
+<span class="sd">                # name can be duplicated from the original name or just left the default one</span>
+<span class="sd">                # if it cannot be determined, however providing some meaningful name is preferred</span>
+<span class="sd">                &#39;name&#39;: &#39;&lt;a recognizable string&gt;&#39;</span>
 <span class="sd">                </span>
-<span class="sd">                # All available attributes of this node in form of key-value pairs.</span>
+<span class="sd">                # All available attributes of this node are in form of key-value pairs</span>
 <span class="sd">                &#39;payload&#39;: {</span>
 <span class="sd">                    &#39;name&#39;: &#39;&#39;,</span>
 <span class="sd">                    &#39;pos&#39;: [0, 0],</span>
@@ -199,14 +201,14 @@
 <span class="sd">                    ...</span>
 <span class="sd">                },</span>
 <span class="sd">                </span>
-<span class="sd">                # If no child, do not assign this entry.</span>
+<span class="sd">                # If there is no child, this part can be omitted</span>
 <span class="sd">                &#39;children&#39;: [</span>
 <span class="sd">                    {...},  # Same structure as this dict. </span>
 <span class="sd">                ],</span>
 <span class="sd">            }</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`dict` or :obj:`NoneType`: Hierarchy data or None</span>
+<span class="sd">            :obj:`dict` or :obj:`NoneType`: hierarchy data or None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
@@ -214,41 +216,46 @@
 
 <div class="viewcode-block" id="AbstractDumper"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper">[docs]</a><span class="k">class</span> <span class="nc">AbstractDumper</span><span class="p">(</span><span class="n">IDumper</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class partially implements ``IDumper`` using general traversal algorithm. To dump the hierarchy from a root </span>
-<span class="sd">    node, this dumper retrieves all available attributes of this root node and list all its children. Then apply the </span>
-<span class="sd">    same procedure on each child (treat each child as root node) until a node which has no child.</span>
+<span class="sd">    This class partially implements ``IDumper`` using general traversal algorithm. In order to dump the hierarchy from</span>
+<span class="sd">    the root node, this dumper first retrieves all available attributes of the root node and also the list all its</span>
+<span class="sd">    children and then applies the same procedures as described on each child (i.e. treats each child as a root node)</span>
+<span class="sd">    until the node that has no child(ren) is reached.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AbstractDumper.dumpHierarchy"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`dict`: A json serializable dict holds the whole hierarchy data.</span>
+<span class="sd">            :obj:`dict`: json serializable dict holding the whole hierarchy data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getRoot</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="AbstractDumper.dumpHierarchyImpl"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Crawl the hierarchy tree using the simple BFS algorithm. ``dump`` is engine independent as the hierarchy </span>
-<span class="sd">        structure is wrapped by :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`, so ``dump`` can be algorithmized. </span>
-<span class="sd">        Here shows the simplest implementation by default. If you like, you can implement your own algorithm to optimize </span>
-<span class="sd">        the speed.</span>
+<span class="sd">        Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` procedure is the engine independent as</span>
+<span class="sd">        the hierarchy structure is wrapped by :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;` and therefore the</span>
+<span class="sd">        ``dump`` procedure can be algorithmized.</span>
 
-<span class="sd">        .. note:: Do not call this method in explicitly as this is an internal impl function, call \</span>
-<span class="sd">         :py:meth:`dumpHierarchy() &lt;poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy&gt;` if you want to dump a </span>
-<span class="sd">         hierarchy.</span>
+<span class="sd">        Following code demonstrates the simplest implementation. Feel free to implement your own algorithms to</span>
+<span class="sd">        optimize the performance.</span>
+
+<span class="sd">        .. note:: Do not explicitly call this method as this is an internal function, call</span>
+<span class="sd">                  :py:meth:`dumpHierarchy() &lt;poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy&gt;` function instead</span>
+<span class="sd">                  if you want to dump the hierarchy.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            node: Root node of the hierarchy to be dumped.</span>
+<span class="sd">            node: root node of the hierarchy to be dumped</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`dict`: A json serializable dict holds the whole hierarchy data.</span>
+<span class="sd">            :obj:`dict`: json serializable dict holding the whole hierarchy data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
         <span class="n">payload</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># filter out all None values</span>
         <span class="k">for</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">attrVal</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">enumerateAttrs</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">attrVal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">payload</span><span class="p">[</span><span class="n">attrName</span><span class="p">]</span> <span class="o">=</span> <span class="n">attrVal</span>
@@ -256,12 +263,12 @@
         <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">getChildren</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">):</span>
                 <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">children</span>
 
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
         <span class="n">result</span><span class="p">[</span><span class="s1">&#39;payload&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span>
 
         <span class="k">return</span> <span class="n">result</span></div></div>

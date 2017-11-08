@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to Poco’s documentation! &mdash; poco  documentation</title>
+  <title>Welcome to Poco (ポコ) documentation! &mdash; poco  documentation</title>
   
 
   
@@ -137,7 +137,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to Poco’s documentation!</li>
+      <li>Welcome to Poco (ポコ) documentation!</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,23 +156,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-poco-s-documentation">
-<h1>Welcome to Poco’s documentation!<a class="headerlink" href="#welcome-to-poco-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p><strong>Poco is a cross-engine UI automation framework.</strong></p>
-</div>
-<div class="section" id="features">
-<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li>Support mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps.</li>
-<li>Retrieve UI Elements Hierarchy in game’s runtime.</li>
-<li>Super fast and impact-free to the game.</li>
-<li>Super easy sdk integration to the game in 5 minutes.</li>
-<li>Powerful APIs which are engine independent.</li>
-<li>Support multi-touch e.g. fling/pinch/etc. (in development)</li>
-<li>Support gps, gyros, rotation (landscape/portrait) and other sensors as input.  (in development)</li>
-<li>Extensible to other private engines by implementing <a class="reference external" href="source/doc/integration.html">poco-sdk</a>.</li>
-<li>Compatible with Python 2.7 and Python 3.3+.</li>
-</ul>
+  <div class="section" id="welcome-to-poco-documentation">
+<h1>Welcome to Poco (ポコ) documentation!<a class="headerlink" href="#welcome-to-poco-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This document provides all the basic information that are needed to start using Poco ポコ cross-engine UI
+automation framework. It covers the main framework ideas and concepts and shows examples for various use cases as well.</p>
 </div>
 <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
@@ -184,7 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="source/README.html#example">Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/README.html#basic-concepts">Basic Concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/README.html#poco-instance">Poco Instance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/README.html#object-selection-and-operation">Object Selection and Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/README.html#working-with-poco-objects">Working with Poco Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/README.html#exceptions">Exceptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="source/README.html#unit-test">Unit Test</a></li>
 </ul>
@@ -193,28 +180,32 @@
 </div>
 <div class="section" id="install-poco-and-pocosdk">
 <h2>Install Poco and PocoSDK<a class="headerlink" href="#install-poco-and-pocosdk" title="Permalink to this headline">¶</a></h2>
-<p>To use poco, you should install poco in your host as a python library and install <a class="reference external" href="source/doc/integration.html">poco-sdk</a> in your game/app.</p>
-<p><strong>poco</strong> can be installed with pip</p>
+<p>In order to use Poco, you must install Poco python library on your host and also install the <a class="reference external" href="source/doc/integration.html">poco-sdk</a> in
+your game/app. Supported version are Python2.7 and Python3.3+.</p>
+<p><strong>Poco</strong> can be installed straightforward with <code class="docutils literal"><span class="pre">pip</span></code> command</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
 pip install poco
 </pre></div>
 </div>
-<p>Currently, it is only available in git repo. So please clone the repo and install</p>
+<p>Currently, the code is available only in <cite>Git</cite> repository and can be installed as follows</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/Meteorix/poco.git
 pip install -e poco
 </pre></div>
 </div>
-<p>For NetEase internally use, please execute the following command.</p>
+<p>For NetEase internal use, clone the repository from following location</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
 pip install -e poco
 </pre></div>
 </div>
-<p><strong>poco-sdk</strong> integration please refer to <a class="reference external" href="source/doc/integration.html">Integration Guide</a></p>
+<p>For <strong>poco-sdk</strong> integration please refer to <a class="reference external" href="source/doc/integration.html">Integration Guide</a></p>
 </div>
 </div>
-<div class="section" id="example">
-<h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
-<p>The following example shows a simple test script on demo game using Unity3D. <a class="reference external" href="source/doc/poco-example/index.html">More examples</a> are here.</p>
+<div class="section" id="using-poco-as-python-package">
+<h1>Using Poco as Python package<a class="headerlink" href="#using-poco-as-python-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="simple-demo">
+<h2>Simple demo<a class="headerlink" href="#simple-demo" title="Permalink to this headline">¶</a></h2>
+<p>The following example shows a simple script on demo game using Unity3D. Check <a class="reference external" href="source/doc/poco-example/index.html">More examples</a> section for more detailed
+info.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
 
 <span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">((</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">5001</span><span class="p">))</span>
@@ -232,9 +223,10 @@ pip install -e poco
 </pre></div>
 </div>
 </div>
-<div class="section" id="dump-ui-hierarchy">
-<h1>Dump UI Hierarchy<a class="headerlink" href="#dump-ui-hierarchy" title="Permalink to this headline">¶</a></h1>
-<p>Poco defines an uniform format to serialize ui heirarchy for different game engines. This section shows how to dump ui hierarchy.</p>
+<div class="section" id="dump-ui-hierarchy-example">
+<h2>Dump UI hierarchy example<a class="headerlink" href="#dump-ui-hierarchy-example" title="Permalink to this headline">¶</a></h2>
+<p>Poco defines an uniform format to serialize UI hierarchy for different game engines. This section shows how to dump
+UI hierarchy.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span> <span class="k">as</span> <span class="n">Poco</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
@@ -243,7 +235,9 @@ pip install -e poco
 <span class="n">pprint</span><span class="p">(</span><span class="n">ui</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The following is part of ui heirarchy. All ui elements are organized in dict like tree structure. Properties are described in <a class="reference external" href="source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy">README</a>.</p>
+<p>The following is the snippet of UI hierarchy. All UI elements are organized in <cite>dict</cite> representing the <cite>tree</cite> structure.
+More detailed info about properties are described in
+<a class="reference external" href="source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy">README</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="o">...</span>
 <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;OctopusArea&quot;</span><span class="p">,</span>
@@ -280,6 +274,7 @@ pip install -e poco
 <span class="p">}</span>
 <span class="o">...</span>
 </pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="api-reference">

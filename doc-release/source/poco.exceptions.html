@@ -38,7 +38,7 @@
     <link rel="top" title="poco  documentation" href="../index.html"/>
         <link rel="up" title="poco package" href="poco.html"/>
         <link rel="next" title="poco.pocofw module" href="poco.pocofw.html"/>
-        <link rel="prev" title="poco.assertions module" href="poco.assertions.html"/> 
+        <link rel="prev" title="poco.agent module" href="poco.agent.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -166,8 +166,8 @@
 <dt id="poco.exceptions.InvalidOperationException">
 <em class="property">exception </em><code class="descname">InvalidOperationException</code><a class="reference internal" href="../_modules/poco/exceptions.html#InvalidOperationException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.exceptions.InvalidOperationException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#poco.exceptions.PocoException" title="poco.exceptions.PocoException"><code class="xref py py-class docutils literal"><span class="pre">poco.exceptions.PocoException</span></code></a></p>
-<p>When an operation performing on target device is foreseen, this exceptions will raise.
-For example, click outside the screen is definitely meaningless, an <code class="docutils literal"><span class="pre">InvalidOperationException</span></code> raised.</p>
+<p>Raised when the operation performing on target device is foreseen, e.g. instruction to click outside the screen is
+definitely meaningless, then the <code class="docutils literal"><span class="pre">InvalidOperationException</span></code> is raised.</p>
 </dd></dl>
 
 <dl class="exception">
@@ -184,23 +184,25 @@ For example, click outside the screen is definitely meaningless, an <code class=
 <dt id="poco.exceptions.PocoException">
 <em class="property">exception </em><code class="descname">PocoException</code><a class="reference internal" href="../_modules/poco/exceptions.html#PocoException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.exceptions.PocoException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
-<p>Base class of exceptions of poco. PY3 compatible.</p>
+<p>Base class for errors and exceptions of Poco. It is Python3 compatible.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="poco.exceptions.PocoNoSuchNodeException">
 <em class="property">exception </em><code class="descname">PocoNoSuchNodeException</code><span class="sig-paren">(</span><em>objproxy</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/exceptions.html#PocoNoSuchNodeException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.exceptions.PocoNoSuchNodeException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#poco.exceptions.PocoException" title="poco.exceptions.PocoException"><code class="xref py py-class docutils literal"><span class="pre">poco.exceptions.PocoException</span></code></a></p>
-<p>Cannot find any UI element of given query condition.</p>
+<p>Raised when the UI element specified by query expression cannot be found.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="poco.exceptions.PocoTargetRemovedException">
 <em class="property">exception </em><code class="descname">PocoTargetRemovedException</code><span class="sig-paren">(</span><em>action</em>, <em>objproxy</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/exceptions.html#PocoTargetRemovedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.exceptions.PocoTargetRemovedException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#poco.exceptions.PocoException" title="poco.exceptions.PocoException"><code class="xref py py-class docutils literal"><span class="pre">poco.exceptions.PocoException</span></code></a></p>
-<p>This exception raises when hierarchy structure changed over the selection or access a UI element that is already
-recycled. In many cases there is no need to handle this exception by hand. Once this exception occurred, please
-check your code carefully. Most of misuses as follows.</p>
+<p>Raised when the hierarchy structure changed over the selection or when accessing the UI element that is already
+recycled.</p>
+<p>In most cases, there is no need to handle this exception manually. If this exception occurs, it usually means it
+is a bug in your code rather than application itself. Check your code first. The most of misuses comes from as
+follows.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">button1</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;button1&#39;</span><span class="p">)</span>
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>   <span class="c1"># waiting for long enough before the UI hierarchy changing</span>
@@ -213,7 +215,8 @@ check your code carefully. Most of misuses as follows.</p>
 <dt id="poco.exceptions.PocoTargetTimeout">
 <em class="property">exception </em><code class="descname">PocoTargetTimeout</code><span class="sig-paren">(</span><em>action</em>, <em>poco_obj_proxy</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/exceptions.html#PocoTargetTimeout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.exceptions.PocoTargetTimeout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#poco.exceptions.PocoException" title="poco.exceptions.PocoException"><code class="xref py py-class docutils literal"><span class="pre">poco.exceptions.PocoException</span></code></a></p>
-<p>Timeout when waiting for some condition to be matched. Such as waiting some UI element but it never appeared.</p>
+<p>Raised when the timeout expired while waiting for some condition to be fulfilled, e.g. waiting for the specific
+UI element but it has not appeared on the screen.</p>
 </dd></dl>
 
 </div>
@@ -231,7 +234,7 @@ check your code carefully. Most of misuses as follows.</p>
         <a href="poco.pocofw.html" class="btn btn-neutral float-right" title="poco.pocofw module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="poco.assertions.html" class="btn btn-neutral" title="poco.assertions module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="poco.agent.html" class="btn btn-neutral" title="poco.agent module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

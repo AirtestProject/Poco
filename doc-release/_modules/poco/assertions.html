@@ -167,7 +167,7 @@
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
 
 
-<span class="c1"># deprecated, use assertion method in unittest.case.PocoTestCase instead</span>
+<span class="c1"># deprecated, use assertion method in pocounit.case.PocoTestCase instead</span>
 <div class="viewcode-block" id="PocoAssertionMixin"><a class="viewcode-back" href="../../source/poco.assertions.html#poco.assertions.PocoAssertionMixin">[docs]</a><span class="k">class</span> <span class="nc">PocoAssertionMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Warnings:</span>
@@ -175,37 +175,37 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="n">r</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> != </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_greater</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &lt;= </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_greater_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &lt; </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_less</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &gt;= </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_less_equal</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> &gt; </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">r</span><span class="p">)))</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in unittest.case.PocoTestCase instead&#39;</span><span class="p">)</span>
+    <span class="nd">@deprecated</span><span class="p">(</span><span class="s1">&#39;use assertion method in pocounit.case.PocoTestCase instead&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">assert_true</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">l</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">PocoAssertionError</span><span class="p">(</span><span class="s1">&#39;断言失败于&quot;</span><span class="si">{}</span><span class="s1">&quot;. </span><span class="si">{}</span><span class="s1"> is not True.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">l</span><span class="p">)))</span></div>

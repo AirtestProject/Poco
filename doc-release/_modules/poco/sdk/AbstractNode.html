@@ -167,65 +167,65 @@
 
 <div class="viewcode-block" id="AbstractNode"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode">[docs]</a><span class="k">class</span> <span class="nc">AbstractNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    AbstractNode is a wrapper class that provides ui hierarchy and node info in game engine.</span>
+<span class="sd">    AbstractNode is a wrapper class that provides UI hierarchy and node info in game engine.</span>
 
-<span class="sd">    This class uniformly specifies node-related methods such as retrieving attribute or accessing up to parent or down </span>
-<span class="sd">    to children.</span>
+<span class="sd">    This class uniformly specifies node-related methods such as retrieving the attributes or accessing the parent nodes</span>
+<span class="sd">    or their children.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AbstractNode.getParent"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getParent">[docs]</a>    <span class="k">def</span> <span class="nf">getParent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the parent node of this node. Return None if no parent or parent is not accessible or this is the root </span>
-<span class="sd">        node. This method will be invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy.</span>
+<span class="sd">        Return the parent node of this node. Return None if there is no parent or parent is not accessible or this is</span>
+<span class="sd">        the root node. This method is invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:class:`AbstractNode or NoneType &lt;poco.sdk.AbstractNode&gt;`: Parent node of this node or None.</span>
+<span class="sd">            :py:class:`AbstractNode or NoneType &lt;poco.sdk.AbstractNode&gt;`: parent node of this node or None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="AbstractNode.getChildren"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getChildren">[docs]</a>    <span class="k">def</span> <span class="nf">getChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return an iterator over all children nodes of this node. Will be invoked by ``Selector`` or ``Dumper`` to get </span>
-<span class="sd">        the UI hierarchy.</span>
+<span class="sd">        Return an iterator over all children nodes of this node. This method is invoked by ``Selector`` or ``Dumper``</span>
+<span class="sd">        to retrieve the UI hierarchy.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Iterable&lt;:py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;</span>
+<span class="sd">            Iterable &lt;:py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="AbstractNode.getAttr"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getAttr">[docs]</a>    <span class="k">def</span> <span class="nf">getAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the attributes of the node. The following list shows the most basic attributes that will be used during </span>
-<span class="sd">        the test run. The implementation class should return correct value as possible as it can. If cannot determine </span>
-<span class="sd">        the value, return the invocation from super class to use default value. See the example below. More attributes </span>
-<span class="sd">        can be added in order to enhance the selection and displaying in ``Inspector``.</span>
+<span class="sd">        Return the attributes of the node. The list below shows the most used basic attributes used during while writing</span>
+<span class="sd">        test code. The implementation class should return the corresponding value as soon as it retrieves its value. If</span>
+<span class="sd">        the value cannot be determined, the default value is obtained from super class invocation and returned.  See the</span>
+<span class="sd">        example below for more detailed information. More attributes can be added in order to enhance the selection</span>
+<span class="sd">        and displaying in ``Inspector``.</span>
 
-<span class="sd">        Most basic attributes defines as follows:</span>
+<span class="sd">        The most used basic attributes are listed as follows:</span>
 
-<span class="sd">        - ``name``: The name of the node, a unique and meaningful name for each node recommended.</span>
-<span class="sd">        - ``type``: The type name of the node, can be any string. e.g. &quot;android.widget.Button&quot; or as simple as </span>
-<span class="sd">          &quot;Button&quot;</span>
-<span class="sd">        - ``visible``: Whether the node is rendered on screen. If the return value is False, all children nodes </span>
-<span class="sd">          will be ignored in Poco selector</span>
-<span class="sd">        - ``pos``: Position of the node in screen. Return value should be 2-list represents the percents of</span>
-<span class="sd">          the coordinate(x, y) in the whole screen. e.g. if the node locates in the center of the screen,</span>
-<span class="sd">          this attribute will be ``[0.5f, 0.5f]``.</span>
-<span class="sd">          position can be negative which means the node is outside the screen</span>
-<span class="sd">        - ``size``: Size of node&#39;s bounding box. similar to ``pos``, value is also a 2-list of percents of </span>
-<span class="sd">          the screen size, e.g. the screen&#39;s size is always ``[1.0f, 1.0f]``.</span>
-<span class="sd">          if the node in left half side of the screen, its size will be ``[0.5f, 1.0f]``.</span>
-<span class="sd">          size should always be nonnegative.</span>
-<span class="sd">        - ``scale``: The scale factor applied to the node itself. leave it ``[1.0f, 1.0f]`` by default.</span>
-<span class="sd">        - ``anchorPoint``: The percentage of the key-point related to the bounding box of the node. leave it </span>
-<span class="sd">          ``[0.5f, 0.5f]`` by default.</span>
-<span class="sd">        - ``zOrders``: The rendering order of this node. value is a dictionary like ``{&quot;global&quot;: 0, &quot;local&quot;: 0}``.</span>
-<span class="sd">          Global zOrder is compared with all nodes in the hierarchy, Local zOrder is compared with its parent and </span>
-<span class="sd">          siblings. Topmost nodes have the largest value.</span>
+<span class="sd">        - ``name``: name of the node, use the unique and meaningful name for each node is recommended</span>
+<span class="sd">        - ``type``: type of the name of the node, it can be either any string, e.g. &quot;android.widget.Button&quot; or just</span>
+<span class="sd">          simple as &quot;Button&quot;</span>
+<span class="sd">        - ``visible``: True or False whether the node is rendered on screen. In case the return value is False, all</span>
+<span class="sd">          children nodes are ignored in Poco selector</span>
+<span class="sd">        - ``pos``: position of the node in screen, return value should be 2-list coordinates (x, y) representing</span>
+<span class="sd">          the percentage of the screen. e.g. if the node lies in the center of the screen, the attribute will be</span>
+<span class="sd">          ``[0.5f, 0.5f]``. If the returned value for position is negative, it means the node lies out of the screen</span>
+<span class="sd">        - ``size``: size of the node bounding box, similar to ``pos``, value is also a 2-list of the percentage of</span>
+<span class="sd">          the screen size, e.g. the screen size is always ``[1.0f, 1.0f]``,</span>
+<span class="sd">          if the node lies in left half side of the screen, its size will be ``[0.5f, 1.0f]``, the returned value of</span>
+<span class="sd">          size should be always positive value</span>
+<span class="sd">        - ``scale``: scale factor applied to the node itself, leave it ``[1.0f, 1.0f]`` by default</span>
+<span class="sd">        - ``anchorPoint``: 2-list coordinates (x, y) of the anchor expressed in the percentage related to the bounding</span>
+<span class="sd">          box of the node, leave it ``[0.5f, 0.5f]`` by default.</span>
+<span class="sd">        - ``zOrders``: rendering order of this node, its value is a dictionary such as ``{&quot;global&quot;: 0, &quot;local&quot;: 0}``,</span>
+<span class="sd">          global zOrder value is compared with all nodes in the hierarchy, local zOrder value is compared with its</span>
+<span class="sd">          parent and siblings. The most top nodes have the largest values.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">            The following code gives some idea about implementing this method::</span>
+<span class="sd">            The following sample code demonstrates some ideas about the implementation of this method::</span>
 <span class="sd">                </span>
 <span class="sd">                def getAttr(self, attrName):</span>
 <span class="sd">                    # basic attributes</span>
@@ -267,17 +267,16 @@
 
 <div class="viewcode-block" id="AbstractNode.setAttr"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.setAttr">[docs]</a>    <span class="k">def</span> <span class="nf">setAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Apply changes of the attribute value to this node.</span>
-<span class="sd">        Only limited attributes can be modified, such as text.</span>
-<span class="sd">        Some others are not recommended to modified, such as position/name, which may hard to understand for testers</span>
-<span class="sd">        and results in unexpected exceptions.</span>
+<span class="sd">        Apply changes of the attribute value to this node. Not all attributes can be modified. The most common</span>
+<span class="sd">        attribute to be modified is the `text`. It is not recommended to modify attributes such as position, name,</span>
+<span class="sd">        their modifications can lead to unexpected and false-positive errors.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            attrName (:obj:`str`): attribute name</span>
 <span class="sd">            val: attribute value</span>
 
 <span class="sd">        See Also:</span>
-<span class="sd">            :py:meth:`setAttr &lt;poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr&gt;` in \</span>
+<span class="sd">            :py:meth:`setAttr &lt;poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr&gt;` in</span>
 <span class="sd">             ``poco.sdk.interfaces.hierarchy``</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -285,13 +284,14 @@
 
 <div class="viewcode-block" id="AbstractNode.getAvailableAttributeNames"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames">[docs]</a>    <span class="k">def</span> <span class="nf">getAvailableAttributeNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Enumerate all available attributes&#39; name of this node. This method in base class returns the most basic </span>
-<span class="sd">        attribute name by default. You can add other customized or engine-specific attributes. See the example above.</span>
+<span class="sd">        Enumerate all available attribute names of this node. This method in base class returns the basic</span>
+<span class="sd">        attribute name by default. It is possible to add other customized or engine-specific attributes.</span>
+<span class="sd">        See the example below.</span>
 
-<span class="sd">        .. note:: Please always call super method and return should contain the part from super method.</span>
+<span class="sd">        .. note:: It is recommended to always call the super method and return should contain the part from super method.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">            This code shows a way about implementing this method::</span>
+<span class="sd">            This code demonstrates how to implement this method::</span>
 
 <span class="sd">                def getAvailableAttributeNames(self):</span>
 <span class="sd">                    return super().getAvailableAttributeNames() + (</span>
@@ -316,9 +316,9 @@
 
 <div class="viewcode-block" id="AbstractNode.enumerateAttrs"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractNode.html#poco.sdk.AbstractNode.AbstractNode.enumerateAttrs">[docs]</a>    <span class="k">def</span> <span class="nf">enumerateAttrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Enumerate all available attributes and yielding in 2-tuple (name, value).</span>
+<span class="sd">        Enumerate all available attributes and yield the 2-tuple (name, value).</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Yields:</span>
 <span class="sd">            Iterable&lt;:obj:`str`, :obj:`ValueType`&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 

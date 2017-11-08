@@ -174,15 +174,15 @@
             
   <div class="section" id="module-poco.sdk.interfaces">
 <span id="poco-sdk-interfaces-package"></span><h1>poco.sdk.interfaces package<a class="headerlink" href="#module-poco.sdk.interfaces" title="Permalink to this headline">¶</a></h1>
-<p>package brief:</p>
-<p>This package (<a class="reference internal" href="#module-poco.sdk.interfaces" title="poco.sdk.interfaces"><code class="xref py py-mod docutils literal"><span class="pre">poco.sdk.interfaces</span></code></a>) defines the main communication interfaces that standardize between poco and
-poco-sdk. When poco-sdk is integrated with an app running on another machine or in different language, poco-sdk is
-called remote runtime. The implementations of these interfaces can be remotely or locally, depending on you. If locally,
-please checkout <a class="reference internal" href="poco.freezeui.html#module-poco.freezeui" title="poco.freezeui"><code class="xref py py-mod docutils literal"><span class="pre">poco.freezeui</span></code></a> to get more information.</p>
-<p>Poco needs to communicated with app’s runtime under the convention of these interfaces. These interfaces should be
-implemented properly. Any object implemented the same interface is replaceable. The communication protocol or transport
-layer is not limited. Thus in many cases, it is customizable that part of the interface can be implemented using HTTP
-and another part with TCP.</p>
+<p><strong>The brief introduction</strong>:</p>
+<p>This package (<a class="reference internal" href="#module-poco.sdk.interfaces" title="poco.sdk.interfaces"><code class="xref py py-mod docutils literal"><span class="pre">poco.sdk.interfaces</span></code></a>) defines the main standards for communication interfaces between poco and
+poco-sdk. If poco-sdk is integrated with an app running on another host or in different language, then poco-sdk is
+called <cite>remote runtime</cite>. The implementation of these interfaces can be done either remotely or locally depending on
+your own choice. If it is done locally, refer to <a class="reference internal" href="poco.freezeui.html#module-poco.freezeui" title="poco.freezeui"><code class="xref py py-mod docutils literal"><span class="pre">poco.freezeui</span></code></a> for more information.</p>
+<p>Poco needs to communicate with the app runtime under the convention of interfaces described below and these interfaces
+must be properly implemented. Any object implementing the same interface is replaceable and the communication protocol
+or transport layer has no limitation. Furthermore, in many cases the communication can be customized that one part of
+interfaces can use HTTP protocol and other can use TCP.</p>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">

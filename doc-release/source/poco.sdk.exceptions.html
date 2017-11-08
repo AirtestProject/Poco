@@ -176,38 +176,40 @@
             
   <div class="section" id="module-poco.sdk.exceptions">
 <span id="poco-sdk-exceptions-module"></span><h1>poco.sdk.exceptions module<a class="headerlink" href="#module-poco.sdk.exceptions" title="Permalink to this headline">¶</a></h1>
-<p>This module provides several exceptions for poco sdk. These exceptions are only raised in sdk corresponding runtime.</p>
+<p>This module provides several exceptions for poco-sdk. These exceptions are raised only in sdk corresponding runtime.</p>
 <dl class="exception">
 <dt id="poco.sdk.exceptions.NoSuchTargetException">
 <em class="property">exception </em><code class="descname">NoSuchTargetException</code><a class="reference internal" href="../_modules/poco/sdk/exceptions.html#NoSuchTargetException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.exceptions.NoSuchTargetException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
-<p>Raises when index out of range on selecting UI element by given index.</p>
+<p>Raised when the index is out of range for selecting the UI element by given index.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="poco.sdk.exceptions.NodeHasBeenRemovedException">
 <em class="property">exception </em><code class="descname">NodeHasBeenRemovedException</code><span class="sig-paren">(</span><em>attrName</em>, <em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/exceptions.html#NodeHasBeenRemovedException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.exceptions.NodeHasBeenRemovedException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
-<p>Raises if node (UI element) refreshed (updated, recycled or destroyed) when retrieving attributes at traversing.
-For some engines, the UI hierarchy is refreshing in another thread when poco is traversing. At the moment poco is
-retrieving attribute on the UI element that is refreshed, this may trigger an engine error. Poco sdk catches
-this engine error and transform into this exception.</p>
+<p>Raised when the node (UI element) is refreshed (updated, recycled or destroyed) while retrieving the attributes
+during traversing the hierarchy.</p>
+<p>In some engines implementations, the UI hierarchy is refreshed in a stand-alone thread while poco is performing
+the traverse process, so the engine error might be triggered when poco is trying to retrieve the attribute of
+the UI element but the attribute is being updated at the same time. In this situation, poco sdk catches the engine
+error and raises this exception.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="poco.sdk.exceptions.UnableToSetAttributeException">
 <em class="property">exception </em><code class="descname">UnableToSetAttributeException</code><span class="sig-paren">(</span><em>attrName</em>, <em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/exceptions.html#UnableToSetAttributeException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.exceptions.UnableToSetAttributeException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
-<p>Raises when fail to set attributes on UI element. Mostly, the reason may be the UI element is not support to mutate
-attribute. At the view of sdk implementation, you can throw this exception proactively to indicate that modification
-is not allowed.</p>
+<p>Raised when settings the attribute of the given UI element failed. In most cases, the reason why it failed is that
+the UI element does not support mutation. From the point of view of SDK implementation, this exception can be
+raised proactively to indicate that the modification of the attribute is not allowed.</p>
 </dd></dl>
 
 <dl class="exception">
 <dt id="poco.sdk.exceptions.NoSuchComparatorException">
 <em class="property">exception </em><code class="descname">NoSuchComparatorException</code><span class="sig-paren">(</span><em>matchingMethod</em>, <em>matcherName</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/exceptions.html#NoSuchComparatorException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.exceptions.NoSuchComparatorException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></code></p>
-<p>When the matcher does not support the given comparison method, this will be raised.</p>
+<p>Raised when the matcher does not support the given comparison method.</p>
 </dd></dl>
 
 </div>

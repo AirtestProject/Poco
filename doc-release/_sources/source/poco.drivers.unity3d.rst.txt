@@ -5,3 +5,11 @@ poco\.drivers\.unity3d package
     :members:
     :show-inheritance:
 
+Submodules
+----------
+
+.. toctree::
+
+   poco.drivers.unity3d.test
+   poco.drivers.unity3d.unity3d_poco
+

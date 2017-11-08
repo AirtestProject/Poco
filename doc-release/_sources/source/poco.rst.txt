@@ -21,7 +21,6 @@ Submodules
 
    poco.acceleration
    poco.agent
-   poco.assertions
    poco.exceptions
    poco.pocofw
    poco.proxy

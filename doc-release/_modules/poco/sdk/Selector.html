@@ -167,19 +167,20 @@
 
 <div class="viewcode-block" id="ISelector"><a class="viewcode-back" href="../../../source/poco.sdk.Selector.html#poco.sdk.Selector.ISelector">[docs]</a><span class="k">class</span> <span class="nc">ISelector</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This interface defines standard selector behavior. Selector is used for selecting specific UI element by given query </span>
-<span class="sd">    condition (formal definitions are in specific implementation classes).</span>
+<span class="sd">    This interface defines the standard selector behavior. Selector is used for selecting the specific UI element(s)</span>
+<span class="sd">    by given query expression (formal definitions are in specific implementation classes).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ISelector.select"><a class="viewcode-back" href="../../../source/poco.sdk.Selector.html#poco.sdk.Selector.ISelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cond</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            cond (:obj:`tuple`): query conditions.</span>
-<span class="sd">            multiple (:obj:`bool`): Whether or not to select element multiple. This method returns once a node found if </span>
-<span class="sd">             multiple is True, returns after traversing through all nodes otherwise.</span>
+<span class="sd">            cond (:obj:`tuple`): query expressiom</span>
+<span class="sd">            multiple (:obj:`bool`): whether or not to select the multiple elements. If set to True, the method</span>
+<span class="sd">                                    terminates immediately once the node is found, otherwise it traverses through all</span>
+<span class="sd">                                    nodes and then exists</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`list` &lt;inherit from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt; : </span>
+<span class="sd">            :obj:`list`: list &lt;inherited from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
@@ -187,11 +188,11 @@
 
 <div class="viewcode-block" id="Selector"><a class="viewcode-back" href="../../../source/poco.sdk.Selector.html#poco.sdk.Selector.Selector">[docs]</a><span class="k">class</span> <span class="nc">Selector</span><span class="p">(</span><span class="n">ISelector</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class implements standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy </span>
-<span class="sd">    structure. It supports flexible query conditions such as parental relationship, attribute predicate and etc. Any </span>
-<span class="sd">    combinations of expressions are also an query conditions.</span>
+<span class="sd">    This class implements the standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy</span>
+<span class="sd">    structure. It supports flexible query expressions such as parental relationship, attribute predicate, etc. Any</span>
+<span class="sd">    combinations of expressions mentioned above are also allowed as the query conditions.</span>
 <span class="sd">    </span>
-<span class="sd">    The query condition (query expression) defines as following::</span>
+<span class="sd">    The query expression can be defined as follows::</span>
 
 <span class="sd">        expr := (op0, (expr0, expr1))</span>
 <span class="sd">        expr := (&#39;index&#39;, (expr, :obj:`int`))</span>
@@ -199,17 +200,17 @@
 
 <span class="sd">    - ``op0`` can be one of the following (&#39;&gt;&#39;, &#39;/&#39;, &#39;-&#39;), each operator stands for as follows::</span>
 
-<span class="sd">        &#39;&gt;&#39;: offsprings, to select all offsprings matched expr1 from all roots matched expr0.</span>
-<span class="sd">        &#39;/&#39;: children, to select all children matched expr1 from all roots matched expr0.</span>
-<span class="sd">        &#39;-&#39;: siblings, to select all siblings matched expr1 from all roots matched expr0.</span>
+<span class="sd">        &#39;&gt;&#39;: offsprings, select all offsprings matched expr1 from all roots matched expr0.</span>
+<span class="sd">        &#39;/&#39;: children, select all children matched expr1 from all roots matched expr0.</span>
+<span class="sd">        &#39;-&#39;: siblings, select all siblings matched expr1 from all roots matched expr0.</span>
 <span class="sd">    </span>
-<span class="sd">    - ``&#39;index&#39;``: to select specific nth UI element from previous results.</span>
+<span class="sd">    - ``&#39;index&#39;``: select specific n-th UI element from the previous results</span>
 
-<span class="sd">    - ``others``: will pass expression to matcher.</span>
+<span class="sd">    - ``others``: passes the expression to matcher</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        dumper (any implements :py:class:`IDumper &lt;poco.sdk.AbstractDumper.IDumper&gt;`): The dumper for selector.</span>
-<span class="sd">        matcher (any implements :py:class:`IMatcher &lt;poco.sdk.DefaultMatcher.IMatcher&gt;`): :py:class:`DefaultMatcher \</span>
+<span class="sd">        dumper (any implementation of :py:class:`IDumper &lt;poco.sdk.AbstractDumper.IDumper&gt;`):  dumper for the selector</span>
+<span class="sd">        matcher (any implementation of :py:class:`IMatcher &lt;poco.sdk.DefaultMatcher.IMatcher&gt;`): :py:class:`DefaultMatcher</span>
 <span class="sd">         &lt;poco.sdk.DefaultMatcher.DefaultMatcher&gt;` instance by default.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -222,7 +223,7 @@
 <span class="sd">        Get a default root node.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            Default root node from dumper. </span>
+<span class="sd">            default root node from the dumper.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dumper</span><span class="o">.</span><span class="n">getRoot</span><span class="p">()</span></div>
@@ -239,20 +240,21 @@
 <span class="sd">        Selector internal implementation. </span>
 <span class="sd">        TODO: add later.</span>
 
-<span class="sd">        .. note:: This doc string only shows the outline of the algorithm. Do not call this method in your code as this </span>
-<span class="sd">         is a internal impl method.</span>
+<span class="sd">        .. note:: This doc shows only the outline of the algorithm. Do not call this method in your code as this</span>
+<span class="sd">         is an internal method.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            cond (:obj:`tuple`): Query condition.</span>
-<span class="sd">            multiple (:obj:`bool`): Whether or not only select the first matched Node.</span>
-<span class="sd">            root (inherit from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`): Start traversing from the given root.</span>
-<span class="sd">            maxDepth (:obj:`bool`): Max traversing depth.</span>
-<span class="sd">            onlyVisibleNode (:obj:`bool`): If True, skip the Node whose visibility (the value of visible attribute) is </span>
+<span class="sd">            cond (:obj:`tuple`): query expression</span>
+<span class="sd">            multiple (:obj:`bool`): whether or not to select multiple nodes #TODO: review this</span>
+<span class="sd">            root (inherited from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`): start traversing from the given</span>
+<span class="sd">             root node</span>
+<span class="sd">            maxDepth (:obj:`bool`): max traversing depth</span>
+<span class="sd">            onlyVisibleNode (:obj:`bool`): If True, skip those node which visibility (the value of visible attribute) is</span>
 <span class="sd">             False.</span>
-<span class="sd">            includeRoot (:obj:`bool`): Whether not not include the root node if its child node matched.</span>
+<span class="sd">            includeRoot (:obj:`bool`): whether not not to include the root node if its child(ren) match(es) the node</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`list` &lt;inherit from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;: The same as \</span>
+<span class="sd">            :obj:`list` &lt;inherited from :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;`&gt;: The same as</span>
 <span class="sd">             :py:meth:`select &lt;poco.sdk.Selector.ISelector.select&gt;`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
