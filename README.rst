@@ -25,7 +25,7 @@ Installation
 ------------
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
-your game/app. Supported version are Python2.7 and Python3.3+.
+your game/app.
 
 **Poco** can be installed straightforward with ``pip`` command
 
@@ -82,8 +82,9 @@ This section describes the basic concepts of Poco. Basic terminology used in fol
 * **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
 * **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
 * **Node/UI element**: UI element instances or nodes in app/game
-* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required
-to customize the ``Selector`` class.
+* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and 
+  selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required 
+  to customize the ``Selector`` class.
 
 Following images show the UI hierarchy represented in Poco
 
@@ -126,11 +127,12 @@ Poco Instance
 
 There are several engines supported and for each engine the different ``poco`` instance must be initialized.
 
-Supported engines are as follows
-    * `cocos2dx-js`_
-    * `android-native`_
-    * unreal (in development)
-    * for other engines, refer to `INTEGRATION guide`_ for more details
+Supported engines are as follows:
+
+* `cocos2dx-js`_
+* `android-native`_
+* unreal (in development)
+* for other engines, refer to `Integration guide`_ for more details
 
 Following example shows how to initialize popo instance for Unity3D.
 
@@ -401,8 +403,8 @@ PocoNoSuchNodeException
 Unit Test
 ---------
 
-Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full set
-of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
+Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full 
+set of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
 ..
  下面的连接要替换成绝对路径
