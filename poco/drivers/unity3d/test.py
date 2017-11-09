@@ -1,8 +1,10 @@
 # coding=utf-8
 
+import base64
 import time
 import json
 
+from poco.drivers.unity3d import UnityPoco
 from poco.drivers.unity3d.unity3d_poco import DEFAULT_ADDR, Dumper
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp import TcpClient
@@ -23,8 +25,17 @@ def dump():
 
 
 if __name__ == '__main__':
-    # p = UnityPoco(("10.254.46.45", 5001))
-    # p("Player").offspring("Mesh").click()
     time.sleep(2)
-    h = dump()
-    print json.dumps(h)
+
+    p = UnityPoco(DEFAULT_ADDR, unity_editor=True)
+    b64img, fmt = p.snapshot()
+    print b64img
+    print len(b64img)
+    print p.agent.get_debug_profiling_data()
+    # img = open('img.png', 'wb')
+    # img.write(base64.b64decode(b64img))
+    # for n in p():
+    #     print n.attr('components')
+
+    # h = dump()
+    # print json.dumps(h)

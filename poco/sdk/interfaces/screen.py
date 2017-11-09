@@ -17,7 +17,9 @@ class ScreenInterface(object):
             width (:obj:`int`): expected width of the screenshot in pixels
 
         Returns:
-            :obj:`str`: Base64 encoded screen data
+            2-:obj:`list` (:obj:`str`, :obj:`str`):
+                - b64img: base64 encoded screen data
+                - format: screen data format (png/jpg/etc.)
         """
 
         raise NotImplementedError
