@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.drivers.cocosjs &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.drivers.cocosjs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.drivers.cocosjs</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># @Author: gzliuxin</span>
+<span class="c1"># @Email:  gzliuxin@corp.netease.com</span>
+<span class="c1"># @Date:   2017-07-14 19:47:51</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">poco</span> <span class="k">import</span> <span class="n">Poco</span>
+<span class="kn">from</span> <span class="nn">poco.agent</span> <span class="k">import</span> <span class="n">PocoAgent</span>
+<span class="kn">from</span> <span class="nn">poco.utils.simplerpc.utils</span> <span class="k">import</span> <span class="n">sync_wrapper</span>
+<span class="kn">from</span> <span class="nn">poco.freezeui.hierarchy</span> <span class="k">import</span> <span class="n">FreezedUIHierarchy</span><span class="p">,</span> <span class="n">FreezedUIDumper</span>
+<span class="kn">from</span> <span class="nn">poco.utils.airtest</span> <span class="k">import</span> <span class="n">AirtestInput</span><span class="p">,</span> <span class="n">AirtestScreen</span><span class="p">,</span> <span class="n">connect_device</span><span class="p">,</span> <span class="n">airtest_device</span>
+<span class="kn">from</span> <span class="nn">poco.utils.simplerpc.rpcclient</span> <span class="k">import</span> <span class="n">RpcClient</span>
+<span class="kn">from</span> <span class="nn">poco.utils.simplerpc.transport.ws</span> <span class="k">import</span> <span class="n">WebSocketClient</span>
+
+<span class="n">DEFAULT_ADDR</span> <span class="o">=</span> <span class="s2">&quot;ws://localhost:5003&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">CocosJsPocoAgent</span><span class="p">(</span><span class="n">PocoAgent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="n">DEFAULT_ADDR</span><span class="p">):</span>
+        <span class="c1"># init airtest env</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">airtest_device</span><span class="p">():</span>
+            <span class="n">connect_device</span><span class="p">(</span><span class="s2">&quot;Android:///&quot;</span><span class="p">)</span>
+        <span class="c1"># cocos games poco sdk listens on Android localhost:5003</span>
+        <span class="n">localport</span> <span class="o">=</span> <span class="n">addr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">airtest_device</span><span class="p">()</span><span class="o">.</span><span class="n">adb</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="s2">&quot;tcp:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">localport</span><span class="p">,</span> <span class="s2">&quot;tcp:5003&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">WebSocketClient</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">wait_connected</span><span class="p">()</span>
+
+        <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">FreezedUIHierarchy</span><span class="p">(</span><span class="n">Dumper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">))</span>
+        <span class="n">screen</span> <span class="o">=</span> <span class="n">AirtestScreen</span><span class="p">()</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">AirtestInput</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CocosJsPocoAgent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">screen</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Dumper</span><span class="p">(</span><span class="n">FreezedUIDumper</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rpcclient</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Dumper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpcclient</span> <span class="o">=</span> <span class="n">rpcclient</span>
+
+    <span class="nd">@sync_wrapper</span>
+    <span class="k">def</span> <span class="nf">dumpHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rpcclient</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;dump&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CocosJsPoco"><a class="viewcode-back" href="../../../source/poco.drivers.cocosjs.html#poco.drivers.cocosjs.CocosJsPoco">[docs]</a><span class="k">class</span> <span class="nc">CocosJsPoco</span><span class="p">(</span><span class="n">Poco</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring for CocosJsPoco&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="n">DEFAULT_ADDR</span><span class="p">):</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">CocosJsPocoAgent</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CocosJsPoco</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">action_interval</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_pre_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">proxy</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="c1"># airteset log用</span>
+        <span class="kn">from</span> <span class="nn">airtest.core.main</span> <span class="k">import</span> <span class="n">snapshot</span>
+        <span class="n">snapshot</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">unicode</span><span class="p">(</span><span class="n">proxy</span><span class="p">))</span></div>
+
+
+<span class="c1"># test code</span>
+<span class="k">def</span> <span class="nf">dump</span><span class="p">():</span>
+    <span class="kn">from</span> <span class="nn">websocket</span> <span class="k">import</span> <span class="n">create_connection</span>
+    <span class="n">ws</span> <span class="o">=</span> <span class="n">create_connection</span><span class="p">(</span><span class="n">DEFAULT_ADDR</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;, &quot;params&quot;: </span><span class="si">{}</span><span class="s1">, &quot;method&quot;: &quot;dump&quot;, &quot;id&quot;: 0}&#39;</span><span class="p">)</span>
+    <span class="c1"># print(&quot;Sent&quot;)</span>
+    <span class="c1"># print(&quot;Receiving...&quot;)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+    <span class="c1"># print(&quot;Received &#39;%s&#39;&quot; % result)</span>
+    <span class="n">ws</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

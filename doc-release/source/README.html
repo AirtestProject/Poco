@@ -221,7 +221,7 @@
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>In order to use Poco, you must install Poco python library on your host and also install the <a class="reference external" href="doc/integration.html">poco-sdk</a> in
-your game/app. Supported version are Python2.7 and Python3.3+.</p>
+your game/app.</p>
 <p><strong>Poco</strong> can be installed straightforward with <code class="docutils literal"><span class="pre">pip</span></code> command</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># In the future</span>
 pip install poco
@@ -266,9 +266,10 @@ pip install -e poco
 <li><strong>Target device</strong>: test devices where the apps or games run on, it usually refers to mobile phone devices</li>
 <li><strong>UI proxy</strong>: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements</li>
 <li><strong>Node/UI element</strong>: UI element instances or nodes in app/game</li>
-<li><strong>query expression</strong>: a serializable internal data structure through which Poco interacts with <strong>target devices</strong> and selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required</li>
+<li><strong>query expression</strong>: a serializable internal data structure through which Poco interacts with <strong>target devices</strong> and
+selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required
+to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</li>
 </ul>
-<p>to customize the <code class="docutils literal"><span class="pre">Selector</span></code> class.</p>
 <p>Following images show the UI hierarchy represented in Poco</p>
 <img alt="../_images/hunter-inspector.png" src="../_images/hunter-inspector.png" />
 <img alt="../_images/hunter-inspector-text-attribute.png" src="../_images/hunter-inspector-text-attribute.png" />
@@ -301,16 +302,13 @@ correspond to the position out of the UI element.</p>
 <div class="section" id="poco-instance">
 <h2>Poco Instance<a class="headerlink" href="#poco-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are several engines supported and for each engine the different <code class="docutils literal"><span class="pre">poco</span></code> instance must be initialized.</p>
-<dl class="docutils">
-<dt>Supported engines are as follows</dt>
-<dd><ul class="first last simple">
+<p>Supported engines are as follows:</p>
+<ul class="simple">
 <li><a class="reference internal" href="#cocos2dx-js">cocos2dx-js</a></li>
 <li><a class="reference internal" href="#android-native">android-native</a></li>
 <li>unreal (in development)</li>
-<li>for other engines, refer to <a class="reference external" href="doc/integration.html">INTEGRATION guide</a> for more details</li>
+<li>for other engines, refer to <a class="reference external" href="doc/integration.html">Integration guide</a> for more details</li>
 </ul>
-</dd>
-</dl>
 <p>Following example shows how to initialize popo instance for Unity3D.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.vendor.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span>
 
@@ -516,8 +514,8 @@ immediately, otherwise return after timeout.</p>
 </div>
 <div class="section" id="unit-test">
 <h2>Unit Test<a class="headerlink" href="#unit-test" title="Permalink to this headline">¶</a></h2>
-<p>Poco is an automation test framework. For unit testing, please refer to <a class="reference external" href="http://git-qa.gz.netease.com/maki/PocoUnit">PocoUnit</a> section. PocoUnit provides a full set
-of assertion methods and furthermore, it is also compatible with the <code class="docutils literal"><span class="pre">unittest</span></code> in Python standard library.</p>
+<p>Poco is an automation test framework. For unit testing, please refer to <a class="reference external" href="http://git-qa.gz.netease.com/maki/PocoUnit">PocoUnit</a> section. PocoUnit provides a full
+set of assertion methods and furthermore, it is also compatible with the <code class="docutils literal"><span class="pre">unittest</span></code> in Python standard library.</p>
 <span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
 </div>
 
