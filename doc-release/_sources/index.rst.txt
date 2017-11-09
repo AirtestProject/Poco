@@ -18,7 +18,7 @@ Install Poco and PocoSDK
 ------------------------
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
-your game/app. Supported version are Python2.7 and Python3.3+.
+your game/app.
 
 **Poco** can be installed straightforward with ``pip`` command
 
