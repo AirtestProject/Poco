@@ -18,6 +18,9 @@ class AirtestScreen(ScreenInterface):
 
     def getScreen(self, width):
         filename = 'poco-screenshot.png'
-        filepath = os.path.join(Settings.LOG_DIR, Settings.SCREEN_DIR, filename)
-        snapshot(filepath)
+        screen_dir = os.path.join(Settings.LOG_DIR, Settings.SCREEN_DIR)
+        if not os.path.exists(screen_dir):
+            os.makedirs(screen_dir)
+        filepath = os.path.join(screen_dir, filename)
+        snapshot(filename)
         return base64.b64encode(open(filepath, 'rb').read()), 'png'
