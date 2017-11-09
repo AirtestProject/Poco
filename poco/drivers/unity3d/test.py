@@ -32,10 +32,10 @@ if __name__ == '__main__':
     print b64img
     print len(b64img)
     print p.agent.get_debug_profiling_data()
-    # img = open('img.png', 'wb')
-    # img.write(base64.b64decode(b64img))
-    # for n in p():
-    #     print n.attr('components')
+    img = open('img.png', 'wb')
+    img.write(base64.b64decode(b64img))
+    for n in p():
+        print n.attr('components')
 
-    # h = dump()
-    # print json.dumps(h)
+    h = dump()
+    print json.dumps(h)
