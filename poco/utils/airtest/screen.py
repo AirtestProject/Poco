@@ -13,8 +13,11 @@ class AirtestScreen(ScreenInterface):
         super(AirtestScreen, self).__init__()
 
     def getPortSize(self):
-        disp = current_device().get_display_info()
-        return [disp['width'], disp['height']]
+        disp = current_device().display_info
+        if disp['orientation'] in (1, 3):
+            return [disp['height'], disp['width']]
+        else:
+            return [disp['width'], disp['height']]
 
     def getScreen(self, width):
         filename = 'poco-screenshot.png'

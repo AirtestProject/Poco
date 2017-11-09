@@ -1,1 +1,4 @@
 airtest
+hrpc
+hunter-cli
+airtest-hunter

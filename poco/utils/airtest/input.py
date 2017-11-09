@@ -22,9 +22,9 @@ class AirtestInput(InputInterface):
                                    'when running test suites on windows as target device.')
             return self.surface.getPortSize()
         else:
-            size = current_device().display_info
-            w, h = size["width"], size["height"]
-            if size["orientation"] in (1, 3):
+            display_info = current_device().display_info
+            w, h = display_info["width"], display_info["height"]
+            if display_info["orientation"] in (1, 3):
                 return h, w
             else:
                 return w, h
