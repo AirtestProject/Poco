@@ -39,3 +39,6 @@ if __name__ == '__main__':
 
     h = dump()
     print json.dumps(h)
+
+    h = p.agent.hierarchy.dump()
+    print json.dumps(h)

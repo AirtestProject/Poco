@@ -27,15 +27,6 @@ class PocoException(Exception):
     __repr__ = __str__
 
 
-class PocoAssertionError(PocoException):
-    """
-    Warning:
-        Deprecated, do not use.
-    """
-
-    pass
-
-
 class InvalidOperationException(PocoException):
     """
     Raised when the operation performing on target device is foreseen, e.g. instruction to click outside the screen is

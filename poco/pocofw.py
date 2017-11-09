@@ -49,8 +49,8 @@ class Poco(PocoAccelerationMixin):
         and/or other attributes. Invisible UI elements will be skipped even if "visible=False" argument is set.
 
         Selection process is not executed instantly, the query expression is stored in the UI proxy and the selection is
-        executed only then when the UI element(s) info is required (such get the point coordinates where to click, and/or
-        retrieve the specific attribute value).
+        executed only then when the UI element(s) info is required (such get the point coordinates where to click, 
+        and/or retrieve the specific attribute value).
 
         Examples:
             This example shows selecting a Button named 'close'::
@@ -63,16 +63,21 @@ class Poco(PocoAccelerationMixin):
 
         Keyword Args:
             xx: arbitrary key value pair that stands for selecting the UI matching the value of ``UI.xx``
-            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular expression pattern ``UI.xx``
+            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular 
+             expression pattern ``UI.xx``
 
-        In keyword args, the `xx` is the attribute name and it is supposed to be unique so the only one match is found ::
+        In keyword args, you can only use `xx` or `xxMatches` at the same time. Using both with the same attribute does
+        not make sence. Besides, `xx` should not start with ``_`` (underscore) as attributes start with ``_`` are 
+        private attributes that used by sdk implementation.
+        ::
 
             # select the UI element(s) which text attribute matches the pattern '^close.*$'
             poco = Poco(...)
             arb_close_btn = poco(textMatches='^close.*$')
 
         Returns:
-            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element matches the given query expression.
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element matches 
+            the given query expression.
         """
 
         if not name and len(kw) == 0:
@@ -83,11 +88,12 @@ class Poco(PocoAccelerationMixin):
     def wait_for_any(self, objects, timeout=120):
         """
         Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.
-        All UI proxies will be polled periodically. See options :py:class:`poll_interval <poco.Poco>` in
+        All UI proxies will be polled periodically. See options :py:class:`poll_interval <poco.pocofw.Poco>` in
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI 
+             proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Returns:
@@ -109,11 +115,12 @@ class Poco(PocoAccelerationMixin):
     def wait_for_all(self, objects, timeout=120):
         """
         Wait until all of given UI proxies show up before timeout.
-        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
+        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.pocofw.Poco>` in 
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI 
+             proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Raises:
@@ -148,7 +155,7 @@ class Poco(PocoAccelerationMixin):
                 
 
         Returns:
-            :py:class:`Poco <poco.Poco>`: new poco instance copy from current poco instance (``self``)
+            :py:class:`Poco <poco.pocofw.Poco>`: new poco instance copy from current poco instance (``self``)
         """
 
         class FreezedPoco(Poco):
@@ -318,7 +325,7 @@ class Poco(PocoAccelerationMixin):
 
         * ``action`` (:obj:`str`): name or tag of the action
         * ``proxy`` (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): related UI proxy which is
-        involved in the action itself
+          involved in the action itself
         * ``args`` (:obj:`tuple`): all required arguments of the specific action function
 
         Args:
@@ -332,7 +339,7 @@ class Poco(PocoAccelerationMixin):
         Register a callback function to be invoked after each action (such as touch or swipe).
 
         The arguments to be passed are identical to the callback function in
-        :py:meth:`add_pre_action_callback <poco.Poco.add_pre_action_callback>`.
+        :py:meth:`add_pre_action_callback <poco.pocofw.Poco.add_pre_action_callback>`.
 
         Args:
             cb: the callback function
