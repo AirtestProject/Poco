@@ -55,7 +55,10 @@ def build_query(name, **attrs):
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
         attr_val = ensure_unicode(attr_val)
-        if attr_name.endswith('Matches'):
+        if attr_name.startswith('_'):
+            raise NameError("Cannot use private attribute '{}' in your Query Expression as private attributes do not "
+                            "have stable values.".format(attr_name))
+        elif attr_name.endswith('Matches'):
             attr_name = attr_name[:-7]  # textMatches -> (attr.*=, text)
             op = 'attr.*='
         else:

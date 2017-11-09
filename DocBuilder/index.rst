@@ -140,7 +140,7 @@ Poco
 .. toctree::
     :maxdepth: 1
     
-    source/poco
+    source/poco.pocofw
     source/poco.proxy
     source/poco.exceptions
     source/poco.sdk

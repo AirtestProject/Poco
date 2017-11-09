@@ -49,8 +49,8 @@ class Poco(PocoAccelerationMixin):
         and/or other attributes. Invisible UI elements will be skipped even if "visible=False" argument is set.
 
         Selection process is not executed instantly, the query expression is stored in the UI proxy and the selection is
-        executed only then when the UI element(s) info is required (such get the point coordinates where to click, and/or
-        retrieve the specific attribute value).
+        executed only then when the UI element(s) info is required (such get the point coordinates where to click, 
+        and/or retrieve the specific attribute value).
 
         Examples:
             This example shows selecting a Button named 'close'::
@@ -63,16 +63,21 @@ class Poco(PocoAccelerationMixin):
 
         Keyword Args:
             xx: arbitrary key value pair that stands for selecting the UI matching the value of ``UI.xx``
-            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular expression pattern ``UI.xx``
+            xxMatches (:obj:`str`): arbitrary key value pair that stands for selecting the UI matching the regular 
+             expression pattern ``UI.xx``
 
-        In keyword args, the `xx` is the attribute name and it is supposed to be unique so the only one match is found ::
+        In keyword args, you can only use `xx` or `xxMatches` at the same time. Using both with the same attribute does
+        not make sence. Besides, `xx` should not start with ``_``(underscore) as attributes start with ``_`` are 
+        private attributes that used by sdk implementation.
+        ::
 
             # select the UI element(s) which text attribute matches the pattern '^close.*$'
             poco = Poco(...)
             arb_close_btn = poco(textMatches='^close.*$')
 
         Returns:
-            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element matches the given query expression.
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: UI proxy object representing the UI element matches 
+            the given query expression.
         """
 
         if not name and len(kw) == 0:
@@ -87,7 +92,8 @@ class Poco(PocoAccelerationMixin):
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI 
+             proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Returns:
@@ -113,7 +119,8 @@ class Poco(PocoAccelerationMixin):
         ``Poco``'s initialization for more details.
 
         Args:
-            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI proxies
+            objects (Iterable<:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`>): iterable object of the given UI 
+             proxies
             timeout (:obj:`float`): timeout in seconds, default is 120s
 
         Raises:
