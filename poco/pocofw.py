@@ -67,7 +67,7 @@ class Poco(PocoAccelerationMixin):
              expression pattern ``UI.xx``
 
         In keyword args, you can only use `xx` or `xxMatches` at the same time. Using both with the same attribute does
-        not make sence. Besides, `xx` should not start with ``_``(underscore) as attributes start with ``_`` are 
+        not make sence. Besides, `xx` should not start with ``_`` (underscore) as attributes start with ``_`` are 
         private attributes that used by sdk implementation.
         ::
 
@@ -88,7 +88,7 @@ class Poco(PocoAccelerationMixin):
     def wait_for_any(self, objects, timeout=120):
         """
         Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.
-        All UI proxies will be polled periodically. See options :py:class:`poll_interval <poco.Poco>` in
+        All UI proxies will be polled periodically. See options :py:class:`poll_interval <poco.pocofw.Poco>` in
         ``Poco``'s initialization for more details.
 
         Args:
@@ -115,7 +115,7 @@ class Poco(PocoAccelerationMixin):
     def wait_for_all(self, objects, timeout=120):
         """
         Wait until all of given UI proxies show up before timeout.
-        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.Poco>` in 
+        All UI proxies will be polled periodically. See option :py:class:`poll_interval <poco.pocofw.Poco>` in 
         ``Poco``'s initialization for more details.
 
         Args:
@@ -155,7 +155,7 @@ class Poco(PocoAccelerationMixin):
                 
 
         Returns:
-            :py:class:`Poco <poco.Poco>`: new poco instance copy from current poco instance (``self``)
+            :py:class:`Poco <poco.pocofw.Poco>`: new poco instance copy from current poco instance (``self``)
         """
 
         class FreezedPoco(Poco):
@@ -325,7 +325,7 @@ class Poco(PocoAccelerationMixin):
 
         * ``action`` (:obj:`str`): name or tag of the action
         * ``proxy`` (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or :obj:`NoneType`): related UI proxy which is
-        involved in the action itself
+          involved in the action itself
         * ``args`` (:obj:`tuple`): all required arguments of the specific action function
 
         Args:
@@ -339,7 +339,7 @@ class Poco(PocoAccelerationMixin):
         Register a callback function to be invoked after each action (such as touch or swipe).
 
         The arguments to be passed are identical to the callback function in
-        :py:meth:`add_pre_action_callback <poco.Poco.add_pre_action_callback>`.
+        :py:meth:`add_pre_action_callback <poco.pocofw.Poco.add_pre_action_callback>`.
 
         Args:
             cb: the callback function

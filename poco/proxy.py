@@ -55,7 +55,7 @@ class UIObjectProxy(object):
         attrs: other query expressions except for the ``name``
 
     See Also:
-        :py:meth:`select UI element(s) by poco <poco.Poco.__call__>`
+        :py:meth:`select UI element(s) by poco <poco.pocofw.Poco.__call__>`
     """
 
     def __init__(self, poco, name=None, **attrs):
@@ -270,7 +270,7 @@ class UIObjectProxy(object):
              'Center' means to click the center of bounding box of UI element. 
             sleep_interval: number of seconds to wait after this action. Default is None which is the default sleep
              interval. This value can be configured by Poco initialization. See configuration at poco
-             :py:class:`initialization <poco.Poco>` for more details.
+             :py:class:`initialization <poco.pocofw.Poco>` for more details.
 
         Raises:
             PocoNoSuchNodeException: raised when the UI element does not exist
