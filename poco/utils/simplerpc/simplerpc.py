@@ -179,7 +179,7 @@ class RpcAgent(object):
         def _run():
             while True:
                 self.update()
-                time.sleep(0.1)
+                time.sleep(0.002)
         if backend:
             from threading import Thread
             t = Thread(target=_run, name="update")
