@@ -21,7 +21,7 @@ class UnityScreen(ScreenInterface):
 
     @sync_wrapper
     def getScreen(self, width):
-        return self.client.call("Screenshot")
+        return self.client.call("Screenshot", width)
 
     @sync_wrapper
     def getPortSize(self):
@@ -52,6 +52,10 @@ class UnityPocoAgent(PocoAgent):
         input = AirtestInput()
         super(UnityPocoAgent, self).__init__(hierarchy, input, screen, None)
 
+    @sync_wrapper
+    def get_debug_profiling_data(self):
+        return self.c.call("GetDebugProfilingData")
+
 
 class Dumper(FreezedUIDumper):
     def __init__(self, rpcclient):
@@ -61,10 +65,6 @@ class Dumper(FreezedUIDumper):
     @sync_wrapper
     def dumpHierarchy(self):
         return self.rpcclient.call("Dump")
-
-    @sync_wrapper
-    def get_debug_profiling_data(self):
-        return self.rpcclient.call("GetDebugProfilingData")
 
 
 class UnityPoco(Poco):

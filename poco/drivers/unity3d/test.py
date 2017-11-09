@@ -20,8 +20,6 @@ def dump():
     d = Dumper(c)
     h = d.dumpHierarchy()
     t1 = time.time()
-
-    print d.get_debug_profiling_data()
     print t1 - t0
     return h
 
@@ -29,12 +27,15 @@ def dump():
 if __name__ == '__main__':
     time.sleep(2)
 
-    # p = UnityPoco(DEFAULT_ADDR, unity_editor=True)
-    # b64img, fmt = p.snapshot()
+    p = UnityPoco(DEFAULT_ADDR, unity_editor=True)
+    b64img, fmt = p.snapshot()
+    print b64img
+    print len(b64img)
+    print p.agent.get_debug_profiling_data()
     # img = open('img.png', 'wb')
     # img.write(base64.b64decode(b64img))
     # for n in p():
     #     print n.attr('components')
 
-    h = dump()
-    print json.dumps(h)
+    # h = dump()
+    # print json.dumps(h)

@@ -266,7 +266,7 @@ class UIObjectProxy(object):
 
         Args:
             focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): an offset point (x, y) from the top left corner of the UI
-            element(s), values must be in range of 0~1. This argument can be also specified by 'anchor' or 'center'.
+             element(s), values must be in range of 0~1. This argument can be also specified by 'anchor' or 'center'.
              'Center' means to click the center of bounding box of UI element. 
             sleep_interval: number of seconds to wait after this action. Default is None which is the default sleep
              interval. This value can be configured by Poco initialization. See configuration at poco
@@ -294,10 +294,10 @@ class UIObjectProxy(object):
 
         Args:
             dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`):  coordinates (x, y) in NormalizedCoordinate system, it can
-            be also specified as  'up', 'down', 'left', 'right'. Swipe 'up' is equivalent to [0, -0.1], swipe 'down' is
-            equivalent to [0, 0.1], swipe 'left' is equivalent to [-0.1, 0] and swipe 'right' is equivalent to [0, 0.1]
+             be also specified as  'up', 'down', 'left', 'right'. Swipe 'up' is equivalent to [0, -0.1], swipe 'down' is
+             equivalent to [0, 0.1], swipe 'left' is equivalent to [-0.1, 0] and swipe 'right' is equivalent to [0, 0.1]
             focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`
-            for more details
+             for more details
             duration: time interval in which the action is performed
 
         Raises:
@@ -338,7 +338,7 @@ class UIObjectProxy(object):
 
         Args:
             f (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): the focus point, it can be specified as 2-list/2-tuple
-            coordinates (x, y) in NormalizedCoordinate system or as 'center' or 'anchor'.
+             coordinates (x, y) in NormalizedCoordinate system or as 'center' or 'anchor'.
 
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object (copy)
