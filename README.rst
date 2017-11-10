@@ -1,10 +1,41 @@
 
 Poco ポコ
-=========
+=======
 
 **A cross-engine UI automation framework**
 
 `中文README(Chinese README)`_ 在此。
+
+Example
+-------
+
+.. image:: doc/img/overview.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    time.sleep(1.5)
+
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
+
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
+
+`More examples`_ here.
 
 Features
 --------
@@ -23,6 +54,8 @@ Main Poco features includes following:
 
 Installation
 ------------
+
+.. should I install Airtest first?
 
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app.
@@ -49,29 +82,6 @@ For NetEase internal use, clone the repository from following location
     pip install -e poco
 
 For **poco-sdk** integration please refer to `Integration Guide`_
-
-
-Example
--------
-
-The following example shows a simple test script on demo game using Unity3D. `More examples`_ here.
-
-.. code-block:: python
-
-    from poco.drivers.unity3d import UnityPoco as Poco
-    
-    poco = Poco(('localhost', 5001))
-    
-    # tap start button
-    poco('start_btn', type='Button').click()
-    
-    # collect all 'stars' to my 'bag' by dragging the star icon
-    bag = poco('bag_area')
-    for star in poco(type='MPanel').child('star'):
-        star.drag_to(bag)
-    
-    # click Text starting with 'finish' to finish collecting
-    poco(textMatches='finish.*').click()
 
 
 Basic Concepts

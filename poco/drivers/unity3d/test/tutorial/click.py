@@ -5,8 +5,7 @@ from poco.drivers.unity3d.test.tutorial.case import TutorialCase
 
 class ClickTutorial(TutorialCase):
     def runTest(self):
-        for star in self.poco('star'):
-            star.click()
+        self.poco('btn_start').click()
 
 
 if __name__ == '__main__':

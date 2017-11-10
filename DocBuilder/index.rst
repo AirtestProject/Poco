@@ -53,22 +53,31 @@ Simple demo
 The following example shows a simple script on demo game using Unity3D. Check `More examples`_ section for more detailed
 info.
 
+.. image:: ../doc/img/overview.gif
+
 .. code-block:: python
 
-    from poco.drivers.unity3d import UnityPoco as Poco
+    # coding=utf-8
 
-    poco = Poco(('localhost', 5001))
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
 
-    # tap start button
-    poco('start_btn', type='Button').click()
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
 
-    # collect all 'stars' to my 'bag' by dragging the star icon
-    bag = poco('bag_area')
-    for star in poco(type='MPanel').child('star'):
-        star.drag_to(bag)
+    poco('btn_start').click()
+    time.sleep(1.5)
 
-    # click Text starting with 'finish' to finish collecting
-    poco(textMatches='finish.*').click()
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
+
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
 
 
 Dump UI hierarchy example
@@ -79,13 +88,12 @@ UI hierarchy.
 
 .. code-block:: python
 
+    import json
     from poco.drivers.unity3d import UnityPoco as Poco
-    from pprint import pprint
 
     poco = Poco()
     ui = poco.agent.hierarchy.dump()
-    pprint(ui)
-
+    print(json.dumps(ui, indent=4))
 
 
 The following is the snippet of UI hierarchy. All UI elements are organized in `dict` representing the `tree` structure.
