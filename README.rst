@@ -67,9 +67,13 @@ your game/app.
     # In the future
     pip install poco
 
-Currently, the code is available only in `Git` repository and can be installed as follows
+Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
+of poco, install airtest first.
 
 .. code-block:: bash
+
+    git clone https://github.com/Meteorix/airtest.git
+    pip install -e airtest
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
@@ -82,54 +86,6 @@ For NetEase internal use, clone the repository from following location
     pip install -e poco
 
 For **poco-sdk** integration please refer to `Integration Guide`_
-
-
-Basic Concepts
---------------
-
-This section describes the basic concepts of Poco. Basic terminology used in following section
-
-* **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
-* **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
-* **Node/UI element**: UI element instances or nodes in app/game
-* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and 
-  selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required 
-  to customize the ``Selector`` class.
-
-Following images show the UI hierarchy represented in Poco
-
-.. image:: doc/img/hunter-inspector.png
-.. image:: doc/img/hunter-inspector-text-attribute.png
-.. image:: doc/img/hunter-inspector-hierarchy-relations.png
-
-Definitions of coordinate system and metric space
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-Normalized Coordinate System
-''''''''''''''''''''''''''''
-
-In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
-width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
-In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
-position and size. This is especially very handy when writing cross-device test cases.
-
-The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
-(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.
-
-.. image:: doc/img/hunter-poco-coordinate-system.png
-
-Local Coordinate System (local positioning)
-'''''''''''''''''''''''''''''''''''''''''''
-
-The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
-The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
-rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
-length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
-coordinate system.
-
-Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
-the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
-correspond to the position out of the UI element.
 
 
 Poco Instance
@@ -415,6 +371,54 @@ Unit Test
 
 Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full 
 set of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
+
+Basic Concepts
+--------------
+
+This section describes the basic concepts of Poco. Basic terminology used in following section
+
+* **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
+* **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
+* **Node/UI element**: UI element instances or nodes in app/game
+* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and
+  selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required
+  to customize the ``Selector`` class.
+
+Following images show the UI hierarchy represented in Poco
+
+.. image:: doc/img/hunter-inspector.png
+.. image:: doc/img/hunter-inspector-text-attribute.png
+.. image:: doc/img/hunter-inspector-hierarchy-relations.png
+
+Definitions of coordinate system and metric space
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+Normalized Coordinate System
+''''''''''''''''''''''''''''
+
+In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
+width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
+In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
+position and size. This is especially very handy when writing cross-device test cases.
+
+The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
+(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.
+
+.. image:: doc/img/hunter-poco-coordinate-system.png
+
+Local Coordinate System (local positioning)
+'''''''''''''''''''''''''''''''''''''''''''
+
+The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
+The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
+rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
+length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
+coordinate system.
+
+Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
+the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
+correspond to the position out of the UI element.
+
 
 ..
  下面的连接要替换成绝对路径

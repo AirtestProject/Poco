@@ -27,9 +27,13 @@ your game/app.
     # In the future
     pip install poco
 
-Currently, the code is available only in `Git` repository and can be installed as follows
+Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
+of poco, install airtest first.
 
 .. code-block:: bash
+
+    git clone https://github.com/Meteorix/airtest.git
+    pip install -e airtest
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
