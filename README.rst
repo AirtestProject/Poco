@@ -37,6 +37,8 @@ Example
 
 `More examples`_ here.
 
+To retrieve the UI hierarchy of the game, please use our `**HierarchyViewer**`_ ! (coming soon)
+
 Features
 --------
 
@@ -428,6 +430,7 @@ correspond to the position out of the UI element.
 .. _Integration Guide: doc/integration.html
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+.. _HierarchyViewer: hierarchy view 下载链接
 
 ..
  下面是对应sdk的下载链接

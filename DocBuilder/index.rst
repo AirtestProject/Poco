@@ -83,6 +83,7 @@ info.
     assert poco('scoreVal').get_text() == "100", "score correct."
     poco('btn_back', type='Button').click()
 
+To retrieve the UI hierarchy of the game, please use our `**HierarchyViewer**`_ ! (coming soon)
 
 Dump UI hierarchy example
 -------------------------
@@ -158,13 +159,11 @@ Poco
     source/poco.sdk
 
 
-..
- 下面的连接要替换成绝对路径
-
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+.. _HierarchyViewer: hierarchy view 下载链接
 
 ..
  下面是对应sdk的下载链接
