@@ -19,7 +19,7 @@ class MhScreen(ScreenInterface):
 
     @sync_wrapper
     def getScreen(self, width):
-        # get screen 是 get_size ？
+        # FIXME: get screen 是 get_size ？
         return self.c.call("get_size"), 'png'
 
 
@@ -30,7 +30,7 @@ class MhInput(InputInterface):
 
     @sync_wrapper
     def click(self, x, y, op="left"):
-        # 这个函数签名不对
+        # FIXME: 这个函数签名不对
         print((x, y), op)
         return self.c.call("click", (x, y), op)
 

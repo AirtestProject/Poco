@@ -1,17 +1,22 @@
-from distutils.core import setup
+# coding=utf-8
+
+from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
 
 # parse_requirements() returns generator of pip.req.InstallRequirement objects
 install_reqs = parse_requirements('requirements.txt', session=False)
+
 # reqs is a list of requirement
-# e.g. ['django==1.5.1', 'mezzanine==1.4.6']
 reqs = [str(ir.req) for ir in install_reqs if ir.req]
 
 setup(
     name='poco',
-    version='0.0.1',
-    py_modules=['poco'],
-    packages=['poco'],
+    version='1.0.0',
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=reqs,
+    keywords="poco",
+    description='Poco cross-engine UI automated test framework',
+    license='Apache License 2.0',
 )
