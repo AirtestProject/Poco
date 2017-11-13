@@ -3,7 +3,11 @@
 import base64
 import os
 from airtest.cli.runner import device as current_device
-from airtest.core.api import snapshot
+try:
+    from airtest.core.api import snapshot
+except ImportError:
+    # 兼容旧版本
+    from airtest.core.main import snapshot
 from airtest.core.settings import Settings
 from poco.sdk.interfaces.screen import ScreenInterface
 

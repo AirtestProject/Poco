@@ -74,7 +74,11 @@ class UnityPoco(Poco):
 
     def on_pre_action(self, action, proxy, args):
         # airteset log用
-        from airtest.core.api import snapshot
+        try:
+            from airtest.core.api import snapshot
+        except ImportError:
+            # 兼容旧版本
+            from airtest.core.main import snapshot
         snapshot('img.png', msg=unicode(proxy))
 
 
