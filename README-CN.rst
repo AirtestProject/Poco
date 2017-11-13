@@ -4,46 +4,22 @@ Poco ポコ
 
 **A cross-engine UI automation framework**
 
-`English README`_ here. 中文文档更新不够及时，需要最新内容的请见 `English README`_
-
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 `hunter`_ 的项目可直接使用该测试框架。
+
+文档(Documentation)
+-----------------
+
+`在线文档`_ 。
 
 安装(installation)
 ----------------
 
-.. code-block:: bash
+直接运行下面的指令即可
 
-    # airtest runtime
-    git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
-    pip install -e airtest
-    
-    # aircv for airtest
-    git clone -b open-source ssh://git@git-qa.gz.netease.com:32200/airtest-projects/aircv.git
-    pip install -e aircv
-    
-    # hrpc
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/hrpc.git
-    pip install -e hrpc
-    
-    # hunter-cli
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
-    pip install -e hunter-cli
-    
-    # hunter lib for airtest
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
-    pip install -e airtest-hunter
-    
-    # poco
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-    pip install -e poco
-    
-    # poco unittest framework
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/PocoUnit.git
-    pip install -e PocoUnit
+::
 
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com poco pocounit
 
-
-安装遇到权限问题请下载我们的 `deploy-key`_ ，将下载下来的deploy-key放到 ``C:\User\<username>\.ssh\`` 目录下，改名为 ``id_rsa`` ，再重新运行上面的命令。
 
 基本概念(concepts)
 --------------
@@ -328,6 +304,7 @@ poco是自动化框架，关于单元测试请见 `PocoUnit`_ 。PocoUnit提供�
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _API Reference: 
+.. _在线文档: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
 
 ..
  下面是对应sdk的下载链接

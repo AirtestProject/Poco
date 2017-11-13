@@ -42,8 +42,7 @@ For NetEase internal use, clone the repository from following location
 
 .. code-block:: bash
 
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-    pip install -e poco
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
