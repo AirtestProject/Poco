@@ -13,10 +13,10 @@ reqs = [str(ir.req) for ir in install_reqs if ir.req]
 setup(
     name='poco',
     version='1.0.0',
+    keywords="poco",
+    description='Poco cross-engine UI automated test framework.',
     packages=find_packages(),
     include_package_data=True,
     install_requires=reqs,
-    keywords="poco",
-    description='Poco cross-engine UI automated test framework',
     license='Apache License 2.0',
 )
