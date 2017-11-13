@@ -20,7 +20,7 @@ def dump():
     d = Dumper(c)
     h = d.dumpHierarchy()
     t1 = time.time()
-    print t1 - t0
+    print(t1 - t0)
     return h
 
 

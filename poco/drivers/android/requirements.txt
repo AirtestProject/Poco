@@ -1,3 +1,2 @@
-airtest
 pydash
 axmlparserpy
