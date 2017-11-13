@@ -42,7 +42,7 @@ For NetEase internal use, clone the repository from following location
 
 .. code-block:: bash
 
-    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com poco pocounit
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
