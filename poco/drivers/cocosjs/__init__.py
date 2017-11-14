@@ -4,9 +4,6 @@
 # @Date:   2017-07-14 19:47:51
 import json
 
-# latest airtest only
-from airtest.core.api import connect_device, airtest_device as current_device
-
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.utils.simplerpc.utils import sync_wrapper
@@ -22,8 +19,17 @@ DEFAULT_ADDR = "ws://localhost:5003"
 class CocosJsPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
         # init airtest env
-        if not current_device():
-            connect_device("Android:///")
+        try:
+            # new version
+            from airtest.core.api import connect_device, airtest_device as current_device
+            if not current_device():
+                connect_device("Android:///")
+        except ImportError:
+            # old version
+            from airtest.cli.runner import device as current_device
+            from airtest.core.main import set_serialno
+            if not current_device():
+                set_serialno()
         # cocos games poco sdk listens on Android localhost:5003
         localport = addr.split(":")[-1]
         current_device().adb.forward("tcp:%s" % localport, "tcp:5003", False)
@@ -41,7 +47,6 @@ class CocosJsPocoAgent(PocoAgent):
 
 
 class Dumper(FreezedUIDumper):
-
     def __init__(self, rpcclient):
         super(Dumper, self).__init__()
         self.rpcclient = rpcclient

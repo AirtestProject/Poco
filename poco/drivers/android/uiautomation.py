@@ -10,6 +10,7 @@ import warnings
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
 from airtest.core.android.utils.iputils import get_ip_address
+
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 from poco import Poco
@@ -66,8 +67,21 @@ class AndroidPocoAgent(PocoAgent):
 
 class AndroidUiautomationPoco(Poco):
     def __init__(self, device=None, using_proxy=True):
-        # TODO: 临时用着airtest的方案
-        self.android = device or Android()
+        if not device:
+            try:
+                # new version
+                from airtest.core.api import connect_device, airtest_device as current_device
+                if not current_device():
+                    connect_device("Android:///")
+            except ImportError:
+                # old version
+                from airtest.cli.runner import device as current_device
+                from airtest.core.main import set_serialno
+                if not current_device():
+                    set_serialno()
+            self.android = current_device()
+        else:
+            self.android = device
         self.adb_client = self.android.adb
         if using_proxy:
             self.device_ip = self.adb_client.host or "127.0.0.1"
