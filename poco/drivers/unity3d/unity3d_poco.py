@@ -32,11 +32,17 @@ class UnityPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR, unity_editor=False):
         if not unity_editor:
             # init airtest env
-            from poco.utils.airtest import connect_device, airtest_device
-            if not airtest_device():
-                connect_device("Android:///")
+            try:
+                from airtest.core.api import connect_device, airtest_device as current_device
+                if not current_device():
+                    connect_device("Android:///")
+            except ImportError:
+                from airtest.cli.runner import device as current_device
+                if not current_device():
+                    raise RuntimeError("You are using old version of airtest, "
+                                       "please initialize airtest device instance first.")
             # unity games poco sdk listens on Android localhost:5001
-            airtest_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
+            current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
 
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)

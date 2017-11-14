@@ -4,25 +4,29 @@
 # @Date:   2017-07-14 19:47:51
 import json
 
+# latest airtest only
+from airtest.core.api import connect_device, airtest_device as current_device
+
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.utils.simplerpc.utils import sync_wrapper
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
-from poco.utils.airtest import AirtestInput, AirtestScreen, connect_device, airtest_device
+from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.ws import WebSocketClient
 
+__all__ = ['CocosJsPoco']
 DEFAULT_ADDR = "ws://localhost:5003"
 
 
 class CocosJsPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
         # init airtest env
-        if not airtest_device():
+        if not current_device():
             connect_device("Android:///")
         # cocos games poco sdk listens on Android localhost:5003
         localport = addr.split(":")[-1]
-        airtest_device().adb.forward("tcp:%s" % localport, "tcp:5003", False)
+        current_device().adb.forward("tcp:%s" % localport, "tcp:5003", False)
 
         self.conn = WebSocketClient(addr)
         self.c = RpcClient(self.conn)

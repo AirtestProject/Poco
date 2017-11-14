@@ -38,7 +38,7 @@ of poco, install airtest first.
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
 
-For NetEase internal use, clone the repository from following location
+For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
@@ -102,7 +102,7 @@ UI hierarchy.
 
 The following is the snippet of UI hierarchy. All UI elements are organized in `dict` representing the `tree` structure.
 More detailed info about properties are described in
-`README <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
+`.dumpHierarchy() <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
 
 .. code-block:: python
 

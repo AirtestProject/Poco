@@ -71,7 +71,7 @@ class AbstractDumper(IDumper):
 
         return self.dumpHierarchyImpl(self.getRoot())
 
-    def dumpHierarchyImpl(self, node):
+    def dumpHierarchyImpl(self, node, onlyVisibleNode=True):
         """
         Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` procedure is the engine independent as
         the hierarchy structure is wrapped by :py:class:`AbstractNode <poco.sdk.AbstractNode>` and therefore the
@@ -85,7 +85,9 @@ class AbstractDumper(IDumper):
                   if you want to dump the hierarchy.
 
         Args:
-            node: root node of the hierarchy to be dumped
+            node(:py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`): root node of the hierarchy to be
+             dumped
+            onlyVisibleNode(:obj:`bool`): dump only the visible nodes or all nodes, default to True
 
         Returns:
             :obj:`dict`: json serializable dict holding the whole hierarchy data
@@ -104,7 +106,7 @@ class AbstractDumper(IDumper):
         result = {}
         children = []
         for child in node.getChildren():
-            if payload.get('visible') or child.getAttr('visible'):
+            if not onlyVisibleNode or (payload.get('visible') or child.getAttr('visible')):
                 children.append(self.dumpHierarchyImpl(child))
         if len(children) > 0:
             result['children'] = children

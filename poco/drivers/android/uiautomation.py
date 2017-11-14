@@ -3,10 +3,10 @@ __author__ = 'lxn3032'
 
 
 import os
+import requests
 import time
 import warnings
 
-import requests
 from airtest.core.android import Android
 from airtest.core.android.ime import YosemiteIme
 from airtest.core.android.utils.iputils import get_ip_address
@@ -18,6 +18,7 @@ from poco.sdk.Attributor import Attributor
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.drivers.android.utils.installation import install, uninstall
 
+__all__ = ['AndroidUiautomationPoco', 'AndroidUiautomationHelper']
 this_dir = os.path.dirname(os.path.realpath(__file__))
 PocoServicePackage = 'com.netease.open.pocoservice'
 PocoServicePackageTest = 'com.netease.open.pocoservice.test'
