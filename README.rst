@@ -105,9 +105,9 @@ Following example shows how to initialize popo instance for Unity3D.
 
 .. code-block:: python
 
-    from poco.vendor.unity3d import UnityPoco
+    from poco.drivers.unity3d import UnityPoco
     
-    poco = UnityPoco()
+    poco = UnityPoco((ip, port))
     ui = poco('...')
 
 
@@ -278,8 +278,8 @@ The focus function can also be used as internal positioning within the objects. 
 wait
 ''''
 
-Wait for the target objects on the screen and return the object itself. If the object the object exists, return it
-immediately, otherwise return after timeout.
+Wait for the target objects to appear on the screen and return the object proxy itself. If the object exists, return
+immediately.
 
 .. code-block:: python
 
@@ -320,7 +320,9 @@ swipe
 snapshot
 ''''''''
 
-Take a screenshot of the current screen and save it to file.
+Take a screenshot of the current screen in base64 encoded string. The image format depends on the sdk implementation.
+Take a look at `poco.sdk.interfaces.screen <source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen>`_
+to dive into sdk implementation details.
 
 **Note**: ``snapshot``  is not supported in some engine implementation of poco.
 
@@ -328,8 +330,8 @@ Take a screenshot of the current screen and save it to file.
 
     from base64 import b64decode
     
-    b64img = poco.snapshot(width=720)
-    open('screen.png', 'wb').write(b64decode(b64img))
+    b64img, fmt = poco.snapshot(width=720)
+    open('screen.{}'.format(fmt), 'wb').write(b64decode(b64img))
 
 
 Exceptions
@@ -373,10 +375,10 @@ Unit Test
 Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full 
 set of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
-Basic Concepts
---------------
+Some Concepts
+-------------
 
-This section describes the basic concepts of Poco. Basic terminology used in following section
+This section describes some basic concepts of Poco. Basic terminology used in following section
 
 * **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
 * **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
