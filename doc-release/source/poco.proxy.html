@@ -36,7 +36,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="poco  documentation" href="../index.html"/>
-        <link rel="up" title="poco package" href="poco.html"/>
+        <link rel="next" title="poco.exceptions module" href="poco.exceptions.html"/>
         <link rel="prev" title="poco.pocofw module" href="poco.pocofw.html"/> 
 
   
@@ -90,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a></li>
@@ -138,8 +138,6 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="poco.html">poco package</a> &raquo;</li>
-        
       <li>poco.proxy module</li>
     
     
@@ -183,7 +181,7 @@ See <code class="docutils literal"><span class="pre">QueryCondition</span></code
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">select</span> <span class="pre">UI</span> <span class="pre">element(s)</span> <span class="pre">by</span> <span class="pre">poco</span></code></p>
+<p class="last"><a class="reference internal" href="poco.pocofw.html#poco.pocofw.Poco.__call__" title="poco.pocofw.Poco.__call__"><code class="xref py py-meth docutils literal"><span class="pre">select</span> <span class="pre">UI</span> <span class="pre">element(s)</span> <span class="pre">by</span> <span class="pre">poco</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="poco.proxy.UIObjectProxy.__getitem__">
@@ -342,11 +340,12 @@ one. It is also possible to click another point offset by providing <code class=
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>focus</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – an offset point (x, y) from the top left corner of the UI</li>
-<li><strong>element</strong> (<em>s</em>) – ‘Center’ means to click the center of bounding box of UI element.</li>
+<li><strong>focus</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – an offset point (x, y) from the top left corner of the UI
+element(s), values must be in range of 0~1. This argument can be also specified by ‘anchor’ or ‘center’.
+‘Center’ means to click the center of bounding box of UI element.</li>
 <li><strong>sleep_interval</strong> – number of seconds to wait after this action. Default is None which is the default sleep
 interval. This value can be configured by Poco initialization. See configuration at poco
-<code class="xref py py-class docutils literal"><span class="pre">initialization</span></code> for more details.</li>
+<a class="reference internal" href="poco.pocofw.html#poco.pocofw.Poco" title="poco.pocofw.Poco"><code class="xref py py-class docutils literal"><span class="pre">initialization</span></code></a> for more details.</li>
 </ul>
 </td>
 </tr>
@@ -403,17 +402,12 @@ interval. This value can be configured by Poco initialization. See configuration
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>f</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – the focus point, it can be specified as 2-list/2-tuple</li>
-<li><strong>coordinates</strong> (<em>x</em><em>, </em><em>y</em>) – </li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – the focus point, it can be specified as 2-list/2-tuple
+coordinates (x, y) in NormalizedCoordinate system or as ‘center’ or ‘anchor’.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a new UI proxy object (copy)</p>
-</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a new UI proxy object (copy)</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a></p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -616,11 +610,11 @@ current UI element(s)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>dir</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – coordinates (x, y) in NormalizedCoordinate system, it can</li>
-<li><strong>also specified as  'up'</strong><strong>, </strong><strong>'down'</strong><strong>, </strong><strong>'left'</strong><strong>, </strong><strong>'right'. Swipe 'up' is equivalent to</strong><strong> [</strong><strong>0</strong><strong>, </strong><strong>-0.1</strong><strong>]</strong><strong>, </strong><strong>swipe 'down' is</strong> (<em>be</em>) – </li>
-<li><strong>to</strong><strong> [</strong><strong>0</strong><strong>, </strong><strong>0.1</strong><strong>]</strong><strong>, </strong><strong>swipe 'left' is equivalent to</strong><strong> [</strong><strong>-0.1</strong><strong>, </strong><strong>0</strong><strong>] </strong><strong>and swipe 'right' is equivalent to</strong><strong> [</strong><strong>0</strong><strong>, </strong><strong>0.1</strong><strong>]</strong> (<em>equivalent</em>) – </li>
-<li><strong>focus</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – see <a class="reference internal" href="#poco.proxy.UIObjectProxy.click" title="poco.proxy.UIObjectProxy.click"><code class="xref py py-meth docutils literal"><span class="pre">.click()</span></code></a></li>
-<li><strong>more details</strong> (<em>for</em>) – </li>
+<li><strong>dir</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – coordinates (x, y) in NormalizedCoordinate system, it can
+be also specified as  ‘up’, ‘down’, ‘left’, ‘right’. Swipe ‘up’ is equivalent to [0, -0.1], swipe ‘down’ is
+equivalent to [0, 0.1], swipe ‘left’ is equivalent to [-0.1, 0] and swipe ‘right’ is equivalent to [0, 0.1]</li>
+<li><strong>focus</strong> (2-<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>/2-<code class="xref py py-obj docutils literal"><span class="pre">list</span></code>/<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – see <a class="reference internal" href="#poco.proxy.UIObjectProxy.click" title="poco.proxy.UIObjectProxy.click"><code class="xref py py-meth docutils literal"><span class="pre">.click()</span></code></a>
+for more details</li>
 <li><strong>duration</strong> – time interval in which the action is performed</li>
 </ul>
 </td>
@@ -696,6 +690,8 @@ current UI element(s)</p>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="poco.exceptions.html" class="btn btn-neutral float-right" title="poco.exceptions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="poco.pocofw.html" class="btn btn-neutral" title="poco.pocofw module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

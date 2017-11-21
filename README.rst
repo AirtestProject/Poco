@@ -89,6 +89,12 @@ For NetEase internal use, run the following command directly.
 For **poco-sdk** integration please refer to `Integration Guide`_
 
 
+Documentation
+-------------
+
+The documents are not published to public site yet. To see the document, you can simply ``open doc-release/index.html``
+on your file system.
+
 Poco Instance
 -------------
 

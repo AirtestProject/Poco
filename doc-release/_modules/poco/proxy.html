@@ -89,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../source/README.html">Poco ポコ</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/poco.sdk.html">poco.sdk package</a></li>
@@ -214,7 +214,7 @@
 <span class="sd">        attrs: other query expressions except for the ``name``</span>
 
 <span class="sd">    See Also:</span>
-<span class="sd">        :py:meth:`select UI element(s) by poco &lt;poco.Poco.__call__&gt;`</span>
+<span class="sd">        :py:meth:`select UI element(s) by poco &lt;poco.pocofw.Poco.__call__&gt;`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">poco</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">attrs</span><span class="p">):</span>
@@ -425,11 +425,11 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): an offset point (x, y) from the top left corner of the UI</span>
-<span class="sd">            element(s), values must be in range of 0~1. This argument can be also specified by &#39;anchor&#39; or &#39;center&#39;.</span>
+<span class="sd">             element(s), values must be in range of 0~1. This argument can be also specified by &#39;anchor&#39; or &#39;center&#39;.</span>
 <span class="sd">             &#39;Center&#39; means to click the center of bounding box of UI element. </span>
 <span class="sd">            sleep_interval: number of seconds to wait after this action. Default is None which is the default sleep</span>
 <span class="sd">             interval. This value can be configured by Poco initialization. See configuration at poco</span>
-<span class="sd">             :py:class:`initialization &lt;poco.Poco&gt;` for more details.</span>
+<span class="sd">             :py:class:`initialization &lt;poco.pocofw.Poco&gt;` for more details.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            PocoNoSuchNodeException: raised when the UI element does not exist</span>
@@ -453,10 +453,10 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            dir (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`):  coordinates (x, y) in NormalizedCoordinate system, it can</span>
-<span class="sd">            be also specified as  &#39;up&#39;, &#39;down&#39;, &#39;left&#39;, &#39;right&#39;. Swipe &#39;up&#39; is equivalent to [0, -0.1], swipe &#39;down&#39; is</span>
-<span class="sd">            equivalent to [0, 0.1], swipe &#39;left&#39; is equivalent to [-0.1, 0] and swipe &#39;right&#39; is equivalent to [0, 0.1]</span>
+<span class="sd">             be also specified as  &#39;up&#39;, &#39;down&#39;, &#39;left&#39;, &#39;right&#39;. Swipe &#39;up&#39; is equivalent to [0, -0.1], swipe &#39;down&#39; is</span>
+<span class="sd">             equivalent to [0, 0.1], swipe &#39;left&#39; is equivalent to [-0.1, 0] and swipe &#39;right&#39; is equivalent to [0, 0.1]</span>
 <span class="sd">            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() &lt;poco.proxy.UIObjectProxy.click&gt;`</span>
-<span class="sd">            for more details</span>
+<span class="sd">             for more details</span>
 <span class="sd">            duration: time interval in which the action is performed</span>
 
 <span class="sd">        Raises:</span>
@@ -497,7 +497,7 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            f (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): the focus point, it can be specified as 2-list/2-tuple</span>
-<span class="sd">            coordinates (x, y) in NormalizedCoordinate system or as &#39;center&#39; or &#39;anchor&#39;.</span>
+<span class="sd">             coordinates (x, y) in NormalizedCoordinate system or as &#39;center&#39; or &#39;anchor&#39;.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            :py:class:`UIObjectProxy &lt;poco.proxy.UIObjectProxy&gt;`: a new UI proxy object (copy)</span>

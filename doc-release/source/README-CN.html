@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a></li>
@@ -158,40 +158,17 @@
   <div class="section" id="poco">
 <h1>Poco ポコ<a class="headerlink" href="#poco" title="Permalink to this headline">¶</a></h1>
 <p><strong>A cross-engine UI automation framework</strong></p>
-<p><a class="reference external" href="README.rst">English README</a> here. 中文文档更新不够及时，需要最新内容的请见 <a class="reference external" href="README.rst">English README</a></p>
 <p>一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 <a class="reference external" href="http://hunter.nie.netease.com">hunter</a> 的项目可直接使用该测试框架。</p>
+<div class="section" id="documentation">
+<h2>文档(Documentation)<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://init.nie.netease.com/autodoc/poco/doc-auto/index.html">在线文档</a> 。</p>
+</div>
 <div class="section" id="installation">
 <h2>安装(installation)<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># airtest runtime</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/gzliuxin/airtest.git
-pip install -e airtest
-
-<span class="c1"># aircv for airtest</span>
-git clone -b open-source ssh://git@git-qa.gz.netease.com:32200/airtest-projects/aircv.git
-pip install -e aircv
-
-<span class="c1"># hrpc</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/hrpc.git
-pip install -e hrpc
-
-<span class="c1"># hunter-cli</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/hunter-cli.git
-pip install -e hunter-cli
-
-<span class="c1"># hunter lib for airtest</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/airtest-hunter.git
-pip install -e airtest-hunter
-
-<span class="c1"># poco</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-pip install -e poco
-
-<span class="c1"># poco unittest framework</span>
-git clone ssh://git@git-qa.gz.netease.com:32200/maki/PocoUnit.git
-pip install -e PocoUnit
+<p>直接运行下面的指令即可</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">extra</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">nie</span><span class="o">.</span><span class="n">netease</span><span class="o">.</span><span class="n">com</span><span class="o">/</span> <span class="o">--</span><span class="n">trusted</span><span class="o">-</span><span class="n">host</span> <span class="n">pypi</span><span class="o">.</span><span class="n">nie</span><span class="o">.</span><span class="n">netease</span><span class="o">.</span><span class="n">com</span> <span class="n">airtest</span><span class="o">-</span><span class="n">hunter</span> <span class="n">poco</span> <span class="n">pocounit</span>
 </pre></div>
 </div>
-<p>安装遇到权限问题请下载我们的 <a class="reference external" href="http://init.nie.netease.com/downloads/deploy/deploy-key">deploy-key</a> ，将下载下来的deploy-key放到 <code class="docutils literal"><span class="pre">C:\User\&lt;username&gt;\.ssh\</span></code> 目录下，改名为 <code class="docutils literal"><span class="pre">id_rsa</span></code> ，再重新运行上面的命令。</p>
 </div>
 <div class="section" id="concepts">
 <h2>基本概念(concepts)<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
@@ -243,7 +220,7 @@ pip install -e PocoUnit
 <li><a class="reference internal" href="#android-native">android-native</a></li>
 <li>unreal (开发中)</li>
 <li>(others see <a class="reference external" href="doc/integration.html">INTEGRATION guide</a> for more details)</li>
-<li><a href="#id18"><span class="problematic" id="id19">`NetEase Internal Engines`_</span></a> 公司内所有引擎请点此链接</li>
+<li><a href="#id19"><span class="problematic" id="id20">`NetEase Internal Engines`_</span></a> 公司内所有引擎请点此链接</li>
 </ul>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">poco.vendor.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span>
 
@@ -254,7 +231,7 @@ pip install -e PocoUnit
 </div>
 <div class="section" id="id7">
 <h3>基本选择器<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">poco</span></code> 对象的 <code class="docutils literal"><span class="pre">__call__</span></code> 方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 <a class="reference internal" href="#api-reference">API Reference</a> 。</p>
+<p><code class="docutils literal"><span class="pre">poco</span></code> 对象的 <code class="docutils literal"><span class="pre">__call__</span></code> 方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 <a class="reference external" href="http://init.nie.netease.com/autodoc/poco/doc-auto/index.html">API Reference</a> 。</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># 根据节点名选择</span>
 <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;bg_mission&#39;</span><span class="p">)</span>
 
@@ -405,7 +382,7 @@ pip install -e PocoUnit
 <ol class="arabic simple" start="3">
 <li><a class="reference external" href="http://hunter.nie.netease.com">hunter终端</a> 右上角点击**Inspector**按钮打开检视器面板。</li>
 </ol>
-<span class="target" id="api-reference"></span><span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
+<span class="target" id="android-native"><span id="cocos2dx-js"></span></span></div>
 </div>
 
 

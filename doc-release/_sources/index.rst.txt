@@ -27,19 +27,22 @@ your game/app.
     # In the future
     pip install poco
 
-Currently, the code is available only in `Git` repository and can be installed as follows
+Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
+of poco, install airtest first.
 
 .. code-block:: bash
+
+    git clone https://github.com/Meteorix/airtest.git
+    pip install -e airtest
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
 
-For NetEase internal use, clone the repository from following location
+For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-    pip install -e poco
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
@@ -53,23 +56,33 @@ Simple demo
 The following example shows a simple script on demo game using Unity3D. Check `More examples`_ section for more detailed
 info.
 
+.. image:: ../doc/img/overview.gif
+
 .. code-block:: python
 
-    from poco.drivers.unity3d import UnityPoco as Poco
+    # coding=utf-8
 
-    poco = Poco(('localhost', 5001))
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
 
-    # tap start button
-    poco('start_btn', type='Button').click()
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
 
-    # collect all 'stars' to my 'bag' by dragging the star icon
-    bag = poco('bag_area')
-    for star in poco(type='MPanel').child('star'):
-        star.drag_to(bag)
+    poco('btn_start').click()
+    time.sleep(1.5)
 
-    # click Text starting with 'finish' to finish collecting
-    poco(textMatches='finish.*').click()
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
 
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
 
 Dump UI hierarchy example
 -------------------------
@@ -79,18 +92,17 @@ UI hierarchy.
 
 .. code-block:: python
 
+    import json
     from poco.drivers.unity3d import UnityPoco as Poco
-    from pprint import pprint
 
     poco = Poco()
     ui = poco.agent.hierarchy.dump()
-    pprint(ui)
-
+    print(json.dumps(ui, indent=4))
 
 
 The following is the snippet of UI hierarchy. All UI elements are organized in `dict` representing the `tree` structure.
 More detailed info about properties are described in
-`README <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
+`.dumpHierarchy() <source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_.
 
 .. code-block:: python
 
@@ -140,19 +152,17 @@ Poco
 .. toctree::
     :maxdepth: 1
     
-    source/poco
+    source/poco.pocofw
     source/poco.proxy
     source/poco.exceptions
     source/poco.sdk
 
 
-..
- 下面的连接要替换成绝对路径
-
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+.. _AirtestIDE: 下载链接
 
 ..
  下面是对应sdk的下载链接

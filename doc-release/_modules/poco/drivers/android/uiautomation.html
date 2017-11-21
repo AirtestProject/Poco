@@ -1,0 +1,413 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>poco.drivers.android.uiautomation &mdash; poco  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="poco  documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="../../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> poco
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/README.html">Poco ポコ</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.pocofw.html">poco.pocofw module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.proxy.html">poco.proxy module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.exceptions.html">poco.exceptions module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.sdk.html">poco.sdk package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">poco</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>poco.drivers.android.uiautomation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for poco.drivers.android.uiautomation</h1><div class="highlight"><pre>
+<span></span><span class="c1"># coding=utf-8</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">airtest.core.android</span> <span class="k">import</span> <span class="n">Android</span>
+<span class="kn">from</span> <span class="nn">airtest.core.android.ime</span> <span class="k">import</span> <span class="n">YosemiteIme</span>
+<span class="kn">from</span> <span class="nn">airtest.core.android.utils.iputils</span> <span class="k">import</span> <span class="n">get_ip_address</span>
+<span class="kn">from</span> <span class="nn">hrpc.client</span> <span class="k">import</span> <span class="n">RpcClient</span>
+<span class="kn">from</span> <span class="nn">hrpc.transport.http</span> <span class="k">import</span> <span class="n">HttpTransport</span>
+<span class="kn">from</span> <span class="nn">poco</span> <span class="k">import</span> <span class="n">Poco</span>
+<span class="kn">from</span> <span class="nn">poco.agent</span> <span class="k">import</span> <span class="n">PocoAgent</span>
+<span class="kn">from</span> <span class="nn">poco.sdk.Attributor</span> <span class="k">import</span> <span class="n">Attributor</span>
+<span class="kn">from</span> <span class="nn">poco.utils.hrpc.hierarchy</span> <span class="k">import</span> <span class="n">RemotePocoHierarchy</span>
+<span class="kn">from</span> <span class="nn">poco.drivers.android.utils.installation</span> <span class="k">import</span> <span class="n">install</span><span class="p">,</span> <span class="n">uninstall</span>
+
+<span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">PocoServicePackage</span> <span class="o">=</span> <span class="s1">&#39;com.netease.open.pocoservice&#39;</span>
+<span class="n">PocoServicePackageTest</span> <span class="o">=</span> <span class="s1">&#39;com.netease.open.pocoservice.test&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">AndroidRpcClient</span><span class="p">(</span><span class="n">RpcClient</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">=</span> <span class="n">endpoint</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AndroidRpcClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">HttpTransport</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initialize_transport</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">HttpTransport</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AttributorWrapper"><a class="viewcode-back" href="../../../../source/poco.drivers.android.uiautomation.html#poco.drivers.android.uiautomation.AttributorWrapper">[docs]</a><span class="k">class</span> <span class="nc">AttributorWrapper</span><span class="p">(</span><span class="n">Attributor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    部分手机上仍不支持Accessibility.ACTION_SET_TEXT，使用YosemiteIme还是兼容性最好的方案</span>
+<span class="sd">    这个class会hook住set_text，然后改用ime的text方法</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remote</span><span class="p">,</span> <span class="n">ime</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remote</span> <span class="o">=</span> <span class="n">remote</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ime</span> <span class="o">=</span> <span class="n">ime</span>
+
+    <span class="k">def</span> <span class="nf">getAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">attrName</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attrName</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setAttr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">attrVal</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">attrName</span> <span class="o">==</span> <span class="s1">&#39;text&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ime</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">attrVal</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remote</span><span class="o">.</span><span class="n">setAttr</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">attrName</span><span class="p">,</span> <span class="n">attrVal</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">AndroidPocoAgent</span><span class="p">(</span><span class="n">PocoAgent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">ime</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">AndroidRpcClient</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+        <span class="n">remote_poco</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="s1">&#39;poco-uiautomation-framework&#39;</span><span class="p">)</span>
+        <span class="n">dumper</span> <span class="o">=</span> <span class="n">remote_poco</span><span class="o">.</span><span class="n">dumper</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="n">remote_poco</span><span class="o">.</span><span class="n">selector</span>
+        <span class="n">attributor</span> <span class="o">=</span> <span class="n">AttributorWrapper</span><span class="p">(</span><span class="n">remote_poco</span><span class="o">.</span><span class="n">attributor</span><span class="p">,</span> <span class="n">ime</span><span class="p">)</span>
+        <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">RemotePocoHierarchy</span><span class="p">(</span><span class="n">dumper</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">attributor</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AndroidPocoAgent</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hierarchy</span><span class="p">,</span> <span class="n">remote_poco</span><span class="o">.</span><span class="n">inputer</span><span class="p">,</span> <span class="n">remote_poco</span><span class="o">.</span><span class="n">screen</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">AndroidUiautomationPoco</span><span class="p">(</span><span class="n">Poco</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">using_proxy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="c1"># TODO: 临时用着airtest的方案</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">android</span> <span class="o">=</span> <span class="n">device</span> <span class="ow">or</span> <span class="n">Android</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">android</span><span class="o">.</span><span class="n">adb</span>
+        <span class="k">if</span> <span class="n">using_proxy</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device_ip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">host</span> <span class="ow">or</span> <span class="s2">&quot;127.0.0.1&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device_ip</span> <span class="o">=</span> <span class="n">get_ip_address</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="p">)</span>
+
+        <span class="c1"># save current top activity (@nullable)</span>
+        <span class="n">current_top_activity_package</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">android</span><span class="o">.</span><span class="n">get_top_activity_name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_top_activity_package</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">current_top_activity_package</span> <span class="o">=</span> <span class="n">current_top_activity_package</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># install ime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ime</span> <span class="o">=</span> <span class="n">YosemiteIme</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">android</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ime</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1"># install</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instrument_proc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_install_service</span><span class="p">()</span>
+
+        <span class="c1"># forward</span>
+        <span class="k">if</span> <span class="n">using_proxy</span><span class="p">:</span>
+            <span class="n">p0</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">setup_forward</span><span class="p">(</span><span class="s2">&quot;tcp:10080&quot;</span><span class="p">)</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">setup_forward</span><span class="p">(</span><span class="s2">&quot;tcp:10081&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="mi">10080</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="mi">10081</span>
+
+        <span class="c1"># start</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_running</span><span class="p">(</span><span class="s1">&#39;com.github.uiautomator&#39;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> should not run together with &quot;uiautomator&quot;. &quot;uiautomator&quot; will be killed.&#39;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">shell</span><span class="p">([</span><span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;force-stop&#39;</span><span class="p">,</span> <span class="s1">&#39;com.github.uiautomator&#39;</span><span class="p">])</span>
+
+        <span class="n">ready</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_instrument</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ready</span><span class="p">:</span>
+            <span class="c1"># 启动失败则需要卸载再重启，instrument的奇怪之处</span>
+            <span class="n">uninstall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="p">,</span> <span class="n">PocoServicePackage</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_install_service</span><span class="p">()</span>
+            <span class="n">ready</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_instrument</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">current_top_activity_package</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">current_top_activity2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">android</span><span class="o">.</span><span class="n">get_top_activity_name</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">current_top_activity2</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">current_top_activity_package</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">current_top_activity2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">android</span><span class="o">.</span><span class="n">start_app</span><span class="p">(</span><span class="n">current_top_activity_package</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ready</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;unable to launch AndroidUiautomationPoco&quot;</span><span class="p">)</span>
+
+        <span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;http://</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_ip</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">AndroidPocoAgent</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ime</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AndroidUiautomationPoco</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_install_service</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="n">install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">this_dir</span><span class="p">,</span> <span class="s1">&#39;lib&#39;</span><span class="p">,</span> <span class="s1">&#39;pocoservice-debug.apk&#39;</span><span class="p">))</span>
+        <span class="n">install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">this_dir</span><span class="p">,</span> <span class="s1">&#39;lib&#39;</span><span class="p">,</span> <span class="s1">&#39;pocoservice-debug-androidTest.apk&#39;</span><span class="p">),</span> <span class="n">updated</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">updated</span>
+
+    <span class="k">def</span> <span class="nf">_is_running</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="n">processes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">shell</span><span class="p">([</span><span class="s1">&#39;ps&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">ps</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+            <span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">ps</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">package_name</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># def _keep_running_instrumentation(self):</span>
+    <span class="c1">#     def loop():</span>
+    <span class="c1">#         while True:</span>
+    <span class="c1">#             proc = self.adb_client.shell([</span>
+    <span class="c1">#                 &#39;am&#39;, &#39;instrument&#39;, &#39;-w&#39;, &#39;-e&#39;, &#39;class&#39;,</span>
+    <span class="c1">#                 &#39;{}.InstrumentedTestAsLauncher#launch&#39;.format(PocoServicePackage),</span>
+    <span class="c1">#                 &#39;{}.test/android.support.test.runner.AndroidJUnitRunner&#39;.format(PocoServicePackage)],</span>
+    <span class="c1">#                 not_wait=True)</span>
+    <span class="c1">#             stdout, stderr = proc.communicate()</span>
+    <span class="c1">#             print(stdout)</span>
+    <span class="c1">#             print(stderr)</span>
+    <span class="c1">#             time.sleep(1)</span>
+    <span class="c1">#     t = threading.Thread(target=loop)</span>
+    <span class="c1">#     t.daemon = True</span>
+    <span class="c1">#     t.start()</span>
+
+    <span class="k">def</span> <span class="nf">_start_instrument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port_to_ping</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instrument_proc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instrument_proc</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_instrument_proc</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ready</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">shell</span><span class="p">([</span><span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;force-stop&#39;</span><span class="p">,</span> <span class="n">PocoServicePackage</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instrument_proc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adb_client</span><span class="o">.</span><span class="n">shell</span><span class="p">([</span>
+            <span class="s1">&#39;am&#39;</span><span class="p">,</span> <span class="s1">&#39;instrument&#39;</span><span class="p">,</span> <span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.InstrumentedTestAsLauncher#launch&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PocoServicePackage</span><span class="p">),</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.test/android.support.test.runner.AndroidJUnitRunner&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PocoServicePackage</span><span class="p">)],</span>
+            <span class="n">not_wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_ip</span><span class="p">,</span> <span class="n">port_to_ping</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                <span class="n">ready</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">Timeout</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;still waiting for uiautomation ready.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">ready</span>
+
+    <span class="k">def</span> <span class="nf">on_pre_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">proxy</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="c1"># airteset log用</span>
+        <span class="kn">from</span> <span class="nn">airtest.core.main</span> <span class="k">import</span> <span class="n">snapshot</span>
+        <span class="n">snapshot</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">unicode</span><span class="p">(</span><span class="n">proxy</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">AndroidUiautomationHelper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">_nuis</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_instance</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_nuis</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_nuis</span><span class="p">[</span><span class="n">device</span><span class="p">]</span> <span class="o">=</span> <span class="n">AndroidUiautomationPoco</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_nuis</span><span class="p">[</span><span class="n">device</span><span class="p">]</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, NetEase Co, Ltd..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

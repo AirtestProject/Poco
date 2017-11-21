@@ -1,10 +1,43 @@
 
 Poco ポコ
-=========
+=======
 
 **A cross-engine UI automation framework**
 
 `中文README(Chinese README)`_ 在此。
+
+Example
+-------
+
+.. image:: doc/img/overview.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    time.sleep(1.5)
+
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
+
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
+
+`More examples`_ here.
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
 
 Features
 --------
@@ -24,6 +57,8 @@ Main Poco features includes following:
 Installation
 ------------
 
+.. should I install Airtest first?
+
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app.
 
@@ -34,93 +69,31 @@ your game/app.
     # In the future
     pip install poco
 
-Currently, the code is available only in `Git` repository and can be installed as follows
+Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
+of poco, install airtest first.
 
 .. code-block:: bash
+
+    git clone https://github.com/Meteorix/airtest.git
+    pip install -e airtest
 
     git clone https://github.com/Meteorix/poco.git
     pip install -e poco
 
-For NetEase internal use, clone the repository from following location
+For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
-    git clone ssh://git@git-qa.gz.netease.com:32200/maki/poco.git
-    pip install -e poco
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
 
-Example
--------
+Documentation
+-------------
 
-The following example shows a simple test script on demo game using Unity3D. `More examples`_ here.
-
-.. code-block:: python
-
-    from poco.drivers.unity3d import UnityPoco as Poco
-    
-    poco = Poco(('localhost', 5001))
-    
-    # tap start button
-    poco('start_btn', type='Button').click()
-    
-    # collect all 'stars' to my 'bag' by dragging the star icon
-    bag = poco('bag_area')
-    for star in poco(type='MPanel').child('star'):
-        star.drag_to(bag)
-    
-    # click Text starting with 'finish' to finish collecting
-    poco(textMatches='finish.*').click()
-
-
-Basic Concepts
---------------
-
-This section describes the basic concepts of Poco. Basic terminology used in following section
-
-* **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
-* **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
-* **Node/UI element**: UI element instances or nodes in app/game
-* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and 
-  selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required 
-  to customize the ``Selector`` class.
-
-Following images show the UI hierarchy represented in Poco
-
-.. image:: doc/img/hunter-inspector.png
-.. image:: doc/img/hunter-inspector-text-attribute.png
-.. image:: doc/img/hunter-inspector-hierarchy-relations.png
-
-Definitions of coordinate system and metric space
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-Normalized Coordinate System
-''''''''''''''''''''''''''''
-
-In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
-width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
-In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
-position and size. This is especially very handy when writing cross-device test cases.
-
-The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
-(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.
-
-.. image:: doc/img/hunter-poco-coordinate-system.png
-
-Local Coordinate System (local positioning)
-'''''''''''''''''''''''''''''''''''''''''''
-
-The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
-The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
-rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
-length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
-coordinate system.
-
-Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
-the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
-correspond to the position out of the UI element.
-
+The documents are not published to public site yet. To see the document, you can simply ``open doc-release/index.html``
+on your file system.
 
 Poco Instance
 -------------
@@ -138,9 +111,9 @@ Following example shows how to initialize popo instance for Unity3D.
 
 .. code-block:: python
 
-    from poco.vendor.unity3d import UnityPoco
+    from poco.drivers.unity3d import UnityPoco
     
-    poco = UnityPoco()
+    poco = UnityPoco((ip, port))
     ui = poco('...')
 
 
@@ -311,8 +284,8 @@ The focus function can also be used as internal positioning within the objects. 
 wait
 ''''
 
-Wait for the target objects on the screen and return the object itself. If the object the object exists, return it
-immediately, otherwise return after timeout.
+Wait for the target objects to appear on the screen and return the object proxy itself. If the object exists, return
+immediately.
 
 .. code-block:: python
 
@@ -353,7 +326,9 @@ swipe
 snapshot
 ''''''''
 
-Take a screenshot of the current screen and save it to file.
+Take a screenshot of the current screen in base64 encoded string. The image format depends on the sdk implementation.
+Take a look at `poco.sdk.interfaces.screen <source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen>`_
+to dive into sdk implementation details.
 
 **Note**: ``snapshot``  is not supported in some engine implementation of poco.
 
@@ -361,8 +336,8 @@ Take a screenshot of the current screen and save it to file.
 
     from base64 import b64decode
     
-    b64img = poco.snapshot(width=720)
-    open('screen.png', 'wb').write(b64decode(b64img))
+    b64img, fmt = poco.snapshot(width=720)
+    open('screen.{}'.format(fmt), 'wb').write(b64decode(b64img))
 
 
 Exceptions
@@ -406,6 +381,54 @@ Unit Test
 Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full 
 set of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
+Some Concepts
+-------------
+
+This section describes some basic concepts of Poco. Basic terminology used in following section
+
+* **Target device**: test devices where the apps or games run on, it usually refers to mobile phone devices
+* **UI proxy**: proxy objects within Poco framework, they represent zero (none), one or multiple in-game UI elements
+* **Node/UI element**: UI element instances or nodes in app/game
+* **query expression**: a serializable internal data structure through which Poco interacts with **target devices** and
+  selects the corresponding UI elements. It is not usually needed to pay much attention to this unless it is required
+  to customize the ``Selector`` class.
+
+Following images show the UI hierarchy represented in Poco
+
+.. image:: doc/img/hunter-inspector.png
+.. image:: doc/img/hunter-inspector-text-attribute.png
+.. image:: doc/img/hunter-inspector-hierarchy-relations.png
+
+Definitions of coordinate system and metric space
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+Normalized Coordinate System
+''''''''''''''''''''''''''''
+
+In normalized coordinate system, the origin (0, 0) lies on top left corner of the device display. The height and the
+width of the screen are chosen as 1 unit of length, refer to image below for more detailed information.
+In normalized coordinate system, the same UI elements on the devices with different resolution have always the same
+position and size. This is especially very handy when writing cross-device test cases.
+
+The space of normalized coordinate system is uniformly distributed, i.e. the coordinates of the screen center are
+(0.5, 0.5) and the computing method of other scalars and vectors are all same in Euclidean space.
+
+.. image:: doc/img/hunter-poco-coordinate-system.png
+
+Local Coordinate System (local positioning)
+'''''''''''''''''''''''''''''''''''''''''''
+
+The aim of introducing local coordinate system is to express the coordinates with reference to a certain UI elements.
+The origin (0,0) of local coordinate system lies on the top left corner of UI bounding box, x-axis goes horizontally
+rightward direction and y-axis goes vertically downwards. The height and the width of UI element are chosen as 1 unit of
+length. Coordinates are expressed as signed distances from the origin. Other definitions are same as for normalized
+coordinate system.
+
+Local coordinate system is more flexible in order to locate the position within or outside of UI element, e.g
+the coordinates at (0.5, 0.5) corresponds to the center of the UI element while coordinates larger than 1 or less than 0
+correspond to the position out of the UI element.
+
+
 ..
  下面的连接要替换成绝对路径
 
@@ -414,6 +437,7 @@ set of assertion methods and furthermore, it is also compatible with the ``unitt
 .. _Integration Guide: doc/integration.html
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
+.. _AirtestIDE: 下载链接
 
 ..
  下面是对应sdk的下载链接

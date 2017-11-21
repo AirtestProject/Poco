@@ -89,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
@@ -230,7 +230,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getRoot</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="AbstractDumper.dumpHierarchyImpl"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<div class="viewcode-block" id="AbstractDumper.dumpHierarchyImpl"><a class="viewcode-back" href="../../../source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl">[docs]</a>    <span class="k">def</span> <span class="nf">dumpHierarchyImpl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">onlyVisibleNode</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` procedure is the engine independent as</span>
 <span class="sd">        the hierarchy structure is wrapped by :py:class:`AbstractNode &lt;poco.sdk.AbstractNode&gt;` and therefore the</span>
@@ -244,7 +244,9 @@
 <span class="sd">                  if you want to dump the hierarchy.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            node: root node of the hierarchy to be dumped</span>
+<span class="sd">            node(:py:class:`inherit from AbstractNode &lt;poco.sdk.AbstractNode&gt;`): root node of the hierarchy to be</span>
+<span class="sd">             dumped</span>
+<span class="sd">            onlyVisibleNode(:obj:`bool`): dump only the visible nodes or all nodes, default to True</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            :obj:`dict`: json serializable dict holding the whole hierarchy data</span>
@@ -263,7 +265,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">getChildren</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">onlyVisibleNode</span> <span class="ow">or</span> <span class="p">(</span><span class="n">payload</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">child</span><span class="o">.</span><span class="n">getAttr</span><span class="p">(</span><span class="s1">&#39;visible&#39;</span><span class="p">)):</span>
                 <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dumpHierarchyImpl</span><span class="p">(</span><span class="n">child</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="s1">&#39;children&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">children</span>

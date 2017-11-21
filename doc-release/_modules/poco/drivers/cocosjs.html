@@ -89,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../source/README.html">Poco ポコ</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/poco.sdk.html">poco.sdk package</a></li>
@@ -167,21 +167,31 @@
 <span class="kn">from</span> <span class="nn">poco.agent</span> <span class="k">import</span> <span class="n">PocoAgent</span>
 <span class="kn">from</span> <span class="nn">poco.utils.simplerpc.utils</span> <span class="k">import</span> <span class="n">sync_wrapper</span>
 <span class="kn">from</span> <span class="nn">poco.freezeui.hierarchy</span> <span class="k">import</span> <span class="n">FreezedUIHierarchy</span><span class="p">,</span> <span class="n">FreezedUIDumper</span>
-<span class="kn">from</span> <span class="nn">poco.utils.airtest</span> <span class="k">import</span> <span class="n">AirtestInput</span><span class="p">,</span> <span class="n">AirtestScreen</span><span class="p">,</span> <span class="n">connect_device</span><span class="p">,</span> <span class="n">airtest_device</span>
+<span class="kn">from</span> <span class="nn">poco.utils.airtest</span> <span class="k">import</span> <span class="n">AirtestInput</span><span class="p">,</span> <span class="n">AirtestScreen</span>
 <span class="kn">from</span> <span class="nn">poco.utils.simplerpc.rpcclient</span> <span class="k">import</span> <span class="n">RpcClient</span>
 <span class="kn">from</span> <span class="nn">poco.utils.simplerpc.transport.ws</span> <span class="k">import</span> <span class="n">WebSocketClient</span>
 
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CocosJsPoco&#39;</span><span class="p">]</span>
 <span class="n">DEFAULT_ADDR</span> <span class="o">=</span> <span class="s2">&quot;ws://localhost:5003&quot;</span>
 
 
 <span class="k">class</span> <span class="nc">CocosJsPocoAgent</span><span class="p">(</span><span class="n">PocoAgent</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="n">DEFAULT_ADDR</span><span class="p">):</span>
         <span class="c1"># init airtest env</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">airtest_device</span><span class="p">():</span>
-            <span class="n">connect_device</span><span class="p">(</span><span class="s2">&quot;Android:///&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># new version</span>
+            <span class="kn">from</span> <span class="nn">airtest.core.api</span> <span class="k">import</span> <span class="n">connect_device</span><span class="p">,</span> <span class="n">airtest_device</span> <span class="k">as</span> <span class="n">current_device</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">current_device</span><span class="p">():</span>
+                <span class="n">connect_device</span><span class="p">(</span><span class="s2">&quot;Android:///&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="c1"># old version</span>
+            <span class="kn">from</span> <span class="nn">airtest.cli.runner</span> <span class="k">import</span> <span class="n">device</span> <span class="k">as</span> <span class="n">current_device</span>
+            <span class="kn">from</span> <span class="nn">airtest.core.main</span> <span class="k">import</span> <span class="n">set_serialno</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">current_device</span><span class="p">():</span>
+                <span class="n">set_serialno</span><span class="p">()</span>
         <span class="c1"># cocos games poco sdk listens on Android localhost:5003</span>
         <span class="n">localport</span> <span class="o">=</span> <span class="n">addr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">airtest_device</span><span class="p">()</span><span class="o">.</span><span class="n">adb</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="s2">&quot;tcp:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">localport</span><span class="p">,</span> <span class="s2">&quot;tcp:5003&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">current_device</span><span class="p">()</span><span class="o">.</span><span class="n">adb</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="s2">&quot;tcp:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">localport</span><span class="p">,</span> <span class="s2">&quot;tcp:5003&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">WebSocketClient</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">RpcClient</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">)</span>
@@ -196,7 +206,6 @@
 
 
 <span class="k">class</span> <span class="nc">Dumper</span><span class="p">(</span><span class="n">FreezedUIDumper</span><span class="p">):</span>
-
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rpcclient</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Dumper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rpcclient</span> <span class="o">=</span> <span class="n">rpcclient</span>

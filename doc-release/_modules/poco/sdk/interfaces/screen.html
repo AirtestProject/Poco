@@ -89,7 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../source/README.html">Poco ポコ</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.html">poco package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.pocofw.html">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../source/poco.sdk.html">poco.sdk package</a></li>
@@ -176,7 +176,9 @@
 <span class="sd">            width (:obj:`int`): expected width of the screenshot in pixels</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :obj:`str`: Base64 encoded screen data</span>
+<span class="sd">            2-:obj:`list` (:obj:`str`, :obj:`str`):</span>
+<span class="sd">                - b64img: base64 encoded screen data</span>
+<span class="sd">                - format: screen data format (png/jpg/etc.)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>

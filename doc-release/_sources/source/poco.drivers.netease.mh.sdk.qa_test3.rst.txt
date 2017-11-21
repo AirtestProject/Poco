@@ -1,6 +1,0 @@
-poco\.drivers\.netease\.mh\.sdk\.qa\_test3 module
-=================================================
-
-.. automodule:: poco.drivers.netease.mh.sdk.qa_test3
-    :members:
-    :show-inheritance:

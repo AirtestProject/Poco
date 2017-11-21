@@ -17,7 +17,7 @@ Here are several example poco test scripts. Each example is written by using Uni
 * `optimize speed by freezing UI`_
 
 
-.. _basic usage:
+.. _basic usage: basic.html
 .. _interact with Buttons and Labels:
 .. _drag and swipe operations:
 .. _advanced selections:

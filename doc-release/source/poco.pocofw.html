@@ -36,9 +36,8 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="poco  documentation" href="../index.html"/>
-        <link rel="up" title="poco package" href="poco.html"/>
         <link rel="next" title="poco.proxy module" href="poco.proxy.html"/>
-        <link rel="prev" title="poco.exceptions module" href="poco.exceptions.html"/> 
+        <link rel="prev" title="Poco ポコ" href="README.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -91,18 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="README.html">Poco ポコ</a></li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="poco.html">poco package</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="poco.html#subpackages">Subpackages</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="poco.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="poco.acceleration.html">poco.acceleration module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="poco.agent.html">poco.agent module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">poco.pocofw module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">poco.pocofw module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.proxy.html">poco.proxy module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.exceptions.html">poco.exceptions module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="poco.sdk.html">poco.sdk package</a></li>
@@ -149,8 +137,6 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
-        
-          <li><a href="poco.html">poco package</a> &raquo;</li>
         
       <li>poco.pocofw module</li>
     
@@ -206,8 +192,8 @@ performed. If the target UI element does not appear on the screen after this tim
 <dd><p>Call Poco instance to select the UI element by query expression. Query expression can contain specific name
 and/or other attributes. Invisible UI elements will be skipped even if “visible=False” argument is set.</p>
 <p>Selection process is not executed instantly, the query expression is stored in the UI proxy and the selection is
-executed only then when the UI element(s) info is required (such get the point coordinates where to click, and/or
-retrieve the specific attribute value).</p>
+executed only then when the UI element(s) info is required (such get the point coordinates where to click,
+and/or retrieve the specific attribute value).</p>
 <p class="rubric">Examples</p>
 <p>This example shows selecting a Button named ‘close’:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -224,13 +210,16 @@ retrieve the specific attribute value).</p>
 <tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
 <tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first last simple">
 <li><strong>xx</strong> – arbitrary key value pair that stands for selecting the UI matching the value of <code class="docutils literal"><span class="pre">UI.xx</span></code></li>
-<li><strong>xxMatches</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – arbitrary key value pair that stands for selecting the UI matching the regular expression pattern <code class="docutils literal"><span class="pre">UI.xx</span></code></li>
+<li><strong>xxMatches</strong> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>) – arbitrary key value pair that stands for selecting the UI matching the regular
+expression pattern <code class="docutils literal"><span class="pre">UI.xx</span></code></li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>In keyword args, the <cite>xx</cite> is the attribute name and it is supposed to be unique so the only one match is found</p>
+<p>In keyword args, you can only use <cite>xx</cite> or <cite>xxMatches</cite> at the same time. Using both with the same attribute does
+not make sence. Besides, <cite>xx</cite> should not start with <code class="docutils literal"><span class="pre">_</span></code> (underscore) as attributes start with <code class="docutils literal"><span class="pre">_</span></code> are
+private attributes that used by sdk implementation.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># select the UI element(s) which text attribute matches the pattern &#39;^close.*$&#39;</span>
 <span class="n">poco</span> <span class="o">=</span> <span class="n">Poco</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">arb_close_btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="n">textMatches</span><span class="o">=</span><span class="s1">&#39;^close.*$&#39;</span><span class="p">)</span>
@@ -240,7 +229,8 @@ retrieve the specific attribute value).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">UI proxy object representing the UI element matches the given query expression.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">UI proxy object representing the UI element matches
+the given query expression.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a></td>
 </tr>
@@ -253,7 +243,7 @@ retrieve the specific attribute value).</p>
 <code class="descname">add_post_action_callback</code><span class="sig-paren">(</span><em>cb</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.add_post_action_callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.add_post_action_callback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Register a callback function to be invoked after each action (such as touch or swipe).</p>
 <p>The arguments to be passed are identical to the callback function in
-<code class="xref py py-meth docutils literal"><span class="pre">add_pre_action_callback</span></code>.</p>
+<a class="reference internal" href="#poco.pocofw.Poco.add_pre_action_callback" title="poco.pocofw.Poco.add_pre_action_callback"><code class="xref py py-meth docutils literal"><span class="pre">add_pre_action_callback</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -271,10 +261,10 @@ retrieve the specific attribute value).</p>
 <p>The callback function arguments are defined as follows:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">action</span></code> (<code class="xref py py-obj docutils literal"><span class="pre">str</span></code>): name or tag of the action</li>
-<li><code class="docutils literal"><span class="pre">proxy</span></code> (<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a> or <code class="xref py py-obj docutils literal"><span class="pre">NoneType</span></code>): related UI proxy which is</li>
+<li><code class="docutils literal"><span class="pre">proxy</span></code> (<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a> or <code class="xref py py-obj docutils literal"><span class="pre">NoneType</span></code>): related UI proxy which is
+involved in the action itself</li>
+<li><code class="docutils literal"><span class="pre">args</span></code> (<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>): all required arguments of the specific action function</li>
 </ul>
-<p>involved in the action itself
-* <code class="docutils literal"><span class="pre">args</span></code> (<code class="xref py py-obj docutils literal"><span class="pre">tuple</span></code>): all required arguments of the specific action function</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -344,7 +334,7 @@ super fast when calling <code class="docutils literal"><span class="pre">dump</s
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">new poco instance copy from current poco instance (<code class="docutils literal"><span class="pre">self</span></code>)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-class docutils literal"><span class="pre">Poco</span></code></td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#poco.pocofw.Poco" title="poco.pocofw.Poco"><code class="xref py py-class docutils literal"><span class="pre">Poco</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -461,14 +451,15 @@ resolution 1920x1080:</p>
 <dt id="poco.pocofw.Poco.wait_for_all">
 <code class="descname">wait_for_all</code><span class="sig-paren">(</span><em>objects</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.wait_for_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.wait_for_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait until all of given UI proxies show up before timeout.
-All UI proxies will be polled periodically. See option <code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code> in
+All UI proxies will be polled periodically. See option <a class="reference internal" href="#poco.pocofw.Poco" title="poco.pocofw.Poco"><code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code></a> in
 <code class="docutils literal"><span class="pre">Poco</span></code>’s initialization for more details.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – iterable object of the given UI proxies</li>
+<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – iterable object of the given UI
+proxies</li>
 <li><strong>timeout</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – timeout in seconds, default is 120s</li>
 </ul>
 </td>
@@ -484,14 +475,15 @@ All UI proxies will be polled periodically. See option <code class="xref py py-c
 <dt id="poco.pocofw.Poco.wait_for_any">
 <code class="descname">wait_for_any</code><span class="sig-paren">(</span><em>objects</em>, <em>timeout=120</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/pocofw.html#Poco.wait_for_any"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.pocofw.Poco.wait_for_any" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait until any of given UI proxies show up before timeout and return the first appeared UI proxy.
-All UI proxies will be polled periodically. See options <code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code> in
+All UI proxies will be polled periodically. See options <a class="reference internal" href="#poco.pocofw.Poco" title="poco.pocofw.Poco"><code class="xref py py-class docutils literal"><span class="pre">poll_interval</span></code></a> in
 <code class="docutils literal"><span class="pre">Poco</span></code>’s initialization for more details.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – iterable object of the given UI proxies</li>
+<li><strong>objects</strong> (Iterable&lt;<a class="reference internal" href="poco.proxy.html#poco.proxy.UIObjectProxy" title="poco.proxy.UIObjectProxy"><code class="xref py py-class docutils literal"><span class="pre">UIObjectProxy</span></code></a>&gt;) – iterable object of the given UI
+proxies</li>
 <li><strong>timeout</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – timeout in seconds, default is 120s</li>
 </ul>
 </td>
@@ -533,7 +525,7 @@ There is no need to call this method manually. It’s automatically invoked when
         <a href="poco.proxy.html" class="btn btn-neutral float-right" title="poco.proxy module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="poco.exceptions.html" class="btn btn-neutral" title="poco.exceptions module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="README.html" class="btn btn-neutral" title="Poco ポコ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

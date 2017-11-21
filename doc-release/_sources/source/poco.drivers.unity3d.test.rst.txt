@@ -1,6 +1,21 @@
-poco\.drivers\.unity3d\.test module
-===================================
+poco\.drivers\.unity3d\.test package
+====================================
 
 .. automodule:: poco.drivers.unity3d.test
     :members:
     :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    poco.drivers.unity3d.test.tutorial
+
+Submodules
+----------
+
+.. toctree::
+
+   poco.drivers.unity3d.test.test
+
