@@ -5,7 +5,7 @@ import collections
 import socket
 
 
-LOOP_STARTED = False
+LOOP_THREAD = None
 MAX_MESSAGE_LENGTH = 4096
 
 
@@ -131,15 +131,15 @@ def start_thread(target, *args, **kwargs):
     t = threading.Thread(target=target, args=args, kwargs=kwargs)
     t.daemon = True
     t.start()
+    return t
 
 
 def init_loop():
-    global LOOP_STARTED
-    if LOOP_STARTED:
-        print("LOOP_STARTED")
+    global LOOP_THREAD
+    if LOOP_THREAD and LOOP_THREAD.is_alive():
+        print("LOOP_THREAD ALREADY STARTED: %s" % LOOP_THREAD)
     else:
-        LOOP_STARTED = True
-        start_thread(asyncore.loop, timeout=0.001)
+        LOOP_THREAD = start_thread(asyncore.loop, timeout=0.001)
 
 
 if __name__ == '__main__':
