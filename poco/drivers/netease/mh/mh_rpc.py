@@ -34,6 +34,9 @@ class MhInput(InputInterface):
         print((x, y), op)
         return self.c.call("click", (x, y), op)
 
+    def getTouchDownDuration(self):
+        return 0.01
+
 
 class MhDumper(FreezedUIDumper):
     def __init__(self, client):

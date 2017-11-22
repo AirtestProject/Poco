@@ -66,7 +66,7 @@ class AndroidPocoAgent(PocoAgent):
 
 
 class AndroidUiautomationPoco(Poco):
-    def __init__(self, device=None, using_proxy=True):
+    def __init__(self, device=None, using_proxy=True, **options):
         if not device:
             try:
                 # new version
@@ -132,7 +132,7 @@ class AndroidUiautomationPoco(Poco):
 
         endpoint = "http://{}:{}".format(self.device_ip, p1)
         agent = AndroidPocoAgent(endpoint, self.ime)
-        super(AndroidUiautomationPoco, self).__init__(agent)
+        super(AndroidUiautomationPoco, self).__init__(agent, **options)
 
     def _install_service(self):
         updated = install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug.apk'))

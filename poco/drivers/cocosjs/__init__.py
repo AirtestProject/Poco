@@ -59,9 +59,11 @@ class Dumper(FreezedUIDumper):
 class CocosJsPoco(Poco):
     """docstring for CocosJsPoco"""
 
-    def __init__(self, addr=DEFAULT_ADDR):
+    def __init__(self, addr=DEFAULT_ADDR, **options):
         agent = CocosJsPocoAgent(addr)
-        super(CocosJsPoco, self).__init__(agent, action_interval=0.01)
+        if 'action_interval' not in options:
+            options['action_interval'] = 0.1
+        super(CocosJsPoco, self).__init__(agent, **options)
 
     def on_pre_action(self, action, proxy, args):
         # airteset log用

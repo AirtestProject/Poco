@@ -1,6 +1,8 @@
 # coding=utf-8
 __author__ = 'lxn3032'
 
+import warnings
+
 
 class InputInterface(object):
     """
@@ -46,6 +48,27 @@ class InputInterface(object):
             x (:obj:`float`): x-coordinate
             y (:obj:`float`): y-coordinate
             duration (:obj:`float`): time interval to perform the action
+        """
+
+        raise NotImplementedError
+
+    def setTouchDownDuration(self, duration):
+        """
+        Set touch down duration for each click operation.
+        
+        Args:
+            duration (:obj:`float`): the duration in seconds
+        """
+
+        warnings.warn("This implementation of poco does not support changing default touch down duration. "
+                      "Setting touch down duration to {}s takes no effects.".format(duration))
+
+    def getTouchDownDuration(self):
+        """
+        Get touch down duration for each click operation. Each implementation should provide a default value.
+    
+        Return:
+            :obj:`float`: the touch down duration in seconds
         """
 
         raise NotImplementedError

@@ -16,6 +16,7 @@ class AirtestInput(InputInterface):
     def __init__(self, surface=None):
         super(AirtestInput, self).__init__()
         self.surface = surface  # {.getPortSize}
+        self.default_touch_down_duration = 0.01
 
     def _get_touch_resolution(self):
         """
@@ -35,12 +36,20 @@ class AirtestInput(InputInterface):
             else:
                 return w, h
 
+    def setTouchDownDuration(self, duration):
+        self.default_touch_down_duration = duration
+
+    def getTouchDownDuration(self):
+        return self.default_touch_down_duration
+
     def click(self, x, y):
         pw, ph = self._get_touch_resolution()
         pos = [x * pw, y * ph]
-        touch(pos)
+        touch(pos, duration=self.default_touch_down_duration)
 
     def swipe(self, x1, y1, x2, y2, duration=2.0):
+        if duration <= 0:
+            raise ValueError("Operation duration cannot be less equal 0. Please provide a positive number.")
         direction = x2 - x1, y2 - y1
         pw, ph = self._get_touch_resolution()
         p1 = [x1 * pw, y1 * ph]
@@ -48,4 +57,8 @@ class AirtestInput(InputInterface):
         swipe(p1, vector=direction, duration=duration, steps=steps)
 
     def longClick(self, x, y, duration=2.0):
-        raise NotImplementedError
+        if duration <= 0:
+            raise ValueError("Operation duration cannot be less equal 0. Please provide a positive number.")
+        pw, ph = self._get_touch_resolution()
+        pos = [x * pw, y * ph]
+        touch(pos, duration=duration)

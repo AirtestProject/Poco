@@ -76,9 +76,11 @@ class Dumper(FreezedUIDumper):
 
 
 class UnityPoco(Poco):
-    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False):
+    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, **options):
         agent = UnityPocoAgent(addr, unity_editor)
-        super(UnityPoco, self).__init__(agent, action_interval=0.1)
+        if 'action_interval' not in options:
+            options['action_interval'] = 0.1
+        super(UnityPoco, self).__init__(agent, **options)
 
     def on_pre_action(self, action, proxy, args):
         # airteset log用

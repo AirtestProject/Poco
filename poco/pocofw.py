@@ -29,6 +29,9 @@ class Poco(PocoAccelerationMixin):
             - ``pre_action_wait_for_appearance``: time interval to wait before the action (such as click or swipe) is
               performed. If the target UI element does not appear on the screen after this time interval, the
               :py:class:`PocoNoSuchNodeException <poco.exceptions.PocoNoSuchNodeException>` is raised
+            - ``touch_down_duration``: Touch down step duration of the click operation last for. If this argument is
+              provided, this value will set to ``self.agent.input`` module. Note that not all implementation of poco 
+              support this parameter. If not support, you may see a warning.
     """
 
     def __init__(self, agent, **options):
@@ -36,9 +39,11 @@ class Poco(PocoAccelerationMixin):
         self._agent = agent
 
         # options
-        self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
-        self._post_action_interval = options.get('action_interval', 0.8)
-        self._poll_interval = options.get('poll_interval', 1.44)
+        self._pre_action_wait_for_appearance = options.get(b'pre_action_wait_for_appearance', 6)
+        self._post_action_interval = options.get(b'action_interval', 0.8)
+        self._poll_interval = options.get(b'poll_interval', 1.44)
+        if 'touch_down_duration' in options:
+            self._agent.input.setTouchDownDuration(options[b'touch_down_duration'])
 
         self._pre_action_callbacks = [self.on_pre_action.__func__]
         self._post_action_callbacks = [self.on_post_action.__func__]

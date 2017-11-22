@@ -24,6 +24,8 @@ class MhPocoAgent(PocoAgent):
 
 class MhPoco(Poco):
     """docstring for MhPoco"""
-    def __init__(self, addr=("localhost", 5001)):
+    def __init__(self, addr=("localhost", 5001), **options):
         agent = MhPocoAgent(addr)
-        super(MhPoco, self).__init__(agent, action_interval=0.2)
+        if 'action_interval' not in options:
+            options['action_interval'] = 0.2
+        super(MhPoco, self).__init__(agent, **options)

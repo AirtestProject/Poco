@@ -39,14 +39,15 @@ def test_drag():
 
 if __name__ == '__main__':
     # test_click()
-    test_drag()
+    # test_drag()
     # time.sleep(2)
     #
-    # p = UnityPoco(DEFAULT_ADDR, unity_editor=True)
+    p = UnityPoco(("localhost", 5001), unity_editor=True)
+    p.agent.hierarchy.dump()
     # b64img, fmt = p.snapshot()
     # print b64img
     # print len(b64img)
-    # print p.agent.get_debug_profiling_data()
+    print p.agent.get_debug_profiling_data()
     #
     # h = p.agent.hierarchy.dump()
     # print json.dumps(h)

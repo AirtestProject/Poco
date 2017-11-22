@@ -39,11 +39,11 @@ class NeteasePocoAgent(PocoAgent):
 
 
 class NeteasePoco(Poco):
-    def __init__(self, process, hunter=None):
+    def __init__(self, process, hunter=None, **options):
         apitoken = open_platform.get_api_token(process)
         self._hunter = hunter or AirtestHunter(apitoken, process)
         agent = NeteasePocoAgent(self._hunter)
-        super(NeteasePoco, self).__init__(agent)
+        super(NeteasePoco, self).__init__(agent, **options)
         self._last_proxy = None
 
     def on_pre_action(self, action, proxy, args):
