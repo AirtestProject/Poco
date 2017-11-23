@@ -1,5 +1,6 @@
 # coding=utf-8
 
+import re
 import json
 import sys
 import traceback
@@ -19,10 +20,15 @@ def process_cmd(cmd):
 if __name__ == '__main__':
     print('hello poco unity3d repl!')
 
+    buf = ''
     while True:
-        cmd = sys.stdin.readline()
-        try:
-            # print('cmd', cmd)
-            exec(cmd)
-        except Exception as e:
-            traceback.print_exc()
+        line = sys.stdin.readline().rstrip() + '\n'
+        buf += line
+        if re.findall(r'# end-proc #\s*$', buf):
+            try:
+                # print('cmd', buf)
+                cmd = buf
+                buf = ''
+                exec(cmd)
+            except Exception as e:
+                traceback.print_exc()
