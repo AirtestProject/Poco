@@ -2,13 +2,13 @@
 Basic Usage
 ===========
 
-select a button and perform a click.
+Wrap a pair of brackets after poco instance to select UI objects. The following example simply shows how to select a
+button and perform a click.
 
 .. code-block:: python
 
     # coding=utf-8
 
-    import time
     from poco.drivers.unity3d import UnityPoco
     from airtest.core.api import connect_device
 

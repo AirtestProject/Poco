@@ -11,12 +11,15 @@ install_reqs = parse_requirements('requirements.txt', session=False)
 reqs = [str(ir.req) for ir in install_reqs if ir.req]
 
 setup(
-    name='poco',
-    version='1.0.5',
+    name='pocoui',
+    version='1.0.6',
     keywords="poco",
     description='Poco cross-engine UI automated test framework.',
     packages=find_packages(),
     include_package_data=True,
     install_requires=reqs,
     license='Apache License 2.0',
+
+    author='adolli, adolli, lxn3032, gzliuxin',
+    author_email='adolli@163.com, adollixiang@gmail.com, lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
 )

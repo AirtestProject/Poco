@@ -18,7 +18,7 @@ Poco ポコ
 
 ::
 
-    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
+    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter pocoui pocounit
 
 
 基本概念(concepts)

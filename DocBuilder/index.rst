@@ -25,7 +25,7 @@ your game/app.
 .. code-block:: bash
 
     # In the future
-    pip install poco
+    pip install pocoui
 
 Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
 of poco, install airtest first.
