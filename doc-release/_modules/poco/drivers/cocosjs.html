@@ -218,9 +218,11 @@
 <div class="viewcode-block" id="CocosJsPoco"><a class="viewcode-back" href="../../../source/poco.drivers.cocosjs.html#poco.drivers.cocosjs.CocosJsPoco">[docs]</a><span class="k">class</span> <span class="nc">CocosJsPoco</span><span class="p">(</span><span class="n">Poco</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;docstring for CocosJsPoco&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="n">DEFAULT_ADDR</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">addr</span><span class="o">=</span><span class="n">DEFAULT_ADDR</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
         <span class="n">agent</span> <span class="o">=</span> <span class="n">CocosJsPocoAgent</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CocosJsPoco</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">action_interval</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;action_interval&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="n">options</span><span class="p">[</span><span class="s1">&#39;action_interval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CocosJsPoco</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">on_pre_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">proxy</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
         <span class="c1"># airteset log用</span>

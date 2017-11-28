@@ -67,7 +67,7 @@ your game/app.
 .. code-block:: bash
 
     # In the future
-    pip install poco
+    pip install pocoui
 
 Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
 of poco, install airtest first.
@@ -84,7 +84,7 @@ For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
-    pip install --extra-index-url http://pypi.nie.netease.com/ --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
+    pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 

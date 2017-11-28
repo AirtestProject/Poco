@@ -160,6 +160,8 @@
 <span></span><span class="c1"># coding=utf-8</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;lxn3032&#39;</span>
 
+<span class="kn">import</span> <span class="nn">warnings</span>
+
 
 <div class="viewcode-block" id="InputInterface"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface">[docs]</a><span class="k">class</span> <span class="nc">InputInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -205,6 +207,27 @@
 <span class="sd">            x (:obj:`float`): x-coordinate</span>
 <span class="sd">            y (:obj:`float`): y-coordinate</span>
 <span class="sd">            duration (:obj:`float`): time interval to perform the action</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="InputInterface.setTouchDownDuration"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface.setTouchDownDuration">[docs]</a>    <span class="k">def</span> <span class="nf">setTouchDownDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set touch down duration for each click operation.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            duration (:obj:`float`): the duration in seconds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;This implementation of poco does not support changing default touch down duration. &quot;</span>
+                      <span class="s2">&quot;Setting touch down duration to </span><span class="si">{}</span><span class="s2">s takes no effects.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="InputInterface.getTouchDownDuration"><a class="viewcode-back" href="../../../../source/poco.sdk.interfaces.input.html#poco.sdk.interfaces.input.InputInterface.getTouchDownDuration">[docs]</a>    <span class="k">def</span> <span class="nf">getTouchDownDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get touch down duration for each click operation. Each implementation should provide a default value.</span>
+<span class="sd">    </span>
+<span class="sd">        Return:</span>
+<span class="sd">            :obj:`float`: the touch down duration in seconds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>

@@ -179,6 +179,9 @@ appear on the screen). Polling is done periodically.</li>
 <li><code class="docutils literal"><span class="pre">pre_action_wait_for_appearance</span></code>: time interval to wait before the action (such as click or swipe) is
 performed. If the target UI element does not appear on the screen after this time interval, the
 <a class="reference internal" href="poco.exceptions.html#poco.exceptions.PocoNoSuchNodeException" title="poco.exceptions.PocoNoSuchNodeException"><code class="xref py py-class docutils literal"><span class="pre">PocoNoSuchNodeException</span></code></a> is raised</li>
+<li><code class="docutils literal"><span class="pre">touch_down_duration</span></code>: Touch down step duration of the click operation last for. If this argument is
+provided, this value will set to <code class="docutils literal"><span class="pre">self.agent.input</span></code> module. Note that not all implementation of poco
+support this parameter. If not support, you may see a warning.</li>
 </ul>
 </li>
 </ul>

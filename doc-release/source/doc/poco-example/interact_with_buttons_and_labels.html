@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basic Usage &mdash; poco  documentation</title>
+  <title>Interact with Buttons and Labels &mdash; poco  documentation</title>
   
 
   
@@ -136,13 +136,13 @@
     
       <li><a href="../../../index.html">Docs</a> &raquo;</li>
         
-      <li>Basic Usage</li>
+      <li>Interact with Buttons and Labels</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../../_sources/source/doc/poco-example/basic.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/source/doc/poco-example/interact_with_buttons_and_labels.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,10 +155,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="basic-usage">
-<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
-<p>Wrap a pair of brackets after poco instance to select UI objects. The following example simply shows how to select a
-button and perform a click.</p>
+  <div class="section" id="interact-with-buttons-and-labels">
+<h1>Interact with Buttons and Labels<a class="headerlink" href="#interact-with-buttons-and-labels" title="Permalink to this headline">¶</a></h1>
+<p>UI objects are just proxies, you can assign it into a variable and reuse without repeated instantiation. The following
+example shows the most used methods of UI proxy. It is very easy to access all available attributes of UI in game/app.</p>
+<p>If retrieve attributes or perform an operation on inexistent UI, exceptions will raise. If you are not sure whether
+the UI exists or not, you can call <code class="docutils literal"><span class="pre">.exists()</span></code> to test whether exists. In specific test cases, remember to think of
+a bug if the UI does not exist as your wish.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># coding=utf-8</span>
 
 <span class="kn">from</span> <span class="nn">poco.drivers.unity3d</span> <span class="kn">import</span> <span class="n">UnityPoco</span>
@@ -168,7 +171,25 @@ button and perform a click.</p>
 <span class="n">connect_device</span><span class="p">(</span><span class="s1">&#39;Android:///&#39;</span><span class="p">)</span>
 <span class="n">poco</span> <span class="o">=</span> <span class="n">UnityPoco</span><span class="p">((</span><span class="s1">&#39;10.254.44.76&#39;</span><span class="p">,</span> <span class="mi">5001</span><span class="p">))</span>
 
-<span class="n">poco</span><span class="p">(</span><span class="s1">&#39;btn_start&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="n">btn</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;btn_start&#39;</span><span class="p">)</span>
+<span class="n">btn</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">btn</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>  <span class="c1"># =&gt; &#39;Start&#39;</span>
+
+<span class="n">intro</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;instruduction&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intro</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>  <span class="c1"># =&gt; &#39;xxxx&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intro</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">))</span>  <span class="c1"># =&gt; &#39;xxxx&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intro</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">))</span>  <span class="c1"># =&gt; &#39;Text&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intro</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;texture&#39;</span><span class="p">))</span>  <span class="c1"># =&gt; None. Because there is no texture on Text.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">intro</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">))</span>  <span class="c1"># =&gt; None. Because &quot;intro&quot; dose not have an attribute named &quot;foo-bar&quot;.</span>
+
+<span class="n">intro</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>  <span class="c1"># Perform a click on any UI objects are allowed.</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;foo-bar&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;FooBar&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>  <span class="c1"># =&gt; False. This UI does not exist actually</span>
+
+<span class="n">invisible_obj</span> <span class="o">=</span> <span class="n">poco</span><span class="p">(</span><span class="s1">&#39;result_panel&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Layer&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">invisible_obj</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>  <span class="c1"># =&gt; False. This UI is not visible to user.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">invisible_obj</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">))</span>  <span class="c1"># =&gt; raise PocoNoSuchNodeException. Cannot retrieve attributes of inexistent UI.</span>
 </pre></div>
 </div>
 </div>

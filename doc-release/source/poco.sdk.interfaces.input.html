@@ -201,6 +201,22 @@ to provide full support for mobile devices.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="poco.sdk.interfaces.input.InputInterface.getTouchDownDuration">
+<code class="descname">getTouchDownDuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.getTouchDownDuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.getTouchDownDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get touch down duration for each click operation. Each implementation should provide a default value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the touch down duration in seconds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><code class="xref py py-obj docutils literal"><span class="pre">float</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="poco.sdk.interfaces.input.InputInterface.keyevent">
 <code class="descname">keyevent</code><span class="sig-paren">(</span><em>keycode</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.keyevent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.keyevent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Send a key event to target device.</p>
@@ -229,6 +245,20 @@ all in range of 0~1.</p>
 <li><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – time interval to perform the action</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="poco.sdk.interfaces.input.InputInterface.setTouchDownDuration">
+<code class="descname">setTouchDownDuration</code><span class="sig-paren">(</span><em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/poco/sdk/interfaces/input.html#InputInterface.setTouchDownDuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#poco.sdk.interfaces.input.InputInterface.setTouchDownDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set touch down duration for each click operation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duration</strong> (<code class="xref py py-obj docutils literal"><span class="pre">float</span></code>) – the duration in seconds</td>
 </tr>
 </tbody>
 </table>

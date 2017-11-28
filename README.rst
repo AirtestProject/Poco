@@ -84,7 +84,7 @@ For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
-    pip install -i http://pypi.nie.netease.com/simple --extra-index-url http://pypi.org/simple --trusted-host pypi.nie.netease.com airtest-hunter poco pocounit
+    pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
