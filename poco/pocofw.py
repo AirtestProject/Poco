@@ -231,7 +231,7 @@ class Poco(PocoAccelerationMixin):
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.click(pos[0], pos[1])
+        return self.agent.input.click(pos[0], pos[1])
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
@@ -271,7 +271,7 @@ class Poco(PocoAccelerationMixin):
             p2 = p2
         else:
             raise TypeError('Swipe end not set.')
-        self.agent.input.swipe(p1[0], p1[1], p2[0], p2[1], duration)
+        return self.agent.input.swipe(p1[0], p1[1], p2[0], p2[1], duration)
 
     def long_click(self, pos, duration=2.0):
         """
@@ -284,7 +284,7 @@ class Poco(PocoAccelerationMixin):
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
-        self.agent.input.longClick(pos[0], pos[1], duration)
+        return self.agent.input.longClick(pos[0], pos[1], duration)
 
     def snapshot(self, width=720):
         """

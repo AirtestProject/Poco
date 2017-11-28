@@ -279,12 +279,13 @@ class UIObjectProxy(object):
         focus = focus or self._focus or 'anchor'
         pos_in_percentage = self.get_position(focus)
         self.poco.pre_action('click', self, pos_in_percentage)
-        self.poco.click(pos_in_percentage)
+        ret = self.poco.click(pos_in_percentage)
         if sleep_interval:
             time.sleep(sleep_interval)
         else:
             self.poco.wait_stable()
         self.poco.post_action('click', self, pos_in_percentage)
+        return ret
 
     @wait
     def swipe(self, dir, focus=None, duration=0.5):
@@ -308,8 +309,9 @@ class UIObjectProxy(object):
         dir_vec = self._direction_vector_of(dir)
         origin = self.get_position(focus)
         self.poco.pre_action('swipe', self, (origin, dir_vec))
-        self.poco.swipe(origin, direction=dir_vec, duration=duration)
+        ret = self.poco.swipe(origin, direction=dir_vec, duration=duration)
         self.poco.post_action('swipe', self, (origin, dir_vec))
+        return ret
 
     def drag_to(self, target, duration=2):
         """
@@ -330,7 +332,7 @@ class UIObjectProxy(object):
             target_pos = target.get_position()
         origin_pos = self.get_position()
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
-        self.swipe(dir, duration=duration)
+        return self.swipe(dir, duration=duration)
 
     def focus(self, f):
         """
@@ -549,7 +551,7 @@ class UIObjectProxy(object):
             InvalidOperationException: when unable to mutate text value of the UI element
         """
 
-        self.setattr('text', text)
+        return self.setattr('text', text)
 
     def get_name(self):
         """
