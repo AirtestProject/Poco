@@ -1,5 +1,5 @@
 # coding=utf-8
-from airtest.core.main import snapshot
+
 from airtest_hunter import open_platform, AirtestHunter
 from hunter_cli.rpc.client import HunterRpcClient
 
@@ -48,4 +48,9 @@ class NeteasePoco(Poco):
 
     def on_pre_action(self, action, proxy, args):
         # airteset log用
+        try:
+            from airtest.core.api import snapshot
+        except ImportError:
+            # 兼容旧airtest
+            from airtest.core.main import snapshot
         snapshot(msg=unicode(proxy))

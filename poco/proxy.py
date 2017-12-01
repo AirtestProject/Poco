@@ -508,7 +508,7 @@ class UIObjectProxy(object):
 
         nodes = self._do_query(multiple=False)
         try:
-            self.poco.agent.hierarchy.setAttr(nodes, name, val)
+            return self.poco.agent.hierarchy.setAttr(nodes, name, val)
         except UnableToSetAttributeException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(e.message, self))
 
