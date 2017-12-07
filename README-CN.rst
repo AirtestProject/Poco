@@ -6,12 +6,45 @@ Poco ポコ
 
 一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 `hunter`_ 的项目可直接使用该测试框架。
 
+Example
+-------
+
+.. image:: doc/img/overview.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    time.sleep(1.5)
+
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
+
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
+
+`More examples`_ here.
+
+Android原生应用或Unity3D游戏请使用 `HierarchyViewer`_ 查看UI层次结构，编写脚本请使用我们专门为您打造的 `AirtestIDE`_ 。
+
 文档(Documentation)
 -----------------
 
 `在线文档`_ 。
 
-安装(installation)
+安装(Installation)
 ----------------
 
 直接运行下面的指令即可
@@ -20,78 +53,62 @@ Poco ポコ
 
     pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
 
+SDK接入(Integration)
+------------------
 
-基本概念(concepts)
---------------
+网易内部项目无需嵌入sdk，请见 `接入指引 <#netease-integration-guide>`_
 
+如何使用poco
+--------
 
-测试Test
-""""""
+不用引擎版本的poco请按对应的方式初始化。
 
-* **TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本  
-* **TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件  
-* **TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境  
-* **TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏  
+* Unity3D
 
-* **TestFramework**:  测试框架，Poco就是一个测试框架  
-* **TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK  
+.. code-block:: python
 
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
 
-Poco测试框架相关
-""""""""""
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
 
-* **目标设备**: 待测应用或游戏运行的机器，一般指手机  
-* **UI代理(UI proxy)**: poco框架内代表游戏内0个1个或多个UI元素的代理对象  
-* **节点/UI元素(Node/UI element)**: 应用/游戏内UI元素的实例，就是平时所说的UI  
-* **选择器(选择表达式)(query condition/expression)**: 一个可序列化的数据结构，poco通过该表达式与**目标设备**交互并选出其代表的对应的UI元素。Tester一般不用关心这个表达式的内部结构，除非要自定义`Selector`类。  
+    # for windows
+    # poco = UnityPoco(('localhost', 5001), editor_mode=True)
 
-.. image:: doc/img/hunter-inspector.png
-.. image:: doc/img/hunter-inspector-text-attribute.png
-.. image:: doc/img/hunter-inspector-hierarchy-relations.png
+    ui = poco('...')
+    ui.click()
 
-坐标系与度量空间定义
-"""""""""""""""""
+* `NetEase Internal Engines <source/poco.drivers.netease.internal.html>`_ 公司内非Unity3D项目
 
-.. image:: doc/img/hunter-poco-coordinate-system.png
+.. code-block:: python
 
-归一化坐标系
-''''''''''
+    from poco.drivers.netease.internal import NeteasePoco
+    from airtest.core.api import connect_device
 
-归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。
+    # 先连上android设备
+    connect_device('Android:///')
 
-归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。
+    # windows的话这样
+    # connect_device('Windows:///?title_re=^.*errors and.*$')  # 无需urlencode
 
-局部坐标系（局部定位）
-''''''''''''''''''
-
-引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。
-
-局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。
-
-对象选择与操作
-------------
-
-选择器实例初始化
-"""""""""""""
-
-不用引擎版本的poco的实例化方式有点不一样，以下以Unity3D为例，其余的请参考：
+    poco = NeteasePoco('g37')  # hunter上的项目代号
+    ui = poco('...')
+    ui.click()
 
 * `cocos2dx-js`_
 * `android-native`_
 * unreal (开发中)
-* (others see `INTEGRATION guide`_ for more details)
-* `NetEase Internal Engines`_ 公司内所有引擎请点此链接
+* (others see `Integration guide`_ for more details)
 
-.. code-block:: python
 
-    from poco.vendor.unity3d import UnityPoco
-    
-    poco = UnityPoco()
-    ui = poco('...')
-
+对象选择与操作
+-------
 
 基本选择器
-""""""""
+"""""
 
 ``poco`` 对象的 ``__call__`` 方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 `API Reference`_ 。
 
@@ -99,7 +116,7 @@ Poco测试框架相关
 
     # 根据节点名选择
     poco('bg_mission')
-    
+
     # 节点名和属性选择
     poco('bg_mission', type='Button')
     poco(textMatches='^据点.*$', type='Button', enable=True)
@@ -161,7 +178,7 @@ Poco测试框架相关
 
 
 对象代理操作
-""""""""""
+""""""
 
 click
 '''''
@@ -195,7 +212,7 @@ swipe
 
 drag
 ''''
- 
+
 从当前对象拖拽到目标对象
 
 .. code-block:: python
@@ -241,18 +258,18 @@ wait
 .. code-block:: python
 
     from poco.exceptions import PocoTargetTimeout
-    
+
     try:
         poco('guide_panel', type='ImageView').wait_for_appearance()
     except PocoTargetTimeout:
         # 面板没有弹出来，有bug
         raise
-    
+
 
 .. code-block:: python
 
     from poco.exceptions import PocoNoSuchNodeException
-    
+
     img = poco('guide_panel', type='ImageView')
     try:
         if not img.exists():
@@ -268,26 +285,97 @@ wait
 poco是自动化框架，关于单元测试请见 `PocoUnit`_ 。PocoUnit提供了一整套完整的断言方法，并且和python标准库unittest是兼容的。
 
 
-接入参考
-----
+Netease Integration Guide 接入参考
+------------------------------
 
-1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 <http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载最新版的接入模块。
-2. 在项目的 ``__init__`` 指令后面插入以下代码片段，然后重启游戏即可，以下是NeoX引擎的例子，其余引擎的sdk正在更新中，敬请期待。
+1. safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 <http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载
+   最新版的接入模块。最近新注册的hunter项目一般不需要重新下载。
+2. 在项目的 ``Hunter __init__指令`` 后面根据引擎插入以下代码片段，然后重启游戏即可，lua脚本的游戏请联系 ``lxn3032@corp.netease.com`` 。
+
+**NeoX:**
 
 .. code-block:: python
 
     # poco uiautomation
     PocoUiautomation = require('support.poco.neox.uiautomation')
     Safaia().install(PocoUiautomation)
-    
+
     # inspector extension
     InspectorExt = require('support.poco.safaia.inspector')
     InspectorExt.screen = require('support.poco.neox.screen')()
     InspectorExt.dumper = require('support.poco.neox.Dumper')()
     Safaia().install(InspectorExt)
 
+**Messiah:**
 
-3. `hunter终端`_ 右上角点击**Inspector**按钮打开检视器面板。
+.. code-block:: python
+
+    # poco uiautomation
+    PocoUiautomation = require('support.poco.messiah.uiautomation')
+    Safaia().install(PocoUiautomation)
+
+    # inspector extension
+    InspectorExt = require('support.poco.safaia.inspector')
+    InspectorExt.screen = require('support.poco.messiah.screen')()   # 引擎自身原因，可能截图速度较慢
+    InspectorExt.dumper = require('support.poco.cocos2dx.Dumper')()  # 3D 场景模型需另外适配
+    Safaia().install(InspectorExt)
+
+`Unity3D <doc/integration.html#unity3d>`_
+
+
+**其他引擎:** 请联系 ``lxn3032@corp.netease.com``
+
+
+3. `hunter终端`_ 右上角点击 **Inspector** 按钮打开检视器面板。
+
+
+
+基本概念(concepts)
+--------------
+
+
+测试Test
+""""""
+
+* **TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本
+* **TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件
+* **TestRunner**: 用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境
+* **TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏
+
+* **TestFramework**:  测试框架，Poco就是一个测试框架
+* **TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK
+
+
+Poco测试框架相关
+""""""""""
+
+* **目标设备**: 待测应用或游戏运行的机器，一般指手机
+* **UI代理(UI proxy)**: poco框架内代表游戏内0个1个或多个UI元素的代理对象
+* **节点/UI元素(Node/UI element)**: 应用/游戏内UI元素的实例，就是平时所说的UI
+* **选择器(选择表达式)(query condition/expression)**: 一个可序列化的数据结构，poco通过该表达式与**目标设备**交互并选出其代表的对应的UI元素。Tester一般不用关心这个表达式的内部结构，除非要自定义`Selector`类。
+
+.. image:: doc/img/hunter-inspector.png
+.. image:: doc/img/hunter-inspector-text-attribute.png
+.. image:: doc/img/hunter-inspector-hierarchy-relations.png
+
+坐标系与度量空间定义
+"""""""""""""""""
+
+.. image:: doc/img/hunter-poco-coordinate-system.png
+
+归一化坐标系
+''''''''''
+
+归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。
+
+归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。
+
+局部坐标系（局部定位）
+'''''''''''
+
+引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。
+
+局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。
 
 
 
@@ -303,8 +391,10 @@ poco是自动化框架，关于单元测试请见 `PocoUnit`_ 。PocoUnit提供�
 .. _Integration Guide: doc/integration.html
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
-.. _API Reference: 
+.. _API Reference:
 .. _在线文档: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
+.. _HierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
+.. _AirtestIDE:
 
 ..
  下面是对应sdk的下载链接

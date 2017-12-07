@@ -10,6 +10,7 @@ from poco.utils.airtest.screen import AirtestScreen
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.utils.hunter.command import HunterCommand
 
+__all__ = ['NeteasePoco']
 __author__ = 'lxn3032'
 
 

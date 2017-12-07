@@ -112,9 +112,18 @@ Following example shows how to initialize popo instance for Unity3D.
 .. code-block:: python
 
     from poco.drivers.unity3d import UnityPoco
-    
-    poco = UnityPoco((ip, port))
+    from airtest.core.api import connect_device
+
+    # you should connect an Android device to your PC/mac
+    # and set the ip address of your Android device
+    connect_device('Android:///')
+    poco = UnityPoco(('<ip of device>', 5001))
+
+    # for windows
+    # poco = UnityPoco(('localhost', 5001), editor_mode=True)
+
     ui = poco('...')
+    ui.click()
 
 
 Working with Poco Objects

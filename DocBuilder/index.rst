@@ -142,6 +142,13 @@ More detailed info about properties are described in
     }
     ...
 
+中文README
+========
+
+.. toctree::
+   :maxdepth: 2
+
+   source/README-CN
 
 API reference
 =============
@@ -151,11 +158,18 @@ Poco
 
 .. toctree::
     :maxdepth: 1
-    
+
     source/poco.pocofw
     source/poco.proxy
     source/poco.exceptions
     source/poco.sdk
+
+- `poco drivers <source/poco.drivers.html>`_
+  - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
+  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
+  - `android native <source/poco.drivers.android.uiautomation.html>`_
+  - `Netease Games <source/poco.drivers.netease.internal.html>`_
+
 
 
 .. _poco-sdk: source/doc/integration.html

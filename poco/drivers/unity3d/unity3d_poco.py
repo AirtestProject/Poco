@@ -11,6 +11,7 @@ from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
 from poco.utils.simplerpc.utils import sync_wrapper
 
+__all__ = ['UnityPoco']
 DEFAULT_ADDR = ("localhost", 5001)
 
 
