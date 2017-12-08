@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.interfaces.rst:2
+msgid "poco\\.sdk\\.interfaces package"
+msgstr ""
+
+#: of poco.sdk.interfaces:1
+msgid "**The brief introduction**:"
+msgstr ""
+
+#: of poco.sdk.interfaces:3
+msgid ""
+"This package (:py:mod:`poco.sdk.interfaces`) defines the main standards "
+"for communication interfaces between poco and poco-sdk. If poco-sdk is "
+"integrated with an app running on another host or in different language, "
+"then poco-sdk is called `remote runtime`. The implementation of these "
+"interfaces can be done either remotely or locally depending on your own "
+"choice. If it is done locally, refer to :py:mod:`poco.freezeui` for more "
+"information."
+msgstr ""
+
+#: of poco.sdk.interfaces:8
+msgid ""
+"Poco needs to communicate with the app runtime under the convention of "
+"interfaces described below and these interfaces must be properly "
+"implemented. Any object implementing the same interface is replaceable "
+"and the communication protocol or transport layer has no limitation. "
+"Furthermore, in many cases the communication can be customized that one "
+"part of interfaces can use HTTP protocol and other can use TCP."
+msgstr ""
+
+#: ../../source/poco.sdk.interfaces.rst:9
+msgid "Submodules"
+msgstr ""
+

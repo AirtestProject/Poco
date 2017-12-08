@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/implementation_guide.rst:3
+msgid "Implementation Guide"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:5
+msgid ""
+"This guide helps you implement and integrate poco-sdk with your game/app "
+"step by step."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:7
+msgid "Poco-sdk now supports following languages:"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:9
+msgid "python"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:10
+msgid "js"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:11
+msgid "lua"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:12
+msgid "c#"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:13
+msgid "java"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:15
+msgid "More language will come in future."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:18
+msgid "Getting Poco SDK"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:20
+msgid ""
+"First clone the `poco-sdk repo`_. Each languages are located in ``poco-"
+"sdk/sdk/*`` separately."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:26
+msgid ""
+"You can just copy the source code of corresponding language to your "
+"project script folder."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:29
+msgid "Implement the Abstract Method"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:31
+#: ../../source/doc/implementation_guide.rst:36
+msgid "xxx"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:34
+msgid "Initialize poco-sdk after game launched"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:40
+msgid "Object Model"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:42
+msgid "This section shows key models and relationship between them."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:45
+msgid "Abstract Class/Interface Implementation"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:47
+msgid ""
+"To implement your own version of poco sdk, you only need to implement the"
+" following 2 classes/interfaces and override its abstract method. This "
+"section shows the details about implementing the abstract method in "
+"classes or interfaces."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:50
+msgid ":py:class:`AbstractNode <poco.sdk.AbstractNode>`"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:52
+msgid "4 methods should be override"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:55
+msgid ":py:class:`AbstractNode <poco.sdk.AbstractDumper>`"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:57
+msgid "1 method should be override"
+msgstr ""
+

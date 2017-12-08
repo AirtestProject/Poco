@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.interfaces.input.rst:2
+msgid "poco\\.sdk\\.interfaces\\.input module"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface:1
+msgid ""
+"This is one of the main communication interfaces. This interface ensures "
+"the ability for simulated input on target device. So far, the interface "
+"supports only some basic methods definitions. The motion event will be "
+"added in future to provide full support for mobile devices."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface:5
+msgid ""
+"All coordinates are in NormalizedCoordinate system, see "
+"``NormalizedCoordinate`` for more details."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.click:1
+msgid ""
+"Perform click action as simulated input on target device. Coordinates "
+"arguments are all in range of 0~1."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.click
+#: poco.sdk.interfaces.input.InputInterface.keyevent
+#: poco.sdk.interfaces.input.InputInterface.longClick
+#: poco.sdk.interfaces.input.InputInterface.setTouchDownDuration
+#: poco.sdk.interfaces.input.InputInterface.swipe
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.click:3
+#: poco.sdk.interfaces.input.InputInterface.longClick:6
+msgid "y-coordinate"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.click:5
+#: poco.sdk.interfaces.input.InputInterface.longClick:4
+msgid "x-coordinate"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.getTouchDownDuration:1
+msgid ""
+"Get touch down duration for each click operation. Each implementation "
+"should provide a default value."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.getTouchDownDuration
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.getTouchDownDuration:3
+msgid "the touch down duration in seconds"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.getTouchDownDuration
+msgid "返回类型"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.getTouchDownDuration:4
+msgid ":obj:`float`"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.keyevent:1
+msgid "Send a key event to target device."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.keyevent:3
+msgid "Ascii key code"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.longClick:1
+msgid ""
+"Perform press action as simulated input on target device within given "
+"seconds. Coordinates arguments are all in range of 0~1."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.longClick:8
+msgid "time interval to perform the action"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.setTouchDownDuration:1
+msgid "Set touch down duration for each click operation."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.setTouchDownDuration:3
+msgid "the duration in seconds"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:1
+msgid ""
+"Perform swipe action as simulated input on target device from point A to "
+"B within given time interval to perform the action. Coordinates  "
+"arguments are all in range of 0~1."
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:4
+msgid "x-coordinate of the start point"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:6
+msgid "y-coordinate of the start point"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:8
+msgid "x-coordinate of the end point"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:10
+msgid "y-coordinate of the end point"
+msgstr ""
+
+#: of poco.sdk.interfaces.input.InputInterface.swipe:12
+msgid "time interval to perform the swipe action"
+msgstr ""
+

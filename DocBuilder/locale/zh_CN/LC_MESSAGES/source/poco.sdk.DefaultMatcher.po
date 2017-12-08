@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.DefaultMatcher.rst:2
+msgid "poco\\.sdk\\.DefaultMatcher module"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:1
+msgid "Bases: :class:`poco.sdk.DefaultMatcher.IMatcher`"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:1
+msgid ""
+"Default matcher implementation for poco hierarchy traversing. Including "
+"logical query condition and predicate expression. When traversing through"
+" the hierarchy tree, matcher will apply the match method on each node of "
+"the tree."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:4
+msgid "The formal definition of query condition as follows::"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:9
+msgid ""
+"``op0``:obj:`str` is logical operator ('or' or 'and') which has the same "
+"semantics as in python, e.g. 'or' means this expression/condition matches"
+" if any of the exprN matches"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:11
+msgid "``op1``:obj:`str` is comparator, can be one of as follows::"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:17
+msgid ""
+"``attr=`` corresponds to :py:class:`EqualizationComparator "
+"<poco.sdk.DefaultMatcher.EqualizationComparator>`."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:18
+msgid ""
+"``attr.*=`` corresponds to :py:class:`RegexpComparator "
+"<poco.sdk.DefaultMatcher.RegexpComparator>`."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher:20
+msgid ""
+"The ``op1`` must be a string. The ``Matcher`` will help to map to "
+"``Comparator`` object."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.DefaultMatcher.match:1
+msgid ""
+"See Also: :py:meth:`IMatcher.match "
+"<poco.sdk.DefaultMatcher.IMatcher.match>`"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.EqualizationComparator:1
+#: poco.sdk.DefaultMatcher.RegexpComparator:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.EqualizationComparator:1
+msgid "Compare two objects using the native equivalence (==) comparison operator"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator:1
+msgid ""
+"Compare two objects using regular expression. Available only when the "
+"original value is string type. It always returns False if the original "
+"value or given pattern are not :obj:`str` type."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare:1
+msgid "original string"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare:3
+msgid "Regexp pattern string"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare:6
+msgid "True if matches otherwise False."
+msgstr ""
+
+#: of poco.sdk.DefaultMatcher.RegexpComparator.compare
+msgid "返回类型"
+msgstr ""
+

@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.interfaces.command.rst:2
+msgid "poco\\.sdk\\.interfaces\\.command module"
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface:1
+msgid ""
+"This is one of the main communication interfaces. This interface defines "
+"command-level behaviours providing abilities to control remote runtime by"
+" sending self-defined command. The provided command can be various type -"
+" from string type to specific structure of a dict."
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command:1
+msgid "Emit a command to remote runtime (target device)."
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command:3
+msgid "any json serializable data."
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command:4
+msgid "a string value indicated the command type (command tag)."
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.interfaces.command.CommandInterface.command:7
+msgid "None (recommended)."
+msgstr ""
+

@@ -1,0 +1,458 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/README.rst:3
+msgid "Poco ポコ"
+msgstr ""
+
+#: ../../source/README.rst:5
+msgid "**A cross-engine UI automation framework**"
+msgstr ""
+
+#: ../../source/README.rst:7
+msgid "`中文README(Chinese README)`_ 在此。"
+msgstr ""
+
+#: ../../source/README.rst:10
+msgid "Example"
+msgstr ""
+
+#: ../../source/README.rst:38
+msgid "`More examples`_ here."
+msgstr ""
+
+#: ../../source/README.rst:40
+msgid ""
+"To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
+"(an IDE for writing test scripts) !"
+msgstr ""
+
+#: ../../source/README.rst:43
+msgid "Features"
+msgstr ""
+
+#: ../../source/README.rst:45
+msgid "Main Poco features includes following:"
+msgstr ""
+
+#: ../../source/README.rst:47
+msgid ""
+"supports mainstream game engines, including: Unity3D, cocos2dx-js, "
+"cocos2dx-lua and Android native apps"
+msgstr ""
+
+#: ../../source/README.rst:48
+msgid "retrieves UI Elements Hierarchy in game's runtime"
+msgstr ""
+
+#: ../../source/README.rst:49
+msgid "is super fast and impact-free to the game"
+msgstr ""
+
+#: ../../source/README.rst:50
+msgid "allows straightforward SDK integration to the game (within in 5 minutes)"
+msgstr ""
+
+#: ../../source/README.rst:51
+msgid "provides powerful APIs taht are engine independent"
+msgstr ""
+
+#: ../../source/README.rst:52
+msgid "supports multi-touch e.g. fling/pinch/... (and more is coming soon)"
+msgstr ""
+
+#: ../../source/README.rst:53
+msgid ""
+"support gps, accelerometer and gyro sensors, rotation "
+"(landscape/portrait) and other sensors as input (coming soon)"
+msgstr ""
+
+#: ../../source/README.rst:54
+msgid "is extensible to other private engines by implementing `poco-sdk`_ ."
+msgstr ""
+
+#: ../../source/README.rst:55
+msgid "is compatible with Python 2.7 and Python 3.3+."
+msgstr ""
+
+#: ../../source/README.rst:58
+msgid "Installation"
+msgstr ""
+
+#: ../../source/README.rst:62
+msgid ""
+"In order to use Poco, you must install Poco python library on your host "
+"and also install the `poco-sdk`_ in your game/app."
+msgstr ""
+
+#: ../../source/README.rst:65
+msgid "**Poco** can be installed straightforward with ``pip`` command"
+msgstr ""
+
+#: ../../source/README.rst:72
+msgid ""
+"Currently, the code is available only in `Git` repository and can be "
+"installed as follows. As airtest is a dependency of poco, install airtest"
+" first."
+msgstr ""
+
+#: ../../source/README.rst:83
+msgid "For NetEase internal use, run the following command directly."
+msgstr ""
+
+#: ../../source/README.rst:89
+msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
+msgstr ""
+
+#: ../../source/README.rst:93
+msgid "Documentation"
+msgstr ""
+
+#: ../../source/README.rst:95
+msgid ""
+"The documents are not published to public site yet. To see the document, "
+"you can simply ``open doc-release/index.html`` on your file system."
+msgstr ""
+
+#: ../../source/README.rst:99
+msgid "Poco Instance"
+msgstr ""
+
+#: ../../source/README.rst:101
+msgid ""
+"There are several engines supported and for each engine the different "
+"``poco`` instance must be initialized."
+msgstr ""
+
+#: ../../source/README.rst:103
+msgid "Supported engines are as follows:"
+msgstr ""
+
+#: ../../source/README.rst:105
+msgid "`cocos2dx-js`_"
+msgstr ""
+
+#: ../../source/README.rst:106
+msgid "`android-native`_"
+msgstr ""
+
+#: ../../source/README.rst:107
+msgid "unreal (in development)"
+msgstr ""
+
+#: ../../source/README.rst:108
+msgid "for other engines, refer to `Integration guide`_ for more details"
+msgstr ""
+
+#: ../../source/README.rst:110
+msgid "Following example shows how to initialize popo instance for Unity3D."
+msgstr ""
+
+#: ../../source/README.rst:130
+msgid "Working with Poco Objects"
+msgstr ""
+
+#: ../../source/README.rst:133
+msgid "Basic Selector"
+msgstr ""
+
+#: ../../source/README.rst:135
+msgid ""
+"UI element objects can be selected by invoking ``poco(...)`` function "
+"instance. The function traverses through the render tree structure and "
+"selects all the corresponding UI elements matching the query expression."
+msgstr ""
+
+#: ../../source/README.rst:138
+msgid ""
+"The function takes one mandatory argument `node name`, the optional "
+"arguments can be substituted too and they refer to specific node "
+"properties. For more information, refer to API reference."
+msgstr ""
+
+#: ../../source/README.rst:156
+msgid "Relative Selector"
+msgstr ""
+
+#: ../../source/README.rst:158
+msgid ""
+"When there is any ambiguity in the selected objects by node names/node "
+"types or object unable to select, the relative selector tries to select "
+"the element object by hierarchy in following manner"
+msgstr ""
+
+#: ../../source/README.rst:170
+msgid "Sequence Selector (index selector, iterator is recommended for use)"
+msgstr ""
+
+#: ../../source/README.rst:172
+msgid ""
+"Tree indexing and traversing is performed by default from up to down or "
+"from left to right. In case that the 'not-yet-traversed' nodes are "
+"removed from the screen, the exception is raised. The exception is not "
+"raised in case when the 'already-traversed' nodes are removed and in this"
+" case the traversing continues in previous order despite the fact that "
+"thenodes in views were rearranged during the travers process."
+msgstr ""
+
+#: ../../source/README.rst:186
+msgid "Iterate over a collection of objects"
+msgstr ""
+
+#: ../../source/README.rst:188
+msgid ""
+"Following code snippet shows how to iterate over the collection of UI "
+"objects"
+msgstr ""
+
+#: ../../source/README.rst:201
+msgid "Get object properties"
+msgstr ""
+
+#: ../../source/README.rst:203
+msgid "Following examples shows how to obtain various properties of an object"
+msgstr ""
+
+#: ../../source/README.rst:215
+msgid "Object Proxy Related Operation"
+msgstr ""
+
+#: ../../source/README.rst:217
+msgid "This section describes object proxy related operations"
+msgstr ""
+
+#: ../../source/README.rst:220 ../../source/README.rst:312
+msgid "click"
+msgstr ""
+
+#: ../../source/README.rst:222
+msgid ""
+"The anchorPoint of UI element is attached to the click point by default. "
+"When the first argument (the relative click position) is passed to the "
+"function, the coordinates of the top-left corner of the bounding box "
+"become `[0, 0]` and the bottom right corner coordinates are `[1, 1]`. The"
+" click range area can be less than 0 or larger than 1. If the click range"
+" area lies in the interval (0, 1), it means it is beyond the bounding "
+"box."
+msgstr ""
+
+#: ../../source/README.rst:227
+msgid "Following example demonstrates how to use ``click`` function"
+msgstr ""
+
+#: ../../source/README.rst:240 ../../source/README.rst:321
+msgid "swipe"
+msgstr ""
+
+#: ../../source/README.rst:242
+msgid ""
+"The anchorPoint of UI element is taken as the origin, the swipe action is"
+" performed towards the given direction with the certain distance."
+msgstr ""
+
+#: ../../source/README.rst:245
+msgid "Following example shows how to use the ``swipe`` function"
+msgstr ""
+
+#: ../../source/README.rst:258
+msgid "drag"
+msgstr ""
+
+#: ../../source/README.rst:260
+msgid "Drag from current UI element to the target UI element."
+msgstr ""
+
+#: ../../source/README.rst:262
+msgid "Following example shows how to use the ``drag_to`` function"
+msgstr ""
+
+#: ../../source/README.rst:272
+msgid "focus (local positioning)"
+msgstr ""
+
+#: ../../source/README.rst:274
+msgid ""
+"The anchorPoint is set as the origin when conducting operations related "
+"to the node coordinates. If the the local click area is need, the focus "
+"function can be used. The coordinate system is similar to the screen "
+"coordinates - the origin is put to the top left corner of the bounding "
+"box and with length of unit of 1, i.e the coordinates of the center are "
+"then `[0.5, 0.5]` and the bottom right corner has coordinates `[1, 1]`."
+msgstr ""
+
+#: ../../source/README.rst:285
+msgid ""
+"The focus function can also be used as internal positioning within the "
+"objects. Following example demonstrates the implementation of `scroll` "
+"operation in `ScrollView`."
+msgstr ""
+
+#: ../../source/README.rst:294
+msgid "wait"
+msgstr ""
+
+#: ../../source/README.rst:296
+msgid ""
+"Wait for the target objects to appear on the screen and return the object"
+" proxy itself. If the object exists, return immediately."
+msgstr ""
+
+#: ../../source/README.rst:306
+msgid "Global Operation"
+msgstr ""
+
+#: ../../source/README.rst:308
+msgid ""
+"`Poco` framework also allows to perform the operations without any UI "
+"elements selected. These operations are called `global` operations."
+msgstr ""
+
+#: ../../source/README.rst:336
+msgid "snapshot"
+msgstr ""
+
+#: ../../source/README.rst:338
+msgid ""
+"Take a screenshot of the current screen in base64 encoded string. The "
+"image format depends on the sdk implementation. Take a look at "
+"`poco.sdk.interfaces.screen "
+"<source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen>`_"
+" to dive into sdk implementation details."
+msgstr ""
+
+#: ../../source/README.rst:342
+msgid ""
+"**Note**: ``snapshot``  is not supported in some engine implementation of"
+" poco."
+msgstr ""
+
+#: ../../source/README.rst:353
+msgid "Exceptions"
+msgstr ""
+
+#: ../../source/README.rst:355
+msgid "This sections describes the Poco framework errors and exceptions."
+msgstr ""
+
+#: ../../source/README.rst:358
+msgid "PocoTargetTimeout"
+msgstr ""
+
+#: ../../source/README.rst:372
+msgid "PocoNoSuchNodeException"
+msgstr ""
+
+#: ../../source/README.rst:388
+msgid "Unit Test"
+msgstr ""
+
+#: ../../source/README.rst:390
+msgid ""
+"Poco is an automation test framework. For unit testing, please refer to "
+"`PocoUnit`_ section. PocoUnit provides a full set of assertion methods "
+"and furthermore, it is also compatible with the ``unittest`` in Python "
+"standard library."
+msgstr ""
+
+#: ../../source/README.rst:394
+msgid "Some Concepts"
+msgstr ""
+
+#: ../../source/README.rst:396
+msgid ""
+"This section describes some basic concepts of Poco. Basic terminology "
+"used in following section"
+msgstr ""
+
+#: ../../source/README.rst:398
+msgid ""
+"**Target device**: test devices where the apps or games run on, it "
+"usually refers to mobile phone devices"
+msgstr ""
+
+#: ../../source/README.rst:399
+msgid ""
+"**UI proxy**: proxy objects within Poco framework, they represent zero "
+"(none), one or multiple in-game UI elements"
+msgstr ""
+
+#: ../../source/README.rst:400
+msgid "**Node/UI element**: UI element instances or nodes in app/game"
+msgstr ""
+
+#: ../../source/README.rst:401
+msgid ""
+"**query expression**: a serializable internal data structure through "
+"which Poco interacts with **target devices** and selects the "
+"corresponding UI elements. It is not usually needed to pay much attention"
+" to this unless it is required to customize the ``Selector`` class."
+msgstr ""
+
+#: ../../source/README.rst:405
+msgid "Following images show the UI hierarchy represented in Poco"
+msgstr ""
+
+#: ../../source/README.rst:412
+msgid "Definitions of coordinate system and metric space"
+msgstr ""
+
+#: ../../source/README.rst:415
+msgid "Normalized Coordinate System"
+msgstr ""
+
+#: ../../source/README.rst:417
+msgid ""
+"In normalized coordinate system, the origin (0, 0) lies on top left "
+"corner of the device display. The height and the width of the screen are "
+"chosen as 1 unit of length, refer to image below for more detailed "
+"information. In normalized coordinate system, the same UI elements on the"
+" devices with different resolution have always the same position and "
+"size. This is especially very handy when writing cross-device test cases."
+msgstr ""
+
+#: ../../source/README.rst:422
+msgid ""
+"The space of normalized coordinate system is uniformly distributed, i.e. "
+"the coordinates of the screen center are (0.5, 0.5) and the computing "
+"method of other scalars and vectors are all same in Euclidean space."
+msgstr ""
+
+#: ../../source/README.rst:428
+msgid "Local Coordinate System (local positioning)"
+msgstr ""
+
+#: ../../source/README.rst:430
+msgid ""
+"The aim of introducing local coordinate system is to express the "
+"coordinates with reference to a certain UI elements. The origin (0,0) of "
+"local coordinate system lies on the top left corner of UI bounding box, "
+"x-axis goes horizontally rightward direction and y-axis goes vertically "
+"downwards. The height and the width of UI element are chosen as 1 unit of"
+" length. Coordinates are expressed as signed distances from the origin. "
+"Other definitions are same as for normalized coordinate system."
+msgstr ""
+
+#: ../../source/README.rst:436
+msgid ""
+"Local coordinate system is more flexible in order to locate the position "
+"within or outside of UI element, e.g the coordinates at (0.5, 0.5) "
+"corresponds to the center of the UI element while coordinates larger than"
+" 1 or less than 0 correspond to the position out of the UI element."
+msgstr ""
+
