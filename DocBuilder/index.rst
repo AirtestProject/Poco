@@ -24,19 +24,7 @@ your game/app.
 
 .. code-block:: bash
 
-    # In the future
     pip install pocoui
-
-Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
-of poco, install airtest first.
-
-.. code-block:: bash
-
-    git clone https://github.com/Meteorix/airtest.git
-    pip install -e airtest
-
-    git clone https://github.com/Meteorix/poco.git
-    pip install -e poco
 
 For NetEase internal use, run the following command directly.
 
@@ -142,13 +130,6 @@ More detailed info about properties are described in
     }
     ...
 
-中文README
-========
-
-.. toctree::
-   :maxdepth: 2
-
-   source/README-CN
 
 API reference
 =============

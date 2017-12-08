@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-08 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,108 +27,108 @@ msgid ""
 " using Poco ポコ cross-engine UI automation framework. It covers the main "
 "framework ideas and concepts and shows examples for various use cases as "
 "well."
-msgstr "本文档会提供详尽的使用方法"
+msgstr "Poco是高性能的跨平台跨引擎通用自动化框架，本文档会提供详尽的使用说明。"
 
 #: ../../index.rst:10
 msgid "Getting Started"
-msgstr ""
+msgstr "快速预览"
 
 #: ../../index.rst:18
 msgid "Install Poco and PocoSDK"
-msgstr ""
+msgstr "安装Poco和PocoSDK"
 
 #: ../../index.rst:20
 msgid ""
 "In order to use Poco, you must install Poco python library on your host "
 "and also install the `poco-sdk`_ in your game/app."
-msgstr ""
+msgstr "在电脑上安装poco，并把poco-sdk集成到游戏里"
 
 #: ../../index.rst:23
 msgid "**Poco** can be installed straightforward with ``pip`` command"
-msgstr ""
+msgstr "直接pip安装即可"
 
-#: ../../index.rst:30
-msgid ""
-"Currently, the code is available only in `Git` repository and can be "
-"installed as follows. As airtest is a dependency of poco, install airtest"
-" first."
-msgstr ""
-
-#: ../../index.rst:41
+#: ../../index.rst:29
 msgid "For NetEase internal use, run the following command directly."
-msgstr ""
+msgstr "重点看黑板： **网易游戏项目** 请用下面的命令安装"
 
-#: ../../index.rst:47
+#: ../../index.rst:35
 msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
-msgstr ""
+msgstr "把sdk集成到游戏里请参考 `Integration Guide`_ 。"
 
-#: ../../index.rst:51
+#: ../../index.rst:39
 msgid "Using Poco as Python package"
-msgstr ""
+msgstr "如何使用"
 
-#: ../../index.rst:54
+#: ../../index.rst:42
 msgid "Simple demo"
-msgstr ""
+msgstr "示例"
 
-#: ../../index.rst:56
+#: ../../index.rst:44
 msgid ""
 "The following example shows a simple script on demo game using Unity3D. "
 "Check `More examples`_ section for more detailed info."
-msgstr ""
+msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_"
 
-#: ../../index.rst:85
+#: ../../index.rst:73
 msgid ""
 "To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
 "(an IDE for writing test scripts) !"
-msgstr ""
+msgstr "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_"
 
-#: ../../index.rst:88
+#: ../../index.rst:76
 msgid "Dump UI hierarchy example"
-msgstr ""
+msgstr "如何用脚本抓取界面所有元素"
 
-#: ../../index.rst:90
+#: ../../index.rst:78
 msgid ""
 "Poco defines an uniform format to serialize UI hierarchy for different "
 "game engines. This section shows how to dump UI hierarchy."
-msgstr ""
+msgstr "Poco为不同的引擎定义了标准的界面层次结构(hierarchy)格式，在任何游戏上使用dump方法都可以获得相同的结构。示例代码和层次结构格式如下。"
 
-#: ../../index.rst:103
+#: ../../index.rst:91
 msgid ""
 "The following is the snippet of UI hierarchy. All UI elements are "
 "organized in `dict` representing the `tree` structure. More detailed info"
 " about properties are described in `.dumpHierarchy() "
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
-msgstr ""
+msgstr "下面就是层次结构(hierarchy)的数据表示，用``dict``存储并都是可json序列化的。"
 
-#: ../../index.rst:146
-msgid "中文README"
-msgstr ""
-
-#: ../../index.rst:154
+#: ../../index.rst:135
 msgid "API reference"
 msgstr ""
 
-#: ../../index.rst:157
+#: ../../index.rst:138
 msgid "Poco"
 msgstr ""
 
-#: ../../index.rst:167
+#: ../../index.rst:148
 msgid "`poco drivers <source/poco.drivers.html>`_"
 msgstr ""
 
-#: ../../index.rst:169
+#: ../../index.rst:150
 msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
 msgstr ""
 
-#: ../../index.rst:170
+#: ../../index.rst:151
 msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
 msgstr ""
 
-#: ../../index.rst:171
+#: ../../index.rst:152
 msgid "`android native <source/poco.drivers.android.uiautomation.html>`_"
 msgstr ""
 
-#: ../../index.rst:172
+#: ../../index.rst:153
 msgid "`Netease Games <source/poco.drivers.netease.internal.html>`_"
 msgstr ""
+
+#~ msgid ""
+#~ "Currently, the code is available only"
+#~ " in `Git` repository and can be "
+#~ "installed as follows. As airtest is "
+#~ "a dependency of poco, install airtest"
+#~ " first."
+#~ msgstr ""
+
+#~ msgid "中文README"
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-08 17:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,305 +25,319 @@ msgstr ""
 msgid "**A cross-engine UI automation framework**"
 msgstr ""
 
-#: ../../source/README-CN.rst:7
-msgid "一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 `hunter`_ 的项目可直接使用该测试框架。"
-msgstr ""
-
-#: ../../source/README-CN.rst:10
+#: ../../source/README-CN.rst:8
 msgid "Example"
 msgstr ""
 
-#: ../../source/README-CN.rst:38
+#: ../../source/README-CN.rst:36
 msgid "`More examples`_ here."
 msgstr ""
 
-#: ../../source/README-CN.rst:40
+#: ../../source/README-CN.rst:38
 msgid ""
 "Android原生应用或Unity3D游戏请使用 `HierarchyViewer`_ 查看UI层次结构，编写脚本请使用我们专门为您打造的 "
 "`AirtestIDE`_ 。"
 msgstr ""
 
-#: ../../source/README-CN.rst:43
+#: ../../source/README-CN.rst:41
 msgid "文档(Documentation)"
 msgstr ""
 
-#: ../../source/README-CN.rst:45
+#: ../../source/README-CN.rst:43
 msgid "`在线文档`_ 。"
 msgstr ""
 
-#: ../../source/README-CN.rst:48
+#: ../../source/README-CN.rst:46
 msgid "安装(Installation)"
 msgstr ""
 
-#: ../../source/README-CN.rst:50
+#: ../../source/README-CN.rst:48
 msgid "直接运行下面的指令即可"
 msgstr ""
 
-#: ../../source/README-CN.rst:57
+#: ../../source/README-CN.rst:55
 msgid "SDK接入(Integration)"
 msgstr ""
 
-#: ../../source/README-CN.rst:59
+#: ../../source/README-CN.rst:57
 msgid "网易内部项目无需嵌入sdk，请见 `接入指引 <#netease-integration-guide>`_"
 msgstr ""
 
-#: ../../source/README-CN.rst:62
+#: ../../source/README-CN.rst:60
 msgid "如何使用poco"
 msgstr ""
 
-#: ../../source/README-CN.rst:64
-msgid "不用引擎版本的poco请按对应的方式初始化。"
+#: ../../source/README-CN.rst:62
+msgid "根据你所使用的引擎，按对应的方式初始化Poco实例。"
 msgstr ""
 
-#: ../../source/README-CN.rst:66
+#: ../../source/README-CN.rst:64
 msgid "Unity3D"
 msgstr ""
 
-#: ../../source/README-CN.rst:84
+#: ../../source/README-CN.rst:82
 msgid ""
-"`NetEase Internal Engines <source/poco.drivers.netease.internal.html>`_ "
+"`NetEase Internal Engines <poco.drivers.netease.internal.html>`_ "
 "公司内非Unity3D项目"
 msgstr ""
 
-#: ../../source/README-CN.rst:101
+#: ../../source/README-CN.rst:99
 msgid "`cocos2dx-js`_"
 msgstr ""
 
-#: ../../source/README-CN.rst:102
+#: ../../source/README-CN.rst:100
 msgid "`android-native`_"
 msgstr ""
 
-#: ../../source/README-CN.rst:103
+#: ../../source/README-CN.rst:101
 msgid "unreal (开发中)"
 msgstr ""
 
-#: ../../source/README-CN.rst:104
+#: ../../source/README-CN.rst:102
 msgid "(others see `Integration guide`_ for more details)"
 msgstr ""
 
-#: ../../source/README-CN.rst:108
+#: ../../source/README-CN.rst:106
 msgid "对象选择与操作"
 msgstr ""
 
-#: ../../source/README-CN.rst:111
+#: ../../source/README-CN.rst:109
 msgid "基本选择器"
 msgstr ""
 
-#: ../../source/README-CN.rst:113
+#: ../../source/README-CN.rst:111
 msgid ""
 "``poco`` 对象的 ``__call__`` "
 "方法就是进行选择，遍历整个渲染树形结构，选出所有满足给定的属性的对象代理。第一个参数为节点名，其余的属性键值对通过命名参数传入。具体可参考 "
 "`API Reference`_ 。"
 msgstr ""
 
-#: ../../source/README-CN.rst:129
+#: ../../source/README-CN.rst:127
 msgid "相对选择器"
 msgstr ""
 
-#: ../../source/README-CN.rst:131
+#: ../../source/README-CN.rst:129
 msgid "直接通过节点名或节点类型选择的对象容易产生歧义或无法选择时，可通过相对的方式按层级进行选择"
 msgstr ""
 
-#: ../../source/README-CN.rst:142
+#: ../../source/README-CN.rst:140
 msgid "顺序选择器（索引选择器，更推荐迭代遍历）"
 msgstr ""
 
-#: ../../source/README-CN.rst:144
+#: ../../source/README-CN.rst:142
 msgid "索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。"
 msgstr ""
 
-#: ../../source/README-CN.rst:156
+#: ../../source/README-CN.rst:154
 msgid "遍历对象集合"
 msgstr ""
 
-#: ../../source/README-CN.rst:169
+#: ../../source/README-CN.rst:167
 msgid "获取对象属性"
 msgstr ""
 
-#: ../../source/README-CN.rst:181
+#: ../../source/README-CN.rst:179
 msgid "对象代理操作"
 msgstr ""
 
-#: ../../source/README-CN.rst:184
+#: ../../source/README-CN.rst:182
 msgid "click"
 msgstr ""
 
-#: ../../source/README-CN.rst:186
+#: ../../source/README-CN.rst:184
 msgid ""
 "点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为 ``[0, 0]`` "
 "，右下角为 ``[1, 1]`` 。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。"
 msgstr ""
 
-#: ../../source/README-CN.rst:199
+#: ../../source/README-CN.rst:197
 msgid "swipe"
 msgstr ""
 
-#: ../../source/README-CN.rst:201
+#: ../../source/README-CN.rst:199
 msgid "以对象anchor为起点，朝某个方向滑动一段距离"
 msgstr ""
 
-#: ../../source/README-CN.rst:214
+#: ../../source/README-CN.rst:212
 msgid "drag"
 msgstr ""
 
-#: ../../source/README-CN.rst:216
+#: ../../source/README-CN.rst:214
 msgid "从当前对象拖拽到目标对象"
 msgstr ""
 
-#: ../../source/README-CN.rst:226
+#: ../../source/README-CN.rst:224
 msgid "focus (局部定位)"
 msgstr ""
 
-#: ../../source/README-CN.rst:228
+#: ../../source/README-CN.rst:226
 msgid ""
-"与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为"
-" ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` ，以此类推。"
+"与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。"
+" focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` "
+"，以此类推。"
 msgstr ""
 
-#: ../../source/README-CN.rst:236
+#: ../../source/README-CN.rst:235
 msgid "focus也可以用于一个对象的内部定位，例如实现一个ScrollView的卷动操作"
 msgstr ""
 
-#: ../../source/README-CN.rst:245
+#: ../../source/README-CN.rst:244
 msgid "wait"
 msgstr ""
 
-#: ../../source/README-CN.rst:247
+#: ../../source/README-CN.rst:246
 msgid "等待目标对象出现，总是返回对象自身，如果出现立即返回，否则timeout后返回"
 msgstr ""
 
-#: ../../source/README-CN.rst:256
+#: ../../source/README-CN.rst:255
 msgid "捕获异常"
 msgstr ""
 
-#: ../../source/README-CN.rst:283
+#: ../../source/README-CN.rst:282
 msgid "单元测试"
 msgstr ""
 
-#: ../../source/README-CN.rst:285
+#: ../../source/README-CN.rst:284
 msgid ""
 "poco是自动化框架，关于单元测试请见 `PocoUnit`_ "
 "。PocoUnit提供了一整套完整的断言方法，并且和python标准库unittest是兼容的。"
 msgstr ""
 
-#: ../../source/README-CN.rst:289
+#: ../../source/README-CN.rst:288
 msgid "Netease Integration Guide 接入参考"
 msgstr ""
 
-#: ../../source/README-CN.rst:291
+#: ../../source/README-CN.rst:290
 msgid ""
 "safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 "
 "<http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载 "
 "最新版的接入模块。最近新注册的hunter项目一般不需要重新下载。"
 msgstr ""
 
-#: ../../source/README-CN.rst:293
+#: ../../source/README-CN.rst:292
 msgid ""
 "在项目的 ``Hunter __init__指令`` 后面根据引擎插入以下代码片段，然后重启游戏即可，lua脚本的游戏请联系 "
 "``lxn3032@corp.netease.com`` 。"
 msgstr ""
 
-#: ../../source/README-CN.rst:295
+#: ../../source/README-CN.rst:294
 msgid "**NeoX:**"
 msgstr ""
 
-#: ../../source/README-CN.rst:309
+#: ../../source/README-CN.rst:308
 msgid "**Messiah:**"
 msgstr ""
 
-#: ../../source/README-CN.rst:323
+#: ../../source/README-CN.rst:322
 msgid "`Unity3D <doc/integration.html#unity3d>`_"
 msgstr ""
 
-#: ../../source/README-CN.rst:326
+#: ../../source/README-CN.rst:325
 msgid "**其他引擎:** 请联系 ``lxn3032@corp.netease.com``"
 msgstr ""
 
-#: ../../source/README-CN.rst:329
+#: ../../source/README-CN.rst:328
 msgid "`hunter终端`_ 右上角点击 **Inspector** 按钮打开检视器面板。"
 msgstr ""
 
-#: ../../source/README-CN.rst:334
+#: ../../source/README-CN.rst:333
 msgid "基本概念(concepts)"
 msgstr ""
 
-#: ../../source/README-CN.rst:338
+#: ../../source/README-CN.rst:337
 msgid "测试Test"
 msgstr ""
 
-#: ../../source/README-CN.rst:340
+#: ../../source/README-CN.rst:339
 msgid "**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本"
 msgstr ""
 
-#: ../../source/README-CN.rst:341
+#: ../../source/README-CN.rst:340
 msgid "**TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件"
 msgstr ""
 
-#: ../../source/README-CN.rst:342
+#: ../../source/README-CN.rst:341
 msgid ""
 "**TestRunner**: "
 "用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境"
 msgstr ""
 
-#: ../../source/README-CN.rst:343
+#: ../../source/README-CN.rst:342
 msgid "**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏"
 msgstr ""
 
-#: ../../source/README-CN.rst:345
+#: ../../source/README-CN.rst:344
 msgid "**TestFramework**:  测试框架，Poco就是一个测试框架"
 msgstr ""
 
-#: ../../source/README-CN.rst:346
+#: ../../source/README-CN.rst:345
 msgid "**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK"
 msgstr ""
 
-#: ../../source/README-CN.rst:350
+#: ../../source/README-CN.rst:349
 msgid "Poco测试框架相关"
 msgstr ""
 
-#: ../../source/README-CN.rst:352
+#: ../../source/README-CN.rst:351
 msgid "**目标设备**: 待测应用或游戏运行的机器，一般指手机"
 msgstr ""
 
-#: ../../source/README-CN.rst:353
+#: ../../source/README-CN.rst:352
 msgid "**UI代理(UI proxy)**: poco框架内代表游戏内0个1个或多个UI元素的代理对象"
 msgstr ""
 
-#: ../../source/README-CN.rst:354
+#: ../../source/README-CN.rst:353
 msgid "**节点/UI元素(Node/UI element)**: 应用/游戏内UI元素的实例，就是平时所说的UI"
 msgstr ""
 
-#: ../../source/README-CN.rst:355
+#: ../../source/README-CN.rst:354
 msgid ""
 "**选择器(选择表达式)(query condition/expression)**: "
 "一个可序列化的数据结构，poco通过该表达式与**目标设备**交互并选出其代表的对应的UI元素。Tester一般不用关心这个表达式的内部结构，除非要自定义`Selector`类。"
 msgstr ""
 
-#: ../../source/README-CN.rst:362
+#: ../../source/README-CN.rst:361
 msgid "坐标系与度量空间定义"
 msgstr ""
 
-#: ../../source/README-CN.rst:367
+#: ../../source/README-CN.rst:366
 msgid "归一化坐标系"
 msgstr ""
 
-#: ../../source/README-CN.rst:369
+#: ../../source/README-CN.rst:368
 msgid "归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。"
 msgstr ""
 
-#: ../../source/README-CN.rst:371
+#: ../../source/README-CN.rst:370
 msgid "归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。"
 msgstr ""
 
-#: ../../source/README-CN.rst:374
+#: ../../source/README-CN.rst:373
 msgid "局部坐标系（局部定位）"
 msgstr ""
 
-#: ../../source/README-CN.rst:376
+#: ../../source/README-CN.rst:375
 msgid "引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。"
 msgstr ""
 
-#: ../../source/README-CN.rst:378
+#: ../../source/README-CN.rst:377
 msgid "局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。"
 msgstr ""
+
+#~ msgid "一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 `hunter`_ 的项目可直接使用该测试框架。"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为"
+#~ " ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` "
+#~ "，以此类推。"
+#~ msgstr ""
+
+#~ msgid "不用引擎版本的poco请按对应的方式初始化。"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "`NetEase Internal Engines "
+#~ "<source/poco.drivers.netease.internal.html>`_ 公司内非Unity3D项目"
+#~ msgstr ""
 

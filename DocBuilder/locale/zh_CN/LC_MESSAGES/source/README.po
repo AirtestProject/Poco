@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-08 17:45+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,185 +23,184 @@ msgstr ""
 
 #: ../../source/README.rst:5
 msgid "**A cross-engine UI automation framework**"
-msgstr ""
+msgstr "**高性能跨引擎UI自动化框架**"
 
-#: ../../source/README.rst:7
-msgid "`中文README(Chinese README)`_ 在此。"
-msgstr ""
-
-#: ../../source/README.rst:10
+#: ../../source/README.rst:8
 msgid "Example"
-msgstr ""
+msgstr "示例(Example)"
+
+#: ../../source/README.rst:36
+msgid "`More examples`_ here."
+msgstr "更多的例子请移步 `More examples`_"
 
 #: ../../source/README.rst:38
-msgid "`More examples`_ here."
-msgstr ""
-
-#: ../../source/README.rst:40
 msgid ""
 "To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
 "(an IDE for writing test scripts) !"
-msgstr ""
+msgstr "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_"
+
+#: ../../source/README.rst:41
+msgid "Features"
+msgstr "特性(Features)"
 
 #: ../../source/README.rst:43
-msgid "Features"
-msgstr ""
+msgid "Main Poco features includes following:"
+msgstr "主要有以下特点"
 
 #: ../../source/README.rst:45
-msgid "Main Poco features includes following:"
-msgstr ""
-
-#: ../../source/README.rst:47
 msgid ""
 "supports mainstream game engines, including: Unity3D, cocos2dx-js, "
 "cocos2dx-lua and Android native apps"
-msgstr ""
+msgstr "支持包括Unity3D, cocos2dx-*等主流引擎，也支持android原生应用"
+
+#: ../../source/README.rst:46
+msgid "retrieves UI Elements Hierarchy in game's runtime"
+msgstr "在游戏运行时获取UI元素和层次结构(hierarchy)"
+
+#: ../../source/README.rst:47
+msgid "is super fast and impact-free to the game"
+msgstr "超快"
 
 #: ../../source/README.rst:48
-msgid "retrieves UI Elements Hierarchy in game's runtime"
-msgstr ""
+msgid "allows straightforward SDK integration to the game (within in 5 minutes)"
+msgstr "5分钟完成就可以安装集成好"
 
 #: ../../source/README.rst:49
-msgid "is super fast and impact-free to the game"
-msgstr ""
+msgid "provides powerful APIs taht are engine independent"
+msgstr "提供了强大的引擎无关API"
 
 #: ../../source/README.rst:50
-msgid "allows straightforward SDK integration to the game (within in 5 minutes)"
-msgstr ""
+msgid "supports multi-touch e.g. fling/pinch/... (and more is coming soon)"
+msgstr "支持多点触控 fling/pinch/..."
 
 #: ../../source/README.rst:51
-msgid "provides powerful APIs taht are engine independent"
-msgstr ""
-
-#: ../../source/README.rst:52
-msgid "supports multi-touch e.g. fling/pinch/... (and more is coming soon)"
-msgstr ""
-
-#: ../../source/README.rst:53
 msgid ""
 "support gps, accelerometer and gyro sensors, rotation "
 "(landscape/portrait) and other sensors as input (coming soon)"
-msgstr ""
+msgstr "支持gps、加速度感应器等模拟输入"
 
-#: ../../source/README.rst:54
+#: ../../source/README.rst:52
 msgid "is extensible to other private engines by implementing `poco-sdk`_ ."
-msgstr ""
+msgstr "可以很方便地扩找到私有引擎中使用"
 
-#: ../../source/README.rst:55
+#: ../../source/README.rst:53
 msgid "is compatible with Python 2.7 and Python 3.3+."
-msgstr ""
+msgstr "python 2/3兼容"
+
+#: ../../source/README.rst:56
+msgid "Installation"
+msgstr "安装(Installation)"
 
 #: ../../source/README.rst:58
-msgid "Installation"
-msgstr ""
-
-#: ../../source/README.rst:62
 msgid ""
 "In order to use Poco, you must install Poco python library on your host "
 "and also install the `poco-sdk`_ in your game/app."
-msgstr ""
+msgstr "在电脑上安装poco，并把poco-sdk集成到游戏里"
 
-#: ../../source/README.rst:65
+#: ../../source/README.rst:61
 msgid "**Poco** can be installed straightforward with ``pip`` command"
-msgstr ""
+msgstr "直接pip安装即可"
 
-#: ../../source/README.rst:72
-msgid ""
-"Currently, the code is available only in `Git` repository and can be "
-"installed as follows. As airtest is a dependency of poco, install airtest"
-" first."
-msgstr ""
-
-#: ../../source/README.rst:83
+#: ../../source/README.rst:67
 msgid "For NetEase internal use, run the following command directly."
-msgstr ""
+msgstr "重点看黑板： **网易游戏项目** 请用下面的命令安装"
 
-#: ../../source/README.rst:89
+#: ../../source/README.rst:74
+msgid "SDK Integration"
+msgstr "SDK集成(Integration)"
+
+#: ../../source/README.rst:76
 msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
-msgstr ""
+msgstr "把sdk集成到游戏里请参考 `Integration Guide`_ 。"
 
-#: ../../source/README.rst:93
+#: ../../source/README.rst:80
 msgid "Documentation"
+msgstr "文档(Documentation)"
+
+#: ../../source/README.rst:82
+msgid "`Online docs`_."
 msgstr ""
 
-#: ../../source/README.rst:95
+#: ../../source/README.rst:85
+msgid "How to use Poco"
+msgstr "如何使用(How to use Poco)"
+
+#: ../../source/README.rst:87
 msgid ""
-"The documents are not published to public site yet. To see the document, "
-"you can simply ``open doc-release/index.html`` on your file system."
+"Poco supports different types of engines by different drivers. For "
+"different engines please initialize ``poco`` instance by corresponding "
+"driver."
+msgstr "根据你所使用的引擎，按对应的方式初始化Poco实例。"
+
+#: ../../source/README.rst:90
+msgid "Following example shows how to initialize popo instance for"
+msgstr "下面例子列出几种常见引擎的初始化方式"
+
+#: ../../source/README.rst:92
+msgid "Unity3D."
 msgstr ""
 
-#: ../../source/README.rst:99
-msgid "Poco Instance"
-msgstr ""
-
-#: ../../source/README.rst:101
+#: ../../source/README.rst:111
+#, fuzzy
 msgid ""
-"There are several engines supported and for each engine the different "
-"``poco`` instance must be initialized."
-msgstr ""
+"`NetEase Internal Engines <poco.drivers.netease.internal.html>`_ except "
+"for Unity3D projects."
+msgstr "`网易游戏非Unity3D项目 <poco.drivers.netease.internal.html>`_"
 
-#: ../../source/README.rst:103
-msgid "Supported engines are as follows:"
-msgstr ""
-
-#: ../../source/README.rst:105
+#: ../../source/README.rst:129
 msgid "`cocos2dx-js`_"
 msgstr ""
 
-#: ../../source/README.rst:106
+#: ../../source/README.rst:130
 msgid "`android-native`_"
 msgstr ""
 
-#: ../../source/README.rst:107
+#: ../../source/README.rst:131
 msgid "unreal (in development)"
 msgstr ""
 
-#: ../../source/README.rst:108
+#: ../../source/README.rst:132
 msgid "for other engines, refer to `Integration guide`_ for more details"
-msgstr ""
+msgstr "其他引擎请参考 `Integration guide`_ 。"
 
-#: ../../source/README.rst:110
-msgid "Following example shows how to initialize popo instance for Unity3D."
-msgstr ""
-
-#: ../../source/README.rst:130
+#: ../../source/README.rst:136
 msgid "Working with Poco Objects"
-msgstr ""
+msgstr "使用Poco选择UI对象"
 
-#: ../../source/README.rst:133
+#: ../../source/README.rst:139
 msgid "Basic Selector"
-msgstr ""
+msgstr "基本选择器(Basic Selector)"
 
-#: ../../source/README.rst:135
+#: ../../source/README.rst:141
 msgid ""
 "UI element objects can be selected by invoking ``poco(...)`` function "
 "instance. The function traverses through the render tree structure and "
 "selects all the corresponding UI elements matching the query expression."
 msgstr ""
 
-#: ../../source/README.rst:138
+#: ../../source/README.rst:144
 msgid ""
 "The function takes one mandatory argument `node name`, the optional "
 "arguments can be substituted too and they refer to specific node "
 "properties. For more information, refer to API reference."
 msgstr ""
 
-#: ../../source/README.rst:156
+#: ../../source/README.rst:162
 msgid "Relative Selector"
-msgstr ""
+msgstr "相对选择器(Relative Selector)"
 
-#: ../../source/README.rst:158
+#: ../../source/README.rst:164
 msgid ""
 "When there is any ambiguity in the selected objects by node names/node "
 "types or object unable to select, the relative selector tries to select "
 "the element object by hierarchy in following manner"
 msgstr ""
 
-#: ../../source/README.rst:170
-msgid "Sequence Selector (index selector, iterator is recommended for use)"
-msgstr ""
+#: ../../source/README.rst:176
+msgid "Sequence Selector"
+msgstr "空间顺序选择器(Sequence Selector)"
 
-#: ../../source/README.rst:172
+#: ../../source/README.rst:178
 msgid ""
 "Tree indexing and traversing is performed by default from up to down or "
 "from left to right. In case that the 'not-yet-traversed' nodes are "
@@ -211,123 +210,124 @@ msgid ""
 "thenodes in views were rearranged during the travers process."
 msgstr ""
 
-#: ../../source/README.rst:186
+#: ../../source/README.rst:192
 msgid "Iterate over a collection of objects"
-msgstr ""
+msgstr "迭代一组对象(Iterate over a collection of objects)"
 
-#: ../../source/README.rst:188
+#: ../../source/README.rst:194
 msgid ""
 "Following code snippet shows how to iterate over the collection of UI "
 "objects"
 msgstr ""
 
-#: ../../source/README.rst:201
+#: ../../source/README.rst:207
 msgid "Get object properties"
-msgstr ""
+msgstr "读取属性(Get object properties)"
 
-#: ../../source/README.rst:203
+#: ../../source/README.rst:209
 msgid "Following examples shows how to obtain various properties of an object"
 msgstr ""
 
-#: ../../source/README.rst:215
+#: ../../source/README.rst:221
 msgid "Object Proxy Related Operation"
-msgstr ""
+msgstr "操作UI对象(Object Proxy Related Operation)"
 
-#: ../../source/README.rst:217
+#: ../../source/README.rst:223
 msgid "This section describes object proxy related operations"
 msgstr ""
 
-#: ../../source/README.rst:220 ../../source/README.rst:312
+#: ../../source/README.rst:226 ../../source/README.rst:318
 msgid "click"
-msgstr ""
+msgstr "点击(click)"
 
-#: ../../source/README.rst:222
+#: ../../source/README.rst:228
 msgid ""
 "The anchorPoint of UI element is attached to the click point by default. "
 "When the first argument (the relative click position) is passed to the "
 "function, the coordinates of the top-left corner of the bounding box "
-"become `[0, 0]` and the bottom right corner coordinates are `[1, 1]`. The"
-" click range area can be less than 0 or larger than 1. If the click range"
-" area lies in the interval (0, 1), it means it is beyond the bounding "
-"box."
+"become ``[0, 0]`` and the bottom right corner coordinates are ``[1, 1]``."
+" The click range area can be less than 0 or larger than 1. If the click "
+"range area lies in the interval (0, 1), it means it is beyond the "
+"bounding box."
 msgstr ""
 
-#: ../../source/README.rst:227
+#: ../../source/README.rst:233
 msgid "Following example demonstrates how to use ``click`` function"
 msgstr ""
 
-#: ../../source/README.rst:240 ../../source/README.rst:321
+#: ../../source/README.rst:246 ../../source/README.rst:327
 msgid "swipe"
-msgstr ""
+msgstr "滑动(swipe)"
 
-#: ../../source/README.rst:242
+#: ../../source/README.rst:248
 msgid ""
 "The anchorPoint of UI element is taken as the origin, the swipe action is"
 " performed towards the given direction with the certain distance."
 msgstr ""
 
-#: ../../source/README.rst:245
+#: ../../source/README.rst:251
 msgid "Following example shows how to use the ``swipe`` function"
 msgstr ""
 
-#: ../../source/README.rst:258
+#: ../../source/README.rst:264
 msgid "drag"
-msgstr ""
+msgstr "拖拽(drag)"
 
-#: ../../source/README.rst:260
+#: ../../source/README.rst:266
 msgid "Drag from current UI element to the target UI element."
 msgstr ""
 
-#: ../../source/README.rst:262
+#: ../../source/README.rst:268
 msgid "Following example shows how to use the ``drag_to`` function"
 msgstr ""
 
-#: ../../source/README.rst:272
+#: ../../source/README.rst:278
 msgid "focus (local positioning)"
-msgstr ""
+msgstr "局部定位(focus (local positioning))"
 
-#: ../../source/README.rst:274
+#: ../../source/README.rst:280
 msgid ""
 "The anchorPoint is set as the origin when conducting operations related "
 "to the node coordinates. If the the local click area is need, the focus "
 "function can be used. The coordinate system is similar to the screen "
 "coordinates - the origin is put to the top left corner of the bounding "
 "box and with length of unit of 1, i.e the coordinates of the center are "
-"then `[0.5, 0.5]` and the bottom right corner has coordinates `[1, 1]`."
+"then ``[0.5, 0.5]`` and the bottom right corner has coordinates ``[1, "
+"1]``."
 msgstr ""
 
-#: ../../source/README.rst:285
+#: ../../source/README.rst:291
 msgid ""
 "The focus function can also be used as internal positioning within the "
 "objects. Following example demonstrates the implementation of `scroll` "
 "operation in `ScrollView`."
 msgstr ""
 
-#: ../../source/README.rst:294
+#: ../../source/README.rst:300
 msgid "wait"
-msgstr ""
+msgstr "等待出现(wait)"
 
-#: ../../source/README.rst:296
+#: ../../source/README.rst:302
 msgid ""
 "Wait for the target objects to appear on the screen and return the object"
 " proxy itself. If the object exists, return immediately."
 msgstr ""
 
-#: ../../source/README.rst:306
+#: ../../source/README.rst:312
 msgid "Global Operation"
-msgstr ""
+msgstr "全局操作(Global Operation)"
 
-#: ../../source/README.rst:308
+#: ../../source/README.rst:314
 msgid ""
 "`Poco` framework also allows to perform the operations without any UI "
 "elements selected. These operations are called `global` operations."
 msgstr ""
 
-#: ../../source/README.rst:336
+#: ../../source/README.rst:342
 msgid "snapshot"
-msgstr ""
+msgstr "截屏(snapshot)"
 
-#: ../../source/README.rst:338
+#: ../../source/README.rst:344
 msgid ""
 "Take a screenshot of the current screen in base64 encoded string. The "
 "image format depends on the sdk implementation. Take a look at "
@@ -336,33 +336,33 @@ msgid ""
 " to dive into sdk implementation details."
 msgstr ""
 
-#: ../../source/README.rst:342
+#: ../../source/README.rst:348
 msgid ""
 "**Note**: ``snapshot``  is not supported in some engine implementation of"
 " poco."
 msgstr ""
 
-#: ../../source/README.rst:353
+#: ../../source/README.rst:359
 msgid "Exceptions"
-msgstr ""
+msgstr "异常处理(Exceptions)"
 
-#: ../../source/README.rst:355
+#: ../../source/README.rst:361
 msgid "This sections describes the Poco framework errors and exceptions."
 msgstr ""
 
-#: ../../source/README.rst:358
+#: ../../source/README.rst:364
 msgid "PocoTargetTimeout"
 msgstr ""
 
-#: ../../source/README.rst:372
+#: ../../source/README.rst:378
 msgid "PocoNoSuchNodeException"
 msgstr ""
 
-#: ../../source/README.rst:388
+#: ../../source/README.rst:394
 msgid "Unit Test"
-msgstr ""
+msgstr "单元测试(Unit Test)"
 
-#: ../../source/README.rst:390
+#: ../../source/README.rst:396
 msgid ""
 "Poco is an automation test framework. For unit testing, please refer to "
 "`PocoUnit`_ section. PocoUnit provides a full set of assertion methods "
@@ -370,33 +370,33 @@ msgid ""
 "standard library."
 msgstr ""
 
-#: ../../source/README.rst:394
+#: ../../source/README.rst:400
 msgid "Some Concepts"
-msgstr ""
+msgstr "术语解释(Some Concepts)"
 
-#: ../../source/README.rst:396
+#: ../../source/README.rst:402
 msgid ""
 "This section describes some basic concepts of Poco. Basic terminology "
 "used in following section"
 msgstr ""
 
-#: ../../source/README.rst:398
+#: ../../source/README.rst:404
 msgid ""
 "**Target device**: test devices where the apps or games run on, it "
 "usually refers to mobile phone devices"
 msgstr ""
 
-#: ../../source/README.rst:399
+#: ../../source/README.rst:405
 msgid ""
 "**UI proxy**: proxy objects within Poco framework, they represent zero "
 "(none), one or multiple in-game UI elements"
 msgstr ""
 
-#: ../../source/README.rst:400
+#: ../../source/README.rst:406
 msgid "**Node/UI element**: UI element instances or nodes in app/game"
 msgstr ""
 
-#: ../../source/README.rst:401
+#: ../../source/README.rst:407
 msgid ""
 "**query expression**: a serializable internal data structure through "
 "which Poco interacts with **target devices** and selects the "
@@ -404,19 +404,19 @@ msgid ""
 " to this unless it is required to customize the ``Selector`` class."
 msgstr ""
 
-#: ../../source/README.rst:405
+#: ../../source/README.rst:411
 msgid "Following images show the UI hierarchy represented in Poco"
 msgstr ""
 
-#: ../../source/README.rst:412
+#: ../../source/README.rst:418
 msgid "Definitions of coordinate system and metric space"
 msgstr ""
 
-#: ../../source/README.rst:415
+#: ../../source/README.rst:421
 msgid "Normalized Coordinate System"
-msgstr ""
+msgstr "归一化坐标系(Normalized Coordinate System)"
 
-#: ../../source/README.rst:417
+#: ../../source/README.rst:423
 msgid ""
 "In normalized coordinate system, the origin (0, 0) lies on top left "
 "corner of the device display. The height and the width of the screen are "
@@ -426,18 +426,18 @@ msgid ""
 "size. This is especially very handy when writing cross-device test cases."
 msgstr ""
 
-#: ../../source/README.rst:422
+#: ../../source/README.rst:428
 msgid ""
 "The space of normalized coordinate system is uniformly distributed, i.e. "
 "the coordinates of the screen center are (0.5, 0.5) and the computing "
 "method of other scalars and vectors are all same in Euclidean space."
 msgstr ""
 
-#: ../../source/README.rst:428
+#: ../../source/README.rst:434
 msgid "Local Coordinate System (local positioning)"
-msgstr ""
+msgstr "局部坐标系(Local Coordinate System (local positioning))"
 
-#: ../../source/README.rst:430
+#: ../../source/README.rst:436
 msgid ""
 "The aim of introducing local coordinate system is to express the "
 "coordinates with reference to a certain UI elements. The origin (0,0) of "
@@ -448,11 +448,80 @@ msgid ""
 "Other definitions are same as for normalized coordinate system."
 msgstr ""
 
-#: ../../source/README.rst:436
+#: ../../source/README.rst:442
 msgid ""
 "Local coordinate system is more flexible in order to locate the position "
 "within or outside of UI element, e.g the coordinates at (0.5, 0.5) "
 "corresponds to the center of the UI element while coordinates larger than"
 " 1 or less than 0 correspond to the position out of the UI element."
 msgstr ""
+
+#~ msgid "`中文README(Chinese README)`_ 在此。"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Currently, the code is available only"
+#~ " in `Git` repository and can be "
+#~ "installed as follows. As airtest is "
+#~ "a dependency of poco, install airtest"
+#~ " first."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The documents are not published to "
+#~ "public site yet. To see the "
+#~ "document, you can simply ``open doc-"
+#~ "release/index.html`` on your file system."
+#~ msgstr ""
+
+#~ msgid "Poco Instance"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "There are several engines supported and"
+#~ " for each engine the different "
+#~ "``poco`` instance must be initialized."
+#~ msgstr ""
+
+#~ msgid "Supported engines are as follows:"
+#~ msgstr ""
+
+#~ msgid "Following example shows how to initialize popo instance for Unity3D."
+#~ msgstr ""
+
+#~ msgid "Sequence Selector (index selector, iterator is recommended for use)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The anchorPoint of UI element is "
+#~ "attached to the click point by "
+#~ "default. When the first argument (the"
+#~ " relative click position) is passed "
+#~ "to the function, the coordinates of "
+#~ "the top-left corner of the "
+#~ "bounding box become `[0, 0]` and "
+#~ "the bottom right corner coordinates are"
+#~ " `[1, 1]`. The click range area "
+#~ "can be less than 0 or larger "
+#~ "than 1. If the click range area"
+#~ " lies in the interval (0, 1), "
+#~ "it means it is beyond the bounding"
+#~ " box."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The anchorPoint is set as the "
+#~ "origin when conducting operations related "
+#~ "to the node coordinates. If the "
+#~ "the local click area is need, the"
+#~ " focus function can be used. The "
+#~ "coordinate system is similar to the "
+#~ "screen coordinates - the origin is "
+#~ "put to the top left corner of "
+#~ "the bounding box and with length "
+#~ "of unit of 1, i.e the coordinates"
+#~ " of the center are then `[0.5, "
+#~ "0.5]` and the bottom right corner "
+#~ "has coordinates `[1, 1]`."
+#~ msgstr ""
 
