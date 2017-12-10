@@ -70,7 +70,11 @@ info.
     assert poco('scoreVal').get_text() == "100", "score correct."
     poco('btn_back', type='Button').click()
 
-To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
+Tools for writing test scripts
+------------------------------
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
+standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
 Dump UI hierarchy example
 -------------------------
@@ -159,6 +163,7 @@ Poco
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
+.. _PocoHierarchyViewer: 下载链接
 
 ..
  下面是对应sdk的下载链接

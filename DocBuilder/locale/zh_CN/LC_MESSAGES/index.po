@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 17:30+0800\n"
+"POT-Creation-Date: 2017-12-10 22:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,23 +69,30 @@ msgid ""
 "Check `More examples`_ section for more detailed info."
 msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_"
 
-#: ../../index.rst:73
-msgid ""
-"To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
-"(an IDE for writing test scripts) !"
-msgstr "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_"
+#: ../../index.rst:74
+msgid "Tools for writing test scripts"
+msgstr "编写脚本专用工具"
 
 #: ../../index.rst:76
+msgid ""
+"To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
+"(an IDE for writing test scripts) or standalone `PocoHierarchyViewer`_ "
+"(to viewer the hierarchy and attributes only but lightweight) !"
+msgstr ""
+"获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
+"`PocoHierarchyViewer`_ "
+
+#: ../../index.rst:80
 msgid "Dump UI hierarchy example"
 msgstr "如何用脚本抓取界面所有元素"
 
-#: ../../index.rst:78
+#: ../../index.rst:82
 msgid ""
 "Poco defines an uniform format to serialize UI hierarchy for different "
 "game engines. This section shows how to dump UI hierarchy."
 msgstr "Poco为不同的引擎定义了标准的界面层次结构(hierarchy)格式，在任何游戏上使用dump方法都可以获得相同的结构。示例代码和层次结构格式如下。"
 
-#: ../../index.rst:91
+#: ../../index.rst:95
 msgid ""
 "The following is the snippet of UI hierarchy. All UI elements are "
 "organized in `dict` representing the `tree` structure. More detailed info"
@@ -93,42 +100,31 @@ msgid ""
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
 msgstr "下面就是层次结构(hierarchy)的数据表示，用``dict``存储并都是可json序列化的。"
 
-#: ../../index.rst:135
+#: ../../index.rst:139
 msgid "API reference"
 msgstr ""
 
-#: ../../index.rst:138
+#: ../../index.rst:142
 msgid "Poco"
 msgstr ""
 
-#: ../../index.rst:148
+#: ../../index.rst:152
 msgid "`poco drivers <source/poco.drivers.html>`_"
 msgstr ""
 
-#: ../../index.rst:150
+#: ../../index.rst:154
 msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
 msgstr ""
 
-#: ../../index.rst:151
+#: ../../index.rst:155
 msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
 msgstr ""
 
-#: ../../index.rst:152
+#: ../../index.rst:156
 msgid "`android native <source/poco.drivers.android.uiautomation.html>`_"
 msgstr ""
 
-#: ../../index.rst:153
+#: ../../index.rst:157
 msgid "`Netease Games <source/poco.drivers.netease.internal.html>`_"
 msgstr ""
-
-#~ msgid ""
-#~ "Currently, the code is available only"
-#~ " in `Git` repository and can be "
-#~ "installed as follows. As airtest is "
-#~ "a dependency of poco, install airtest"
-#~ " first."
-#~ msgstr ""
-
-#~ msgid "中文README"
-#~ msgstr ""
 

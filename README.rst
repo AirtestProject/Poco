@@ -35,7 +35,11 @@ Example
 
 `More examples`_ here.
 
-To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
+Tools for writing test scripts
+------------------------------
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
+standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
 Features
 --------
@@ -178,7 +182,7 @@ Sequence Selector
 Tree indexing and traversing is performed by default from up to down or from left to right. In case that
 the 'not-yet-traversed' nodes are removed from the screen, the exception is raised. The exception is not raised in case
 when the 'already-traversed' nodes are removed and in this case the traversing continues in previous order despite
-the fact that thenodes in views were rearranged during the travers process.
+the fact that the nodes in views were rearranged during the travers process.
 
 .. code-block:: python
 
@@ -342,7 +346,7 @@ snapshot
 ''''''''
 
 Take a screenshot of the current screen in base64 encoded string. The image format depends on the sdk implementation.
-Take a look at `poco.sdk.interfaces.screen <source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen>`_
+Take a look at :py:meth:`ScreenInterface.getScreen <poco.sdk.interfaces.screen.ScreenInterface.getScreen>`
 to dive into sdk implementation details.
 
 **Note**: ``snapshot``  is not supported in some engine implementation of poco.
@@ -453,6 +457,8 @@ correspond to the position out of the UI element.
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
+.. _PocoHierarchyViewer: 下载链接
+
 .. _API Reference: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html#api-reference
 .. _Online docs: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
 
