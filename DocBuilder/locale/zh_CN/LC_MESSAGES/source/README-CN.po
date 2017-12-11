@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 17:45+0800\n"
+"POT-Creation-Date: 2017-12-11 09:46+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,202 +125,204 @@ msgid "顺序选择器（索引选择器，更推荐迭代遍历）"
 msgstr ""
 
 #: ../../source/README-CN.rst:142
-msgid "索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。"
+msgid ""
+"索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常， "
+"已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。"
 msgstr ""
 
-#: ../../source/README-CN.rst:154
+#: ../../source/README-CN.rst:155
 msgid "遍历对象集合"
 msgstr ""
 
-#: ../../source/README-CN.rst:167
+#: ../../source/README-CN.rst:168
 msgid "获取对象属性"
 msgstr ""
 
-#: ../../source/README-CN.rst:179
+#: ../../source/README-CN.rst:180
 msgid "对象代理操作"
 msgstr ""
 
-#: ../../source/README-CN.rst:182
+#: ../../source/README-CN.rst:183
 msgid "click"
 msgstr ""
 
-#: ../../source/README-CN.rst:184
+#: ../../source/README-CN.rst:185
 msgid ""
 "点击对象，默认以锚点(挂接点)(anchorPoint)对象为点击点。第一个参数传入点击相对位置，对象包围盒左上角为 ``[0, 0]`` "
 "，右下角为 ``[1, 1]`` 。偏移范围可以比0小也可以比1大，超过0~1的范围表示超出包围盒范围。"
 msgstr ""
 
-#: ../../source/README-CN.rst:197
+#: ../../source/README-CN.rst:198
 msgid "swipe"
 msgstr ""
 
-#: ../../source/README-CN.rst:199
+#: ../../source/README-CN.rst:200
 msgid "以对象anchor为起点，朝某个方向滑动一段距离"
 msgstr ""
 
-#: ../../source/README-CN.rst:212
+#: ../../source/README-CN.rst:213
 msgid "drag"
 msgstr ""
 
-#: ../../source/README-CN.rst:214
+#: ../../source/README-CN.rst:215
 msgid "从当前对象拖拽到目标对象"
 msgstr ""
 
-#: ../../source/README-CN.rst:224
+#: ../../source/README-CN.rst:225
 msgid "focus (局部定位)"
 msgstr ""
 
-#: ../../source/README-CN.rst:226
+#: ../../source/README-CN.rst:227
 msgid ""
 "与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。"
 " focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` "
 "，以此类推。"
 msgstr ""
 
-#: ../../source/README-CN.rst:235
+#: ../../source/README-CN.rst:236
 msgid "focus也可以用于一个对象的内部定位，例如实现一个ScrollView的卷动操作"
 msgstr ""
 
-#: ../../source/README-CN.rst:244
+#: ../../source/README-CN.rst:245
 msgid "wait"
 msgstr ""
 
-#: ../../source/README-CN.rst:246
+#: ../../source/README-CN.rst:247
 msgid "等待目标对象出现，总是返回对象自身，如果出现立即返回，否则timeout后返回"
 msgstr ""
 
-#: ../../source/README-CN.rst:255
+#: ../../source/README-CN.rst:256
 msgid "捕获异常"
 msgstr ""
 
-#: ../../source/README-CN.rst:282
+#: ../../source/README-CN.rst:283
 msgid "单元测试"
 msgstr ""
 
-#: ../../source/README-CN.rst:284
+#: ../../source/README-CN.rst:285
 msgid ""
 "poco是自动化框架，关于单元测试请见 `PocoUnit`_ "
 "。PocoUnit提供了一整套完整的断言方法，并且和python标准库unittest是兼容的。"
 msgstr ""
 
-#: ../../source/README-CN.rst:288
+#: ../../source/README-CN.rst:289
 msgid "Netease Integration Guide 接入参考"
 msgstr ""
 
-#: ../../source/README-CN.rst:290
+#: ../../source/README-CN.rst:291
 msgid ""
 "safaia版本需要高于1.2.0，如果不高于的话项目组master可在 `项目 "
 "<http://hunter.nie.netease.com/mywork/project#/>`_ 页直接下载 "
 "最新版的接入模块。最近新注册的hunter项目一般不需要重新下载。"
 msgstr ""
 
-#: ../../source/README-CN.rst:292
+#: ../../source/README-CN.rst:293
 msgid ""
 "在项目的 ``Hunter __init__指令`` 后面根据引擎插入以下代码片段，然后重启游戏即可，lua脚本的游戏请联系 "
 "``lxn3032@corp.netease.com`` 。"
 msgstr ""
 
-#: ../../source/README-CN.rst:294
+#: ../../source/README-CN.rst:295
 msgid "**NeoX:**"
 msgstr ""
 
-#: ../../source/README-CN.rst:308
+#: ../../source/README-CN.rst:309
 msgid "**Messiah:**"
 msgstr ""
 
-#: ../../source/README-CN.rst:322
+#: ../../source/README-CN.rst:323
 msgid "`Unity3D <doc/integration.html#unity3d>`_"
 msgstr ""
 
-#: ../../source/README-CN.rst:325
+#: ../../source/README-CN.rst:326
 msgid "**其他引擎:** 请联系 ``lxn3032@corp.netease.com``"
 msgstr ""
 
-#: ../../source/README-CN.rst:328
+#: ../../source/README-CN.rst:329
 msgid "`hunter终端`_ 右上角点击 **Inspector** 按钮打开检视器面板。"
 msgstr ""
 
-#: ../../source/README-CN.rst:333
+#: ../../source/README-CN.rst:334
 msgid "基本概念(concepts)"
 msgstr ""
 
-#: ../../source/README-CN.rst:337
+#: ../../source/README-CN.rst:338
 msgid "测试Test"
 msgstr ""
 
-#: ../../source/README-CN.rst:339
+#: ../../source/README-CN.rst:340
 msgid "**TestCase**: 无论以何种形式表示的测试内容的一个单元，以下均指使用Poco编写的测试脚本"
 msgstr ""
 
-#: ../../source/README-CN.rst:340
+#: ../../source/README-CN.rst:341
 msgid "**TestSuite**: 多个TestCase或TestSuite构成的一系列脚本文件"
 msgstr ""
 
-#: ../../source/README-CN.rst:341
+#: ../../source/README-CN.rst:342
 msgid ""
 "**TestRunner**: "
 "用于启动测试的一个东西，可能是一个可执行文件也可以是一个class。Poco默认使用Airtest作为TestRunner，使用Airtest启动的测试需要安装Airtest环境"
 msgstr ""
 
-#: ../../source/README-CN.rst:342
+#: ../../source/README-CN.rst:343
 msgid "**TestTarget/TargetDevice**: 运行待测应用程序的设备，以下均指运行在手机上的待测游戏或PC版待测游戏"
 msgstr ""
 
-#: ../../source/README-CN.rst:344
+#: ../../source/README-CN.rst:345
 msgid "**TestFramework**:  测试框架，Poco就是一个测试框架"
 msgstr ""
 
-#: ../../source/README-CN.rst:345
+#: ../../source/README-CN.rst:346
 msgid "**TestFrameworkSDK**:  测试框架与待测应用集成的模块，一般来说不是必须的，Poco里带有一个SDK"
 msgstr ""
 
-#: ../../source/README-CN.rst:349
+#: ../../source/README-CN.rst:350
 msgid "Poco测试框架相关"
 msgstr ""
 
-#: ../../source/README-CN.rst:351
+#: ../../source/README-CN.rst:352
 msgid "**目标设备**: 待测应用或游戏运行的机器，一般指手机"
 msgstr ""
 
-#: ../../source/README-CN.rst:352
+#: ../../source/README-CN.rst:353
 msgid "**UI代理(UI proxy)**: poco框架内代表游戏内0个1个或多个UI元素的代理对象"
 msgstr ""
 
-#: ../../source/README-CN.rst:353
+#: ../../source/README-CN.rst:354
 msgid "**节点/UI元素(Node/UI element)**: 应用/游戏内UI元素的实例，就是平时所说的UI"
 msgstr ""
 
-#: ../../source/README-CN.rst:354
+#: ../../source/README-CN.rst:355
 msgid ""
 "**选择器(选择表达式)(query condition/expression)**: "
 "一个可序列化的数据结构，poco通过该表达式与**目标设备**交互并选出其代表的对应的UI元素。Tester一般不用关心这个表达式的内部结构，除非要自定义`Selector`类。"
 msgstr ""
 
-#: ../../source/README-CN.rst:361
+#: ../../source/README-CN.rst:362
 msgid "坐标系与度量空间定义"
 msgstr ""
 
-#: ../../source/README-CN.rst:366
+#: ../../source/README-CN.rst:367
 msgid "归一化坐标系"
 msgstr ""
 
-#: ../../source/README-CN.rst:368
+#: ../../source/README-CN.rst:369
 msgid "归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。"
 msgstr ""
 
-#: ../../source/README-CN.rst:370
+#: ../../source/README-CN.rst:371
 msgid "归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。"
 msgstr ""
 
-#: ../../source/README-CN.rst:373
+#: ../../source/README-CN.rst:374
 msgid "局部坐标系（局部定位）"
 msgstr ""
 
-#: ../../source/README-CN.rst:375
+#: ../../source/README-CN.rst:376
 msgid "引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。"
 msgstr ""
 
-#: ../../source/README-CN.rst:377
+#: ../../source/README-CN.rst:378
 msgid "局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。"
 msgstr ""
 
@@ -339,5 +341,8 @@ msgstr ""
 #~ msgid ""
 #~ "`NetEase Internal Engines "
 #~ "<source/poco.drivers.netease.internal.html>`_ 公司内非Unity3D项目"
+#~ msgstr ""
+
+#~ msgid "索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。"
 #~ msgstr ""
 

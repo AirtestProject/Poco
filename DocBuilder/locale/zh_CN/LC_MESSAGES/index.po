@@ -71,7 +71,7 @@ msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请�
 
 #: ../../index.rst:74
 msgid "Tools for writing test scripts"
-msgstr "编写脚本专用工具"
+msgstr "编写脚本专用工具(Tools)"
 
 #: ../../index.rst:76
 msgid ""

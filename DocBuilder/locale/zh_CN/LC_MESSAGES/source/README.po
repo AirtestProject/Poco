@@ -35,7 +35,7 @@ msgstr "更多的例子请移步 `More examples`_"
 
 #: ../../source/README.rst:39
 msgid "Tools for writing test scripts"
-msgstr "编写脚本专用工具"
+msgstr "编写脚本专用工具(Tools)"
 
 #: ../../source/README.rst:41
 msgid ""

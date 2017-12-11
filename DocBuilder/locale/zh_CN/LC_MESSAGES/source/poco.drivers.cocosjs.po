@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 17:58+0800\n"
+"POT-Creation-Date: 2017-12-08 17:30+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 
 #: ../../source/poco.drivers.cocosjs.rst:2
 msgid "poco\\.drivers\\.cocosjs package"
+msgstr ""
+
+#: of poco.drivers.cocosjs.CocosJsPoco:1
+msgid "Bases: :class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.cocosjs.CocosJsPoco:1
+msgid "docstring for CocosJsPoco"
 msgstr ""
 
 #~ msgid "Bases: :class:`poco.pocofw.Poco`"
