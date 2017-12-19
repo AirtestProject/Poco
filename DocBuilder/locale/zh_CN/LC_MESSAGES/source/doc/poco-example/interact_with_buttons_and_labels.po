@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:3
+msgid "Interact with Buttons and Labels"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:5
+msgid ""
+"UI objects are just proxies, you can assign it into a variable and reuse "
+"without repeated instantiation. The following example shows the most used"
+" methods of UI proxy. It is very easy to access all available attributes "
+"of UI in game/app."
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:8
+msgid ""
+"If retrieve attributes or perform an operation on inexistent UI, "
+"exceptions will raise. If you are not sure whether the UI exists or not, "
+"you can call ``.exists()`` to test whether exists. In specific test "
+"cases, remember to think of a bug if the UI does not exist as your wish."
+msgstr ""
+

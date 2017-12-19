@@ -1,0 +1,427 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.pocofw.rst:2
+msgid "poco\\.pocofw module"
+msgstr ""
+
+#: of poco.pocofw.Poco:1
+msgid "Bases: :class:`poco.acceleration.PocoAccelerationMixin`"
+msgstr ""
+
+#: of poco.pocofw.Poco:1
+msgid "Poco standard initializer."
+msgstr ""
+
+#: of poco.pocofw.Poco poco.pocofw.Poco.__call__
+#: poco.pocofw.Poco.add_post_action_callback
+#: poco.pocofw.Poco.add_pre_action_callback poco.pocofw.Poco.click
+#: poco.pocofw.Poco.long_click poco.pocofw.Poco.snapshot poco.pocofw.Poco.swipe
+#: poco.pocofw.Poco.wait_for_all poco.pocofw.Poco.wait_for_any
+msgid "参数"
+msgstr ""
+
+#: of poco.pocofw.Poco:3
+msgid ""
+"an agent object for Poco to communicate with the target device. See "
+":py:class:`PocoAgent <poco.agent.PocoAgent>` definition for more details."
+msgstr ""
+
+#: of poco.pocofw.Poco:6
+msgid ""
+"- ``action_interval``: time interval to wait for the action (such as "
+"touch or swipe) completion performed   on device and for the UI to become"
+" still (stable). Default value is 0.8s. - ``poll_interval``: the minimum "
+"time needed between each poll events (such as waiting for UI element to"
+"   appear on the screen). Polling is done periodically. - "
+"``pre_action_wait_for_appearance``: time interval to wait before the "
+"action (such as click or swipe) is   performed. If the target UI element "
+"does not appear on the screen after this time interval, the   "
+":py:class:`PocoNoSuchNodeException "
+"<poco.exceptions.PocoNoSuchNodeException>` is raised - "
+"``touch_down_duration``: Touch down step duration of the click operation "
+"last for. If this argument is   provided, this value will set to "
+"``self.agent.input`` module. Note that not all implementation of poco   "
+"support this parameter. If not support, you may see a warning."
+msgstr ""
+
+#: of poco.pocofw.Poco:7
+msgid ""
+"``action_interval``: time interval to wait for the action (such as touch "
+"or swipe) completion performed on device and for the UI to become still "
+"(stable). Default value is 0.8s."
+msgstr ""
+
+#: of poco.pocofw.Poco:9
+msgid ""
+"``poll_interval``: the minimum time needed between each poll events (such"
+" as waiting for UI element to appear on the screen). Polling is done "
+"periodically."
+msgstr ""
+
+#: of poco.pocofw.Poco:11
+msgid ""
+"``pre_action_wait_for_appearance``: time interval to wait before the "
+"action (such as click or swipe) is performed. If the target UI element "
+"does not appear on the screen after this time interval, the "
+":py:class:`PocoNoSuchNodeException "
+"<poco.exceptions.PocoNoSuchNodeException>` is raised"
+msgstr ""
+
+#: of poco.pocofw.Poco:14
+msgid ""
+"``touch_down_duration``: Touch down step duration of the click operation "
+"last for. If this argument is provided, this value will set to "
+"``self.agent.input`` module. Note that not all implementation of poco "
+"support this parameter. If not support, you may see a warning."
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:1
+msgid ""
+"Call Poco instance to select the UI element by query expression. Query "
+"expression can contain specific name and/or other attributes. Invisible "
+"UI elements will be skipped even if \"visible=False\" argument is set."
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:4
+msgid ""
+"Selection process is not executed instantly, the query expression is "
+"stored in the UI proxy and the selection is executed only then when the "
+"UI element(s) info is required (such get the point coordinates where to "
+"click, and/or retrieve the specific attribute value)."
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:9 poco.pocofw.Poco.click:10
+#: poco.pocofw.Poco.freeze:6 poco.pocofw.Poco.swipe:10
+msgid "Examples"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:10
+msgid "This example shows selecting a Button named 'close'::"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:15
+msgid "name of the UI element to be selected"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__
+msgid "Keyword Arguments"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:18
+msgid ""
+"arbitrary key value pair that stands for selecting the UI matching the "
+"value of ``UI.xx``"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:19
+msgid ""
+"arbitrary key value pair that stands for selecting the UI matching the "
+"regular expression pattern ``UI.xx``"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:23
+msgid ""
+"In keyword args, you can only use `xx` or `xxMatches` at the same time. "
+"Using both with the same attribute does not make sence. Besides, `xx` "
+"should not start with ``_`` (underscore) as attributes start with ``_`` "
+"are private attributes that used by sdk implementation. ::"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__ poco.pocofw.Poco.agent poco.pocofw.Poco.freeze
+#: poco.pocofw.Poco.get_screen_size poco.pocofw.Poco.snapshot
+#: poco.pocofw.Poco.wait_for_any
+msgid "返回"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:32
+msgid ""
+"UI proxy object representing the UI element matches the given query "
+"expression."
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__ poco.pocofw.Poco.agent poco.pocofw.Poco.freeze
+#: poco.pocofw.Poco.get_screen_size poco.pocofw.Poco.snapshot
+#: poco.pocofw.Poco.wait_for_any
+msgid "返回类型"
+msgstr ""
+
+#: of poco.pocofw.Poco.__call__:34 poco.pocofw.Poco.wait_for_any:12
+msgid ":py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`"
+msgstr ""
+
+#: of poco.pocofw.Poco.add_post_action_callback:1
+msgid ""
+"Register a callback function to be invoked after each action (such as "
+"touch or swipe)."
+msgstr ""
+
+#: of poco.pocofw.Poco.add_post_action_callback:3
+msgid ""
+"The arguments to be passed are identical to the callback function in "
+":py:meth:`add_pre_action_callback "
+"<poco.pocofw.Poco.add_pre_action_callback>`."
+msgstr ""
+
+#: of poco.pocofw.Poco.add_post_action_callback:6
+#: poco.pocofw.Poco.add_pre_action_callback:10
+msgid "the callback function"
+msgstr ""
+
+#: of poco.pocofw.Poco.add_pre_action_callback:1
+msgid ""
+"Register a callback function to be invoked before each action (such as "
+"touch or swipe)."
+msgstr ""
+
+#: of poco.pocofw.Poco.add_pre_action_callback:3
+msgid "The callback function arguments are defined as follows:"
+msgstr ""
+
+#: of poco.pocofw.Poco.add_pre_action_callback:5
+msgid "``action`` (:obj:`str`): name or tag of the action"
+msgstr ""
+
+#: of poco.pocofw.Poco.add_pre_action_callback:6
+msgid ""
+"``proxy`` (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` or "
+":obj:`NoneType`): related UI proxy which is involved in the action itself"
+msgstr ""
+
+#: of poco.pocofw.Poco.add_pre_action_callback:8
+msgid ""
+"``args`` (:obj:`tuple`): all required arguments of the specific action "
+"function"
+msgstr ""
+
+#: of poco.pocofw.Poco.agent:1
+msgid ""
+"Readonly property to access poco agent instance. See "
+":py:class:`poco.agent.PocoAgent` for more details."
+msgstr ""
+
+#: of poco.pocofw.Poco.agent:3
+msgid "poco agent instance"
+msgstr ""
+
+#: of poco.pocofw.Poco.agent:4
+msgid ":py:class:`poco.agent.PocoAgent`"
+msgstr ""
+
+#: of poco.pocofw.Poco.click:1
+msgid ""
+"Perform click (touch, tap, etc.) action on target device at given "
+"coordinates."
+msgstr ""
+
+#: of poco.pocofw.Poco.click:3
+msgid ""
+"The coordinates (x, y) are either a 2-list or 2-tuple. The coordinates "
+"values for x and y must be in the interval between 0 ~ 1 to represent the"
+" percentage of the screen. For example, the coordinates ``[0.5, 0.5]`` "
+"represent the `center` of the screen and the coordinates ``[0, 0]`` "
+"represent the `top left corner`."
+msgstr ""
+
+#: of poco.pocofw.Poco.click:7 poco.pocofw.Poco.swipe:7
+msgid "See ``CoordinateSystem`` for more details about coordinate system."
+msgstr ""
+
+#: of poco.pocofw.Poco.click:11
+msgid ""
+"Click the point of ``(100, 100)`` of screen which resolution is ``(1920, "
+"1080)``::"
+msgstr ""
+
+#: of poco.pocofw.Poco.click:15
+msgid "coordinates (x, y) in range of 0 to 1"
+msgstr ""
+
+#: of poco.pocofw.Poco.click poco.pocofw.Poco.swipe
+#: poco.pocofw.Poco.wait_for_all poco.pocofw.Poco.wait_for_any
+msgid "raises"
+msgstr ""
+
+#: of poco.pocofw.Poco.click:18
+msgid ":exc:`InvalidOperationException` -- when clicked outside of the screen"
+msgstr ""
+
+#: of poco.pocofw.Poco.freeze:1
+msgid ""
+"Snapshot current **hierarchy** and cache it into a new poco instance. "
+"This new poco instance is a copy from current poco instance (``self``). "
+"The hierarchy of the new poco instance is fixed and immutable. It will be"
+" super fast when calling ``dump`` function from freezed poco. See the "
+"example below."
+msgstr ""
+
+#: of poco.pocofw.Poco.freeze:13
+msgid "new poco instance copy from current poco instance (``self``)"
+msgstr ""
+
+#: of poco.pocofw.Poco.freeze:14
+msgid ":py:class:`Poco <poco.pocofw.Poco>`"
+msgstr ""
+
+#: of poco.pocofw.Poco.get_screen_size:1
+msgid "Get the real physical resolution of the screen of target device."
+msgstr ""
+
+#: of poco.pocofw.Poco.get_screen_size:3
+msgid "float number indicating the screen physical resolution in pixels"
+msgstr ""
+
+#: of poco.pocofw.Poco.long_click:1
+msgid ""
+"Similar to click but press the screen for the given time interval and "
+"then release"
+msgstr ""
+
+#: of poco.pocofw.Poco.long_click:3
+msgid "coordinates (x, y) in range from 0 to 1"
+msgstr ""
+
+#: of poco.pocofw.Poco.long_click:5
+msgid "duration of press the screen"
+msgstr ""
+
+#: of poco.pocofw.Poco.sleep_for_polling_interval:1
+msgid ""
+"Sleep for fixed number of seconds after each poll event. There is no need"
+" to call this method manually. It's automatically invoked when required."
+msgstr ""
+
+#: of poco.pocofw.Poco.snapshot:1
+msgid ""
+"Take the screenshot from the target device. The supported output format "
+"(png, jpg, etc.) depends on the agent implementation."
+msgstr ""
+
+#: of poco.pocofw.Poco.snapshot:4
+msgid ""
+"an expected width of the screenshot. The real size depends on the agent "
+"implementation"
+msgstr ""
+
+#: of poco.pocofw.Poco.snapshot:8
+msgid ""
+"- screen_shot (:obj:`str/bytes`): base64 encoded screenshot data - format"
+" (:obj:`str`): output format 'png', 'jpg', etc."
+msgstr ""
+
+#: of poco.pocofw.Poco.snapshot:8
+msgid "screen_shot (:obj:`str/bytes`): base64 encoded screenshot data"
+msgstr ""
+
+#: of poco.pocofw.Poco.snapshot:9
+msgid "format (:obj:`str`): output format 'png', 'jpg', etc."
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:1
+msgid ""
+"Perform swipe action on target device from point to point given by start "
+"point and end point, or by the direction vector. At least one of the end "
+"point or direction must be provided."
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:4
+msgid ""
+"The coordinates (x, y) definition for points is the same as for ``click``"
+" event. The components of the direction vector (x, y) are also expressed "
+"in the range of the screen from 0 to 1."
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:11
+msgid ""
+"Following example shows how to perform a swipe action from (100, 100) to "
+"(100, 200) on screen with resolution 1920x1080::"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:16
+msgid "Or given by the specific direction instead of end point::"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:20
+msgid "start point"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:22
+msgid "end point"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:23
+msgid "swipe direction"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:24
+msgid "time interval in which the swipe action is performed"
+msgstr ""
+
+#: of poco.pocofw.Poco.swipe:27
+msgid ""
+":exc:`InvalidOperationException` -- when the start point of the swipe "
+"action lies outside the screen"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_all:1
+msgid ""
+"Wait until all of given UI proxies show up before timeout. All UI proxies"
+" will be polled periodically. See option :py:class:`poll_interval "
+"<poco.pocofw.Poco>` in ``Poco``'s initialization for more details."
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_all:5 poco.pocofw.Poco.wait_for_any:5
+msgid "iterable object of the given UI proxies"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_all:8 poco.pocofw.Poco.wait_for_any:8
+msgid "timeout in seconds, default is 120s"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_all:11
+msgid ""
+":exc:`PocoTargetTimeout` -- when not all of UI proxies appeared before "
+"timeout"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_any:1
+msgid ""
+"Wait until any of given UI proxies show up before timeout and return the "
+"first appeared UI proxy. All UI proxies will be polled periodically. See "
+"options :py:class:`poll_interval <poco.pocofw.Poco>` in ``Poco``'s "
+"initialization for more details."
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_any:11
+msgid "the first appeared UI proxy"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_for_any:14
+msgid ""
+":exc:`PocoTargetTimeout` -- when none of UI proxies appeared before "
+"timeout"
+msgstr ""
+
+#: of poco.pocofw.Poco.wait_stable:1
+msgid ""
+"Sleep for fixed number of seconds in order to wait for the UI to become "
+"still (stable). There is no need to call this method manually. It's "
+"automatically invoked when required."
+msgstr ""
+

@@ -4,8 +4,6 @@ Poco ポコ
 
 **A cross-engine UI automation framework**
 
-`中文README(Chinese README)`_ 在此。
-
 Example
 -------
 
@@ -37,7 +35,11 @@ Example
 
 `More examples`_ here.
 
-To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
+Tools for writing test scripts
+------------------------------
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
+standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
 Features
 --------
@@ -57,8 +59,6 @@ Main Poco features includes following:
 Installation
 ------------
 
-.. should I install Airtest first?
-
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app.
 
@@ -66,19 +66,7 @@ your game/app.
 
 .. code-block:: bash
 
-    # In the future
     pip install pocoui
-
-Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
-of poco, install airtest first.
-
-.. code-block:: bash
-
-    git clone https://github.com/Meteorix/airtest.git
-    pip install -e airtest
-
-    git clone https://github.com/Meteorix/poco.git
-    pip install -e poco
 
 For NetEase internal use, run the following command directly.
 
@@ -86,28 +74,26 @@ For NetEase internal use, run the following command directly.
 
     pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
 
+SDK Integration
+---------------
+
 For **poco-sdk** integration please refer to `Integration Guide`_
 
 
 Documentation
 -------------
 
-The documents are not published to public site yet. To see the document, you can simply ``open doc-release/index.html``
-on your file system.
+`Online docs`_.
 
-Poco Instance
--------------
+How to use Poco
+---------------
 
-There are several engines supported and for each engine the different ``poco`` instance must be initialized.
+Poco supports different types of engines by different drivers. For different engines please initialize ``poco`` instance
+by corresponding driver.
 
-Supported engines are as follows:
+Following example shows how to initialize popo instance for
 
-* `cocos2dx-js`_
-* `android-native`_
-* unreal (in development)
-* for other engines, refer to `Integration guide`_ for more details
-
-Following example shows how to initialize popo instance for Unity3D.
+* Unity3D.
 
 .. code-block:: python
 
@@ -124,6 +110,30 @@ Following example shows how to initialize popo instance for Unity3D.
 
     ui = poco('...')
     ui.click()
+
+
+* `NetEase Internal Engines <poco.drivers.netease.internal.html>`_ except for Unity3D projects.
+
+.. code-block:: python
+
+    from poco.drivers.netease.internal import NeteasePoco
+    from airtest.core.api import connect_device
+
+    # 先连上android设备
+    connect_device('Android:///')
+
+    # windows的话这样
+    # connect_device('Windows:///?title_re=^.*errors and.*$')  # 无需urlencode
+
+    poco = NeteasePoco('g37')  # hunter上的项目代号
+    ui = poco('...')
+    ui.click()
+
+
+* `cocos2dx-js`_
+* `android-native`_
+* unreal (in development)
+* for other engines, refer to `Integration guide`_ for more details
 
 
 Working with Poco Objects
@@ -166,13 +176,13 @@ selector tries to select the element object by hierarchy in following manner
 
 .. image:: doc/img/hunter-poco-select-relative.png
 
-Sequence Selector (index selector, iterator is recommended for use)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Sequence Selector
+"""""""""""""""""
 
 Tree indexing and traversing is performed by default from up to down or from left to right. In case that
 the 'not-yet-traversed' nodes are removed from the screen, the exception is raised. The exception is not raised in case
 when the 'already-traversed' nodes are removed and in this case the traversing continues in previous order despite
-the fact that thenodes in views were rearranged during the travers process.
+the fact that the nodes in views were rearranged during the travers process.
 
 .. code-block:: python
 
@@ -221,8 +231,8 @@ click
 
 The anchorPoint of UI element is attached to the click point by default. When the first argument
 (the relative click position) is passed to the function, the coordinates of the top-left corner of the bounding box
-become `[0, 0]` and the bottom right corner coordinates are `[1, 1]`. The click range area can be less than 0 or larger
-than 1. If the click range area lies in the interval (0, 1), it means it is beyond the bounding box.
+become ``[0, 0]`` and the bottom right corner coordinates are ``[1, 1]``. The click range area can be less than 0 or
+larger than 1. If the click range area lies in the interval (0, 1), it means it is beyond the bounding box.
 
 Following example demonstrates how to use ``click`` function
 
@@ -274,7 +284,7 @@ focus (local positioning)
 The anchorPoint is set as the origin when conducting operations related to the node coordinates. If the the local click
 area is need, the focus function can be used. The coordinate system is similar to the screen coordinates - the origin
 is put to the top left corner of the bounding box and with length of unit of 1, i.e the coordinates of the center are
-then `[0.5, 0.5]` and the bottom right corner has coordinates `[1, 1]`.
+then ``[0.5, 0.5]`` and the bottom right corner has coordinates ``[1, 1]``.
 
 
 .. code-block:: python
@@ -336,7 +346,7 @@ snapshot
 ''''''''
 
 Take a screenshot of the current screen in base64 encoded string. The image format depends on the sdk implementation.
-Take a look at `poco.sdk.interfaces.screen <source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen>`_
+Take a look at :py:meth:`ScreenInterface.getScreen <poco.sdk.interfaces.screen.ScreenInterface.getScreen>`
 to dive into sdk implementation details.
 
 **Note**: ``snapshot``  is not supported in some engine implementation of poco.
@@ -447,6 +457,11 @@ correspond to the position out of the UI element.
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
+.. _PocoHierarchyViewer: 下载链接
+
+.. _API Reference: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html#api-reference
+.. _Online docs: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
+
 
 ..
  下面是对应sdk的下载链接

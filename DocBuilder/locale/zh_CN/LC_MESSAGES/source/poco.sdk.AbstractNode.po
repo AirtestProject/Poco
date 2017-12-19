@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.AbstractNode.rst:2
+msgid "poco\\.sdk\\.AbstractNode module"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode:1
+msgid ""
+"AbstractNode is a wrapper class that provides UI hierarchy and node info "
+"in game engine."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode:3
+msgid ""
+"This class uniformly specifies node-related methods such as retrieving "
+"the attributes or accessing the parent nodes or their children."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.enumerateAttrs:1
+msgid "Enumerate all available attributes and yield the 2-tuple (name, value)."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.enumerateAttrs
+msgid "Yields"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.enumerateAttrs:3
+msgid "Iterable<:obj:`str`, :obj:`ValueType`>"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:1
+msgid ""
+"Return the attributes of the node. The list below shows the most used "
+"basic attributes used during while writing test code. The implementation "
+"class should return the corresponding value as soon as it retrieves its "
+"value. If the value cannot be determined, the default value is obtained "
+"from super class invocation and returned.  See the example below for more"
+" detailed information. More attributes can be added in order to enhance "
+"the selection and displaying in ``Inspector``."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:7
+msgid "The most used basic attributes are listed as follows:"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:9
+msgid ""
+"``name``: name of the node, use the unique and meaningful name for each "
+"node is recommended"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:10
+msgid ""
+"``type``: type of the name of the node, it can be either any string, e.g."
+" \"android.widget.Button\" or just simple as \"Button\""
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:12
+msgid ""
+"``visible``: True or False whether the node is rendered on screen. In "
+"case the return value is False, all children nodes are ignored in Poco "
+"selector"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:14
+msgid ""
+"``pos``: position of the node in screen, return value should be 2-list "
+"coordinates (x, y) representing the percentage of the screen. e.g. if the"
+" node lies in the center of the screen, the attribute will be ``[0.5f, "
+"0.5f]``. If the returned value for position is negative, it means the "
+"node lies out of the screen"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:17
+msgid ""
+"``size``: size of the node bounding box, similar to ``pos``, value is "
+"also a 2-list of the percentage of the screen size, e.g. the screen size "
+"is always ``[1.0f, 1.0f]``, if the node lies in left half side of the "
+"screen, its size will be ``[0.5f, 1.0f]``, the returned value of size "
+"should be always positive value"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:21
+msgid ""
+"``scale``: scale factor applied to the node itself, leave it ``[1.0f, "
+"1.0f]`` by default"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:22
+msgid ""
+"``anchorPoint``: 2-list coordinates (x, y) of the anchor expressed in the"
+" percentage related to the bounding box of the node, leave it ``[0.5f, "
+"0.5f]`` by default."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:24
+msgid ""
+"``zOrders``: rendering order of this node, its value is a dictionary such"
+" as ``{\"global\": 0, \"local\": 0}``, global zOrder value is compared "
+"with all nodes in the hierarchy, local zOrder value is compared with its "
+"parent and siblings. The most top nodes have the largest values."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:29
+#: poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames:8
+msgid "Examples"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:30
+msgid ""
+"The following sample code demonstrates some ideas about the "
+"implementation of this method::"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr
+#: poco.sdk.AbstractNode.AbstractNode.setAttr
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:50
+#: poco.sdk.AbstractNode.AbstractNode.setAttr:5
+msgid "attribute name"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr
+#: poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames
+#: poco.sdk.AbstractNode.AbstractNode.getChildren
+#: poco.sdk.AbstractNode.AbstractNode.getParent
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAttr:53
+msgid "JsonSerializable attribute value or None if no such attribute."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames:1
+msgid ""
+"Enumerate all available attribute names of this node. This method in base"
+" class returns the basic attribute name by default. It is possible to add"
+" other customized or engine-specific attributes. See the example below."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames:5
+msgid ""
+"It is recommended to always call the super method and return should "
+"contain the part from super method."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames:9
+msgid "This code demonstrates how to implement this method::"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames:17
+msgid "Iterable<:obj:`str`>"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getChildren:1
+msgid ""
+"Return an iterator over all children nodes of this node. This method is "
+"invoked by ``Selector`` or ``Dumper`` to retrieve the UI hierarchy."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getChildren:4
+msgid "Iterable <:py:class:`AbstractNode <poco.sdk.AbstractNode>`>"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getParent:1
+msgid ""
+"Return the parent node of this node. Return None if there is no parent or"
+" parent is not accessible or this is the root node. This method is "
+"invoked by ``Selector`` or ``Dumper`` when traversing UI hierarchy."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getParent:4
+msgid "parent node of this node or None."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getParent
+msgid "返回类型"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.getParent:5
+msgid ":py:class:`AbstractNode or NoneType <poco.sdk.AbstractNode>`"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:1
+msgid ""
+"Apply changes of the attribute value to this node. Not all attributes can"
+" be modified. The most common attribute to be modified is the `text`. It "
+"is not recommended to modify attributes such as position, name, their "
+"modifications can lead to unexpected and false-positive errors."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:7
+msgid "attribute value"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:11
+msgid ""
+":py:meth:`setAttr "
+"<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in"
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:12
+msgid "``poco.sdk.interfaces.hierarchy``"
+msgstr ""
+

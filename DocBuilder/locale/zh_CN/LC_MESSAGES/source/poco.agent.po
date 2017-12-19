@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.agent.rst:2
+msgid "poco\\.agent module"
+msgstr ""
+
+#: of poco.agent.PocoAgent:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.agent.PocoAgent:1
+msgid "This is the agent class for poco to communicate with target device."
+msgstr ""
+
+#: of poco.agent.PocoAgent:3
+msgid "This class is an aggregation of 4 major interfaces for now."
+msgstr ""
+
+#: of poco.agent.PocoAgent:5
+msgid ""
+":py:class:`HierarchyInterface "
+"<poco.sdk.interfaces.hierarchy.HierarchyInterface>`: defines the "
+"hierarchy accessibility methods such as dump(crawl the whole UI tree), "
+"getAttr(retrieve attribute value by name)"
+msgstr ""
+
+#: of poco.agent.PocoAgent:7
+msgid ""
+":py:class:`InputInterface <poco.sdk.interfaces.input.InputInterface>`: "
+"defines the simulated input methods to allow inject simulated input on "
+"target device"
+msgstr ""
+
+#: of poco.agent.PocoAgent:9
+msgid ""
+":py:class:`ScreenInterface <poco.sdk.interfaces.screen.ScreenInterface>`:"
+" defines methods to access the screen surface"
+msgstr ""
+
+#: of poco.agent.PocoAgent:11
+msgid ""
+":py:class:`CommandInterface "
+"<poco.sdk.interfaces.command.CommandInterface>`: defines methods to "
+"communicate with target device in arbitrary way. This is optional."
+msgstr ""
+

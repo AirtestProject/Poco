@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/integration.rst:2
+msgid "PocoSDK Integration Guide"
+msgstr ""
+
+#: ../../source/doc/integration.rst:4
+msgid ""
+"PocoSDK implementations for most popular game engines are already "
+"provided in `poco-sdk repo`_. You can easily integrate PocoSDK in your "
+"game following the corresponding instruction."
+msgstr ""
+
+#: ../../source/doc/integration.rst:6
+msgid "Feel free to open an issue if you get stuck in integration."
+msgstr ""
+
+#: ../../source/doc/integration.rst:9
+msgid "Unity3D"
+msgstr ""
+
+#: ../../source/doc/integration.rst:10
+msgid ""
+"PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If "
+"your game is not supported yet, please refer to `implementation guide "
+"<implementation_guide.html>`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:12
+msgid "Clone source code from `poco-sdk repo`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:13
+msgid "Copy the ``Unity3D`` folder to your unity project script folder."
+msgstr ""
+
+#: ../../source/doc/integration.rst:14
+msgid ""
+"If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . "
+"If you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` ."
+msgstr ""
+
+#: ../../source/doc/integration.rst:15
+msgid ""
+"Add ``Unity3D/PocoManager.cs`` as script component on any permanent "
+"``GameObject`` that will never be destroyed during game's lifetime."
+msgstr ""
+
+#: ../../source/doc/integration.rst:19
+msgid "Cocos2dx-js"
+msgstr ""
+
+#: ../../source/doc/integration.rst:21
+msgid ""
+"PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on "
+"Android, the javascript sdk is inplemented in ES5."
+msgstr ""
+
+#: ../../source/doc/integration.rst:23
+msgid "Clone sdk source code from `poco-sdk repo`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:24
+msgid "Copy the ``cocos2dx-js`` folder to your cocos project script folder."
+msgstr ""
+
+#: ../../source/doc/integration.rst:25 ../../source/doc/integration.rst:41
+msgid "**Extra Step**: build the socket/websocket module?"
+msgstr ""
+
+#: ../../source/doc/integration.rst:26
+msgid ""
+"``require('poco-manager')``  in your game's first initialized script to "
+"start PocoSDK."
+msgstr ""
+
+#: ../../source/doc/integration.rst:35
+msgid "Cocos2dx-lua"
+msgstr ""
+
+#: ../../source/doc/integration.rst:37
+msgid "PocoSDK supports Cocos2dx version >= 3.0."
+msgstr ""
+
+#: ../../source/doc/integration.rst:39
+msgid "Clone the sdk source code from `poco-sdk repo`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:40
+msgid ""
+"Copy the ``cocos2dx-lua`` folder to your project script folder. You can "
+"rename the folder if you wish."
+msgstr ""
+
+#: ../../source/doc/integration.rst:42
+msgid ""
+"Initialize poco-sdk by copying following code to your game initialization"
+" script."
+msgstr ""
+
+#: ../../source/doc/integration.rst:50
+msgid "Unreal"
+msgstr ""
+
+#: ../../source/doc/integration.rst:52
+msgid "(Coming soon.)"
+msgstr ""
+
+#: ../../source/doc/integration.rst:55
+msgid "Android Native App"
+msgstr ""
+
+#: ../../source/doc/integration.rst:57
+msgid ""
+"Nothing to do about integration. Just start writing tests and be happy. "
+"See `poco for Android Native App`_ section for more details."
+msgstr ""
+
+#: ../../source/doc/integration.rst:62
+msgid "Other Engines"
+msgstr ""
+
+#: ../../source/doc/integration.rst:64
+msgid ""
+"See `implementation guide <implementation_guide.html>`_. This guide helps"
+" you implement and integrate PocoSDK with your game step by step."
+msgstr ""
+

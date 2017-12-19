@@ -24,19 +24,7 @@ your game/app.
 
 .. code-block:: bash
 
-    # In the future
     pip install pocoui
-
-Currently, the code is available only in `Git` repository and can be installed as follows. As airtest is a dependency
-of poco, install airtest first.
-
-.. code-block:: bash
-
-    git clone https://github.com/Meteorix/airtest.git
-    pip install -e airtest
-
-    git clone https://github.com/Meteorix/poco.git
-    pip install -e poco
 
 For NetEase internal use, run the following command directly.
 
@@ -82,7 +70,11 @@ info.
     assert poco('scoreVal').get_text() == "100", "score correct."
     poco('btn_back', type='Button').click()
 
-To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) !
+Tools for writing test scripts
+------------------------------
+
+To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
+standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
 Dump UI hierarchy example
 -------------------------
@@ -142,13 +134,6 @@ More detailed info about properties are described in
     }
     ...
 
-中文README
-========
-
-.. toctree::
-   :maxdepth: 2
-
-   source/README-CN
 
 API reference
 =============
@@ -165,6 +150,7 @@ Poco
     source/poco.sdk
 
 - `poco drivers <source/poco.drivers.html>`_
+
   - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
   - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
   - `android native <source/poco.drivers.android.uiautomation.html>`_
@@ -177,6 +163,7 @@ Poco
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
+.. _PocoHierarchyViewer: 下载链接
 
 ..
  下面是对应sdk的下载链接

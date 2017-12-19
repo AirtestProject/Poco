@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.interfaces.hierarchy.rst:2
+msgid "poco\\.sdk\\.interfaces\\.hierarchy module"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface:1
+msgid ""
+"This is one of the main communication interfaces. This interface defines "
+"hierarchy-related behaviour assembling from :py:class:`IDumper "
+"<poco.sdk.AbstractDumper.IDumper>`, :py:class:`Attributor "
+"<poco.sdk.Attributor>` and :py:class:`Selector <poco.sdk.Selector>`. The "
+"hierarchy mentioned is the real hierarchy on target app runtime, e.g. a "
+"game UI hierarchy in its runtime."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.dump:1
+msgid ""
+"Get the UI hierarchy with its origin structure and attributes, then store"
+" the structure and attributes  into a json serializable dictionary."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.dump
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.select
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.dump:4
+msgid ""
+"dict representing the hierarchy structure. Structure specification refers"
+" to              :py:class:`IDumper <poco.sdk.AbstractDumper.IDumper>`."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.dump
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.select
+msgid "返回类型"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.dump:5
+msgid ":obj:`dict`"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.getAttr:1
+msgid "Get attribute of UI element."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.getAttr
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.select
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.getAttr:3
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:3
+msgid ""
+"UI element or list of UI elements, if there is a list of UI elements "
+"provided, then only the             first UI element will be used"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.getAttr:4
+#: poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:4
+msgid "attribute name"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.select:1
+msgid ""
+"Select UI element(s) matching the given query expression and return the "
+"list of selected UI element(s)"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.select:3
+msgid ""
+"query expression,  for the structure specification refer to "
+":py:class:`Selector <poco.sdk.Selector>`."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.select:6
+msgid ""
+"whether or not to select multiple elements,  if False, the method "
+"terminates             immediately once the node is found, otherwise the "
+"method travers through all nodes and then terminates"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.select:9
+msgid "list of UI elements corresponding to the given query expression"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.select:10
+msgid ":obj:`list`"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:1
+msgid "Set attribute of UI element."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:6
+msgid "new value to be set."
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr
+msgid "raises"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:8
+msgid ":exc:`UnableToSetAttributeException` -- raised when："
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:10
+msgid "fails to set attributes on given UI element"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:11
+msgid "the  engine does not support mutating attributes"
+msgstr ""
+
+#: of poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr:12
+msgid "developer does not allow to change the attribute value by implementation"
+msgstr ""
+

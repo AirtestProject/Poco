@@ -4,8 +4,6 @@ Poco ポコ
 
 **A cross-engine UI automation framework**
 
-一个引擎无关的自动化框架。通过HunterRpc进行数据传输，所有接入了 `hunter`_ 的项目可直接使用该测试框架。
-
 Example
 -------
 
@@ -61,7 +59,7 @@ SDK接入(Integration)
 如何使用poco
 --------
 
-不用引擎版本的poco请按对应的方式初始化。
+根据你所使用的引擎，按对应的方式初始化Poco实例。
 
 * Unity3D
 
@@ -81,7 +79,7 @@ SDK接入(Integration)
     ui = poco('...')
     ui.click()
 
-* `NetEase Internal Engines <source/poco.drivers.netease.internal.html>`_ 公司内非Unity3D项目
+* `NetEase Internal Engines <poco.drivers.netease.internal.html>`_ 公司内非Unity3D项目
 
 .. code-block:: python
 
@@ -141,7 +139,8 @@ SDK接入(Integration)
 顺序选择器（索引选择器，更推荐迭代遍历）
 """"""""""""""""""""""""""""""""""
 
-索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
+索引和遍历会默认按照从左到右从上到下的空间顺序按顺序遍历。遍历过程中，还未遍历到的节点如果从画面中移除了则会抛出异常，
+已遍历的节点即使移除也不受影响。遍历顺序在遍历开始前已经确定，遍历过程中界面上的节点进行了重排则仍然按照之前的顺序进行遍历。
 
 .. code-block:: python
 
@@ -225,7 +224,8 @@ drag
 focus (局部定位)
 ''''''''''''''
 
-与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` ，以此类推。
+与节点坐标相关的操作默认以anchor为起始点，click的话就直接click在anchor上。如果要进行局部的点击偏移，可以使用focus操作。
+focus同屏幕坐标系类似，以节点包围盒左上角为原点，长宽均为1，中心点即为 ``[0.5, 0.5]`` ，右下角为 ``[1, 1]`` ，以此类推。
 
 .. code-block:: python
 
@@ -391,7 +391,7 @@ Poco测试框架相关
 .. _Integration Guide: doc/integration.html
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
-.. _API Reference:
+.. _API Reference: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html#api-reference
 .. _在线文档: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
 .. _HierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
 .. _AirtestIDE:
