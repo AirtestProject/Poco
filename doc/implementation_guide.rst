@@ -2,6 +2,8 @@
 Implementation Guide
 ====================
 
+(this page is not finished yet)
+
 This guide helps you implement and integrate poco-sdk with your game/app step by step.
 
 Poco-sdk now supports following languages:
