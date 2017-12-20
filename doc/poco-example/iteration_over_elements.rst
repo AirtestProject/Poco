@@ -13,15 +13,11 @@ The following example shows how to buy all merchandises on the current screen.
 
     # coding=utf-8
 
-    from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
-
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = Poco(...)
 
     bought_items = set()
-    for item in self.poco('main_node').child('list_item').offspring('name'):
+    for item in poco('main_node').child('list_item').offspring('name'):
+        # get its text value
         item_name = item.get_text()
 
         # markdown the bought item

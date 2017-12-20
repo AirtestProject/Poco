@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 15:34+0800\n"
+"POT-Creation-Date: 2017-12-20 17:35+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgid "`handling exceptions`_"
 msgstr ""
 
 #: ../../source/doc/poco-example/index.rst:15
-msgid "`waiting events`_"
+msgid "`waiting for events`_"
 msgstr ""
 
 #: ../../source/doc/poco-example/index.rst:16
@@ -68,5 +68,8 @@ msgid "`optimize speed by freezing UI`_"
 msgstr ""
 
 #~ msgid "(entry only and it is not finished yet.)"
+#~ msgstr ""
+
+#~ msgid "`waiting events`_"
 #~ msgstr ""
 
