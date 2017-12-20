@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-20 17:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,5 +35,49 @@ msgid ""
 "exceptions will raise. If you are not sure whether the UI exists or not, "
 "you can call ``.exists()`` to test whether exists. In specific test "
 "cases, remember to think of a bug if the UI does not exist as your wish."
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:42
+msgid "See also:"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:44
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:45
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:46
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:47
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:48
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:49
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:50
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:51
+msgid "`waiting events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:52
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:53
+msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

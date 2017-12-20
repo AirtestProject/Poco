@@ -42,7 +42,7 @@ See also:
 * `play with coordinate system and local positioning`_
 * `iteration over elements`_
 * `handling exceptions`_
-* `waiting events`_
+* `waiting for events`_
 * `play with unittest framework`_
 * `optimize speed by freezing UI`_
 
@@ -54,6 +54,6 @@ See also:
 .. _play with coordinate system and local positioning: play_with_coordinate_system_and_local_positioning.html
 .. _iteration over elements: iteration_over_elements.html
 .. _handling exceptions: handling_exceptions.html
-.. _waiting events: waiting_events.html
+.. _waiting for events: waiting_events.html
 .. _play with unittest framework: play_with_unittest_framework.html
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
