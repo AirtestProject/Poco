@@ -57,6 +57,10 @@ Android Native App
 Nothing to do about integration. Just start writing tests and be happy.
 See `poco for Android Native App`_ section for more details.
 
+Netease Internal Engines
+------------------------
+
+Already ready for using. No need to do anything!
 
 Other Engines
 -------------

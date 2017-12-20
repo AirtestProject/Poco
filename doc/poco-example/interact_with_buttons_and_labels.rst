@@ -24,7 +24,7 @@ a bug if the UI does not exist as your wish.
     btn.click()
     print(btn.get_text())  # => 'Start'
 
-    intro = poco('instruduction')
+    intro = poco('introduction')
     print(intro.get_text())  # => 'xxxx'
     print(intro.attr('text'))  # => 'xxxx'
     print(intro.attr('type'))  # => 'Text'
@@ -38,4 +38,4 @@ a bug if the UI does not exist as your wish.
 
     invisible_obj = poco('result_panel', type='Layer')
     print(invisible_obj.exists())  # => False. This UI is not visible to user.
-    print(invisible_obj.attr('size'))  # => raise PocoNoSuchNodeException. Cannot retrieve attributes of inexistent UI.
+

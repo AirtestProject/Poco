@@ -49,7 +49,7 @@ Android原生应用或Unity3D游戏请使用 `HierarchyViewer`_ 查看UI层次�
 
 ::
 
-    pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
+    pip install -i https://pypi.nie.netease.com/ airtest-hunter pocoui pocounit
 
 SDK接入(Integration)
 ------------------

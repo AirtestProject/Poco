@@ -1,0 +1,59 @@
+
+Play with coordinate system and local positioning
+=================================================
+
+In poco, coordinates are always normalized from 0 to 1. You can simply think of it the percentage size and positions.
+In case that you need to interact with UI nearby or just want to click the button's edge rather than the center, you
+can use local positioning by specifying a offset.
+
+In general, to interact with UI always starts with a point, such as click or drag from the point. Local positioning
+allows you to make any offset from the selected UI without selecting another UI.
+
+.. image:: ../img/hunter-poco-coordinate-system.png
+
+The following examples will show how to click different point inside selected UI.
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    # click the logo
+    logo = poco('logo')
+    logo.focus('center').click()
+    logo.focus([0.5, 0.5]).click()  # the same as 'center'
+    logo.focus([0, 0]).click()  # top left corner
+    logo.focus([1, 1]).click()  # bottom down corner
+
+    # drag the star
+    star = poco('star')
+    star.focus('center').swipe(direction=[0.1, 0])  # from 'center' towards right
+    star.focus([0, 0]).swipe(dirextion=[0.1, 0])  # from 'top left' towards right
+
+Can also click outside the selected UI. It is very useful to click some models by its name tag.
+
+来个梦幻人物脚底下名字的截图
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    npc_name = poco(text='袁天罡')
+    npc = npc_name.focus([0.5, -1])
+    npc.click()
+
+The following examples show that ``focus`` is an immutable method that will not impact the origin UI.
+
+.. code-block:: python
+
+    # focus is immutable
+    button = poco('button')
+    button_right_edge = button.focus([1, 0.5])
+    button.click()  # still click the center
+    button_right_edge.click()  # will click the right edge

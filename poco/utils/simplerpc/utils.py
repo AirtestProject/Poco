@@ -10,7 +10,7 @@ def sync_wrapper(func):
     @wraps(func)
     def new_func(*args, **kwargs):
         cb = func(*args, **kwargs)
-        ret, err = cb.wait(timeout=5)
+        ret, err = cb.wait(timeout=30)
         if err:
             raise RemoteError(err['message'])
         return ret

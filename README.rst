@@ -72,7 +72,7 @@ For NetEase internal use, run the following command directly.
 
 .. code-block:: bash
 
-    pip install -i https://pypi.nie.netease.com/ airtest-hunter poco pocounit
+    pip install -i https://pypi.nie.netease.com/ airtest-hunter pocoui pocounit
 
 SDK Integration
 ---------------

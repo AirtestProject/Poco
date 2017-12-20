@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-20 10:38+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,11 +133,19 @@ msgid ""
 "See `poco for Android Native App`_ section for more details."
 msgstr ""
 
-#: ../../source/doc/integration.rst:62
+#: ../../source/doc/integration.rst:61
+msgid "Netease Internal Engines"
+msgstr ""
+
+#: ../../source/doc/integration.rst:63
+msgid "Already ready for using. No need to do anything!"
+msgstr ""
+
+#: ../../source/doc/integration.rst:66
 msgid "Other Engines"
 msgstr ""
 
-#: ../../source/doc/integration.rst:64
+#: ../../source/doc/integration.rst:68
 msgid ""
 "See `implementation guide <implementation_guide.html>`_. This guide helps"
 " you implement and integrate PocoSDK with your game step by step."

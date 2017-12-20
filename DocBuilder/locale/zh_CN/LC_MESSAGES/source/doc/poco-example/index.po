@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-20 15:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,36 +27,36 @@ msgid ""
 "using Unity3D demo game. It is nothing different from other games."
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:7
-msgid "(entry only and it is not finished yet.)"
-msgstr ""
-
-#: ../../source/doc/poco-example/index.rst:9
+#: ../../source/doc/poco-example/index.rst:8
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:10
+#: ../../source/doc/poco-example/index.rst:9
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:11
+#: ../../source/doc/poco-example/index.rst:10
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:12
+#: ../../source/doc/poco-example/index.rst:11
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:13
+#: ../../source/doc/poco-example/index.rst:12
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:14
+#: ../../source/doc/poco-example/index.rst:13
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/index.rst:15
+#: ../../source/doc/poco-example/index.rst:14
 msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/index.rst:15
+msgid "`waiting events`_"
 msgstr ""
 
 #: ../../source/doc/poco-example/index.rst:16
@@ -66,4 +66,7 @@ msgstr ""
 #: ../../source/doc/poco-example/index.rst:17
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
+
+#~ msgid "(entry only and it is not finished yet.)"
+#~ msgstr ""
 
