@@ -2,6 +2,23 @@
 Optimize speed by freezing UI
 =============================
 
+This section introduces one of the way to speed up your test script only in complicate situations. For simple selection
+and operations, you need not to do this optimization at all.
+
+Freezing UI is just to dump the UI hierarchy and store it locally. With current hierarchy data, the position of UIs can
+be retrieved directly without communicating with game/app which is slow if multiple visits. The only one disadvantage of
+freezing UI is that the hierarchy data cannot stay in sync with game/app automatically. So you should handle your
+UI state carefully otherwise you may get wired test results.
+
+.. note::
+
+    In some poco-sdk implementations, freezing and not freezing UI are equivalent. See poco engine specification for
+    more details.
+
+The following 2 examples shows the difference between freezing and not freezing UI.
+
+使用netease的例子吧
+
 See also:
 
 * `basic usage`_

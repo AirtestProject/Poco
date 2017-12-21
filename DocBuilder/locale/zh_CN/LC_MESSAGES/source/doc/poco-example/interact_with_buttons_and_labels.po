@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:3
 msgid "Interact with Buttons and Labels"
-msgstr ""
+msgstr "Button和Label的交互"
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:5
 msgid ""
@@ -28,6 +28,7 @@ msgid ""
 " methods of UI proxy. It is very easy to access all available attributes "
 "of UI in game/app."
 msgstr ""
+"poco中的UI对象只是一个 **代理** ，下面例子将展示UI代理的常用方法，通过UI代理可以很容易获取在game/app中的具体属性值。"
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:8
 msgid ""
@@ -36,10 +37,12 @@ msgid ""
 "you can call ``.exists()`` to test whether exists. In specific test "
 "cases, remember to think of a bug if the UI does not exist as your wish."
 msgstr ""
+"如果从一个不存在的UI里读取属性值或者操作它，会触发异常，如果你不确定那个UI是否存在，可以调用 ``.exists()`` 来判断。"
+"在具体的测试用例中，如果因为UI不存在出现了异常，这很有可能是game/app的bug，不要强行忽略。"
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:42
 msgid "See also:"
-msgstr ""
+msgstr "更多示例："
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:44
 msgid "`basic usage`_"
@@ -80,7 +83,3 @@ msgstr ""
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:53
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
-
-#~ msgid "`waiting events`_"
-#~ msgstr ""
-

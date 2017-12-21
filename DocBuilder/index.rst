@@ -163,7 +163,7 @@ Poco
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
-.. _PocoHierarchyViewer: 下载链接
+.. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
 
 ..
  下面是对应sdk的下载链接

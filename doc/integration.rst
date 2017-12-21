@@ -1,12 +1,13 @@
+
 PocoSDK Integration Guide
-======================================
+=========================
 
 PocoSDK implementations for most popular game engines are already provided in `poco-sdk repo`_. You can easily integrate PocoSDK in your game following the corresponding instruction.
 
 Feel free to open an issue if you get stuck in integration.
 
 Unity3D
-----------
+-------
 PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If your game is not supported yet, please refer to `implementation guide <implementation_guide.html>`_.
 
 1. Clone source code from `poco-sdk repo`_. 
@@ -18,7 +19,7 @@ PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If your ga
 Cocos2dx-js
 -----------
 
-PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, the javascript sdk is inplemented in ES5.
+PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, the javascript sdk is implemented in ES5.
 
 1. Clone sdk source code from `poco-sdk repo`_. 
 #. Copy the ``cocos2dx-js`` folder to your cocos project script folder.
@@ -68,4 +69,4 @@ Other Engines
 See `implementation guide <implementation_guide.html>`_. This guide helps you implement and integrate PocoSDK with your game step by step.
 
 .. _poco-sdk repo: https://github.com/Meteorix/poco-sdk
-.. _poco for Android Native App: 
+.. _poco for Android Native App:

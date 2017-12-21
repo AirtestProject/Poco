@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../../source/doc/poco-example/basic.rst:3
 msgid "Basic Usage"
-msgstr ""
+msgstr "基本用法"
 
 #: ../../source/doc/poco-example/basic.rst:5
 msgid ""
@@ -27,10 +27,11 @@ msgid ""
 "following example simply shows how to select a button and perform a "
 "click."
 msgstr ""
+"在poco实例后加一对括号即为UI选择，下面的例子展示如何选择一个名字叫做 ``btn_start`` 的按钮并模拟点击下去。"
 
 #: ../../source/doc/poco-example/basic.rst:21
 msgid "See also:"
-msgstr ""
+msgstr "更多示例："
 
 #: ../../source/doc/poco-example/basic.rst:23
 msgid "`basic usage`_"

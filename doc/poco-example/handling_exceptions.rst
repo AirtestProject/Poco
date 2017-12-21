@@ -8,7 +8,7 @@ your test script. If you think it is poco's bug, feel free to open an issue.
 :py:class:`InvalidOperationException <poco.exceptions.InvalidOperationException>`
 ---------------------------------------------------------------------------------
 
-If the operation you performed in your test script is not allowed or unable to do that, you will get this exception.
+If the operation you performed takes no effects or unable to complete, you will get this exception.
 If you got this exception, you should check your script carefully. Mostly because the UI you selected is outside the
 screen and a operation performed on it. See the following example.
 

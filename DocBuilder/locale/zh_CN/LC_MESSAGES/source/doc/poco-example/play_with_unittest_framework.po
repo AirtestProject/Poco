@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-20 20:56+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:3
+msgid "Play with unittest framework"
+msgstr "使用单元测试框架"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:5
+msgid ""
+"This section introduces a unittest framework (``pocounit``) to make your "
+"test scripts **higher quality** and **more manageable**. This unittest "
+"framework is fully compatible with Python standard library ``unittest``. "
+"To use ``pocounit``, install from pip directly."
+msgstr ""
+"本节引入单元测试框架 (``pocounit``)，这样测试用例会质量更高也更容易管理和维护。"
+"这个单元测试框架 ``pocounit`` 与python标准库的unittest完全兼容，直接通过pip安装即可。"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:14
+msgid ""
+"``pocounit`` provides a full set of assertion methods just like Python "
+"unittest and will record all details at runtime of the test script. You "
+"can replay the test procedure after and see what's wrong with your test "
+"case by `PocoTestResultPlayer for windows`_ (or `PocoTestResultPlayer for"
+" mac`_)."
+msgstr ""
+"``pocounit`` 和python标准库的unittest一样，提供了完整的一套断言方法，除此之外，"
+"更重要的是使用 ``pocounit`` 编写的用例将可以通过欧我们的提供的回放工具对测试过程进行完整的回放，不会漏掉任何细节。"
+"回放工具下载地址： `PocoTestResultPlayer for windows`_ (或 `PocoTestResultPlayer for mac`_)"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:18
+msgid "The following simple example shows how powerful of pocounit"
+msgstr "下面例子展示pocounit的强大之处"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:20
+msgid "video link: `replay the test`_"
+msgstr "视频链接: `replay the test`_"
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:104
+msgid "See also:"
+msgstr "更多示例："
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:106
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:107
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:108
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:109
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:110
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:111
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:112
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:113
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:114
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:115
+msgid "`optimize speed by freezing UI`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:135
+msgid "About PocoTestResultPlayer"
+msgstr "关于PocoTestResultPlayer"
+

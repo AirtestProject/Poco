@@ -457,7 +457,7 @@ correspond to the position out of the UI element.
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
-.. _PocoHierarchyViewer: 下载链接
+.. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
 
 .. _API Reference: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html#api-reference
 .. _Online docs: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html

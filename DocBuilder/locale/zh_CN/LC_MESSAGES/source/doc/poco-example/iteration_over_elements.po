@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:3
+msgid "Iteration over elements"
+msgstr "遍历UI"
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:5
+msgid ""
+"Poco provides the easiest way to interact with a serials of UI. That is "
+"to iterate over the selected UIs via for-loop. In the loop, the iterator "
+"is also the the UI proxy. You can apply any method just like other "
+"selected UI."
+msgstr ""
+"Poco提供了非常简单的方式来处理一系列UI交互，直接用for循环进行迭代遍历即可。"
+"在for循环中，每次迭代的对象都是一个UI代理，所以可以像之前说的那样，去访问对象的属性和进行对象操作。"
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:8
+msgid ""
+"The following example shows how to buy all merchandises on the current "
+"screen."
+msgstr "下面例子展示了怎么样在商城界面中购买当前屏幕的所有商品。"
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:32
+msgid "See also:"
+msgstr "更多示例："
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:34
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:35
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:36
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:37
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:38
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:39
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:40
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:41
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:42
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:43
+msgid "`optimize speed by freezing UI`_"
+msgstr ""
+
+#~ msgid "配一个g62的商店界面图"
+#~ msgstr ""
+
+#~ msgid "`waiting events`_"
+#~ msgstr ""
+

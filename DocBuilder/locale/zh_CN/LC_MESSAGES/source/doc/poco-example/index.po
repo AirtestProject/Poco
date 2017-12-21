@@ -19,57 +19,51 @@ msgstr ""
 
 #: ../../source/doc/poco-example/index.rst:3
 msgid "Poco Examples"
-msgstr ""
+msgstr "Poco示例 (Examples)"
 
 #: ../../source/doc/poco-example/index.rst:5
 msgid ""
 "Here are several example poco test scripts. Each example is written by "
 "using Unity3D demo game. It is nothing different from other games."
-msgstr ""
+msgstr "以下的所有示例大部分都是基于一个Unity3D写的小游戏，你可以下载这个小游戏并安装到你的手机上来测试一下例子里的代码。"
 
 #: ../../source/doc/poco-example/index.rst:8
 msgid "`basic usage`_"
-msgstr ""
+msgstr "`基本用法 <basic usage_>`_ "
 
 #: ../../source/doc/poco-example/index.rst:9
 msgid "`interact with Buttons and Labels`_"
-msgstr ""
+msgstr "`Button和Label的交互 <interact with Buttons and Labels_>`_"
 
 #: ../../source/doc/poco-example/index.rst:10
 msgid "`drag and swipe operations`_"
-msgstr ""
+msgstr "`拖动和滑动(drag/swipe) <drag and swipe operations_>`_"
 
 #: ../../source/doc/poco-example/index.rst:11
 msgid "`advanced selections`_"
-msgstr ""
+msgstr "`复杂层次的UI选择 <advanced selections_>`_"
 
 #: ../../source/doc/poco-example/index.rst:12
 msgid "`play with coordinate system and local positioning`_"
-msgstr ""
+msgstr "`坐标系与局部定位 <play with coordinate system and local positioning_>`_"
 
 #: ../../source/doc/poco-example/index.rst:13
 msgid "`iteration over elements`_"
-msgstr ""
+msgstr "`遍历UI <iteration over elements_>`_"
 
 #: ../../source/doc/poco-example/index.rst:14
 msgid "`handling exceptions`_"
-msgstr ""
+msgstr "`异常处理 <handling exceptions_>`_"
 
 #: ../../source/doc/poco-example/index.rst:15
 msgid "`waiting for events`_"
-msgstr ""
+msgstr "`等待UI <waiting for events_>`_"
 
 #: ../../source/doc/poco-example/index.rst:16
 msgid "`play with unittest framework`_"
-msgstr ""
+msgstr "`使用单元测试框架 <play with unittest framework_>`_"
 
 #: ../../source/doc/poco-example/index.rst:17
 msgid "`optimize speed by freezing UI`_"
-msgstr ""
-
-#~ msgid "(entry only and it is not finished yet.)"
-#~ msgstr ""
-
-#~ msgid "`waiting events`_"
-#~ msgstr ""
+msgstr "`冻结UI以加快一些速度 <optimize speed by freezing UI_>`_"
 

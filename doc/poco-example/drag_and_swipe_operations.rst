@@ -2,10 +2,11 @@
 Drag and Swipe operations
 =========================
 
-Like click, drag and swipe are other types of actions on UI. Drag usually starts from and ends to specific UI, but
-Swipe can be performed from any point to any point.
+Like click, drag and swipe are other types of actions on UI. **Drag** usually starts from and ends to specific UI, while
+**Swipe** can be performed from any point to any point.
 
-The following example shows how to swipe or drag from A to B.
+The following example shows how to swipe or drag the "star" to the "shell". And also simulate scrolling a ListView
+by using drag.
 
 .. code-block:: python
 

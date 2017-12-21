@@ -1,0 +1,109 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-21 10:58+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:3
+msgid "Optimize speed by freezing UI"
+msgstr "冻结UI以加快一些速度"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:5
+msgid ""
+"This section introduces one of the way to speed up your test script only "
+"in complicate situations. For simple selection and operations, you need "
+"not to do this optimization at all."
+msgstr "本节介绍一种加快UI操作速度的一种方法（即冻结UI），只是对于复杂的选择和UI遍历有效，"
+"如果只是简单的按名字选择请不要用这种方法，以为一点效果都没有。"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:8
+msgid ""
+"Freezing UI is just to dump the UI hierarchy and store it locally. With "
+"current hierarchy data, the position of UIs can be retrieved directly "
+"without communicating with game/app which is slow if multiple visits. The"
+" only one disadvantage of freezing UI is that the hierarchy data cannot "
+"stay in sync with game/app automatically. So you should handle your UI "
+"state carefully otherwise you may get wired test results."
+msgstr ""
+"冻结UI其实就是将当前界面的层次结构包括所有UI的属性信息抓取并存到内存里，"
+"在跟UI交互时就直接从内存里读取UI属性，而不用在发送rpc请求到game/app里去操作UI。"
+"好处就是一次抓取(消耗几百毫秒），可以使用多次，读取UI属性几乎不消耗时间，同时坏处就是，"
+"你需要手动处理UI同步，如果抓取了层次结构后，某个UI控件位置发生了变化，"
+"此时如果仍然点击这个UI的话，就会点击到原来的位置上，而不是最新的位置，这很容易导致奇怪的测试结果，请谨慎使用。"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:15
+msgid ""
+"In some poco-sdk implementations, freezing and not freezing UI are "
+"equivalent. See poco engine specification for more details."
+msgstr "冻结UI仅在某些poco-sdk实现中生效，具体细节请参考poco引擎specification。"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:18
+msgid ""
+"The following 2 examples shows the difference between freezing and not "
+"freezing UI."
+msgstr "下面两个例子分别展示使用了冻结UI和不使用冻结UI的效果区别"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:20
+msgid "使用netease的例子吧"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:22
+msgid "See also:"
+msgstr "更多示例:"
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:24
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:25
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:26
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:27
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:28
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:29
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:30
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:31
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:32
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:33
+msgid "`optimize speed by freezing UI`_"
+msgstr ""
+
+#~ msgid "`waiting events`_"
+#~ msgstr ""
+
