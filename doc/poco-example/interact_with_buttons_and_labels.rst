@@ -39,6 +39,25 @@ a bug if the UI does not exist as your wish.
     invisible_obj = poco('result_panel', type='Layer')
     print(invisible_obj.exists())  # => False. This UI is not visible to user.
 
+For operations, the simplest one is click, and can also do long click as long as you wish. The following example shows
+the effects of click and long click.
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    poco('basic').click()
+    poco('star_single').long_click()
+    poco('star_single').long_click(duration=5)
+
 See also:
 
 * `basic usage`_

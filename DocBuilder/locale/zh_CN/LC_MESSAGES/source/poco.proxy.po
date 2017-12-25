@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2017-12-25 11:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,10 +40,10 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.attr poco.proxy.UIObjectProxy.child
 #: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
 #: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_position
-#: poco.proxy.UIObjectProxy.offspring poco.proxy.UIObjectProxy.set_text
-#: poco.proxy.UIObjectProxy.setattr poco.proxy.UIObjectProxy.sibling
-#: poco.proxy.UIObjectProxy.swipe poco.proxy.UIObjectProxy.wait
-#: poco.proxy.UIObjectProxy.wait_for_appearance
+#: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.set_text poco.proxy.UIObjectProxy.setattr
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.swipe
+#: poco.proxy.UIObjectProxy.wait poco.proxy.UIObjectProxy.wait_for_appearance
 #: poco.proxy.UIObjectProxy.wait_for_disappearance
 msgid "参数"
 msgstr ""
@@ -99,8 +99,8 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_bounds
 #: poco.proxy.UIObjectProxy.get_name poco.proxy.UIObjectProxy.get_position
 #: poco.proxy.UIObjectProxy.get_size poco.proxy.UIObjectProxy.get_text
-#: poco.proxy.UIObjectProxy.offspring poco.proxy.UIObjectProxy.sibling
-#: poco.proxy.UIObjectProxy.wait
+#: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.wait
 msgid "返回"
 msgstr ""
 
@@ -434,6 +434,25 @@ msgstr ""
 msgid ""
 "Clear the flag to indicate to re-query or re-select the UI element(s) "
 "from hierarchy."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:1
+msgid ""
+"Perform the long click action on the UI element(s) represented by the UI "
+"proxy. If this UI proxy represents a set of UI elements, the first one in"
+" the set is clicked and the anchor point of the UI element is used as the"
+" default one. Similar to click but press the screen for the given time "
+"interval and then release."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:5
+msgid "whole action duration."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:8
+msgid ""
+"the same as :py:meth:`poco.pocofw.Poco.long_click`, depending on poco "
+"agent implementation."
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.nodes:1

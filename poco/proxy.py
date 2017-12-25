@@ -288,6 +288,26 @@ class UIObjectProxy(object):
         return ret
 
     @wait
+    def long_click(self, duration=2.0):
+        """
+        Perform the long click action on the UI element(s) represented by the UI proxy. If this UI proxy represents a 
+        set of UI elements, the first one in the set is clicked and the anchor point of the UI element is used as the 
+        default one. Similar to click but press the screen for the given time interval and then release.
+    
+        Args:
+            duration (:py:obj:`float`): whole action duration.
+        
+        Return:
+            the same as :py:meth:`poco.pocofw.Poco.long_click`, depending on poco agent implementation.
+        """
+
+        pos_in_percentage = self.get_position(self._focus or 'anchor')
+        self.poco.pre_action('long_click', self, pos_in_percentage)
+        ret = self.poco.long_click(pos_in_percentage, duration)
+        self.poco.post_action('long_click', self, pos_in_percentage)
+        return ret
+
+    @wait
     def swipe(self, dir, focus=None, duration=0.5):
         """
         Perform a swipe action given by the direction from this UI element. For notices and limitations see
