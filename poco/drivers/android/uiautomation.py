@@ -7,9 +7,15 @@ import requests
 import time
 import warnings
 
-from airtest.core.android import Android
+try:
+    new_airtest_api = True
+    import airtest.core.api as _____
+    from airtest.core.android.utils.iputils import get_ip_address
+except ImportError:
+    new_airtest_api = False
+
 from airtest.core.android.ime import YosemiteIme
-from airtest.core.android.utils.iputils import get_ip_address
+
 
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
@@ -86,7 +92,10 @@ class AndroidUiautomationPoco(Poco):
         if using_proxy:
             self.device_ip = self.adb_client.host or "127.0.0.1"
         else:
-            self.device_ip = get_ip_address(self.adb_client)
+            if new_airtest_api:
+                self.device_ip = self.adb_client.get_ip_address()
+            else:
+                self.device_ip = get_ip_address(self.adb_client)
 
         # save current top activity (@nullable)
         current_top_activity_package = self.android.get_top_activity_name()
@@ -169,11 +178,14 @@ class AndroidUiautomationPoco(Poco):
             self._instrument_proc = None
         ready = False
         self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
-        self._instrument_proc = self.adb_client.shell([
-            'am', 'instrument', '-w', '-e', 'class',
-            '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
-            '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
-            not_wait=True)
+        instrumentation_cmd = [
+                'am', 'instrument', '-w', '-e', 'class',
+                '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+                '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
+        if new_airtest_api:
+            self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
+        else:
+            self._instrument_proc = self.adb_client.shell(instrumentation_cmd, not_wait=True)
         time.sleep(2)
         for i in range(10):
             try:
