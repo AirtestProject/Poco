@@ -52,11 +52,33 @@ The following examples show that ``focus`` is an immutable method that will not 
 
 .. code-block:: python
 
+    # coding=utf-8
+
     # focus is immutable
     button = poco('button')
     button_right_edge = button.focus([1, 0.5])
     button.click()  # still click the center
     button_right_edge.click()  # will click the right edge
+
+The following example show how to scroll a list by using drag.
+
+.. image:: img/scroll2.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    listView = poco('Scroll View')
+    listView.focus([0.5, 0.8]).drag_to(listView.focus([0.5, 0.2]))
+    time.sleep(1)
 
 See also:
 

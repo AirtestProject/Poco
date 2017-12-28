@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"POT-Creation-Date: 2017-12-28 17:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,8 +28,8 @@ msgid ""
 "interact with UI nearby or just want to click the button's edge rather "
 "than the center, you can use local positioning by specifying a offset."
 msgstr ""
-"poco里的坐标的取值范围是相对于屏幕的，屏幕的宽和高都为单位1，因此也叫百分比坐标。"
-"当你需要和某个UI控件附近的UI控件交互或者要点击某个按钮的边缘而不是中间时，那可以用 **局部定位** 。"
+"poco里的坐标的取值范围是相对于屏幕的，屏幕的宽和高都为单位1，因此也叫百分比坐标。当你需要和某个UI控件附近的UI控件交互或者要点击某个按钮的边缘而不是中间时，那可以用"
+" **局部定位** 。"
 
 #: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:9
 msgid ""
@@ -37,8 +37,8 @@ msgid ""
 " or drag from the point. Local positioning allows you to make any offset "
 "from the selected UI without selecting another UI."
 msgstr ""
-"总的来说，和UI控件交互最终都是和坐标交互，例如点击一个按钮实际上就是点击某个坐标。 **局部定位** 就可以基于某个UI的"
-"左上角进行偏移，然后可以实现点击到这个UI控件内的各个坐标甚至UI外面的其他坐标。"
+"总的来说，和UI控件交互最终都是和坐标交互，例如点击一个按钮实际上就是点击某个坐标。 **局部定位** "
+"就可以基于某个UI的左上角进行偏移，然后可以实现点击到这个UI控件内的各个坐标甚至UI外面的其他坐标。"
 
 #: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:14
 msgid ""
@@ -60,49 +60,55 @@ msgstr ""
 msgid ""
 "The following examples show that ``focus`` is an immutable method that "
 "will not impact the origin UI."
-msgstr "下面例子将展示 ``focus`` 方法的不可变(immutable)特性。调用focos方法不会影响到原来的UI代理，而是返回一个跟原来一样的新的UI代理。"
+msgstr ""
+"下面例子将展示 ``focus`` "
+"方法的不可变(immutable)特性。调用focos方法不会影响到原来的UI代理，而是返回一个跟原来一样的新的UI代理。"
 
 #: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:61
+msgid "The following example show how to scroll a list by using drag."
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:79
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:63
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:81
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:64
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:82
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:65
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:83
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:66
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:84
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:67
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:85
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:68
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:86
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:69
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:87
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:70
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:88
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:71
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:89
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:72
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:90
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

@@ -1,4 +1,6 @@
 
+.. image:: doc/img/logo-landscape-no-padding.png
+
 Poco ポコ
 =======
 
