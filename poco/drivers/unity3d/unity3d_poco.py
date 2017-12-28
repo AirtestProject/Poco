@@ -5,7 +5,9 @@
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
+from poco.sdk.Attributor import Attributor
 from poco.sdk.interfaces.screen import ScreenInterface
+from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
@@ -53,7 +55,7 @@ class UnityPocoAgent(PocoAgent):
         self.c.run(backend=True)
         self.c.wait_connected()
 
-        hierarchy = FreezedUIHierarchy(Dumper(self.c))
+        hierarchy = FreezedUIHierarchy(Dumper(self.c), UnityAttributor(self.c))
         if unity_editor:
             screen = UnityScreen(self.c)
         else:
@@ -64,6 +66,23 @@ class UnityPocoAgent(PocoAgent):
     @sync_wrapper
     def get_debug_profiling_data(self):
         return self.c.call("GetDebugProfilingData")
+
+
+class UnityAttributor(Attributor):
+    def __init__(self, client):
+        super(UnityAttributor, self).__init__()
+        self.client = client
+
+    def setAttr(self, node, attrName, attrVal):
+        if attrName == 'text':
+            if type(node) in (list, tuple):
+                node = node[0]
+            instance_id = node.getAttr('_instanceId')
+            if instance_id:
+                success = self.client.call('SetText', instance_id, attrVal)
+                if success:
+                    return
+        raise UnableToSetAttributeException(attrName, node)
 
 
 class Dumper(FreezedUIDumper):

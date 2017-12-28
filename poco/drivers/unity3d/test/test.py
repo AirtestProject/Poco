@@ -43,12 +43,6 @@ if __name__ == '__main__':
     # time.sleep(2)
     #
     p = UnityPoco(("localhost", 5001), unity_editor=True)
-    p.agent.hierarchy.dump()
-    # b64img, fmt = p.snapshot()
-    # print b64img
-    # print len(b64img)
-    print p.agent.get_debug_profiling_data()
-    #
-    # h = p.agent.hierarchy.dump()
-    # print json.dumps(h)
+    p('pos_input').set_text('2333')
+    time.sleep(2)
 

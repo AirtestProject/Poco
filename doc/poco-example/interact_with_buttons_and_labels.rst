@@ -5,6 +5,59 @@ Interact with Buttons and Labels
 UI objects are just proxies, you can assign it into a variable and reuse without repeated instantiation. The following
 example shows the most used methods of UI proxy. It is very easy to access all available attributes of UI in game/app.
 
+For operations, the simplest one is click, and can also do long click as long as you wish. The following example shows
+the effects of click and long click.
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    poco('basic').click()
+    poco('star_single').long_click()
+    poco('star_single').long_click(duration=5)
+
+The following example shows more functional ways of interacting with UIs, including getting and setting attributes on
+UIs.
+
+.. image:: img/interact_with_buttons_and_labels.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    poco(text='basic').click()
+
+    star = poco('star_single')
+    if star.exists():
+        pos = star.get_position()
+        input_field = poco('pos_input')
+        time.sleep(1)
+        input_field.set_text('x={:.02f}, y={:.02f}'.format(*pos))  # very fast
+        time.sleep(3)
+
+    title = poco('title').get_text()
+    if title == 'Basic test':
+        back = poco('btn_back', type='Button')
+        back.click()
+        back.click()
+
 If retrieve attributes or perform an operation on inexistent UI, exceptions will raise. If you are not sure whether
 the UI exists or not, you can call ``.exists()`` to test whether exists. In specific test cases, remember to think of
 a bug if the UI does not exist as your wish.
@@ -39,24 +92,6 @@ a bug if the UI does not exist as your wish.
     invisible_obj = poco('result_panel', type='Layer')
     print(invisible_obj.exists())  # => False. This UI is not visible to user.
 
-For operations, the simplest one is click, and can also do long click as long as you wish. The following example shows
-the effects of click and long click.
-
-.. code-block:: python
-
-    # coding=utf-8
-
-    from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
-
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
-
-    poco('btn_start').click()
-    poco('basic').click()
-    poco('star_single').long_click()
-    poco('star_single').long_click(duration=5)
 
 See also:
 

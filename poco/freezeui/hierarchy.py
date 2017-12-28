@@ -58,11 +58,11 @@ class FreezedUIHierarchy(HierarchyInterface):
     out of date.
     """
 
-    def __init__(self, dumper):
+    def __init__(self, dumper, attributor=None):
         super(FreezedUIHierarchy, self).__init__()
         self.dumper = dumper
         self.selector = Selector(self.dumper)
-        self.attributor = Attributor()
+        self.attributor = attributor or Attributor()
 
     def dump(self):
         return self.dumper.dumpHierarchy()

@@ -124,7 +124,7 @@ class RpcAgent(object):
         rid = self._id
         payload = {
             "method": func,
-            "params": args or kwargs,
+            "params": args or kwargs or [],
             "jsonrpc": "2.0",
             "id": rid,
         }

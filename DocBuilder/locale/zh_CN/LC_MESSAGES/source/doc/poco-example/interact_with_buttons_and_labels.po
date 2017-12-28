@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-25 11:24+0800\n"
+"POT-Creation-Date: 2017-12-28 16:08+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,20 @@ msgstr "poco中的UI对象只是一个 **代理** ，下面例子将展示UI代�
 
 #: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:8
 msgid ""
+"For operations, the simplest one is click, and can also do long click as "
+"long as you wish. The following example shows the effects of click and "
+"long click."
+msgstr "最简单的操作就是点击(click)，也可以长按(long click)，按多久都行，下面例子展示点击和长按各自的效果。"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:27
+msgid ""
+"The following example shows more functional ways of interacting with UIs,"
+" including getting and setting attributes on UIs."
+msgstr ""
+"下面例子在多个功能点上展示如何与按钮和文本框交互，包括读取和设置UI的属性"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:60
+msgid ""
 "If retrieve attributes or perform an operation on inexistent UI, "
 "exceptions will raise. If you are not sure whether the UI exists or not, "
 "you can call ``.exists()`` to test whether exists. In specific test "
@@ -39,54 +53,47 @@ msgstr ""
 "如果从一个不存在的UI里读取属性值或者操作它，会触发异常，如果你不确定那个UI是否存在，可以调用 ``.exists()`` "
 "来判断。在具体的测试用例中，如果因为UI不存在出现了异常，这很有可能是game/app的bug，不要强行忽略。"
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:42
-msgid ""
-"For operations, the simplest one is click, and can also do long click as "
-"long as you wish. The following example shows the effects of click and "
-"long click."
-msgstr ""
-"最简单的操作就是点击(click)，也可以长按(long click)，按多久都行，下面例子展示点击和长按各自的效果。"
-
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:61
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:95
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:63
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:97
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:64
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:98
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:65
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:99
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:66
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:100
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:67
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:101
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:68
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:102
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:69
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:103
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:70
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:104
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:71
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:105
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:72
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:106
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
+

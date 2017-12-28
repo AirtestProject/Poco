@@ -5,6 +5,8 @@ Basic Usage
 Wrap a pair of brackets after poco instance to select UI objects. The following example simply shows how to select a
 button and perform a click.
 
+.. image:: img/basic_btn_start.png
+
 .. code-block:: python
 
     # coding=utf-8
