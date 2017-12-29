@@ -46,3 +46,11 @@ class NeteasePoco(Poco):
         agent = NeteasePocoAgent(self._hunter)
         super(NeteasePoco, self).__init__(agent, **options)
         self._last_proxy = None
+
+    def on_pre_action(self, action, proxy, args):
+        try:
+            from airtest.core.api import snapshot
+        except ImportError:
+            # 兼容旧airtest
+            from airtest.core.main import snapshot
+            snapshot(msg=unicode(proxy))

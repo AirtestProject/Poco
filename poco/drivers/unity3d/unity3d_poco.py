@@ -101,3 +101,11 @@ class UnityPoco(Poco):
         if 'action_interval' not in options:
             options['action_interval'] = 0.1
         super(UnityPoco, self).__init__(agent, **options)
+
+    def on_pre_action(self, action, proxy, args):
+        try:
+            from airtest.core.api import snapshot
+        except ImportError:
+            # 兼容旧airtest
+            from airtest.core.main import snapshot
+            snapshot(msg=unicode(proxy))
