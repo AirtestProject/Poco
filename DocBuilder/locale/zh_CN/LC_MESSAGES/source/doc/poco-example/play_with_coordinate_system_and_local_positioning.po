@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 17:31+0800\n"
+"POT-Creation-Date: 2017-12-29 10:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,74 +41,75 @@ msgstr ""
 "就可以基于某个UI的左上角进行偏移，然后可以实现点击到这个UI控件内的各个坐标甚至UI外面的其他坐标。"
 
 #: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:14
+#, fuzzy
 msgid ""
 "The following examples will show how to click different point inside "
-"selected UI."
+"selected UI. Please pay attention on the red dot on the GIF underneath."
 msgstr "下面例子展示如何点击一个UI空间中的不同位置"
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:39
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:41
+#, fuzzy
 msgid ""
 "Can also click outside the selected UI. It is very useful to click some "
-"models by its name tag."
+"models by its name tag. Please pay attention on the red dot on the GIF "
+"underneath."
 msgstr "当然也可以点击UI控件的外部。在游戏中，通过角色名标签来点击角色模型非常有用。"
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:41
-msgid "来个梦幻人物脚底下名字的截图"
-msgstr ""
-
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:51
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:60
+#, fuzzy
 msgid ""
 "The following examples show that ``focus`` is an immutable method that "
-"will not impact the origin UI."
+"will not impact the origin UI. Please pay attention on the red dot on the"
+" GIF underneath."
 msgstr ""
 "下面例子将展示 ``focus`` "
 "方法的不可变(immutable)特性。调用focos方法不会影响到原来的UI代理，而是返回一个跟原来一样的新的UI代理。"
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:61
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:84
 msgid "The following example show how to scroll a list by using drag."
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:79
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:104
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:81
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:106
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:82
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:107
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:83
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:108
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:84
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:109
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:85
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:110
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:86
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:111
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:87
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:112
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:88
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:113
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:89
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:114
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:90
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:115
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 
@@ -149,5 +150,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "`waiting events`_"
+#~ msgstr ""
+
+#~ msgid "来个梦幻人物脚底下名字的截图"
 #~ msgstr ""
 

@@ -11,7 +11,37 @@ allows you to make any offset from the selected UI without selecting another UI.
 
 .. image:: ../img/hunter-poco-coordinate-system.png
 
-The following examples will show how to click different point inside selected UI.
+The following examples will show how to click different point inside selected UI. Please pay attention on
+the red dot on the GIF underneath.
+
+.. image:: img/local_positioning1.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    image = poco('fish').child(type='Image')
+    image.focus('center').long_click()
+    time.sleep(0.2)
+    image.focus([0.1, 0.1]).long_click()
+    time.sleep(0.2)
+    image.focus([0.9, 0.9]).long_click()
+    time.sleep(0.2)
+    image.focus([0.5, 0.9]).long_click()
+    time.sleep(0.2)
+
+Can also click outside the selected UI. It is very useful to click some models by its name tag. Please pay attention on
+the red dot on the GIF underneath.
+
+.. image:: img/local_positioning2.gif
 
 .. code-block:: python
 
@@ -24,41 +54,32 @@ The following examples will show how to click different point inside selected UI
     connect_device('Android:///')
     poco = UnityPoco(('10.254.44.76', 5001))
 
-    # click the logo
-    logo = poco('logo')
-    logo.focus('center').click()
-    logo.focus([0.5, 0.5]).click()  # the same as 'center'
-    logo.focus([0, 0]).click()  # top left corner
-    logo.focus([1, 1]).click()  # bottom down corner
+    balloonfish_image = poco(text='balloonfish').focus([0.5, -3])
+    balloonfish_image.long_click()
 
-    # drag the star
-    star = poco('star')
-    star.focus('center').swipe(direction=[0.1, 0])  # from 'center' towards right
-    star.focus([0, 0]).swipe(dirextion=[0.1, 0])  # from 'top left' towards right
+The following examples show that ``focus`` is an immutable method that will not impact the origin UI. Please pay
+attention on the red dot on the GIF underneath.
 
-Can also click outside the selected UI. It is very useful to click some models by its name tag.
-
-来个梦幻人物脚底下名字的截图
+.. image:: img/local_positioning3.gif
 
 .. code-block:: python
 
     # coding=utf-8
 
-    npc_name = poco(text='袁天罡')
-    npc = npc_name.focus([0.5, -1])
-    npc.click()
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
 
-The following examples show that ``focus`` is an immutable method that will not impact the origin UI.
 
-.. code-block:: python
-
-    # coding=utf-8
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
 
     # focus is immutable
-    button = poco('button')
-    button_right_edge = button.focus([1, 0.5])
-    button.click()  # still click the center
-    button_right_edge.click()  # will click the right edge
+    fish = poco('fish').child(type='Image')
+    fish_right_edge = fish.focus([1, 0.5])
+    fish.long_click()  # still click the center
+    time.sleep(0.2)
+    fish_right_edge.long_click()  # will click the right edge
+    time.sleep(0.2)
 
 The following example show how to scroll a list by using drag.
 
