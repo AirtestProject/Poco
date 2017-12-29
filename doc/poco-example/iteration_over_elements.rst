@@ -5,6 +5,53 @@ Iteration over elements
 Poco provides the easiest way to interact with a serials of UI. That is to iterate over the selected UIs via for-loop.
 In the loop, the iterator is also the the UI proxy. You can apply any method just like other selected UI.
 
+The following example shows how to drag all stars to the shell. Yep it is the same example in homepage.
+
+.. image:: ../img/overview.gif
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    poco('btn_start').click()
+    poco(text='drag drop').click()
+    time.sleep(1.5)
+
+    shell = poco('shell').focus('center')
+    for star in poco('star'):
+        star.drag_to(shell)
+    time.sleep(1)
+
+    assert poco('scoreVal').get_text() == "100", "score correct."
+    poco('btn_back', type='Button').click()
+
+
+Here is another example to iterate over all names of the model.
+
+.. image:: img/iteration_over_elements1.png
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    connect_device('Android:///')
+    poco = UnityPoco(('10.254.44.76', 5001))
+
+    for name in poco('plays').offspring('fish').child('name'):
+        print(name.get_text())  # pearl/shark/balloonfish
+
+
 The following example shows how to buy all merchandises on the current screen.
 
 .. image:: img/g62-shop.png

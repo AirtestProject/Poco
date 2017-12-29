@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"POT-Creation-Date: 2017-12-29 11:00+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,57 +31,57 @@ msgid ""
 "UI including by any existed attributes, hierarchy relationship and "
 "positional relationship. Most importantly, any above ways can be chained "
 "or combined together to achieve more complicate selections."
-msgstr ""
-"在UI自动化测试中，最关键的就是将目标UI选择出来。一般情况下，通过名字选择是最简单的方式，"
-"但是在一些情况下，并不是每个UI控件都有命名，特别是通过代码动态生成和加载的UI，一般都没有一个有意义的名字。"
-"Poco提供了强大有效的各种选择方式，不仅可以通过UI单一的属性选择，还可以通过UI之间的层次关系和位置关系来"
-"选择出目标UI。更强大的是，以上三种模式可以进行任意串联或者组合使用，这样基本上能应付所有情况了。"
+msgstr "在UI自动化测试中，最关键的就是将目标UI选择出来。一般情况下，通过名字选择是最简单的方式，但是在一些情况下，并不是每个UI控件都有命名，特别是通过代码动态生成和加载的UI，一般都没有一个有意义的名字。Poco提供了强大有效的各种选择方式，不仅可以通过UI单一的属性选择，还可以通过UI之间的层次关系和位置关系来选择出目标UI。更强大的是，以上三种模式可以进行任意串联或者组合使用，这样基本上能应付所有情况了。"
 
 #: ../../source/doc/poco-example/advanced_selections.rst:11
+msgid "[用例还需补充]"
+msgstr ""
+
+#: ../../source/doc/poco-example/advanced_selections.rst:13
 msgid "The following examples will show how to select UI in complicate scenes."
 msgstr "下面的例子将展示如何在复杂层次里选出对应的UI控件"
 
-#: ../../source/doc/poco-example/advanced_selections.rst:31
+#: ../../source/doc/poco-example/advanced_selections.rst:33
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/advanced_selections.rst:33
+#: ../../source/doc/poco-example/advanced_selections.rst:35
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:34
+#: ../../source/doc/poco-example/advanced_selections.rst:36
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:35
+#: ../../source/doc/poco-example/advanced_selections.rst:37
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:36
+#: ../../source/doc/poco-example/advanced_selections.rst:38
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:37
+#: ../../source/doc/poco-example/advanced_selections.rst:39
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:38
+#: ../../source/doc/poco-example/advanced_selections.rst:40
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:39
+#: ../../source/doc/poco-example/advanced_selections.rst:41
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:40
+#: ../../source/doc/poco-example/advanced_selections.rst:42
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:41
+#: ../../source/doc/poco-example/advanced_selections.rst:43
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/advanced_selections.rst:42
+#: ../../source/doc/poco-example/advanced_selections.rst:44
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

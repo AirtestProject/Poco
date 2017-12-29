@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"POT-Creation-Date: 2017-12-29 11:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,57 +27,66 @@ msgid ""
 "to iterate over the selected UIs via for-loop. In the loop, the iterator "
 "is also the the UI proxy. You can apply any method just like other "
 "selected UI."
-msgstr ""
-"Poco提供了非常简单的方式来处理一系列UI交互，直接用for循环进行迭代遍历即可。"
-"在for循环中，每次迭代的对象都是一个UI代理，所以可以像之前说的那样，去访问对象的属性和进行对象操作。"
+msgstr "Poco提供了非常简单的方式来处理一系列UI交互，直接用for循环进行迭代遍历即可。在for循环中，每次迭代的对象都是一个UI代理，所以可以像之前说的那样，去访问对象的属性和进行对象操作。"
 
 #: ../../source/doc/poco-example/iteration_over_elements.rst:8
+#, fuzzy
+msgid ""
+"The following example shows how to drag all stars to the shell. Yep it is"
+" the same example in homepage."
+msgstr "下面例子展示了怎么样在商城界面中购买当前屏幕的所有商品。"
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:36
+msgid "Here is another example to iterate over all names of the model."
+msgstr ""
+
+#: ../../source/doc/poco-example/iteration_over_elements.rst:55
 msgid ""
 "The following example shows how to buy all merchandises on the current "
 "screen."
 msgstr "下面例子展示了怎么样在商城界面中购买当前屏幕的所有商品。"
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:32
+#: ../../source/doc/poco-example/iteration_over_elements.rst:75
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:34
+#: ../../source/doc/poco-example/iteration_over_elements.rst:77
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:35
+#: ../../source/doc/poco-example/iteration_over_elements.rst:78
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:36
+#: ../../source/doc/poco-example/iteration_over_elements.rst:79
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:37
+#: ../../source/doc/poco-example/iteration_over_elements.rst:80
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:38
+#: ../../source/doc/poco-example/iteration_over_elements.rst:81
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:39
+#: ../../source/doc/poco-example/iteration_over_elements.rst:82
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:40
+#: ../../source/doc/poco-example/iteration_over_elements.rst:83
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:41
+#: ../../source/doc/poco-example/iteration_over_elements.rst:84
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:42
+#: ../../source/doc/poco-example/iteration_over_elements.rst:85
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/iteration_over_elements.rst:43
+#: ../../source/doc/poco-example/iteration_over_elements.rst:86
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

@@ -48,7 +48,6 @@ cover/
 .DS_Store
 doc-auto/
 DocBuilder/source
-*.mo
 
 tokenid.py
 

@@ -8,6 +8,8 @@ programmatically generated UI, which would not have a static name. Poco provides
 select UI including by any existed attributes, hierarchy relationship and positional relationship. Most importantly,
 any above ways can be chained or combined together to achieve more complicate selections.
 
+[用例还需补充]
+
 The following examples will show how to select UI in complicate scenes.
 
 .. image:: img/g62-shop.png

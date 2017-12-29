@@ -44,6 +44,8 @@ You can simply test whether the node exists or not by invoke ``.exists()``.
     - If a UI that is transparent and you cannot see it, it should be considered as existence. And also you can perform
       any operations on it.
 
+.. image:: img/exception2.gif
+
 .. code-block:: python
 
     # coding=utf-8
@@ -79,6 +81,8 @@ the screen, you will probably get ``PocoNoSuchNodeException`` rather than ``Poco
 
 The following example shows how to deal with this situation and stay in sync with the UI.
 
+.. image:: img/exception3.gif
+
 .. code-block:: python
 
     # coding=utf-8
@@ -92,14 +96,13 @@ The following example shows how to deal with this situation and stay in sync wit
     poco = UnityPoco(('10.254.44.76', 5001))
 
     # UI is very slow
-    poco('start').click()
-    exit_btn = poco('exit')
+    poco('btn_start').click()
+    star = poco('star')
     try:
-        exit_btn.wait_for_appearance(timeout=10)  # wait until appearance within 10s
+        star.wait_for_appearance(timeout=3)  # wait until appearance within 3s
     except PocoTargetTimeout:
         print('oops!')
-    else:
-        exit_btn.click()
+        time.sleep(1)
 
 
 :py:class:`PocoTargetRemovedException <poco.exceptions.PocoTargetRemovedException>`
