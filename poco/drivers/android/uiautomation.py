@@ -76,7 +76,7 @@ class AndroidUiautomationPoco(Poco):
         if not device:
             try:
                 # new version
-                from airtest.core.api import connect_device, airtest_device as current_device
+                from airtest.core.api import connect_device, device as current_device
                 if not current_device():
                     connect_device("Android:///")
             except ImportError:
