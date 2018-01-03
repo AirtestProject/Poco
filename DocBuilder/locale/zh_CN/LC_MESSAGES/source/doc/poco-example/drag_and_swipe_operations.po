@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 17:31+0800\n"
+"POT-Creation-Date: 2017-12-29 11:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,58 +30,66 @@ msgstr ""
 "和点击一样，拖动和滑动也是常规UI操作，**拖动** 是从一个UI到另一个UI，**滑动** "
 "是从一个UI开始，滑动到某个点或朝着某个方向滑动一段距离。其实本质上，拖动是滑动的特殊情况。"
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:8
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:9
+msgid "Drag"
+msgstr ""
+
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:11
 #, fuzzy
 msgid ""
 "The following example shows how to swipe or drag the \"star\" to the "
 "\"shell\"."
 msgstr "下面的例子会展示如何将\"star\"拖动到\"shell\"，以及使用drag来实现卷动一个ListView的效果。"
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:28
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:32
+msgid "Swipe"
+msgstr ""
+
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:34
 msgid "The following example shows how to scroll a list by using swipe."
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:54
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:62
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:56
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:64
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:57
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:65
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:58
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:66
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:59
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:67
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:60
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:68
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:61
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:69
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:62
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:70
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:63
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:71
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:64
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:72
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:65
+#: ../../source/doc/poco-example/drag_and_swipe_operations.rst:73
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

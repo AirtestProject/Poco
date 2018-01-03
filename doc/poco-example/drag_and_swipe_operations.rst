@@ -5,6 +5,9 @@ Drag and Swipe operations
 Like click, drag and swipe are other types of actions on UI. **Drag** usually starts from and ends to specific UI, while
 **Swipe** can be performed from any point to any point.
 
+Drag
+----
+
 The following example shows how to swipe or drag the "star" to the "shell".
 
 .. image:: img/drag_to.png
@@ -24,6 +27,9 @@ The following example shows how to swipe or drag the "star" to the "shell".
     # drag the "star" to the "shell"
     poco('star').drag_to(poco('shell'))
 
+
+Swipe
+-----
 
 The following example shows how to scroll a list by using swipe.
 

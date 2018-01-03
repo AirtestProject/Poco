@@ -11,6 +11,9 @@ allows you to make any offset from the selected UI without selecting another UI.
 
 .. image:: ../img/hunter-poco-coordinate-system.png
 
+Internal offset
+---------------
+
 The following examples will show how to click different point inside selected UI. Please pay attention on
 the red dot on the GIF underneath.
 
@@ -38,6 +41,9 @@ the red dot on the GIF underneath.
     image.focus([0.5, 0.9]).long_click()
     time.sleep(0.2)
 
+External offset
+---------------
+
 Can also click outside the selected UI. It is very useful to click some models by its name tag. Please pay attention on
 the red dot on the GIF underneath.
 
@@ -56,6 +62,9 @@ the red dot on the GIF underneath.
 
     balloonfish_image = poco(text='balloonfish').focus([0.5, -3])
     balloonfish_image.long_click()
+
+Immutability
+------------
 
 The following examples show that ``focus`` is an immutable method that will not impact the origin UI. Please pay
 attention on the red dot on the GIF underneath.
@@ -80,6 +89,9 @@ attention on the red dot on the GIF underneath.
     time.sleep(0.2)
     fish_right_edge.long_click()  # will click the right edge
     time.sleep(0.2)
+
+Gracefully scroll
+-----------------
 
 The following example show how to scroll a list by using drag.
 

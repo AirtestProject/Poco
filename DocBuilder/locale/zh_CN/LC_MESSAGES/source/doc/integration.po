@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-21 11:13+0800\n"
+"POT-Creation-Date: 2018-01-03 20:03+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,44 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 
-#: ../../source/doc/integration.rst:2
+#: ../../source/doc/integration.rst:3
 msgid "PocoSDK Integration Guide"
 msgstr "如何嵌入PocoSDK(Integration Guide)"
 
-#: ../../source/doc/integration.rst:4
+#: ../../source/doc/integration.rst:5
 msgid ""
 "PocoSDK implementations for most popular game engines are already "
 "provided in `poco-sdk repo`_. You can easily integrate PocoSDK in your "
 "game following the corresponding instruction."
 msgstr "主流引擎直接将我们的sdk嵌入到游戏中即可，sdk总仓库 `poco-sdk repo`_ "
 
-#: ../../source/doc/integration.rst:6
+#: ../../source/doc/integration.rst:7
 msgid "Feel free to open an issue if you get stuck in integration."
 msgstr "嵌入sdk过程中遇到任何问题可以随时在github上提issue"
 
-#: ../../source/doc/integration.rst:9
+#: ../../source/doc/integration.rst:10
 msgid "Unity3D"
 msgstr ""
 
-#: ../../source/doc/integration.rst:10
+#: ../../source/doc/integration.rst:11
 msgid ""
 "PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If "
 "your game is not supported yet, please refer to `implementation guide "
 "<implementation_guide.html>`_."
 msgstr ""
 "PocoSDK 支持Unity3D "
-"4以上版本，支持NGUI和UGUI，SDK目前只有c#版。如果你的Unity3D游戏使用了其他GUI框架，请参考 "
-"`implementation guide <implementation_guide.html>`_ 。接入步骤如下："
+"4以上版本，支持NGUI和UGUI，SDK目前只有c#版。如果你的Unity3D游戏使用了其他GUI框架，请参考 `implementation "
+"guide <implementation_guide.html>`_ 。接入步骤如下："
 
-#: ../../source/doc/integration.rst:12
+#: ../../source/doc/integration.rst:13
 msgid "Clone source code from `poco-sdk repo`_."
 msgstr "从 `poco-sdk repo`_ clone或下载源码。 "
 
-#: ../../source/doc/integration.rst:13
+#: ../../source/doc/integration.rst:14
 msgid "Copy the ``Unity3D`` folder to your unity project script folder."
 msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
 
-#: ../../source/doc/integration.rst:14
+#: ../../source/doc/integration.rst:15
 msgid ""
 "If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . "
 "If you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` ."
@@ -62,7 +62,7 @@ msgstr ""
 "使用 ``NGUI`` 的话就把 ``Unity3D/ugui`` 目录删除。使用 ``UGUI`` 的话就把 ``Unity3D/ngui`` "
 "目录删除。"
 
-#: ../../source/doc/integration.rst:15
+#: ../../source/doc/integration.rst:16
 msgid ""
 "Add ``Unity3D/PocoManager.cs`` as script component on any permanent "
 "``GameObject`` that will never be destroyed during game's lifetime."
@@ -70,89 +70,108 @@ msgstr ""
 "将 ``Unity3D/PocoManager.cs`` 挂载到场景中任意 ``GameObject`` ，一般就挂到root上，并不要销毁这个 "
 "``GameObject`` 。"
 
-#: ../../source/doc/integration.rst:19
+#: ../../source/doc/integration.rst:20
 msgid "Cocos2dx-js"
 msgstr ""
 
-#: ../../source/doc/integration.rst:21
+#: ../../source/doc/integration.rst:22
 msgid ""
 "PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on "
 "Android, the javascript sdk is implemented in ES5."
 msgstr ""
 
-#: ../../source/doc/integration.rst:23
+#: ../../source/doc/integration.rst:24
 msgid "Clone sdk source code from `poco-sdk repo`_."
 msgstr ""
 
-#: ../../source/doc/integration.rst:24
+#: ../../source/doc/integration.rst:25
 msgid "Copy the ``cocos2dx-js`` folder to your cocos project script folder."
 msgstr ""
 
-#: ../../source/doc/integration.rst:25 ../../source/doc/integration.rst:41
+#: ../../source/doc/integration.rst:26 ../../source/doc/integration.rst:42
 msgid "**Extra Step**: build the socket/websocket module?"
 msgstr ""
 
-#: ../../source/doc/integration.rst:26
+#: ../../source/doc/integration.rst:27
 msgid ""
 "``require('poco-manager')``  in your game's first initialized script to "
 "start PocoSDK."
 msgstr ""
 
-#: ../../source/doc/integration.rst:35
+#: ../../source/doc/integration.rst:36
 msgid "Cocos2dx-lua"
 msgstr ""
 
-#: ../../source/doc/integration.rst:37
+#: ../../source/doc/integration.rst:38
 msgid "PocoSDK supports Cocos2dx version >= 3.0."
 msgstr ""
 
-#: ../../source/doc/integration.rst:39
+#: ../../source/doc/integration.rst:40
 msgid "Clone the sdk source code from `poco-sdk repo`_."
 msgstr ""
 
-#: ../../source/doc/integration.rst:40
+#: ../../source/doc/integration.rst:41
 msgid ""
 "Copy the ``cocos2dx-lua`` folder to your project script folder. You can "
 "rename the folder if you wish."
 msgstr ""
 
-#: ../../source/doc/integration.rst:42
+#: ../../source/doc/integration.rst:43
 msgid ""
 "Initialize poco-sdk by copying following code to your game initialization"
 " script."
 msgstr ""
 
-#: ../../source/doc/integration.rst:50
+#: ../../source/doc/integration.rst:51
 msgid "Unreal"
 msgstr ""
 
-#: ../../source/doc/integration.rst:52
+#: ../../source/doc/integration.rst:53
 msgid "(Coming soon.)"
 msgstr "(即将支持)"
 
-#: ../../source/doc/integration.rst:55
+#: ../../source/doc/integration.rst:56
 msgid "Android Native App"
 msgstr "Android原生应用 (Native App)"
 
-#: ../../source/doc/integration.rst:57
+#: ../../source/doc/integration.rst:58
 msgid ""
 "Nothing to do about integration. Just start writing tests and be happy. "
 "See `poco for Android Native App`_ section for more details."
 msgstr "什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
 
-#: ../../source/doc/integration.rst:61
+#: ../../source/doc/integration.rst:62
 msgid "Netease Internal Engines"
 msgstr "网易自研引擎 (Netease Internal Engines)"
 
-#: ../../source/doc/integration.rst:63
-msgid "Already ready for using. No need to do anything!"
-msgstr "在 `hunter <http://hunter.nie.netease.com/mywork/instruction>`_ 中进行配置即可。有问题请联系 ``lxn3032@corp.netease.com`` "
+#: ../../source/doc/integration.rst:64
+msgid ""
+"Just config the module preload at `Hunter`_. Please append following "
+"script to the end of hunter ``__init__`` instruction. Require safaia "
+"version >= 1.2.0. Use ``print Safaia.__version__`` to get current "
+"version. Any questions about hunter feel free to contact "
+"``lxn3032@corp.netease.com``."
+msgstr ""
+"在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片段。 要求safaia版本大于1.2.0. "
+"有疑问请联系 ``lxn3032@corp.netease.com``."
 
-#: ../../source/doc/integration.rst:66
+#: ../../source/doc/integration.rst:68
+msgid "for NeoX"
+msgstr ""
+
+#: ../../source/doc/integration.rst:83
+msgid "for Messiah"
+msgstr ""
+
+#: ../../source/doc/integration.rst:98
+msgid "for cocos2dx-* and others: please contact ``lxn3032@corp.netease.com``."
+msgstr ""
+
+#: ../../source/doc/integration.rst:101
 msgid "Other Engines"
 msgstr "其他引擎 (Other Engines)"
 
-#: ../../source/doc/integration.rst:68
+#: ../../source/doc/integration.rst:103
 msgid ""
 "See `implementation guide <implementation_guide.html>`_. This guide helps"
 " you implement and integrate PocoSDK with your game step by step."

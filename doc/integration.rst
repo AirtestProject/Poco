@@ -61,7 +61,41 @@ See `poco for Android Native App`_ section for more details.
 Netease Internal Engines
 ------------------------
 
-Already ready for using. No need to do anything!
+Just config the module preload at `Hunter`_. Please append following script to the end of hunter ``__init__``
+instruction. Require safaia version >= 1.2.0. Use ``print Safaia.__version__`` to get current version.
+Any questions about hunter feel free to contact ``lxn3032@corp.netease.com``.
+
+* for NeoX
+
+.. code-block:: python
+
+    # poco uiautomation
+    PocoUiautomation = require('support.poco.neox.uiautomation')
+    Safaia().install(PocoUiautomation)
+
+    # inspector extension
+    screen_handler = require('support.poco.neox.screen')()
+    InspectorExt = require('support.poco.safaia.inspector')
+    InspectorExt.screen = screen_handler
+    InspectorExt.dumper = require('support.poco.neox.Dumper')()
+    Safaia().install(InspectorExt)
+
+* for Messiah
+
+.. code-block:: python
+
+    # poco uiautomation
+    PocoUiautomation = require('support.poco.messiah.uiautomation')
+    Safaia().install(PocoUiautomation)
+
+    # inspector extension
+    screen_handler = require('support.poco.messiah.screen')()
+    InspectorExt = require('support.poco.safaia.inspector')
+    InspectorExt.screen = screen_handler
+    InspectorExt.dumper = require('support.poco.cocos2dx.Dumper')()
+    Safaia().install(InspectorExt)
+
+* for cocos2dx-* and others: please contact ``lxn3032@corp.netease.com``.
 
 Other Engines
 -------------
@@ -70,3 +104,4 @@ See `implementation guide <implementation_guide.html>`_. This guide helps you im
 
 .. _poco-sdk repo: https://github.com/Meteorix/poco-sdk
 .. _poco for Android Native App:
+.. _Hunter: http://hunter.nie.netease.com/mywork/instruction

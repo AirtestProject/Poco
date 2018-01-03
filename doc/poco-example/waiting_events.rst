@@ -31,6 +31,10 @@ The following example shows the simplest way to stay in sync with UIs.
 
 The following example shows how to poll any of UIs in one time.
 
+The fish and bomb will come up from bottom right to left. Click the fish and avoid the bomb.
+
+.. image:: img/wait_any_ui.gif
+
 .. code-block:: python
 
     # coding=utf-8
@@ -43,25 +47,28 @@ The following example shows how to poll any of UIs in one time.
     connect_device('Android:///')
     poco = UnityPoco(('10.254.44.76', 5001))
 
-    shell = poco('shell')
-    basket = poco('basket')
+    bomb_count = 0
     while True:
-        star = poco('start')
-        fish = poco('fish')
-
-        try:
-            result = poco.wait_for_any([star, fish])
-        except PocoTargetTimeout:
-            # if no more fish or star within timeout
-            break
-
-        if result is star:
-            result.drag_to(shell)  # star to shell
-        elif result is fish:
-            result.drag_to(basket)  # fish to basket
+        blue_fish = poco('fish_emitter').child('blue')
+        yellow_fish = poco('fish_emitter').child('yellow')
+        bomb = poco('fish_emitter').child('bomb')
+        fish = poco.wait_for_any([blue_fish, yellow_fish, bomb])
+        if fish is bomb:
+            # skip the bomb and count to 3 to exit
+            bomb_count += 1
+            if bomb_count > 3:
+                return
+        else:
+            # otherwise click the fish to collect.
+            fish.click()
+        time.sleep(2.5)
 
 
 The following example shows how to poll all of UIs in one time.
+
+Wait until 3 fishes appear on the screen.
+
+.. image:: img/wait_all_ui.gif
 
 .. code-block:: python
 

@@ -5,6 +5,9 @@ Interact with Buttons and Labels
 UI objects are just proxies, you can assign it into a variable and reuse without repeated instantiation. The following
 example shows the most used methods of UI proxy. It is very easy to access all available attributes of UI in game/app.
 
+Click and long click
+--------------------
+
 For operations, the simplest one is click, and can also do long click as long as you wish. The following example shows
 the effects of click and long click.
 
@@ -23,6 +26,9 @@ the effects of click and long click.
     poco('basic').click()
     poco('star_single').long_click()
     poco('star_single').long_click(duration=5)
+
+Get and set attributes
+----------------------
 
 The following example shows more functional ways of interacting with UIs, including getting and setting attributes on
 UIs.
@@ -57,6 +63,9 @@ UIs.
         back = poco('btn_back', type='Button')
         back.click()
         back.click()
+
+Existence test
+--------------
 
 If retrieve attributes or perform an operation on inexistent UI, exceptions will raise. If you are not sure whether
 the UI exists or not, you can call ``.exists()`` to test whether exists. In specific test cases, remember to think of

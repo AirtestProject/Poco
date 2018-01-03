@@ -456,6 +456,7 @@ correspond to the position out of the UI element.
 .. _中文README(Chinese README): 
 .. _poco-sdk: doc/integration.html
 .. _Integration Guide: doc/integration.html
+.. _Integration Guide for NetEase: doc/integration.html#netease-internal-engines
 .. _More examples: doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接

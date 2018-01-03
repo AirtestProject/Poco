@@ -160,6 +160,7 @@ Poco
 
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
+.. _Integration Guide for NetEase: source/doc/integration.html#netease-internal-engines
 .. _More examples: source/doc/poco-example/index.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接

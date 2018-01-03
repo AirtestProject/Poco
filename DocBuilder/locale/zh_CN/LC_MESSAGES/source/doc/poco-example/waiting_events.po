@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"POT-Creation-Date: 2018-01-03 19:28+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,10 +28,7 @@ msgid ""
 "changing on UIs. Poco provides simple poll mechanism to allow you to poll"
 " some events of UIs. This section will show how to stay in sync with UIs "
 "and poll for state changing."
-msgstr ""
-"一些复杂的测试用例中，不可能只是不断地主动控制或者读取属性。通过被动地获取UI状态改变的事件，这样有助于写出不混乱的测试脚本。"
-"Poco提供了简单的轮询机制去同时轮询1个或多个UI控件，所谓轮询就是依次判断UI是否存在。"
-"本节将详细介绍UI同步方法，以让你的脚本时刻保持与当前UI状态同步，适应各种各样的运行环境。"
+msgstr "一些复杂的测试用例中，不可能只是不断地主动控制或者读取属性。通过被动地获取UI状态改变的事件，这样有助于写出不混乱的测试脚本。Poco提供了简单的轮询机制去同时轮询1个或多个UI控件，所谓轮询就是依次判断UI是否存在。本节将详细介绍UI同步方法，以让你的脚本时刻保持与当前UI状态同步，适应各种各样的运行环境。"
 
 #: ../../source/doc/poco-example/waiting_events.rst:9
 msgid "The following example shows the simplest way to stay in sync with UIs."
@@ -41,51 +38,61 @@ msgstr "下面例子展示的是最简单的UI同步"
 msgid "The following example shows how to poll any of UIs in one time."
 msgstr "下面例子展示轮询UI时等待 **任意一个** UI出现就往下走"
 
-#: ../../source/doc/poco-example/waiting_events.rst:64
+#: ../../source/doc/poco-example/waiting_events.rst:34
+msgid ""
+"The fish and bomb will come up from bottom right to left. Click the fish "
+"and avoid the bomb."
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:67
 msgid "The following example shows how to poll all of UIs in one time."
 msgstr "下面例子展示轮询UI时等待 **所有** UI出现才往下走"
 
-#: ../../source/doc/poco-example/waiting_events.rst:88
-msgid "See also:"
-msgstr "更多示例："
-
-#: ../../source/doc/poco-example/waiting_events.rst:90
-msgid "`basic usage`_"
-msgstr ""
-
-#: ../../source/doc/poco-example/waiting_events.rst:91
-msgid "`interact with Buttons and Labels`_"
-msgstr ""
-
-#: ../../source/doc/poco-example/waiting_events.rst:92
-msgid "`drag and swipe operations`_"
-msgstr ""
-
-#: ../../source/doc/poco-example/waiting_events.rst:93
-msgid "`advanced selections`_"
-msgstr ""
-
-#: ../../source/doc/poco-example/waiting_events.rst:94
-msgid "`play with coordinate system and local positioning`_"
+#: ../../source/doc/poco-example/waiting_events.rst:69
+msgid "Wait until 3 fishes appear on the screen."
 msgstr ""
 
 #: ../../source/doc/poco-example/waiting_events.rst:95
-msgid "`iteration over elements`_"
-msgstr ""
-
-#: ../../source/doc/poco-example/waiting_events.rst:96
-msgid "`handling exceptions`_"
-msgstr ""
+msgid "See also:"
+msgstr "更多示例："
 
 #: ../../source/doc/poco-example/waiting_events.rst:97
-msgid "`waiting for events`_"
+msgid "`basic usage`_"
 msgstr ""
 
 #: ../../source/doc/poco-example/waiting_events.rst:98
-msgid "`play with unittest framework`_"
+msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
 #: ../../source/doc/poco-example/waiting_events.rst:99
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:100
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:101
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:102
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:103
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:104
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:105
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/waiting_events.rst:106
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 

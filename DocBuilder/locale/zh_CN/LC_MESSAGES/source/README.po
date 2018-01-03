@@ -118,7 +118,7 @@ msgstr "SDK集成(Integration)"
 
 #: ../../source/README.rst:80
 msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
-msgstr "把sdk集成到游戏里请参考 `Integration Guide`_ 。"
+msgstr "把sdk集成到游戏里请参考 `Integration Guide`_ 。 **网易自研引擎** 无需嵌入sdk，请在hunter上直接配置，见 `Integration Guide for NetEase`_ "
 
 #: ../../source/README.rst:84
 msgid "Documentation"
