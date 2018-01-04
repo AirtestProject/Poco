@@ -66,7 +66,7 @@ The fish and bomb will come up from bottom right to left. Click the fish and avo
 
 The following example shows how to poll all of UIs in one time.
 
-Wait until 3 fishes appear on the screen.
+Wait until all 3 fishes appear on the screen.
 
 .. image:: img/wait_all_ui.gif
 

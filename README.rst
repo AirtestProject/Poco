@@ -458,6 +458,7 @@ correspond to the position out of the UI element.
 .. _Integration Guide: doc/integration.html
 .. _Integration Guide for NetEase: doc/integration.html#netease-internal-engines
 .. _More examples: doc/poco-example/index.html
+.. _Hunter内嵌inspector: source/doc/hunter-inspector-guide.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 .. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip

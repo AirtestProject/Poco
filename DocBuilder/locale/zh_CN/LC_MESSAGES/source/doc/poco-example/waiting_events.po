@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-03 19:28+0800\n"
+"POT-Creation-Date: 2018-01-04 17:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgid "The following example shows how to poll all of UIs in one time."
 msgstr "下面例子展示轮询UI时等待 **所有** UI出现才往下走"
 
 #: ../../source/doc/poco-example/waiting_events.rst:69
-msgid "Wait until 3 fishes appear on the screen."
+msgid "Wait until all 3 fishes appear on the screen."
 msgstr ""
 
 #: ../../source/doc/poco-example/waiting_events.rst:95
@@ -97,5 +97,8 @@ msgid "`optimize speed by freezing UI`_"
 msgstr ""
 
 #~ msgid "`waiting events`_"
+#~ msgstr ""
+
+#~ msgid "Wait until 3 fishes appear on the screen."
 #~ msgstr ""
 

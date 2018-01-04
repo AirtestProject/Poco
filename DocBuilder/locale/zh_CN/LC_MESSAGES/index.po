@@ -80,7 +80,7 @@ msgid ""
 "(to viewer the hierarchy and attributes only but lightweight) !"
 msgstr ""
 "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
-"`PocoHierarchyViewer`_ "
+"`PocoHierarchyViewer`_ 。 **网易自研引擎** 请直接使用 `Hunter内嵌inspector`_ ."
 
 #: ../../index.rst:80
 msgid "Dump UI hierarchy example"
