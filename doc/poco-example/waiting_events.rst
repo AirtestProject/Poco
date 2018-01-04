@@ -74,23 +74,23 @@ Wait until all 3 fishes appear on the screen.
 
     # coding=utf-8
 
+    import time
     from poco.drivers.unity3d import UnityPoco
     from airtest.core.api import connect_device
-    from poco.exceptions import PocoTargetTimeout
 
 
     connect_device('Android:///')
     poco = UnityPoco(('10.254.44.76', 5001))
 
-    shell = poco('shell')
-    star = poco('star')
+    poco(text='wait UI 2').click()
 
-    try:
-        poco.wait_for_all([star, shell])
-    except PocoTargetTimeout:
-        print('oops!')
-        raise
-    star.drag_to(shell)
+    blue_fish = poco('fish_area').child('blue')
+    yellow_fish = poco('fish_area').child('yellow')
+    shark = poco('fish_area').child('black')
+
+    poco.wait_for_all([blue_fish, yellow_fish, shark])
+    poco('btn_back').click()
+    time.sleep(2.5)
 
 See also:
 
