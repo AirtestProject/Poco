@@ -103,5 +103,5 @@ Other Engines
 See `implementation guide <implementation_guide.html>`_. This guide helps you implement and integrate PocoSDK with your game step by step.
 
 .. _poco-sdk repo: https://github.com/Meteorix/poco-sdk
-.. _poco for Android Native App:
+.. _poco for Android Native App: poco_for_android_native_app.html
 .. _Hunter: http://hunter.nie.netease.com/mywork/instruction
