@@ -98,7 +98,7 @@ msgid ""
 "organized in `dict` representing the `tree` structure. More detailed info"
 " about properties are described in `.dumpHierarchy() "
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
-msgstr "下面就是层次结构(hierarchy)的数据表示，用``dict``存储并都是可json序列化的。"
+msgstr "下面就是层次结构(hierarchy)的数据表示，用 ``dict`` 存储并都是可json序列化的。"
 
 #: ../../index.rst:139
 msgid "API reference"
