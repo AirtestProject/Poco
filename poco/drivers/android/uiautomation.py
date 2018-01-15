@@ -178,8 +178,10 @@ class AndroidUiautomationPoco(Poco):
             self._instrument_proc = None
         ready = False
         self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+        # TODO: 不加#launch试试
+        # TODO: 启动instrument之前，先把activity启动起来
         instrumentation_cmd = [
-                'am', 'instrument', '-w', '-e', 'class',
+                'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
                 '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
         if new_airtest_api:
