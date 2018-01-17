@@ -9,6 +9,8 @@ Poco ポコ
 Example
 -------
 
+First you should connect your Android phone, for example, via usb cable and enable the **ADB DEBUG MODE**.
+
 .. image:: doc/img/overview.gif
 
 .. code-block:: python

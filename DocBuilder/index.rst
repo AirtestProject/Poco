@@ -44,6 +44,8 @@ Simple demo
 The following example shows a simple script on demo game using Unity3D. Check `More examples`_ section for more detailed
 info.
 
+First you should connect your Android phone, for example, via usb cable and enable the **ADB DEBUG MODE**.
+
 .. image:: ../doc/img/overview.gif
 
 .. code-block:: python
