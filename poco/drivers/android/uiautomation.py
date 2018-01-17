@@ -10,9 +10,9 @@ import warnings
 try:
     new_airtest_api = True
     import airtest.core.api as _____
-    from airtest.core.android.utils.iputils import get_ip_address
 except ImportError:
     new_airtest_api = False
+    from airtest.core.android.utils.iputils import get_ip_address
 
 from airtest.core.android.ime import YosemiteIme
 
@@ -103,7 +103,7 @@ class AndroidUiautomationPoco(Poco):
             current_top_activity_package = current_top_activity_package.split('/')[0]
 
         # install ime
-        self.ime = YosemiteIme(self.android)
+        self.ime = YosemiteIme(self.adb_client)
         self.ime.start()
 
         # install
@@ -178,11 +178,13 @@ class AndroidUiautomationPoco(Poco):
             self._instrument_proc = None
         ready = False
         self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
-        # TODO: 不加#launch试试
-        # TODO: 启动instrument之前，先把activity启动起来
+
+        # 启动instrument之前，先把主类activity启动起来，不然instrumentation可能失败
+        self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
+
         instrumentation_cmd = [
                 'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
-                '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
+                '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
         if new_airtest_api:
             self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
