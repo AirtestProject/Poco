@@ -189,7 +189,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
         if run_on_win:
             if new_airtest_api:
                 connect_device('Windows:///?title_re=^.*errors and.*$')
-                Settings.
+                Settings.OP_OFFSET = [8, 30]
             else:
                 Settings.FIND_INSIDE = [8, 30]  # 窗口边框偏移
                 set_windows(window_title='^.*errors and.*$')
