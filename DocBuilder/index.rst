@@ -165,6 +165,7 @@ Poco
 .. _Integration Guide for NetEase: source/doc/integration.html#netease-internal-engines
 .. _More examples: source/doc/poco-example/index.html
 .. _Hunter内嵌inspector: source/doc/hunter-inspector-guide.html
+.. _网易游戏项目测试脚本标准模板: source/doc/netease-internal-use-template.html
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 .. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip

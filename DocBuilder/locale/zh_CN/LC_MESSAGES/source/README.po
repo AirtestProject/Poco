@@ -37,7 +37,8 @@ msgstr "首先请把usb线连上Android手机并打开 **adb调试模式** 。"
 
 #: ../../source/README.rst:40
 msgid "`More examples`_ here."
-msgstr "更多的例子请移步 `More examples`_"
+msgstr "更多的例子请移步 `More examples`_."
+" **网易自研引擎项目请参考** 网易游戏项目测试脚本标准模板_ 来开始建立回归测试工程。"
 
 #: ../../source/README.rst:43
 msgid "Tools for writing test scripts"

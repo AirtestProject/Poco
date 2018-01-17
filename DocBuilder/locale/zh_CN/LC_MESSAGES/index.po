@@ -69,7 +69,8 @@ msgstr "示例"
 msgid ""
 "The following example shows a simple script on demo game using Unity3D. "
 "Check `More examples`_ section for more detailed info."
-msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_"
+msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_."
+" **网易自研引擎项目请参考** 网易游戏项目测试脚本标准模板_ 来开始建立回归测试工程。"
 
 #: ../../index.rst:47
 msgid ""
