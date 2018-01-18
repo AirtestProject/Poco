@@ -4,7 +4,7 @@
 rm -rf source/
 mkdir source/
 cp ../README.rst source/
-cp ../README-CN.md source/
+cp ../README-CN.rst source/
 cp -r ../doc source/
 cp -r ../doc source/
 
@@ -16,5 +16,4 @@ sphinx-apidoc -Me -o source/ ../poco ../poco/utils
 sphinx-build -M gettext . _build/
 sphinx-intl update -p _build/gettext -l zh_CN
 
-export LANGUAGE=zh_CN
 sphinx-build -b html . ../doc-auto
