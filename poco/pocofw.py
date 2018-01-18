@@ -43,7 +43,13 @@ class Poco(PocoAccelerationMixin):
         self._post_action_interval = options.get(b'action_interval', 0.8)
         self._poll_interval = options.get(b'poll_interval', 1.44)
         if 'touch_down_duration' in options:
-            self._agent.input.setTouchDownDuration(options[b'touch_down_duration'])
+            touch_down_duration = options[b'touch_down_duration']
+            try:
+                touch_down_duration = float(touch_down_duration)
+            except ValueError:
+                raise ValueError('Option `touch_down_duration` should be <float>. Got {}'
+                                 .format(repr(touch_down_duration)))
+            self._agent.input.setTouchDownDuration(touch_down_duration)
 
         self._pre_action_callbacks = [self.on_pre_action.__func__]
         self._post_action_callbacks = [self.on_post_action.__func__]
@@ -263,6 +269,11 @@ class Poco(PocoAccelerationMixin):
             InvalidOperationException: when the start point of the swipe action lies outside the screen
         """
 
+        try:
+            duration = float(duration)
+        except ValueError:
+            raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
+
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
             raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
         if direction is not None:
@@ -281,6 +292,11 @@ class Poco(PocoAccelerationMixin):
             pos (:obj:`2-list/2-tuple`): coordinates (x, y) in range from 0 to 1
             duration: duration of press the screen
         """
+
+        try:
+            duration = float(duration)
+        except ValueError:
+            raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))

@@ -301,6 +301,11 @@ class UIObjectProxy(object):
             the same as :py:meth:`poco.pocofw.Poco.long_click`, depending on poco agent implementation.
         """
 
+        try:
+            duration = float(duration)
+        except ValueError:
+            raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
+
         pos_in_percentage = self.get_position(self._focus or 'anchor')
         self.poco.pre_action('long_click', self, pos_in_percentage)
         ret = self.poco.long_click(pos_in_percentage, duration)
@@ -319,11 +324,16 @@ class UIObjectProxy(object):
              equivalent to [0, 0.1], swipe 'left' is equivalent to [-0.1, 0] and swipe 'right' is equivalent to [0, 0.1]
             focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`
              for more details
-            duration: time interval in which the action is performed
+            duration (:py:obj:`float`): time interval in which the action is performed
 
         Raises:
             PocoNoSuchNodeException: raised when the UI element does not exist
         """
+
+        try:
+            duration = float(duration)
+        except ValueError:
+            raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
         focus = focus or self._focus or 'anchor'
         dir_vec = self._direction_vector_of(dir)
@@ -333,18 +343,23 @@ class UIObjectProxy(object):
         self.poco.post_action('swipe', self, (origin, dir_vec))
         return ret
 
-    def drag_to(self, target, duration=2):
+    def drag_to(self, target, duration=2.0):
         """
         Similar to swipe action, but the end point is provide by a UI proxy or by fixed coordinates.
 
         Args:
             target (:py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`): a UI proxy or 2-list/2-tuple coordinates
              (x, y) in NormalizedCoordinate system
-            duration: time interval in which the action is performed
+            duration (:py:obj:`float`): time interval in which the action is performed
 
         Raises:
             PocoNoSuchNodeException: raised when the UI element does not exist
         """
+
+        try:
+            duration = float(duration)
+        except ValueError:
+            raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
         if type(target) in (list, tuple):
             target_pos = target
