@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-25 11:22+0800\n"
+"POT-Creation-Date: 2018-01-18 21:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -312,8 +312,8 @@ msgid ""
 "<poco.pocofw.Poco>` for more details."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:8
-#: poco.proxy.UIObjectProxy.swipe:13
+#: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:9
+#: poco.proxy.UIObjectProxy.swipe:14
 msgid ""
 ":exc:`PocoNoSuchNodeException` -- raised when the UI element does not "
 "exist"
@@ -559,4 +559,22 @@ msgid ""
 "Block and wait until the UI element **disappears** within the given "
 "timeout."
 msgstr ""
+
+#~ msgid "参数"
+#~ msgstr ""
+
+#~ msgid "返回"
+#~ msgstr ""
+
+#~ msgid "返回类型"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
 
