@@ -12,7 +12,7 @@ reqs = [str(ir.req) for ir in install_reqs if ir.req]
 
 setup(
     name='pocoui',
-    version='1.0.13',
+    version='1.0.14',
     keywords="poco",
     description='Poco cross-engine UI automated test framework.',
     packages=find_packages(),

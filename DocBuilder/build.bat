@@ -15,5 +15,4 @@ sphinx-apidoc -Me -o source/ ../poco ../poco/utils
 sphinx-build -M gettext . _build/
 sphinx-intl update -p _build/gettext -l zh_CN
 
-SET LANGUAGE=zh_CN
 sphinx-build -b html . ../doc-auto
