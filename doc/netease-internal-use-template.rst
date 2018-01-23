@@ -174,6 +174,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
         new_airtest_api = True
         from airtest.core.api import connect_device, device as current_device
         from airtest.core.helper import set_logdir
+        from airtest.core.settings import Settings
     except ImportError:
         new_airtest_api = False
         from airtest.core.main import set_serialno, set_windows
@@ -215,7 +216,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
             Settings.set_basedir(os.path.dirname(filename))
             set_logfile()
             set_screendir()
-        execfile(filename, globals())
+        execfile(os.path.abspath(filename), globals())
 
 
     if __name__ == '__main__':
