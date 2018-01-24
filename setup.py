@@ -24,4 +24,5 @@ setup(
 
     author='adolli, adolli, lxn3032, gzliuxin',
     author_email='adolli@163.com, adollixiang@gmail.com, lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
+    url='https://github.com/AirtestProject/Poco',
 )

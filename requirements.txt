@@ -1,2 +1,5 @@
 requests
 airtest
+hrpc
+pydash
+axmlparserpy
