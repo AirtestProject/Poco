@@ -40,7 +40,7 @@ msgid ""
 " mac`_)."
 msgstr ""
 "``pocounit`` 和python标准库的unittest一样，提供了完整的一套断言方法，除此之外，"
-"更重要的是使用 ``pocounit`` 编写的用例将可以通过欧我们的提供的回放工具对测试过程进行完整的回放，不会漏掉任何细节。"
+"更重要的是使用 ``pocounit`` 编写的用例将可以通过我们的提供的回放工具对测试过程进行完整的回放，不会漏掉任何细节。"
 "回放工具下载地址： `PocoTestResultPlayer for windows`_ (或 `PocoTestResultPlayer for mac`_)"
 
 #: ../../source/doc/poco-example/play_with_unittest_framework.rst:18

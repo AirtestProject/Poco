@@ -209,11 +209,20 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
 
 
     def run_script(filename):
-        if new_airtest_api:
-            set_logdir("logs")
+        if filename.endswith('.py'):
+            script_dir = os.path.dirname(filename)
+        elif filename.endswith('.owl') or filename.endswith('.air'):
+            script_dir = filename
+            script_name = os.path.basename(filename)[:-4]
+            filename = os.path.join(script_dir, script_name + '.py')
         else:
-            Settings.set_logdir(os.path.dirname(filename))
-            Settings.set_basedir(os.path.dirname(filename))
+            raise ValueError('script should be one of .air/.owl/.py')
+
+        if new_airtest_api:
+            set_logdir(os.path.join(script_dir, "logs"))
+        else:
+            Settings.set_logdir(script_dir)
+            Settings.set_basedir(script_dir)
             set_logfile()
             set_screendir()
         execfile(os.path.abspath(filename), globals())
