@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-01-24 15:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,13 +21,12 @@ msgstr ""
 msgid "poco\\.drivers package"
 msgstr ""
 
-#: of poco.drivers:1
-msgid ""
-"drivers包提供poco在各大平台或引擎下的一些实现类，如unityPoco "
-"该包中的依赖库暂时不列于poco/requirements.txt里"
-msgstr ""
-
 #: ../../source/poco.drivers.rst:9
 msgid "Subpackages"
 msgstr ""
+
+#~ msgid ""
+#~ "drivers包提供poco在各大平台或引擎下的一些实现类，如unityPoco "
+#~ "该包中的依赖库暂时不列于poco/requirements.txt里"
+#~ msgstr ""
 
