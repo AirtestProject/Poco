@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.acceleration.rst:2
+msgid "poco\\.acceleration module"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin:1
+msgid ""
+"This class provides some high-level method to reduce redundant code "
+"implementations. As this is a MixinClass, please do not introduce new "
+"state in methods."
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:1
+msgid "Automatically dismiss the target objects"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss
+msgid "参数"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:3
+msgid "list of poco objects to be dropped"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:5
+msgid ""
+"termination condition, default is None which means to automatically exit "
+"when list of ``targets`` is empty"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:7
+msgid "time interval between each actions for the given targets, default is 0.5s"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:8
+msgid ""
+"time interval to wait for given target to appear on the screen, "
+"automatically exit when timeout, default is 20s"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:10
+msgid "dismiss function timeout, default is 120s"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss
+msgid "raises"
+msgstr ""
+
+#: of poco.acceleration.PocoAccelerationMixin.dismiss:12
+msgid ""
+":exc:`PocoTargetTimeout` -- when dismiss time interval timeout, under "
+"normal circumstances, this should not happen and if happens, it will be "
+"reported"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+

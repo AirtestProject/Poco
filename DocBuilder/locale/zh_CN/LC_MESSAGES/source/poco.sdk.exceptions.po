@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.exceptions.rst:2
+msgid "poco\\.sdk\\.exceptions module"
+msgstr ""
+
+#: of poco.sdk.exceptions:1
+msgid ""
+"This module provides several exceptions for poco-sdk. These exceptions "
+"are raised only in sdk corresponding runtime."
+msgstr ""
+
+#: of poco.sdk.exceptions.NoSuchComparatorException:1
+#: poco.sdk.exceptions.NoSuchTargetException:1
+#: poco.sdk.exceptions.NodeHasBeenRemovedException:1
+#: poco.sdk.exceptions.UnableToSetAttributeException:1
+msgid "Bases: :class:`exceptions.Exception`"
+msgstr ""
+
+#: of poco.sdk.exceptions.NoSuchTargetException:1
+msgid ""
+"Raised when the index is out of range for selecting the UI element by "
+"given index."
+msgstr ""
+
+#: of poco.sdk.exceptions.NodeHasBeenRemovedException:1
+msgid ""
+"Raised when the node (UI element) is refreshed (updated, recycled or "
+"destroyed) while retrieving the attributes during traversing the "
+"hierarchy."
+msgstr ""
+
+#: of poco.sdk.exceptions.NodeHasBeenRemovedException:4
+msgid ""
+"In some engines implementations, the UI hierarchy is refreshed in a "
+"stand-alone thread while poco is performing the traverse process, so the "
+"engine error might be triggered when poco is trying to retrieve the "
+"attribute of the UI element but the attribute is being updated at the "
+"same time. In this situation, poco sdk catches the engine error and "
+"raises this exception."
+msgstr ""
+
+#: of poco.sdk.exceptions.UnableToSetAttributeException:1
+msgid ""
+"Raised when settings the attribute of the given UI element failed. In "
+"most cases, the reason why it failed is that the UI element does not "
+"support mutation. From the point of view of SDK implementation, this "
+"exception can be raised proactively to indicate that the modification of "
+"the attribute is not allowed."
+msgstr ""
+
+#: of poco.sdk.exceptions.NoSuchComparatorException:1
+msgid "Raised when the matcher does not support the given comparison method."
+msgstr ""
+

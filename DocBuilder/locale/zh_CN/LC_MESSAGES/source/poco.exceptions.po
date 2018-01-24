@@ -1,0 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.exceptions.rst:2
+msgid "poco\\.exceptions module"
+msgstr ""
+
+#: of poco.exceptions.InvalidOperationException:1
+#: poco.exceptions.PocoNoSuchNodeException:1
+#: poco.exceptions.PocoTargetRemovedException:1
+#: poco.exceptions.PocoTargetTimeout:1
+msgid "Bases: :class:`poco.exceptions.PocoException`"
+msgstr ""
+
+#: of poco.exceptions.InvalidOperationException:1
+msgid ""
+"Raised when the operation performing on target device is foreseen, e.g. "
+"instruction to click outside the screen is definitely meaningless, then "
+"the ``InvalidOperationException`` is raised."
+msgstr ""
+
+#: of poco.exceptions.PocoException:1
+msgid "Bases: :class:`exceptions.Exception`"
+msgstr ""
+
+#: of poco.exceptions.PocoException:1
+msgid "Base class for errors and exceptions of Poco. It is Python3 compatible."
+msgstr ""
+
+#: of poco.exceptions.PocoNoSuchNodeException:1
+msgid "Raised when the UI element specified by query expression cannot be found."
+msgstr ""
+
+#: of poco.exceptions.PocoTargetRemovedException:1
+msgid ""
+"Raised when the hierarchy structure changed over the selection or when "
+"accessing the UI element that is already recycled."
+msgstr ""
+
+#: of poco.exceptions.PocoTargetRemovedException:4
+msgid ""
+"In most cases, there is no need to handle this exception manually. If "
+"this exception occurs, it usually means it is a bug in your code rather "
+"than application itself. Check your code first. The most of misuses comes"
+" from as follows."
+msgstr ""
+
+#: of poco.exceptions.PocoTargetRemovedException:9
+msgid "Examples"
+msgstr ""
+
+#: of poco.exceptions.PocoTargetTimeout:1
+msgid ""
+"Raised when the timeout expired while waiting for some condition to be "
+"fulfilled, e.g. waiting for the specific UI element but it has not "
+"appeared on the screen."
+msgstr ""
+

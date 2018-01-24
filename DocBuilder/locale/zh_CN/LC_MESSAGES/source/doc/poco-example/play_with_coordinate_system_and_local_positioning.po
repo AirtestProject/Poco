@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-29 11:52+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:3
+msgid "Play with coordinate system and local positioning"
+msgstr "坐标系与局部定位"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:5
+msgid ""
+"In poco, coordinates are always normalized from 0 to 1. You can simply "
+"think of it the percentage size and positions. In case that you need to "
+"interact with UI nearby or just want to click the button's edge rather "
+"than the center, you can use local positioning by specifying a offset."
+msgstr ""
+"poco里的坐标的取值范围是相对于屏幕的，屏幕的宽和高都为单位1，因此也叫百分比坐标。当你需要和某个UI控件附近的UI控件交互或者要点击某个按钮的边缘而不是中间时，那可以用"
+" **局部定位** 。"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:9
+msgid ""
+"In general, to interact with UI always starts with a point, such as click"
+" or drag from the point. Local positioning allows you to make any offset "
+"from the selected UI without selecting another UI."
+msgstr ""
+"总的来说，和UI控件交互最终都是和坐标交互，例如点击一个按钮实际上就是点击某个坐标。 **局部定位** "
+"就可以基于某个UI的左上角进行偏移，然后可以实现点击到这个UI控件内的各个坐标甚至UI外面的其他坐标。"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:15
+msgid "Internal offset"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:17
+#, fuzzy
+msgid ""
+"The following examples will show how to click different point inside "
+"selected UI. Please pay attention on the red dot on the GIF underneath."
+msgstr "下面例子展示如何点击一个UI空间中的不同位置"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:45
+msgid "External offset"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:47
+#, fuzzy
+msgid ""
+"Can also click outside the selected UI. It is very useful to click some "
+"models by its name tag. Please pay attention on the red dot on the GIF "
+"underneath."
+msgstr "当然也可以点击UI控件的外部。在游戏中，通过角色名标签来点击角色模型非常有用。"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:67
+msgid "Immutability"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:69
+#, fuzzy
+msgid ""
+"The following examples show that ``focus`` is an immutable method that "
+"will not impact the origin UI. Please pay attention on the red dot on the"
+" GIF underneath."
+msgstr ""
+"下面例子将展示 ``focus`` "
+"方法的不可变(immutable)特性。调用focos方法不会影响到原来的UI代理，而是返回一个跟原来一样的新的UI代理。"
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:94
+msgid "Gracefully scroll"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:96
+msgid "The following example show how to scroll a list by using drag."
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:116
+msgid "See also:"
+msgstr "更多示例："
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:118
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:119
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:120
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:121
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:122
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:123
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:124
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:125
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:126
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/play_with_coordinate_system_and_local_positioning.rst:127
+msgid "`optimize speed by freezing UI`_"
+msgstr ""
+
+#~ msgid ""
+#~ "The following examples will show how "
+#~ "to click different point inside and "
+#~ "outside selected UI."
+#~ msgstr ""
+
+#~ msgid "More examples:"
+#~ msgstr ""
+
+#~ msgid "`basic usage`_"
+#~ msgstr ""
+
+#~ msgid "`interact with Buttons and Labels`_"
+#~ msgstr ""
+
+#~ msgid "`drag and swipe operations`_"
+#~ msgstr ""
+
+#~ msgid "`advanced selections`_"
+#~ msgstr ""
+
+#~ msgid "`play with coordinate system and local positioning`_"
+#~ msgstr ""
+
+#~ msgid "`iteration over elements`_"
+#~ msgstr ""
+
+#~ msgid "`handling exceptions`_"
+#~ msgstr ""
+
+#~ msgid "`play with unittest framework`_"
+#~ msgstr ""
+
+#~ msgid "`optimize speed by freezing UI`_"
+#~ msgstr ""
+
+#~ msgid "`waiting events`_"
+#~ msgstr ""
+
+#~ msgid "来个梦幻人物脚底下名字的截图"
+#~ msgstr ""
+

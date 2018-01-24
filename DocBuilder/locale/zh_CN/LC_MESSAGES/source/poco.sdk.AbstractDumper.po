@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.AbstractDumper.rst:2
+msgid "poco\\.sdk\\.AbstractDumper module"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper:1
+msgid ""
+"This interface defines the standard dumper behavior. Dumper class is "
+"introduced to get the hierarchy information and convert it into "
+"serializable data."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.dumpHierarchy:1
+msgid ""
+"Return the json serializable dictionary holding the hierarchy data. Refer"
+" to sample of returned structure object below."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.dumpHierarchy:4
+msgid "Structure of the dict::"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy
+#: poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl
+#: poco.sdk.AbstractDumper.IDumper.dumpHierarchy
+#: poco.sdk.AbstractDumper.IDumper.getRoot
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.dumpHierarchy:25
+msgid "hierarchy data or None"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy
+#: poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl
+#: poco.sdk.AbstractDumper.IDumper.dumpHierarchy
+#: poco.sdk.AbstractDumper.IDumper.getRoot
+msgid "返回类型"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.dumpHierarchy:26
+msgid ":obj:`dict` or :obj:`NoneType`"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.getRoot:1
+msgid ""
+"Return the root node of the UI Hierarchy. The node information is wrapped"
+" by :py:class:`AbstractNode <poco.sdk.AbstractNode>`. See definition of "
+":py:class:`AbstractNode <poco.sdk.AbstractNode>` for more details."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.getRoot:5
+msgid "instance that holds the hierarchy data"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.IDumper.getRoot:6
+msgid ":py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper:1
+msgid "Bases: :class:`poco.sdk.AbstractDumper.IDumper`"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper:1
+msgid ""
+"This class partially implements ``IDumper`` using general traversal "
+"algorithm. In order to dump the hierarchy from the root node, this dumper"
+" first retrieves all available attributes of the root node and also the "
+"list all its children and then applies the same procedures as described "
+"on each child (i.e. treats each child as a root node) until the node that"
+" has no child(ren) is reached."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy:1
+#: poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:18
+msgid "json serializable dict holding the whole hierarchy data"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy:2
+#: poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:19
+msgid ":obj:`dict`"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:1
+msgid ""
+"Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` "
+"procedure is the engine independent as the hierarchy structure is wrapped"
+" by :py:class:`AbstractNode <poco.sdk.AbstractNode>` and therefore the "
+"``dump`` procedure can be algorithmized."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:5
+msgid ""
+"Following code demonstrates the simplest implementation. Feel free to "
+"implement your own algorithms to optimize the performance."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:8
+msgid ""
+"Do not explicitly call this method as this is an internal function, call "
+":py:meth:`dumpHierarchy() "
+"<poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchy>` function instead "
+"if you want to dump the hierarchy."
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:12
+msgid "root node of the hierarchy to be dumped"
+msgstr ""
+
+#: of poco.sdk.AbstractDumper.AbstractDumper.dumpHierarchyImpl:15
+msgid "dump only the visible nodes or all nodes, default to True"
+msgstr ""
+
+#~ msgid "返回"
+#~ msgstr ""
+
+#~ msgid "返回类型"
+#~ msgstr ""
+
+#~ msgid "参数"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+

@@ -1,0 +1,307 @@
+
+网易游戏项目测试脚本标准模板
+==============
+
+非网易游戏项目和unity3d项目请勿使用此工程模板。
+
+游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。
+
+按照下面的指引组织好工程后，在testcase中使用 ``poco`` 对象可以简单地像下面这样获取
+
+.. code-block:: python
+
+    # 以runTest函数为例
+    def runTest(self):
+        self.poco('button').click()
+
+目录结构
+''''
+
+.. code-block:: text
+
+    ─ /
+        ├─ lib/
+        |   ├─ __init__.py
+        |   ├─ case.py
+        |   └─ player.py
+        ├─ scripts/
+        |   ├─ group/
+        |   |   ├─ group_test1.air
+        |   |   └─ group_test2.air
+        |   ├─ test1.air
+        |   |   └─ test1.py
+        |   └─ test2.air
+        |       └─ test2.py
+        └─ launcher.py
+
+``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` 目录用于存放一个个脚本文件，支持多级嵌套，用 ``.air`` 的文件夹后缀
+组织每个脚本，这个目录里可以存放脚本引用到的所有资源文件，脚本运行结束后也会存储对应的运行结果文件。其余的目录没有规定，根据实际情况建立
+自己需要的目录。
+
+模板代码
+''''
+
+在自己本地新建文件并把下面代码copy到文件里。
+
+``case.py``
+-----------
+
+case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** 。一般CommonCase里就是设置好player成员变量就行了，这样在每个
+testcase里面可以方便地访问到player对象。
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    from pocounit.case import PocoTestCase
+    from pocounit.addons.poco.action_tracking import ActionTracker
+    from pocounit.addons.hunter.runtime_logging import AppRuntimeLogging
+
+    from player import Player
+
+
+    class CommonCase(PocoTestCase):
+        @classmethod
+        def setUpClass(cls):
+            super(CommonCase, cls).setUpClass()
+            cls.player = Player()
+
+            action_tracker = ActionTracker(cls.player.poco)
+            runtime_logger = AppRuntimeLogging(cls.player.hunter)
+            cls.register_addin(action_tracker)
+            cls.register_addin(runtime_logger)
+
+
+
+``player.py``
+-------------
+
+player.py 里定义游戏测试中跟角色相关的行为和属性等，用于抽象隔离hunter、poco、airtest等库。测试脚本与测试框架细节隔离有利于兼容框架
+后续的功能更新和升级，也能随时切换到别的框架上。
+
+``class Player`` 中可以加入其余需要的自定义方法，例如常用的关闭所有窗口、打开背包等。
+
+关于GM指令，默认通过hunter直接调用，可以改写成其他的方式。如果需要获取GM指令的返回值，请先了解GM指令的代码实现方式，再通过hunter-rpc
+进行调用。
+
+请将 ``PROCESS`` 变量改成对应的hunter项目代号。
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import sys
+    import re
+
+    from airtest_hunter import AirtestHunter, open_platform, wait_for_hunter_connected
+    try:
+        from poco.vendor.airtest import AirtestPoco as Poco
+    except ImportError:
+        from poco.drivers.netease.internal import NeteasePoco as Poco
+
+
+    __all__ = ['Player']
+    PROCESS = 'g62'  # hunter上的项目代号
+
+
+    class Singleton(type):
+        def __init__(cls, name, bases, dict):
+            super(Singleton, cls).__init__(name, bases, dict)
+            cls.instance = None
+
+        def __call__(cls, *args, **kwargs):
+            if cls.instance is None:
+                cls.instance = super(Singleton, cls).__call__(*args, **kwargs)
+            return cls.instance
+
+
+    def get_hunter_instance():
+        tokenid = open_platform.get_api_token(PROCESS)
+        hunter = AirtestHunter(tokenid, PROCESS)
+        return hunter
+
+
+    class Player(object):
+        __metaclass__ = Singleton
+
+        def __init__(self, hunter=None):
+            self._hunter = hunter or get_hunter_instance()
+            self._poco_instance = None
+
+        @property
+        def poco(self):
+            if not self._poco_instance:
+                self._poco_instance = Poco(PROCESS, self._hunter)
+            return self._poco_instance
+
+        @property
+        def hunter(self):
+            return self._hunter
+
+        def refresh(self):
+            wait_for_hunter_connected(PROCESS, timeout=16)
+            self._hunter = get_hunter_instance()
+            self._poco_instance = Poco(PROCESS, self._hunter)
+
+        def server_call(self, cmd):
+            self.hunter.script(cmd, lang='text')
+
+``launcher.py``
+---------------
+
+launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可以通过以下命令
+
+.. code-block:: bash
+
+    python launcher.py scripts/test1.air/test1.py
+
+如果在windows上直接跑的话，用下面命令
+
+.. code-block:: bash
+
+    python launcher.py scripts/test1.air/test1.py windows
+
+``launcher.py`` 定义如下:
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import os
+    import sys
+    import traceback
+    try:
+        new_airtest_api = True
+        from airtest.core.api import connect_device, device as current_device
+        from airtest.core.helper import set_logdir
+        from airtest.core.settings import Settings
+    except ImportError:
+        new_airtest_api = False
+        from airtest.core.main import set_serialno, set_windows
+        from airtest.cli.runner import set_logfile, set_screendir, device as current_device
+        from airtest.core.settings import Settings
+
+
+    launcher_dir = os.path.dirname(os.path.realpath(__file__))
+    os.chdir(launcher_dir)
+
+
+    def setUpEnvironment(run_on_win=False):
+        if run_on_win:
+            if new_airtest_api:
+                connect_device('Windows:///?title_re=^.*errors and.*$')
+                Settings.OP_OFFSET = [8, 30]
+            else:
+                Settings.FIND_INSIDE = [8, 30]  # 窗口边框偏移
+                set_windows(window_title='^.*errors and.*$')
+        else:
+            if not current_device():
+                if new_airtest_api:
+                    connect_device("Android:///")
+                else:
+                    set_serialno()
+
+        sys.path.append(os.path.abspath('./lib'))
+        if new_airtest_api:
+            exec("from airtest.core.api import *") in globals()
+        else:
+            exec("from airtest.core.main import *") in globals()
+
+
+    def run_script(filename):
+        if filename.endswith('.py'):
+            script_dir = os.path.dirname(filename)
+        elif filename.endswith('.owl') or filename.endswith('.air'):
+            script_dir = filename
+            script_name = os.path.basename(filename)[:-4]
+            filename = os.path.join(script_dir, script_name + '.py')
+        else:
+            raise ValueError('script should be one of .air/.owl/.py')
+
+        if new_airtest_api:
+            set_logdir(os.path.join(script_dir, "logs"))
+        else:
+            Settings.set_logdir(script_dir)
+            Settings.set_basedir(script_dir)
+            set_logfile()
+            set_screendir()
+        execfile(os.path.abspath(filename), globals())
+
+
+    if __name__ == '__main__':
+        filename = sys.argv[1]
+        run_on_win = False
+        if len(sys.argv) > 2 and sys.argv[2].lower() in ('win', 'win32', 'windows'):
+            run_on_win = True
+        setUpEnvironment(run_on_win)
+        run_script(filename)
+
+
+``test1.air/test1.py`` 模板
+-------------------------
+
+**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+
+**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+
+**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+
+
+以下是例子，根据实际测试需求编写脚本。 ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选。
+
+.. code-block:: python
+
+    from lib.case import CommonCase
+
+    # 一个文件里建议就只有一个CommonCase
+    # 一个Case做的事情尽量简单，不要把一大串操作都放到一起
+    class MyTestCase(CommonCase):
+        def setUp(self):
+            # 这两个对象能满足大部分测试需求了
+            self.poco = self.player.poco
+            self.hunter = self.player.hunter
+
+            # 调用hunter指令可以这样写
+            self.hunter.script('print 23333', lang='python')
+
+            # hunter rpc对象可以这样获取
+            remote_obj = self.hunter.rpc.remote('uri-xxx')
+            remote_obj.func1()
+
+        def runTest(self):
+            # 普通语句跟原来一样，但是必须都要用self开头，这是为了以后动态代理
+            self.poco(text='角色').click()
+
+            # 断言语句跟python unittest写法一模一样
+            self.assertTrue(self.poco(text='最大生命').wait(3).exists(), "看到了最大生命")
+
+            self.poco('btn_close').click()
+            self.poco('movetouch_panel').offspring('point_img').swipe('up')
+
+            self.assertTrue(False, '肯定错！')
+
+        def tearDown(self):
+            # 如果没有清场操作，这个函数就不用写出来
+            a = 1 / 0
+
+
+    # 固定格式
+    if __name__ == '__main__':
+        import pocounit
+        pocounit.main()
+
+
+如何运行脚本
+''''''
+
+Android 的话，请插上usb线，然后终端里跑下面命令
+
+.. code-block:: bash
+
+    python launcher.py scripts/test1.air/test1.py
+
+如果在windows上直接跑的话，用下面命令
+
+.. code-block:: bash
+
+    python launcher.py scripts/test1.air/test1.py windows

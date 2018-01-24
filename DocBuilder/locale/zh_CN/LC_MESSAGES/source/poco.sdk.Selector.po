@@ -1,0 +1,196 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.sdk.Selector.rst:2
+msgid "poco\\.sdk\\.Selector module"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector:1
+msgid ""
+"This interface defines the standard selector behavior. Selector is used "
+"for selecting the specific UI element(s) by given query expression "
+"(formal definitions are in specific implementation classes)."
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select poco.sdk.Selector.Selector
+#: poco.sdk.Selector.Selector.selectImpl
+msgid "参数"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select:1
+msgid "query expressiom"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select:3
+msgid ""
+"whether or not to select the multiple elements. If set to True, the "
+"method terminates immediately once the node is found, otherwise it "
+"traverses through all nodes and then exists"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select poco.sdk.Selector.Selector.getRoot
+#: poco.sdk.Selector.Selector.selectImpl
+msgid "返回"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select:8
+msgid "list <inherited from :py:class:`AbstractNode <poco.sdk.AbstractNode>`>"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select poco.sdk.Selector.Selector.selectImpl
+msgid "返回类型"
+msgstr ""
+
+#: of poco.sdk.Selector.ISelector.select:9
+msgid ":obj:`list`"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:1
+msgid "Bases: :class:`poco.sdk.Selector.ISelector`"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:1
+msgid ""
+"This class implements the standard Selector interface that uses BFS "
+"algorithm to travers through tree-like hierarchy structure. It supports "
+"flexible query expressions such as parental relationship, attribute "
+"predicate, etc. Any combinations of expressions mentioned above are also "
+"allowed as the query conditions."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:5
+msgid "The query expression can be defined as follows::"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:11
+msgid ""
+"``op0`` can be one of the following ('>', '/', '-'), each operator stands"
+" for as follows::"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:17
+msgid "``'index'``: select specific n-th UI element from the previous results"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:19
+msgid "``others``: passes the expression to matcher"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:21
+msgid "dumper for the selector"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector:23
+msgid ""
+":py:class:`DefaultMatcher <poco.sdk.DefaultMatcher.DefaultMatcher>` "
+"instance by default."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.getRoot:1
+msgid "Get a default root node."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.getRoot:3
+msgid "default root node from the dumper."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.select:1
+msgid ""
+"See Also: :py:meth:`select <poco.sdk.Selector.ISelector.select>` method "
+"in ``ISelector``."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:1
+msgid "Selector internal implementation. TODO: add later."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:4
+msgid ""
+"This doc shows only the outline of the algorithm. Do not call this method"
+" in your code as this is an internal method."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:7
+msgid "query expression"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:9
+msgid "whether or not to select multiple nodes #TODO: review this"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:11
+msgid "start traversing from the given root node"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:14
+msgid "max traversing depth"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:16
+msgid ""
+"If True, skip those node which visibility (the value of visible "
+"attribute) is False."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:19
+msgid ""
+"whether not not to include the root node if its child(ren) match(es) the "
+"node"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:22
+msgid "The same as  :py:meth:`select <poco.sdk.Selector.ISelector.select>`."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:24
+msgid "The same as"
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:25
+msgid ":py:meth:`select <poco.sdk.Selector.ISelector.select>`."
+msgstr ""
+
+#: of poco.sdk.Selector.Selector.selectImpl:26
+msgid ""
+":obj:`list` <inherited from :py:class:`AbstractNode "
+"<poco.sdk.AbstractNode>`>"
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr ""
+
+#~ msgid "返回"
+#~ msgstr ""
+
+#~ msgid "返回类型"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

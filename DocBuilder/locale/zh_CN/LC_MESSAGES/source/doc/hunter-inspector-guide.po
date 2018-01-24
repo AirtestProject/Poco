@@ -1,0 +1,32 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-04 10:14+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/hunter-inspector-guide.rst:3
+msgid "Hunter 内嵌Inspector"
+msgstr ""
+
+#: ../../source/doc/hunter-inspector-guide.rst:5
+msgid ""
+"在Hunter中配置好poco模块后，终端界面就会出现下面的图标了。Hunter中配置poco请见 `Integration Guide for "
+"NetEase`_ ."
+msgstr ""
+
+#~ msgid "在Hunter中配置好poco模块后，终端界面就会出现下面的图标了。"
+#~ msgstr ""
+

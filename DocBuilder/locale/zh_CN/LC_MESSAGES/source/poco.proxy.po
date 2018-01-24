@@ -1,0 +1,580 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.proxy.rst:2
+msgid "poco\\.proxy module"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:1
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:1
+msgid "UI Proxy class that represents the UI element on target device."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:3
+msgid ""
+"Any action performing on this instance is handled by Poco. It is not "
+"necessary to initialize this object manually. See ``QueryCondition`` for "
+"more details about how to select the UI elements."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy poco.proxy.UIObjectProxy.__getitem__
+#: poco.proxy.UIObjectProxy.attr poco.proxy.UIObjectProxy.child
+#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
+#: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_position
+#: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.set_text poco.proxy.UIObjectProxy.setattr
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.swipe
+#: poco.proxy.UIObjectProxy.wait poco.proxy.UIObjectProxy.wait_for_appearance
+#: poco.proxy.UIObjectProxy.wait_for_disappearance
+msgid "参数"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:6
+msgid "the poco instance"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:7
+msgid ""
+"query condition of \"name\" attribute, i.e. the UI element(s) with "
+"``name`` name will be selected"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:8
+msgid "other query expressions except for the ``name``"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy:10
+msgid ":py:meth:`select UI element(s) by poco <poco.pocofw.Poco.__call__>`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:1
+msgid ""
+"Select the specific UI element by index. If this UI proxy represents a "
+"set of UI elements, then use this method to access the specific UI "
+"element. The new UI element will be wrapped by UIObjectProxy instance and"
+" therefore the returned value is also the UI proxy object."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:5
+msgid ""
+"The order of UI elements are determined by their position on the screen "
+"and not by the selection sequence. This rule is called  \"L2R U2D\" (one "
+"by one from left to right, line by line from up to down), i.e. the most "
+"top left UI element is always the first one. See ``IterationOverUI`` for "
+"more details."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:9
+msgid ""
+"This method may cause some performance issues depending on implementation"
+" of PocoAgent."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:11
+msgid "the index."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__ poco.proxy.UIObjectProxy.__len__
+#: poco.proxy.UIObjectProxy.attr poco.proxy.UIObjectProxy.child
+#: poco.proxy.UIObjectProxy.children poco.proxy.UIObjectProxy.exists
+#: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_bounds
+#: poco.proxy.UIObjectProxy.get_name poco.proxy.UIObjectProxy.get_position
+#: poco.proxy.UIObjectProxy.get_size poco.proxy.UIObjectProxy.get_text
+#: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.wait
+msgid "返回"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:14
+msgid "a new UI proxy object representing the n-th of the current UI elements."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__ poco.proxy.UIObjectProxy.__len__
+#: poco.proxy.UIObjectProxy.child poco.proxy.UIObjectProxy.children
+#: poco.proxy.UIObjectProxy.exists poco.proxy.UIObjectProxy.focus
+#: poco.proxy.UIObjectProxy.get_bounds poco.proxy.UIObjectProxy.get_name
+#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.get_size
+#: poco.proxy.UIObjectProxy.get_text poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.wait
+msgid "返回类型"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__getitem__:16 poco.proxy.UIObjectProxy.child:9
+#: poco.proxy.UIObjectProxy.children:5 poco.proxy.UIObjectProxy.focus:8
+#: poco.proxy.UIObjectProxy.offspring:9 poco.proxy.UIObjectProxy.sibling:9
+#: poco.proxy.UIObjectProxy.wait:6
+msgid ":py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__iter__:1
+msgid ""
+"Similar method to :py:meth:`.__getitem__() "
+"<poco.proxy.UIObjectProxy.__getitem__>` with the difference that this "
+"method iterates over all UI elements. The order rules of UI elements is "
+"same as for :py:meth:`.__getitem__() "
+"<poco.proxy.UIObjectProxy.__getitem__>`. See ``IterationOverUI`` for more"
+" details."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__iter__
+msgid "Yields"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__iter__:5
+msgid ""
+":py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>` -- a generator "
+"yielding new UI proxy represents the specific UI element iterated over"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__iter__ poco.proxy.UIObjectProxy.attr
+#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
+#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.set_text
+#: poco.proxy.UIObjectProxy.setattr poco.proxy.UIObjectProxy.swipe
+#: poco.proxy.UIObjectProxy.wait_for_appearance
+#: poco.proxy.UIObjectProxy.wait_for_disappearance
+msgid "raises"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__iter__:8
+msgid ""
+":exc:`PocoTargetRemovedException` -- when hierarchy structure has changed"
+" and it is attempted to access to the nonexistent UI element over the "
+"iteration"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__len__:1
+msgid "Return the number of selected UI elements."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__len__:3
+msgid ""
+"returns 0 if none of the UI element matches the query expression "
+"otherwise returns the number of selected UI elements"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.__len__:5
+msgid ":obj:`int`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:1
+msgid ""
+"Retrieve the attribute of UI element by given attribute name. Return None"
+" if attribute does not exist. If attribute type is :obj:`str`, it is "
+"encoded to utf-8 as :obj:`str` in Python2.7."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:4
+msgid ""
+"attribute name, it can be one of the following or any other customized "
+"type implemented by SDK  - visible: whether or not it is visible to user "
+"- text: string value of the UI element - type: the type name of UI "
+"element from remote runtime - pos: the position of the UI element - size:"
+" the percentage size [width, height] in range of 0~1 according to the "
+"screen - name: the name of UI element - ...: other sdk implemented "
+"attributes"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:4
+msgid ""
+"attribute name, it can be one of the following or any other customized "
+"type implemented by SDK"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:6
+msgid "visible: whether or not it is visible to user"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:7
+msgid "text: string value of the UI element"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:8
+msgid "type: the type name of UI element from remote runtime"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:9
+msgid "pos: the position of the UI element"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:10
+msgid ""
+"size: the percentage size [width, height] in range of 0~1 according to "
+"the screen"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:11
+msgid "name: the name of UI element"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:12
+msgid "...: other sdk implemented attributes"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:14
+msgid ""
+"None if no such attribute or its value is None/null/nil/etc. Otherwise "
+"the attribute value is returned. The returned value type is json "
+"serializable."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:17
+msgid ":exc:`PocoNoSuchNodeException` -- when the UI element does not exists"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:19
+msgid "Exception :py:class:`NodeHasBeenRemovedException` is caught automatically."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.attr:21
+msgid ""
+":py:meth:`UI element attributes in poco sdk definition "
+"<poco.sdk.AbstractNode.AbstractNode.getAttr>`."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.child:1
+msgid ""
+"Select the direct child(ren) from the UI element(s) given by the query "
+"expression, see ``QueryCondition`` for more details about the selectors."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.child:4 poco.proxy.UIObjectProxy.offspring:4
+#: poco.proxy.UIObjectProxy.sibling:4
+msgid ""
+"query expression of attribute \"name\", i.e. the UI elements with "
+"``name`` name will be selected"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.child:5 poco.proxy.UIObjectProxy.offspring:5
+#: poco.proxy.UIObjectProxy.sibling:5
+msgid "other query expression except for the ``name``"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.child:7 poco.proxy.UIObjectProxy.offspring:7
+#: poco.proxy.UIObjectProxy.sibling:7
+msgid "a new UI proxy object representing the child(ren) of current UI element(s)"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.children:1
+msgid ""
+"The same as :py:meth:`.child() <poco.proxy.UIObjectProxy.child>` but it "
+"selects all children from the UI element(s)."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.children:4
+msgid "a new UI proxy object"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.click:1
+msgid ""
+"Perform the click action on the UI element(s) represented by the UI "
+"proxy. If this UI proxy represents a set of UI elements, the first one in"
+" the set is clicked and the anchor point of the UI element is used as the"
+" default one. It is also possible to click another point offset by "
+"providing ``focus`` argument."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.click:5
+msgid "See ``CoordinateSystem`` for more details."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.click:7
+msgid ""
+"an offset point (x, y) from the top left corner of the UI element(s), "
+"values must be in range of 0~1. This argument can be also specified by "
+"'anchor' or 'center'. 'Center' means to click the center of bounding box "
+"of UI element."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.click:11
+msgid ""
+"number of seconds to wait after this action. Default is None which is the"
+" default sleep interval. This value can be configured by Poco "
+"initialization. See configuration at poco :py:class:`initialization "
+"<poco.pocofw.Poco>` for more details."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:9
+#: poco.proxy.UIObjectProxy.swipe:14
+msgid ""
+":exc:`PocoNoSuchNodeException` -- raised when the UI element does not "
+"exist"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.drag_to:1
+msgid ""
+"Similar to swipe action, but the end point is provide by a UI proxy or by"
+" fixed coordinates."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.drag_to:3
+msgid ""
+"a UI proxy or 2-list/2-tuple coordinates (x, y) in NormalizedCoordinate "
+"system"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.drag_to:6 poco.proxy.UIObjectProxy.swipe:11
+msgid "time interval in which the action is performed"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.exists:1
+msgid ""
+"Test whether the UI element is in the hierarchy. Similar to "
+":py:meth:`.attr('visible') <poco.proxy.UIObjectProxy.attr>`."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.exists:4
+msgid "True if exists otherwise False"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.focus:1
+msgid ""
+"Get a new UI proxy copy with the given focus. Return a new UI proxy "
+"object as the UI proxy is immutable."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.focus:3
+msgid ""
+"the focus point, it can be specified as 2-list/2-tuple coordinates (x, y)"
+" in NormalizedCoordinate system or as 'center' or 'anchor'."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.focus:7
+msgid "a new UI proxy object (copy)"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_bounds:1
+msgid "Get the parameters of bounding box of the UI element."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_bounds:3
+msgid ""
+"4-list (top, right, bottom, left) coordinates related to the edge of "
+"screen in NormalizedCoordinate system"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_bounds:5
+msgid ":obj:`list` <:obj:`float`>"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_name:1
+msgid "Get the UI element name attribute"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_name:3
+msgid "UI element name attribute"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_name:4 poco.proxy.UIObjectProxy.get_text:5
+msgid ":obj:`str`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_position:1
+msgid "Get the position of the UI elements."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_position:3
+msgid ""
+"focus point of UI proxy,  see :py:meth:`.focus() "
+"<poco.proxy.UIObjectProxy.focus>` for more details"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_position:5
+msgid "coordinates (x, y) in NormalizedCoordinate system"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_position:8
+msgid ":exc:`TypeError` -- raised when unsupported focus type is specified"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_size:1
+msgid "Get the UI element size in ``NormalizedCoordinate`` system."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_size:3
+msgid "size [width, height] in range of 0 ~ 1."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_size:4
+msgid "2-:obj:`list`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_text:1
+msgid ""
+"Get the text attribute of the UI element. Return None if no such "
+"attribute. Similar to :py:meth:`.attr('text') "
+"<poco.proxy.UIObjectProxy.attr>`."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.get_text:4
+msgid ""
+"None if the UI element does not have the text element, otherwise the "
+"utf-8 encoded text value"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.invalidate:1
+msgid ""
+"Clear the flag to indicate to re-query or re-select the UI element(s) "
+"from hierarchy."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:1
+msgid ""
+"Perform the long click action on the UI element(s) represented by the UI "
+"proxy. If this UI proxy represents a set of UI elements, the first one in"
+" the set is clicked and the anchor point of the UI element is used as the"
+" default one. Similar to click but press the screen for the given time "
+"interval and then release."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:5
+msgid "whole action duration."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.long_click:8
+msgid ""
+"the same as :py:meth:`poco.pocofw.Poco.long_click`, depending on poco "
+"agent implementation."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.nodes:1
+msgid "Readonly property accessing the UI element(s) in the remote runtime."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.offspring:1
+msgid ""
+"Select the offsprings including the direct child(ren) from the UI "
+"element(s) given by the query expression, see ``QueryCondition`` for more"
+" details about selectors."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.set_text:1
+msgid ""
+"Set the text attribute of the UI element. If the UI element does not "
+"support mutation, an exception is raised"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.set_text:3
+msgid "the text value to be set"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.set_text:5
+msgid ""
+":exc:`InvalidOperationException` -- when unable to mutate text value of "
+"the UI element"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.setattr:1
+msgid ""
+"Change the attribute value of the UI element. Not all attributes can be "
+"casted to text. If changing the immutable attributes or attributes which "
+"do not exist, the InvalidOperationException exception is raised."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.setattr:4
+msgid "attribute name"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.setattr:5
+msgid "new attribute value to cast"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.setattr:7
+msgid ""
+":exc:`InvalidOperationException` -- when it fails to set the attribute on"
+" UI element"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.sibling:1
+msgid ""
+"Select the sibling(s) from the UI element(s) given by the query "
+"expression, see ``QueryCondition`` for more details about the selectors."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.swipe:1
+msgid ""
+"Perform a swipe action given by the direction from this UI element. For "
+"notices and limitations see :py:meth:`.click() "
+"<poco.proxy.UIObjectProxy.click>`."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.swipe:4
+msgid ""
+"coordinates (x, y) in NormalizedCoordinate system, it can be also "
+"specified as  'up', 'down', 'left', 'right'. Swipe 'up' is equivalent to "
+"[0, -0.1], swipe 'down' is equivalent to [0, 0.1], swipe 'left' is "
+"equivalent to [-0.1, 0] and swipe 'right' is equivalent to [0, 0.1]"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.swipe:8
+msgid "see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>` for more details"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait:1
+msgid "Block and wait for max given time before the UI element appears."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait:3
+#: poco.proxy.UIObjectProxy.wait_for_appearance:4
+#: poco.proxy.UIObjectProxy.wait_for_disappearance:3
+msgid "maximum waiting time in seconds"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait:5
+msgid "self"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait_for_appearance:1
+msgid ""
+"Block and wait until the UI element **appears** within the given timeout."
+" When timeout, the :py:class:`PocoTargetTimeout "
+"<poco.exceptions.PocoTargetTimeout>` is raised."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait_for_appearance:6
+#: poco.proxy.UIObjectProxy.wait_for_disappearance:5
+msgid ":exc:`PocoTargetTimeout` -- when timeout"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.wait_for_disappearance:1
+msgid ""
+"Block and wait until the UI element **disappears** within the given "
+"timeout."
+msgstr ""
+
+#~ msgid "参数"
+#~ msgstr ""
+
+#~ msgid "返回"
+#~ msgstr ""
+
+#~ msgid "返回类型"
+#~ msgstr ""
+
+#~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "Returns"
+#~ msgstr ""
+
+#~ msgid "Return type"
+#~ msgstr ""
+

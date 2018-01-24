@@ -1,0 +1,2 @@
+hunter-cli
+airtest-hunter

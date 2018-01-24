@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-29 11:52+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:3
+msgid "Interact with Buttons and Labels"
+msgstr "Button和Label的交互"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:5
+msgid ""
+"UI objects are just proxies, you can assign it into a variable and reuse "
+"without repeated instantiation. The following example shows the most used"
+" methods of UI proxy. It is very easy to access all available attributes "
+"of UI in game/app."
+msgstr "poco中的UI对象只是一个 **代理** ，下面例子将展示UI代理的常用方法，通过UI代理可以很容易获取在game/app中的具体属性值。"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:9
+msgid "Click and long click"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:11
+msgid ""
+"For operations, the simplest one is click, and can also do long click as "
+"long as you wish. The following example shows the effects of click and "
+"long click."
+msgstr "最简单的操作就是点击(click)，也可以长按(long click)，按多久都行，下面例子展示点击和长按各自的效果。"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:31
+msgid "Get and set attributes"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:33
+msgid ""
+"The following example shows more functional ways of interacting with UIs,"
+" including getting and setting attributes on UIs."
+msgstr "下面例子在多个功能点上展示如何与按钮和文本框交互，包括读取和设置UI的属性"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:68
+msgid "Existence test"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:70
+msgid ""
+"If retrieve attributes or perform an operation on inexistent UI, "
+"exceptions will raise. If you are not sure whether the UI exists or not, "
+"you can call ``.exists()`` to test whether exists. In specific test "
+"cases, remember to think of a bug if the UI does not exist as your wish."
+msgstr ""
+"如果从一个不存在的UI里读取属性值或者操作它，会触发异常，如果你不确定那个UI是否存在，可以调用 ``.exists()`` "
+"来判断。在具体的测试用例中，如果因为UI不存在出现了异常，这很有可能是game/app的bug，不要强行忽略。"
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:105
+msgid "See also:"
+msgstr "更多示例："
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:107
+msgid "`basic usage`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:108
+msgid "`interact with Buttons and Labels`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:109
+msgid "`drag and swipe operations`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:110
+msgid "`advanced selections`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:111
+msgid "`play with coordinate system and local positioning`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:112
+msgid "`iteration over elements`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:113
+msgid "`handling exceptions`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:114
+msgid "`waiting for events`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:115
+msgid "`play with unittest framework`_"
+msgstr ""
+
+#: ../../source/doc/poco-example/interact_with_buttons_and_labels.rst:116
+msgid "`optimize speed by freezing UI`_"
+msgstr ""
+

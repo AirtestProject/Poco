@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco-example/index.rst:3
+msgid "Poco Examples"
+msgstr "Poco示例 (Examples)"
+
+#: ../../source/doc/poco-example/index.rst:5
+msgid ""
+"Here are several example poco test scripts. Each example is written by "
+"using Unity3D demo game. It is nothing different from other games."
+msgstr "以下的所有示例大部分都是基于一个Unity3D写的小游戏，你可以下载这个小游戏并安装到你的手机上来测试一下例子里的代码。"
+
+#: ../../source/doc/poco-example/index.rst:8
+msgid "`basic usage`_"
+msgstr "`基本用法 <basic usage_>`_ "
+
+#: ../../source/doc/poco-example/index.rst:9
+msgid "`interact with Buttons and Labels`_"
+msgstr "`Button和Label的交互 <interact with Buttons and Labels_>`_"
+
+#: ../../source/doc/poco-example/index.rst:10
+msgid "`drag and swipe operations`_"
+msgstr "`拖动和滑动(drag/swipe) <drag and swipe operations_>`_"
+
+#: ../../source/doc/poco-example/index.rst:11
+msgid "`advanced selections`_"
+msgstr "`复杂层次的UI选择 <advanced selections_>`_"
+
+#: ../../source/doc/poco-example/index.rst:12
+msgid "`play with coordinate system and local positioning`_"
+msgstr "`坐标系与局部定位 <play with coordinate system and local positioning_>`_"
+
+#: ../../source/doc/poco-example/index.rst:13
+msgid "`iteration over elements`_"
+msgstr "`遍历UI <iteration over elements_>`_"
+
+#: ../../source/doc/poco-example/index.rst:14
+msgid "`handling exceptions`_"
+msgstr "`异常处理 <handling exceptions_>`_"
+
+#: ../../source/doc/poco-example/index.rst:15
+msgid "`waiting for events`_"
+msgstr "`等待UI <waiting for events_>`_"
+
+#: ../../source/doc/poco-example/index.rst:16
+msgid "`play with unittest framework`_"
+msgstr "`使用单元测试框架 <play with unittest framework_>`_"
+
+#: ../../source/doc/poco-example/index.rst:17
+msgid "`optimize speed by freezing UI`_"
+msgstr "`冻结UI以加快一些速度 <optimize speed by freezing UI_>`_"
+

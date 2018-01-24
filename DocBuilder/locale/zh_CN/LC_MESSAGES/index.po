@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-17 15:57+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../index.rst:3
+msgid "Welcome to Poco (ポコ) documentation!"
+msgstr "欢迎使用Poco (ポコ) UI自动化框架"
+
+#: ../../index.rst:5
+msgid ""
+"This document provides all the basic information that are needed to start"
+" using Poco ポコ cross-engine UI automation framework. It covers the main "
+"framework ideas and concepts and shows examples for various use cases as "
+"well."
+msgstr "Poco是高性能的跨平台跨引擎通用自动化框架，本文档会提供详尽的使用说明。"
+
+#: ../../index.rst:10
+msgid "Getting Started"
+msgstr "快速预览"
+
+#: ../../index.rst:18
+msgid "Install Poco and PocoSDK"
+msgstr "安装Poco和PocoSDK"
+
+#: ../../index.rst:20
+msgid ""
+"In order to use Poco, you must install Poco python library on your host "
+"and also install the `poco-sdk`_ in your game/app."
+msgstr "在电脑上安装poco，并把poco-sdk集成到游戏里"
+
+#: ../../index.rst:23
+msgid "**Poco** can be installed straightforward with ``pip`` command"
+msgstr "直接pip安装即可"
+
+#: ../../index.rst:29
+msgid "For NetEase internal use, run the following command directly."
+msgstr "重点看黑板： **网易游戏项目** 请用下面的命令安装"
+
+#: ../../index.rst:35
+msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
+msgstr ""
+"把sdk集成到游戏里请参考 `Integration Guide`_ 。 **网易自研引擎** 无需嵌入sdk，请在hunter上直接配置，见 "
+"`Integration Guide for NetEase`_ "
+
+#: ../../index.rst:39
+msgid "Using Poco as Python package"
+msgstr "如何使用"
+
+#: ../../index.rst:42
+msgid "Simple demo"
+msgstr "示例"
+
+#: ../../index.rst:44
+msgid ""
+"The following example shows a simple script on demo game using Unity3D. "
+"Check `More examples`_ section for more detailed info."
+msgstr "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_."
+" **网易自研引擎项目请参考** 网易游戏项目测试脚本标准模板_ 来开始建立回归测试工程。"
+
+#: ../../index.rst:47
+msgid ""
+"First you should connect your Android phone, for example, via usb cable "
+"and enable the **ADB DEBUG MODE**."
+msgstr "首先请把usb线连上Android手机并打开 **adb调试模式** 。"
+
+#: ../../index.rst:76
+msgid "Tools for writing test scripts"
+msgstr "编写脚本专用工具(Tools)"
+
+#: ../../index.rst:78
+msgid ""
+"To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
+"(an IDE for writing test scripts) or standalone `PocoHierarchyViewer`_ "
+"(to viewer the hierarchy and attributes only but lightweight) !"
+msgstr ""
+"获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
+"`PocoHierarchyViewer`_ 。 **网易自研引擎** 请直接使用 `Hunter内嵌inspector`_ ."
+
+#: ../../index.rst:82
+msgid "Dump UI hierarchy example"
+msgstr "如何用脚本抓取界面所有元素"
+
+#: ../../index.rst:84
+msgid ""
+"Poco defines an uniform format to serialize UI hierarchy for different "
+"game engines. This section shows how to dump UI hierarchy."
+msgstr "Poco为不同的引擎定义了标准的界面层次结构(hierarchy)格式，在任何游戏上使用dump方法都可以获得相同的结构。示例代码和层次结构格式如下。"
+
+#: ../../index.rst:97
+msgid ""
+"The following is the snippet of UI hierarchy. All UI elements are "
+"organized in `dict` representing the `tree` structure. More detailed info"
+" about properties are described in `.dumpHierarchy() "
+"<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
+msgstr "下面就是层次结构(hierarchy)的数据表示，用 ``dict`` 存储并都是可json序列化的。"
+
+#: ../../index.rst:141
+msgid "API reference"
+msgstr ""
+
+#: ../../index.rst:144
+msgid "Poco"
+msgstr ""
+
+#: ../../index.rst:154
+msgid "`poco drivers <source/poco.drivers.html>`_"
+msgstr ""
+
+#: ../../index.rst:156
+msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
+msgstr ""
+
+#: ../../index.rst:157
+msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
+msgstr ""
+
+#: ../../index.rst:158
+msgid "`android native <source/poco.drivers.android.uiautomation.html>`_"
+msgstr ""
+
+#: ../../index.rst:159
+msgid "`Netease Games <source/poco.drivers.netease.internal.html>`_"
+msgstr ""
+
