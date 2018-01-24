@@ -15,14 +15,13 @@ reqs = [str(ir.req) for ir in install_reqs if ir.req]
 setup(
     name='pocoui',
     version=poco.__version__,
-    keywords="poco",
+    keywords="poco, automation test, ui automation",
     description='Poco cross-engine UI automated test framework.',
     packages=find_packages(),
     include_package_data=True,
     install_requires=reqs,
     license='Apache License 2.0',
 
-    author='adolli, adolli, lxn3032, gzliuxin',
-    author_email='adolli@163.com, adollixiang@gmail.com, lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
+    author='adolli@163.com, adollixiang@gmail.com, lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
     url='https://github.com/AirtestProject/Poco',
 )
