@@ -126,9 +126,9 @@ See also:
 .. _play with unittest framework: play_with_unittest_framework.html
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
 
-.. _PocoTestResultPlayer for windows: http://init.nie.netease.com/downloads/poco/PocoTestResultPlayer-win32-x64.zip
+.. _PocoTestResultPlayer for windows: http://top.gdl.netease.com/poco-res/PocoTestResultPlayer-win32-x64.zip
 .. _PocoTestResultPlayer for mac: xxx
-.. _replay the test: http://init.nie.netease.com/video/poco/result%20player.mp4
+.. _replay the test: http://top.gdl.netease.com/poco-res/video/result_player_demo.mp4
 
 
 About PocoTestResultPlayer

@@ -465,12 +465,13 @@ correspond to the position out of the UI element.
 
 .. _ScreenInterface.getScreen: http://poco.readthedocs.io/en/latest/source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen
 
+.. _PocoHierarchyViewer: http://top.gdl.netease.com/poco-res/PocoHierarchyViewer-win32-x64.zip
+
 ..
  以下链接还没完全准备好
 
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
-.. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
 
 
 ..
