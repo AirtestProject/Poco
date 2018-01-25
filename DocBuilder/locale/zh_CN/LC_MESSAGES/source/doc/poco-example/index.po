@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 17:35+0800\n"
+"POT-Creation-Date: 2018-01-25 16:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/doc/poco-example/index.rst:3
-msgid "Poco Examples"
-msgstr "Poco示例 (Examples)"
+msgid "Poco Examples and Tutorials"
+msgstr ""
 
 #: ../../source/doc/poco-example/index.rst:5
 msgid ""
@@ -66,4 +66,7 @@ msgstr "`使用单元测试框架 <play with unittest framework_>`_"
 #: ../../source/doc/poco-example/index.rst:17
 msgid "`optimize speed by freezing UI`_"
 msgstr "`冻结UI以加快一些速度 <optimize speed by freezing UI_>`_"
+
+#~ msgid "Poco Examples"
+#~ msgstr "Poco示例 (Examples)"
 

@@ -118,7 +118,7 @@ class AbstractNode(object):
 
         See Also:
             :py:meth:`setAttr <poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in
-             ``poco.sdk.interfaces.hierarchy``
+            ``poco.sdk.interfaces.hierarchy``
         """
 
         raise UnableToSetAttributeException(attrName, None)

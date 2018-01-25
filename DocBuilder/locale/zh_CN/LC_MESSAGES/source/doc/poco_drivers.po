@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-25 16:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/poco_drivers.rst:3
+msgid "Poco drivers (engine specific poco implementation)"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:5
+msgid ""
+"For different engines please initialize ``poco`` instance by "
+"corresponding driver. Here are API reference of different drivers."
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:8
+msgid "`Unity3D`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:9
+msgid "`android-native`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:10
+msgid "`cocos2dx-js`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:11
+msgid "`NetEase Internal Engines`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:13
+msgid ""
+"Following example shows how to initialize popo instance for Unity3D. "
+"Remember to connect an Android device to your PC/mac with a running game "
+"or launch and keep the Unity game active on PC/mac."
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:37
+msgid "For other engines, refer to `Integration guide`_ for more details"
+msgstr ""
+
+#~ msgid "`NetEase Internal Engines <poco.drivers.netease.internal.html>`_"
+#~ msgstr ""
+
