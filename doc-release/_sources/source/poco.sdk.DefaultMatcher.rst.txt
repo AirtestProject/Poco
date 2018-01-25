@@ -1,6 +1,0 @@
-poco\.sdk\.DefaultMatcher module
-================================
-
-.. automodule:: poco.sdk.DefaultMatcher
-    :members:
-    :show-inheritance:

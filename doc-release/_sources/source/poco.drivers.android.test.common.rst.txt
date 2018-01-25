@@ -1,6 +1,0 @@
-poco\.drivers\.android\.test\.common module
-===========================================
-
-.. automodule:: poco.drivers.android.test.common
-    :members:
-    :show-inheritance:

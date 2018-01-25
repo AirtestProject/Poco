@@ -1,6 +1,0 @@
-poco\.agent module
-==================
-
-.. automodule:: poco.agent
-    :members:
-    :show-inheritance:

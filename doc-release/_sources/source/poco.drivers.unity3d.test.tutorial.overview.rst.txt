@@ -1,6 +1,0 @@
-poco\.drivers\.unity3d\.test\.tutorial\.overview module
-=======================================================
-
-.. automodule:: poco.drivers.unity3d.test.tutorial.overview
-    :members:
-    :show-inheritance:

@@ -1,7 +1,0 @@
-poco\.drivers\.cocosjs package
-==============================
-
-.. automodule:: poco.drivers.cocosjs
-    :members:
-    :show-inheritance:
-

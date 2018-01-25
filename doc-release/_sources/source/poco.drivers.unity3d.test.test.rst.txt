@@ -1,6 +1,0 @@
-poco\.drivers\.unity3d\.test\.test module
-=========================================
-
-.. automodule:: poco.drivers.unity3d.test.test
-    :members:
-    :show-inheritance:

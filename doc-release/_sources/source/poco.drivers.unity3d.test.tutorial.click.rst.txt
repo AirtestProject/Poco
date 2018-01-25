@@ -1,6 +1,0 @@
-poco\.drivers\.unity3d\.test\.tutorial\.click module
-====================================================
-
-.. automodule:: poco.drivers.unity3d.test.tutorial.click
-    :members:
-    :show-inheritance:

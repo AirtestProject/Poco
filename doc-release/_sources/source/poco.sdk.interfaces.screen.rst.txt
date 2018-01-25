@@ -1,6 +1,0 @@
-poco\.sdk\.interfaces\.screen module
-====================================
-
-.. automodule:: poco.sdk.interfaces.screen
-    :members:
-    :show-inheritance:

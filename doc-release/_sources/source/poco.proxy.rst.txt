@@ -1,6 +1,0 @@
-poco\.proxy module
-==================
-
-.. automodule:: poco.proxy
-    :members:
-    :show-inheritance:

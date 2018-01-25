@@ -1,6 +1,0 @@
-poco\.drivers\.netease\.internal module
-=======================================
-
-.. automodule:: poco.drivers.netease.internal
-    :members:
-    :show-inheritance:

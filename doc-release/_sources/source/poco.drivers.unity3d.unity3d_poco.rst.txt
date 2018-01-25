@@ -1,6 +1,0 @@
-poco\.drivers\.unity3d\.unity3d\_poco module
-============================================
-
-.. automodule:: poco.drivers.unity3d.unity3d_poco
-    :members:
-    :show-inheritance:

@@ -1,6 +1,0 @@
-poco\.freezeui\.hierarchy module
-================================
-
-.. automodule:: poco.freezeui.hierarchy
-    :members:
-    :show-inheritance:

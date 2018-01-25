@@ -1,6 +1,0 @@
-poco\.sdk\.AbstractNode module
-==============================
-
-.. automodule:: poco.sdk.AbstractNode
-    :members:
-    :show-inheritance:

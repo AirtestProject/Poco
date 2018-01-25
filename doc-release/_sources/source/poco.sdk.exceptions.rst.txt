@@ -1,6 +1,0 @@
-poco\.sdk\.exceptions module
-============================
-
-.. automodule:: poco.sdk.exceptions
-    :members:
-    :show-inheritance:

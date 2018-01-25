@@ -1,6 +1,0 @@
-poco\.drivers\.android\.utils\.apk\_parse module
-================================================
-
-.. automodule:: poco.drivers.android.utils.apk_parse
-    :members:
-    :show-inheritance:
