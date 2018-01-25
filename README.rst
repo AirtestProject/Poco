@@ -72,11 +72,6 @@ your game/app.
 
     pip install pocoui
 
-For NetEase internal use, run the following command directly.
-
-.. code-block:: bash
-
-    pip install -i https://pypi.nie.netease.com/ airtest-hunter pocoui pocounit
 
 SDK Integration
 ---------------
@@ -98,6 +93,9 @@ by corresponding driver.
 Following example shows how to initialize popo instance for
 
 * Unity3D.
+
+Remember to connect an Android device to your PC/mac with a running game or launch and keep the Unity game active on
+PC/mac.
 
 .. code-block:: python
 
@@ -452,26 +450,28 @@ the coordinates at (0.5, 0.5) corresponds to the center of the UI element while 
 correspond to the position out of the UI element.
 
 
-..
- 下面的连接要替换成绝对路径
 
-.. _中文README(Chinese README): 
-.. _poco-sdk: doc/integration.html
-.. _Integration Guide: doc/integration.html
-.. _Integration Guide for NetEase: doc/integration.html#netease-internal-engines
-.. _More examples: doc/poco-example/index.html
-.. _Hunter内嵌inspector: doc/hunter-inspector-guide.html
-.. _网易游戏项目测试脚本标准模板: doc/netease-internal-use-template.html
+.. _poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/integration.html
+.. _Integration Guide: http://poco.readthedocs.io/en/latest/source/doc/integration.html
+.. _Integration Guide for NetEase: http://poco.readthedocs.io/en/latest/source/doc/integration.html#netease-internal-engines
+.. _More examples: http://poco.readthedocs.io/en/latest/source/doc/poco-example/index.html
+.. _Hunter内嵌inspector: http://poco.readthedocs.io/en/latest/source/doc/hunter-inspector-guide.html
+.. _网易游戏项目测试脚本标准模板: http://poco.readthedocs.io/en/latest/source/doc/netease-internal-use-template.html
+.. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
+
+.. _API Reference: http://poco.readthedocs.io#api-reference
+.. _Online docs: http://poco.readthedocs.io
+
+..
+ 以下链接还没完全准备好
+
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 .. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
-
-.. _API Reference: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html#api-reference
-.. _Online docs: http://init.nie.netease.com/autodoc/poco/doc-auto/index.html
 
 
 ..
  下面是对应sdk的下载链接
 
-.. _cocos2dx-js:
-.. _android-native:
+.. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
+

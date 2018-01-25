@@ -26,12 +26,6 @@ your game/app.
 
     pip install pocoui
 
-For NetEase internal use, run the following command directly.
-
-.. code-block:: bash
-
-    pip install -i https://pypi.nie.netease.com/ airtest-hunter pocoui pocounit
-
 For **poco-sdk** integration please refer to `Integration Guide`_
 
 
@@ -144,20 +138,42 @@ Poco
 ----
 
 .. toctree::
-    :maxdepth: 1
+   :maxdepth: 2
 
-    source/poco.pocofw
-    source/poco.proxy
-    source/poco.exceptions
-    source/poco.sdk
+   Poco instance API <source/poco.pocofw>
+   UI proxy object API <source/poco.proxy>
 
-- `poco drivers <source/poco.drivers.html>`_
+.. toctree::
+   :hidden:
+
+   Poco drivers (engine specific poco implementation) <source/doc/poco_drivers>
+
+- `poco drivers (engine specific poco implementation) <source/doc/poco_drivers.html>`_
 
   - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
   - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
-  - `android native <source/poco.drivers.android.uiautomation.html>`_
-  - `Netease Games <source/poco.drivers.netease.internal.html>`_
+  - `Android native app <source/poco.drivers.android.uiautomation.html>`_
+  - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
 
+.. toctree::
+    :maxdepth: 3
+
+    Poco SDK API <source/poco.sdk>
+
+.. toctree::
+    :maxdepth: 2
+
+    Exceptions <source/poco.exceptions>
+
+.. toctree::
+   :hidden:
+
+    Examples and Tutorial <source/doc/poco-example/index>
+
+.. toctree::
+    :hidden:
+
+    Project integration <source/doc/integration>
 
 
 .. _poco-sdk: source/doc/integration.html
@@ -166,6 +182,9 @@ Poco
 .. _More examples: source/doc/poco-example/index.html
 .. _Hunter内嵌inspector: source/doc/hunter-inspector-guide.html
 .. _网易游戏项目测试脚本标准模板: source/doc/netease-internal-use-template.html
+.. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
+
+
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 .. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
@@ -173,5 +192,5 @@ Poco
 ..
  下面是对应sdk的下载链接
 
-.. _cocos2dx-js:
-.. _android-native:
+.. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
+

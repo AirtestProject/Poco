@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2018-01-25 14:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,11 +219,8 @@ msgstr ""
 #: of poco.sdk.AbstractNode.AbstractNode.setAttr:11
 msgid ""
 ":py:meth:`setAttr "
-"<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in"
-msgstr ""
-
-#: of poco.sdk.AbstractNode.AbstractNode.setAttr:12
-msgid "``poco.sdk.interfaces.hierarchy``"
+"<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in "
+"``poco.sdk.interfaces.hierarchy``"
 msgstr ""
 
 #~ msgid "参数"
@@ -242,5 +239,13 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:meth:`setAttr "
+#~ "<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in"
+#~ msgstr ""
+
+#~ msgid "``poco.sdk.interfaces.hierarchy``"
 #~ msgstr ""
 
