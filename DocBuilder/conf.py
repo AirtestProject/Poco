@@ -20,7 +20,6 @@
 import os
 import sys
 import shutil
-sys.path.insert(0, os.path.abspath('../poco'))
 
 from recommonmark.parser import CommonMarkParser
 
@@ -28,8 +27,10 @@ from recommonmark.parser import CommonMarkParser
 # prepare tree structure
 this_dir = os.path.dirname(os.path.abspath(sys._getframe(0).f_code.co_filename))
 os.chdir(this_dir)
+sys.path.insert(0, os.path.abspath('../poco'))
 
 print sys.argv
+print sys.path
 # compatible with readthedocs online builder and local builder
 if sys.argv[0].endswith('sphinx-build') and ('html' in sys.argv or sys.argv[-1] == '_build/html'):
     if not os.path.exists('source'):
