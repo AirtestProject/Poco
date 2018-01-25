@@ -182,7 +182,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
         from airtest.core.settings import Settings
 
 
-    launcher_dir = os.path.dirname(os.path.realpath(__file__))
+    launcher_dir = os.path.dirname(sys._getframe(0).f_code.co_filename)
     os.chdir(launcher_dir)
 
 
@@ -201,6 +201,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
                 else:
                     set_serialno()
 
+        sys.path.append(os.path.abspath('.'))
         sys.path.append(os.path.abspath('./lib'))
         if new_airtest_api:
             exec("from airtest.core.api import *") in globals()

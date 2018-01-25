@@ -19,9 +19,30 @@
 #
 import os
 import sys
+import shutil
 sys.path.insert(0, os.path.abspath('../poco'))
 
 from recommonmark.parser import CommonMarkParser
+
+
+# prepare tree structure
+this_dir = os.path.dirname(os.path.abspath(sys._getframe(0).f_code.co_filename))
+os.chdir(this_dir)
+
+print sys.argv
+if sys.argv[0].endswith('sphinx-build') and sys.argv[2] == 'html':
+    if not os.path.exists('source'):
+        os.mkdir('source')
+
+    # gen api-doc
+    os.environ['SPHINX_APIDOC_OPTIONS'] = 'members,show-inheritance'
+    os.system("sphinx-apidoc -Me -o source/ ../poco ../poco/utils")
+
+    # prepare other file
+    shutil.copyfile('../README.rst', 'source/README.rst')
+    if os.path.exists('source/doc'):
+        shutil.rmtree('source/doc')
+    shutil.copytree('../doc', 'source/doc')
 
 
 # -- General configuration ------------------------------------------------
