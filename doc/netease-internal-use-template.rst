@@ -94,10 +94,7 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
     import re
 
     from airtest_hunter import AirtestHunter, open_platform, wait_for_hunter_connected
-    try:
-        from poco.vendor.airtest import AirtestPoco as Poco
-    except ImportError:
-        from poco.drivers.netease.internal import NeteasePoco as Poco
+    from poco.drivers.netease.internal import NeteasePoco as Poco
 
 
     __all__ = ['Player']

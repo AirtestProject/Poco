@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 15:50+0800\n"
+"POT-Creation-Date: 2018-01-25 17:22+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,7 +93,7 @@ msgid ""
 msgstr "支持gps、加速度感应器等模拟输入"
 
 #: ../../source/README.rst:60
-msgid "is extensible to other private engines by implementing `poco-sdk`_ ."
+msgid "is extensible to other private engines by `implementing poco-sdk`_ ."
 msgstr "可以很方便地扩找到私有引擎中使用"
 
 #: ../../source/README.rst:61
@@ -158,9 +158,7 @@ msgid ""
 msgstr "请先将Android手机连上电脑并启动好Unity游戏，或者直接启动windows版并且不要让游戏后台运行。"
 
 #: ../../source/README.rst:117
-msgid ""
-"`NetEase Internal Engines <poco.drivers.netease.internal.html>`_ except "
-"for Unity3D projects."
+msgid "`NetEase Internal Engines`_ except for Unity3D projects."
 msgstr " `网易游戏非Unity3D项目 <poco.drivers.netease.internal.html>`_ "
 
 #: ../../source/README.rst:135
@@ -176,8 +174,8 @@ msgid "unreal (in development)"
 msgstr ""
 
 #: ../../source/README.rst:138
-msgid "for other engines, refer to `Integration guide`_ for more details"
-msgstr "其他引擎请参考 `Integration guide`_ 。"
+msgid "for other engines, refer to `Integration Guide`_ for more details"
+msgstr "其他引擎请参考 `Integration Guide`_ 。"
 
 #: ../../source/README.rst:142
 msgid "Working with Poco Objects"
@@ -367,41 +365,38 @@ msgstr "截屏(snapshot)"
 msgid ""
 "Take a screenshot of the current screen in base64 encoded string. The "
 "image format depends on the sdk implementation. Take a look at "
-":py:meth:`ScreenInterface.getScreen "
-"<poco.sdk.interfaces.screen.ScreenInterface.getScreen>` to dive into sdk "
-"implementation details."
+"`ScreenInterface.getScreen`_ to dive into sdk implementation details."
 msgstr ""
-"截屏幕并以base64编码返回。截图的格式(png, jpg, ...)由对应的sdk实现决定，大多数情况下是png。详见 "
-":py:meth:`ScreenInterface.getScreen "
-"<poco.sdk.interfaces.screen.ScreenInterface.getScreen>`"
+"截屏幕并以base64编码返回。截图的格式(png, jpg, ...)由对应的sdk实现决定，大多数情况下是png。详见 `ScreenInterface.getScreen`_ "
 
-#: ../../source/README.rst:354
+
+#: ../../source/README.rst:353
 msgid ""
 "**Note**: ``snapshot``  is not supported in some engine implementation of"
 " poco."
 msgstr " **注意** : 有些引擎不支持截屏。"
 
-#: ../../source/README.rst:365
+#: ../../source/README.rst:364
 msgid "Exceptions"
 msgstr "异常处理(Exceptions)"
 
-#: ../../source/README.rst:367
+#: ../../source/README.rst:366
 msgid "This sections describes the Poco framework errors and exceptions."
 msgstr "本节说明如何处理异常"
 
-#: ../../source/README.rst:370
+#: ../../source/README.rst:369
 msgid "PocoTargetTimeout"
 msgstr ""
 
-#: ../../source/README.rst:384
+#: ../../source/README.rst:383
 msgid "PocoNoSuchNodeException"
 msgstr ""
 
-#: ../../source/README.rst:400
+#: ../../source/README.rst:399
 msgid "Unit Test"
 msgstr "单元测试(Unit Test)"
 
-#: ../../source/README.rst:402
+#: ../../source/README.rst:401
 msgid ""
 "Poco is an automation test framework. For unit testing, please refer to "
 "`PocoUnit`_ section. PocoUnit provides a full set of assertion methods "
@@ -412,23 +407,23 @@ msgstr ""
 "`PocoUnit`_. PocoUnit是一个提供了完善设施的专门为游戏和应用设计的单元测试框架，用法与python标准库 "
 "``unittest`` 完全兼容。"
 
-#: ../../source/README.rst:406
+#: ../../source/README.rst:405
 msgid "Some Concepts"
 msgstr "术语解释(Some Concepts)"
 
-#: ../../source/README.rst:408
+#: ../../source/README.rst:407
 msgid ""
 "This section describes some basic concepts of Poco. Basic terminology "
 "used in following section"
 msgstr "文档中可能会用到以下术语，在这里事先定义一下，避免误解和歧义。"
 
-#: ../../source/README.rst:410
+#: ../../source/README.rst:409
 msgid ""
 "**Target device**: test devices where the apps or games run on, it "
 "usually refers to mobile phone devices"
-msgstr " **目标设备** ： 你的游戏或app运行的设备，一般指手机。 "
+msgstr " **目标设备** ： 你的游戏或app运行的设备，一般指手机。"
 
-#: ../../source/README.rst:411
+#: ../../source/README.rst:410
 msgid ""
 "**UI proxy**: proxy objects within Poco framework, they represent zero "
 "(none), one or multiple in-game UI elements"
@@ -436,11 +431,11 @@ msgstr ""
 " **UI代理** "
 "：Poco自动化框架中的代表实际游戏/app内UI控件的一个对象，一个UI代理可对应0个、1个或多个实际的UI控件。进行选择操作时，实际上就是创建了一个UI代理；对UI进行操作时，也是通过UI代理进行。"
 
-#: ../../source/README.rst:412
+#: ../../source/README.rst:411
 msgid "**Node/UI element**: UI element instances or nodes in app/game"
 msgstr " **节点/UI元素** ：游戏/app里的UI控件或某个实体。"
 
-#: ../../source/README.rst:413
+#: ../../source/README.rst:412
 msgid ""
 "**query expression**: a serializable internal data structure through "
 "which Poco interacts with **target devices** and selects the "
@@ -450,19 +445,19 @@ msgstr ""
 "**选择表达式** ：除非你需要扩展或自定义更底层的Poco的行为，一般无需关心此。选择表达式是一种框架和sdk交互的底层数据结构，用在 "
 "``Selector`` 类中。"
 
-#: ../../source/README.rst:417
+#: ../../source/README.rst:416
 msgid "Following images show the UI hierarchy represented in Poco"
 msgstr "下面的几个图形象地展示在Poco中层次结构(hierarchy)和UI属性的特征，从Inspector里也能很容易地预览当前界面的UI控件。"
 
-#: ../../source/README.rst:424
+#: ../../source/README.rst:423
 msgid "Definitions of coordinate system and metric space"
 msgstr "坐标系与度量空间定义"
 
-#: ../../source/README.rst:427
+#: ../../source/README.rst:426
 msgid "Normalized Coordinate System"
 msgstr "归一化坐标系(Normalized Coordinate System)"
 
-#: ../../source/README.rst:429
+#: ../../source/README.rst:428
 msgid ""
 "In normalized coordinate system, the origin (0, 0) lies on top left "
 "corner of the device display. The height and the width of the screen are "
@@ -472,18 +467,18 @@ msgid ""
 "size. This is especially very handy when writing cross-device test cases."
 msgstr "归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。"
 
-#: ../../source/README.rst:434
+#: ../../source/README.rst:433
 msgid ""
 "The space of normalized coordinate system is uniformly distributed, i.e. "
 "the coordinates of the screen center are (0.5, 0.5) and the computing "
 "method of other scalars and vectors are all same in Euclidean space."
 msgstr "归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。"
 
-#: ../../source/README.rst:440
+#: ../../source/README.rst:439
 msgid "Local Coordinate System (local positioning)"
 msgstr "局部坐标系(Local Coordinate System (local positioning))"
 
-#: ../../source/README.rst:442
+#: ../../source/README.rst:441
 msgid ""
 "The aim of introducing local coordinate system is to express the "
 "coordinates with reference to a certain UI elements. The origin (0,0) of "
@@ -494,14 +489,10 @@ msgid ""
 "Other definitions are same as for normalized coordinate system."
 msgstr "引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。"
 
-#: ../../source/README.rst:448
+#: ../../source/README.rst:447
 msgid ""
 "Local coordinate system is more flexible in order to locate the position "
 "within or outside of UI element, e.g the coordinates at (0.5, 0.5) "
 "corresponds to the center of the UI element while coordinates larger than"
 " 1 or less than 0 correspond to the position out of the UI element."
 msgstr "局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。"
-
-#~ msgid "For NetEase internal use, run the following command directly."
-#~ msgstr "重点看黑板： **网易游戏项目** 请用下面的命令安装"
-

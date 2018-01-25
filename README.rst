@@ -57,7 +57,7 @@ Main Poco features includes following:
 * provides powerful APIs taht are engine independent
 * supports multi-touch e.g. fling/pinch/... (and more is coming soon)
 * support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
-* is extensible to other private engines by implementing `poco-sdk`_ .
+* is extensible to other private engines by `implementing poco-sdk`_ .
 * is compatible with Python 2.7 and Python 3.3+.
 
 Installation
@@ -114,7 +114,7 @@ PC/mac.
     ui.click()
 
 
-* `NetEase Internal Engines <poco.drivers.netease.internal.html>`_ except for Unity3D projects.
+* `NetEase Internal Engines`_ except for Unity3D projects.
 
 .. code-block:: python
 
@@ -135,7 +135,7 @@ PC/mac.
 * `cocos2dx-js`_
 * `android-native`_
 * unreal (in development)
-* for other engines, refer to `Integration guide`_ for more details
+* for other engines, refer to `Integration Guide`_ for more details
 
 
 Working with Poco Objects
@@ -348,8 +348,7 @@ snapshot
 ''''''''
 
 Take a screenshot of the current screen in base64 encoded string. The image format depends on the sdk implementation.
-Take a look at :py:meth:`ScreenInterface.getScreen <poco.sdk.interfaces.screen.ScreenInterface.getScreen>`
-to dive into sdk implementation details.
+Take a look at `ScreenInterface.getScreen`_ to dive into sdk implementation details.
 
 **Note**: ``snapshot``  is not supported in some engine implementation of poco.
 
@@ -452,15 +451,19 @@ correspond to the position out of the UI element.
 
 
 .. _poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/integration.html
+.. _implementing poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/implementation_guide.html
 .. _Integration Guide: http://poco.readthedocs.io/en/latest/source/doc/integration.html
 .. _Integration Guide for NetEase: http://poco.readthedocs.io/en/latest/source/doc/integration.html#netease-internal-engines
 .. _More examples: http://poco.readthedocs.io/en/latest/source/doc/poco-example/index.html
 .. _Hunter内嵌inspector: http://poco.readthedocs.io/en/latest/source/doc/hunter-inspector-guide.html
 .. _网易游戏项目测试脚本标准模板: http://poco.readthedocs.io/en/latest/source/doc/netease-internal-use-template.html
+.. _NetEase Internal Engines: http://poco.readthedocs.io/en/latest/source/poco.drivers.netease.internal.html
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 
 .. _API Reference: http://poco.readthedocs.io#api-reference
 .. _Online docs: http://poco.readthedocs.io
+
+.. _ScreenInterface.getScreen: http://poco.readthedocs.io/en/latest/source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen
 
 ..
  以下链接还没完全准备好
