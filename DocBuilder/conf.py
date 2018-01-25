@@ -30,7 +30,8 @@ this_dir = os.path.dirname(os.path.abspath(sys._getframe(0).f_code.co_filename))
 os.chdir(this_dir)
 
 print sys.argv
-if sys.argv[0].endswith('sphinx-build') and sys.argv[2] == 'html':
+# compatible with readthedocs online builder and local builder
+if sys.argv[0].endswith('sphinx-build') and ('html' in sys.argv or sys.argv[-1] == '_build/html'):
     if not os.path.exists('source'):
         os.mkdir('source')
 
