@@ -27,7 +27,7 @@ from recommonmark.parser import CommonMarkParser
 # prepare tree structure
 this_dir = os.path.dirname(os.path.abspath(sys._getframe(0).f_code.co_filename))
 os.chdir(this_dir)
-sys.path.insert(0, os.path.abspath('../poco'))
+sys.path.insert(0, os.path.abspath(os.path.join(this_dir, '..', 'poco')))
 
 print sys.argv
 print sys.path
