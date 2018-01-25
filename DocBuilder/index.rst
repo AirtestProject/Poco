@@ -184,12 +184,13 @@ Poco
 .. _网易游戏项目测试脚本标准模板: source/doc/netease-internal-use-template.html
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 
+.. _PocoHierarchyViewer: http://top.gdl.netease.com/poco-res/PocoHierarchyViewer-win32-x64.zip
+
 ..
  以下链接还没有完成
 
 .. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
-.. _PocoHierarchyViewer: http://init.nie.netease.com/downloads/poco/PocoHierarchyViewer-win32-x64.zip
 
 ..
  下面是对应sdk的下载链接
