@@ -103,7 +103,10 @@ class AndroidUiautomationPoco(Poco):
             current_top_activity_package = current_top_activity_package.split('/')[0]
 
         # install ime
-        self.ime = YosemiteIme(self.adb_client)
+        if new_airtest_api:
+            self.ime = YosemiteIme(self.adb_client)
+        else:
+            self.ime = YosemiteIme(self.android)
         self.ime.start()
 
         # install
