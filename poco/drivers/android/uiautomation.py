@@ -72,7 +72,7 @@ class AndroidPocoAgent(PocoAgent):
 
 
 class AndroidUiautomationPoco(Poco):
-    def __init__(self, device=None, using_proxy=True, **options):
+    def __init__(self, device=None, using_proxy=True, force_restart=True, **options):
         if not device:
             try:
                 # new version
@@ -127,7 +127,7 @@ class AndroidUiautomationPoco(Poco):
                           .format(self.__class__.__name__))
             self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
 
-        ready = self._start_instrument(p0)
+        ready = self._start_instrument(p0, force_restart=force_restart)
         if not ready:
             # 启动失败则需要卸载再重启，instrument的奇怪之处
             uninstall(self.adb_client, PocoServicePackage)
@@ -175,10 +175,19 @@ class AndroidUiautomationPoco(Poco):
     #     t.daemon = True
     #     t.start()
 
-    def _start_instrument(self, port_to_ping):
+    def _start_instrument(self, port_to_ping, force_restart=True):
+        if not force_restart:
+            try:
+                requests.get('http://{}:{}'.format(self.device_ip, port_to_ping), timeout=10)
+            except:
+                pass
+            else:
+                return True
+
         if self._instrument_proc is not None:
             self._instrument_proc.kill()
             self._instrument_proc = None
+
         ready = False
         self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
 
