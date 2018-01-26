@@ -8,7 +8,7 @@ This section introduces a unittest framework (``pocounit``) to make your test sc
 
 .. code-block:: bash
 
-    pip install -i https://pypi.nie.netease.com/ pocounit
+    pip install pocounit
 
 
 ``pocounit`` provides a full set of assertion methods just like Python unittest and will record all details at runtime
