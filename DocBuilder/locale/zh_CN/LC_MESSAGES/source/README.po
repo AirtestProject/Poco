@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 17:22+0800\n"
+"POT-Creation-Date: 2018-01-29 21:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "编写脚本专用工具(Tools)"
 msgid ""
 "To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
 "(an IDE for writing test scripts) or standalone `PocoHierarchyViewer`_ "
-"(to viewer the hierarchy and attributes only but lightweight) !"
+"(to view the hierarchy and attributes only but lightweight) !"
 msgstr ""
 "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
 "`PocoHierarchyViewer`_ 。 **网易自研引擎** 请直接使用 `Hunter内嵌inspector`_ ."
@@ -367,8 +367,8 @@ msgid ""
 "image format depends on the sdk implementation. Take a look at "
 "`ScreenInterface.getScreen`_ to dive into sdk implementation details."
 msgstr ""
-"截屏幕并以base64编码返回。截图的格式(png, jpg, ...)由对应的sdk实现决定，大多数情况下是png。详见 `ScreenInterface.getScreen`_ "
-
+"截屏幕并以base64编码返回。截图的格式(png, jpg, ...)由对应的sdk实现决定，大多数情况下是png。详见 "
+"`ScreenInterface.getScreen`_ "
 
 #: ../../source/README.rst:353
 msgid ""
@@ -407,23 +407,27 @@ msgstr ""
 "`PocoUnit`_. PocoUnit是一个提供了完善设施的专门为游戏和应用设计的单元测试框架，用法与python标准库 "
 "``unittest`` 完全兼容。"
 
-#: ../../source/README.rst:405
+#: ../../source/README.rst:404
+msgid "`Tutorial of PocoUnit`_."
+msgstr ""
+
+#: ../../source/README.rst:407
 msgid "Some Concepts"
 msgstr "术语解释(Some Concepts)"
 
-#: ../../source/README.rst:407
+#: ../../source/README.rst:409
 msgid ""
 "This section describes some basic concepts of Poco. Basic terminology "
 "used in following section"
 msgstr "文档中可能会用到以下术语，在这里事先定义一下，避免误解和歧义。"
 
-#: ../../source/README.rst:409
+#: ../../source/README.rst:411
 msgid ""
 "**Target device**: test devices where the apps or games run on, it "
 "usually refers to mobile phone devices"
 msgstr " **目标设备** ： 你的游戏或app运行的设备，一般指手机。"
 
-#: ../../source/README.rst:410
+#: ../../source/README.rst:412
 msgid ""
 "**UI proxy**: proxy objects within Poco framework, they represent zero "
 "(none), one or multiple in-game UI elements"
@@ -431,11 +435,11 @@ msgstr ""
 " **UI代理** "
 "：Poco自动化框架中的代表实际游戏/app内UI控件的一个对象，一个UI代理可对应0个、1个或多个实际的UI控件。进行选择操作时，实际上就是创建了一个UI代理；对UI进行操作时，也是通过UI代理进行。"
 
-#: ../../source/README.rst:411
+#: ../../source/README.rst:413
 msgid "**Node/UI element**: UI element instances or nodes in app/game"
 msgstr " **节点/UI元素** ：游戏/app里的UI控件或某个实体。"
 
-#: ../../source/README.rst:412
+#: ../../source/README.rst:414
 msgid ""
 "**query expression**: a serializable internal data structure through "
 "which Poco interacts with **target devices** and selects the "
@@ -445,19 +449,19 @@ msgstr ""
 "**选择表达式** ：除非你需要扩展或自定义更底层的Poco的行为，一般无需关心此。选择表达式是一种框架和sdk交互的底层数据结构，用在 "
 "``Selector`` 类中。"
 
-#: ../../source/README.rst:416
+#: ../../source/README.rst:418
 msgid "Following images show the UI hierarchy represented in Poco"
 msgstr "下面的几个图形象地展示在Poco中层次结构(hierarchy)和UI属性的特征，从Inspector里也能很容易地预览当前界面的UI控件。"
 
-#: ../../source/README.rst:423
+#: ../../source/README.rst:425
 msgid "Definitions of coordinate system and metric space"
 msgstr "坐标系与度量空间定义"
 
-#: ../../source/README.rst:426
+#: ../../source/README.rst:428
 msgid "Normalized Coordinate System"
 msgstr "归一化坐标系(Normalized Coordinate System)"
 
-#: ../../source/README.rst:428
+#: ../../source/README.rst:430
 msgid ""
 "In normalized coordinate system, the origin (0, 0) lies on top left "
 "corner of the device display. The height and the width of the screen are "
@@ -467,18 +471,18 @@ msgid ""
 "size. This is especially very handy when writing cross-device test cases."
 msgstr "归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。"
 
-#: ../../source/README.rst:433
+#: ../../source/README.rst:435
 msgid ""
 "The space of normalized coordinate system is uniformly distributed, i.e. "
 "the coordinates of the screen center are (0.5, 0.5) and the computing "
 "method of other scalars and vectors are all same in Euclidean space."
 msgstr "归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。"
 
-#: ../../source/README.rst:439
+#: ../../source/README.rst:441
 msgid "Local Coordinate System (local positioning)"
 msgstr "局部坐标系(Local Coordinate System (local positioning))"
 
-#: ../../source/README.rst:441
+#: ../../source/README.rst:443
 msgid ""
 "The aim of introducing local coordinate system is to express the "
 "coordinates with reference to a certain UI elements. The origin (0,0) of "
@@ -489,10 +493,11 @@ msgid ""
 "Other definitions are same as for normalized coordinate system."
 msgstr "引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。"
 
-#: ../../source/README.rst:447
+#: ../../source/README.rst:449
 msgid ""
 "Local coordinate system is more flexible in order to locate the position "
 "within or outside of UI element, e.g the coordinates at (0.5, 0.5) "
 "corresponds to the center of the UI element while coordinates larger than"
 " 1 or less than 0 correspond to the position out of the UI element."
 msgstr "局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。"
+

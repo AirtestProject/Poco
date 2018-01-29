@@ -183,13 +183,12 @@ Poco
 .. _Hunter内嵌inspector: source/doc/hunter-inspector-guide.html
 .. _网易游戏项目测试脚本标准模板: source/doc/netease-internal-use-template.html
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
-
-.. _PocoHierarchyViewer: http://top.gdl.netease.com/poco-res/PocoHierarchyViewer-win32-x64.zip
+.. _PocoUnit: https://github.com/AirtestProject/PocoUnit
+.. _PocoHierarchyViewer: source/doc/about-standalone-inspector.html
 
 ..
  以下链接还没有完成
 
-.. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 
 ..

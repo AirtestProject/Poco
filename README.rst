@@ -43,7 +43,7 @@ Tools for writing test scripts
 ------------------------------
 
 To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
-standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
+standalone `PocoHierarchyViewer`_ (to view the hierarchy and attributes only but lightweight) !
 
 Features
 --------
@@ -401,6 +401,8 @@ Unit Test
 Poco is an automation test framework. For unit testing, please refer to `PocoUnit`_ section. PocoUnit provides a full 
 set of assertion methods and furthermore, it is also compatible with the ``unittest`` in Python standard library.
 
+`Tutorial of PocoUnit`_.
+
 Some Concepts
 -------------
 
@@ -459,18 +461,18 @@ correspond to the position out of the UI element.
 .. _网易游戏项目测试脚本标准模板: http://poco.readthedocs.io/en/latest/source/doc/netease-internal-use-template.html
 .. _NetEase Internal Engines: http://poco.readthedocs.io/en/latest/source/poco.drivers.netease.internal.html
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
+.. _Tutorial of PocoUnit: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
 
 .. _API Reference: http://poco.readthedocs.io#api-reference
 .. _Online docs: http://poco.readthedocs.io
 
 .. _ScreenInterface.getScreen: http://poco.readthedocs.io/en/latest/source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen
-
-.. _PocoHierarchyViewer: http://top.gdl.netease.com/poco-res/PocoHierarchyViewer-win32-x64.zip
+.. _PocoUnit: https://github.com/AirtestProject/PocoUnit
+.. _PocoHierarchyViewer: http://poco.readthedocs.io/en/latest/source/doc/about-standalone-inspector.html
 
 ..
  以下链接还没完全准备好
 
-.. _PocoUnit: http://git-qa.gz.netease.com/maki/PocoUnit
 .. _AirtestIDE: 下载链接
 
 
