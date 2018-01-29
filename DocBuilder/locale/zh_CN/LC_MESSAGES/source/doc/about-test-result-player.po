@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-29 21:03+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/about-test-result-player.rst:3
+msgid "Test Result Player"
+msgstr ""
+
+#: ../../source/doc/about-test-result-player.rst:5
+msgid ""
+"The test result player can replay the whole procedure of the test case "
+"written under `pocounit framework`_. Simply open the test case folder and"
+" you can start to play the test. It very powerful for test engineers to "
+"spot the bugs quickly."
+msgstr ""
+
+#: ../../source/doc/about-test-result-player.rst:9
+msgid ""
+"This tool should use together with ``pocounit``. More information refers "
+"to `pocounit framework`_."
+msgstr ""
+
+#: ../../source/doc/about-test-result-player.rst:12
+msgid "Download"
+msgstr ""
+
+#: ../../source/doc/about-test-result-player.rst:14
+msgid "`PocoTestResultPlayer for windows`_"
+msgstr ""
+
+#: ../../source/doc/about-test-result-player.rst:15
+msgid "`PocoTestResultPlayer for mac`_"
+msgstr ""
+

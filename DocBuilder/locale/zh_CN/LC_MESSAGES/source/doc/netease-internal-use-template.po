@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-17 17:25+0800\n"
+"POT-Creation-Date: 2018-01-29 18:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,42 +88,42 @@ msgstr ""
 msgid "请将 ``PROCESS`` 变量改成对应的hunter项目代号。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:150
+#: ../../source/doc/netease-internal-use-template.rst:147
 msgid "``launcher.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:152
+#: ../../source/doc/netease-internal-use-template.rst:149
 msgid "launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可以通过以下命令"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:158
-#: ../../source/doc/netease-internal-use-template.rst:293
+#: ../../source/doc/netease-internal-use-template.rst:155
+#: ../../source/doc/netease-internal-use-template.rst:321
 msgid "如果在windows上直接跑的话，用下面命令"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:164
+#: ../../source/doc/netease-internal-use-template.rst:161
 msgid "``launcher.py`` 定义如下:"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:231
+#: ../../source/doc/netease-internal-use-template.rst:255
 msgid "``test1.air/test1.py`` 模板"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:233
-#: ../../source/doc/netease-internal-use-template.rst:235
-#: ../../source/doc/netease-internal-use-template.rst:237
+#: ../../source/doc/netease-internal-use-template.rst:257
+#: ../../source/doc/netease-internal-use-template.rst:259
+#: ../../source/doc/netease-internal-use-template.rst:261
 msgid "**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:240
-msgid "以下是例子，根据实际测试需求编写脚本。 ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选。"
+#: ../../source/doc/netease-internal-use-template.rst:264
+msgid "以下是例子， ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选，根据实际需求选择。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:285
+#: ../../source/doc/netease-internal-use-template.rst:313
 msgid "如何运行脚本"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:287
+#: ../../source/doc/netease-internal-use-template.rst:315
 msgid "Android 的话，请插上usb线，然后终端里跑下面命令"
 msgstr ""
 
@@ -146,5 +146,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "以下是例子。 ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选。"
+#~ msgstr ""
+
+#~ msgid "以下是例子，根据实际测试需求编写脚本。 ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选。"
 #~ msgstr ""
 

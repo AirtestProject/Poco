@@ -2,18 +2,19 @@
 Play with unittest framework
 ============================
 
-This section introduces a unittest framework (``pocounit``) to make your test scripts **higher quality** and
+This section introduces a unittest framework (`pocounit`_) to make your test scripts **higher quality** and
 **more manageable**. This unittest framework is fully compatible with Python standard library ``unittest``. To use
-``pocounit``, install from pip directly.
+`pocounit`_, install from pip directly.
 
 .. code-block:: bash
 
     pip install pocounit
 
 
-``pocounit`` provides a full set of assertion methods just like Python unittest and will record all details at runtime
-of the test script. You can replay the test procedure after and see what's wrong with your test case by
-`PocoTestResultPlayer for windows`_ (or `PocoTestResultPlayer for mac`_).
+`pocounit`_ provides a full set of assertion methods just like Python unittest and will record all details at runtime
+of the test script. You can replay the test procedure after and see what's wrong with your test case.
+
+`Get PocoTestResultPlayer`_
 
 The following simple example shows how powerful of pocounit
 
@@ -126,14 +127,6 @@ See also:
 .. _play with unittest framework: play_with_unittest_framework.html
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
 
-.. _PocoTestResultPlayer for windows: http://top.gdl.netease.com/poco-res/PocoTestResultPlayer-win32-x64.zip
-.. _PocoTestResultPlayer for mac: xxx
+.. _Get PocoTestResultPlayer: ../about-test-result-player.html
 .. _replay the test: http://top.gdl.netease.com/poco-res/video/result_player_demo.mp4
-
-
-About PocoTestResultPlayer
---------------------------
-
-.. image:: img/PocoTestResultPlayer/intro1.png
-
-.. image:: img/PocoTestResultPlayer/intro2.png
+.. _pocounit: https://github.com/AirtestProject/PocoUnit

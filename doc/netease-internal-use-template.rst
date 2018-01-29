@@ -172,6 +172,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
         from airtest.core.api import connect_device, device as current_device
         from airtest.core.helper import set_logdir
         from airtest.core.settings import Settings
+        from airtest.cli.parser import runner_parser
     except ImportError:
         new_airtest_api = False
         from airtest.core.main import set_serialno, set_windows
@@ -192,10 +193,25 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
                 Settings.FIND_INSIDE = [8, 30]  # 窗口边框偏移
                 set_windows(window_title='^.*errors and.*$')
         else:
-            if not current_device():
-                if new_airtest_api:
-                    connect_device("Android:///")
+            if new_airtest_api:
+                # 根据命令行参数自动连接设备，如果没有指定就默认连上电脑的第一个
+                ap = runner_parser()
+                args = ap.parse_args(sys.argv[1:])
+                print(sys.argv)
+
+                if isinstance(args.device, list):
+                    devices = args.device
+                elif args.device:
+                    devices = [args.device]
                 else:
+                    # default to use local android device
+                    devices = ["Android:///"]
+
+                for dev in devices:
+                    connect_device(dev)
+                    print('"{}" connected.'.format(dev))
+            else:
+                if not current_device():
                     set_serialno()
 
         sys.path.append(os.path.abspath('.'))
@@ -245,7 +261,7 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
 **请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
 
 
-以下是例子，根据实际测试需求编写脚本。 ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选。
+以下是例子， ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选，根据实际需求选择。
 
 .. code-block:: python
 
@@ -254,11 +270,15 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
     # 一个文件里建议就只有一个CommonCase
     # 一个Case做的事情尽量简单，不要把一大串操作都放到一起
     class MyTestCase(CommonCase):
-        def setUp(self):
-            # 这两个对象能满足大部分测试需求了
-            self.poco = self.player.poco
-            self.hunter = self.player.hunter
+        @property
+        def poco(self):
+            return self.player.poco
 
+        @property
+        def hunter(self):
+            return self.player.hunter
+
+        def setUp(self):
             # 调用hunter指令可以这样写
             self.hunter.script('print 23333', lang='python')
 

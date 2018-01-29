@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-29 21:15+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/about-standalone-inspector.rst:3
+msgid "Hierarchy viewer (UI Inspector)"
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:5
+msgid ""
+"As poco dives into UI controls, it is very necessary to get to know the "
+"UI structure of testing game/app when writing test script. The hierarchy "
+"viewer will do a lot help."
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:8
+msgid ""
+"The standalone hierarchy viewer now supports android native apps and "
+"Unity3D games (with poco-sdk integrated)."
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:11
+msgid "Download"
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:13
+msgid "`Hierarchy viewer for windows`_"
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:14
+msgid "`Hierarchy viewer for mac`_"
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:16
+msgid ""
+"When you placing the mouse pointer over, it will auto detect a bounding "
+"box for proper UI controls."
+msgstr ""
+
+#: ../../source/doc/about-standalone-inspector.rst:21
+msgid ""
+"If multiple UI controls overlap, right click and a list of all overlap UI"
+" controls will be shown."
+msgstr ""
+
+#~ msgid "UI Inspector"
+#~ msgstr ""
+
