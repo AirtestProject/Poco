@@ -8,6 +8,8 @@ quickly.
 
 This tool should use together with ``pocounit``. More information refers to `pocounit framework`_.
 
+`video demo`_
+
 Download
 --------
 
@@ -21,3 +23,4 @@ Download
 .. _PocoTestResultPlayer for windows: http://top.gdl.netease.com/poco-res/PocoTestResultPlayer-win32-x64.zip
 .. _PocoTestResultPlayer for mac: TODO.fix.the.link
 .. _pocounit framework: https://github.com/AirtestProject/PocoUnit
+.. _video demo: http://top.gdl.netease.com/poco-res/video/result_player_demo.mp4
