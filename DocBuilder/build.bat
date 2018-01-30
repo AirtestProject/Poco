@@ -1,7 +1,6 @@
 
-:: exclude undoc members
-:: SET SPHINX_APIDOC_OPTIONS=members,show-inheritance
-:: sphinx-apidoc -Me -o source/ ../poco ../poco/utils
+:: 需要先build一次，不然下面无法自动gettext
+sphinx-build -b html . ../doc-auto
 
 :: international multi-languages
 sphinx-build -M gettext . _build/

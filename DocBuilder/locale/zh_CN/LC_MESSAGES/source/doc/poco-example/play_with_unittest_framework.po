@@ -28,7 +28,7 @@ msgid ""
 "framework is fully compatible with Python standard library ``unittest``. "
 "To use `pocounit`_, install from pip directly."
 msgstr ""
-"本节引入单元测试框架 (`pocounit`_)，这样测试用例会质量更高也更容易管理和维护。这个单元测试框架 pocounit`_ "
+"本节引入单元测试框架 (`pocounit`_)，这样测试用例会质量更高也更容易管理和维护。这个单元测试框架 `pocounit`_ "
 "与python标准库的unittest完全兼容，直接通过pip安装即可。"
 
 #: ../../source/doc/poco-example/play_with_unittest_framework.rst:14
