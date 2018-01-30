@@ -33,19 +33,27 @@ class UnityScreen(ScreenInterface):
 
 class UnityPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR, unity_editor=False):
-        if not unity_editor:
-            # init airtest env
-            try:
-                # new version
-                from airtest.core.api import connect_device, device as current_device
-                if not current_device():
+        # if not unity_editor:
+        # init airtest env
+        try:
+            # new version
+            from airtest.core.api import connect_device, device as current_device
+            if not current_device():
+                if unity_editor:
+                    connect_device("Windows:///?title_re=Unity.*")
+                    game_window = current_device().app.top_window().child_window(title="UnityEditor.GameView")
+                    current_device()._top_window = game_window.wrapper_object()
+                    current_device().focus_rect = (0, 40, 0, 0)
+                else:
                     connect_device("Android:///")
-            except ImportError:
-                # old version
-                from airtest.cli.runner import device as current_device
-                from airtest.core.main import set_serialno
-                if not current_device():
-                    set_serialno()
+                    # unity games poco sdk listens on Android localhost:5001
+                    current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
+        except ImportError:
+            # old version
+            from airtest.cli.runner import device as current_device
+            from airtest.core.main import set_serialno
+            if not current_device():
+                set_serialno()
             # unity games poco sdk listens on Android localhost:5001
             current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
 
