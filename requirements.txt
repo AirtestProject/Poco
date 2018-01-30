@@ -3,3 +3,4 @@ airtest
 hrpc
 pydash
 axmlparserpy
+websocket-client

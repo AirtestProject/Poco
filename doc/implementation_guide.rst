@@ -23,7 +23,7 @@ First clone the `poco-sdk repo`_. Each languages are located in ``poco-sdk/sdk/*
 
 .. code-block:: bash
 
-    git clone https://github.com/Meteorix/poco-sdk.git
+    git clone https://github.com/AirtestProject/Poco-SDK.git
 
 You can just copy the source code of corresponding language to your project script folder.
 
@@ -59,4 +59,4 @@ To implement your own version of poco sdk, you only need to implement the follow
 1 method should be override
 
 
-.. _poco-sdk repo: https://github.com/Meteorix/poco-sdk
+.. _poco-sdk repo: https://github.com/AirtestProject/Poco-SDK
