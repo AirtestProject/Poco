@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-01-31 20:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,4 +20,50 @@ msgstr ""
 #: ../../source/poco.drivers.android.uiautomation.rst:2
 msgid "poco\\.drivers\\.android\\.uiautomation module"
 msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:1
+msgid "Bases: :class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:1
+msgid "Poco Android implementation for testing **Android native apps**."
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco
+msgid "参数"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:3
+msgid ""
+":py:obj:`airtest.core.device.Device` instance provided by ``airtest``. "
+"leave the parameter default and the default device will be chosen. more "
+"details refer to ``airtest doc``"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:6
+msgid "whether use adb forward to connect the Android device or not"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:8
+msgid ""
+"whether always restart the poco-service-demo running on Android device or"
+" not"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:10
+msgid "see :py:class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:13
+msgid "Examples"
+msgstr ""
+
+#: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:14
+msgid ""
+"The simplest way to initialize AndroidUiautomationPoco instance and no "
+"matter your device network status::"
+msgstr ""
+
+#~ msgid "The simplest way to initialize AndroidUiautomationPoco instance::"
+#~ msgstr ""
 

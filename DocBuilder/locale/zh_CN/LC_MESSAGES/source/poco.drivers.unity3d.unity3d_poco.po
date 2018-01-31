@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-01-31 20:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,4 +20,49 @@ msgstr ""
 #: ../../source/poco.drivers.unity3d.unity3d_poco.rst:2
 msgid "poco\\.drivers\\.unity3d\\.unity3d\\_poco module"
 msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
+msgid "Bases: :class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
+msgid "Poco Unity3D implementation."
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco
+msgid "参数"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:3
+msgid "the endpoint of your Unity3D game, default to ``(\"localhost\", 5001)``"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:5
+msgid ""
+"whether your Unity3D game is running in UnityEditor or not. default to "
+"``False``"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:7
+msgid "see :py:class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:10
+msgid "Examples"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:11
+msgid ""
+"If your game is running on Android, you could initialize poco instance by"
+" using following snippet::"
+msgstr ""
+
+#~ msgid "whether your Unity3D game is running in UnityEditor or not"
+#~ msgstr ""
+
+#~ msgid "see :py:obj:`poco.pocofw.Poco.__init__`"
+#~ msgstr ""
+
+#~ msgid "see :py:meth:`poco.pocofw.Poco.__init__`"
+#~ msgstr ""
 
