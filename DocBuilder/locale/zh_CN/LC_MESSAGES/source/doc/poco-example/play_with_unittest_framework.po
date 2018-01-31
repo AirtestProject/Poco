@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 21:03+0800\n"
+"POT-Creation-Date: 2018-01-31 10:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,8 +38,8 @@ msgid ""
 "can replay the test procedure after and see what's wrong with your test "
 "case."
 msgstr ""
-"`pocounit`_ 和python标准库的unittest一样，提供了完整的一套断言方法，除此之外，更重要的是使用 "
-"`pocounit`_ 编写的用例将可以通过我们的提供的回放工具对测试过程进行完整的回放，不会漏掉任何细节。
+"`pocounit`_ 和python标准库的unittest一样，提供了完整的一套断言方法，除此之外，更重要的是使用 `pocounit`_ "
+"编写的用例将可以通过我们的提供的回放工具对测试过程进行完整的回放，不会漏掉任何细节"
 
 #: ../../source/doc/poco-example/play_with_unittest_framework.rst:17
 msgid "`Get PocoTestResultPlayer`_"
@@ -49,51 +49,50 @@ msgstr ""
 msgid "The following simple example shows how powerful of pocounit"
 msgstr "下面例子展示pocounit的强大之处"
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:21
-msgid "video link: `replay the test`_"
-msgstr "视频链接: `replay the test`_"
-
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:105
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:114
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:107
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:116
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:108
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:117
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:109
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:118
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:110
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:119
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:111
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:120
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:112
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:121
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:113
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:122
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:114
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:123
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:115
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:124
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/play_with_unittest_framework.rst:116
+#: ../../source/doc/poco-example/play_with_unittest_framework.rst:125
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
+
+#~ msgid "video link: `replay the test`_"
+#~ msgstr "视频链接: `replay the test`_"
 

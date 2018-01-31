@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 16:53+0800\n"
+"POT-Creation-Date: 2018-01-31 11:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,17 +88,61 @@ msgstr ""
 "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
 "`PocoHierarchyViewer`_ 。 **网易自研引擎** 请直接使用 `Hunter内嵌inspector`_ ."
 
-#: ../../index.rst:76
+#: ../../index.rst:77
+msgid "API reference"
+msgstr ""
+
+#: ../../index.rst:80
+msgid "Poco API"
+msgstr ""
+
+#: ../../index.rst:82
+msgid ""
+"You can find all functions/methods for writing test scripts under the "
+"following links."
+msgstr "大部分用于编写测试脚本的函数和成员方法在下面的API文档里可以查找"
+
+#: ../../index.rst:92
+msgid "Engine specific API"
+msgstr ""
+
+#: ../../index.rst:99
+msgid ""
+"`poco drivers (engine specific poco implementation) "
+"<source/doc/poco_drivers.html>`_"
+msgstr ""
+
+#: ../../index.rst:101
+msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
+msgstr ""
+
+#: ../../index.rst:102
+msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
+msgstr ""
+
+#: ../../index.rst:103
+msgid "`Android native app <source/poco.drivers.android.uiautomation.html>`_"
+msgstr ""
+
+#: ../../index.rst:104
+msgid "`Netease Internal Engines <source/poco.drivers.netease.internal.html>`_"
+msgstr ""
+
+#: ../../index.rst:107
+msgid "Poco SDK API"
+msgstr ""
+
+#: ../../index.rst:127
 msgid "Dump UI hierarchy example"
 msgstr "如何用脚本抓取界面所有元素"
 
-#: ../../index.rst:78
+#: ../../index.rst:129
 msgid ""
 "Poco defines an uniform format to serialize UI hierarchy for different "
 "game engines. This section shows how to dump UI hierarchy."
 msgstr "Poco为不同的引擎定义了标准的界面层次结构(hierarchy)格式，在任何游戏上使用dump方法都可以获得相同的结构。示例代码和层次结构格式如下。"
 
-#: ../../index.rst:91
+#: ../../index.rst:142
 msgid ""
 "The following is the snippet of UI hierarchy. All UI elements are "
 "organized in `dict` representing the `tree` structure. More detailed info"
@@ -106,32 +150,12 @@ msgid ""
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
 msgstr "下面就是层次结构(hierarchy)的数据表示，用 ``dict`` 存储并都是可json序列化的。"
 
-#: ../../index.rst:135
-msgid "API reference"
-msgstr ""
+#~ msgid "Poco"
+#~ msgstr ""
 
-#: ../../index.rst:138
-msgid "Poco"
-msgstr ""
+#~ msgid ""
+#~ "You can find all functions/methods for"
+#~ " writing test scripts under these two"
+#~ " links."
+#~ msgstr ""
 
-#: ../../index.rst:151
-msgid ""
-"`poco drivers (engine specific poco implementation) "
-"<source/doc/poco_drivers.html>`_"
-msgstr ""
-
-#: ../../index.rst:153
-msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
-msgstr ""
-
-#: ../../index.rst:154
-msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
-msgstr ""
-
-#: ../../index.rst:155
-msgid "`Android native app <source/poco.drivers.android.uiautomation.html>`_"
-msgstr ""
-
-#: ../../index.rst:156
-msgid "`Netease Internal Engines <source/poco.drivers.netease.internal.html>`_"
-msgstr ""
