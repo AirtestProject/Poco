@@ -17,11 +17,13 @@ setup(
     version=poco.__version__,
     keywords="poco, automation test, ui automation",
     description='Poco cross-engine UI automated test framework.',
+    long_description='Poco cross-engine UI automated test framework. 2018 present by NetEase Games',
     packages=find_packages(),
     include_package_data=True,
     install_requires=reqs,
     license='Apache License 2.0',
 
-    author='adolli@163.com, adollixiang@gmail.com, lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
+    author='Netease Games',
+    author_email='lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
     url='https://github.com/AirtestProject/Poco',
 )

@@ -148,7 +148,7 @@ UI element objects can be selected by invoking ``poco(...)`` function instance. 
 render tree structure and selects all the corresponding UI elements matching the query expression.
 
 The function takes one mandatory argument `node name`, the optional arguments can be substituted too and they refer to
-specific node properties. For more information, refer to API reference.
+specific node properties. For more information, refer to `API Reference`_.
 
 
 .. code-block:: python
@@ -463,17 +463,13 @@ correspond to the position out of the UI element.
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _Tutorial of PocoUnit: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
 
+.. _AirtestIDE: http://airtest.netease.com/
 .. _API Reference: http://poco.readthedocs.io#api-reference
 .. _Online docs: http://poco.readthedocs.io
 
 .. _ScreenInterface.getScreen: http://poco.readthedocs.io/en/latest/source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: http://poco.readthedocs.io/en/latest/source/doc/about-standalone-inspector.html
-
-..
- 以下链接还没完全准备好
-
-.. _AirtestIDE: 下载链接
 
 
 ..

@@ -72,6 +72,57 @@ Tools for writing test scripts
 To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
 standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
+
+API reference
+=============
+
+Poco API
+--------
+
+You can find all functions/methods for writing test scripts under the following links.
+
+.. toctree::
+    :maxdepth: 2
+
+    Poco instance API <source/poco.pocofw>
+    UI proxy object API <source/poco.proxy>
+    Exceptions <source/poco.exceptions>
+
+Engine specific API
+'''''''''''''''''''
+
+.. toctree::
+    :hidden:
+
+    Poco drivers (engine specific poco implementation) <source/doc/poco_drivers>
+
+- `poco drivers (engine specific poco implementation) <source/doc/poco_drivers.html>`_
+
+  - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
+  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
+  - `Android native app <source/poco.drivers.android.uiautomation.html>`_
+  - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
+
+Poco SDK API
+''''''''''''
+
+.. toctree::
+    :maxdepth: 3
+
+    Poco SDK API <source/poco.sdk>
+
+
+.. toctree::
+    :hidden:
+
+    Examples and Tutorial <source/doc/poco-example/index>
+
+.. toctree::
+    :hidden:
+
+    Project integration <source/doc/integration>
+
+
 Dump UI hierarchy example
 -------------------------
 
@@ -131,51 +182,6 @@ More detailed info about properties are described in
     ...
 
 
-API reference
-=============
-
-Poco
-----
-
-.. toctree::
-   :maxdepth: 2
-
-   Poco instance API <source/poco.pocofw>
-   UI proxy object API <source/poco.proxy>
-
-.. toctree::
-   :hidden:
-
-   Poco drivers (engine specific poco implementation) <source/doc/poco_drivers>
-
-- `poco drivers (engine specific poco implementation) <source/doc/poco_drivers.html>`_
-
-  - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
-  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
-  - `Android native app <source/poco.drivers.android.uiautomation.html>`_
-  - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
-
-.. toctree::
-    :maxdepth: 3
-
-    Poco SDK API <source/poco.sdk>
-
-.. toctree::
-    :maxdepth: 2
-
-    Exceptions <source/poco.exceptions>
-
-.. toctree::
-   :hidden:
-
-    Examples and Tutorial <source/doc/poco-example/index>
-
-.. toctree::
-    :hidden:
-
-    Project integration <source/doc/integration>
-
-
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
 .. _Integration Guide for NetEase: source/doc/integration.html#netease-internal-engines
@@ -185,11 +191,7 @@ Poco
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: source/doc/about-standalone-inspector.html
-
-..
- 以下链接还没有完成
-
-.. _AirtestIDE: 下载链接
+.. _AirtestIDE: http://airtest.netease.com/
 
 ..
  下面是对应sdk的下载链接

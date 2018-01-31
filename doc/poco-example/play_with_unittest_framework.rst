@@ -18,7 +18,16 @@ of the test script. You can replay the test procedure after and see what's wrong
 
 The following simple example shows how powerful of pocounit
 
-video link: `replay the test`_
+.. raw:: html
+
+    <div style=" overflow: hidden; max-width: 100%; height: auto;">
+        <div align="center" class="embed-responsive embed-responsive-16by9">
+            <video class="embed-responsive-item device-record" controls="" style="top: 0;bottom: 0;left: 0;width: 100%;height: 100%;border: 0;">
+                <source src="http://top.gdl.netease.com/poco-res/video/result_player_demo.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br/>
+    </div>
 
 .. image:: img/g62-shop-pocounit-resultplayer.png
 
@@ -128,5 +137,4 @@ See also:
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
 
 .. _Get PocoTestResultPlayer: ../about-test-result-player.html
-.. _replay the test: http://top.gdl.netease.com/poco-res/video/result_player_demo.mp4
 .. _pocounit: https://github.com/AirtestProject/PocoUnit
