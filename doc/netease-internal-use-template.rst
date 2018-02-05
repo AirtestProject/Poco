@@ -14,6 +14,14 @@
     def runTest(self):
         self.poco('button').click()
 
+安装网易专用依赖库
+'''''''''
+
+.. code-block:: bash
+
+     pip install -i https://pypi.nie.netease.com/ airtest_hunter
+
+
 目录结构
 ''''
 

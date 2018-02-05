@@ -72,6 +72,27 @@ class AndroidPocoAgent(PocoAgent):
 
 
 class AndroidUiautomationPoco(Poco):
+    """
+    Poco Android implementation for testing **Android native apps**.
+
+    Args:
+        device (:py:obj:`Device`): :py:obj:`airtest.core.device.Device` instance provided by ``airtest``. leave the 
+         parameter default and the default device will be chosen. more details refer to ``airtest doc``
+        using_proxy (:py:obj:`bool`): whether use adb forward to connect the Android device or not
+        force_restart (:py:obj:`bool`): whether always restart the poco-service-demo running on Android device or not
+        options: see :py:class:`poco.pocofw.Poco`
+
+    Examples:
+        The simplest way to initialize AndroidUiautomationPoco instance and no matter your device network status::
+
+            from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
+            poco = AndroidUiautomationPoco()
+            poco('android:id/title').click()
+            ...
+
+    """
+
     def __init__(self, device=None, using_proxy=True, force_restart=True, **options):
         if not device:
             try:
@@ -231,6 +252,18 @@ class AndroidUiautomationHelper(object):
 
     @classmethod
     def get_instance(cls, device):
+        """
+        This is only a slot to store and get already initialized poco instance rather than initializing again. You can
+        simply pass the ``current device instance`` provided by ``airtest`` to get the AndroidUiautomationPoco instance.
+        If no such AndroidUiautomationPoco instance, a new instance will be created and stored. 
+
+        Args:
+            device (:py:obj:`airtest.core.device.Device`): more details refer to ``airtest doc``
+
+        Returns:
+            poco instance
+        """
+
         if cls._nuis.get(device) is None:
             cls._nuis[device] = AndroidUiautomationPoco(device)
         return cls._nuis[device]

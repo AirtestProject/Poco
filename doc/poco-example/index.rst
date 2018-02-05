@@ -5,6 +5,17 @@ Poco Examples and Tutorials
 Here are several example poco test scripts. Each example is written by using Unity3D demo game.
 It is nothing different from other games.
 
+Download the demo game
+----------------------
+
+You can have a try most of the example scripts with the super simple demo game we provided.
+
+- `demo game android`_
+- `demo game windows`_
+
+Tutorial
+--------
+
 * `basic usage`_
 * `interact with Buttons and Labels`_
 * `drag and swipe operations`_
@@ -27,3 +38,6 @@ It is nothing different from other games.
 .. _waiting for events: waiting_events.html
 .. _play with unittest framework: play_with_unittest_framework.html
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
+
+.. _demo game android: http://top.gdl.netease.com/poco-res/poco-demo-unity-game-android.zip
+.. _demo game windows: http://top.gdl.netease.com/poco-res/poco-demo-unity-game-win.zip

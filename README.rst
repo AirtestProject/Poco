@@ -88,14 +88,12 @@ How to use Poco
 ---------------
 
 Poco supports different types of engines by different drivers. For different engines please initialize ``poco`` instance
-by corresponding driver.
+by corresponding driver. Remember to connect an Android device to your PC/mac with a running game or launch and keep
+the game/app active on PC/mac.
 
 Following example shows how to initialize popo instance for
 
 * Unity3D.
-
-Remember to connect an Android device to your PC/mac with a running game or launch and keep the Unity game active on
-PC/mac.
 
 .. code-block:: python
 
@@ -148,7 +146,7 @@ UI element objects can be selected by invoking ``poco(...)`` function instance. 
 render tree structure and selects all the corresponding UI elements matching the query expression.
 
 The function takes one mandatory argument `node name`, the optional arguments can be substituted too and they refer to
-specific node properties. For more information, refer to API reference.
+specific node properties. For more information, refer to `API Reference selecting UI`_.
 
 
 .. code-block:: python
@@ -463,17 +461,14 @@ correspond to the position out of the UI element.
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _Tutorial of PocoUnit: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
 
-.. _API Reference: http://poco.readthedocs.io#api-reference
+.. _AirtestIDE: http://airtest.netease.com/
 .. _Online docs: http://poco.readthedocs.io
+.. _API Reference: http://poco.readthedocs.io#api-reference
+.. _API Reference selecting UI: http://poco.readthedocs.io/en/latest/source/poco.pocofw.html#poco.pocofw.Poco.__call__
 
 .. _ScreenInterface.getScreen: http://poco.readthedocs.io/en/latest/source/poco.sdk.interfaces.screen.html#poco.sdk.interfaces.screen.ScreenInterface.getScreen
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: http://poco.readthedocs.io/en/latest/source/doc/about-standalone-inspector.html
-
-..
- 以下链接还没完全准备好
-
-.. _AirtestIDE: 下载链接
 
 
 ..

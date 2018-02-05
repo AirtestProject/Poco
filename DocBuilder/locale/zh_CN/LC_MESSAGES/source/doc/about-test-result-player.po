@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 21:03+0800\n"
+"POT-Creation-Date: 2018-01-31 10:06+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,15 +35,14 @@ msgid ""
 "to `pocounit framework`_."
 msgstr ""
 
-#: ../../source/doc/about-test-result-player.rst:12
+#: ../../source/doc/about-test-result-player.rst:23
 msgid "Download"
 msgstr ""
 
-#: ../../source/doc/about-test-result-player.rst:14
+#: ../../source/doc/about-test-result-player.rst:25
 msgid "`PocoTestResultPlayer for windows`_"
 msgstr ""
 
-#: ../../source/doc/about-test-result-player.rst:15
+#: ../../source/doc/about-test-result-player.rst:26
 msgid "`PocoTestResultPlayer for mac`_"
 msgstr ""
-

@@ -106,6 +106,27 @@ class Dumper(FreezedUIDumper):
 
 
 class UnityPoco(Poco):
+    """
+    Poco Unity3D implementation.
+
+    Args:
+        addr (:py:obj:`tuple`): the endpoint of your Unity3D game, default to ``("localhost", 5001)``
+        unity_editor (:py:obj:`bool`): whether your Unity3D game is running in UnityEditor or not. default to ``False``
+        options: see :py:class:`poco.pocofw.Poco`
+    
+    Examples:
+        If your game is running on Android, you could initialize poco instance by using following snippet::
+            
+            from poco.drivers.unity3d import UnityPoco
+            
+            # your phone and your PC/mac should be inside the same sub-net.
+            ip = '<ip address of your phone>'
+            poco = UnityPoco((ip, 5001))
+            poco('button').click()
+            ...
+
+    """
+
     def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, **options):
         agent = UnityPocoAgent(addr, unity_editor)
         if 'action_interval' not in options:
