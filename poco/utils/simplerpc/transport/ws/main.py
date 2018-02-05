@@ -20,14 +20,6 @@ class WebSocketClient(IClient):
         t = Thread(target=self._ws.run_forever)
         t.daemon = True
         t.start()
-        # for i in range(10):
-        #     print("waiting for handshake")
-        #     if self._connected:
-        #         return True
-        #     if self._error:
-        #         raise RuntimeError(self.client._error)
-        #     time.sleep(0.5)
-        # raise RuntimeError("connecting timeout")
 
     def send(self, msg):
         if isinstance(msg, str):
