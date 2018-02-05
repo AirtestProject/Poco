@@ -12,6 +12,7 @@ from jsonrpc.exceptions import JSONRPCServerError
 
 
 DEBUG = True
+BACKEND_UPDATE = False
 
 
 class Callback(object):
@@ -66,6 +67,8 @@ class Callback(object):
     def wait(self, timeout=None):
         start_time = time.time()
         while True:
+            if not BACKEND_UPDATE:
+                self.agent.update()
             if self.status == self.WAITING:
                 time.sleep(0.005)
                 if timeout and time.time() - start_time > timeout:
@@ -175,12 +178,12 @@ class RpcAgent(object):
     def update(self):
         raise NotImplementedError
 
-    def run(self, backend=False):
+    def run(self):
         def _run():
             while True:
                 self.update()
                 time.sleep(0.002)
-        if backend:
+        if BACKEND_UPDATE:
             from threading import Thread
             t = Thread(target=_run, name="update")
             t.daemon = True
@@ -189,7 +192,9 @@ class RpcAgent(object):
             _run()
 
     def console_run(self, local_dict=None):
-        self.run(backend=True)
+        global BACKEND_UPDATE
+        BACKEND_UPDATE = True
+        self.run()
         from code import InteractiveInterpreter
         i = InteractiveInterpreter(local_dict)
         while True:

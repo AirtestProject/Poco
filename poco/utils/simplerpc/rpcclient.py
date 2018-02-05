@@ -27,12 +27,10 @@ class RpcClient(RpcAgent):
         simplerpc.DEBUG = value
 
     def on_connect(self):
-        print("on_connect")
         if self._status == self.CONNECTING:
             self._status = self.CONNECTED
 
     def on_close(self):
-        print("on_close")
         self._status = self.CLOSED
 
     def call(self, func, *args, **kwargs):

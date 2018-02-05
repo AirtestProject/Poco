@@ -38,6 +38,7 @@ class UnityPocoAgent(PocoAgent):
         try:
             # new version
             from airtest.core.api import connect_device, device as current_device
+            from airtest.core.helper import device_platform
             if not current_device():
                 if unity_editor:
                     connect_device("Windows:///?title_re=Unity.*")
@@ -46,8 +47,9 @@ class UnityPocoAgent(PocoAgent):
                     current_device().focus_rect = (0, 40, 0, 0)
                 else:
                     connect_device("Android:///")
-                    # unity games poco sdk listens on Android localhost:5001
-                    current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
+            if device_platform() == "Android":
+                # unity games poco sdk listens on Android localhost:5001
+                current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
         except ImportError:
             # old version
             from airtest.cli.runner import device as current_device
@@ -60,7 +62,7 @@ class UnityPocoAgent(PocoAgent):
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
-        self.c.run(backend=True)
+        # self.c.run(backend=True)
         self.c.wait_connected()
 
         hierarchy = FreezedUIHierarchy(Dumper(self.c), UnityAttributor(self.c))

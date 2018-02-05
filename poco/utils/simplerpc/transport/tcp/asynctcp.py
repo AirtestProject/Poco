@@ -1,5 +1,5 @@
 from __future__ import print_function
-
+import threading
 import asyncore
 import collections
 import socket
@@ -16,6 +16,7 @@ class BaseClient(asyncore.dispatcher):
     def __init__(self):
         asyncore.dispatcher.__init__(self)
         self.outbox = collections.deque()
+        self.read_lock = threading.Lock()
         self.inbox = ""
         self.closed = False
 
@@ -34,10 +35,13 @@ class BaseClient(asyncore.dispatcher):
         self.send(message)
 
     def handle_read(self):
+        if not self.connected:
+            return
         message = self.recv(MAX_MESSAGE_LENGTH)
         if message == b"":
             return
-        self.inbox += message
+        with self.read_lock:
+            self.inbox += message
 
     def handle_close(self):
         asyncore.dispatcher.handle_close(self)
@@ -45,10 +49,11 @@ class BaseClient(asyncore.dispatcher):
         self.closed = True
 
     def read_message(self, length=None):
-        if length is None:
-            message, self.inbox = self.inbox, ""
-        else:
-            message, self.inbox = self.inbox[:length], self.inbox[length:]
+        with self.read_lock:
+            if length is None:
+                message, self.inbox = self.inbox, ""
+            else:
+                message, self.inbox = self.inbox[:length], self.inbox[length:]
         return message
 
 
@@ -119,19 +124,25 @@ class Client(BaseClient):
     def __init__(self, host_address):
         BaseClient.__init__(self)
         self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-        print('Connecting to host at:', host_address)
+        print('Connecting to host at: %s' % repr(host_address))
         self.connect(host_address)
 
     def handle_connect(self):
-        print(self, " is connected")
+        print("%s is connected" % self)
 
 
-def start_thread(target, *args, **kwargs):
-    import threading
-    t = threading.Thread(target=target, args=args, kwargs=kwargs)
-    t.daemon = True
-    t.start()
-    return t
+class LoopThread(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(LoopThread, self).__init__(*args, **kwargs)
+        self._kill_event = threading.Event()
+
+    def run(self):
+        while not self._kill_event.is_set():
+            asyncore.loop(timeout=0.001, count=1)
+        print("%s finished" % self)
+
+    def kill(self):
+        self._kill_event.set()
 
 
 def init_loop():
@@ -139,7 +150,19 @@ def init_loop():
     if LOOP_THREAD and LOOP_THREAD.is_alive():
         print("LOOP_THREAD ALREADY STARTED: %s" % LOOP_THREAD)
     else:
-        LOOP_THREAD = start_thread(asyncore.loop, timeout=0.001)
+        # LOOP_THREAD = start_thread(asyncore.loop, timeout=0.001)
+        LOOP_THREAD = LoopThread(name="simplerpc_update")
+        LOOP_THREAD.daemon = True
+        LOOP_THREAD.start()
+
+def wait_exit():
+    if LOOP_THREAD:
+        LOOP_THREAD.kill()
+        LOOP_THREAD.join(1.0)
+
+
+import atexit
+atexit.register(wait_exit)
 
 
 if __name__ == '__main__':
