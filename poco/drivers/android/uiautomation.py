@@ -6,6 +6,7 @@ import os
 import requests
 import time
 import warnings
+import atexit
 
 try:
     new_airtest_api = True
@@ -223,6 +224,7 @@ class AndroidUiautomationPoco(Poco):
             self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
         else:
             self._instrument_proc = self.adb_client.shell(instrumentation_cmd, not_wait=True)
+        atexit.register(self._instrument_proc.kill)
         time.sleep(2)
         for i in range(10):
             try:

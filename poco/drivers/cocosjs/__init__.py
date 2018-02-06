@@ -37,7 +37,7 @@ class CocosJsPocoAgent(PocoAgent):
         self.conn = WebSocketClient(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
-        self.c.run(backend=True)
+        # self.c.run(backend=True)
         self.c.wait_connected()
 
         hierarchy = FreezedUIHierarchy(Dumper(self.c))
