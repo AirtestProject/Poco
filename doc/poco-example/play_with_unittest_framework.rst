@@ -58,11 +58,11 @@ The following simple example shows how powerful of pocounit
 
         def setUp(self):
             # 准备好足够的水晶和背包空间
-            self.poco.command('@item clear')
-            self.poco.command('@currency add_crystal 99999')
+            self.poco.command('***********')
+            self.poco.command('***************************')
 
             # 清除掉每日购买次数限制
-            self.poco.command('@day clear')
+            self.poco.command('**********')
 
             # 打开商店界面
             if not self.poco('entry_list').exists():
