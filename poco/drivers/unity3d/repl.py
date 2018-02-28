@@ -5,6 +5,12 @@ import json
 import sys
 import traceback
 
+# hide airtest logger
+import logging
+
+airtest_logger = logging.getLogger('airtest')
+airtest_logger.setLevel(logging.WARNING)
+
 from poco.drivers.unity3d import UnityPoco
 from airtest.core.api import connect_device
 

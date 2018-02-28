@@ -62,20 +62,20 @@ class UnityPocoAgent(PocoAgent):
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
-        # self.c.run(backend=True)
         self.c.wait_connected()
 
         hierarchy = FreezedUIHierarchy(Dumper(self.c), UnityAttributor(self.c))
-        if unity_editor:
-            screen = UnityScreen(self.c)
-        else:
-            screen = AirtestScreen()
+        screen = UnityScreen(self.c)
         input = AirtestInput()
         super(UnityPocoAgent, self).__init__(hierarchy, input, screen, None)
 
     @sync_wrapper
     def get_debug_profiling_data(self):
         return self.c.call("GetDebugProfilingData")
+
+    @sync_wrapper
+    def get_sdk_version(self):
+        return self.c.call('GetSDKVersion')
 
 
 class UnityAttributor(Attributor):
