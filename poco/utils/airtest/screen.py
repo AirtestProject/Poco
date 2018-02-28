@@ -8,7 +8,6 @@ try:
 except ImportError:
     # 兼容旧版本
     from airtest.core.main import snapshot
-from airtest.core.settings import Settings
 from poco.sdk.interfaces.screen import ScreenInterface
 
 
@@ -24,10 +23,5 @@ class AirtestScreen(ScreenInterface):
             return [disp['width'], disp['height']]
 
     def getScreen(self, width):
-        filename = 'poco-screenshot.png'
-        screen_dir = os.path.join(Settings.LOG_DIR, Settings.SCREEN_DIR)
-        if not os.path.exists(screen_dir):
-            os.makedirs(screen_dir)
-        filepath = os.path.join(screen_dir, filename)
-        snapshot(filename)
-        return base64.b64encode(open(filepath, 'rb').read()), 'png'
+        savepath = snapshot()
+        return base64.b64encode(open(savepath, 'rb').read()), 'png'
