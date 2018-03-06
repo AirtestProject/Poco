@@ -16,11 +16,8 @@ the effects of click and long click.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco('btn_start').click()
     poco('basic').click()
@@ -41,11 +38,8 @@ UIs.
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco('btn_start').click()
     poco(text='basic').click()
@@ -76,11 +70,8 @@ a bug if the UI does not exist as your wish.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     btn = poco('btn_start')
     btn.click()

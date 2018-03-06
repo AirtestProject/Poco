@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-08 16:58+0800\n"
+"POT-Creation-Date: 2018-03-06 14:40+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,51 @@ msgid "Poco for Android Native App"
 msgstr ""
 
 #: ../../source/doc/poco_for_android_native_app.rst:5
-msgid "(coming soon ...)"
+msgid ""
+"Poco also supports to write tests for Android native apps. It is an "
+"alternative framework for `xiaocong/uiautomator`_ and its APIs are more "
+"powerful and easy to use. You don't need to setup an AndroidSDK "
+"environment and other dependencies. Only adb tools are required. Just "
+"simply install poco with following command."
 msgstr ""
+
+#: ../../source/doc/poco_for_android_native_app.rst:13
+msgid ""
+"The following example shows how to start writing test scripts. Remember "
+"to connect an Android device to your PC/mac first and enable the **ADB "
+"DEBUG MODE**."
+msgstr ""
+
+#: ../../source/doc/poco_for_android_native_app.rst:25
+msgid ""
+"If multiple devices are connected, simply invoke airtest "
+"``connect_device``."
+msgstr ""
+
+#: ../../source/doc/poco_for_android_native_app.rst:37
+msgid ""
+"If you want to control multiple devices at one time, see the following "
+"example."
+msgstr ""
+
+#: ../../source/doc/poco_for_android_native_app.rst:53
+msgid ""
+"More usage are similar to poco drivers for other game engines. Use "
+"`PocoHierarchyViewer`_ to retrieve the view structure."
+msgstr ""
+
+#~ msgid "(coming soon ...)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Poco also supports to write tests "
+#~ "for Android native apps. It is an"
+#~ " alternative framework for "
+#~ "`xiaocong/uiautomator`_ and its APIs are "
+#~ "more powerful and easy to use. You"
+#~ " don't need to setup an AndroidSDK"
+#~ " environment and other dependencies. Only"
+#~ " adb tools are required. Just simple"
+#~ " install poco with following command."
+#~ msgstr ""
 

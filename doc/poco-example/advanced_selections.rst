@@ -19,11 +19,8 @@ The following examples will show how to select UI in complicate scenes.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     items = poco('main_node').child('list_item').offspring('name'):
     first_one = items[0]

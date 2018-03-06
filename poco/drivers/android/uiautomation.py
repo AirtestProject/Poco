@@ -107,10 +107,10 @@ class AndroidUiautomationPoco(Poco):
                 from airtest.core.main import set_serialno
                 if not current_device():
                     set_serialno()
-            self.android = current_device()
+            self.device = current_device()
         else:
-            self.android = device
-        self.adb_client = self.android.adb
+            self.device = device
+        self.adb_client = self.device.adb
         if using_proxy:
             self.device_ip = self.adb_client.host or "127.0.0.1"
         else:
@@ -120,7 +120,7 @@ class AndroidUiautomationPoco(Poco):
                 self.device_ip = get_ip_address(self.adb_client)
 
         # save current top activity (@nullable)
-        current_top_activity_package = self.android.get_top_activity_name()
+        current_top_activity_package = self.device.get_top_activity_name()
         if current_top_activity_package is not None:
             current_top_activity_package = current_top_activity_package.split('/')[0]
 
@@ -128,7 +128,7 @@ class AndroidUiautomationPoco(Poco):
         if new_airtest_api:
             self.ime = YosemiteIme(self.adb_client)
         else:
-            self.ime = YosemiteIme(self.android)
+            self.ime = YosemiteIme(self.device)
         self.ime.start()
 
         # install
@@ -157,9 +157,9 @@ class AndroidUiautomationPoco(Poco):
             ready = self._start_instrument(p0)
 
             if current_top_activity_package is not None:
-                current_top_activity2 = self.android.get_top_activity_name()
+                current_top_activity2 = self.device.get_top_activity_name()
                 if current_top_activity2 is None or current_top_activity_package not in current_top_activity2:
-                    self.android.start_app(current_top_activity_package, activity=True)
+                    self.device.start_app(current_top_activity_package, activity=True)
 
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")

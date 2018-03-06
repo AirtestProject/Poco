@@ -19,12 +19,8 @@ First you should connect your Android phone, for example, via usb cable and enab
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-    # you should connect an Android device to your PC/mac
-    # and set the ip address of your Android device
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco('btn_start').click()
     time.sleep(1.5)
@@ -98,15 +94,10 @@ Following example shows how to initialize popo instance for
 .. code-block:: python
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-    # you should connect an Android device to your PC/mac
-    # and set the ip address of your Android device
-    connect_device('Android:///')
-    poco = UnityPoco(('<ip of device>', 5001))
-
+    poco = UnityPoco()
     # for windows
-    # poco = UnityPoco(('localhost', 5001), editor_mode=True)
+    # poco = UnityPoco(('localhost', 5001), unity_editor=True)
 
     ui = poco('...')
     ui.click()
@@ -123,7 +114,7 @@ Following example shows how to initialize popo instance for
     connect_device('Android:///')
 
     # windows的话这样
-    # connect_device('Windows:///?title_re=^.*errors and.*$')  # 无需urlencode
+    # connect_device('Windows:///?title_re=^.*errors and.*$')  # 填写可以识别出的窗口标题栏正则表达式，无需urlencode
 
     poco = NeteasePoco('g37')  # hunter上的项目代号
     ui = poco('...')
@@ -134,6 +125,8 @@ Following example shows how to initialize popo instance for
 * `android-native`_
 * unreal (in development)
 * for other engines, refer to `Integration Guide`_ for more details
+
+If you are using multiple devices at the same time, please refer to `Poco drivers`_.
 
 
 Working with Poco Objects
@@ -460,6 +453,7 @@ correspond to the position out of the UI element.
 .. _NetEase Internal Engines: http://poco.readthedocs.io/en/latest/source/poco.drivers.netease.internal.html
 .. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _Tutorial of PocoUnit: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
+.. _Poco drivers: http://poco.readthedocs.io/en/latest/source/doc/poco_drivers.html
 
 .. _AirtestIDE: http://airtest.netease.com/
 .. _Online docs: http://poco.readthedocs.io

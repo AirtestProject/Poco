@@ -15,10 +15,8 @@ The following example shows how to drag all stars to the shell. Yep it is the sa
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco('btn_start').click()
     poco(text='drag drop').click()
@@ -43,10 +41,8 @@ Here is another example to iterate over all names of the model.
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     for name in poco('plays').offspring('fish').child('name'):
         print(name.get_text())  # pearl/shark/balloonfish

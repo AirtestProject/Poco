@@ -17,12 +17,9 @@ screen and a operation performed on it. See the following example.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
     from poco.exceptions import InvalidOperationException
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     try:
         poco.click([1.1, 1.1])  # click outside screen
@@ -51,12 +48,9 @@ You can simply test whether the node exists or not by invoke ``.exists()``.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
     from poco.exceptions import PocoNoSuchNodeException
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     node = poco('not existed node')  # select will never raise any exceptions
     try:
