@@ -25,11 +25,8 @@ the red dot on the GIF underneath.
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     image = poco('fish').child(type='Image')
     image.focus('center').long_click()
@@ -54,11 +51,8 @@ the red dot on the GIF underneath.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     balloonfish_image = poco(text='balloonfish').focus([0.5, -3])
     balloonfish_image.long_click()
@@ -76,11 +70,8 @@ attention on the red dot on the GIF underneath.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     # focus is immutable
     fish = poco('fish').child(type='Image')
@@ -103,11 +94,8 @@ The following example show how to scroll a list by using drag.
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     listView = poco('Scroll View')
     listView.focus([0.5, 0.8]).drag_to(listView.focus([0.5, 0.2]))

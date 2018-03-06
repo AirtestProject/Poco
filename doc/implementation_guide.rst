@@ -2,8 +2,6 @@
 Implementation Guide
 ====================
 
-(this page is not finished yet)
-
 This guide helps you implement and integrate poco-sdk with your game/app step by step.
 
 Poco-sdk now supports following languages:
@@ -30,12 +28,12 @@ You can just copy the source code of corresponding language to your project scri
 Implement the Abstract Method
 -----------------------------
 
-xxx
+(coming soon...)
 
 Initialize poco-sdk after game launched
 ---------------------------------------
 
-xxx
+(coming soon...)
 
 
 Object Model
@@ -48,15 +46,20 @@ Abstract Class/Interface Implementation
 
 To implement your own version of poco sdk, you only need to implement the following 2 classes/interfaces and override its abstract method. This section shows the details about implementing the abstract method in classes or interfaces.
 
+(coming soon...)
+
 :py:class:`AbstractNode <poco.sdk.AbstractNode>`
 ------------------------------------------------
 
 4 methods should be override
+
+(coming soon...)
 
 :py:class:`AbstractNode <poco.sdk.AbstractDumper>`
 --------------------------------------------------
 
 1 method should be override
 
+(coming soon...)
 
 .. _poco-sdk repo: https://github.com/AirtestProject/Poco-SDK

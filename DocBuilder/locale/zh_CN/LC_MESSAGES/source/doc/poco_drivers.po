@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 16:49+0800\n"
+"POT-Creation-Date: 2018-03-06 15:18+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,13 @@ msgid ""
 "or launch and keep the Unity game active on PC/mac."
 msgstr ""
 
-#: ../../source/doc/poco_drivers.rst:37
+#: ../../source/doc/poco_drivers.rst:32
+msgid ""
+"If multiple devices connected, please select one by invoke "
+"``connect_device`` from airtest API."
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:43
 msgid "For other engines, refer to `Integration guide`_ for more details"
 msgstr ""
 

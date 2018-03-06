@@ -12,12 +12,8 @@ button and perform a click.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
-
+    poco = UnityPoco()
     poco('btn_start').click()
 
 See also:

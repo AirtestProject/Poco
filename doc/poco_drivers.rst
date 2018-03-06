@@ -19,19 +19,25 @@ PC/mac with a running game or launch and keep the Unity game active on PC/mac.
     from poco.drivers.unity3d import UnityPoco
     from airtest.core.api import connect_device
 
-    # you should connect an Android device to your PC/mac
-    # and set the ip address of your Android device
-    connect_device('Android:///')
-
     # then initialize the poco instance in the following way
-    poco = UnityPoco(('<ip of device>', 5001))
+    poco = UnityPoco()
 
     # for windows
-    # poco = UnityPoco(('localhost', 5001), editor_mode=True)
+    # poco = UnityPoco(('localhost', 5001), unity_editor=True)
 
     # now you can play with poco
     ui = poco('...')
     ui.click()
+
+If multiple devices connected, please select one by invoke ``connect_device`` from airtest API.
+
+.. code-block:: python
+
+    from poco.drivers.unity3d import UnityPoco
+    from airtest.core.api import connect_device
+
+    connect_device('Android://014E05DE0F02000E/')  # connect device by serialno
+    poco = UnityPoco()
 
 
 For other engines, refer to `Integration guide`_ for more details

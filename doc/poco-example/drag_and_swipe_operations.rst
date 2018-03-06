@@ -17,12 +17,8 @@ The following example shows how to swipe or drag the "star" to the "shell".
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
-
+    poco = UnityPoco()
 
     # drag the "star" to the "shell"
     poco('star').drag_to(poco('shell'))
@@ -40,11 +36,8 @@ The following example shows how to scroll a list by using swipe.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     # swipe the list view up
     poco('Scroll View').swipe([0, -0.1])

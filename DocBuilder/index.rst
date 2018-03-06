@@ -83,12 +83,8 @@ First you should connect your Android phone, for example, via usb cable and enab
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-    # you should connect an Android device to your PC/mac
-    # and set the ip address of your Android device
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco('btn_start').click()
     time.sleep(1.5)
@@ -134,9 +130,12 @@ Engine specific API
 - `poco drivers (engine specific poco implementation) <source/doc/poco_drivers.html>`_
 
   - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
-  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
   - `Android native app <source/poco.drivers.android.uiautomation.html>`_
-  - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
+
+..
+ 还没写完的连接先注释掉
+ - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
+ - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
 
 Poco SDK API
 ''''''''''''

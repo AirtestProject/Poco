@@ -13,11 +13,8 @@ The following example shows the simplest way to stay in sync with UIs.
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     # start and waiting for switching scene
     start_btn = poco('start')
@@ -40,12 +37,9 @@ The fish and bomb will come up from bottom right to left. Click the fish and avo
     # coding=utf-8
 
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
     from poco.exceptions import PocoTargetTimeout
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     bomb_count = 0
     while True:
@@ -76,11 +70,8 @@ Wait until all 3 fishes appear on the screen.
 
     import time
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
-
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     poco(text='wait UI 2').click()
 
