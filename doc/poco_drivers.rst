@@ -10,7 +10,7 @@ drivers.
 - `cocos2dx-js`_
 - `NetEase Internal Engines`_
 
-Following example shows how to initialize popo instance for Unity3D. Remember to connect an Android device to your
+Following example shows how to initialize poco instance for Unity3D. Remember to connect an Android device to your
 PC/mac with a running game or launch and keep the Unity game active on PC/mac.
 
 .. code-block:: python
@@ -29,7 +29,7 @@ PC/mac with a running game or launch and keep the Unity game active on PC/mac.
     ui = poco('...')
     ui.click()
 
-If multiple devices connected, please select one by invoke ``connect_device`` from airtest API.
+If multiple devices connected, please select one by invoking ``connect_device`` from airtest API.
 
 .. code-block:: python
 
@@ -42,8 +42,25 @@ If multiple devices connected, please select one by invoke ``connect_device`` fr
 
 For other engines, refer to `Integration guide`_ for more details
 
+Device object
+-------------
+
+``Device`` is an abstract object which game/app runs on. In poco communicating with game/app is under a connection with
+the device. This device connection is handled by `Airtest device abstraction`_ (take Android as example).
+
+There are 2 ways to connect to the device.
+
+* Call function `airtest.core.api.connect_device`_.
+* Initialize Device instance according to platform (`android`_/`windows`_/`ios`_) then pass the device instance to Poco
+  constructor according to different poco drivers.
+
 .. _Integration Guide: integration.html
 .. _Unity3D: ../poco.drivers.unity3d.unity3d_poco.html
 .. _android-native: ../poco.drivers.android.uiautomation.html
 .. _cocos2dx-js: ../poco.drivers.cocosjs.html
 .. _NetEase Internal Engines: ../poco.drivers.netease.internal.html
+.. _Airtest device abstraction: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.android.android.html
+.. _airtest.core.api.connect_device: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.api.html#airtest.core.api.connect_device
+.. _ios: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.ios.ios.html
+.. _android: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.android.android.html
+.. _windows: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.win.win.html

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-21 16:30+0800\n"
+"POT-Creation-Date: 2018-03-07 10:25+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,43 +40,40 @@ msgid ""
 "you will get this exception. If you got this exception, you should check "
 "your script carefully. Mostly because the UI you selected is outside the "
 "screen and a operation performed on it. See the following example."
-msgstr ""
-"这个异常特指无效的操作，或者说不起作用的操作，例如点击到了屏幕外面，或者对一个图片设置text属性(输入框才能设置text属性)。"
-"虽然这个异常并不会对应用造成什么实质性影响，但是还是要尽可能避免，以免测试脚本里逻辑混乱或测试结果不稳定。"
+msgstr "这个异常特指无效的操作，或者说不起作用的操作，例如点击到了屏幕外面，或者对一个图片设置text属性(输入框才能设置text属性)。虽然这个异常并不会对应用造成什么实质性影响，但是还是要尽可能避免，以免测试脚本里逻辑混乱或测试结果不稳定。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:35
+#: ../../source/doc/poco-example/handling_exceptions.rst:32
 msgid ""
 ":py:class:`PocoNoSuchNodeException "
 "<poco.exceptions.PocoNoSuchNodeException>`"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:37
+#: ../../source/doc/poco-example/handling_exceptions.rst:34
+#, fuzzy
 msgid ""
 "If read attributes from or perform operations on UI that is not actually "
 "exists, you will get this exception. You can simply test whether the node"
-" exists or not by invoke ``.exists()``."
-msgstr ""
-"如果从一个不存在的UI控件读取属性或控制它，那就会出现这个异常。测试一个UI控件是否存在可以调用UI代理的 ``.exists()`` 方法。"
+" exists or not by invoking ``.exists()``."
+msgstr "如果从一个不存在的UI控件读取属性或控制它，那就会出现这个异常。测试一个UI控件是否存在可以调用UI代理的 ``.exists()`` 方法。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:42
+#: ../../source/doc/poco-example/handling_exceptions.rst:39
 msgid ""
 "Selecting any UI any store it without doing anything on it will never get"
 " exceptions. As the selected UI is only a UI proxy which represents the "
 "UI object in the game/app."
-msgstr ""
-"如果只是选择了一个UI但是不去操作或者读取属性是不会产生异常的，因为选择UI只是将选择的条件存储下来，等到执行具体的操作时才会去game/app中查找和选择。"
+msgstr "如果只是选择了一个UI但是不去操作或者读取属性是不会产生异常的，因为选择UI只是将选择的条件存储下来，等到执行具体的操作时才会去game/app中查找和选择。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:44
+#: ../../source/doc/poco-example/handling_exceptions.rst:41
 msgid ""
 "If a UI that is transparent and you cannot see it, it should be "
 "considered as existence. And also you can perform any operations on it."
 msgstr "如果有个透明的UI或者你看不见(在屏幕外面或者尺寸为0)，他同样也是存在的，同样也可以对他进行操作或者读取属性。只有不在hierarchy树中的才是不存在的。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:74
+#: ../../source/doc/poco-example/handling_exceptions.rst:70
 msgid ":py:class:`PocoTargetTimeout <poco.exceptions.PocoTargetTimeout>`"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:76
+#: ../../source/doc/poco-example/handling_exceptions.rst:72
 msgid ""
 "This exception only raises when you are waiting some conditions. Such as "
 "waiting the UI to appear or disappear. It is quite different from "
@@ -84,85 +81,84 @@ msgid ""
 " not keep up on the screen, you will probably get "
 "``PocoNoSuchNodeException`` rather than ``PocoTargetTimeout``."
 msgstr ""
-"这个异常只会在你主动等待UI出现或消失时抛出，和 ``PocoNoSuchNodeException`` 不一样，当你的操作速度太快，"
-"界面来不及跟着变化的话，你只会遇到 ``PocoNoSuchNodeException`` 而不是 ``PocoTargetTimeout`` ，"
-"其实就是在那个UI还没有出现的时候就想要进行操作。"
+"这个异常只会在你主动等待UI出现或消失时抛出，和 ``PocoNoSuchNodeException`` "
+"不一样，当你的操作速度太快，界面来不及跟着变化的话，你只会遇到 ``PocoNoSuchNodeException`` 而不是 "
+"``PocoTargetTimeout`` ，其实就是在那个UI还没有出现的时候就想要进行操作。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:80
+#: ../../source/doc/poco-example/handling_exceptions.rst:76
 msgid ""
 "The following example shows how to deal with this situation and stay in "
 "sync with the UI."
 msgstr "下面的例子展示测试脚本如何与UI保持同步，并处理 ``PocoTargetTimeout`` 异常"
 
-
-#: ../../source/doc/poco-example/handling_exceptions.rst:106
+#: ../../source/doc/poco-example/handling_exceptions.rst:103
 msgid ""
 ":py:class:`PocoTargetRemovedException "
 "<poco.exceptions.PocoTargetRemovedException>`"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:108
+#: ../../source/doc/poco-example/handling_exceptions.rst:105
 msgid ""
 "Unlike the above, if your operations are much slower than the UI, you may"
 " probably get this exceptions. This exception seldom raises under normal "
 "circumstances. If you see this exception mostly because the UI you "
 "performed operation on has already removed from the game/app."
 msgstr ""
-"与上面 ``PocoTargetTimeout`` 不同，如果操作速度远远慢于UI变化的速度，那*很可能*会出现这个异常。"
-"这个异常仅当去访问或操作一个刚才还在但现在不在的UI控件才会出现，并且一般情况下基本不会出现。"
+"与上面 ``PocoTargetTimeout`` "
+"不同，如果操作速度远远慢于UI变化的速度，那*很可能*会出现这个异常。这个异常仅当去访问或操作一个刚才还在但现在不在的UI控件才会出现，并且一般情况下基本不会出现。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:112
+#: ../../source/doc/poco-example/handling_exceptions.rst:109
 msgid "The following example shows clicking on a no longer valid UI."
 msgstr "下面例子展示点击一个已经不存在的UI控件的效果"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:144
+#: ../../source/doc/poco-example/handling_exceptions.rst:141
 msgid ""
 "In some poco-sdk implementations, this exceptions is never raised. So "
 "please test existence state carefully by your own when using previously "
 "defined UI proxies. See the following example."
 msgstr "这个异常仅会在一些poco-sdk实现中，所以更可靠的做法是必要的情况下显示地去调用 ``.exists()`` 去判断UI是否存在。"
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:168
+#: ../../source/doc/poco-example/handling_exceptions.rst:165
 msgid "See also:"
 msgstr "更多示例："
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:170
+#: ../../source/doc/poco-example/handling_exceptions.rst:167
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:171
+#: ../../source/doc/poco-example/handling_exceptions.rst:168
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:172
+#: ../../source/doc/poco-example/handling_exceptions.rst:169
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:173
+#: ../../source/doc/poco-example/handling_exceptions.rst:170
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:174
+#: ../../source/doc/poco-example/handling_exceptions.rst:171
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:175
+#: ../../source/doc/poco-example/handling_exceptions.rst:172
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:176
+#: ../../source/doc/poco-example/handling_exceptions.rst:173
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:177
+#: ../../source/doc/poco-example/handling_exceptions.rst:174
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:178
+#: ../../source/doc/poco-example/handling_exceptions.rst:175
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/handling_exceptions.rst:179
+#: ../../source/doc/poco-example/handling_exceptions.rst:176
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 
