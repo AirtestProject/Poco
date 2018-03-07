@@ -142,30 +142,3 @@ msgid ""
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
 msgstr "下面就是层次结构(hierarchy)的数据表示，用 ``dict`` 存储并都是可json序列化的。"
 
-#~ msgid "Poco"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "You can find all functions/methods for"
-#~ " writing test scripts under these two"
-#~ " links."
-#~ msgstr ""
-
-#~ msgid "`cocos2dx-js <source/poco.drivers.cocosjs.html>`_"
-#~ msgstr ""
-
-#~ msgid "`Android native app <source/poco.drivers.android.uiautomation.html>`_"
-#~ msgstr ""
-
-#~ msgid "`Netease Internal Engines <source/poco.drivers.netease.internal.html>`_"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "..- `cocos2dx-js "
-#~ "<source/poco.drivers.cocosjs.html>`_ - `Android "
-#~ "native app "
-#~ "<source/poco.drivers.android.uiautomation.html>`_ ..- "
-#~ "`Netease Internal Engines "
-#~ "<source/poco.drivers.netease.internal.html>`_"
-#~ msgstr ""
-

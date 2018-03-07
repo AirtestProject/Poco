@@ -32,7 +32,7 @@ screen and a operation performed on it. See the following example.
 -----------------------------------------------------------------------------
 
 If read attributes from or perform operations on UI that is not actually exists, you will get this exception.
-You can simply test whether the node exists or not by invoke ``.exists()``.
+You can simply test whether the node exists or not by invoking ``.exists()``.
 
 .. note::
 
