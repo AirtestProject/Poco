@@ -17,7 +17,34 @@ UI state carefully otherwise you may get wired test results.
 
 The following 2 examples shows the difference between freezing and not freezing UI.
 
-使用netease的例子吧
+**Freezing UI**
+
+.. code-block:: python
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+
+    poco = UnityPoco()
+    with poco.freeze() as freezed_poco:
+        t0 = time.time()
+        for item in freezed_poco('Scroll View').offspring(type='Text'):
+            print item.get_text()
+        t1 = time.time()
+        print t1 - t0  # about 6~8ms
+
+**No Freezing UI**
+
+.. code-block:: python
+
+    import time
+    from poco.drivers.unity3d import UnityPoco
+
+    poco = UnityPoco()
+    t0 = time.time()
+    for item in poco('Scroll View').offspring(type='Text'):
+        print item.get_text()
+    t1 = time.time()
+    print t1 - t0  # about 50~60ms
 
 See also:
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 20:12+0800\n"
+"POT-Creation-Date: 2018-03-12 19:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,14 +44,20 @@ msgid ""
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:7
-msgid "see :py:class:`poco.pocofw.Poco`"
+msgid ""
+"whether connect to a default device if no devices selected manually. "
+"default to ``True``."
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:10
+msgid "see :py:class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:13
 msgid "Examples"
 msgstr ""
 
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:11
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:14
 msgid ""
 "If your game is running on Android, you could initialize poco instance by"
 " using following snippet::"

@@ -32,26 +32,30 @@ class UnityScreen(ScreenInterface):
 
 
 class UnityPocoAgent(PocoAgent):
-    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False):
-        # if not unity_editor:
+    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, connect_default_device=True):
         # init airtest env
         try:
             # new version
             from airtest.core.api import connect_device, device as current_device
             from airtest.core.helper import device_platform
-            if not current_device():
-                if unity_editor:
-                    connect_device("Windows:///?title_re=Unity.*")
-                    game_window = current_device().app.top_window().child_window(title="UnityEditor.GameView")
-                    current_device()._top_window = game_window.wrapper_object()
-                    current_device().focus_rect = (0, 40, 0, 0)
-                else:
-                    connect_device("Android:///")
+            if unity_editor and not current_device():
+                connect_device("Windows:///?title_re=Unity.*")
+                game_window = current_device().app.top_window().child_window(title="UnityEditor.GameView")
+                current_device()._top_window = game_window.wrapper_object()
+                current_device().focus_rect = (0, 40, 0, 0)
+
+            if connect_default_device:
+                # currently only connect to Android as default
+                # can apply auto detection in the future
+                connect_device("Android:///")
+
             if device_platform() == "Android":
+                # always forward port for Android
                 # unity games poco sdk listens on Android localhost:5001
                 current_device().adb.forward("tcp:%s" % addr[1], "tcp:5001", False)
+
         except ImportError:
-            # old version
+            # old version, 逐渐废弃
             from airtest.cli.runner import device as current_device
             from airtest.core.main import set_serialno
             if not current_device():
@@ -112,6 +116,8 @@ class UnityPoco(Poco):
     Args:
         addr (:py:obj:`tuple`): the endpoint of your Unity3D game, default to ``("localhost", 5001)``
         unity_editor (:py:obj:`bool`): whether your Unity3D game is running in UnityEditor or not. default to ``False``
+        connect_default_device (:py:obj:`bool`): whether connect to a default device if no devices selected manually.
+         default to ``True``.
         options: see :py:class:`poco.pocofw.Poco`
     
     Examples:
@@ -127,8 +133,8 @@ class UnityPoco(Poco):
 
     """
 
-    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, **options):
-        agent = UnityPocoAgent(addr, unity_editor)
+    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, connect_default_device=True, **options):
+        agent = UnityPocoAgent(addr, unity_editor, connect_default_device)
         if 'action_interval' not in options:
             options['action_interval'] = 0.1
         super(UnityPoco, self).__init__(agent, **options)
