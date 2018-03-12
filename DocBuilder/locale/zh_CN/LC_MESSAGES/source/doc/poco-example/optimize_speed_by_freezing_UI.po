@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-21 10:58+0800\n"
+"POT-Creation-Date: 2018-03-12 19:58+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,8 +26,7 @@ msgid ""
 "This section introduces one of the way to speed up your test script only "
 "in complicate situations. For simple selection and operations, you need "
 "not to do this optimization at all."
-msgstr "本节介绍一种加快UI操作速度的一种方法（即冻结UI），只是对于复杂的选择和UI遍历有效，"
-"如果只是简单的按名字选择请不要用这种方法，以为一点效果都没有。"
+msgstr "本节介绍一种加快UI操作速度的一种方法（即冻结UI），只是对于复杂的选择和UI遍历有效，如果只是简单的按名字选择请不要用这种方法，以为一点效果都没有。"
 
 #: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:8
 msgid ""
@@ -37,12 +36,7 @@ msgid ""
 " only one disadvantage of freezing UI is that the hierarchy data cannot "
 "stay in sync with game/app automatically. So you should handle your UI "
 "state carefully otherwise you may get wired test results."
-msgstr ""
-"冻结UI其实就是将当前界面的层次结构包括所有UI的属性信息抓取并存到内存里，"
-"在跟UI交互时就直接从内存里读取UI属性，而不用在发送rpc请求到game/app里去操作UI。"
-"好处就是一次抓取(消耗几百毫秒），可以使用多次，读取UI属性几乎不消耗时间，同时坏处就是，"
-"你需要手动处理UI同步，如果抓取了层次结构后，某个UI控件位置发生了变化，"
-"此时如果仍然点击这个UI的话，就会点击到原来的位置上，而不是最新的位置，这很容易导致奇怪的测试结果，请谨慎使用。"
+msgstr "冻结UI其实就是将当前界面的层次结构包括所有UI的属性信息抓取并存到内存里，在跟UI交互时就直接从内存里读取UI属性，而不用在发送rpc请求到game/app里去操作UI。好处就是一次抓取(消耗几百毫秒），可以使用多次，读取UI属性几乎不消耗时间，同时坏处就是，你需要手动处理UI同步，如果抓取了层次结构后，某个UI控件位置发生了变化，此时如果仍然点击这个UI的话，就会点击到原来的位置上，而不是最新的位置，这很容易导致奇怪的测试结果，请谨慎使用。"
 
 #: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:15
 msgid ""
@@ -57,53 +51,60 @@ msgid ""
 msgstr "下面两个例子分别展示使用了冻结UI和不使用冻结UI的效果区别"
 
 #: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:20
-msgid "使用netease的例子吧"
+msgid "**Freezing UI**"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:22
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:35
+msgid "**No Freezing UI**"
+msgstr ""
+
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:49
 msgid "See also:"
 msgstr "更多示例:"
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:24
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:51
 msgid "`basic usage`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:25
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:52
 msgid "`interact with Buttons and Labels`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:26
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:53
 msgid "`drag and swipe operations`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:27
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:54
 msgid "`advanced selections`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:28
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:55
 msgid "`play with coordinate system and local positioning`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:29
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:56
 msgid "`iteration over elements`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:30
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:57
 msgid "`handling exceptions`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:31
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:58
 msgid "`waiting for events`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:32
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:59
 msgid "`play with unittest framework`_"
 msgstr ""
 
-#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:33
+#: ../../source/doc/poco-example/optimize_speed_by_freezing_UI.rst:60
 msgid "`optimize speed by freezing UI`_"
 msgstr ""
 
 #~ msgid "`waiting events`_"
+#~ msgstr ""
+
+#~ msgid "使用netease的例子吧"
 #~ msgstr ""
 
