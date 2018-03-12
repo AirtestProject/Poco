@@ -89,6 +89,3 @@ msgstr "`使用单元测试框架 <play with unittest framework_>`_"
 msgid "`optimize speed by freezing UI`_"
 msgstr "`冻结UI以加快一些速度 <optimize speed by freezing UI_>`_"
 
-#~ msgid "Poco Examples"
-#~ msgstr "Poco示例 (Examples)"
-

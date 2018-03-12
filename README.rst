@@ -4,7 +4,7 @@
 Poco ポコ
 =======
 
-**A cross-engine UI automation framework**
+**A cross-engine UI automation framework**. ``Unity3D``/``cocos2dx-*``/``Android native APP``/(Other engines SDK)/...
 
 Example
 -------
@@ -41,20 +41,7 @@ Tools for writing test scripts
 To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
 standalone `PocoHierarchyViewer`_ (to view the hierarchy and attributes only but lightweight) !
 
-Features
---------
-
-Main Poco features includes following:
-
-* supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
-* retrieves UI Elements Hierarchy in game's runtime
-* is super fast and impact-free to the game
-* allows straightforward SDK integration to the game (within in 5 minutes)
-* provides powerful APIs taht are engine independent
-* supports multi-touch e.g. fling/pinch/... (and more is coming soon)
-* support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
-* is extensible to other private engines by `implementing poco-sdk`_ .
-* is compatible with Python 2.7 and Python 3.3+.
+.. image:: doc/img/hunter-inspector.png
 
 Installation
 ------------
@@ -74,11 +61,50 @@ SDK Integration
 
 For **poco-sdk** integration please refer to `Integration Guide`_
 
+Features
+--------
+
+* supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
+* retrieves UI Elements Hierarchy in game's runtime
+* is super fast and impact-free to the game
+* allows straightforward SDK integration to the game (within in 5 minutes)
+* provides powerful APIs taht are engine independent
+* supports multi-touch e.g. fling/pinch/... (and more is coming soon)
+* support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
+* is extensible to other private engines by `implementing poco-sdk`_ .
+* is compatible with Python 2.7 and Python 3.3+.
+
 
 Documentation
 -------------
 
 `Online docs`_.
+
+Tutorials and examples
+----------------------
+
+* `basic usage`_
+* `interact with Buttons and Labels`_
+* `drag and swipe operations`_
+* `advanced selections`_
+* `play with coordinate system and local positioning`_
+* `iteration over elements`_
+* `handling exceptions`_
+* `waiting for events`_
+* `play with unittest framework`_
+* `optimize speed by freezing UI`_
+
+.. _basic usage: http://poco.readthedocs.io/en/latest/source/doc/poco-example/basic.html
+.. _interact with Buttons and Labels: http://poco.readthedocs.io/en/latest/source/doc/poco-example/interact_with_buttons_and_labels.html
+.. _drag and swipe operations: http://poco.readthedocs.io/en/latest/source/doc/poco-example/drag_and_swipe_operations.html
+.. _advanced selections: http://poco.readthedocs.io/en/latest/source/doc/poco-example/advanced_selections.html
+.. _play with coordinate system and local positioning: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_coordinate_system_and_local_positioning.html
+.. _iteration over elements: http://poco.readthedocs.io/en/latest/source/doc/poco-example/iteration_over_elements.html
+.. _handling exceptions: http://poco.readthedocs.io/en/latest/source/doc/poco-example/handling_exceptions.html
+.. _waiting for events: http://poco.readthedocs.io/en/latest/source/doc/poco-example/waiting_events.html
+.. _play with unittest framework: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
+.. _optimize speed by freezing UI: http://poco.readthedocs.io/en/latest/source/doc/poco-example/optimize_speed_by_freezing_UI.html
+
 
 How to use Poco
 ---------------

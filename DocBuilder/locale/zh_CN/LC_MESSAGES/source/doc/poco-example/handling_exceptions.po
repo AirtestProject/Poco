@@ -49,7 +49,6 @@ msgid ""
 msgstr ""
 
 #: ../../source/doc/poco-example/handling_exceptions.rst:34
-#, fuzzy
 msgid ""
 "If read attributes from or perform operations on UI that is not actually "
 "exists, you will get this exception. You can simply test whether the node"
