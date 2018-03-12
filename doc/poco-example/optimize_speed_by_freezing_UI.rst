@@ -25,9 +25,9 @@ The following 2 examples shows the difference between freezing and not freezing 
     from poco.drivers.unity3d import UnityPoco
 
     poco = UnityPoco()
-    with poco.freeze() as freezed_poco:
+    with poco.freeze() as frozen_poco:
         t0 = time.time()
-        for item in freezed_poco('Scroll View').offspring(type='Text'):
+        for item in frozen_poco('Scroll View').offspring(type='Text'):
             print item.get_text()
         t1 = time.time()
         print t1 - t0  # about 6~8ms

@@ -4,7 +4,7 @@
 # @Date:   2017-07-14 19:47:51
 from poco import Poco
 from poco.agent import PocoAgent
-from poco.freezeui.hierarchy import FreezedUIHierarchy, FreezedUIDumper
+from poco.freezeui.hierarchy import FrozenUIHierarchy, FrozenUIDumper
 from poco.sdk.Attributor import Attributor
 from poco.sdk.interfaces.screen import ScreenInterface
 from poco.sdk.exceptions import UnableToSetAttributeException
@@ -68,7 +68,7 @@ class UnityPocoAgent(PocoAgent):
         self.c.DEBUG = False
         self.c.wait_connected()
 
-        hierarchy = FreezedUIHierarchy(Dumper(self.c), UnityAttributor(self.c))
+        hierarchy = FrozenUIHierarchy(Dumper(self.c), UnityAttributor(self.c))
         screen = UnityScreen(self.c)
         input = AirtestInput()
         super(UnityPocoAgent, self).__init__(hierarchy, input, screen, None)
@@ -99,7 +99,7 @@ class UnityAttributor(Attributor):
         raise UnableToSetAttributeException(attrName, node)
 
 
-class Dumper(FreezedUIDumper):
+class Dumper(FrozenUIDumper):
     def __init__(self, rpcclient):
         super(Dumper, self).__init__()
         self.rpcclient = rpcclient

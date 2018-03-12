@@ -8,10 +8,10 @@ from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
 
 
-__all__ = ['FreezedUIDumper', 'FreezedUIHierarchy']
+__all__ = ['FrozenUIDumper', 'FrozenUIHierarchy']
 
 
-class FreezedUIDumper(AbstractDumper):
+class FrozenUIDumper(AbstractDumper):
     """
     Partially implementation of IDumper. This is only a helper that helps to make dumper work with local nodes just 
     like with remote nodes. The local nodes is an implementation of :py:class:`AbstractNode <poco.sdk.AbstractNode>` 
@@ -44,11 +44,11 @@ class FreezedUIDumper(AbstractDumper):
                 self._linkParent(child)
 
 
-class FreezedUIHierarchy(HierarchyInterface):
+class FrozenUIHierarchy(HierarchyInterface):
     """
     Locally implementation of hierarchy interface with a given dumper and all other behaviours by default. As all 
     information can only be retrieve from a fixed UI hierarchy data created by dumper and all UI elements are immutable, 
-    this class is called freezed hierarchy. With the help of this class, only very few of the methods are required to 
+    this class is called frozen hierarchy. With the help of this class, only very few of the methods are required to
     implement. See :py:class:`AbstractNode <poco.sdk.AbstractNode>` or poco-sdk integration guide to get more details 
     about this. 
      
@@ -59,7 +59,7 @@ class FreezedUIHierarchy(HierarchyInterface):
     """
 
     def __init__(self, dumper, attributor=None):
-        super(FreezedUIHierarchy, self).__init__()
+        super(FrozenUIHierarchy, self).__init__()
         self.dumper = dumper
         self.selector = Selector(self.dumper)
         self.attributor = attributor or Attributor()
