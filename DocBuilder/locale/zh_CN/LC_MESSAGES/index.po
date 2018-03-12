@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-06 15:30+0800\n"
+"POT-Creation-Date: 2018-03-12 11:47+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,45 +23,43 @@ msgstr "欢迎使用Poco (ポコ) UI自动化框架"
 
 #: ../../index.rst:5
 msgid ""
-"This document provides all the basic information that are needed to start"
-" using Poco ポコ cross-engine UI automation framework. It covers the main "
-"framework ideas and concepts and shows examples for various use cases as "
-"well."
-msgstr "Poco是高性能的跨平台跨引擎通用自动化框架，本文档会提供详尽的使用说明。"
+"**A cross-engine UI automation framework**. "
+"``Unity3D``/``cocos2dx-*``/``Android native APP``/(Other engines SDK)/..."
+msgstr ""
 
-#: ../../index.rst:45
+#: ../../index.rst:44
 msgid "Getting Started"
 msgstr "快速预览"
 
-#: ../../index.rst:53
+#: ../../index.rst:52
 msgid "Install Poco and PocoSDK"
 msgstr "安装Poco和PocoSDK"
 
-#: ../../index.rst:55
+#: ../../index.rst:54
 msgid ""
 "In order to use Poco, you must install Poco python library on your host "
 "and also install the `poco-sdk`_ in your game/app."
 msgstr "在电脑上安装poco，并把poco-sdk集成到游戏里"
 
-#: ../../index.rst:58
+#: ../../index.rst:57
 msgid "**Poco** can be installed straightforward with ``pip`` command"
 msgstr "直接pip安装即可"
 
-#: ../../index.rst:64
+#: ../../index.rst:63
 msgid "For **poco-sdk** integration please refer to `Integration Guide`_"
 msgstr ""
 "把sdk集成到游戏里请参考 `Integration Guide`_ 。 **网易自研引擎** 无需嵌入sdk，请在hunter上直接配置，见 "
 "`Integration Guide for NetEase`_ "
 
-#: ../../index.rst:68
+#: ../../index.rst:67
 msgid "Using Poco as Python package"
 msgstr "如何使用"
 
-#: ../../index.rst:71
+#: ../../index.rst:70
 msgid "Simple demo"
 msgstr "示例"
 
-#: ../../index.rst:73
+#: ../../index.rst:72
 msgid ""
 "The following example shows a simple script on demo game using Unity3D. "
 "Check `More examples`_ section for more detailed info."
@@ -69,17 +67,17 @@ msgstr ""
 "下面Unity3D的例子展示了最简单的用法，更多的例子请移步 `More examples`_. **网易自研引擎项目请参考** "
 "网易游戏项目测试脚本标准模板_ 来开始建立回归测试工程。"
 
-#: ../../index.rst:76
+#: ../../index.rst:75
 msgid ""
 "First you should connect your Android phone, for example, via usb cable "
 "and enable the **ADB DEBUG MODE**."
 msgstr "首先请把usb线连上Android手机并打开 **adb调试模式** 。"
 
-#: ../../index.rst:101
+#: ../../index.rst:100
 msgid "Tools for writing test scripts"
 msgstr "编写脚本专用工具(Tools)"
 
-#: ../../index.rst:103
+#: ../../index.rst:102
 msgid ""
 "To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ "
 "(an IDE for writing test scripts) or standalone `PocoHierarchyViewer`_ "
@@ -88,57 +86,120 @@ msgstr ""
 "获取界面中的UI元素和开始编写脚本，请使用我们专门为您打造的 `AirtestIDE`_ 或轻量级的检视器 "
 "`PocoHierarchyViewer`_ 。 **网易自研引擎** 请直接使用 `Hunter内嵌inspector`_ ."
 
+#: ../../index.rst:106
+msgid "Tutorials and examples"
+msgstr "入门教学用例(Tutorials and examples)"
+
 #: ../../index.rst:108
+msgid "`basic usage`_"
+msgstr "`基本用法 <basic usage_>`_ "
+
+#: ../../index.rst:109
+msgid "`interact with Buttons and Labels`_"
+msgstr "`Button和Label的交互 <interact with Buttons and Labels_>`_"
+
+#: ../../index.rst:110
+msgid "`drag and swipe operations`_"
+msgstr "`拖动和滑动(drag/swipe) <drag and swipe operations_>`_"
+
+#: ../../index.rst:111
+msgid "`advanced selections`_"
+msgstr "`复杂层次的UI选择 <advanced selections_>`_"
+
+#: ../../index.rst:112
+msgid "`play with coordinate system and local positioning`_"
+msgstr "`坐标系与局部定位 <play with coordinate system and local positioning_>`_"
+
+#: ../../index.rst:113
+msgid "`iteration over elements`_"
+msgstr "`遍历UI <iteration over elements_>`_"
+
+#: ../../index.rst:114
+msgid "`handling exceptions`_"
+msgstr "`异常处理 <handling exceptions_>`_"
+
+#: ../../index.rst:115
+msgid "`waiting for events`_"
+msgstr "`等待UI <waiting for events_>`_"
+
+#: ../../index.rst:116
+msgid "`play with unittest framework`_"
+msgstr "`使用单元测试框架 <play with unittest framework_>`_"
+
+#: ../../index.rst:117
+msgid "`optimize speed by freezing UI`_"
+msgstr "`冻结UI以加快一些速度 <optimize speed by freezing UI_>`_"
+
+#: ../../index.rst:131
 msgid "API reference"
 msgstr ""
 
-#: ../../index.rst:111
+#: ../../index.rst:134
 msgid "Poco API"
 msgstr ""
 
-#: ../../index.rst:113
+#: ../../index.rst:136
 msgid ""
 "You can find all functions/methods for writing test scripts under the "
 "following links."
 msgstr "大部分用于编写测试脚本的函数和成员方法在下面的API文档里可以查找"
 
-#: ../../index.rst:123
+#: ../../index.rst:146
 msgid "Engine specific API"
 msgstr ""
 
-#: ../../index.rst:130
+#: ../../index.rst:153
 msgid ""
 "`poco drivers (engine specific poco implementation) "
 "<source/doc/poco_drivers.html>`_"
 msgstr ""
 
-#: ../../index.rst:132
+#: ../../index.rst:155
 msgid "`Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_"
 msgstr ""
 
-#: ../../index.rst:133
+#: ../../index.rst:156
 msgid "`Android native app <source/poco.drivers.android.uiautomation.html>`_"
 msgstr ""
 
-#: ../../index.rst:141
+#: ../../index.rst:164
 msgid "Poco SDK API"
 msgstr ""
 
-#: ../../index.rst:161
+#: ../../index.rst:184
 msgid "Dump UI hierarchy example"
 msgstr "如何用脚本抓取界面所有元素"
 
-#: ../../index.rst:163
+#: ../../index.rst:186
 msgid ""
 "Poco defines an uniform format to serialize UI hierarchy for different "
 "game engines. This section shows how to dump UI hierarchy."
 msgstr "Poco为不同的引擎定义了标准的界面层次结构(hierarchy)格式，在任何游戏上使用dump方法都可以获得相同的结构。示例代码和层次结构格式如下。"
 
-#: ../../index.rst:176
+#: ../../index.rst:199
 msgid ""
 "The following is the snippet of UI hierarchy. All UI elements are "
 "organized in `dict` representing the `tree` structure. More detailed info"
 " about properties are described in `.dumpHierarchy() "
 "<source/poco.sdk.AbstractDumper.html#poco.sdk.AbstractDumper.IDumper.dumpHierarchy>`_."
 msgstr "下面就是层次结构(hierarchy)的数据表示，用 ``dict`` 存储并都是可json序列化的。"
+
+#~ msgid "Tutorials"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This document provides all the basic "
+#~ "information that are needed to start "
+#~ "using Poco ポコ cross-engine UI "
+#~ "automation framework. It covers the main"
+#~ " framework ideas and concepts and "
+#~ "shows examples for various use cases "
+#~ "as well."
+#~ msgstr "Poco是高性能的跨平台跨引擎通用自动化框架，本文档会提供详尽的使用说明。"
+
+#~ msgid ""
+#~ "**A cross-engine UI automation "
+#~ "framework**. Unity3D/cocos2dx-*/Android native "
+#~ "APP/(Other engines SDK)/..."
+#~ msgstr ""
 
