@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-12 11:51+0800\n"
+"POT-Creation-Date: 2018-03-12 12:50+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,48 +194,52 @@ msgstr "下面例子列出几种常见引擎的初始化方式"
 msgid "Unity3D."
 msgstr ""
 
-#: ../../source/README.rst:132
+#: ../../source/README.rst:131
+msgid "Android native APP"
+msgstr ""
+
+#: ../../source/README.rst:141
 msgid "`NetEase Internal Engines`_ except for Unity3D projects."
 msgstr " `网易游戏非Unity3D项目 <poco.drivers.netease.internal.html>`_ "
 
-#: ../../source/README.rst:150
+#: ../../source/README.rst:159
 msgid "`cocos2dx-js`_"
 msgstr ""
 
-#: ../../source/README.rst:151
+#: ../../source/README.rst:160
 msgid "`android-native`_"
 msgstr ""
 
-#: ../../source/README.rst:152
+#: ../../source/README.rst:161
 msgid "unreal (in development)"
 msgstr ""
 
-#: ../../source/README.rst:153
+#: ../../source/README.rst:162
 msgid "for other engines, refer to `Integration Guide`_ for more details"
 msgstr "其他引擎请参考 `Integration Guide`_ 。"
 
-#: ../../source/README.rst:155
+#: ../../source/README.rst:164
 msgid ""
 "If you are using multiple devices at the same time, please refer to `Poco"
 " drivers`_."
 msgstr "如果你PC/mac上同时连接了多个设备，请见 `Poco drivers`_ 这一章节"
 
-#: ../../source/README.rst:159
+#: ../../source/README.rst:168
 msgid "Working with Poco Objects"
 msgstr "使用Poco选择UI对象"
 
-#: ../../source/README.rst:162
+#: ../../source/README.rst:171
 msgid "Basic Selector"
 msgstr "基本选择器(Basic Selector)"
 
-#: ../../source/README.rst:164
+#: ../../source/README.rst:173
 msgid ""
 "UI element objects can be selected by invoking ``poco(...)`` function "
 "instance. The function traverses through the render tree structure and "
 "selects all the corresponding UI elements matching the query expression."
 msgstr "在poco实例后加一对括号就可以进行UI选择了。选择器会遍历所有UI，将满足给定条件的UI都选出来并返回。"
 
-#: ../../source/README.rst:167
+#: ../../source/README.rst:176
 msgid ""
 "The function takes one mandatory argument `node name`, the optional "
 "arguments can be substituted too and they refer to specific node "
@@ -245,22 +249,22 @@ msgstr ""
 "其余可选参数均表示节点的属性及预期的属性值。下面的例子中可以感受一下选择表达式究竟是怎么样的。更详细的使用请参考 `API Reference "
 "selecting UI`_ "
 
-#: ../../source/README.rst:185
+#: ../../source/README.rst:194
 msgid "Relative Selector"
 msgstr "相对选择器(Relative Selector)"
 
-#: ../../source/README.rst:187
+#: ../../source/README.rst:196
 msgid ""
 "When there is any ambiguity in the selected objects by node names/node "
 "types or object unable to select, the relative selector tries to select "
 "the element object by hierarchy in following manner"
 msgstr "直接用节点属性没法选出你所想要的UI时，还可以通过UI之间的渲染层级关系进行选择，例如父子关系、兄弟关系、祖先后代关系。"
 
-#: ../../source/README.rst:199
+#: ../../source/README.rst:208
 msgid "Sequence Selector"
 msgstr "空间顺序选择器(Sequence Selector)"
 
-#: ../../source/README.rst:201
+#: ../../source/README.rst:210
 msgid ""
 "Tree indexing and traversing is performed by default from up to down or "
 "from left to right. In case that the 'not-yet-traversed' nodes are "
@@ -273,37 +277,37 @@ msgstr ""
 " ``poco(...)[1]`` "
 "来访问，而不是6.如果选择了之后，某个UI消失了(从界面中移除或者隐藏了)，那么如果再访问那个UI则可能会发生异常，其余的UI仍可继续访问。"
 
-#: ../../source/README.rst:215
+#: ../../source/README.rst:224
 msgid "Iterate over a collection of objects"
 msgstr "迭代一组对象(Iterate over a collection of objects)"
 
-#: ../../source/README.rst:217
+#: ../../source/README.rst:226
 msgid ""
 "Following code snippet shows how to iterate over the collection of UI "
 "objects"
 msgstr "下面代码片段展示如何迭代遍历一组UI"
 
-#: ../../source/README.rst:230
+#: ../../source/README.rst:239
 msgid "Get object properties"
 msgstr "读取属性(Get object properties)"
 
-#: ../../source/README.rst:232
+#: ../../source/README.rst:241
 msgid "Following examples shows how to obtain various properties of an object"
 msgstr "下面的例子展示如何通过代码获取UI的各种属性"
 
-#: ../../source/README.rst:244
+#: ../../source/README.rst:253
 msgid "Object Proxy Related Operation"
 msgstr "操作UI对象(Object Proxy Related Operation)"
 
-#: ../../source/README.rst:246
+#: ../../source/README.rst:255
 msgid "This section describes object proxy related operations"
 msgstr "下面就是一些UI常规的操作方法"
 
-#: ../../source/README.rst:249 ../../source/README.rst:341
+#: ../../source/README.rst:258 ../../source/README.rst:350
 msgid "click"
 msgstr "点击(click)"
 
-#: ../../source/README.rst:251
+#: ../../source/README.rst:260
 msgid ""
 "The anchorPoint of UI element is attached to the click point by default. "
 "When the first argument (the relative click position) is passed to the "
@@ -319,15 +323,15 @@ msgstr ""
 "方法中，这个参数是一个用list或tuple表示的2维向量，其 [x, y] 值分别表示相对于包围盒左上角的偏移量，左上角为 ``[0, 0]``"
 " ，右下角为 ``[1, 1]`` ，具体用法请见 ``局部坐标系`` 。"
 
-#: ../../source/README.rst:256
+#: ../../source/README.rst:265
 msgid "Following example demonstrates how to use ``click`` function"
 msgstr "下面的例子展示 ``click`` 的几种用法"
 
-#: ../../source/README.rst:269 ../../source/README.rst:350
+#: ../../source/README.rst:278 ../../source/README.rst:359
 msgid "swipe"
 msgstr "滑动(swipe)"
 
-#: ../../source/README.rst:271
+#: ../../source/README.rst:280
 msgid ""
 "The anchorPoint of UI element is taken as the origin, the swipe action is"
 " performed towards the given direction with the certain distance."
@@ -335,27 +339,27 @@ msgstr ""
 "swipe操作同样是以 `anchorPoint` 为起点，如果你想改变起点请使用下面的 ``focus`` "
 "方法，然后朝给定向量所代表的方向滑动，距离也就是向量的长度。关于向量的坐标如何表示可以参考 ``归一化坐标系`` 。"
 
-#: ../../source/README.rst:274
+#: ../../source/README.rst:283
 msgid "Following example shows how to use the ``swipe`` function"
 msgstr "下面例子展示如何使用 ``swipe`` 方法"
 
-#: ../../source/README.rst:287
+#: ../../source/README.rst:296
 msgid "drag"
 msgstr "拖拽(drag)"
 
-#: ../../source/README.rst:289
+#: ../../source/README.rst:298
 msgid "Drag from current UI element to the target UI element."
 msgstr "与 ``swipe`` 不同的是， ``darg`` 是从一个UI拖到另一个UI，而 ``swipe`` 是将一个UI朝某个方向拖动。"
 
-#: ../../source/README.rst:291
+#: ../../source/README.rst:300
 msgid "Following example shows how to use the ``drag_to`` function"
 msgstr "下面例子展示如何使用 ``drag_to`` 方法"
 
-#: ../../source/README.rst:301
+#: ../../source/README.rst:310
 msgid "focus (local positioning)"
 msgstr "局部定位(focus (local positioning))"
 
-#: ../../source/README.rst:303
+#: ../../source/README.rst:312
 msgid ""
 "The anchorPoint is set as the origin when conducting operations related "
 "to the node coordinates. If the the local click area is need, the focus "
@@ -370,18 +374,18 @@ msgstr ""
 "所使用的是局部坐标系，因此同样是UI包围盒的左上角为原点，x轴向右，y轴向下，并且包围盒长宽均为单位1。很显然中心点就是 ``[0.5, "
 "0.5]`` 。下面的例子会展示一些常用的用法。"
 
-#: ../../source/README.rst:314
+#: ../../source/README.rst:323
 msgid ""
 "The focus function can also be used as internal positioning within the "
 "objects. Following example demonstrates the implementation of `scroll` "
 "operation in `ScrollView`."
 msgstr "将 ``focus`` 和 ``drag_to`` 结合使用还能产生卷动(scroll)的效果，下面例子展示了如何将一个列表向上卷动半页。"
 
-#: ../../source/README.rst:323
+#: ../../source/README.rst:332
 msgid "wait"
 msgstr "等待出现(wait)"
 
-#: ../../source/README.rst:325
+#: ../../source/README.rst:334
 msgid ""
 "Wait for the target objects to appear on the screen and return the object"
 " proxy itself. If the object exists, return immediately."
@@ -390,21 +394,21 @@ msgstr ""
 "如果超时了还没有出现，同样也会返回，但是调用这个UI的操作时会报错。类似的操作还有，见 :py:meth:`wait_for_appearance"
 " <poco.proxy.UIObjectProxy.wait_for_appearance>` "
 
-#: ../../source/README.rst:335
+#: ../../source/README.rst:344
 msgid "Global Operation"
 msgstr "全局操作(Global Operation)"
 
-#: ../../source/README.rst:337
+#: ../../source/README.rst:346
 msgid ""
 "`Poco` framework also allows to perform the operations without any UI "
 "elements selected. These operations are called `global` operations."
 msgstr "在没有选定或指定UI的情况下也可以进行操作(模拟输入)，也叫全局操作。"
 
-#: ../../source/README.rst:365
+#: ../../source/README.rst:374
 msgid "snapshot"
 msgstr "截屏(snapshot)"
 
-#: ../../source/README.rst:367
+#: ../../source/README.rst:376
 msgid ""
 "Take a screenshot of the current screen in base64 encoded string. The "
 "image format depends on the sdk implementation. Take a look at "
@@ -413,33 +417,33 @@ msgstr ""
 "截屏幕并以base64编码返回。截图的格式(png, jpg, ...)由对应的sdk实现决定，大多数情况下是png。详见 "
 "`ScreenInterface.getScreen`_ "
 
-#: ../../source/README.rst:370
+#: ../../source/README.rst:379
 msgid ""
 "**Note**: ``snapshot``  is not supported in some engine implementation of"
 " poco."
 msgstr " **注意** : 有些引擎不支持截屏。"
 
-#: ../../source/README.rst:381
+#: ../../source/README.rst:390
 msgid "Exceptions"
 msgstr "异常处理(Exceptions)"
 
-#: ../../source/README.rst:383
+#: ../../source/README.rst:392
 msgid "This sections describes the Poco framework errors and exceptions."
 msgstr "本节说明如何处理异常"
 
-#: ../../source/README.rst:386
+#: ../../source/README.rst:395
 msgid "PocoTargetTimeout"
 msgstr ""
 
-#: ../../source/README.rst:400
+#: ../../source/README.rst:409
 msgid "PocoNoSuchNodeException"
 msgstr ""
 
-#: ../../source/README.rst:416
+#: ../../source/README.rst:425
 msgid "Unit Test"
 msgstr "单元测试(Unit Test)"
 
-#: ../../source/README.rst:418
+#: ../../source/README.rst:427
 msgid ""
 "Poco is an automation test framework. For unit testing, please refer to "
 "`PocoUnit`_ section. PocoUnit provides a full set of assertion methods "
@@ -450,27 +454,27 @@ msgstr ""
 "`PocoUnit`_. PocoUnit是一个提供了完善设施的专门为游戏和应用设计的单元测试框架，用法与python标准库 "
 "``unittest`` 完全兼容。"
 
-#: ../../source/README.rst:421
+#: ../../source/README.rst:430
 msgid "`Tutorial of PocoUnit`_."
 msgstr ""
 
-#: ../../source/README.rst:424
+#: ../../source/README.rst:433
 msgid "Some Concepts"
 msgstr "术语解释(Some Concepts)"
 
-#: ../../source/README.rst:426
+#: ../../source/README.rst:435
 msgid ""
 "This section describes some basic concepts of Poco. Basic terminology "
 "used in following section"
 msgstr "文档中可能会用到以下术语，在这里事先定义一下，避免误解和歧义。"
 
-#: ../../source/README.rst:428
+#: ../../source/README.rst:437
 msgid ""
 "**Target device**: test devices where the apps or games run on, it "
 "usually refers to mobile phone devices"
 msgstr " **目标设备** ： 你的游戏或app运行的设备，一般指手机。"
 
-#: ../../source/README.rst:429
+#: ../../source/README.rst:438
 msgid ""
 "**UI proxy**: proxy objects within Poco framework, they represent zero "
 "(none), one or multiple in-game UI elements"
@@ -478,11 +482,11 @@ msgstr ""
 " **UI代理** "
 "：Poco自动化框架中的代表实际游戏/app内UI控件的一个对象，一个UI代理可对应0个、1个或多个实际的UI控件。进行选择操作时，实际上就是创建了一个UI代理；对UI进行操作时，也是通过UI代理进行。"
 
-#: ../../source/README.rst:430
+#: ../../source/README.rst:439
 msgid "**Node/UI element**: UI element instances or nodes in app/game"
 msgstr " **节点/UI元素** ：游戏/app里的UI控件或某个实体。"
 
-#: ../../source/README.rst:431
+#: ../../source/README.rst:440
 msgid ""
 "**query expression**: a serializable internal data structure through "
 "which Poco interacts with **target devices** and selects the "
@@ -492,19 +496,19 @@ msgstr ""
 "**选择表达式** ：除非你需要扩展或自定义更底层的Poco的行为，一般无需关心此。选择表达式是一种框架和sdk交互的底层数据结构，用在 "
 "``Selector`` 类中。"
 
-#: ../../source/README.rst:435
+#: ../../source/README.rst:444
 msgid "Following images show the UI hierarchy represented in Poco"
 msgstr "下面的几个图形象地展示在Poco中层次结构(hierarchy)和UI属性的特征，从Inspector里也能很容易地预览当前界面的UI控件。"
 
-#: ../../source/README.rst:442
+#: ../../source/README.rst:451
 msgid "Definitions of coordinate system and metric space"
 msgstr "坐标系与度量空间定义"
 
-#: ../../source/README.rst:445
+#: ../../source/README.rst:454
 msgid "Normalized Coordinate System"
 msgstr "归一化坐标系(Normalized Coordinate System)"
 
-#: ../../source/README.rst:447
+#: ../../source/README.rst:456
 msgid ""
 "In normalized coordinate system, the origin (0, 0) lies on top left "
 "corner of the device display. The height and the width of the screen are "
@@ -514,18 +518,18 @@ msgid ""
 "size. This is especially very handy when writing cross-device test cases."
 msgstr "归一化坐标系就是将屏幕宽和高按照单位一来算，这样UI在poco中的宽和高其实就是相对于屏幕的百分比大小了，好处就是不同分辨率设备之间，同一个UI的归一化坐标系下的位置和尺寸是一样的，有助于编写跨设备测试用例。"
 
-#: ../../source/README.rst:452
+#: ../../source/README.rst:461
 msgid ""
 "The space of normalized coordinate system is uniformly distributed, i.e. "
 "the coordinates of the screen center are (0.5, 0.5) and the computing "
 "method of other scalars and vectors are all same in Euclidean space."
 msgstr "归一化坐标系的空间是均匀的，屏幕正中央一定是(0.5, 0.5)，其他标量和向量的计算方法同欧式空间。"
 
-#: ../../source/README.rst:458
+#: ../../source/README.rst:467
 msgid "Local Coordinate System (local positioning)"
 msgstr "局部坐标系(Local Coordinate System (local positioning))"
 
-#: ../../source/README.rst:460
+#: ../../source/README.rst:469
 msgid ""
 "The aim of introducing local coordinate system is to express the "
 "coordinates with reference to a certain UI elements. The origin (0,0) of "
@@ -536,7 +540,7 @@ msgid ""
 "Other definitions are same as for normalized coordinate system."
 msgstr "引入局部坐标系是为了表示相对于某UI的坐标。局部坐标系以UI包围盒左上角为原点，向右为x轴，向下为y轴，包围盒宽和高均为单位一。其余的定义和归一化坐标系类似。"
 
-#: ../../source/README.rst:466
+#: ../../source/README.rst:475
 msgid ""
 "Local coordinate system is more flexible in order to locate the position "
 "within or outside of UI element, e.g the coordinates at (0.5, 0.5) "
