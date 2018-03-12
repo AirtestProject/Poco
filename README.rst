@@ -128,6 +128,15 @@ Following example shows how to initialize popo instance for
     ui = poco('...')
     ui.click()
 
+* Android native APP
+
+.. code-block:: python
+
+    from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
+    poco = AndroidUiautomationPoco()
+    poco.device.wake()
+    poco(text='Clock').click()
 
 * `NetEase Internal Engines`_ except for Unity3D projects.
 

@@ -102,6 +102,8 @@ Tools for writing test scripts
 To retrieve the UI hierarchy of the game, please use our `AirtestIDE`_ (an IDE for writing test scripts) or
 standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only but lightweight) !
 
+.. image:: source/doc/img/hunter-inspector.png
+
 Tutorials and examples
 ----------------------
 
