@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2018-03-12 20:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,11 +21,11 @@ msgstr ""
 msgid "poco\\.freezeui\\.hierarchy module"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper:1
+#: of poco.freezeui.hierarchy.FrozenUIDumper:1
 msgid "Bases: :class:`poco.sdk.AbstractDumper.AbstractDumper`"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper:1
+#: of poco.freezeui.hierarchy.FrozenUIDumper:1
 msgid ""
 "Partially implementation of IDumper. This is only a helper that helps to "
 "make dumper work with local nodes just like with remote nodes. The local "
@@ -35,52 +35,52 @@ msgid ""
 "target app, but to perform like a ordinary dumper."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot:1
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:1
 msgid ""
 "Dump a hierarchy immediately from target runtime and store into a Node "
 "(subclass of :py:class:`AbstractNode <poco.sdk.AbstractNode>`) object."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot
 msgid "返回"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot:4
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:4
 msgid "Each time a new node instance is created by latest hierarchy  data."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot:6
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:6
 msgid "Each time a new node instance is created by latest hierarchy"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot:7
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:7
 msgid "data."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot
 msgid "返回类型"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIDumper.getRoot:8
+#: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:8
 msgid ":py:class:`inherit from AbstractNode <Node>`"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy:1
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy:1
 msgid "Bases: :class:`poco.sdk.interfaces.hierarchy.HierarchyInterface`"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy:1
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy:1
 msgid ""
 "Locally implementation of hierarchy interface with a given dumper and all"
 " other behaviours by default. As all information can only be retrieve "
 "from a fixed UI hierarchy data created by dumper and all UI elements are "
-"immutable, this class is called freezed hierarchy. With the help of this "
+"immutable, this class is called frozen hierarchy. With the help of this "
 "class, only very few of the methods are required to implement. See "
 ":py:class:`AbstractNode <poco.sdk.AbstractNode>` or poco-sdk integration "
 "guide to get more details about this."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy:7
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy:7
 msgid ""
 "This class makes it much easier to integrate poco-sdk and optimizes "
 "performance in some situations, but it is not sensitive enough to the "
@@ -90,27 +90,15 @@ msgid ""
 "out of date."
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy.getAttr:1
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.getAttr:1
 msgid "get node attribute"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy.select:1
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.select:1
 msgid "select nodes by query"
 msgstr ""
 
-#: of poco.freezeui.hierarchy.FreezedUIHierarchy.setAttr:1
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.setAttr:1
 msgid "set node attribute"
 msgstr ""
-
-#~ msgid "返回"
-#~ msgstr ""
-
-#~ msgid "返回类型"
-#~ msgstr ""
-
-#~ msgid "Returns"
-#~ msgstr ""
-
-#~ msgid "Return type"
-#~ msgstr ""
 

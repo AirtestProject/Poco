@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2018-03-12 20:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,7 +267,7 @@ msgid ""
 "Snapshot current **hierarchy** and cache it into a new poco instance. "
 "This new poco instance is a copy from current poco instance (``self``). "
 "The hierarchy of the new poco instance is fixed and immutable. It will be"
-" super fast when calling ``dump`` function from freezed poco. See the "
+" super fast when calling ``dump`` function from frozen poco. See the "
 "example below."
 msgstr ""
 
@@ -425,21 +425,4 @@ msgid ""
 "automatically invoked when required."
 msgstr ""
 
-#~ msgid "参数"
-#~ msgstr ""
-
-#~ msgid "返回"
-#~ msgstr ""
-
-#~ msgid "返回类型"
-#~ msgstr ""
-
-#~ msgid "Parameters"
-#~ msgstr ""
-
-#~ msgid "Returns"
-#~ msgstr ""
-
-#~ msgid "Return type"
-#~ msgstr ""
 
