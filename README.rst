@@ -68,7 +68,7 @@ Features
 * retrieves UI Elements Hierarchy in game's runtime
 * is super fast and impact-free to the game
 * allows straightforward SDK integration to the game (within in 5 minutes)
-* provides powerful APIs taht are engine independent
+* provides powerful APIs that are engine independent
 * supports multi-touch e.g. fling/pinch/... (and more is coming soon)
 * support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
 * is extensible to other private engines by `implementing poco-sdk`_ .
