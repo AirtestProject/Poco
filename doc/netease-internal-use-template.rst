@@ -65,6 +65,8 @@ testcase里面可以方便地访问到player对象。
     from pocounit.addons.poco.action_tracking import ActionTracker
     from pocounit.addons.hunter.runtime_logging import AppRuntimeLogging
 
+    from airtest.core.api import connect_device, device as current_device
+
     from player import Player
 
 
@@ -72,6 +74,14 @@ testcase里面可以方便地访问到player对象。
         @classmethod
         def setUpClass(cls):
             super(CommonCase, cls).setUpClass()
+
+            # 例如使用android手机进行测试
+            if not current_device():
+                connect_device('Android:///')
+
+                # 如果连接windows的话，用下面这种写法
+                # conncect_device('Windows:///?title_re=^.*标题栏正则.*$')
+
             cls.player = Player()
 
             action_tracker = ActionTracker(cls.player.poco)
@@ -151,113 +161,6 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
         def server_call(self, cmd):
             self.hunter.script(cmd, lang='text')
 
-``launcher.py``
----------------
-
-launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可以通过以下命令
-
-.. code-block:: bash
-
-    python launcher.py scripts/test1.air/test1.py
-
-如果在windows上直接跑的话，用下面命令
-
-.. code-block:: bash
-
-    python launcher.py scripts/test1.air/test1.py windows
-
-``launcher.py`` 定义如下:
-
-.. code-block:: python
-
-    # coding=utf-8
-
-    import os
-    import sys
-    import traceback
-    try:
-        new_airtest_api = True
-        from airtest.core.api import connect_device, device as current_device
-        from airtest.core.helper import set_logdir
-        from airtest.core.settings import Settings
-        from airtest.cli.parser import runner_parser
-    except ImportError:
-        new_airtest_api = False
-        from airtest.core.main import set_serialno, set_windows
-        from airtest.cli.runner import set_logfile, set_screendir, device as current_device
-        from airtest.core.settings import Settings
-
-
-    launcher_dir = os.path.dirname(sys._getframe(0).f_code.co_filename)
-    os.chdir(launcher_dir)
-
-
-    def setUpEnvironment(run_on_win=False):
-        if run_on_win:
-            if new_airtest_api:
-                connect_device('Windows:///?title_re=^.*errors and.*$')
-                Settings.OP_OFFSET = [8, 30]
-            else:
-                Settings.FIND_INSIDE = [8, 30]  # 窗口边框偏移
-                set_windows(window_title='^.*errors and.*$')
-        else:
-            if new_airtest_api:
-                # 根据命令行参数自动连接设备，如果没有指定就默认连上电脑的第一个
-                ap = runner_parser()
-                args = ap.parse_args(sys.argv[1:])
-                print(sys.argv)
-
-                if isinstance(args.device, list):
-                    devices = args.device
-                elif args.device:
-                    devices = [args.device]
-                else:
-                    # default to use local android device
-                    devices = ["Android:///"]
-
-                for dev in devices:
-                    connect_device(dev)
-                    print('"{}" connected.'.format(dev))
-            else:
-                if not current_device():
-                    set_serialno()
-
-        sys.path.append(os.path.abspath('.'))
-        sys.path.append(os.path.abspath('./lib'))
-        if new_airtest_api:
-            exec("from airtest.core.api import *") in globals()
-        else:
-            exec("from airtest.core.main import *") in globals()
-
-
-    def run_script(filename):
-        if filename.endswith('.py'):
-            script_dir = os.path.dirname(filename)
-        elif filename.endswith('.owl') or filename.endswith('.air'):
-            script_dir = filename
-            script_name = os.path.basename(filename)[:-4]
-            filename = os.path.join(script_dir, script_name + '.py')
-        else:
-            raise ValueError('script should be one of .air/.owl/.py')
-
-        if new_airtest_api:
-            set_logdir(os.path.join(script_dir, "logs"))
-        else:
-            Settings.set_logdir(script_dir)
-            Settings.set_basedir(script_dir)
-            set_logfile()
-            set_screendir()
-        execfile(os.path.abspath(filename), globals())
-
-
-    if __name__ == '__main__':
-        filename = sys.argv[1]
-        run_on_win = False
-        if len(sys.argv) > 2 and sys.argv[2].lower() in ('win', 'win32', 'windows'):
-            run_on_win = True
-        setUpEnvironment(run_on_win)
-        run_script(filename)
-
 
 ``test1.air/test1.py`` 模板
 -------------------------
@@ -320,14 +223,15 @@ launcher.py 里定义启动脚本，无需修改，运行任意测试脚本可�
 如何运行脚本
 ''''''
 
-Android 的话，请插上usb线，然后终端里跑下面命令
+就跟普通python脚本一样，直接运行即可
 
 .. code-block:: bash
 
-    python launcher.py scripts/test1.air/test1.py
+    python scripts/test1.air/test1.py
 
-如果在windows上直接跑的话，用下面命令
+如果当前目录不在工程根目录，需要加上环境变量PROJECT_ROOT，假设工程根目录在 ``D:\project``
 
 .. code-block:: bash
 
-    python launcher.py scripts/test1.air/test1.py windows
+    set PROJECT_ROOT=D:\project & python test1.py
+
