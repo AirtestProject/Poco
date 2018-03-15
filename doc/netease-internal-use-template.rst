@@ -32,15 +32,14 @@
         |   ├─ __init__.py
         |   ├─ case.py
         |   └─ player.py
-        ├─ scripts/
-        |   ├─ group/
-        |   |   ├─ group_test1.air
-        |   |   └─ group_test2.air
-        |   ├─ test1.air
-        |   |   └─ test1.py
-        |   └─ test2.air
-        |       └─ test2.py
-        └─ launcher.py
+        └─ scripts/
+            ├─ group/
+            |   ├─ group_test1.air
+            |   └─ group_test2.air
+            ├─ test1.air
+            |   └─ test1.py
+            └─ test2.air
+                └─ test2.py
 
 ``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` 目录用于存放一个个脚本文件，支持多级嵌套，用 ``.air`` 的文件夹后缀
 组织每个脚本，这个目录里可以存放脚本引用到的所有资源文件，脚本运行结束后也会存储对应的运行结果文件。其余的目录没有规定，根据实际情况建立
