@@ -56,7 +56,7 @@ class AttributorWrapper(Attributor):
 
     def setAttr(self, node, attrName, attrVal):
         if attrName == 'text' and attrVal != '':
-            # 先清除了再设置
+            # 先清除了再设置，虽然这样不如直接用ime的方法好，但是也能凑合用着
             current_val = self.remote.getAttr(node, 'text')
             if current_val:
                 self.remote.setAttr(node, 'text', '')
