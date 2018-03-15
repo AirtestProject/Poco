@@ -1,3 +1,6 @@
+# coding=utf-8
+
+
 class IConnection(object):
 
     def send(self, msg):

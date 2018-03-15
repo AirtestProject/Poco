@@ -14,9 +14,8 @@ class HunterCommand(CommandInterface):
         通过hunter调用gm指令，可调用hunter指令库中定义的所有指令，也可以调用text类型的gm指令
         gm指令相关功能请参考safaia GM指令扩展模块
 
-        :param script: 指令
-        :param lang: 语言，默认text
-        :param sleep_interval: 调用指令后的等待间隔时间
+        :param cmd: 指令
+        :param type: 语言，默认text
         :return: None
         """
 
