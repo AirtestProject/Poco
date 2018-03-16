@@ -6,6 +6,8 @@ from poco.drivers.unity3d.test.tutorial.case import TutorialCase
 
 class WaitAnyUITutorial(TutorialCase):
     def runTest(self):
+        self.poco(text='wait UI').click()
+
         bomb_count = 0
         while True:
             blue_fish = self.poco('fish_emitter').child('blue')

@@ -4,10 +4,13 @@ import time
 from poco.drivers.unity3d.test.tutorial.case import TutorialCase
 
 
-class ClickTutorial(TutorialCase):
+class OverviewTutorial(TutorialCase):
     def runTest(self):
         self.poco('btn_start').click()
-        time.sleep(1.5)
+        time.sleep(1)
+
+        self.poco(textMatches='drag.*').click()
+        time.sleep(1)
 
         shell = self.poco('shell').focus('center')
         for star in self.poco('star'):
