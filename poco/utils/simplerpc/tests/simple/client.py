@@ -11,16 +11,7 @@ def test_with_tcp():
 
     client = TcpClient()
     c = RpcClient(client)
-    c.run(backend=True)
-    c.wait_connected()
-    test_client(c)
-
-def test_with_sszmq():
-    from simplerpc.transport.sszmq import SSZmqClient
-
-    client = SSZmqClient()
-    c = RpcClient(client)
-    c.run(backend=True)
+    # c.run()
     c.wait_connected()
     test_client(c)
 
@@ -63,4 +54,3 @@ def test_client(c):
 
 if __name__ == '__main__':
     test_with_tcp()
-    # test_with_sszmq()

@@ -1,8 +1,7 @@
 # encoding=utf-8
-from simplerpc import RpcAgent
-import simplerpc
+from .simplerpc import RpcAgent
+from . import simplerpc
 import time
-
 
 
 class RpcClient(RpcAgent):

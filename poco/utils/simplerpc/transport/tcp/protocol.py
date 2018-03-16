@@ -54,7 +54,7 @@ if __name__ == '__main__':
     u = s.unpack(r)
     g = s.input(r[:1])
     for i in g:
-        print i
+        print(i)
     g = s.input(r[1:])
     for i in g:
-        print i
+        print(i)

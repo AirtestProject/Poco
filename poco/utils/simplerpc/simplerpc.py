@@ -6,9 +6,9 @@ import json
 import time
 import traceback
 
-from jsonrpc import JSONRPCResponseManager, dispatcher
-from jsonrpc.jsonrpc2 import JSONRPC20Response
-from jsonrpc.exceptions import JSONRPCServerError
+from .jsonrpc import JSONRPCResponseManager, dispatcher
+from .jsonrpc.jsonrpc2 import JSONRPC20Response
+from .jsonrpc.exceptions import JSONRPCServerError
 
 
 DEBUG = True
