@@ -78,7 +78,7 @@ class Poco(PocoAccelerationMixin):
              expression pattern ``UI.xx``
 
         In keyword args, you can only use `xx` or `xxMatches` at the same time. Using both with the same attribute does
-        not make sence. Besides, `xx` should not start with ``_`` (underscore) as attributes start with ``_`` are 
+        not make sense. Besides, `xx` should not start with ``_`` (underscore) as attributes start with ``_`` are 
         private attributes that used by sdk implementation.
         ::
 
