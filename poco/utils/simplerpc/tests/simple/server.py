@@ -49,12 +49,5 @@ def test_with_tcp():
     # s.console_run({"s": s})
 
 
-def test_with_sszmq():
-    from simplerpc.transport.sszmq import SSZmqServer
-    s = RpcServer(SSZmqServer())
-    s.run()
-
-
 if __name__ == '__main__':
     test_with_tcp()
-    # test_with_sszmq()
