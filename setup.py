@@ -3,8 +3,6 @@
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-import poco
-
 
 # parse_requirements() returns generator of pip.req.InstallRequirement objects
 install_reqs = parse_requirements('requirements.txt', session=False)
@@ -14,7 +12,7 @@ reqs = [str(ir.req) for ir in install_reqs if ir.req]
 
 setup(
     name='pocoui',
-    version=poco.__version__,
+    version='1.0.25',
     keywords="poco, automation test, ui automation",
     description='Poco cross-engine UI automated test framework.',
     long_description='Poco cross-engine UI automated test framework. 2018 present by NetEase Games',
