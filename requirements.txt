@@ -3,5 +3,5 @@ requests
 airtest
 hrpc
 pydash
-axmlparserpy
+axmlparserpy==0.0.4
 websocket-client
