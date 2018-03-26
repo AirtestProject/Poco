@@ -4,7 +4,7 @@ __author__ = 'lnx3032'
 
 import re
 
-from axmlparserpy.apk import APK
+from airtest.utils.apkparser.apk import APK
 
 
 def install(adb_client, localpath, force_reinstall=False):
