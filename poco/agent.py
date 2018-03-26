@@ -1,7 +1,5 @@
 # coding=utf-8
 
-import types
-
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
@@ -11,7 +9,7 @@ __author__ = 'lxn3032'
 
 
 def _assign(val, default_val):
-    if isinstance(val, types.NoneType):
+    if isinstance(val, type(None)):
         return default_val
     else:
         return val
