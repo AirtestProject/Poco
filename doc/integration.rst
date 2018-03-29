@@ -22,16 +22,15 @@ Cocos2dx-js
 PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, the javascript sdk is implemented in ES5.
 
 1. Clone sdk source code from `poco-sdk repo`_. 
-#. Copy the ``cocos2dx-js`` folder to your cocos project script folder.
+#. Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript folder.
 #. Build websocket server module and js bindings for RPC server use, `websocketserver reference`_.
     #. ``cp -r cocos2dx-js/3rd/websockets <your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/external/websockets``
     #. ``cp cocos2dx-js/3rd/src/* <your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/Classes``
     *. edit ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/Classes/AppDelegate.cpp``
         add line ``#include "jsb_websocketserver.h"``
         add line ``sc->addRegisterCallback(register_jsb_websocketserver);`` in the middle of file after ``#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)``
-    *. edit ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/proj.android/jni/Android.mk``
-        add ``LOCAL_SRC_FILES := ../../Classes/WebSocketServer.cpp ../../Classes/jsb_websocketserver.cpp``
-        add ``LOCAL_STATIC_LIBRARIES := websockets_static``
+    *. merge ``cocos2dx-js/3rd/Android.mk`` into ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/proj.android/jni/Android.mk``
+    #. remove ``websockets_static`` in ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/external/android/Android.mk`` to re-build libwebsockets
     #. recompile your cocos project
 #. ``require('Poco')``  in your game's first initialized script to start PocoSDK, and do not destroy it during game's lifetime.
 
