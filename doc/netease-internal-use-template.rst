@@ -60,6 +60,9 @@ testcase里面可以方便地访问到player对象。
 
     # coding=utf-8
 
+    import os
+    import sys
+
     from pocounit.case import PocoTestCase
     from pocounit.addons.poco.action_tracking import ActionTracker
     from pocounit.addons.hunter.runtime_logging import AppRuntimeLogging
@@ -74,6 +77,12 @@ testcase里面可以方便地访问到player对象。
         def setUpClass(cls):
             super(CommonCase, cls).setUpClass()
 
+            # 把lib目录和PROJECT_ROOT加到search path里
+            proot = os.environ.get('PROJECT_ROOT', '.')
+            proot = os.path.abspath(proot)
+            sys.path.append(proot)
+            sys.path.append(os.path.join(proot, 'lib'))
+
             # 例如使用android手机进行测试
             if not current_device():
                 connect_device('Android:///')
@@ -87,7 +96,6 @@ testcase里面可以方便地访问到player对象。
             runtime_logger = AppRuntimeLogging(cls.player.hunter)
             cls.register_addin(action_tracker)
             cls.register_addin(runtime_logger)
-
 
 
 ``player.py``
