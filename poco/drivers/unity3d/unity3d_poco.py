@@ -44,7 +44,7 @@ class UnityPocoAgent(PocoAgent):
                 current_device()._top_window = game_window.wrapper_object()
                 current_device().focus_rect = (0, 40, 0, 0)
 
-            if connect_default_device:
+            if connect_default_device and not current_device():
                 # currently only connect to Android as default
                 # can apply auto detection in the future
                 connect_device("Android:///")

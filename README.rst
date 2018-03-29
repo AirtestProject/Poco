@@ -511,10 +511,9 @@ Join to discuss!
 .. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
 
 
-.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/poco/badge/?version=latest
+    :target: http://poco.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
-    :scale: 100%
-    :target: https://poco.readthedocs.io
 
 .. |chat on slack| image:: doc/img/chat_on_slack.png
     :alt: chat on slack
