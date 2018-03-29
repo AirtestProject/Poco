@@ -1,18 +1,28 @@
 # coding=utf-8
 
 
+import time
 import json
-from hunter_cli import Hunter, open_platform
+from airtest_hunter import AirtestHunter, open_platform
 from poco.drivers.netease.internal import NeteasePoco
 
+from pocounit.case import PocoTestCase
+from airtest.core.api import connect_device, device as current_device
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
+
+class Case(PocoTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(Case, cls).setUpClass()
+        if not current_device():
+            connect_device('Android:///')
+
+    def runTest(self):
+        poco = AndroidUiautomationPoco()
+        poco('com.sonyericsson.conversations:id/recipients_editor').set_text('\b\b\b')
+
+
 if __name__ == '__main__':
-    tokenid = open_platform.get_api_token('poco-test')
-    # hunter = Hunter(tokenid, 'g62', devid='g62_at_408d5c117d0f')
-    hunter = Hunter(tokenid, 'g62', devid='g62_at_408d5c117d0f')
-    poco = NeteasePoco('g62', hunter)
-
-    # root = poco.agent.hierarchy.dumper.getRoot()
-    # h = poco.agent.hierarchy.dumper.dumpHierarchyImpl(root, False)
-    # print json.dumps(h)
-
-    print poco(visible=False).query
+    import pocounit
+    pocounit.main()
