@@ -477,6 +477,10 @@ the coordinates at (0.5, 0.5) corresponds to the center of the UI element while 
 correspond to the position out of the UI element.
 
 
+Join to discuss!
+----------------
+
+`join slack`_
 
 .. _poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/integration.html
 .. _implementing poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/implementation_guide.html
@@ -499,6 +503,7 @@ correspond to the position out of the UI element.
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: http://poco.readthedocs.io/en/latest/source/doc/about-standalone-inspector.html
 
+.. _join slack: https://join.slack.com/t/airtestproject/shared_invite/enQtMzM4MTUwODk0MzQyLWFiNTEyNTkzZjUwZDcyOWQ1NjE5YzQ4Zjk3OTBmMTEyZDBkN2YxZTdmZWY5MWRiNjg2ZjZkYjk1YTEzOTJmMzU
 
 ..
  下面是对应sdk的下载链接

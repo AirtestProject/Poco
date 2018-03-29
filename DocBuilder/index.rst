@@ -241,6 +241,11 @@ More detailed info about properties are described in
     ...
 
 
+Join to discuss!
+----------------
+
+`join slack`_
+
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
 .. _Integration Guide for NetEase: source/doc/integration.html#netease-internal-engines
@@ -251,6 +256,8 @@ More detailed info about properties are described in
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: source/doc/about-standalone-inspector.html
 .. _AirtestIDE: http://airtest.netease.com/
+
+.. _join slack: https://join.slack.com/t/airtestproject/shared_invite/enQtMzM4MTUwODk0MzQyLWFiNTEyNTkzZjUwZDcyOWQ1NjE5YzQ4Zjk3OTBmMTEyZDBkN2YxZTdmZWY5MWRiNjg2ZjZkYjk1YTEzOTJmMzU
 
 ..
  下面是对应sdk的下载链接

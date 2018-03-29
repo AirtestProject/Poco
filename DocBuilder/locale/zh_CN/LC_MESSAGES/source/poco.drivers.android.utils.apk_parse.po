@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-03-29 14:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,35 +21,27 @@ msgstr ""
 msgid "poco\\.drivers\\.android\\.utils\\.apk\\_parse module"
 msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse:1
-msgid "parse apk file class, inherit from axmlparserpy."
-msgstr ""
+#~ msgid "parse apk file class, inherit from axmlparserpy."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse:1
-msgid "Bases: :class:`object`"
-msgstr ""
+#~ msgid "Bases: :class:`object`"
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse:1
-msgid "APK parse."
-msgstr ""
+#~ msgid "APK parse."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse.__init__:1
-msgid "Init method."
-msgstr ""
+#~ msgid "Init method."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse.get_aapt_parse_data:1
-msgid "Get aapt parse data."
-msgstr ""
+#~ msgid "Get aapt parse data."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse.get_raw:1
-msgid "Get raw data."
-msgstr ""
+#~ msgid "Get raw data."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse.parse_app_name:1
-msgid "Parse app name form apk."
-msgstr ""
+#~ msgid "Parse app name form apk."
+#~ msgstr ""
 
-#: of poco.drivers.android.utils.apk_parse.APKParse.parse_package_version:1
-msgid "Parse package and version from apk."
-msgstr ""
+#~ msgid "Parse package and version from apk."
+#~ msgstr ""
 
