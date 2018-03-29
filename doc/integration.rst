@@ -31,8 +31,14 @@ PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, 
 
 .. code-block:: javascript
 
-    var poco = require('Poco')
-    // ...
+    var PocoManager = require('Poco')
+    var poco = new PocoManager()
+
+    // persist this variable to window object
+    window.poco = poco
+
+    // if you'd like to listen on another port, use the following line
+    // var poco = new PocoManager(5004)
 
 
 Cocos2dx-lua

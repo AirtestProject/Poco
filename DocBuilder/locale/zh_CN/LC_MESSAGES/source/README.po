@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-12 12:50+0800\n"
+"POT-Creation-Date: 2018-03-29 14:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,7 +101,8 @@ msgid "allows straightforward SDK integration to the game (within in 5 minutes)"
 msgstr "5分钟完成就可以安装集成好"
 
 #: ../../source/README.rst:71
-msgid "provides powerful APIs taht are engine independent"
+#, fuzzy
+msgid "provides powerful APIs that are engine independent"
 msgstr "提供了强大的引擎无关API"
 
 #: ../../source/README.rst:72
@@ -547,6 +548,14 @@ msgid ""
 "corresponds to the center of the UI element while coordinates larger than"
 " 1 or less than 0 correspond to the position out of the UI element."
 msgstr "局部坐标系可以更灵活地定位UI内或外的位置，例如(0.5, 0.5)就代表UI的正中央，超过1或小于0的坐标值则表示UI的外面。"
+
+#: ../../source/README.rst:481
+msgid "Join to discuss!"
+msgstr ""
+
+#: ../../source/README.rst:483
+msgid "`join slack`_"
+msgstr ""
 
 #~ msgid "**A cross-engine UI automation framework**"
 #~ msgstr "**高性能跨引擎UI自动化框架**"
