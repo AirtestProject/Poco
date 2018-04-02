@@ -23,20 +23,83 @@ PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, 
 
 1. Clone sdk source code from `poco-sdk repo`_. 
 #. Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript folder.
-#. Build websocket server module and js bindings for RPC server use, `websocketserver reference`_.
-    #. ``cp -r cocos2dx-js/3rd/websockets <your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/external/websockets``
-    #. ``cp cocos2dx-js/3rd/src/* <your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/Classes``
-    *. edit ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/Classes/AppDelegate.cpp``
-        add line ``#include "jsb_websocketserver.h"``
-        add line ``sc->addRegisterCallback(register_jsb_websocketserver);`` in the middle of file after ``#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)``
-    *. merge ``cocos2dx-js/3rd/Android.mk`` into ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/runtime-src/proj.android/jni/Android.mk``
-    #. remove ``websockets_static`` in ``<your-cocos-project>/build/jsb-default/frameworks/cocos2d-x/external/android/Android.mk`` to re-build libwebsockets
-    #. recompile your cocos project
-#. ``require('Poco')``  in your game's first initialized script to start PocoSDK, and do not destroy it during game's lifetime.
+#. As sdk require WebSocketServer, we should build WebSocketServer module and js bindings in native code.
+   The WebSocketServer is part of cocos2dx framework but not include by default thus we build it manually by following
+   steps. See also `WebSocketServer reference`_. You'd better backup your origin ``websockets`` folder before copying.
+
+.. code-block:: bash
+
+    cp cocos2dx-js/3rd/src/* <your-cocos-project>/frameworks/runtime-src/Classes
+
+4. Edit ``<your-cocos-project>/frameworks/runtime-src/Classes/AppDelegate.cpp``. Add
+   following 2 lines at proper position respectively.
+
+.. code-block:: cpp
+
+    // include it at top
+    #include "jsb_websocketserver.h"
+
+    // register callbacks of websocketserver
+    sc->addRegisterCallback(register_jsb_websocketserver);
+
+.. image:: img/integration-guild-cocos2dxjs-jsbwebsocketserver.png
+.. image:: img/integration-guild-cocos2dxjs-jsbwebsocketserver-2.png
+
+5. Edit ``<your-cocos-project>/frameworks/runtime-src/proj.android/jni/Android.mk``.
+   Add following boxed line at proper position in your own makefile.
+   If you are using AndroidStudio project, edit ``proj.android-studio/jni/Android.mk``.
+
+.. image:: img/integration-guild-cocos2dxjs-jsbwebsocketserver-3.png
+
+.. code-block:: text
+
+    ...
+
+    $(call import-add-path, $(LOCAL_PATH)/../../../cocos2d-x/external)
+
+    LOCAL_SRC_FILES := hellojavascript/main.cpp \
+                       ../../Classes/AppDelegate.cpp \
+                       ../../Classes/WebSocketServer.cpp \
+                       ../../Classes/jsb_websocketserver.cpp
+
+    LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
+                        $(LOCAL_PATH)/../../../cocos2d-x/external/websockets/include/android
+
+    LOCAL_STATIC_LIBRARIES := cocos2d_js_static websockets_static
+
+    include $(BUILD_SHARED_LIBRARY)
+    $(call import-module, websockets/prebuilt/android)
+    $(call import-module, scripting/js-bindings/proj.android)
+
+    ...
+
+7. Edit your ``project.json``. Append sdk filenames to ``jsList`` in the following order.
 
 .. code-block:: javascript
 
-    var PocoManager = require('Poco')
+    {
+        // ...
+        jsList: [
+            // ...
+            "src/lib/Poco/sdk/AbstractDumper.js",
+            "src/lib/Poco/sdk/AbstractNode.js",
+            "src/lib/Poco/sdk/Attributor.js",
+            "src/lib/Poco/sdk/DefaultMatcher.js",
+            "src/lib/Poco/sdk/IScreen.js",
+            "src/lib/Poco/sdk/Selector.js",
+            "src/lib/Poco/Cocos2dxNode.js",
+            "src/lib/Poco/Cocos2dxDumper.js",
+            "src/lib/Poco/Poco.js"
+        ]
+    }
+
+8. Recompile your cocos project
+#. ``require('Poco')``  in your game's first initialized script to start PocoSDK, and do not destroy it during game's
+   lifetime.
+
+.. code-block:: javascript
+
+    var PocoManager = window.PocoManager
     var poco = new PocoManager()
 
     // add poco on window object to persist
@@ -116,4 +179,4 @@ See `implementation guide <implementation_guide.html>`_. This guide helps you im
 .. _poco-sdk repo: https://github.com/AirtestProject/Poco-SDK
 .. _poco for Android Native App: poco_for_android_native_app.html
 .. _Hunter: http://hunter.nie.netease.com/mywork/instruction
-.. _websocketserver reference: http://discuss.cocos2d-x.org/t/cocos2d-js-websocket-server/33570
+.. _WebSocketServer reference: http://discuss.cocos2d-x.org/t/cocos2d-js-websocket-server/33570

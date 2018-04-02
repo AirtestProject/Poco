@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 14:24+0800\n"
+"POT-Creation-Date: 2018-04-02 16:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,86 +85,97 @@ msgid "Clone sdk source code from `poco-sdk repo`_."
 msgstr ""
 
 #: ../../source/doc/integration.rst:25
-msgid "Copy the ``cocos2dx-js`` folder to your cocos project script folder."
-msgstr ""
-
-#: ../../source/doc/integration.rst:28
+#, fuzzy
 msgid ""
-"Build websocket server module and js bindings for RPC server use, "
-"`websocketserver reference`_."
-msgstr ""
+"Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript "
+"folder."
+msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
 
-#: ../../source/doc/integration.rst:27
-msgid "``unzip cocos2dx-js\\3rd\\websockets.zip``"
-msgstr ""
-
-#: ../../source/doc/integration.rst:28
+#: ../../source/doc/integration.rst:26
 msgid ""
-"``cp -r websockets <your-cocos-project>\\build\\jsb-"
-"default\\frameworks\\cocos2d-x\\external\\websockets``"
+"As sdk require WebSocketServer, we should build WebSocketServer module "
+"and js bindings in native code. The WebSocketServer is part of cocos2dx "
+"framework but not include by default thus we build it manually by "
+"following steps. See also `WebSocketServer reference`_. You'd better "
+"backup your origin ``websockets`` folder before copying."
 msgstr ""
 
-#: ../../source/doc/integration.rst:29
+#: ../../source/doc/integration.rst:35
+msgid ""
+"Edit ``<your-cocos-project>/frameworks/runtime-"
+"src/Classes/AppDelegate.cpp``. Add following 2 lines at proper position "
+"respectively."
+msgstr ""
+
+#: ../../source/doc/integration.rst:49
+msgid ""
+"Edit ``<your-cocos-project>/frameworks/runtime-"
+"src/proj.android/jni/Android.mk``. Add following boxed line at proper "
+"position in your own makefile. If you are using AndroidStudio project, "
+"edit ``proj.android-studio/jni/Android.mk``."
+msgstr ""
+
+#: ../../source/doc/integration.rst:78
 msgid "recompile your cocos project"
 msgstr ""
 
-#: ../../source/doc/integration.rst:30
+#: ../../source/doc/integration.rst:79
 msgid ""
 "``require('Poco')``  in your game's first initialized script to start "
 "PocoSDK, and do not destroy it during game's lifetime."
 msgstr ""
 
-#: ../../source/doc/integration.rst:45
+#: ../../source/doc/integration.rst:92
 msgid "Cocos2dx-lua"
 msgstr ""
 
-#: ../../source/doc/integration.rst:47
+#: ../../source/doc/integration.rst:94
 msgid "PocoSDK supports Cocos2dx version >= 3.0."
 msgstr ""
 
-#: ../../source/doc/integration.rst:49
+#: ../../source/doc/integration.rst:96
 msgid "Clone the sdk source code from `poco-sdk repo`_."
 msgstr ""
 
-#: ../../source/doc/integration.rst:50
+#: ../../source/doc/integration.rst:97
 msgid ""
 "Copy the ``cocos2dx-lua`` folder to your project script folder. You can "
 "rename the folder if you wish."
 msgstr ""
 
-#: ../../source/doc/integration.rst:51
+#: ../../source/doc/integration.rst:98
 msgid "**Extra Step**: build the socket/websocket module?"
 msgstr ""
 
-#: ../../source/doc/integration.rst:52
+#: ../../source/doc/integration.rst:99
 msgid ""
 "Initialize poco-sdk by copying following code to your game initialization"
 " script."
 msgstr ""
 
-#: ../../source/doc/integration.rst:60
+#: ../../source/doc/integration.rst:107
 msgid "Unreal"
 msgstr ""
 
-#: ../../source/doc/integration.rst:62
+#: ../../source/doc/integration.rst:109
 msgid "(Coming soon.)"
 msgstr "(即将支持)"
 
-#: ../../source/doc/integration.rst:65
+#: ../../source/doc/integration.rst:112
 msgid "Android Native App"
 msgstr "Android原生应用 (Native App)"
 
-#: ../../source/doc/integration.rst:67
+#: ../../source/doc/integration.rst:114
 msgid ""
 "Nothing to do about integration. Just start writing tests and be happy. "
 "See `poco for Android Native App`_ section for more details."
 msgstr "什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
 
-#: ../../source/doc/integration.rst:71
+#: ../../source/doc/integration.rst:118
 msgid "Netease Internal Engines"
 msgstr "网易自研引擎 (Netease Internal Engines)"
 
-#: ../../source/doc/integration.rst:73
+#: ../../source/doc/integration.rst:120
 msgid ""
 "Just config the module preload at `Hunter`_. Please append following "
 "script to the end of hunter ``__init__`` instruction. Require safaia "
@@ -175,23 +186,23 @@ msgstr ""
 "在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片段。 要求safaia版本大于1.2.0. "
 "有疑问请联系 ``lxn3032@corp.netease.com``."
 
-#: ../../source/doc/integration.rst:77
+#: ../../source/doc/integration.rst:124
 msgid "for NeoX"
 msgstr ""
 
-#: ../../source/doc/integration.rst:92
+#: ../../source/doc/integration.rst:139
 msgid "for Messiah"
 msgstr ""
 
-#: ../../source/doc/integration.rst:107
+#: ../../source/doc/integration.rst:154
 msgid "for cocos2dx-* and others: please contact ``lxn3032@corp.netease.com``."
 msgstr ""
 
-#: ../../source/doc/integration.rst:110
+#: ../../source/doc/integration.rst:157
 msgid "Other Engines"
 msgstr "其他引擎 (Other Engines)"
 
-#: ../../source/doc/integration.rst:112
+#: ../../source/doc/integration.rst:159
 msgid ""
 "See `implementation guide <implementation_guide.html>`_. This guide helps"
 " you implement and integrate PocoSDK with your game step by step."
@@ -201,5 +212,118 @@ msgstr "请见 `implementation guide <implementation_guide.html>`_ 。"
 #~ "``require('poco-manager')``  in your game's"
 #~ " first initialized script to start "
 #~ "PocoSDK."
+#~ msgstr ""
+
+#~ msgid "Copy the ``cocos2dx-js`` folder to your cocos project script folder."
+#~ msgstr ""
+
+#~ msgid "``unzip cocos2dx-js\\3rd\\websockets.zip``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``cp -r websockets <your-cocos-"
+#~ "project>\\build\\jsb-"
+#~ "default\\frameworks\\cocos2d-x\\external\\websockets``"
+#~ msgstr ""
+
+#~ msgid "recompile your cocos project"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``cp -r cocos2dx-js/3rd/websockets <your-"
+#~ "cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/external/websockets``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "#. ``cp cocos2dx-js/3rd/src/* <your-"
+#~ "cocos-project>/build/jsb-default/frameworks/cocos2d-x"
+#~ "/runtime-src/Classes`` *. edit ``<your-"
+#~ "cocos-project>/build/jsb-default/frameworks/cocos2d-x"
+#~ "/runtime-src/Classes/AppDelegate.cpp``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "add line ``#include \"jsb_websocketserver.h\"`` "
+#~ "add line "
+#~ "``sc->addRegisterCallback(register_jsb_websocketserver);`` in"
+#~ " the middle of file after ``#if "
+#~ "(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "*. merge ``cocos2dx-js/3rd/Android.mk`` into"
+#~ " ``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/proj.android/jni/Android.mk`` #. remove "
+#~ "``websockets_static`` in ``<your-cocos-"
+#~ "project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/external/android/Android.mk`` to"
+#~ " re-build libwebsockets #. recompile "
+#~ "your cocos project"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Build websocket server module and js "
+#~ "bindings for RPC server use, "
+#~ "`websocketserver reference`_."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Modify ``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/Classes/AppDelegate.cpp``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "merge ``cocos2dx-js/3rd/Android.mk`` into "
+#~ "``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/proj.android/jni/Android.mk``"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "remove ``websockets_static`` from ``<your-"
+#~ "cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/external/android/Android.mk`` to"
+#~ " re-build libwebsockets"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "As sdk require WebSocketServer, build "
+#~ "WebSocketServer module and js bindings "
+#~ "in native code. The WebSocketServer is"
+#~ " part of cocos2dx framework but not"
+#~ " include by default thus we build "
+#~ "it manually by following steps. See "
+#~ "also `WebSocketServer reference`_."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Edit ``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/Classes/AppDelegate.cpp``. Only 2 lines "
+#~ "need to be added."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Edit ``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/Classes/AppDelegate.cpp``. Add following 2 "
+#~ "lines at proper position"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Edit ``<your-cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/runtime-"
+#~ "src/proj.android/jni/Android.mk``. Add following "
+#~ "boxed line at proper position in "
+#~ "your own makefile."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "remove ``websockets_static`` from ``<your-"
+#~ "cocos-project>/build/jsb-"
+#~ "default/frameworks/cocos2d-x/external/android/Android.mk``"
 #~ msgstr ""
 
