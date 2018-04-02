@@ -41,8 +41,10 @@ if __name__ == '__main__':
     # test_click()
     # test_drag()
     # time.sleep(2)
-    #
-    p = UnityPoco(("localhost", 5001), unity_editor=True)
-    p('pos_input').set_text('2333')
-    time.sleep(2)
+
+    from poco.drivers.cocosjs import CocosJsPoco
+    poco = CocosJsPoco()
+    for n in poco():
+        print n.get_name()
+
 

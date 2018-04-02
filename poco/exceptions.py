@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import six
+import poco.utils.six as six
 
 
 __author__ = 'lxn3032'

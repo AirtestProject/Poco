@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 import copy
-import six
+import poco.utils.six as six
 import time
 from functools import wraps
 
