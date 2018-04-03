@@ -16,19 +16,25 @@ PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If your ga
 #. Add ``Unity3D/PocoManager.cs`` as script component on any permanent ``GameObject`` that will never be destroyed during game's lifetime.
 
 
-Cocos2dx-js
------------
+Cocos2dx-js (beta)
+------------------
 
-PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, the javascript sdk is implemented in ES5.
+PocoSDK supports 3.0 <= Cocos2dx version <= 3.13.1 (theoretically). To make sure compatibility across every javascript
+engines, the javascript sdk is written in ES5.
+
+cocos2d-x 3.13.1 is tested and passed.
 
 1. Clone sdk source code from `poco-sdk repo`_. 
 #. Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript folder.
-#. As sdk require WebSocketServer, we should build WebSocketServer module and js bindings in native code.
+#. As sdk requires WebSocketServer, we should build WebSocketServer module and js bindings in native code.
    The WebSocketServer is part of cocos2dx framework but not include by default thus we build it manually by following
    steps. See also `WebSocketServer reference`_. You'd better backup your origin ``websockets`` folder before copying.
+   The js binding for WebSocketServer requires libwebsockets version == 1.6. There may be some incompatibility issues
+   in cocos2d-x itself if your cocos2d-x engine is not using libwebsockets version == 1.6.
 
 .. code-block:: bash
 
+    cp -r cocos2dx-js/3rd/websockets <your-cocos-project>/frameworks/cocos2d-x/external/websockets
     cp cocos2dx-js/3rd/src/* <your-cocos-project>/frameworks/runtime-src/Classes
 
 4. Edit ``<your-cocos-project>/frameworks/runtime-src/Classes/AppDelegate.cpp``. Add
@@ -47,7 +53,7 @@ PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, 
 
 5. Edit ``<your-cocos-project>/frameworks/runtime-src/proj.android/jni/Android.mk``.
    Add following boxed line at proper position in your own makefile.
-   If you are using AndroidStudio project, edit ``proj.android-studio/jni/Android.mk``.
+   If you are using AndroidStudio project, edit ``proj.android-studio/jni/Android.mk`` and ensure the path is correct.
 
 .. image:: img/integration-guild-cocos2dxjs-jsbwebsocketserver-3.png
 
@@ -89,6 +95,7 @@ PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, 
             "src/lib/Poco/sdk/Selector.js",
             "src/lib/Poco/Cocos2dxNode.js",
             "src/lib/Poco/Cocos2dxDumper.js",
+            "src/lib/Poco/POCO_SDK_VERSION.js",
             "src/lib/Poco/Poco.js"
         ]
     }
@@ -105,9 +112,10 @@ PocoSDK supports Cocos2dx version >= 3.0. To support cocos-js games on Android, 
     // add poco on window object to persist
     window.poco = poco
 
+**If anything goes wrong, please `open an issue here`_. Title format: [cocos2dx-js sdk integration] xxx **
 
-Cocos2dx-lua
-------------
+Cocos2dx-lua (coming soon)
+--------------------------
 
 PocoSDK supports Cocos2dx version >= 3.0. 
 
@@ -180,3 +188,4 @@ See `implementation guide <implementation_guide.html>`_. This guide helps you im
 .. _poco for Android Native App: poco_for_android_native_app.html
 .. _Hunter: http://hunter.nie.netease.com/mywork/instruction
 .. _WebSocketServer reference: http://discuss.cocos2d-x.org/t/cocos2d-js-websocket-server/33570
+.. _open an issue here: https://github.com/AirtestProject/Poco-SDK/issues
