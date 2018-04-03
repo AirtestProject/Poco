@@ -112,7 +112,7 @@ cocos2d-x 3.13.1 is tested and passed.
     // add poco on window object to persist
     window.poco = poco
 
-**If anything goes wrong, please `open an issue here`_. Title format: [cocos2dx-js sdk integration] xxx **
+**If anything goes wrong, please** `open an issue here`_. **Title format: [cocos2dx-js sdk integration] xxx**
 
 Cocos2dx-lua (coming soon)
 --------------------------
