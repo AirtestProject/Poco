@@ -49,7 +49,7 @@ class TestCommonCases(unittest.TestCase):
 class TestRemoteDevice(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.device = Android('a6c29d2b', adbhost=('10.250.190.230', 5038))
+        cls.device = Android('a6c29d2b', host=('10.250.190.230', 5038))
         cls.poco = AndroidUiautomationPoco(cls.device)
 
     def test_any(self):
