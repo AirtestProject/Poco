@@ -27,7 +27,7 @@ class NeteasePocoAgent(PocoAgent):
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
 
         # input
-        input = AirtestInput(remote_poco.screen)
+        input = AirtestInput()
 
         # screen
         screen = AirtestScreen()
