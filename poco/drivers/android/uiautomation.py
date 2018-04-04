@@ -17,13 +17,14 @@ except ImportError:
 
 from airtest.core.android.ime import YosemiteIme
 
-
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
 from poco import Poco
 from poco.agent import PocoAgent
 from poco.sdk.Attributor import Attributor
+from poco.sdk.interfaces.screen import ScreenInterface
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
+from poco.utils.airtest.input import AirtestInput
 from poco.drivers.android.utils.installation import install, uninstall
 
 __all__ = ['AndroidUiautomationPoco', 'AndroidUiautomationHelper']
@@ -65,15 +66,34 @@ class AttributorWrapper(Attributor):
             self.remote.setAttr(node, attrName, attrVal)
 
 
+class ScreenWrapper(ScreenInterface):
+    def __init__(self, screen):
+        super(ScreenWrapper, self).__init__()
+        self.screen = screen
+
+    def getScreen(self, width):
+        # Android上PocoService的实现为仅返回b64编码的图像，格式固定位jpg
+        b64img = self.screen.getScreen(width)
+        return b64img, 'jpg'
+
+    def getPortSize(self):
+        return self.screen.getPortSize()
+
+
 class AndroidPocoAgent(PocoAgent):
-    def __init__(self, endpoint, ime):
+    def __init__(self, endpoint, ime, use_airtest_input=False):
         self.client = AndroidRpcClient(endpoint)
         remote_poco = self.client.remote('poco-uiautomation-framework')
         dumper = remote_poco.dumper
         selector = remote_poco.selector
         attributor = AttributorWrapper(remote_poco.attributor, ime)
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
-        super(AndroidPocoAgent, self).__init__(hierarchy, remote_poco.inputer, remote_poco.screen, None)
+
+        if use_airtest_input:
+            inputer = AirtestInput()
+        else:
+            inputer = remote_poco.inputer
+        super(AndroidPocoAgent, self).__init__(hierarchy, inputer, ScreenWrapper(remote_poco.screen), None)
 
 
 class AndroidUiautomationPoco(Poco):
@@ -98,7 +118,7 @@ class AndroidUiautomationPoco(Poco):
 
     """
 
-    def __init__(self, device=None, using_proxy=True, force_restart=True, **options):
+    def __init__(self, device=None, using_proxy=True, force_restart=False, use_airtest_input=False, **options):
         if not device:
             try:
                 # new version
@@ -169,7 +189,7 @@ class AndroidUiautomationPoco(Poco):
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
 
         endpoint = "http://{}:{}".format(self.device_ip, p1)
-        agent = AndroidPocoAgent(endpoint, self.ime)
+        agent = AndroidPocoAgent(endpoint, self.ime, use_airtest_input)
         super(AndroidUiautomationPoco, self).__init__(agent, **options)
 
     def _install_service(self):
@@ -201,14 +221,17 @@ class AndroidUiautomationPoco(Poco):
     #     t.daemon = True
     #     t.start()
 
-    def _start_instrument(self, port_to_ping, force_restart=True):
+    def _start_instrument(self, port_to_ping, force_restart=False):
         if not force_restart:
             try:
-                requests.get('http://{}:{}'.format(self.device_ip, port_to_ping), timeout=10)
+                state = requests.get('http://{}:{}/uiautomation/connectionState'.format(self.device_ip, port_to_ping),
+                                     timeout=10)
+                state = state.json()
+                if state.get('connected'):
+                    # skip starting instrumentation if UiAutomation Service already connected.
+                    return True
             except:
                 pass
-            else:
-                return True
 
         if self._instrument_proc is not None:
             self._instrument_proc.kill()

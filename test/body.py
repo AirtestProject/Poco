@@ -19,8 +19,10 @@ class Case(PocoTestCase):
             connect_device('Android:///')
 
     def runTest(self):
-        poco = AndroidUiautomationPoco()
-        poco('com.sonyericsson.conversations:id/recipients_editor').set_text('\b\b\b')
+        from poco.drivers.cocosjs import CocosJsPoco
+        poco = CocosJsPoco()
+        for n in poco():
+            print n.get_name()
 
 
 if __name__ == '__main__':

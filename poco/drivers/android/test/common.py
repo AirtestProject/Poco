@@ -15,7 +15,7 @@ class TestCommonCases(unittest.TestCase):
         cls.poco = AndroidUiautomationPoco()
 
     def test_snapshot(self):
-        b64img = self.poco.snapshot()
+        b64img, fmt = self.poco.snapshot()
         with open('img.jpg', 'wb') as img:
             img.write(base64.b64decode(b64img))
 
@@ -49,10 +49,34 @@ class TestCommonCases(unittest.TestCase):
 class TestRemoteDevice(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.device = Android('a6c29d2b', host=('10.250.190.230', 5038))
-        cls.poco = AndroidUiautomationPoco(cls.device)
+        from airtest.core.api import connect_device
+        connect_device('Android:///HT7C51A04625')
+        cls.poco = AndroidUiautomationPoco(use_airtest_input=True)
 
     def test_any(self):
-        for n in self.poco():
-            print n.get_name()
+        self.poco('com.netease.cloudmusic:id/mn').click()
+        self.poco('com.netease.cloudmusic:id/aib').click()
+        jpg, fmt = self.poco.snapshot()
+        print(len(jpg), fmt)
+        time.sleep(5)
+
+
+class TestConcurrentAccess(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from airtest.core.api import connect_device
+        connect_device('Android:///HT7C51A04625')
+        # cls.p = AndroidUiautomationPoco()
+        cls.pocos = [AndroidUiautomationPoco() for _ in range(3)]
+
+    @classmethod
+    def tearDownClass(cls):
+        for poco in cls.pocos:
+            print poco._instrument_proc
+        time.sleep(2)
+
+    def test_dump_hierarchy(self):
+        for poco in self.pocos:
+            h = poco.agent.hierarchy.dump()
+            print len(h)
 
