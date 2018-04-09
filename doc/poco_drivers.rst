@@ -17,13 +17,29 @@ PC/mac with a running game or launch and keep the Unity game active on PC/mac.
 
     # import unity poco driver from this path
     from poco.drivers.unity3d import UnityPoco
-    from airtest.core.api import connect_device
 
     # then initialize the poco instance in the following way
     poco = UnityPoco()
 
     # for windows
     # poco = UnityPoco(('localhost', 5001), unity_editor=True)
+
+    # now you can play with poco
+    ui = poco('...')
+    ui.click()
+
+For **cocos2dx-lua** games are similar as Unity3d drivers.
+
+.. code-block:: python
+
+    # import standard poco driver
+    from poco.drivers.std import StdPoco
+    from airtest.core.api import connect_device
+
+    # then initialize the poco instance in the following way
+    # connect a device first, then initialize poco object
+    connect_device('Android:///')
+    poco = StdPoco()
 
     # now you can play with poco
     ui = poco('...')
@@ -36,7 +52,7 @@ If multiple devices connected, please select one by invoking ``connect_device`` 
     from poco.drivers.unity3d import UnityPoco
     from airtest.core.api import connect_device
 
-    connect_device('Android://014E05DE0F02000E/')  # connect device by serialno
+    connect_device('Android:///014E05DE0F02000E')  # connect device by serialno
     poco = UnityPoco()
 
 

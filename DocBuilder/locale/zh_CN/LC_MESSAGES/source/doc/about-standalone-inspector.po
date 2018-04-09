@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 11:16+0800\n"
+"POT-Creation-Date: 2018-04-09 17:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,30 +46,24 @@ msgstr ""
 msgid "`Hierarchy viewer for mac`_"
 msgstr ""
 
-#: ../../source/doc/about-standalone-inspector.rst:16
-msgid ""
-"For mac please open the ``build-.app``. For windows please open the "
-"``start.exe``."
-msgstr ""
-
-#: ../../source/doc/about-standalone-inspector.rst:19
+#: ../../source/doc/about-standalone-inspector.rst:17
 msgid "How to use"
 msgstr ""
 
-#: ../../source/doc/about-standalone-inspector.rst:21
+#: ../../source/doc/about-standalone-inspector.rst:19
 msgid ""
 "When you placing the mouse pointer over, it will auto detect a bounding "
 "box for proper UI controls."
 msgstr ""
 
-#: ../../source/doc/about-standalone-inspector.rst:26
+#: ../../source/doc/about-standalone-inspector.rst:24
 msgid ""
 "If multiple UI controls overlap, right click and a list of all overlap UI"
 " controls will be shown. If you want to view non-interactive UI, just "
 "right click with shift key."
 msgstr ""
 
-#: ../../source/doc/about-standalone-inspector.rst:31
+#: ../../source/doc/about-standalone-inspector.rst:29
 msgid ""
 "It is also available for android native apps. Simply plug your Android "
 "device and enable the **ADB DEBUG MODE**. On some system, if the adb "
@@ -77,4 +71,9 @@ msgid ""
 "``adb start-server`` first."
 msgstr ""
 
+#~ msgid ""
+#~ "For mac please open the ``build-.app``."
+#~ " For windows please open the "
+#~ "``start.exe``."
+#~ msgstr ""
 
