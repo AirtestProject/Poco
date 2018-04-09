@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 22:24+0800\n"
+"POT-Creation-Date: 2018-04-09 18:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,33 +70,77 @@ msgstr ""
 "将 ``Unity3D/PocoManager.cs`` 挂载到场景中任意 ``GameObject`` ，一般就挂到root上，并不要销毁这个 "
 "``GameObject`` 。"
 
-#: ../../source/doc/integration.rst:20
+#: ../../source/doc/integration.rst:19
+msgid "Cocos2dx-lua"
+msgstr ""
+
+#: ../../source/doc/integration.rst:21
+msgid "PocoSDK supports cocos2dx-lua version >= 3.1."
+msgstr ""
+
+#: ../../source/doc/integration.rst:23
+msgid "Clone the sdk source code from `poco-sdk repo`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:24
+#, fuzzy
+msgid ""
+"Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You "
+"can rename the folder if you wish."
+msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
+
+#: ../../source/doc/integration.rst:25
+msgid ""
+"Initialize poco-sdk by copying following code to your game initialization"
+" script."
+msgstr ""
+
+#: ../../source/doc/integration.rst:34
+msgid ""
+"Your cocos2dx-lua project should at least enable ``socket`` or "
+"``socket.core`` module, as poco requires this module to setup a tcp "
+"server at runtime."
+msgstr ""
+
+#: ../../source/doc/integration.rst:39
+msgid ""
+"If your cocos2dx-lua project does not have ``mime`` module, it still "
+"works but a little slow."
+msgstr ""
+
+#: ../../source/doc/integration.rst:41
+msgid ""
+"After integration, you can start to `play with poco`_. Or if you have any"
+" problems, feel free to `open an issue here`_."
+msgstr ""
+
+#: ../../source/doc/integration.rst:44
 msgid "Cocos2dx-js (beta)"
 msgstr ""
 
-#: ../../source/doc/integration.rst:22
+#: ../../source/doc/integration.rst:46
 msgid ""
-"PocoSDK supports 3.0 <= Cocos2dx version <= 3.13.1 (theoretically). To "
+"PocoSDK supports 3.1 <= Cocos2dx version <= 3.13.1 (theoretically). To "
 "make sure compatibility across every javascript engines, the javascript "
 "sdk is written in ES5."
 msgstr ""
 
-#: ../../source/doc/integration.rst:25
+#: ../../source/doc/integration.rst:49
 msgid "cocos2d-x 3.13.1 is tested and passed."
 msgstr ""
 
-#: ../../source/doc/integration.rst:27
+#: ../../source/doc/integration.rst:51
 msgid "Clone sdk source code from `poco-sdk repo`_."
 msgstr ""
 
-#: ../../source/doc/integration.rst:28
+#: ../../source/doc/integration.rst:52
 #, fuzzy
 msgid ""
 "Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript "
 "folder."
 msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
 
-#: ../../source/doc/integration.rst:29
+#: ../../source/doc/integration.rst:53
 msgid ""
 "As sdk requires WebSocketServer, we should build WebSocketServer module "
 "and js bindings in native code. The WebSocketServer is part of cocos2dx "
@@ -108,14 +152,14 @@ msgid ""
 "is not using libwebsockets version == 1.6."
 msgstr ""
 
-#: ../../source/doc/integration.rst:40
+#: ../../source/doc/integration.rst:64
 msgid ""
 "Edit ``<your-cocos-project>/frameworks/runtime-"
 "src/Classes/AppDelegate.cpp``. Add following 2 lines at proper position "
 "respectively."
 msgstr ""
 
-#: ../../source/doc/integration.rst:54
+#: ../../source/doc/integration.rst:78
 msgid ""
 "Edit ``<your-cocos-project>/frameworks/runtime-"
 "src/proj.android/jni/Android.mk``. Add following boxed line at proper "
@@ -124,80 +168,51 @@ msgid ""
 "correct."
 msgstr ""
 
-#: ../../source/doc/integration.rst:82
+#: ../../source/doc/integration.rst:106
 msgid ""
 "Edit your ``project.json``. Append sdk filenames to ``jsList`` in the "
 "following order."
 msgstr ""
 
-#: ../../source/doc/integration.rst:103
+#: ../../source/doc/integration.rst:127
 msgid "Recompile your cocos project"
 msgstr ""
 
-#: ../../source/doc/integration.rst:104
+#: ../../source/doc/integration.rst:128
 msgid ""
 "``require('Poco')``  in your game's first initialized script to start "
 "PocoSDK, and do not destroy it during game's lifetime."
 msgstr ""
 
-#: ../../source/doc/integration.rst:115
+#: ../../source/doc/integration.rst:139
 msgid ""
 "**If anything goes wrong, please** `open an issue here`_. **Title format:"
 " [cocos2dx-js sdk integration] xxx**"
 msgstr ""
 
-#: ../../source/doc/integration.rst:118
-#, fuzzy
-msgid "Cocos2dx-lua (coming soon)"
-msgstr "(即将支持)"
-
-#: ../../source/doc/integration.rst:120
-msgid "PocoSDK supports Cocos2dx version >= 3.0."
-msgstr ""
-
-#: ../../source/doc/integration.rst:122
-msgid "Clone the sdk source code from `poco-sdk repo`_."
-msgstr ""
-
-#: ../../source/doc/integration.rst:123
-msgid ""
-"Copy the ``cocos2dx-lua`` folder to your project script folder. You can "
-"rename the folder if you wish."
-msgstr ""
-
-#: ../../source/doc/integration.rst:124
-msgid "**Extra Step**: build the socket/websocket module?"
-msgstr ""
-
-#: ../../source/doc/integration.rst:125
-msgid ""
-"Initialize poco-sdk by copying following code to your game initialization"
-" script."
-msgstr ""
-
-#: ../../source/doc/integration.rst:133
+#: ../../source/doc/integration.rst:142
 msgid "Unreal"
 msgstr ""
 
-#: ../../source/doc/integration.rst:135
+#: ../../source/doc/integration.rst:144
 msgid "(Coming soon.)"
 msgstr "(即将支持)"
 
-#: ../../source/doc/integration.rst:138
+#: ../../source/doc/integration.rst:147
 msgid "Android Native App"
 msgstr "Android原生应用 (Native App)"
 
-#: ../../source/doc/integration.rst:140
+#: ../../source/doc/integration.rst:149
 msgid ""
 "Nothing to do about integration. Just start writing tests and be happy. "
 "See `poco for Android Native App`_ section for more details."
 msgstr "什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
 
-#: ../../source/doc/integration.rst:144
+#: ../../source/doc/integration.rst:153
 msgid "Netease Internal Engines"
 msgstr "网易自研引擎 (Netease Internal Engines)"
 
-#: ../../source/doc/integration.rst:146
+#: ../../source/doc/integration.rst:155
 msgid ""
 "Just config the module preload at `Hunter`_. Please append following "
 "script to the end of hunter ``__init__`` instruction. Require safaia "
@@ -208,23 +223,23 @@ msgstr ""
 "在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片段。 要求safaia版本大于1.2.0. "
 "有疑问请联系 ``lxn3032@corp.netease.com``."
 
-#: ../../source/doc/integration.rst:150
+#: ../../source/doc/integration.rst:159
 msgid "for NeoX"
 msgstr ""
 
-#: ../../source/doc/integration.rst:165
+#: ../../source/doc/integration.rst:174
 msgid "for Messiah"
 msgstr ""
 
-#: ../../source/doc/integration.rst:180
+#: ../../source/doc/integration.rst:189
 msgid "for cocos2dx-* and others: please contact ``lxn3032@corp.netease.com``."
 msgstr ""
 
-#: ../../source/doc/integration.rst:183
+#: ../../source/doc/integration.rst:192
 msgid "Other Engines"
 msgstr "其他引擎 (Other Engines)"
 
-#: ../../source/doc/integration.rst:185
+#: ../../source/doc/integration.rst:194
 msgid ""
 "See `implementation guide <implementation_guide.html>`_. This guide helps"
 " you implement and integrate PocoSDK with your game step by step."
@@ -387,5 +402,42 @@ msgstr "请见 `implementation guide <implementation_guide.html>`_ 。"
 #~ "**If anything goes wrong, please `open"
 #~ " an issue here`_. Title format: "
 #~ "[cocos2dx-js sdk integration] xxx **"
+#~ msgstr ""
+
+#~ msgid "Cocos2dx-lua (coming soon)"
+#~ msgstr "(即将支持)"
+
+#~ msgid "PocoSDK supports Cocos2dx version >= 3.0."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Copy the ``cocos2dx-lua`` folder to "
+#~ "your project script folder. You can "
+#~ "rename the folder if you wish."
+#~ msgstr ""
+
+#~ msgid "**Extra Step**: build the socket/websocket module?"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your cocos2dx-lua project should at "
+#~ "least enable ``socket.core`` module, as "
+#~ "poco requires this module to setup "
+#~ "a tcp server at runtime."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "PocoSDK supports 3.0 <= Cocos2dx version"
+#~ " <= 3.13.1 (theoretically). To make "
+#~ "sure compatibility across every javascript "
+#~ "engines, the javascript sdk is written"
+#~ " in ES5."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "After integration, you can start to "
+#~ "`play with poco`_. If you get into"
+#~ " any trouble, feel free to `open "
+#~ "an issue here`_."
 #~ msgstr ""
 

@@ -15,11 +15,35 @@ PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If your ga
 #. If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . If you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` .
 #. Add ``Unity3D/PocoManager.cs`` as script component on any permanent ``GameObject`` that will never be destroyed during game's lifetime.
 
+Cocos2dx-lua
+------------
+
+PocoSDK supports cocos2dx-lua version >= 3.1.
+
+1. Clone the sdk source code from `poco-sdk repo`_.
+#. Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You can rename the folder if you wish.
+#. Initialize poco-sdk by copying following code to your game initialization script.
+
+.. code-block:: lua
+
+    local poco = require('poco.poco_manager')
+    poco:init_server(15004)  -- default port number is 15004, change to another if you like
+
+.. note::
+
+    Your cocos2dx-lua project should at least enable ``socket`` or ``socket.core`` module, as poco requires this module
+    to setup a tcp server at runtime.
+
+.. note::
+
+    If your cocos2dx-lua project does not have ``mime`` module, it still works but a little slow.
+
+After integration, you can start to `play with poco`_. Or if you have any problems, feel free to `open an issue here`_.
 
 Cocos2dx-js (beta)
 ------------------
 
-PocoSDK supports 3.0 <= Cocos2dx version <= 3.13.1 (theoretically). To make sure compatibility across every javascript
+PocoSDK supports 3.1 <= Cocos2dx version <= 3.13.1 (theoretically). To make sure compatibility across every javascript
 engines, the javascript sdk is written in ES5.
 
 cocos2d-x 3.13.1 is tested and passed.
@@ -114,21 +138,6 @@ cocos2d-x 3.13.1 is tested and passed.
 
 **If anything goes wrong, please** `open an issue here`_. **Title format: [cocos2dx-js sdk integration] xxx**
 
-Cocos2dx-lua (coming soon)
---------------------------
-
-PocoSDK supports Cocos2dx version >= 3.0. 
-
-1. Clone the sdk source code from `poco-sdk repo`_. 
-#. Copy the ``cocos2dx-lua`` folder to your project script folder. You can rename the folder if you wish.
-#. **Extra Step**: build the socket/websocket module?
-#. Initialize poco-sdk by copying following code to your game initialization script.
-
-.. code-block:: lua
-
-    local poco = require('poco-manager')
-    -- ...
-
 Unreal
 ------
 
@@ -189,3 +198,4 @@ See `implementation guide <implementation_guide.html>`_. This guide helps you im
 .. _Hunter: http://hunter.nie.netease.com/mywork/instruction
 .. _WebSocketServer reference: http://discuss.cocos2d-x.org/t/cocos2d-js-websocket-server/33570
 .. _open an issue here: https://github.com/AirtestProject/Poco-SDK/issues
+.. _play with poco: poco_drivers.html

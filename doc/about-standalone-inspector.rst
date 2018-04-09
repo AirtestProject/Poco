@@ -13,8 +13,6 @@ Download
 - `Hierarchy viewer for windows`_
 - `Hierarchy viewer for mac`_
 
-For mac please open the ``build-.app``. For windows please open the ``start.exe``.
-
 How to use
 ----------
 
