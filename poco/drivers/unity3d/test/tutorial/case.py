@@ -12,7 +12,7 @@ class TutorialCase(PocoTestCase):
     def setUpClass(cls):
         cls.poco = UnityPoco()
         action_tracker = ActionTracker(cls.poco)
-        cls.register_addin(action_tracker)
+        cls.register_addon(action_tracker)
 
     @classmethod
     def tearDownClass(cls):

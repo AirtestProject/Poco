@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 14:24+0800\n"
+"POT-Creation-Date: 2018-04-10 16:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "网易游戏项目测试脚本标准模板"
 msgstr ""
 
 #: ../../source/doc/netease-internal-use-template.rst:5
-msgid "非网易游戏项目和unity3d项目请勿使用此工程模板。"
+msgid "内测功能，非网易游戏项目和unity3d项目请勿使用此工程模板。"
 msgstr ""
 
 #: ../../source/doc/netease-internal-use-template.rst:7
@@ -41,81 +41,110 @@ msgstr ""
 msgid "目录结构"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:44
+#: ../../source/doc/netease-internal-use-template.rst:46
 msgid ""
-"``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` 目录用于存放一个个脚本文件，支持多级嵌套，用 "
-"``.air`` 的文件夹后缀 "
-"组织每个脚本，这个目录里可以存放脚本引用到的所有资源文件，脚本运行结束后也会存储对应的运行结果文件。其余的目录没有规定，根据实际情况建立 "
-"自己需要的目录。"
+"``lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``scripts`` 目录存放所有测试用例脚本文件， ``res`` "
+"目录存放任意资源文件，没有 其他的规定了。"
 msgstr ""
 
 #: ../../source/doc/netease-internal-use-template.rst:49
+msgid ""
+"**如果你不想手动创建这些文件，请直接clone我们的** `工程模板repo`_ ， "
+"**然后给clone下来的文件夹改个名字（必须是标识符）并运行下面代码。**"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:55
+msgid "运行完之后看到一个叫 ``<刚clone下来的文件夹名>.egg-info`` 的文件夹就ok了。"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:58
 msgid "模板代码"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:51
-msgid "在自己本地新建文件并把下面代码copy到文件里。"
+#: ../../source/doc/netease-internal-use-template.rst:60
+msgid ""
+"在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名需要符合标识符** "
+"，并把下面代码copy到文件夹 对应文件里。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:54
+#: ../../source/doc/netease-internal-use-template.rst:64
+msgid "``setup.py``"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:66
+msgid ""
+"setup.py "
+"就是用来创建一个工程的，创建好这个文件后，可以直接在项目根文件夹下打开终端输入以下命令进行安装。如果你的项目依赖别的python包， "
+"可以顺便新建个 ``requirements.txt`` 并在里面写上依赖其他第三方的模块。"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:73
+msgid "setup.py 代码如下"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:111
+msgid "``.gitignore``"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:113
+msgid "这个大家都懂的"
+msgstr ""
+
+#: ../../source/doc/netease-internal-use-template.rst:167
 msgid "``case.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:56
+#: ../../source/doc/netease-internal-use-template.rst:169
 msgid ""
 "case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** "
 "。一般CommonCase里就是设置好player成员变量就行了，这样在每个 testcase里面可以方便地访问到player对象。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:94
+#: ../../source/doc/netease-internal-use-template.rst:223
 msgid "``player.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:96
+#: ../../source/doc/netease-internal-use-template.rst:225
 msgid ""
 "player.py "
 "里定义游戏测试中跟角色相关的行为和属性等，用于抽象隔离hunter、poco、airtest等库。测试脚本与测试框架细节隔离有利于兼容框架 "
 "后续的功能更新和升级，也能随时切换到别的框架上。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:99
+#: ../../source/doc/netease-internal-use-template.rst:228
 msgid "``class Player`` 中可以加入其余需要的自定义方法，例如常用的关闭所有窗口、打开背包等。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:101
+#: ../../source/doc/netease-internal-use-template.rst:230
 msgid ""
 "关于GM指令，默认通过hunter直接调用，可以改写成其他的方式。如果需要获取GM指令的返回值，请先了解GM"
 "指令的代码实现方式，再通过hunter-rpc 进行调用。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:104
+#: ../../source/doc/netease-internal-use-template.rst:233
 msgid "请将 ``PROCESS`` 变量改成对应的hunter项目代号。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:165
-msgid "``test1.air/test1.py`` 模板"
+#: ../../source/doc/netease-internal-use-template.rst:294
+msgid "``test1.py`` 举例"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:167
-#: ../../source/doc/netease-internal-use-template.rst:169
-#: ../../source/doc/netease-internal-use-template.rst:171
-msgid "**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**"
+#: ../../source/doc/netease-internal-use-template.rst:296
+#: ../../source/doc/netease-internal-use-template.rst:298
+#: ../../source/doc/netease-internal-use-template.rst:300
+msgid "**请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:174
+#: ../../source/doc/netease-internal-use-template.rst:303
 msgid "以下是例子， ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选，根据实际需求选择。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:223
+#: ../../source/doc/netease-internal-use-template.rst:345
 msgid "如何运行脚本"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:225
+#: ../../source/doc/netease-internal-use-template.rst:347
 msgid "就跟普通python脚本一样，直接运行即可"
-msgstr ""
-
-#: ../../source/doc/netease-internal-use-template.rst:231
-msgid "如果当前目录不在工程根目录，需要加上环境变量PROJECT_ROOT，假设工程根目录在 ``D:\\project``"
 msgstr ""
 
 #~ msgid "``launcher.py``"
@@ -131,5 +160,32 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Android 的话，请插上usb线，然后终端里跑下面命令"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` "
+#~ "目录用于存放一个个脚本文件，支持多级嵌套，用 ``.air`` 的文件夹后缀 "
+#~ "组织每个脚本，这个目录里可以存放脚本引用到的所有资源文件，脚本运行结束后也会存储对应的运行结果文件。其余的目录没有规定，根据实际情况建立"
+#~ " 自己需要的目录。"
+#~ msgstr ""
+
+#~ msgid "在自己本地新建文件并把下面代码copy到文件里。"
+#~ msgstr ""
+
+#~ msgid "非网易游戏项目和unity3d项目请勿使用此工程模板。"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` "
+#~ "目录用于存放一个个脚本文件， ``res`` 目录用于存放任意资源文件，没有 其他的规定了。"
+#~ msgstr ""
+
+#~ msgid "``test1.air/test1.py`` 模板"
+#~ msgstr ""
+
+#~ msgid "**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**"
+#~ msgstr ""
+
+#~ msgid "如果当前目录不在工程根目录，需要加上环境变量PROJECT_ROOT，假设工程根目录在 ``D:\\project``"
 #~ msgstr ""
 

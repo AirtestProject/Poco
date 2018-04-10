@@ -48,7 +48,7 @@ The following simple example shows how powerful of pocounit
             cls.poco = Poco(...)
 
             action_tracker = ActionTracker(cls.poco)
-            cls.register_addin(action_tracker)
+            cls.register_addon(action_tracker)
 
 
     class TestBuyShopItem(CommonCase):
