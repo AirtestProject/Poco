@@ -2,7 +2,7 @@
 网易游戏项目测试脚本标准模板
 ==============
 
-非网易游戏项目和unity3d项目请勿使用此工程模板。
+内测功能，非网易游戏项目和unity3d项目请勿使用此工程模板。
 
 游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。
 
@@ -19,7 +19,7 @@
 
 .. code-block:: bash
 
-     pip install -i https://pypi.nie.netease.com/ airtest_hunter
+     pip install -i https://pypi.nie.netease.com/ airtest_hunter pocounit
 
 
 目录结构
@@ -27,28 +27,141 @@
 
 .. code-block:: text
 
-    ─ /
+    ─ project_name/
+        ├─ setup.py
+        ├─ .gitignore
+        ├─ res/
+        |   └─ ..
         ├─ lib/
         |   ├─ __init__.py
         |   ├─ case.py
         |   └─ player.py
         └─ scripts/
-            ├─ group/
-            |   ├─ group_test1.air
-            |   └─ group_test2.air
-            ├─ test1.air
-            |   └─ test1.py
-            └─ test2.air
+            ├─ __init__.py
+            ├─ test1.py
+            └─ folder/
+                ├─ __init__.py
                 └─ test2.py
 
-``lib`` 目录用于存放公共代码模块和其他任何你需要的库。 ``scripts`` 目录用于存放一个个脚本文件，支持多级嵌套，用 ``.air`` 的文件夹后缀
-组织每个脚本，这个目录里可以存放脚本引用到的所有资源文件，脚本运行结束后也会存储对应的运行结果文件。其余的目录没有规定，根据实际情况建立
-自己需要的目录。
+``lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``scripts`` 目录存放所有测试用例脚本文件， ``res`` 目录存放任意资源文件，没有
+其他的规定了。
+
+**如果你不想手动创建这些文件，请直接clone我们的** `工程模板repo`_ ， **然后给clone下来的文件夹改个名字（必须是标识符）并运行下面代码。**
+
+.. code-block:: bash
+
+    pip install -e <刚clone下来的文件夹名>
+
+运行完之后看到一个叫 ``<刚clone下来的文件夹名>.egg-info`` 的文件夹就ok了。
 
 模板代码
 ''''
 
-在自己本地新建文件并把下面代码copy到文件里。
+在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名需要符合标识符** ，并把下面代码copy到文件夹
+对应文件里。
+
+``setup.py``
+------------
+
+setup.py 就是用来创建一个工程的，创建好这个文件后，可以直接在项目根文件夹下打开终端输入以下命令进行安装。如果你的项目依赖别的python包，
+可以顺便新建个 ``requirements.txt`` 并在里面写上依赖其他第三方的模块。
+
+.. code-block:: bash
+
+    pip install -e .
+
+setup.py 代码如下
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import os
+    import sys
+    from setuptools import setup, find_packages
+    from pip.req import parse_requirements
+
+    current_frame = sys._getframe(0)
+    caller = current_frame.f_back
+    this_filename = caller.f_code.co_filename
+    this_dir = os.path.abspath(os.path.join(this_filename, '..'))
+    project_name = os.path.basename(this_dir)
+    print('project name is {}'.format(project_name))
+
+
+    if os.path.exists('requirements.txt'):
+        # parse_requirements() returns generator of pip.req.InstallRequirement objects
+        install_reqs = parse_requirements('requirements.txt', session=False)
+
+        # reqs is a list of requirement
+        reqs = [str(ir.req) for ir in install_reqs if ir.req]
+    else:
+        reqs = []
+
+    setup(
+        name=project_name,
+        version='1.0.0',
+        description='A test automation project using poco and pocounit.',
+        packages=find_packages(),
+        include_package_data=True,
+        install_requires=reqs,
+    )
+
+``.gitignore``
+--------------
+
+这个大家都懂的
+
+.. code-block:: text
+
+    *.py[cod]
+
+    # Packages
+    *.egg
+    *.egg-info
+    dist
+    build
+    eggs
+    parts
+    bin
+    var
+    sdist
+    develop-eggs
+    .installed.cfg
+    lib64
+    __pycache__
+
+    # Installer logs
+    pip-log.txt
+
+    # Unit test / coverage reports
+    .coverage
+    .tox
+    nosetests.xml
+
+    # Translations
+    *.mo
+
+    # Mr Developer
+    .mr.developer.cfg
+    .project
+    .pydevproject
+    .vs/
+    tmp/
+    *.log
+    _site
+    apps
+    _build/
+    *.spec
+    htmlcov/
+    cover/
+    .idea/
+    .DS_Store
+
+    # test results
+    log/
+    pocounit-results/
+
 
 ``case.py``
 -----------
@@ -94,8 +207,16 @@ testcase里面可以方便地访问到player对象。
 
             action_tracker = ActionTracker(cls.player.poco)
             runtime_logger = AppRuntimeLogging(cls.player.hunter)
-            cls.register_addin(action_tracker)
-            cls.register_addin(runtime_logger)
+            cls.register_addon(action_tracker)
+            cls.register_addon(runtime_logger)
+
+        @property
+        def poco(self):
+            return self.player.poco
+
+        @property
+        def hunter(self):
+            return self.player.hunter
 
 
 ``player.py``
@@ -169,14 +290,14 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
             self.hunter.script(cmd, lang='text')
 
 
-``test1.air/test1.py`` 模板
--------------------------
+``test1.py`` 举例
+----------------
 
-**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+**请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**
 
-**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+**请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**
 
-**请勿在测试脚本里使用任何全局变量来存储测试相关的对象！**
+**请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**
 
 
 以下是例子， ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选，根据实际需求选择。
@@ -188,21 +309,13 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
     # 一个文件里建议就只有一个CommonCase
     # 一个Case做的事情尽量简单，不要把一大串操作都放到一起
     class MyTestCase(CommonCase):
-        @property
-        def poco(self):
-            return self.player.poco
-
-        @property
-        def hunter(self):
-            return self.player.hunter
-
         def setUp(self):
             # 调用hunter指令可以这样写
             self.hunter.script('print 23333', lang='python')
 
             # hunter rpc对象可以这样获取
-            remote_obj = self.hunter.rpc.remote('uri-xxx')
-            remote_obj.func1()
+            remote_obj = self.hunter.rpc.remote('safaia-rpc-test')  # see http://hunter.nie.netease.com/mywork/instruction?insids=3086
+            print(remote_obj.get_value())
 
         def runTest(self):
             # 普通语句跟原来一样，但是必须都要用self开头，这是为了以后动态代理
@@ -218,6 +331,7 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
 
         def tearDown(self):
             # 如果没有清场操作，这个函数就不用写出来
+            # 记得下面这句话是会报错的
             a = 1 / 0
 
 
@@ -234,11 +348,7 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
 
 .. code-block:: bash
 
-    python scripts/test1.air/test1.py
+    python scripts/test1.py
 
-如果当前目录不在工程根目录，需要加上环境变量PROJECT_ROOT，假设工程根目录在 ``D:\project``
 
-.. code-block:: bash
-
-    set PROJECT_ROOT=D:\project & python test1.py
-
+.. _工程模板repo:

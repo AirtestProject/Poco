@@ -39,7 +39,7 @@ class UnityPocoAgent(PocoAgent):
             from airtest.core.api import connect_device, device as current_device
             from airtest.core.helper import device_platform
             if unity_editor and not current_device():
-                connect_device("Windows:///?title_re=Unity.*")
+                connect_device("Windows:///?class_name=UnityWndClass&title_re=Unity.*")
                 game_window = current_device().app.top_window().child_window(title="UnityEditor.GameView")
                 current_device()._top_window = game_window.wrapper_object()
                 current_device().focus_rect = (0, 40, 0, 0)

@@ -39,6 +39,7 @@ PocoSDK supports cocos2dx-lua version >= 3.1.
     If your cocos2dx-lua project does not have ``mime`` module, it still works but a little slow.
 
 After integration, you can start to `play with poco`_. Or if you have any problems, feel free to `open an issue here`_.
+**Title format: [cocos2dx-lua sdk integration] xxx**
 
 Cocos2dx-js (beta)
 ------------------
@@ -191,7 +192,8 @@ Any questions about hunter feel free to contact ``lxn3032@corp.netease.com``.
 Other Engines
 -------------
 
-See `implementation guide <implementation_guide.html>`_. This guide helps you implement and integrate PocoSDK with your game step by step.
+See `implementation guide <implementation_guide.html>`_. This guide helps you implement and integrate PocoSDK with your
+game step by step.
 
 .. _poco-sdk repo: https://github.com/AirtestProject/Poco-SDK
 .. _poco for Android Native App: poco_for_android_native_app.html
