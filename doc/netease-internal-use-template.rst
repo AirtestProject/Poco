@@ -2,9 +2,10 @@
 网易游戏项目测试脚本标准模板
 ==============
 
-内测功能，非网易游戏项目和unity3d项目请勿使用此工程模板。
+内测功能，非网易游戏项目请勿使用此工程模板。
 
 游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。
+而且还可以用pycharm直接打开工程，自动补全代码哦！
 
 按照下面的指引组织好工程后，在testcase中使用 ``poco`` 对象可以简单地像下面这样获取
 
@@ -57,7 +58,7 @@
 模板代码
 ''''
 
-在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名需要符合标识符** ，并把下面代码copy到文件夹
+在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名必须是标识符** ，并把下面代码copy到文件夹
 对应文件里。
 
 ``setup.py``
@@ -189,12 +190,6 @@ testcase里面可以方便地访问到player对象。
         @classmethod
         def setUpClass(cls):
             super(CommonCase, cls).setUpClass()
-
-            # 把lib目录和PROJECT_ROOT加到search path里
-            proot = os.environ.get('PROJECT_ROOT', '.')
-            proot = os.path.abspath(proot)
-            sys.path.append(proot)
-            sys.path.append(os.path.join(proot, 'lib'))
 
             # 例如使用android手机进行测试
             if not current_device():
@@ -351,4 +346,4 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
     python scripts/test1.py
 
 
-.. _工程模板repo:
+.. _工程模板repo: http://git-qa.gz.netease.com/maki/my_testwork
