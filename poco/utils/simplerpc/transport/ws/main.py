@@ -30,6 +30,9 @@ class WebSocketClient(IClient):
         msgs, self._inbox = self._inbox, []
         return msgs
 
+    def close(self):
+        self._ws.close()
+
     def _init_ws(self):
         # ws.enableTrace(True)
         ws = websocket.WebSocketApp(self.addr,

@@ -72,6 +72,9 @@ class TcpClient(IClient):
         msg_bytes = self.c.read_message()
         return self.prot.input(msg_bytes)
 
+    def close(self):
+        return self.c.close()
+
     def _handle_connect(self):
         self._c_handle_connect()
         self.on_connect()

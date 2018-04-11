@@ -56,3 +56,6 @@ class RpcClient(RpcAgent):
             else:
                 raise RuntimeError("Connection Closed")
         raise RuntimeError("connecting timeout")
+
+    def close(self):
+        self.conn.close()
