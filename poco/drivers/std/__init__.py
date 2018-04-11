@@ -11,6 +11,7 @@ from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
 from poco.utils.simplerpc.utils import sync_wrapper
 
+from airtest.core.api import device as current_device
 
 __all__ = ['StdPoco']
 DEFAULT_PORT = 15004
@@ -83,6 +84,7 @@ class StdPocoAgent(PocoAgent):
 
 class StdPoco(Poco):
     def __init__(self, device=None, port=DEFAULT_PORT, **kwargs):
+        device = device or current_device()
         if not device:
             raise RuntimeError('Please call `connect_device` first. see airtest.core.api.connect_device to get '
                                'more infomation')
