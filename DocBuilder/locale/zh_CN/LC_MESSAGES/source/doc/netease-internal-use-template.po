@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-10 16:36+0800\n"
+"POT-Creation-Date: 2018-04-11 15:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,128 +22,130 @@ msgid "网易游戏项目测试脚本标准模板"
 msgstr ""
 
 #: ../../source/doc/netease-internal-use-template.rst:5
-msgid "内测功能，非网易游戏项目和unity3d项目请勿使用此工程模板。"
+msgid "内测功能，非网易游戏项目请勿使用此工程模板。"
 msgstr ""
 
 #: ../../source/doc/netease-internal-use-template.rst:7
-msgid "游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。"
+msgid ""
+"游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。 "
+"而且还可以用pycharm直接打开工程，自动补全代码哦！"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:9
+#: ../../source/doc/netease-internal-use-template.rst:10
 msgid "按照下面的指引组织好工程后，在testcase中使用 ``poco`` 对象可以简单地像下面这样获取"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:18
+#: ../../source/doc/netease-internal-use-template.rst:19
 msgid "安装网易专用依赖库"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:26
+#: ../../source/doc/netease-internal-use-template.rst:27
 msgid "目录结构"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:46
+#: ../../source/doc/netease-internal-use-template.rst:47
 msgid ""
 "``lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``scripts`` 目录存放所有测试用例脚本文件， ``res`` "
 "目录存放任意资源文件，没有 其他的规定了。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:49
+#: ../../source/doc/netease-internal-use-template.rst:50
 msgid ""
 "**如果你不想手动创建这些文件，请直接clone我们的** `工程模板repo`_ ， "
 "**然后给clone下来的文件夹改个名字（必须是标识符）并运行下面代码。**"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:55
+#: ../../source/doc/netease-internal-use-template.rst:56
 msgid "运行完之后看到一个叫 ``<刚clone下来的文件夹名>.egg-info`` 的文件夹就ok了。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:58
+#: ../../source/doc/netease-internal-use-template.rst:59
 msgid "模板代码"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:60
+#: ../../source/doc/netease-internal-use-template.rst:61
 msgid ""
-"在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名需要符合标识符** "
+"在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名必须是标识符** "
 "，并把下面代码copy到文件夹 对应文件里。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:64
+#: ../../source/doc/netease-internal-use-template.rst:65
 msgid "``setup.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:66
+#: ../../source/doc/netease-internal-use-template.rst:67
 msgid ""
 "setup.py "
 "就是用来创建一个工程的，创建好这个文件后，可以直接在项目根文件夹下打开终端输入以下命令进行安装。如果你的项目依赖别的python包， "
 "可以顺便新建个 ``requirements.txt`` 并在里面写上依赖其他第三方的模块。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:73
+#: ../../source/doc/netease-internal-use-template.rst:74
 msgid "setup.py 代码如下"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:111
+#: ../../source/doc/netease-internal-use-template.rst:112
 msgid "``.gitignore``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:113
+#: ../../source/doc/netease-internal-use-template.rst:114
 msgid "这个大家都懂的"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:167
+#: ../../source/doc/netease-internal-use-template.rst:168
 msgid "``case.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:169
+#: ../../source/doc/netease-internal-use-template.rst:170
 msgid ""
 "case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** "
 "。一般CommonCase里就是设置好player成员变量就行了，这样在每个 testcase里面可以方便地访问到player对象。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:223
+#: ../../source/doc/netease-internal-use-template.rst:218
 msgid "``player.py``"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:225
+#: ../../source/doc/netease-internal-use-template.rst:220
 msgid ""
 "player.py "
 "里定义游戏测试中跟角色相关的行为和属性等，用于抽象隔离hunter、poco、airtest等库。测试脚本与测试框架细节隔离有利于兼容框架 "
 "后续的功能更新和升级，也能随时切换到别的框架上。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:228
+#: ../../source/doc/netease-internal-use-template.rst:223
 msgid "``class Player`` 中可以加入其余需要的自定义方法，例如常用的关闭所有窗口、打开背包等。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:230
+#: ../../source/doc/netease-internal-use-template.rst:225
 msgid ""
 "关于GM指令，默认通过hunter直接调用，可以改写成其他的方式。如果需要获取GM指令的返回值，请先了解GM"
 "指令的代码实现方式，再通过hunter-rpc 进行调用。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:233
+#: ../../source/doc/netease-internal-use-template.rst:228
 msgid "请将 ``PROCESS`` 变量改成对应的hunter项目代号。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:294
+#: ../../source/doc/netease-internal-use-template.rst:289
 msgid "``test1.py`` 举例"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:296
-#: ../../source/doc/netease-internal-use-template.rst:298
-#: ../../source/doc/netease-internal-use-template.rst:300
+#: ../../source/doc/netease-internal-use-template.rst:291
+#: ../../source/doc/netease-internal-use-template.rst:293
+#: ../../source/doc/netease-internal-use-template.rst:295
 msgid "**请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:303
+#: ../../source/doc/netease-internal-use-template.rst:298
 msgid "以下是例子， ``runTest`` 必须， ``setUp`` 和 ``tearDown`` 可选，根据实际需求选择。"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:345
+#: ../../source/doc/netease-internal-use-template.rst:340
 msgid "如何运行脚本"
 msgstr ""
 
-#: ../../source/doc/netease-internal-use-template.rst:347
+#: ../../source/doc/netease-internal-use-template.rst:342
 msgid "就跟普通python脚本一样，直接运行即可"
 msgstr ""
 
@@ -187,5 +189,16 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "如果当前目录不在工程根目录，需要加上环境变量PROJECT_ROOT，假设工程根目录在 ``D:\\project``"
+#~ msgstr ""
+
+#~ msgid "内测功能，非网易游戏项目和unity3d项目请勿使用此工程模板。"
+#~ msgstr ""
+
+#~ msgid "游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名需要符合标识符**"
+#~ " ，并把下面代码copy到文件夹 对应文件里。"
 #~ msgstr ""
 
