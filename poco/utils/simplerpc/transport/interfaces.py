@@ -33,6 +33,9 @@ class IClient(IConnection):
     def connect(self):
         raise NotImplementedError
 
+    def close(self):
+        raise NotImplementedError
+
 
 class IServer(object):
 
