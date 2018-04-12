@@ -12,7 +12,7 @@ class TestSimple(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         connect_device('Android:///')
-        cls.poco = StdPoco(current_device())
+        cls.poco = StdPoco()
 
     @classmethod
     def tearDownClass(cls):
