@@ -1,10 +1,10 @@
 
-网易游戏项目测试脚本标准模板
+自动化测试工程项目标准模板
 ==============
 
-内测功能，非网易游戏项目请勿使用此工程模板。
+(内测功能)
 
-游戏自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。
+自动化测试是一项 **工程** ，不是离散的脚本，建议按照下面的方式组织脚本，有利于项目长久维护。
 而且还可以用pycharm直接打开工程，自动补全代码哦！
 
 按照下面的指引组织好工程后，在testcase中使用 ``poco`` 对象可以简单地像下面这样获取
@@ -15,160 +15,62 @@
     def runTest(self):
         self.poco('button').click()
 
-安装网易专用依赖库
-'''''''''
 
-.. code-block:: bash
-
-     pip install -i https://pypi.nie.netease.com/ airtest_hunter pocounit
-
-
-目录结构
+项目结构
 ''''
 
 .. code-block:: text
 
-    ─ project_name/
-        ├─ setup.py
-        ├─ .gitignore
-        ├─ res/
-        |   └─ ..
-        ├─ lib/
+    ─ my_testflow/
+        ├─ testflow/            <-------   此文件夹可自定义名称
         |   ├─ __init__.py
-        |   ├─ case.py
-        |   └─ player.py
-        └─ scripts/
-            ├─ __init__.py
-            ├─ test1.py
-            └─ folder/
-                ├─ __init__.py
-                └─ test2.py
+        |   ├─ lib/
+        |   |   ├─ __init__.py
+        |   |   ├─ case.py
+        |   |   └─ player.py
+        |   └─ scripts/
+        |       ├─ __init__.py
+        |       ├─ test1.py
+        |       └─ folder/
+        |           ├─ __init__.py
+        |           └─ test2.py
+        ├─ res/
+        |   └─ ...
+        ├─ pocounit-results/
+        ├─ setup.py
+        ├─ requirements.txt
+        └─ .gitignore
 
-``lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``scripts`` 目录存放所有测试用例脚本文件， ``res`` 目录存放任意资源文件，没有
-其他的规定了。
 
-**如果你不想手动创建这些文件，请直接clone我们的** `工程模板repo`_ ， **然后给clone下来的文件夹改个名字（必须是标识符）并运行下面代码。**
+``testflow/lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``testflow/scripts`` 目录存放所有测试用例脚本文件，
+``res`` 目录存放任意资源文件， ``pocounit-results`` 用于存放运行结果，没有其他的规定了。
 
-.. code-block:: bash
+**clone我们的** `工程模板repo`_ ， **然后给里面的 ``testflow`` 文件夹改个名字，例如g18（必须是标识符）**
 
-    pip install -e <刚clone下来的文件夹名>
-
-运行完之后看到一个叫 ``<刚clone下来的文件夹名>.egg-info`` 的文件夹就ok了。
-
-模板代码
-''''
-
-在自己本地新建项目根文件夹， **记得给你的项目起一个好听的名字，例如g18_auto_project，命名必须是标识符** ，并把下面代码copy到文件夹
-对应文件里。
-
-``setup.py``
-------------
-
-setup.py 就是用来创建一个工程的，创建好这个文件后，可以直接在项目根文件夹下打开终端输入以下命令进行安装。如果你的项目依赖别的python包，
-可以顺便新建个 ``requirements.txt`` 并在里面写上依赖其他第三方的模块。
+在 ``my_testflow/`` 里打开终端，运行下面命令
 
 .. code-block:: bash
 
     pip install -e .
 
-setup.py 代码如下
+运行完之后看到一个叫 ``testflow_xxx.egg-info`` 的文件夹就ok了。
 
-.. code-block:: python
+其余参考模板代码
+''''''''
 
-    # coding=utf-8
+使用以下模板请先 **安装网易专用依赖库**
 
-    import os
-    import sys
-    from setuptools import setup, find_packages
-    from pip.req import parse_requirements
+.. code-block:: bash
 
-    current_frame = sys._getframe(0)
-    caller = current_frame.f_back
-    this_filename = caller.f_code.co_filename
-    this_dir = os.path.abspath(os.path.join(this_filename, '..'))
-    project_name = os.path.basename(this_dir)
-    print('project name is {}'.format(project_name))
+     pip install -i https://pypi.nie.netease.com/ airtest_hunter
 
+以下脚本可自行复制到工程目录里
 
-    if os.path.exists('requirements.txt'):
-        # parse_requirements() returns generator of pip.req.InstallRequirement objects
-        install_reqs = parse_requirements('requirements.txt', session=False)
+``lib/case/netease_case.py``
+----------------------------
 
-        # reqs is a list of requirement
-        reqs = [str(ir.req) for ir in install_reqs if ir.req]
-    else:
-        reqs = []
-
-    setup(
-        name=project_name,
-        version='1.0.0',
-        description='A test automation project using poco and pocounit.',
-        packages=find_packages(),
-        include_package_data=True,
-        install_requires=reqs,
-    )
-
-``.gitignore``
---------------
-
-这个大家都懂的
-
-.. code-block:: text
-
-    *.py[cod]
-
-    # Packages
-    *.egg
-    *.egg-info
-    dist
-    build
-    eggs
-    parts
-    bin
-    var
-    sdist
-    develop-eggs
-    .installed.cfg
-    lib64
-    __pycache__
-
-    # Installer logs
-    pip-log.txt
-
-    # Unit test / coverage reports
-    .coverage
-    .tox
-    nosetests.xml
-
-    # Translations
-    *.mo
-
-    # Mr Developer
-    .mr.developer.cfg
-    .project
-    .pydevproject
-    .vs/
-    tmp/
-    *.log
-    _site
-    apps
-    _build/
-    *.spec
-    htmlcov/
-    cover/
-    .idea/
-    .DS_Store
-
-    # test results
-    log/
-    pocounit-results/
-
-
-``case.py``
------------
-
-case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** 。一般CommonCase里就是设置好player成员变量就行了，这样在每个
-testcase里面可以方便地访问到player对象。
+netease_case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** 。一般CommonCase里就是设置好player成员变量就行了，
+这样在每个testcase里面可以方便地访问到player对象。
 
 .. code-block:: python
 
@@ -183,7 +85,8 @@ testcase里面可以方便地访问到player对象。
 
     from airtest.core.api import connect_device, device as current_device
 
-    from player import Player
+    # TODO: "from testflow.lib" should be renamed according to your actual package name
+    from testflow.lib.player import Player
 
 
     class CommonCase(PocoTestCase):
@@ -214,8 +117,8 @@ testcase里面可以方便地访问到player对象。
             return self.player.hunter
 
 
-``player.py``
--------------
+``lib/player.py``
+----------------
 
 player.py 里定义游戏测试中跟角色相关的行为和属性等，用于抽象隔离hunter、poco、airtest等库。测试脚本与测试框架细节隔离有利于兼容框架
 后续的功能更新和升级，也能随时切换到别的框架上。
@@ -285,8 +188,8 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
             self.hunter.script(cmd, lang='text')
 
 
-``test1.py`` 举例
-----------------
+``scripts/test1.py`` 举例
+-----------------------
 
 **请勿在测试用例的脚本里使用任何全局变量来存储测试相关的对象！**
 
@@ -299,7 +202,8 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
 
 .. code-block:: python
 
-    from lib.case import CommonCase
+    # TODO: "from testflow.lib" should be renamed according to your actual package name
+    from testflow.lib.case.netease_case import CommonCase
 
     # 一个文件里建议就只有一个CommonCase
     # 一个Case做的事情尽量简单，不要把一大串操作都放到一起
@@ -343,7 +247,7 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
 
 .. code-block:: bash
 
-    python scripts/test1.py
+    python testflow/scripts/test1.py
 
 
-.. _工程模板repo: http://git-qa.gz.netease.com/maki/my_testwork
+.. _工程模板repo: http://git-qa.gz.netease.com/maki/my_testflow

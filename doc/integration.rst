@@ -161,6 +161,9 @@ Any questions about hunter feel free to contact ``lxn3032@corp.netease.com``.
 
 .. code-block:: python
 
+    # core (add only if not present)
+    Safaia().install(require('safaia.init.core'))
+
     # poco uiautomation
     PocoUiautomation = require('support.poco.neox.uiautomation')
     Safaia().install(PocoUiautomation)
@@ -175,6 +178,9 @@ Any questions about hunter feel free to contact ``lxn3032@corp.netease.com``.
 * for Messiah
 
 .. code-block:: python
+
+    # core (add only if not present)
+    Safaia().install(require('safaia.init.core'))
 
     # poco uiautomation
     PocoUiautomation = require('support.poco.messiah.uiautomation')
