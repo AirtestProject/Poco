@@ -45,7 +45,7 @@
 ``testflow/lib`` 目录存放公共代码模块和其他任何你需要的库代码。 ``testflow/scripts`` 目录存放所有测试用例脚本文件，
 ``res`` 目录存放任意资源文件， ``pocounit-results`` 用于存放运行结果，没有其他的规定了。
 
-**clone我们的** `工程模板repo`_ ， **然后给里面的 ``testflow`` 文件夹改个名字，例如g18（必须是标识符）**
+**clone我们的** `工程模板repo`_ ， **然后给里面的 testflow 文件夹改个名字，例如g18（必须是标识符）**
 
 在 ``my_testflow/`` 里打开终端，运行下面命令
 
@@ -65,57 +65,6 @@
      pip install -i https://pypi.nie.netease.com/ airtest_hunter
 
 以下脚本可自行复制到工程目录里
-
-``lib/case/netease_case.py``
-----------------------------
-
-netease_case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** 。一般CommonCase里就是设置好player成员变量就行了，
-这样在每个testcase里面可以方便地访问到player对象。
-
-.. code-block:: python
-
-    # coding=utf-8
-
-    import os
-    import sys
-
-    from pocounit.case import PocoTestCase
-    from pocounit.addons.poco.action_tracking import ActionTracker
-    from pocounit.addons.hunter.runtime_logging import AppRuntimeLogging
-
-    from airtest.core.api import connect_device, device as current_device
-
-    # TODO: "from testflow.lib" should be renamed according to your actual package name
-    from testflow.lib.player import Player
-
-
-    class CommonCase(PocoTestCase):
-        @classmethod
-        def setUpClass(cls):
-            super(CommonCase, cls).setUpClass()
-
-            # 例如使用android手机进行测试
-            if not current_device():
-                connect_device('Android:///')
-
-                # 如果连接windows的话，用下面这种写法
-                # conncect_device('Windows:///?title_re=^.*标题栏正则.*$')
-
-            cls.player = Player()
-
-            action_tracker = ActionTracker(cls.player.poco)
-            runtime_logger = AppRuntimeLogging(cls.player.hunter)
-            cls.register_addon(action_tracker)
-            cls.register_addon(runtime_logger)
-
-        @property
-        def poco(self):
-            return self.player.poco
-
-        @property
-        def hunter(self):
-            return self.player.hunter
-
 
 ``lib/player.py``
 ----------------
@@ -186,6 +135,58 @@ player.py 里定义游戏测试中跟角色相关的行为和属性等，用于�
 
         def server_call(self, cmd):
             self.hunter.script(cmd, lang='text')
+
+
+``lib/case/netease_case.py``
+----------------------------
+
+netease_case.py 里定义最基础的用例模板，全局初始化和清场行为。 **登录脚本除外** 。一般CommonCase里就是设置好player成员变量就行了，
+这样在每个testcase里面可以方便地访问到player对象。
+
+.. code-block:: python
+
+    # coding=utf-8
+
+    import os
+    import sys
+
+    from pocounit.case import PocoTestCase
+    from pocounit.addons.poco.action_tracking import ActionTracker
+    from pocounit.addons.hunter.runtime_logging import AppRuntimeLogging
+
+    from airtest.core.api import connect_device, device as current_device
+
+    # TODO: "from testflow.lib" should be renamed according to your actual package name
+    from testflow.lib.player import Player
+
+
+    class CommonCase(PocoTestCase):
+        @classmethod
+        def setUpClass(cls):
+            super(CommonCase, cls).setUpClass()
+
+            # 例如使用android手机进行测试
+            if not current_device():
+                connect_device('Android:///')
+
+                # 如果连接windows的话，用下面这种写法
+                # conncect_device('Windows:///?title_re=^.*标题栏正则.*$')
+
+            cls.player = Player()
+
+            action_tracker = ActionTracker(cls.player.poco)
+            runtime_logger = AppRuntimeLogging(cls.player.hunter)
+            cls.register_addon(action_tracker)
+            cls.register_addon(runtime_logger)
+
+        @property
+        def poco(self):
+            return self.player.poco
+
+        @property
+        def hunter(self):
+            return self.player.hunter
+
 
 
 ``scripts/test1.py`` 举例

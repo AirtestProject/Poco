@@ -83,7 +83,7 @@ class StdPocoAgent(PocoAgent):
 
 
 class StdPoco(Poco):
-    def __init__(self, device=None, port=DEFAULT_PORT, **kwargs):
+    def __init__(self, port=DEFAULT_PORT, device=None, **kwargs):
         device = device or current_device()
         if not device:
             raise RuntimeError('Please call `connect_device` first. see airtest.core.api.connect_device to get '
