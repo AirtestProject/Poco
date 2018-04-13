@@ -25,6 +25,16 @@ class Case(PocoTestCase):
             print n.get_name()
 
 
-if __name__ == '__main__':
-    import pocounit
-    pocounit.main()
+# if __name__ == '__main__':
+#     import pocounit
+#     pocounit.main()
+
+
+from hunter_cli import Hunter, open_platform
+from poco.drivers.netease.internal import NeteasePoco
+
+tokenid = open_platform.get_api_token('test')
+hunter = Hunter(tokenid, 'xy2', 'xy2_at_408d5c116536')
+poco = NeteasePoco('xy2', hunter)
+
+print poco('npc_conversation').offspring('list_options').offspring('Widget')[0].offspring('txt_content').nodes[0].node.data

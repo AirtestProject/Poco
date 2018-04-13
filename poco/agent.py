@@ -36,3 +36,6 @@ class PocoAgent(object):
         self.input = _assign(input, InputInterface())
         self.screen = _assign(screen, ScreenInterface())
         self.command = _assign(command, CommandInterface())
+
+    def get_sdk_version(self):
+        pass

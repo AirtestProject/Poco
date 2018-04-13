@@ -119,6 +119,11 @@ class AndroidUiautomationPoco(Poco):
     """
 
     def __init__(self, device=None, using_proxy=True, force_restart=False, use_airtest_input=False, **options):
+        # 加这个参数为了不在最新的pocounit方案中每步都截图
+        self.screenshot_each_action = True
+        if options.get('screenshot_each_action') is False:
+            self.screenshot_each_action = False
+
         if not device:
             try:
                 # new version
@@ -267,13 +272,14 @@ class AndroidUiautomationPoco(Poco):
         return ready
 
     def on_pre_action(self, action, proxy, args):
-        # airteset log用
-        try:
-            from airtest.core.api import snapshot
-        except ImportError:
-            # 兼容旧airtest
-            from airtest.core.main import snapshot
-        snapshot(msg=unicode(proxy))
+        if self.screenshot_each_action:
+            # airteset log用
+            try:
+                from airtest.core.api import snapshot
+            except ImportError:
+                # 兼容旧airtest
+                from airtest.core.main import snapshot
+            snapshot(msg=unicode(proxy))
 
 
 class AndroidUiautomationHelper(object):

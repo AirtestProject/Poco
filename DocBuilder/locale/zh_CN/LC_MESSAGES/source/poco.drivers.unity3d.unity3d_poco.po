@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-12 19:58+0800\n"
+"POT-Creation-Date: 2018-04-13 18:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "poco\\.drivers\\.unity3d\\.unity3d\\_poco module"
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
-msgid "Bases: :class:`poco.pocofw.Poco`"
+msgid "Bases: :class:`poco.drivers.std.StdPoco`"
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
@@ -70,5 +70,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "see :py:meth:`poco.pocofw.Poco.__init__`"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.pocofw.Poco`"
 #~ msgstr ""
 

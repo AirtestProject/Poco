@@ -25,7 +25,5 @@ class OverviewTutorial(TutorialCase):
 
 
 if __name__ == '__main__':
-    from airtest.core.api import connect_device
-    connect_device('Android:///')
     import pocounit
     pocounit.main()
