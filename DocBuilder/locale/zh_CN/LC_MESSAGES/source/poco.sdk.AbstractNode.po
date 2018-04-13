@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-25 14:53+0800\n"
+"POT-Creation-Date: 2018-04-13 18:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,6 +147,7 @@ msgstr ""
 #: poco.sdk.AbstractNode.AbstractNode.getAvailableAttributeNames
 #: poco.sdk.AbstractNode.AbstractNode.getChildren
 #: poco.sdk.AbstractNode.AbstractNode.getParent
+#: poco.sdk.AbstractNode.AbstractNode.setAttr
 msgid "返回"
 msgstr ""
 
@@ -216,7 +217,11 @@ msgstr ""
 msgid "attribute value"
 msgstr ""
 
-#: of poco.sdk.AbstractNode.AbstractNode.setAttr:11
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:9
+msgid "True if success else False or raise."
+msgstr ""
+
+#: of poco.sdk.AbstractNode.AbstractNode.setAttr:13
 msgid ""
 ":py:meth:`setAttr "
 "<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in "

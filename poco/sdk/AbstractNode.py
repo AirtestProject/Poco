@@ -116,6 +116,9 @@ class AbstractNode(object):
             attrName (:obj:`str`): attribute name
             val: attribute value
 
+        Returns:
+            True if success else False or raise.
+
         See Also:
             :py:meth:`setAttr <poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in
             ``poco.sdk.interfaces.hierarchy``

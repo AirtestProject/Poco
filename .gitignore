@@ -48,6 +48,7 @@ cover/
 .DS_Store
 doc-auto/
 DocBuilder/source
+pocounit-results/
 
 tokenid.py
 
