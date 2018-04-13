@@ -39,5 +39,16 @@ Tutorial
 .. _play with unittest framework: play_with_unittest_framework.html
 .. _optimize speed by freezing UI: optimize_speed_by_freezing_UI.html
 
+More demo games for testing
+---------------------------
+
+The following files are standard apps with according poco-sdk integrated. You can download and install on your device
+to make sure it works for your environment.
+
+- `cocos2dx-lua sdk test (android)`_
+- `cocos2dx-js sdk test (android)`_
+
 .. _demo game android: http://top.gdl.netease.com/poco-res/poco-demo-unity-game-android.zip
 .. _demo game windows: http://top.gdl.netease.com/poco-res/poco-demo-unity-game-win.zip
+.. _cocos2dx-lua sdk test (android): http://top.gdl.netease.com/poco-res/poco-sdk-test-cocos2dx-lua-demo-android.zip
+.. _cocos2dx-js sdk test (android): http://top.gdl.netease.com/poco-res/poco-sdk-test-cocos2dx-js-demo-android.zip
