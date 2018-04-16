@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 17:43+0800\n"
+"POT-Creation-Date: 2018-04-16 16:54+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,43 @@ msgstr ""
 
 #: ../../source/poco.drivers.std.rst:2
 msgid "poco\\.drivers\\.std package"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:1
+msgid "Bases: :class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:1
+msgid "Poco standard implementation for PocoSDK protocol."
+msgstr ""
+
+#: of poco.drivers.std.StdPoco
+msgid "参数"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:3
+msgid ""
+"the port number of the server that listens on the target device. default "
+"to 15004."
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:5
+msgid ""
+":py:obj:`airtest.core.device.Device` instance provided by ``airtest``. "
+"leave the parameter default and the default device will be chosen. more "
+"details refer to ``airtest doc``"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:8
+msgid "see :py:class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:11
+msgid "Examples"
+msgstr ""
+
+#: of poco.drivers.std.StdPoco:12
+msgid "The simplest way to connect to a cocos2dx-lua game::"
 msgstr ""
 
 #: ../../source/poco.drivers.std.rst:9

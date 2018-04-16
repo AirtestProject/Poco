@@ -41,6 +41,32 @@ class StdPocoAgent(PocoAgent):
 
 
 class StdPoco(Poco):
+    """
+    Poco standard implementation for PocoSDK protocol.
+
+    Args:
+        port (:py:obj:`int`): the port number of the server that listens on the target device. default to 15004.
+        device (:py:obj:`Device`): :py:obj:`airtest.core.device.Device` instance provided by ``airtest``. leave the
+         parameter default and the default device will be chosen. more details refer to ``airtest doc``
+        options: see :py:class:`poco.pocofw.Poco`
+
+    Examples:
+        The simplest way to connect to a cocos2dx-lua game::
+
+            from poco.drivers.std import StdPoco
+            from airtest.core.api import connect_device
+
+            # connect a device first, then initialize poco object
+            device = connect_device('Android:///')
+            poco = StdPoco(10054, device)
+
+            # now you can play with poco
+            ui = poco('...')
+            ui.click()
+            ...
+
+    """
+
     def __init__(self, port=DEFAULT_PORT, device=None, **kwargs):
         device = device or current_device()
         if not device:
