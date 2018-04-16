@@ -36,10 +36,9 @@ For **cocos2dx-lua** games are similar as Unity3d drivers.
     from poco.drivers.std import StdPoco
     from airtest.core.api import connect_device
 
-    # then initialize the poco instance in the following way
     # connect a device first, then initialize poco object
-    connect_device('Android:///')
-    poco = StdPoco()
+    device = connect_device('Android:///')
+    poco = StdPoco(10054, device)
 
     # now you can play with poco
     ui = poco('...')

@@ -174,11 +174,12 @@ Engine specific API
 
   - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
   - `Android native app <source/poco.drivers.android.uiautomation.html>`_
+  - `cocos2dx-lua <source/poco.drivers.std.html>`_
 
 ..
  还没写完的连接先注释掉
- - `Netease Internal Engines <source/poco.drivers.netease.internal.html>`_
  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
+
 
 Poco SDK API
 ''''''''''''
@@ -279,9 +280,3 @@ Join to discuss!
 .. _AirtestIDE: http://airtest.netease.com/
 
 .. _join slack: https://join.slack.com/t/airtestproject/shared_invite/enQtMzM4MTUwODk0MzQyLWFiNTEyNTkzZjUwZDcyOWQ1NjE5YzQ4Zjk3OTBmMTEyZDBkN2YxZTdmZWY5MWRiNjg2ZjZkYjk1YTEzOTJmMzU
-
-..
- 下面是对应sdk的下载链接
-
-.. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
-
