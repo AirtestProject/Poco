@@ -80,14 +80,14 @@ msgstr ""
 
 #: ../../source/doc/integration.rst:23
 msgid "Clone the sdk source code from `poco-sdk repo`_."
-msgstr ""
+msgstr "从 `poco-sdk repo`_ clone或下载源码。 "
 
 #: ../../source/doc/integration.rst:24
 #, fuzzy
 msgid ""
 "Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You "
 "can rename the folder if you wish."
-msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
+msgstr "将 ``cocos2dx-lua/poco`` 文件夹复制到项目脚本文件夹中。如果您愿意，可以重命名文件夹。"
 
 #: ../../source/doc/integration.rst:25
 msgid ""
