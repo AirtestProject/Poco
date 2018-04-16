@@ -113,7 +113,7 @@ msgid ""
 "After integration, you can start to `play with poco`_. Or if you have any"
 " problems, feel free to `open an issue here`_. **Title format: [cocos2dx-"
 "lua sdk integration] xxx**"
-msgstr "整合之后，你可以开始 `play with poco`_。或者如果你有任何问题，欢迎 `open an issue here`_。标题格式:[cocos2dx-lua sdk集成]xxx。"
+msgstr "整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an issue here`_。标题格式:[cocos2dx-lua sdk集成]xxx。"
 
 #: ../../source/doc/integration.rst:45
 msgid "Cocos2dx-js (beta)"
