@@ -266,6 +266,10 @@ class AndroidUiautomationPoco(Poco):
             except requests.exceptions.Timeout:
                 break
             except requests.exceptions.ConnectionError:
+                if self._instrument_proc.poll() is not None:
+                    warnings.warn("instrument server process is not alive")
+                    output = self._instrument_proc.stdout.read()
+                    print(output)
                 time.sleep(1)
                 print("still waiting for uiautomation ready.")
                 continue
