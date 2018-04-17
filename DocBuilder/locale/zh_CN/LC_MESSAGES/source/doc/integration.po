@@ -76,44 +76,44 @@ msgstr ""
 
 #: ../../source/doc/integration.rst:21
 msgid "PocoSDK supports cocos2dx-lua version >= 3.1."
-msgstr ""
+msgstr "cocos2dx-lua版本 >= 3.1"
 
 #: ../../source/doc/integration.rst:23
 msgid "Clone the sdk source code from `poco-sdk repo`_."
-msgstr ""
+msgstr "从 `poco-sdk repo`_ clone或下载源码。 "
 
 #: ../../source/doc/integration.rst:24
 #, fuzzy
 msgid ""
 "Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You "
 "can rename the folder if you wish."
-msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意路径都可以。"
+msgstr "将 ``cocos2dx-lua/poco`` 文件夹复制到项目脚本文件夹中。如果您愿意，可以重命名文件夹。"
 
 #: ../../source/doc/integration.rst:25
 msgid ""
 "Initialize poco-sdk by copying following code to your game initialization"
 " script."
-msgstr ""
+msgstr "通过将以下代码复制到您的游戏初始化脚本，初始化poco-sdk。"
 
 #: ../../source/doc/integration.rst:34
 msgid ""
 "Your cocos2dx-lua project should at least enable ``socket`` or "
 "``socket.core`` module, as poco requires this module to setup a tcp "
 "server at runtime."
-msgstr ""
+msgstr "您的cocos2dx-lua项目至少应该启用 ``socket`` 或``socket.core`` 模块。poco要求这个模块在运行时设置一个tcp服务器。"
 
 #: ../../source/doc/integration.rst:39
 msgid ""
 "If your cocos2dx-lua project does not have ``mime`` module, it still "
 "works but a little slow."
-msgstr ""
+msgstr "如果cocos2dx-lua项目没有 ``mime`` 模块，它仍然可以工作，但是有点慢。"
 
 #: ../../source/doc/integration.rst:41
 msgid ""
 "After integration, you can start to `play with poco`_. Or if you have any"
 " problems, feel free to `open an issue here`_. **Title format: [cocos2dx-"
 "lua sdk integration] xxx**"
-msgstr ""
+msgstr "整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an issue here`_。标题格式:[cocos2dx-lua sdk集成]xxx。"
 
 #: ../../source/doc/integration.rst:45
 msgid "Cocos2dx-js (beta)"
