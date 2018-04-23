@@ -7,8 +7,12 @@ import math
 
 class Vec2(object):
     def __init__(self, x=0.0, y=0.0):
-        self.x = x
-        self.y = y
+        if type(x) in (list, tuple):
+            self.x = x[0]
+            self.y = x[1]
+        else:
+            self.x = x
+            self.y = y
 
     @staticmethod
     def from_radian(rad):

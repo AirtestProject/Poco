@@ -10,6 +10,7 @@ from .exceptions import PocoTargetTimeout, InvalidOperationException
 from .proxy import UIObjectProxy
 from .agent import PocoAgent
 from .freezeui.utils import create_immutable_hierarchy
+from .utils.track import MotionTrackBatch
 
 __author__ = 'lxn3032'
 
@@ -301,6 +302,21 @@ class Poco(PocoAccelerationMixin):
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
         return self.agent.input.longClick(pos[0], pos[1], duration)
+
+    def apply_motion_tracks(self, tracks, accuracy=0.004):
+        """
+        Similar to click but press the screen for the given time interval and then release
+
+        Args:
+           tracks (:py:obj:`list`): list of :py:class:`poco.utils.track.MotionTrack` object
+           accuracy (:py:obj:`float`): motion accuracy for each motion steps in normalized coordinate metrics.
+        """
+
+        if not tracks:
+            raise ValueError('Please provide at least one track. Got {}'.format(repr(tracks)))
+
+        tb = MotionTrackBatch(tracks)
+        return self.agent.input.applyMotionTracks(tb.discretize(accuracy))
 
     def snapshot(self, width=720):
         """

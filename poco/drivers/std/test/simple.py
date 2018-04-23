@@ -60,12 +60,20 @@ class TestStandardFunction(unittest.TestCase):
 
     def test_set_text(self):
         textval = 'hello 中国!'
-        node = self.poco(typeMatches='TextField|InputField')
+        node = self.poco(typeMatches='TextField|InputField|EditBox')
         node.set_text(textval)
         node.invalidate()
         actualVal = node.get_text() or node.offspring(text=textval).get_text()
         print repr(actualVal)
         self.assertEqual(actualVal, textval)
+
+    def test_clear_text(self):
+        node = self.poco(typeMatches='TextField|InputField|EditBox')
+        node.set_text('val2333')
+        node.set_text('')
+        node.invalidate()
+        actualVal = node.get_text()
+        self.assertEqual(actualVal, '')
 
     def test_instanceId(self):
         for n in self.poco():

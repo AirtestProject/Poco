@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-23 15:24+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/poco.utils.six.rst:2
+msgid "poco\\.utils\\.six module"
+msgstr ""
+
+#: of poco.utils.six:1
+msgid "Utilities for writing code that runs on Python 2 and 3"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib:1
+msgid "Bases: :class:`module`"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib:1
+msgid "Create a six.moves.urllib namespace that resembles the Python 3 namespace"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_error:1
+#: poco.utils.six.Module_six_moves_urllib_parse:1
+#: poco.utils.six.Module_six_moves_urllib_request:1
+#: poco.utils.six.Module_six_moves_urllib_response:1
+#: poco.utils.six.Module_six_moves_urllib_robotparser:1
+msgid "Bases: :class:`poco.utils.six._LazyModule`"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_error:1
+msgid "Lazy loading of moved objects in six.moves.urllib_error"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_parse:1
+msgid "Lazy loading of moved objects in six.moves.urllib_parse"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_request:1
+msgid "Lazy loading of moved objects in six.moves.urllib_request"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_response:1
+msgid "Lazy loading of moved objects in six.moves.urllib_response"
+msgstr ""
+
+#: of poco.utils.six.Module_six_moves_urllib_robotparser:1
+msgid "Lazy loading of moved objects in six.moves.urllib_robotparser"
+msgstr ""
+
+#: of poco.utils.six.add_metaclass:1
+msgid "Class decorator for creating a class with a metaclass."
+msgstr ""
+
+#: of poco.utils.six.add_move:1
+msgid "Add an item to six.moves."
+msgstr ""
+
+#: of poco.utils.six.b:1
+msgid "Byte literal"
+msgstr ""
+
+#: of poco.utils.six.exec_:1
+msgid "Execute code in a namespace."
+msgstr ""
+
+#: of poco.utils.six.get_unbound_function:1
+msgid "Get the function out of a possibly unbound function"
+msgstr ""
+
+#: of poco.utils.six.iteritems:1
+msgid "Return an iterator over the (key, value) pairs of a dictionary."
+msgstr ""
+
+#: of poco.utils.six.iterkeys:1
+msgid "Return an iterator over the keys of a dictionary."
+msgstr ""
+
+#: of poco.utils.six.iterlists:1
+msgid "Return an iterator over the (key, [values]) pairs of a dictionary."
+msgstr ""
+
+#: of poco.utils.six.itervalues:1
+msgid "Return an iterator over the values of a dictionary."
+msgstr ""
+
+#: of poco.utils.six.python_2_unicode_compatible:1
+msgid ""
+"A decorator that defines __unicode__ and __str__ methods under Python 2. "
+"Under Python 3 it does nothing."
+msgstr ""
+
+#: of poco.utils.six.python_2_unicode_compatible:4
+msgid ""
+"To support Python 2 and 3 with a single code base, define a __str__ "
+"method returning text and apply this decorator to the class."
+msgstr ""
+
+#: of poco.utils.six.remove_move:1
+msgid "Remove item from six.moves."
+msgstr ""
+
+#: of poco.utils.six.reraise:1
+msgid "Reraise an exception."
+msgstr ""
+
+#: of poco.utils.six.u:1
+msgid "Text literal"
+msgstr ""
+
+#: of poco.utils.six.with_metaclass:1
+msgid "Create a base class with a metaclass."
+msgstr ""
+

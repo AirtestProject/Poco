@@ -55,7 +55,7 @@ class InputInterface(object):
     def setTouchDownDuration(self, duration):
         """
         Set touch down duration for each click operation.
-        
+
         Args:
             duration (:obj:`float`): the duration in seconds
         """
@@ -66,7 +66,7 @@ class InputInterface(object):
     def getTouchDownDuration(self):
         """
         Get touch down duration for each click operation. Each implementation should provide a default value.
-    
+
         Return:
             :obj:`float`: the touch down duration in seconds
         """
@@ -79,6 +79,17 @@ class InputInterface(object):
 
         Args:
             keycode (:obj:`int` or :obj:`char`): Ascii key code
+        """
+
+        raise NotImplementedError
+
+    def applyMotionTracks(self, tracks):
+        """
+        Apply a motion event on the device touch panel
+
+        Args:
+            tracks (:py:obj:`list`): list of track. each track is a list of MotionEvent data
+             (``['u/d/m/s', (x, y), contact_id]``)
         """
 
         raise NotImplementedError

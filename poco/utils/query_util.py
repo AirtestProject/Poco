@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
-__author__ = 'lxn3032'
+
+import poco.utils.six as six
 
 
 __all__ = ['query_expr']
@@ -40,9 +41,8 @@ def query_expr(query):
         raise RuntimeError('Bad query format. "{}"'.format(repr(query)))
 
 
-def ensure_unicode(value):
-    # py3 to be supported
-    if isinstance(value, str):
+def ensure_string_value(value):
+    if six.PY2 and isinstance(value, str):
         return value.decode("utf-8")
     else:
         return value
@@ -51,10 +51,10 @@ def ensure_unicode(value):
 def build_query(name, **attrs):
     query = []
     if name is not None:
-        name = ensure_unicode(name)
+        name = ensure_string_value(name)
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
-        attr_val = ensure_unicode(attr_val)
+        attr_val = ensure_string_value(attr_val)
         if attr_name.startswith('_'):
             raise NameError("Cannot use private attribute '{}' in your Query Expression as private attributes do not "
                             "have stable values.".format(attr_name))
