@@ -303,6 +303,15 @@ class Poco(PocoAccelerationMixin):
             raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
         return self.agent.input.longClick(pos[0], pos[1], duration)
 
+    def scroll(self, direction='vertical', percent=0.6, duration=2.0):
+        raise NotImplementedError
+
+    def pinch(self, direction='in', percent=0.6, duration=2.0, dead_zone=0.1):
+        raise NotImplementedError
+
+    def pan(self, dir, duration=2.0):
+        raise NotImplementedError
+
     def apply_motion_tracks(self, tracks, accuracy=0.004):
         """
         Similar to click but press the screen for the given time interval and then release
