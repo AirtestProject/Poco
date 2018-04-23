@@ -123,6 +123,8 @@ class MotionTrackBatch(object):
         self.tracks = tracks
 
     def discretize(self, accuracy=0.004):
+        if accuracy < 0.001:
+            accuracy = 0.001
         events = []
         discretized_tracks = [t.discretize(i, accuracy) for i, t in enumerate(self.tracks)]
 

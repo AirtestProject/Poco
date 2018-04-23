@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2018-04-23 20:43+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,7 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
 #: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_position
 #: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
+#: poco.proxy.UIObjectProxy.pinch poco.proxy.UIObjectProxy.scroll
 #: poco.proxy.UIObjectProxy.set_text poco.proxy.UIObjectProxy.setattr
 #: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.swipe
 #: poco.proxy.UIObjectProxy.wait poco.proxy.UIObjectProxy.wait_for_appearance
@@ -147,7 +148,8 @@ msgstr ""
 
 #: of poco.proxy.UIObjectProxy.__iter__ poco.proxy.UIObjectProxy.attr
 #: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
-#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.set_text
+#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.pinch
+#: poco.proxy.UIObjectProxy.scroll poco.proxy.UIObjectProxy.set_text
 #: poco.proxy.UIObjectProxy.setattr poco.proxy.UIObjectProxy.swipe
 #: poco.proxy.UIObjectProxy.wait_for_appearance
 #: poco.proxy.UIObjectProxy.wait_for_disappearance
@@ -313,6 +315,7 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:9
+#: poco.proxy.UIObjectProxy.pinch:12 poco.proxy.UIObjectProxy.scroll:12
 #: poco.proxy.UIObjectProxy.swipe:14
 msgid ""
 ":exc:`PocoNoSuchNodeException` -- raised when the UI element does not "
@@ -331,7 +334,8 @@ msgid ""
 "system"
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.drag_to:6 poco.proxy.UIObjectProxy.swipe:11
+#: of poco.proxy.UIObjectProxy.drag_to:6 poco.proxy.UIObjectProxy.pinch:7
+#: poco.proxy.UIObjectProxy.scroll:9 poco.proxy.UIObjectProxy.swipe:11
 msgid "time interval in which the action is performed"
 msgstr ""
 
@@ -464,6 +468,43 @@ msgid ""
 "Select the offsprings including the direct child(ren) from the UI "
 "element(s) given by the query expression, see ``QueryCondition`` for more"
 " details about selectors."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.pinch:1
+msgid ""
+"Squeezing or expanding 2 fingers on this UI with given motion range and "
+"duration."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.pinch:3
+msgid ""
+"pinching direction, only \"in\" or \"out\". \"in\" for squeezing, \"out\""
+" for expanding"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.pinch:5
+msgid "pinching range from or expanding range to of the bounds of the UI"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.pinch:9
+msgid "pinching end circle radius. should not be greater than `percent`"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.scroll:1
+msgid ""
+"Simply touch down from point A and move to point B then release up "
+"finally. This action is performed within specific motion range and "
+"duration."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.scroll:4
+msgid "scrolling direction. \"vertical\" or \"horizontal\""
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.scroll:6
+msgid ""
+"scrolling distance percentage of selected UI height or width according to"
+" direction"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.set_text:1
