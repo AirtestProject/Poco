@@ -369,6 +369,12 @@ class UIObjectProxy(object):
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         return self.swipe(dir, duration=duration)
 
+    def scroll(self):
+        raise NotImplementedError
+
+    def pinch(self):
+        raise NotImplementedError
+
     def focus(self, f):
         """
         Get a new UI proxy copy with the given focus. Return a new UI proxy object as the UI proxy is immutable.
