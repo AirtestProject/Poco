@@ -30,11 +30,43 @@ class Case(PocoTestCase):
 #     pocounit.main()
 
 
-from hunter_cli import Hunter, open_platform
-from poco.drivers.netease.internal import NeteasePoco
+# from hunter_cli import Hunter, open_platform
+# from poco.drivers.netease.internal import NeteasePoco
+#
+# tokenid = open_platform.get_api_token('test')
+# hunter = Hunter(tokenid, 'xy2', 'xy2_at_408d5c116536')
+# poco = NeteasePoco('xy2', hunter)
+#
+# print poco('npc_conversation').offspring('list_options').offspring('Widget')[0].offspring('txt_content').nodes[0].node.data
 
-tokenid = open_platform.get_api_token('test')
-hunter = Hunter(tokenid, 'xy2', 'xy2_at_408d5c116536')
-poco = NeteasePoco('xy2', hunter)
+from airtest.core.api import connect_device
+from poco.utils.track import track_sampling, MotionTrack, MotionTrackBatch
+from poco.utils.airtest.input import AirtestInput
 
-print poco('npc_conversation').offspring('list_options').offspring('Widget')[0].offspring('txt_content').nodes[0].node.data
+
+mt = MotionTrack()
+mt1 = MotionTrack()
+mt2 = MotionTrack()
+mt.start([0.5, 0.5]).move([0.2, 0.5]).move([0.5, 0.5]).hold(1)
+mt1.start([0.5, 0.6]).move([0.2, 0.6]).hold(1).move([0.5, 0.6])
+# mt2.hold(1).start([0.5, 0.4]).move([0.2, 0.4]).move([0.5, 0.4])
+
+
+meb = MotionTrackBatch([mt1, mt])
+for e in meb.discretize():
+    print e
+print len(meb.discretize())
+
+connect_device('Android:///')
+poco = AndroidUiautomationPoco(use_airtest_input=True)
+
+# ai = AirtestInput()
+# t1 = time.time()
+# ai.applyMotionTracks(meb.discretize())
+# t2 = time.time()
+# print t2 - t1
+
+poco.apply_motion_tracks([mt1, mt])
+
+time.sleep(4)
+

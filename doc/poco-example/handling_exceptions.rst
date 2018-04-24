@@ -86,8 +86,7 @@ The following example shows how to deal with this situation and stay in sync wit
     from poco.exceptions import PocoTargetTimeout
 
 
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     # UI is very slow
     poco('btn_start').click()
@@ -141,6 +140,10 @@ The following example shows clicking on a no longer valid UI.
     In some poco-sdk implementations, this exceptions is never raised. So please test existence state carefully by
     your own when using previously defined UI proxies. See the following example.
 
+.. note::
+
+    In :py:class:`poco.drivers.std.StdPoco`, this exceptions is never raised!
+
 .. code-block:: python
 
     # coding=utf-8
@@ -149,8 +152,7 @@ The following example shows clicking on a no longer valid UI.
     from airtest.core.api import connect_device
 
 
-    connect_device('Android:///')
-    poco = UnityPoco(('10.254.44.76', 5001))
+    poco = UnityPoco()
 
     # no PocoTargetRemovedException case
     start = poco('start')

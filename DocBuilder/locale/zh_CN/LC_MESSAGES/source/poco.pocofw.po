@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 14:24+0800\n"
+"POT-Creation-Date: 2018-04-23 15:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,8 @@ msgstr ""
 
 #: of poco.pocofw.Poco poco.pocofw.Poco.__call__
 #: poco.pocofw.Poco.add_post_action_callback
-#: poco.pocofw.Poco.add_pre_action_callback poco.pocofw.Poco.click
+#: poco.pocofw.Poco.add_pre_action_callback
+#: poco.pocofw.Poco.apply_motion_tracks poco.pocofw.Poco.click
 #: poco.pocofw.Poco.long_click poco.pocofw.Poco.snapshot poco.pocofw.Poco.swipe
 #: poco.pocofw.Poco.wait_for_all poco.pocofw.Poco.wait_for_any
 msgid "参数"
@@ -224,6 +225,20 @@ msgstr ""
 msgid ":py:class:`poco.agent.PocoAgent`"
 msgstr ""
 
+#: of poco.pocofw.Poco.apply_motion_tracks:1 poco.pocofw.Poco.long_click:1
+msgid ""
+"Similar to click but press the screen for the given time interval and "
+"then release"
+msgstr ""
+
+#: of poco.pocofw.Poco.apply_motion_tracks:3
+msgid "list of :py:class:`poco.utils.track.MotionTrack` object"
+msgstr ""
+
+#: of poco.pocofw.Poco.apply_motion_tracks:5
+msgid "motion accuracy for each motion steps in normalized coordinate metrics."
+msgstr ""
+
 #: of poco.pocofw.Poco.click:1
 msgid ""
 "Perform click (touch, tap, etc.) action on target device at given "
@@ -285,12 +300,6 @@ msgstr ""
 
 #: of poco.pocofw.Poco.get_screen_size:3
 msgid "float number indicating the screen physical resolution in pixels"
-msgstr ""
-
-#: of poco.pocofw.Poco.long_click:1
-msgid ""
-"Similar to click but press the screen for the given time interval and "
-"then release"
 msgstr ""
 
 #: of poco.pocofw.Poco.long_click:3

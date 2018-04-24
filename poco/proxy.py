@@ -1,5 +1,5 @@
 # coding=utf-8
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 
 import copy
 import poco.utils.six as six
@@ -9,6 +9,7 @@ from functools import wraps
 from poco.exceptions import PocoTargetTimeout, InvalidOperationException, PocoNoSuchNodeException, PocoTargetRemovedException
 from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.utils.query_util import query_expr, build_query
+from poco.utils.track import MotionTrack
 
 __author__ = 'lxn3032'
 __all__ = ['UIObjectProxy']
@@ -368,6 +369,91 @@ class UIObjectProxy(object):
         origin_pos = self.get_position()
         dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
         return self.swipe(dir, duration=duration)
+
+    def scroll(self, direction='vertical', percent=0.6, duration=2.0):
+        """
+        Simply touch down from point A and move to point B then release up finally. This action is performed within
+        specific motion range and duration.
+
+        Args:
+            direction (:py:obj:`str`): scrolling direction. "vertical" or "horizontal"
+            percent (:py:obj:`float`): scrolling distance percentage of selected UI height or width according to
+             direction
+            duration (:py:obj:`float`): time interval in which the action is performed
+
+        Raises:
+            PocoNoSuchNodeException: raised when the UI element does not exist
+        """
+
+        if direction not in ('vertical', 'horizontal'):
+            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
+
+        focus1 = self._focus or [0.5, 0.5]
+        focus2 = list(focus1)
+        half_distance = percent / 2
+        if direction == 'vertical':
+            focus1[1] += half_distance
+            focus2[1] -= half_distance
+        else:
+            focus1[0] += half_distance
+            focus2[0] -= half_distance
+
+        return self.focus(focus1).drag_to(self.focus(focus2), duration=duration)
+
+    def pinch(self, direction='in', percent=0.6, duration=2.0, dead_zone=0.1):
+        """
+        Squeezing or expanding 2 fingers on this UI with given motion range and duration.
+
+        Args:
+            direction (:py:obj:`str`): pinching direction, only "in" or "out". "in" for squeezing, "out" for expanding
+            percent (:py:obj:`float`): pinching range from or expanding range to of the bounds of the UI
+            duration (:py:obj:`float`): time interval in which the action is performed
+            dead_zone (:py:obj:`float`): pinching end circle radius. should not be greater than `percent`
+
+        Raises:
+            PocoNoSuchNodeException: raised when the UI element does not exist
+        """
+
+        if direction not in ('in', 'out'):
+            raise ValueError('Argument `direction` should be one of "in" or "out". Got {}'.format(repr(direction)))
+        if dead_zone >= percent:
+            raise ValueError('Argument `dead_zone` should not be greater than `percent`')
+
+        half_distance = percent / 2
+        dead_zone_distance = dead_zone / 2
+        pa0 = self._focus or [0.5, 0.5]
+        pb0 = list(pa0)
+        pa1 = list(pa0)
+        pb1 = list(pa0)
+        if direction == 'in':
+            pa0[0] += half_distance
+            pa0[1] += half_distance
+            pb0[0] -= half_distance
+            pb0[1] -= half_distance
+            pa1[0] += dead_zone_distance
+            pa1[1] += dead_zone_distance
+            pb1[0] -= dead_zone_distance
+            pb1[1] -= dead_zone_distance
+        else:
+            pa1[0] += half_distance
+            pa1[1] += half_distance
+            pb1[0] -= half_distance
+            pb1[1] -= half_distance
+            pa0[0] += dead_zone_distance
+            pa0[1] += dead_zone_distance
+            pb0[0] -= dead_zone_distance
+            pb0[1] -= dead_zone_distance
+
+        speed = (percent - dead_zone) / 2 / duration
+        track_a = MotionTrack([pa0, pa1], speed)
+        track_b = MotionTrack([pb0, pb1], speed)
+
+        # 速度慢的时候，精度适当要提高，这样有助于控制准确
+        ret = self.poco.apply_motion_tracks([track_a, track_b], accuracy=speed * 0.03)
+        return ret
+
+    def pan(self, dir, duration=2.0):
+        raise NotImplementedError
 
     def focus(self, f):
         """
