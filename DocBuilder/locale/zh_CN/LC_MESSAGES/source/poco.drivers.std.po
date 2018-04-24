@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 16:54+0800\n"
+"POT-Creation-Date: 2018-04-24 20:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,5 +60,9 @@ msgstr ""
 
 #: ../../source/poco.drivers.std.rst:9
 msgid "Subpackages"
+msgstr ""
+
+#: ../../source/poco.drivers.std.rst:16
+msgid "Submodules"
 msgstr ""
 

@@ -484,6 +484,12 @@ Join to discuss!
 
 |chat on slack|
 
+Contributions
+-------------
+
+Any pull requests are welcomed! We will have the code checked carefully. Please make sure the codes are compatible with
+python 2/3 and have the same coding style.
+
 .. _poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/integration.html
 .. _implementing poco-sdk: http://poco.readthedocs.io/en/latest/source/doc/implementation_guide.html
 .. _Integration Guide: http://poco.readthedocs.io/en/latest/source/doc/integration.html
