@@ -412,7 +412,7 @@ class UIObjectProxy(object):
             direction (:py:obj:`str`): pinching direction, only "in" or "out". "in" for squeezing, "out" for expanding
             percent (:py:obj:`float`): squeezing range from or expanding range to of the bounds of the UI
             duration (:py:obj:`float`): time interval in which the action is performed
-            dead_zone (:py:obj:`float`): pinching inner circle radius. should not be greater than `percent`
+            dead_zone (:py:obj:`float`): pinching inner circle radius. should not be greater than ``percent``
 
         Raises:
             PocoNoSuchNodeException: raised when the UI element does not exist
@@ -437,6 +437,30 @@ class UIObjectProxy(object):
         raise NotImplementedError
 
     def start_gesture(self):
+        """
+        Start a gesture action. This method will return a :py:class:`PendingGestureAction
+        <poco.gesture.PendingGestureAction>` object which is able to generate decomposed gesture steps. You can invoke
+        ``.to`` and ``.hold`` any times in a chain. See the following example.
+
+        Examples:
+            ::
+
+                poco = Poco(...)
+                ui1 = poco('xxx')
+                ui2 = poco('yyy')
+
+                # touch down on ui1 and hold for 1s
+                # then drag to ui2 and hold for 1s
+                # finally release(touch up)
+                ui1.start_gesture().hold(1).to(ui2).hold(1).up()
+
+        .. note:: always starts touching down at the position of current UI object.
+
+        Returns:
+            :py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>`: an object for building serialized
+            gesture action.
+        """
+
         return PendingGestureAction(self.poco, self)
 
     def focus(self, f):

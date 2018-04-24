@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-23 15:24+0800\n"
+"POT-Creation-Date: 2018-04-24 21:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,8 +33,10 @@ msgstr ""
 #: poco.pocofw.Poco.add_post_action_callback
 #: poco.pocofw.Poco.add_pre_action_callback
 #: poco.pocofw.Poco.apply_motion_tracks poco.pocofw.Poco.click
-#: poco.pocofw.Poco.long_click poco.pocofw.Poco.snapshot poco.pocofw.Poco.swipe
-#: poco.pocofw.Poco.wait_for_all poco.pocofw.Poco.wait_for_any
+#: poco.pocofw.Poco.long_click poco.pocofw.Poco.pinch poco.pocofw.Poco.scroll
+#: poco.pocofw.Poco.snapshot poco.pocofw.Poco.start_gesture
+#: poco.pocofw.Poco.swipe poco.pocofw.Poco.wait_for_all
+#: poco.pocofw.Poco.wait_for_any
 msgid "参数"
 msgstr ""
 
@@ -109,7 +111,8 @@ msgid ""
 msgstr ""
 
 #: of poco.pocofw.Poco.__call__:9 poco.pocofw.Poco.click:10
-#: poco.pocofw.Poco.freeze:6 poco.pocofw.Poco.swipe:10
+#: poco.pocofw.Poco.freeze:6 poco.pocofw.Poco.start_gesture:6
+#: poco.pocofw.Poco.swipe:10
 msgid "Examples"
 msgstr ""
 
@@ -147,7 +150,7 @@ msgstr ""
 
 #: of poco.pocofw.Poco.__call__ poco.pocofw.Poco.agent poco.pocofw.Poco.freeze
 #: poco.pocofw.Poco.get_screen_size poco.pocofw.Poco.snapshot
-#: poco.pocofw.Poco.wait_for_any
+#: poco.pocofw.Poco.start_gesture poco.pocofw.Poco.wait_for_any
 msgid "返回"
 msgstr ""
 
@@ -159,7 +162,7 @@ msgstr ""
 
 #: of poco.pocofw.Poco.__call__ poco.pocofw.Poco.agent poco.pocofw.Poco.freeze
 #: poco.pocofw.Poco.get_screen_size poco.pocofw.Poco.snapshot
-#: poco.pocofw.Poco.wait_for_any
+#: poco.pocofw.Poco.start_gesture poco.pocofw.Poco.wait_for_any
 msgid "返回类型"
 msgstr ""
 
@@ -310,6 +313,42 @@ msgstr ""
 msgid "duration of press the screen"
 msgstr ""
 
+#: of poco.pocofw.Poco.pinch:1
+msgid "Squeezing or expanding 2 fingers on the entire screen."
+msgstr ""
+
+#: of poco.pocofw.Poco.pinch:3
+msgid ""
+"pinching direction, only \"in\" or \"out\". \"in\" for squeezing, \"out\""
+" for expanding"
+msgstr ""
+
+#: of poco.pocofw.Poco.pinch:5
+msgid "squeezing range from or expanding range to of the entire screen"
+msgstr ""
+
+#: of poco.pocofw.Poco.pinch:7 poco.pocofw.Poco.scroll:8
+msgid "time interval in which the action is performed"
+msgstr ""
+
+#: of poco.pocofw.Poco.pinch:9
+msgid "pinching inner circle radius. should not be greater than ``percent``"
+msgstr ""
+
+#: of poco.pocofw.Poco.scroll:1
+msgid "Scroll from the lower part to the upper part of the entire screen."
+msgstr ""
+
+#: of poco.pocofw.Poco.scroll:3
+msgid "scrolling direction. \"vertical\" or \"horizontal\""
+msgstr ""
+
+#: of poco.pocofw.Poco.scroll:5
+msgid ""
+"scrolling distance percentage of the entire screen height or width "
+"according to direction"
+msgstr ""
+
 #: of poco.pocofw.Poco.sleep_for_polling_interval:1
 msgid ""
 "Sleep for fixed number of seconds after each poll event. There is no need"
@@ -340,6 +379,26 @@ msgstr ""
 
 #: of poco.pocofw.Poco.snapshot:9
 msgid "format (:obj:`str`): output format 'png', 'jpg', etc."
+msgstr ""
+
+#: of poco.pocofw.Poco.start_gesture:1
+msgid ""
+"Start a gesture action. This method will return a "
+":py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>` "
+"object which is able to generate decomposed gesture steps. You can invoke"
+" ``.to`` and ``.hold`` any times in a chain. See the following example."
+msgstr ""
+
+#: of poco.pocofw.Poco.start_gesture:15
+msgid "starting coordinate of normalized coordinate system"
+msgstr ""
+
+#: of poco.pocofw.Poco.start_gesture:17
+msgid "an object for building serialized gesture action."
+msgstr ""
+
+#: of poco.pocofw.Poco.start_gesture:19
+msgid ":py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>`"
 msgstr ""
 
 #: of poco.pocofw.Poco.swipe:1
@@ -443,5 +502,23 @@ msgstr ""
 #~ "(underscore) as attributes start with "
 #~ "``_`` are private attributes that used"
 #~ " by sdk implementation. ::"
+#~ msgstr ""
+
+#~ msgid "pinching inner circle radius. should not be greater than `percent`"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Start a gesture action. This method "
+#~ "will return a :py:class:`PendingGestureAction "
+#~ "<poco.gesture.PendingGestureAction>` object which is"
+#~ " able to generate decomposed gesture "
+#~ "steps. See the following example for "
+#~ "more."
+#~ msgstr ""
+
+#~ msgid "a object for building serialized gesture action."
+#~ msgstr ""
+
+#~ msgid "Example::"
 #~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-23 20:43+0800\n"
+"POT-Creation-Date: 2018-04-24 21:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,7 +101,8 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.get_name poco.proxy.UIObjectProxy.get_position
 #: poco.proxy.UIObjectProxy.get_size poco.proxy.UIObjectProxy.get_text
 #: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
-#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.wait
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.start_gesture
+#: poco.proxy.UIObjectProxy.wait
 msgid "返回"
 msgstr ""
 
@@ -115,7 +116,8 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.get_bounds poco.proxy.UIObjectProxy.get_name
 #: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.get_size
 #: poco.proxy.UIObjectProxy.get_text poco.proxy.UIObjectProxy.offspring
-#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.wait
+#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.start_gesture
+#: poco.proxy.UIObjectProxy.wait
 msgid "返回类型"
 msgstr ""
 
@@ -316,7 +318,7 @@ msgstr ""
 
 #: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:9
 #: poco.proxy.UIObjectProxy.pinch:12 poco.proxy.UIObjectProxy.scroll:12
-#: poco.proxy.UIObjectProxy.swipe:14
+#: poco.proxy.UIObjectProxy.swipe:15
 msgid ""
 ":exc:`PocoNoSuchNodeException` -- raised when the UI element does not "
 "exist"
@@ -335,7 +337,7 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.drag_to:6 poco.proxy.UIObjectProxy.pinch:7
-#: poco.proxy.UIObjectProxy.scroll:9 poco.proxy.UIObjectProxy.swipe:11
+#: poco.proxy.UIObjectProxy.scroll:9 poco.proxy.UIObjectProxy.swipe:12
 msgid "time interval in which the action is performed"
 msgstr ""
 
@@ -483,11 +485,11 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.pinch:5
-msgid "pinching range from or expanding range to of the bounds of the UI"
+msgid "squeezing range from or expanding range to of the bounds of the UI"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.pinch:9
-msgid "pinching end circle radius. should not be greater than `percent`"
+msgid "pinching inner circle radius. should not be greater than ``percent``"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.scroll:1
@@ -550,6 +552,30 @@ msgid ""
 "expression, see ``QueryCondition`` for more details about the selectors."
 msgstr ""
 
+#: of poco.proxy.UIObjectProxy.start_gesture:1
+msgid ""
+"Start a gesture action. This method will return a "
+":py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>` "
+"object which is able to generate decomposed gesture steps. You can invoke"
+" ``.to`` and ``.hold`` any times in a chain. See the following example."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.start_gesture:6
+msgid "Examples"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.start_gesture:18
+msgid "always starts touching down at the position of current UI object."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.start_gesture:20
+msgid "an object for building serialized gesture action."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.start_gesture:22
+msgid ":py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>`"
+msgstr ""
+
 #: of poco.proxy.UIObjectProxy.swipe:1
 msgid ""
 "Perform a swipe action given by the direction from this UI element. For "
@@ -565,7 +591,7 @@ msgid ""
 "equivalent to [-0.1, 0] and swipe 'right' is equivalent to [0, 0.1]"
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.swipe:8
+#: of poco.proxy.UIObjectProxy.swipe:9
 msgid "see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>` for more details"
 msgstr ""
 
@@ -617,5 +643,26 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "pinching range from or expanding range to of the bounds of the UI"
+#~ msgstr ""
+
+#~ msgid "pinching end circle radius. should not be greater than `percent`"
+#~ msgstr ""
+
+#~ msgid "pinching inner circle radius. should not be greater than `percent`"
+#~ msgstr ""
+
+#~ msgid "Note::"
+#~ msgstr ""
+
+#~ msgid "a object for building serialized gesture action."
+#~ msgstr ""
+
+#~ msgid "Example::"
+#~ msgstr ""
+
+#~ msgid "always start touching down at the position of current UI."
 #~ msgstr ""
 

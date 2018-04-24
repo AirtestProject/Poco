@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 15:42+0800\n"
+"POT-Creation-Date: 2018-04-24 20:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -559,6 +559,17 @@ msgstr ""
 
 #: ../../source/README.rst:485
 msgid "|chat on slack|"
+msgstr ""
+
+#: ../../source/README.rst:488
+msgid "Contributions"
+msgstr ""
+
+#: ../../source/README.rst:490
+msgid ""
+"Any pull requests are welcomed! We will have the code checked carefully. "
+"Please make sure the codes are compatible with python 2/3 and have the "
+"same coding style."
 msgstr ""
 
 #~ msgid "**A cross-engine UI automation framework**"

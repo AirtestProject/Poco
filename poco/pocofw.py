@@ -339,7 +339,7 @@ class Poco(PocoAccelerationMixin):
             direction (:py:obj:`str`): pinching direction, only "in" or "out". "in" for squeezing, "out" for expanding
             percent (:py:obj:`float`): squeezing range from or expanding range to of the entire screen
             duration (:py:obj:`float`): time interval in which the action is performed
-            dead_zone (:py:obj:`float`): pinching inner circle radius. should not be greater than `percent`
+            dead_zone (:py:obj:`float`): pinching inner circle radius. should not be greater than ``percent``
         """
 
         if direction not in ('in', 'out'):
@@ -359,6 +359,28 @@ class Poco(PocoAccelerationMixin):
         raise NotImplementedError
 
     def start_gesture(self, pos):
+        """
+        Start a gesture action. This method will return a :py:class:`PendingGestureAction
+        <poco.gesture.PendingGestureAction>` object which is able to generate decomposed gesture steps. You can invoke
+        ``.to`` and ``.hold`` any times in a chain. See the following example.
+
+        Examples:
+            ::
+
+                poco = Poco(...)
+
+                # move from screen center to (0.6w, 0.6h) and hold for 1 second
+                # then return back to center
+                poco.start_gesture([0.5, 0.5]).to([0.6, 0.6]).hold(1).to([0.5, 0.5]).up()
+
+        Args:
+            pos: starting coordinate of normalized coordinate system
+
+        Returns:
+            :py:class:`PendingGestureAction <poco.gesture.PendingGestureAction>`: an object for building serialized
+            gesture action.
+        """
+
         return PendingGestureAction(self, pos)
 
     def apply_motion_tracks(self, tracks, accuracy=0.004):
