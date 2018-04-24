@@ -66,4 +66,4 @@ class PocoAccelerationMixin(object):
                 return
 
             if time.time() - start_time > timeout:
-                raise PocoTargetTimeout('dismiss', repr(targets).decode('utf-8'))
+                raise PocoTargetTimeout('dismiss', targets)
