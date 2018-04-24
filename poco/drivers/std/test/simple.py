@@ -17,7 +17,7 @@ class TestStandardFunction(unittest.TestCase):
         # u3d game 默认5001
         # cocos2dx-lua 默认15004
         connect_device('Android:///')
-        cls.poco = StdPoco(5001)
+        cls.poco = StdPoco(15004)
 
     @classmethod
     def tearDownClass(cls):
@@ -25,10 +25,10 @@ class TestStandardFunction(unittest.TestCase):
 
     def test_dump(self):
         h = self.poco.agent.hierarchy.dump()
-        print json.dumps(h, indent=4)
+        print(json.dumps(h, indent=4))
 
     def test_getSdkVersion(self):
-        print self.poco.agent.get_sdk_version()
+        print(self.poco.agent.get_sdk_version())
 
     def test_nosuch_rpc_method(self):
         @sync_wrapper
@@ -48,7 +48,7 @@ class TestStandardFunction(unittest.TestCase):
             f.write(base64.b64decode(b64img))
 
     def test_get_screen_size(self):
-        print self.poco.get_screen_size()
+        print(self.poco.get_screen_size())
 
     def test_motion_events(self):
         ui = self.poco()[0]
@@ -64,7 +64,7 @@ class TestStandardFunction(unittest.TestCase):
         node.set_text(textval)
         node.invalidate()
         actualVal = node.get_text() or node.offspring(text=textval).get_text()
-        print repr(actualVal)
+        print(repr(actualVal))
         self.assertEqual(actualVal, textval)
 
     def test_clear_text(self):
@@ -79,4 +79,4 @@ class TestStandardFunction(unittest.TestCase):
         for n in self.poco():
             instanceId = n.attr('_instanceId')
             if instanceId:
-                print instanceId
+                print(instanceId)

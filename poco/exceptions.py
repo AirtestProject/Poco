@@ -4,7 +4,10 @@ from __future__ import unicode_literals
 import poco.utils.six as six
 
 
-__author__ = 'lxn3032'
+def to_text(val):
+    if six.PY2 and not isinstance(val, six.text_type):
+        return val.decode('utf-8')
+    return val
 
 
 class PocoException(Exception):
@@ -12,9 +15,13 @@ class PocoException(Exception):
     Base class for errors and exceptions of Poco. It is Python3 compatible.
     """
 
+    def __init__(self, message=None):
+        super(PocoException, self).__init__(message)
+        self.message = message
+
     def __str__(self):
         if six.PY2:
-            if isinstance(self.message, unicode):
+            if isinstance(self.message, six.text_type):
                 return self.message.encode("utf-8")
             else:
                 return self.message
@@ -44,7 +51,7 @@ class PocoTargetTimeout(PocoException):
 
     def __init__(self, action, poco_obj_proxy):
         super(PocoTargetTimeout, self).__init__()
-        self.message = 'Waiting timeout for {} of "{}"'.format(action, poco_obj_proxy)
+        self.message = 'Waiting timeout for {} of "{}"'.format(action, to_text(repr(poco_obj_proxy)))
 
 
 class PocoNoSuchNodeException(PocoException):
@@ -54,7 +61,7 @@ class PocoNoSuchNodeException(PocoException):
 
     def __init__(self, objproxy):
         super(PocoNoSuchNodeException, self).__init__()
-        self.message = 'Cannot find any visible node by query {}'.format(objproxy)
+        self.message = 'Cannot find any visible node by query {}'.format(to_text(repr(objproxy)))
 
 
 class PocoTargetRemovedException(PocoException):
@@ -76,4 +83,5 @@ class PocoTargetRemovedException(PocoException):
 
     def __init__(self, action, objproxy):
         super(PocoTargetRemovedException, self).__init__()
+        objproxy = to_text(repr(objproxy))
         self.message = 'Remote ui object "{}" has been removed from hierarchy during {}.'.format(objproxy, action)

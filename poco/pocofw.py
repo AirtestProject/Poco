@@ -11,6 +11,8 @@ from .proxy import UIObjectProxy
 from .agent import PocoAgent
 from .freezeui.utils import create_immutable_hierarchy
 from .utils.track import MotionTrackBatch
+from .utils.multitouch_gesture import make_pinching
+from .gesture import PendingGestureAction
 
 __author__ = 'lxn3032'
 
@@ -52,8 +54,8 @@ class Poco(PocoAccelerationMixin):
                                  .format(repr(touch_down_duration)))
             self._agent.input.setTouchDownDuration(touch_down_duration)
 
-        self._pre_action_callbacks = [self.on_pre_action.__func__]
-        self._post_action_callbacks = [self.on_post_action.__func__]
+        self._pre_action_callbacks = [self.__class__.on_pre_action]
+        self._post_action_callbacks = [self.__class__.on_post_action]
 
     def __call__(self, name=None, **kw):
         """
@@ -121,7 +123,7 @@ class Poco(PocoAccelerationMixin):
                 if obj.exists():
                     return obj
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('any to appear', repr(objects).decode('utf-8'))
+                raise PocoTargetTimeout('any to appear', objects)
             self.sleep_for_polling_interval()
 
     def wait_for_all(self, objects, timeout=120):
@@ -149,7 +151,7 @@ class Poco(PocoAccelerationMixin):
             if all_exist:
                 return
             if time.time() - start > timeout:
-                raise PocoTargetTimeout('all to appear', repr(objects).decode('utf-8'))
+                raise PocoTargetTimeout('all to appear', objects)
             self.sleep_for_polling_interval()
 
     def freeze(this):
@@ -237,7 +239,7 @@ class Poco(PocoAccelerationMixin):
         """
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
-            raise InvalidOperationException('Click position out of screen. pos={}'.format(repr(pos).decode('utf-8')))
+            raise InvalidOperationException('Click position out of screen. pos={}'.format(repr(pos)))
         return self.agent.input.click(pos[0], pos[1])
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
@@ -276,7 +278,7 @@ class Poco(PocoAccelerationMixin):
             raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
         if not (0 <= p1[0] <= 1) or not (0 <= p1[1] <= 1):
-            raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1).decode('utf-8')))
+            raise InvalidOperationException('Swipe origin out of screen. {}'.format(repr(p1)))
         if direction is not None:
             p2 = [p1[0] + direction[0], p1[1] + direction[1]]
         elif p2 is not None:
@@ -300,17 +302,64 @@ class Poco(PocoAccelerationMixin):
             raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
-            raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos).decode('utf-8')))
+            raise InvalidOperationException('Click position out of screen. {}'.format(repr(pos)))
         return self.agent.input.longClick(pos[0], pos[1], duration)
 
     def scroll(self, direction='vertical', percent=0.6, duration=2.0):
-        raise NotImplementedError
+        """
+        Scroll from the lower part to the upper part of the entire screen.
+
+        Args:
+            direction (:py:obj:`str`): scrolling direction. "vertical" or "horizontal"
+            percent (:py:obj:`float`): scrolling distance percentage of the entire screen height or width according to
+             direction
+            duration (:py:obj:`float`): time interval in which the action is performed
+        """
+
+        if direction not in ('vertical', 'horizontal'):
+            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'
+                             .format(repr(direction)))
+
+        start = [0.5, 0.5]
+        half_distance = percent / 2
+        if direction == 'vertical':
+            start[1] += half_distance
+            direction = [0, -percent]
+        else:
+            start[0] += half_distance
+            direction = [-percent, 0]
+
+        return self.swipe(start, direction=direction, duration=duration)
 
     def pinch(self, direction='in', percent=0.6, duration=2.0, dead_zone=0.1):
+        """
+        Squeezing or expanding 2 fingers on the entire screen.
+
+        Args:
+            direction (:py:obj:`str`): pinching direction, only "in" or "out". "in" for squeezing, "out" for expanding
+            percent (:py:obj:`float`): squeezing range from or expanding range to of the entire screen
+            duration (:py:obj:`float`): time interval in which the action is performed
+            dead_zone (:py:obj:`float`): pinching inner circle radius. should not be greater than `percent`
+        """
+
+        if direction not in ('in', 'out'):
+            raise ValueError('Argument `direction` should be one of "in" or "out". Got {}'.format(repr(direction)))
+        if dead_zone >= percent:
+            raise ValueError('Argument `dead_zone` should not be greater than `percent`. dead_zoon={}, percent={}'
+                             .format(repr(dead_zone), repr(percent)))
+
+        tracks = make_pinching(direction, [0.5, 0.5], [1, 1], percent, dead_zone, duration)
+        speed = (percent - dead_zone) / 2 / duration
+
+        # 速度慢的时候，精度适当要提高，这样有助于控制准确
+        ret = self.apply_motion_tracks(tracks, accuracy=speed * 0.03)
+        return ret
+
+    def pan(self, direction, duration=2.0):
         raise NotImplementedError
 
-    def pan(self, dir, duration=2.0):
-        raise NotImplementedError
+    def start_gesture(self, pos):
+        return PendingGestureAction(self, pos)
 
     def apply_motion_tracks(self, tracks, accuracy=0.004):
         """
@@ -354,8 +403,8 @@ class Poco(PocoAccelerationMixin):
 
         return self.agent.screen.getPortSize()
 
-    def command(self, cmd, type=None):
-        return self.agent.command.command(cmd, type)
+    def command(self, cmd, _type=None):
+        return self.agent.command.command(cmd, _type)
 
     def on_pre_action(self, action, proxy, args):
         pass
@@ -397,12 +446,12 @@ class Poco(PocoAccelerationMixin):
         for cb in self._pre_action_callbacks:
             try:
                 cb(self, action, proxy, args)
-            except:
+            except Exception as e:
                 warnings.warn("Error occurred at pre action stage.\n{}".format(traceback.format_exc()))
 
     def post_action(self, action, proxy, args):
         for cb in self._post_action_callbacks:
             try:
                 cb(self, action, proxy, args)
-            except:
+            except Exception as e:
                 warnings.warn("Error occurred at post action stage.\n{}".format(traceback.format_exc()))
