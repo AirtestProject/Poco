@@ -513,20 +513,20 @@ class UIObjectProxy(object):
                             'Only "anchor/center" or 2-list/2-tuple available.'.format(type(focus)))
         return pos
 
-    def _direction_vector_of(self, _dir):
-        if _dir == 'up':
+    def _direction_vector_of(self, dir_):
+        if dir_ == 'up':
             dir_vec = [0, -0.1]
-        elif _dir == 'down':
+        elif dir_ == 'down':
             dir_vec = [0, 0.1]
-        elif _dir == 'left':
+        elif dir_ == 'left':
             dir_vec = [-0.1, 0]
-        elif _dir == 'right':
+        elif dir_ == 'right':
             dir_vec = [0.1, 0]
-        elif type(_dir) in (list, tuple):
-            dir_vec = _dir
+        elif type(dir_) in (list, tuple):
+            dir_vec = dir_
         else:
             raise TypeError('Unsupported direction type {}. '
-                            'Only "up/down/left/right" or 2-list/2-tuple available.'.format(type(_dir)))
+                            'Only "up/down/left/right" or 2-list/2-tuple available.'.format(type(dir_)))
         return dir_vec
 
     def wait(self, timeout=3):
@@ -602,7 +602,8 @@ class UIObjectProxy(object):
 
         Returns:
             None if no such attribute or its value is None/null/nil/etc. Otherwise the attribute value is returned. The
-            returned value type is json serializable.
+            returned value type is json serializable. In both py2 and py3, if the attribute value in remote is a
+            text-like object, the return value type will be :obj:`str`.
 
         Raises:
             PocoNoSuchNodeException: when the UI element does not exists
@@ -618,6 +619,9 @@ class UIObjectProxy(object):
         nodes = self._do_query(multiple=False)
         val = self.poco.agent.hierarchy.getAttr(nodes, name)
         if six.PY2 and isinstance(val, six.text_type):
+            # 文本类型的属性值，只在python2里encode成utf-8的str，python3保持str类型
+            # 这是为了在写代码的时候，无论py2/3始终可以像下面这样写
+            # node.attr('text') == '节点属性值'
             val = val.encode('utf-8')
         return val
 
@@ -661,12 +665,11 @@ class UIObjectProxy(object):
         <poco.proxy.UIObjectProxy.attr>`.
 
         Returns:
-            :obj:`str`: None if the UI element does not have the text element, otherwise the utf-8 encoded text value
+            :obj:`str`: None if the UI element does not have the text element, otherwise the utf-8 encoded text value.
+            In both py2 and py3, the return value type will be :obj:`str`.
         """
 
         text = self.attr('text')
-        if six.PY2 and isinstance(text, six.text_type):
-            text = text.encode('utf-8')
         return text
 
     def set_text(self, text):

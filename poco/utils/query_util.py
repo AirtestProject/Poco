@@ -42,7 +42,7 @@ def query_expr(query):
 
 
 def ensure_string_value(value):
-    if six.PY2 and isinstance(value, str):
+    if not isinstance(value, six.text_type):
         return value.decode("utf-8")
     else:
         return value
