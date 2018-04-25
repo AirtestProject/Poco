@@ -22,7 +22,7 @@ class Case(PocoTestCase):
         from poco.drivers.cocosjs import CocosJsPoco
         poco = CocosJsPoco()
         for n in poco():
-            print n.get_name()
+            print(n.get_name())
 
 
 # if __name__ == '__main__':
@@ -52,21 +52,18 @@ mt1.start([0.5, 0.6]).move([0.2, 0.6]).hold(1).move([0.5, 0.6])
 # mt2.hold(1).start([0.5, 0.4]).move([0.2, 0.4]).move([0.5, 0.4])
 
 
-meb = MotionTrackBatch([mt1, mt])
-for e in meb.discretize():
-    print e
-print len(meb.discretize())
+
 
 connect_device('Android:///')
 poco = AndroidUiautomationPoco(use_airtest_input=True)
+poco('2333中文', text='另一个中文').click()
 
-# ai = AirtestInput()
-# t1 = time.time()
-# ai.applyMotionTracks(meb.discretize())
-# t2 = time.time()
-# print t2 - t1
-
-poco.apply_motion_tracks([mt1, mt])
+#
+# meb = MotionTrackBatch([mt1, mt])
+# for e in meb.discretize():
+#     print e
+# print len(meb.discretize())
+# poco.apply_motion_tracks([mt1, mt])
 
 time.sleep(4)
 

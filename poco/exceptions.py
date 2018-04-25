@@ -5,7 +5,7 @@ import poco.utils.six as six
 
 
 def to_text(val):
-    if six.PY2 and not isinstance(val, six.text_type):
+    if not isinstance(val, six.text_type):
         return val.decode('utf-8')
     return val
 

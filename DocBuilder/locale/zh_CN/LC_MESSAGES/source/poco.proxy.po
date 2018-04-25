@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 21:02+0800\n"
+"POT-Creation-Date: 2018-04-25 20:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -237,18 +237,19 @@ msgstr ""
 msgid ""
 "None if no such attribute or its value is None/null/nil/etc. Otherwise "
 "the attribute value is returned. The returned value type is json "
-"serializable."
+"serializable. In both py2 and py3, if the attribute value in remote is a "
+"text-like object, the return value type will be :obj:`str`."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.attr:17
+#: of poco.proxy.UIObjectProxy.attr:18
 msgid ":exc:`PocoNoSuchNodeException` -- when the UI element does not exists"
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.attr:19
+#: of poco.proxy.UIObjectProxy.attr:20
 msgid "Exception :py:class:`NodeHasBeenRemovedException` is caught automatically."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.attr:21
+#: of poco.proxy.UIObjectProxy.attr:22
 msgid ""
 ":py:meth:`UI element attributes in poco sdk definition "
 "<poco.sdk.AbstractNode.AbstractNode.getAttr>`."
@@ -389,7 +390,7 @@ msgstr ""
 msgid "UI element name attribute"
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.get_name:4 poco.proxy.UIObjectProxy.get_text:5
+#: of poco.proxy.UIObjectProxy.get_name:4 poco.proxy.UIObjectProxy.get_text:6
 msgid ":obj:`str`"
 msgstr ""
 
@@ -433,7 +434,8 @@ msgstr ""
 #: of poco.proxy.UIObjectProxy.get_text:4
 msgid ""
 "None if the UI element does not have the text element, otherwise the "
-"utf-8 encoded text value"
+"utf-8 encoded text value. In both py2 and py3, the return value type will"
+" be :obj:`str`."
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.invalidate:1
@@ -664,5 +666,19 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "always start touching down at the position of current UI."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "None if no such attribute or its"
+#~ " value is None/null/nil/etc. Otherwise the"
+#~ " attribute value is returned. The "
+#~ "returned value type is json "
+#~ "serializable."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "None if the UI element does not"
+#~ " have the text element, otherwise the"
+#~ " utf-8 encoded text value"
 #~ msgstr ""
 

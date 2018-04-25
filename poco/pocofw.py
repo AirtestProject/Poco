@@ -425,8 +425,8 @@ class Poco(PocoAccelerationMixin):
 
         return self.agent.screen.getPortSize()
 
-    def command(self, cmd, _type=None):
-        return self.agent.command.command(cmd, _type)
+    def command(self, cmd, type_=None):
+        return self.agent.command.command(cmd, type_)
 
     def on_pre_action(self, action, proxy, args):
         pass

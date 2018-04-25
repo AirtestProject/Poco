@@ -9,6 +9,7 @@ import traceback
 from .jsonrpc import JSONRPCResponseManager, dispatcher
 from .jsonrpc.jsonrpc2 import JSONRPC20Response
 from .jsonrpc.exceptions import JSONRPCServerError
+from .jsonrpc import six
 
 
 DEBUG = True
@@ -146,6 +147,9 @@ class RpcAgent(object):
         return res
 
     def handle_message(self, msg, conn):
+        if isinstance(msg, six.binary_type):
+            # py3里 json 只接受str类型，py2没有这个限制
+            msg = msg.decode('utf-8')
         data = json.loads(msg)
         # if DEBUG:
         #     print("<--", data)
