@@ -1,5 +1,5 @@
 # encoding=utf-8
-
+import six
 import struct
 
 HEADER_SIZE = 4
@@ -17,7 +17,7 @@ class SimpleProtocolFilter(object):
 
     def __init__(self):
         super(SimpleProtocolFilter, self).__init__()
-        self.buf = ''
+        self.buf = b''
 
     def input(self, data):
         """ 小数据片段拼接成完整数据包
@@ -37,6 +37,8 @@ class SimpleProtocolFilter(object):
     def pack(content):
         """ content should be str
         """
+        if isinstance(content, six.text_type):
+            content = content.encode("utf-8")
         return struct.pack('i', len(content)) + content
 
     @staticmethod

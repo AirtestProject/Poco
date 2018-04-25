@@ -20,7 +20,7 @@ class BaseClient(asyncore.dispatcher):
         asyncore.dispatcher.__init__(self)
         self.outbox = collections.deque()
         self.read_lock = threading.Lock()
-        self.inbox = ""
+        self.inbox = b""
         self.closed = False
 
     def say(self, message):
@@ -54,7 +54,7 @@ class BaseClient(asyncore.dispatcher):
     def read_message(self, length=None):
         with self.read_lock:
             if length is None:
-                message, self.inbox = self.inbox, ""
+                message, self.inbox = self.inbox, b""
             else:
                 message, self.inbox = self.inbox[:length], self.inbox[length:]
         return message
