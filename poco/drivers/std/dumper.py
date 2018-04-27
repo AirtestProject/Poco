@@ -9,5 +9,5 @@ class StdDumper(FrozenUIDumper):
         self.rpcclient = rpcclient
 
     @sync_wrapper
-    def dumpHierarchy(self):
-        return self.rpcclient.call("Dump")
+    def dumpHierarchy(self, onlyVisibleNode=True):
+        return self.rpcclient.call("Dump", onlyVisibleNode)

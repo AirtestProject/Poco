@@ -83,12 +83,12 @@ class InputInterface(object):
 
         raise NotImplementedError
 
-    def applyMotionTracks(self, tracks):
+    def applyMotionEvents(self, events):
         """
         Apply a motion event on the device touch panel
 
         Args:
-            tracks (:py:obj:`list`): list of track. each track is a list of MotionEvent data
+            events (:py:obj:`list`): list of events. each event is MotionEvent data
              (``['u/d/m/s', (x, y), contact_id]``)
         """
 

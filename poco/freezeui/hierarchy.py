@@ -19,7 +19,7 @@ class FrozenUIDumper(AbstractDumper):
     target app, but to perform like a ordinary dumper.
     """
 
-    def dumpHierarchy(self):
+    def dumpHierarchy(self, onlyVisibleNode=True):
         raise NotImplementedError
 
     def getRoot(self):

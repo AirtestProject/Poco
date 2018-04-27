@@ -11,6 +11,11 @@ from poco.freezeui.hierarchy import FrozenUIHierarchy, FrozenUIDumper
 from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.ws import WebSocketClient
+from poco.utils import six
+
+from airtest.core.api import connect_device, device as current_device
+from airtest.core.helper import device_platform
+
 
 __all__ = ['CocosJsPoco']
 DEFAULT_ADDR = "ws://localhost:5003"
@@ -18,23 +23,24 @@ DEFAULT_ADDR = "ws://localhost:5003"
 
 class CocosJsPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
-        # init airtest env
         try:
-            # new version
-            from airtest.core.api import connect_device, device as current_device
-            if not current_device():
-                connect_device("Android:///")
-        except ImportError:
-            # old version
-            from airtest.cli.runner import device as current_device
-            from airtest.core.main import set_serialno
-            if not current_device():
-                set_serialno()
-        # cocos games poco sdk listens on Android localhost:5003
-        localport = addr.split(":")[-1]
-        current_device().adb.forward("tcp:%s" % localport, "tcp:5003", False)
+            port = int(addr.rsplit(":", 1)[-1])
+        except ValueError:
+            raise ValueError('Argument `addr` should be a string-like format. e.g. "ws://192.168.1.2:5003". Got {}'
+                             .format(repr(addr)))
 
-        self.conn = WebSocketClient(addr)
+        if not current_device():
+            connect_device("Android:///")
+        if device_platform() == 'Android':
+            local_port, _ = current_device().adb.setup_forward('tcp:{}'.format(port))
+            ip = 'localhost'
+            port = local_port
+        else:
+            import socket
+            ip = socket.gethostbyname(socket.gethostname())
+            # Note: ios is not support for now.
+
+        self.conn = WebSocketClient('ws://{}:{}'.format(ip, port))
         self.c = RpcClient(self.conn)
         self.c.DEBUG = False
         # self.c.run(backend=True)
@@ -52,8 +58,8 @@ class Dumper(FrozenUIDumper):
         self.rpcclient = rpcclient
 
     @sync_wrapper
-    def dumpHierarchy(self):
-        return self.rpcclient.call("dump")
+    def dumpHierarchy(self, onlyVisibleNode=True):
+        return self.rpcclient.call("dump", onlyVisibleNode)
 
 
 class CocosJsPoco(Poco):
@@ -64,11 +70,6 @@ class CocosJsPoco(Poco):
         if 'action_interval' not in options:
             options['action_interval'] = 0.5
         super(CocosJsPoco, self).__init__(agent, **options)
-
-    def on_pre_action(self, action, proxy, args):
-        # airteset log用
-        from airtest.core.api import snapshot
-        snapshot(msg=unicode(proxy))
 
 
 # test code

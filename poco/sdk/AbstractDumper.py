@@ -22,7 +22,7 @@ class IDumper(object):
 
         raise NotImplementedError
 
-    def dumpHierarchy(self):
+    def dumpHierarchy(self, onlyVisibleNode):
         """
         Return the json serializable dictionary holding the hierarchy data. Refer to sample of returned structure object
         below.
@@ -63,13 +63,13 @@ class AbstractDumper(IDumper):
     until the node that has no child(ren) is reached.
     """
 
-    def dumpHierarchy(self):
+    def dumpHierarchy(self, onlyVisibleNode=True):
         """
         Returns:
             :obj:`dict`: json serializable dict holding the whole hierarchy data
         """
 
-        return self.dumpHierarchyImpl(self.getRoot())
+        return self.dumpHierarchyImpl(self.getRoot(), onlyVisibleNode)
 
     def dumpHierarchyImpl(self, node, onlyVisibleNode=True):
         """
@@ -106,8 +106,8 @@ class AbstractDumper(IDumper):
         result = {}
         children = []
         for child in node.getChildren():
-            if not onlyVisibleNode or (payload.get('visible') or child.getAttr('visible')):
-                children.append(self.dumpHierarchyImpl(child))
+            if not onlyVisibleNode or child.getAttr('visible'):
+                children.append(self.dumpHierarchyImpl(child, onlyVisibleNode))
         if len(children) > 0:
             result['children'] = children
 

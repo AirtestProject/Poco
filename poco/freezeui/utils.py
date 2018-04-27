@@ -13,7 +13,7 @@ def create_immutable_hierarchy(hierarchy_dict):
 
 def create_immutable_dumper(hierarchy_dict):
     class ImmutableFrozenUIDumper(FrozenUIDumper):
-        def dumpHierarchy(self):
+        def dumpHierarchy(self, onlyVisibleNode=True):
             return hierarchy_dict
 
     return ImmutableFrozenUIDumper()
