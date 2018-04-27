@@ -118,7 +118,7 @@ class AndroidUiautomationPoco(Poco):
 
     """
 
-    def __init__(self, device=None, using_proxy=True, force_restart=False, use_airtest_input=True, **options):
+    def __init__(self, device=None, using_proxy=True, force_restart=False, use_airtest_input=False, **options):
         # 加这个参数为了不在最新的pocounit方案中每步都截图
         self.screenshot_each_action = True
         if options.get('screenshot_each_action') is False:

@@ -240,7 +240,9 @@ class Poco(PocoAccelerationMixin):
 
         if not (0 <= pos[0] <= 1) or not (0 <= pos[1] <= 1):
             raise InvalidOperationException('Click position out of screen. pos={}'.format(repr(pos)))
-        return self.agent.input.click(pos[0], pos[1])
+        ret = self.agent.input.click(pos[0], pos[1])
+        self.wait_stable()
+        return ret
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
