@@ -29,7 +29,7 @@ def transform_node_has_been_removed_exception(func):
         try:
             return func(self, nodes, name, *args, **kwargs)
         except RpcRemoteException as e:
-            if e.error_type == 'NodeHasBeenRemovedException':
+            if e.error_type == 'NodeHasBeenRemovedException' or e.error_type.endswith('.NodeHasBeenRemovedException'):
                 raise PocoTargetRemovedException('{}: {}'.format(func.__name__, name), nodes)
             else:
                 raise

@@ -17,7 +17,8 @@ class TestStandardFunction(unittest.TestCase):
         # u3d game 默认5001
         # cocos2dx-lua 默认15004
         connect_device('Android:///')
-        cls.poco = StdPoco(15004)
+        # connect_device('Windows:///?class_name=UnityWndClass&title_re=Unity.*')
+        cls.poco = StdPoco(5001)
 
     @classmethod
     def tearDownClass(cls):
@@ -25,7 +26,15 @@ class TestStandardFunction(unittest.TestCase):
 
     def test_dump(self):
         h = self.poco.agent.hierarchy.dump()
-        print(json.dumps(h, indent=4))
+        s = json.dumps(h, indent=4)
+        print(s)
+        self.assertNotIn('"visible": false', s)
+
+    def test_dump_include_invisible_node(self):
+        h = self.poco.agent.hierarchy.dumper.dumpHierarchy(onlyVisibleNode=False)
+        s = json.dumps(h, indent=4)
+        print(s)
+        self.assertIn('"visible": false', s)
 
     def test_getSdkVersion(self):
         print(self.poco.agent.get_sdk_version())
@@ -73,6 +82,8 @@ class TestStandardFunction(unittest.TestCase):
         node.set_text('')
         node.invalidate()
         actualVal = node.get_text()
+        if actualVal is None:
+            actualVal = node.offspring(text='').get_text()
         self.assertEqual(actualVal, '')
 
     def test_instanceId(self):

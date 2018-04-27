@@ -425,8 +425,9 @@ class UIObjectProxy(object):
                              .format(repr(dead_zone), repr(percent)))
 
         w, h = self.get_size()
-        focus = self._focus or [0.5, 0.5]
-        tracks = make_pinching(direction, focus, [w, h], percent, dead_zone, duration)
+        x, y = self.get_position()
+        # focus = self._focus or [0.5, 0.5]
+        tracks = make_pinching(direction, [x, y], [w, h], percent, dead_zone, duration)
         speed = math.sqrt(w * h) * (percent - dead_zone) / 2 / duration
 
         # 速度慢的时候，精度适当要提高，这样有助于控制准确

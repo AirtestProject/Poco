@@ -4,11 +4,11 @@ import math
 from poco.utils.track import MotionTrack
 
 
-def make_pinching(direction, focus, size, percent, dead_zone, duration):
+def make_pinching(direction, center, size, percent, dead_zone, duration):
     w, h = size
     half_distance = percent / 2
     dead_zone_distance = dead_zone / 2
-    pa0 = focus
+    pa0 = center
     pb0 = list(pa0)
     pa1 = list(pa0)
     pb1 = list(pa0)

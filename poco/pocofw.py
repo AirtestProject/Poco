@@ -396,7 +396,7 @@ class Poco(PocoAccelerationMixin):
             raise ValueError('Please provide at least one track. Got {}'.format(repr(tracks)))
 
         tb = MotionTrackBatch(tracks)
-        return self.agent.input.applyMotionTracks(tb.discretize(accuracy))
+        return self.agent.input.applyMotionEvents(tb.discretize(accuracy))
 
     def snapshot(self, width=720):
         """

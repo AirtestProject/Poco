@@ -52,7 +52,7 @@ class AirtestInput(InputInterface):
         pos = [x * pw, y * ph]
         touch(pos, duration=duration)
 
-    def applyMotionTracks(self, tracks):
+    def applyMotionEvents(self, events):
         if device_platform() != 'Android':
             raise NotImplementedError
 
@@ -61,7 +61,7 @@ class AirtestInput(InputInterface):
 
         w, h = self._get_touch_resolution()
         mes = []
-        for e in tracks:
+        for e in events:
             t = e[0]
             if t == 'd':
                 contact = e[2]
