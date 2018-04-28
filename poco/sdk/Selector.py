@@ -86,7 +86,8 @@ class Selector(ISelector):
 
         Args:
             cond (:obj:`tuple`): query expression
-            multiple (:obj:`bool`): whether or not to select multiple nodes #TODO: review this
+            multiple (:obj:`bool`): whether or not to select multiple nodes. If true, all nodes that matches the given
+             condition will return, otherwise, only the first node matches will.
             root (inherited from :py:class:`AbstractNode <poco.sdk.AbstractNode>`): start traversing from the given
              root node
             maxDepth (:obj:`bool`): max traversing depth
@@ -118,7 +119,7 @@ class Selector(ISelector):
                         _maxDepth = maxDepth
                     # 按路径进行遍历一定要multiple为true才不会漏掉
                     _res = self.selectImpl(arg, True, parent, _maxDepth, onlyVisibleNode, False)
-                    midResult += _res
+                    [midResult.append(r) for r in _res if r not in midResult]
                 parents = midResult
             result = parents
         elif op == '-':
@@ -127,7 +128,8 @@ class Selector(ISelector):
             query1, query2 = args
             result1 = self.selectImpl(query1, multiple, root, maxDepth, onlyVisibleNode, includeRoot)
             for n in result1:
-                result += self.selectImpl(query2, multiple, n.getParent(), 1, onlyVisibleNode, includeRoot)
+                sibling_result = self.selectImpl(query2, multiple, n.getParent(), 1, onlyVisibleNode, includeRoot)
+                [result.append(r) for r in sibling_result if r not in result]
         elif op == 'index':
             cond, i = args
             try:
@@ -151,7 +153,8 @@ class Selector(ISelector):
             # 父子/祖先后代节点选择时，默认是不包含父节点/祖先节点的
             # 在下面的children循环中则需要包含，因为每个child在_selectTraverse中就当做是root
             if includeRoot:
-                outResult.append(node)
+                if node not in outResult:
+                    outResult.append(node)
                 if not multiple:
                     return True
 

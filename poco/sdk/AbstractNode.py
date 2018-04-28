@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from poco.sdk.exceptions import UnableToSetAttributeException
+from .exceptions import UnableToSetAttributeException
 
 __author__ = 'lxn3032'
 __all__ = ['AbstractNode']
