@@ -370,8 +370,8 @@ class UIObjectProxy(object):
         else:
             target_pos = target.get_position()
         origin_pos = self.get_position()
-        dir = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
-        return self.swipe(dir, duration=duration)
+        dir_ = [target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1]]
+        return self.swipe(dir_, duration=duration)
 
     def scroll(self, direction='vertical', percent=0.6, duration=2.0):
         """
