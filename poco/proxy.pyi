@@ -36,10 +36,13 @@ class UIObjectProxy(object):
     def __iter__(self) -> Iterator[UIObjectProxy]:
         ...
 
+    def click(self, focus: (float, float)=None, sleep_interval: float=None) -> bool:
+        ...
+
     def swipe(self, direction: (float, float), focus: (float, float)=None, duration=0.5) -> bool:
         ...
 
-    def drag_to(self, target: UIObjectProxy, duration: float=2.0):
+    def drag_to(self, target: UIObjectProxy, duration: float=2.0) -> bool:
         ...
 
     def start_gesture(self) -> PendingGestureAction:
