@@ -41,7 +41,7 @@ def query_expr(query):
         raise RuntimeError('Bad query format. "{}"'.format(repr(query)))
 
 
-def ensure_string_value(value):
+def ensure_text(value):
     if not isinstance(value, six.text_type):
         return value.decode("utf-8")
     else:
@@ -51,10 +51,13 @@ def ensure_string_value(value):
 def build_query(name, **attrs):
     query = []
     if name is not None:
-        name = ensure_string_value(name)
+        if not isinstance(name, six.string_types):
+            raise ValueError("Name selector should only be string types. Got {}".format(repr(name)))
+        name = ensure_text(name)
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
-        attr_val = ensure_string_value(attr_val)
+        if isinstance(attr_val, six.string_types):
+            attr_val = ensure_text(attr_val)
         if attr_name.startswith('_'):
             raise NameError("Cannot use private attribute '{}' in your Query Expression as private attributes do not "
                             "have stable values.".format(attr_name))
