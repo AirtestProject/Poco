@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from typing import Iterable, Iterator, Text, Tuple, Union, List, Dict, Any
+from typing import Iterable, Iterator, Text, Tuple, Union, List, Dict, Any, NoReturn
 
 from poco.pocofw import Poco
 from poco.gesture import PendingGestureAction
@@ -39,6 +39,9 @@ class UIObjectProxy(object):
     def click(self, focus: (float, float)=None, sleep_interval: float=None) -> bool:
         ...
 
+    def long_click(self, duration: float=2.0) -> bool:
+        ...
+
     def swipe(self, direction: (float, float), focus: (float, float)=None, duration=0.5) -> bool:
         ...
 
@@ -54,6 +57,19 @@ class UIObjectProxy(object):
     def get_position(self, focus: (float, float)=None) -> (float, float):
         ...
 
+    def get_text(self) -> Text:
+        ...
+
+    def set_text(self, text: Text) -> bool:
+        ...
+
+    def get_name(self) -> Text: ...
+    def get_size(self) -> (float, float): ...
+    def get_bounds(self) -> (float, float, float, float): ...
+
+    @property
+    def nodes(self) -> List[AbstractNode]: ...
+
     def wait(self, timeout: float=3.0) -> UIObjectProxy:
         ...
 
@@ -66,7 +82,7 @@ class UIObjectProxy(object):
     def exists(self) -> bool:
         ...
 
-    def get_size(self) -> (float, float):
+    def invalidate(self) -> NoReturn:
         ...
 
     def _do_query(self, multiple: bool=True, refresh: bool=False) -> Union[type(None), List[AbstractNode]]:

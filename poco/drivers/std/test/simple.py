@@ -18,7 +18,7 @@ class TestStandardFunction(unittest.TestCase):
         # cocos2dx-lua 默认15004
         connect_device('Android:///')
         # connect_device('Windows:///?class_name=UnityWndClass&title_re=Unity.*')
-        cls.poco = StdPoco(5001)
+        cls.poco = StdPoco(15004)
 
     @classmethod
     def tearDownClass(cls):
@@ -31,7 +31,7 @@ class TestStandardFunction(unittest.TestCase):
         self.assertNotIn('"visible": false', s)
 
     def test_dump_include_invisible_node(self):
-        h = self.poco.agent.hierarchy.dumper.dumpHierarchy(onlyVisibleNode=False)
+        h = self.poco.agent.hierarchy.dumper.dumpHierarchy(onlyVisibleNode=False)  # .hierarchy是FrozenUIHierarchy
         s = json.dumps(h, indent=4)
         print(s)
         self.assertIn('"visible": false', s)
@@ -39,7 +39,7 @@ class TestStandardFunction(unittest.TestCase):
     def test_getSdkVersion(self):
         print(self.poco.agent.get_sdk_version())
 
-    def test_nosuch_rpc_method(self):
+    def test_no_such_rpc_method(self):
         @sync_wrapper
         def wrapped(*args, **kwargs):
             return self.poco.agent.c.call('no_such_method')
@@ -81,13 +81,13 @@ class TestStandardFunction(unittest.TestCase):
         node.set_text('val2333')
         node.set_text('')
         node.invalidate()
-        actualVal = node.get_text()
-        if actualVal is None:
-            actualVal = node.offspring(text='').get_text()
-        self.assertEqual(actualVal, '')
+        actual_val = node.get_text()
+        if actual_val is None:
+            actual_val = node.offspring(text='').get_text()
+        self.assertEqual(actual_val, '')
 
     def test_instanceId(self):
         for n in self.poco():
-            instanceId = n.attr('_instanceId')
-            if instanceId:
-                print(instanceId)
+            instance_id = n.attr('_instanceId')
+            if instance_id:
+                print(instance_id)

@@ -38,7 +38,7 @@ if sys.argv[0].endswith('sphinx-build') and ('html' in sys.argv or sys.argv[-1] 
 
     # gen api-doc
     os.environ['SPHINX_APIDOC_OPTIONS'] = 'members,show-inheritance'
-    os.system("sphinx-apidoc -Me -o source/ ../poco ../poco/utils/simplerpc")
+    os.system("sphinx-apidoc -Mef -o source/ ../poco ../poco/utils/simplerpc")
 
     # prepare other file
     shutil.copyfile('../README.rst', 'source/README.rst')

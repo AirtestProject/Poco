@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2018-05-08 19:27+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,42 +135,45 @@ msgid "query expression"
 msgstr ""
 
 #: of poco.sdk.Selector.Selector.selectImpl:9
-msgid "whether or not to select multiple nodes #TODO: review this"
+msgid ""
+"whether or not to select multiple nodes. If true, all nodes that matches "
+"the given condition will return, otherwise, only the first node matches "
+"will."
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:11
+#: of poco.sdk.Selector.Selector.selectImpl:12
 msgid "start traversing from the given root node"
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:14
+#: of poco.sdk.Selector.Selector.selectImpl:15
 msgid "max traversing depth"
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:16
+#: of poco.sdk.Selector.Selector.selectImpl:17
 msgid ""
 "If True, skip those node which visibility (the value of visible "
 "attribute) is False."
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:19
+#: of poco.sdk.Selector.Selector.selectImpl:20
 msgid ""
 "whether not not to include the root node if its child(ren) match(es) the "
 "node"
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:22
+#: of poco.sdk.Selector.Selector.selectImpl:23
 msgid "The same as  :py:meth:`select <poco.sdk.Selector.ISelector.select>`."
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:24
+#: of poco.sdk.Selector.Selector.selectImpl:25
 msgid "The same as"
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:25
+#: of poco.sdk.Selector.Selector.selectImpl:26
 msgid ":py:meth:`select <poco.sdk.Selector.ISelector.select>`."
 msgstr ""
 
-#: of poco.sdk.Selector.Selector.selectImpl:26
+#: of poco.sdk.Selector.Selector.selectImpl:27
 msgid ""
 ":obj:`list` <inherited from :py:class:`AbstractNode "
 "<poco.sdk.AbstractNode>`>"
@@ -192,5 +195,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Return type"
+#~ msgstr ""
+
+#~ msgid "whether or not to select multiple nodes #TODO: review this"
 #~ msgstr ""
 
