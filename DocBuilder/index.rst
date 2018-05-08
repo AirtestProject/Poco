@@ -279,4 +279,4 @@ Join to discuss!
 .. _PocoHierarchyViewer: source/doc/about-standalone-inspector.html
 .. _AirtestIDE: http://airtest.netease.com/
 
-.. _join slack: https://join.slack.com/t/airtestproject/shared_invite/enQtMzM4MTUwODk0MzQyLWFiNTEyNTkzZjUwZDcyOWQ1NjE5YzQ4Zjk3OTBmMTEyZDBkN2YxZTdmZWY5MWRiNjg2ZjZkYjk1YTEzOTJmMzU
+.. _join slack: https://join.slack.com/t/airtestproject/shared_invite/enQtMzYwMjc2NjQzNDkzLTcyMmJlNjgyNjgzZTRkNWRiYmE1YWI1ZWE5ZmQwYmM1YmY3ODZlMDc0YjkwMTQ5NDYxYmEyZWU1ZTFlZjg3ZjI
