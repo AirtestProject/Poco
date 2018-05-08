@@ -13,7 +13,7 @@ PocoSDK supports Unity3D version 4 & 5, ngui & ugui, C# only for now. If your ga
 1. Clone source code from `poco-sdk repo`_. 
 #. Copy the ``Unity3D`` folder to your unity project script folder.
 #. If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . If you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` .
-#. Add ``Unity3D/PocoManager.cs`` as script component on any permanent ``GameObject`` that will never be destroyed during game's lifetime.
+#. Add ``Unity3D/PocoManager.cs`` as script component on any ``GameObject``, generally on main camera.
 
 Cocos2dx-lua
 ------------
@@ -37,6 +37,12 @@ PocoSDK supports cocos2dx-lua version >= 3.1.
 .. note::
 
     If your cocos2dx-lua project does not have ``mime`` module, it still works but a little slow.
+
+
+4. Check the adb logcat (for Android) whether successfully integrated. (It is highly recommended to use Android Studio.)
+   If you can see the following "LUA-print", you poco-sdk is successfully integrated.
+
+.. image:: img/integration-guild-cocos2dxlua-sdk-started.png
 
 After integration, you can start to `play with poco`_. Or if you have any problems, feel free to `open an issue here`_.
 **Title format: [cocos2dx-lua sdk integration] xxx**
