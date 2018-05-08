@@ -43,6 +43,7 @@ class AndroidRpcClient(RpcClient):
         return HttpTransport(self.endpoint, self)
 
 
+# deprecated
 class AttributorWrapper(Attributor):
     """
     部分手机上仍不支持Accessibility.ACTION_SET_TEXT，使用YosemiteIme还是兼容性最好的方案
@@ -87,7 +88,7 @@ class AndroidPocoAgent(PocoAgent):
         remote_poco = self.client.remote('poco-uiautomation-framework')
         dumper = remote_poco.dumper
         selector = remote_poco.selector
-        attributor = AttributorWrapper(remote_poco.attributor, ime)
+        attributor = remote_poco.attributor
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
 
         if use_airtest_input:
