@@ -2,6 +2,8 @@
 
 from poco.utils.track import MotionTrack
 
+__all__ = ['PendingGestureAction']
+
 
 class PendingGestureAction(object):
     def __init__(self, pocoobj, uiproxy_or_pos):

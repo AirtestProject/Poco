@@ -524,4 +524,4 @@ python 2/3 and have the same coding style.
 .. |chat on slack| image:: doc/img/chat_on_slack.png
     :alt: chat on slack
     :scale: 100%
-    :target: https://join.slack.com/t/airtestproject/shared_invite/enQtMzM4MTUwODk0MzQyLWFiNTEyNTkzZjUwZDcyOWQ1NjE5YzQ4Zjk3OTBmMTEyZDBkN2YxZTdmZWY5MWRiNjg2ZjZkYjk1YTEzOTJmMzU
+    :target: https://join.slack.com/t/airtestproject/shared_invite/enQtMzYwMjc2NjQzNDkzLTcyMmJlNjgyNjgzZTRkNWRiYmE1YWI1ZWE5ZmQwYmM1YmY3ODZlMDc0YjkwMTQ5NDYxYmEyZWU1ZTFlZjg3ZjI
