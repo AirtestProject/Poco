@@ -9,6 +9,7 @@ from poco.utils.airtest.input import AirtestInput
 from poco.utils.airtest.screen import AirtestScreen
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.utils.hunter.command import HunterCommand
+from poco.utils import six
 
 __all__ = ['NeteasePoco']
 __author__ = 'lxn3032'
@@ -46,11 +47,13 @@ class NeteasePoco(Poco):
         agent = NeteasePocoAgent(self._hunter)
         super(NeteasePoco, self).__init__(agent, **options)
         self._last_proxy = None
+        self.screenshot_each_action = options.get('screenshot_each_action', True)
 
     def on_pre_action(self, action, ui, args):
-        try:
+        if self.screenshot_each_action:
+            # airteset log用
             from airtest.core.api import snapshot
-        except ImportError:
-            # 兼容旧airtest
-            from airtest.core.main import snapshot
-            snapshot(msg=unicode(ui))
+            msg = repr(ui)
+            if not isinstance(msg, six.text_type):
+                msg = msg.decode('utf-8')
+            snapshot(msg=msg)
