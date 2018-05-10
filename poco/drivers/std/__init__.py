@@ -79,8 +79,9 @@ class StdPoco(Poco):
             ip = 'localhost'
             port = local_port
         elif device_platform() == 'IOS':
-            ip = device.get_ip_address()
-            port = port
+            # ip = device.get_ip_address()
+            # use iproxy first
+            ip = 'localhost'
         else:
             import socket
             ip = socket.gethostbyname(socket.gethostname())
