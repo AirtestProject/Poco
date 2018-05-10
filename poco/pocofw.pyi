@@ -18,7 +18,7 @@ class Poco(PocoAccelerationMixin):
         self._pre_action_callbacks = []             # type: List[Callable[Text, UIObjectProxy, Any]]
         self._post_action_callbacks = []            # type: List[Callable[Text, UIObjectProxy, Any]]
 
-    def __call__(self, name: str, **kw) -> UIObjectProxy:
+    def __call__(self, name: Text=None, **kw) -> UIObjectProxy:
         ...
 
     def wait_for_any(self, objects: List[UIObjectProxy], timeout: float=120.0) -> Union[NoReturn, UIObjectProxy]:
@@ -70,11 +70,11 @@ class Poco(PocoAccelerationMixin):
     def sleep_for_polling_interval(self):
         ...
 
-    def on_pre_action(self, action: Text, proxy: UIObjectProxy, args: Any) -> NoReturn:
+    def on_pre_action(self, action: Text, ui: UIObjectProxy, args: Any) -> NoReturn:
         ...
-    def on_post_action(self, action: Text, proxy: UIObjectProxy, args: Any) -> NoReturn:
+    def on_post_action(self, action: Text, ui: UIObjectProxy, args: Any) -> NoReturn:
         ...
-    def pre_action(self, action: Text, proxy: UIObjectProxy, args: Any) -> NoReturn:
+    def pre_action(self, action: Text, ui: UIObjectProxy, args: Any) -> NoReturn:
         ...
-    def post_action(self, ction: Text, proxy: UIObjectProxy, args: Any) -> NoReturn:
+    def post_action(self, ction: Text, ui: UIObjectProxy, args: Any) -> NoReturn:
         ...

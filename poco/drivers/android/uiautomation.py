@@ -25,6 +25,7 @@ from poco.sdk.Attributor import Attributor
 from poco.sdk.interfaces.screen import ScreenInterface
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.utils.airtest.input import AirtestInput
+from poco.utils import six
 from poco.drivers.android.utils.installation import install, uninstall
 
 __all__ = ['AndroidUiautomationPoco', 'AndroidUiautomationHelper']
@@ -42,6 +43,7 @@ class AndroidRpcClient(RpcClient):
         return HttpTransport(self.endpoint, self)
 
 
+# deprecated
 class AttributorWrapper(Attributor):
     """
     部分手机上仍不支持Accessibility.ACTION_SET_TEXT，使用YosemiteIme还是兼容性最好的方案
@@ -86,7 +88,7 @@ class AndroidPocoAgent(PocoAgent):
         remote_poco = self.client.remote('poco-uiautomation-framework')
         dumper = remote_poco.dumper
         selector = remote_poco.selector
-        attributor = AttributorWrapper(remote_poco.attributor, ime)
+        attributor = remote_poco.attributor
         hierarchy = RemotePocoHierarchy(dumper, selector, attributor)
 
         if use_airtest_input:
@@ -275,15 +277,14 @@ class AndroidUiautomationPoco(Poco):
                 continue
         return ready
 
-    def on_pre_action(self, action, proxy, args):
+    def on_pre_action(self, action, ui, args):
         if self.screenshot_each_action:
             # airteset log用
-            try:
-                from airtest.core.api import snapshot
-            except ImportError:
-                # 兼容旧airtest
-                from airtest.core.main import snapshot
-            snapshot(msg=unicode(proxy))
+            from airtest.core.api import snapshot
+            msg = repr(ui)
+            if not isinstance(msg, six.text_type):
+                msg = msg.decode('utf-8')
+            snapshot(msg=msg)
 
 
 class AndroidUiautomationHelper(object):

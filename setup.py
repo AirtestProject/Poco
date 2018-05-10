@@ -10,7 +10,7 @@ def parse_requirements(filename='requirements.txt'):
 
 setup(
     name='pocoui',
-    version='1.0.44',
+    version='1.0.47',
     keywords="poco, automation test, ui automation",
     description='Poco cross-engine UI automated test framework.',
     long_description='Poco cross-engine UI automated test framework. 2018 present by NetEase Games',

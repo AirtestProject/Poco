@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-23 15:28+0800\n"
+"POT-Creation-Date: 2018-05-08 19:27+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,11 +39,11 @@ msgid ""
 "``NormalizedCoordinate`` for more details."
 msgstr ""
 
-#: of poco.sdk.interfaces.input.InputInterface.applyMotionTracks:1
+#: of poco.sdk.interfaces.input.InputInterface.applyMotionEvents:1
 msgid "Apply a motion event on the device touch panel"
 msgstr ""
 
-#: of poco.sdk.interfaces.input.InputInterface.applyMotionTracks
+#: of poco.sdk.interfaces.input.InputInterface.applyMotionEvents
 #: poco.sdk.interfaces.input.InputInterface.click
 #: poco.sdk.interfaces.input.InputInterface.keyevent
 #: poco.sdk.interfaces.input.InputInterface.longClick
@@ -52,10 +52,10 @@ msgstr ""
 msgid "参数"
 msgstr ""
 
-#: of poco.sdk.interfaces.input.InputInterface.applyMotionTracks:3
+#: of poco.sdk.interfaces.input.InputInterface.applyMotionEvents:3
 msgid ""
-"list of track. each track is a list of MotionEvent data (``['u/d/m/s', "
-"(x, y), contact_id]``)"
+"list of events. each event is MotionEvent data (``['u/d/m/s', (x, y), "
+"contact_id]``)"
 msgstr ""
 
 #: of poco.sdk.interfaces.input.InputInterface.click:1
@@ -168,5 +168,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "list of track. each track is a list of MotionEvent data"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "list of track. each track is a "
+#~ "list of MotionEvent data (``['u/d/m/s', "
+#~ "(x, y), contact_id]``)"
 #~ msgstr ""
 

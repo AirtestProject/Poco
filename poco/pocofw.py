@@ -430,10 +430,10 @@ class Poco(PocoAccelerationMixin):
     def command(self, cmd, type_=None):
         return self.agent.command.command(cmd, type_)
 
-    def on_pre_action(self, action, proxy, args):
+    def on_pre_action(self, action, ui, args):
         pass
 
-    def on_post_action(self, action, proxy, args):
+    def on_post_action(self, action, ui, args):
         pass
 
     def add_pre_action_callback(self, cb):
@@ -466,16 +466,16 @@ class Poco(PocoAccelerationMixin):
 
         self._post_action_callbacks.append(cb)
 
-    def pre_action(self, action, proxy, args):
+    def pre_action(self, action, ui, args):
         for cb in self._pre_action_callbacks:
             try:
-                cb(self, action, proxy, args)
+                cb(self, action, ui, args)
             except Exception as e:
                 warnings.warn("Error occurred at pre action stage.\n{}".format(traceback.format_exc()))
 
-    def post_action(self, action, proxy, args):
+    def post_action(self, action, ui, args):
         for cb in self._post_action_callbacks:
             try:
-                cb(self, action, proxy, args)
+                cb(self, action, ui, args)
             except Exception as e:
                 warnings.warn("Error occurred at post action stage.\n{}".format(traceback.format_exc()))
