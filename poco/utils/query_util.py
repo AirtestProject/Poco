@@ -22,6 +22,9 @@ TranslateOp = {
 }
 
 
+ComparableTypes = six.integer_types + six.string_types + (six.binary_type, bool)
+
+
 def query_expr(query):
     op = query[0]
     if op in ('/', '>', '-'):
@@ -56,6 +59,9 @@ def build_query(name, **attrs):
         name = ensure_text(name)
         attrs['name'] = name
     for attr_name, attr_val in attrs.items():
+        if not isinstance(attr_val, ComparableTypes):
+            raise ValueError('Selector value should be one of the following types "{}". Got {}'
+                             .format(ComparableTypes, type(attr_val)))
         if isinstance(attr_val, six.string_types):
             attr_val = ensure_text(attr_val)
         if attr_name.startswith('_'):
