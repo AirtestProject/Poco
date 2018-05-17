@@ -22,7 +22,7 @@ TranslateOp = {
 }
 
 
-ComparableTypes = six.integer_types + six.string_types + (six.binary_type, bool)
+ComparableTypes = six.integer_types + six.string_types + (six.binary_type, bool, float)
 
 
 def query_expr(query):
