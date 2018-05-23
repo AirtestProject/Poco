@@ -13,6 +13,8 @@ from poco.utils.simplerpc.utils import sync_wrapper
 
 from airtest.core.api import device as current_device
 from airtest.core.helper import device_platform
+import socket
+
 
 __all__ = ['StdPoco', 'StdPocoAgent']
 DEFAULT_PORT = 15004
@@ -69,23 +71,19 @@ class StdPoco(Poco):
 
     def __init__(self, port=DEFAULT_PORT, device=None, **kwargs):
         device = device or current_device()
+        ip = socket.gethostbyname(socket.gethostname())
         if not device:
-            raise RuntimeError('Please call `connect_device` first. see airtest.core.api.connect_device to get '
-                               'more infomation')
-
-        # always forward for android device to avoid network unreachable
-        if device_platform() == 'Android':
+            import warnings
+            warnings.warn("no airtest device connected, please connect_device first")
+        elif device_platform(device) == 'Android':
+            # always forward for android device to avoid network unreachable
             local_port, _ = device.adb.setup_forward('tcp:{}'.format(port))
             ip = 'localhost'
             port = local_port
-        elif device_platform() == 'IOS':
+        elif device_platform(device) == 'IOS':
             # ip = device.get_ip_address()
             # use iproxy first
             ip = 'localhost'
-        else:
-            import socket
-            ip = socket.gethostbyname(socket.gethostname())
-            # Note: ios is not support for now.
 
         agent = StdPocoAgent((ip, port))
         super(StdPoco, self).__init__(agent, **kwargs)
