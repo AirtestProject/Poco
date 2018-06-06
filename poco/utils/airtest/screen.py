@@ -1,7 +1,6 @@
 # coding=utf-8
 
 import base64
-import os
 from airtest.core.api import snapshot, device as current_device
 from poco.sdk.interfaces.screen import ScreenInterface
 

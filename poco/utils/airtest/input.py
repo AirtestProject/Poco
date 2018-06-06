@@ -10,7 +10,6 @@ except ImportError:
     from airtest.core.main import touch, swipe
     from airtest.core.main import get_platform as device_platform
 from poco.sdk.interfaces.input import InputInterface
-from poco.utils.track import track_sampling
 
 
 class AirtestInput(InputInterface):
