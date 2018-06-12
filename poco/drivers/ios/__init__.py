@@ -4,6 +4,7 @@ from poco import Poco
 from poco.agent import PocoAgent
 from poco.freezeui.hierarchy import FrozenUIDumper, FrozenUIHierarchy
 from poco.utils.airtest import AirtestInput, AirtestScreen
+from poco.utils import six
 from airtest.core.api import device as current_device
 from pprint import pprint
 
@@ -61,7 +62,7 @@ def ios_dump_json(jsonObj, screen_size):
 def json_parser(node, screen_size):
     screen_w, screen_h = screen_size
 
-    if "name" in node and node["name"] is not "":
+    if "name" in node and node["name"]:
         name = node["name"]
     else:
         name = node["type"]
@@ -71,8 +72,12 @@ def json_parser(node, screen_size):
         "payload": {}
     }
 
-    for key in [x for x in node.keys() if x not in ['frame', 'children']]:
-        data["payload"][key.encode("utf-8")] = node[key]
+    if six.PY2:
+        for key in [x for x in node.keys() if x not in ['frame', 'children']]:
+            data["payload"][key.encode("utf-8")] = node[key]
+    else:
+        for key in [x for x in node.keys() if x not in ['frame', 'children']]:
+            data["payload"][key] = node[key]
 
     w = float(node["frame"]["width"])
     h = float(node["frame"]["height"])
