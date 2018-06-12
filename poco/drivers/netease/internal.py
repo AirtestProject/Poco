@@ -3,7 +3,7 @@
 from airtest_hunter import open_platform, AirtestHunter
 from hunter_cli.rpc.client import HunterRpcClient
 
-from poco import Poco
+from poco.pocofw import Poco
 from poco.agent import PocoAgent
 from poco.utils.airtest.input import AirtestInput
 from poco.utils.airtest.screen import AirtestScreen
