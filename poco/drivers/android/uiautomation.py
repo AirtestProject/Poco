@@ -19,7 +19,7 @@ from airtest.core.android.ime import YosemiteIme
 
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
-from poco import Poco
+from poco.pocofw import Poco
 from poco.agent import PocoAgent
 from poco.sdk.Attributor import Attributor
 from poco.sdk.interfaces.screen import ScreenInterface

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from poco import Poco
+from poco.pocofw import Poco
 from poco.agent import PocoAgent
 from poco.drivers.std.attributor import StdAttributor
 from poco.drivers.std.dumper import StdDumper
