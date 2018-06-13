@@ -17,10 +17,14 @@ class Attributor(object):
 
     def getAttr(self, node, attrName):
         if type(node) in (list, tuple):
-            node = node[0]
-        return node.getAttr(attrName)
+            node_ = node[0]
+        else:
+            node_ = node
+        return node_.getAttr(attrName)
 
     def setAttr(self, node, attrName, attrVal):
         if type(node) in (list, tuple):
-            node = node[0]
-        node.setAttr(attrName, attrVal)
+            node_ = node[0]
+        else:
+            node_ = node
+        node_.setAttr(attrName, attrVal)
