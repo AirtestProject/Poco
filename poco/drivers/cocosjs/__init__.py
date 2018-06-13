@@ -4,7 +4,7 @@
 # @Date:   2017-07-14 19:47:51
 import json
 
-from poco import Poco
+from poco.pocofw import Poco
 from poco.agent import PocoAgent
 from poco.utils.simplerpc.utils import sync_wrapper
 from poco.freezeui.hierarchy import FrozenUIHierarchy, FrozenUIDumper

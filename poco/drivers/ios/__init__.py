@@ -1,6 +1,6 @@
 # coding=utf-8
 import xml.etree.ElementTree as ET
-from poco import Poco
+from poco.pocofw import Poco
 from poco.agent import PocoAgent
 from poco.freezeui.hierarchy import FrozenUIDumper, FrozenUIHierarchy
 from poco.utils.airtest import AirtestInput, AirtestScreen
