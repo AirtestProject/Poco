@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from __future__ import print_function
 import threading
 try:
@@ -157,6 +159,7 @@ def init_loop():
         LOOP_THREAD = LoopThread(name="simplerpc_update")
         LOOP_THREAD.daemon = True
         LOOP_THREAD.start()
+
 
 def wait_exit():
     if LOOP_THREAD:

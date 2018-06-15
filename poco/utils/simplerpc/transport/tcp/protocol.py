@@ -1,6 +1,9 @@
 # encoding=utf-8
-import six
+
 import struct
+
+from poco.utils import six
+
 
 HEADER_SIZE = 4
 
