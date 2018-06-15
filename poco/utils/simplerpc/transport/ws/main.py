@@ -1,7 +1,11 @@
+# coding=utf-8
+
+
 import time
 import websocket
 from threading import Thread
 from ..interfaces import IClient
+from poco.utils import six
 
 
 DEFAULT_ADDR = "ws://localhost:5003"
@@ -22,7 +26,7 @@ class WebSocketClient(IClient):
         t.start()
 
     def send(self, msg):
-        if isinstance(msg, str):
+        if not isinstance(msg, six.text_type):
             msg = msg.decode("utf-8")
         self._ws.send(msg)
 
