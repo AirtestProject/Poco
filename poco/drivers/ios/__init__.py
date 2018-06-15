@@ -35,8 +35,15 @@ class iosDumper(FrozenUIDumper):
         super(iosDumper, self).__init__()
         self.client = client
         self.size = client.window_size()
+        self.ori = client.orientation
 
     def dumpHierarchy(self):
+        # should get updated window_size
+        nowOri = self.client.orientation
+        if self.ori is not nowOri:
+            self.ori = nowOri
+            self.size = self.client.window_size()
+
         jsonObj = self.client.driver.source(format='json')
         data = ios_dump_json(jsonObj, self.size)
         return data
