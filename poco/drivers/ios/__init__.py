@@ -103,9 +103,16 @@ def json_parser(node, screen_size):
     }
     data["payload"]["anchorPoint"] = [0.5, 0.5]
 
-    # TODO: need to generate visible attr with x,y pos and arnchorPoint
+    # TODO: w = 0 and h = 0 situation need to solve with
+    # roll back set as True when finding a visible child
     if "visible" not in node:
-        data["payload"]["visible"] = True
+        if (x > 0 or x + w > 0) and (x < screen_w) \
+        and (y > 0 or y + h > 0) and (y < screen_h):
+            data["payload"]["visible"] = True
+        elif w == 0 or h == 0:
+            data["payload"]["visible"] = True
+        else:
+            data["payload"]["visible"] = False
 
     children_data = []
     if "children" in node:
