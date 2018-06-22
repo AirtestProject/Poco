@@ -11,7 +11,6 @@ from poco.freezeui.hierarchy import FrozenUIHierarchy, FrozenUIDumper
 from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.ws import WebSocketClient
-from poco.utils import six
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.helper import device_platform
@@ -42,14 +41,16 @@ class CocosJsPocoAgent(PocoAgent):
 
         self.conn = WebSocketClient('ws://{}:{}'.format(ip, port))
         self.c = RpcClient(self.conn)
-        self.c.DEBUG = False
-        # self.c.run(backend=True)
-        self.c.wait_connected()
+        self.c.connect()
 
         hierarchy = FrozenUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
-        input = AirtestInput()
-        super(CocosJsPocoAgent, self).__init__(hierarchy, input, screen, None)
+        inputs = AirtestInput()
+        super(CocosJsPocoAgent, self).__init__(hierarchy, inputs, screen, None)
+
+    @property
+    def rpc(self):
+        return self.c
 
 
 class Dumper(FrozenUIDumper):
