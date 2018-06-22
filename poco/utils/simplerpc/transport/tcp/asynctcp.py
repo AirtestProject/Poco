@@ -5,7 +5,7 @@ import collections
 import socket
 try:
     from . import asyncore
-except ImportError:
+except (ImportError, SyntaxError):
     import asyncore
 
 
