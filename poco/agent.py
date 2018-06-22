@@ -39,3 +39,9 @@ class PocoAgent(object):
 
     def get_sdk_version(self):
         pass
+
+    def rpc_reconnect(self):
+        if not hasattr(self, "rpc"):
+            raise NotImplementedError
+        self.rpc.close()
+        self.rpc.connect()
