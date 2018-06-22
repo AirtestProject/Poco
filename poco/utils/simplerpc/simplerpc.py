@@ -12,7 +12,7 @@ from .jsonrpc.exceptions import JSONRPCServerError
 from .jsonrpc import six
 
 
-DEBUG = True
+DEBUG = False
 BACKEND_UPDATE = False
 
 
@@ -73,11 +73,13 @@ class Callback(object):
             if self.status == self.WAITING:
                 time.sleep(0.005)
                 if timeout and time.time() - start_time > timeout:
-                    raise RuntimeError("%s timeout error" % self)
+                    raise RpcTimeoutError(self)
             else:
                 break
-
         return (self.result, self.error)
+
+    def __str__(self):
+        return repr(self) + "(rid=%s)" % self.rid
 
 
 class AsyncResponse(object):
@@ -151,8 +153,8 @@ class RpcAgent(object):
             # py3里 json 只接受str类型，py2没有这个限制
             msg = msg.decode('utf-8')
         data = json.loads(msg)
-        # if DEBUG:
-        #     print("<--", data)
+        if DEBUG:
+            print("<--", data)
         if "method" in data:
             # rpc request
             message_type = self.REQUEST
@@ -204,8 +206,16 @@ class RpcAgent(object):
         while True:
             prompt = ">>>"
             try:
-                line = raw_input(prompt)
+                line = input(prompt)
             except EOFError:
                 print("closing..")
                 return
             i.runcode(line)
+
+
+class RpcTimeoutError(Exception):
+    pass
+
+
+class RpcConnectionError(Exception):
+    pass

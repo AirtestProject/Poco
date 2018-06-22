@@ -1,16 +1,16 @@
 # coding=utf-8
-
 from __future__ import print_function
 import threading
-try:
-    from . import asyncore
-except:
-    import asyncore
 import collections
 import socket
+try:
+    from . import asyncore
+except ImportError:
+    import asyncore
 
 
 LOOP_THREAD = None
+LOOP_LOCK = threading.Lock()
 MAX_MESSAGE_LENGTH = 4096
 
 
@@ -62,78 +62,35 @@ class BaseClient(asyncore.dispatcher):
         return message
 
 
-class RemoteClient(BaseClient):
+class Client(BaseClient):
 
-    """Wraps a remote client socket."""
-
-    def __init__(self, host, socket, address, cid=None):
+    def __init__(self, host_address, on_connect=None, on_close=None):
         BaseClient.__init__(self)
-        self.host = host
-        self.cid = cid
-        self.set_socket(socket)
+        self.addr = host_address
+        self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.on_connect = on_connect
+        self.on_close = on_close
+
+    def connect_server(self):
+        print('Connecting to host at: %s' % repr(self.addr))
+        self.connect(self.addr)
+
+    def handle_connect(self):
+        # BaseClient.handle_connect(self)
+        print("%s is connected" % self)
+        if callable(self.on_connect):
+            self.on_connect()
 
     def handle_close(self):
         BaseClient.handle_close(self)
-        self.host.close_client(self.cid)
+        print("%s is closed" % self)
+        if callable(self.on_close):
+            self.on_close()
 
-
-class Host(asyncore.dispatcher):
-
-    CLIENT_ID_COUNTER = 1
-    CLIENT_MAX_COUNT = 10
-
-    def __init__(self, address=('0.0.0.0', 5001)):
-        asyncore.dispatcher.__init__(self)
-        self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.bind(address)
-        self.listen(self.CLIENT_MAX_COUNT)
-        print('server listening at', address)
-        self.remote_clients = {}
-        self.msg_queue = []
-
-    def handle_accept(self):
-        socket, addr = self.accept()  # For the remote client.
-        print('Accepted client at %s', addr)
-        client_id = self.__class__.CLIENT_ID_COUNTER
-        self.__class__.CLIENT_ID_COUNTER += 1
-        client = RemoteClient(self, socket, addr, client_id)
-        self.remote_clients[client_id] = client
-        print('connected clients', self.remote_clients)
-        return client
-
-    def swap_msg_queue(self):
-        for client in self.remote_clients.values():
-            message = client.read_message()
-            self.msg_queue.append(message)
-
-        msg_queue = self.msg_queue
-        self.msg_queue = []
-        return msg_queue
-
-    def broadcast(self, message):
-        print('Broadcasting message: %s' % len(message))
-        for remote_client in self.remote_clients.values():
-            remote_client.say(message)
-
-    def say(self, client_id, message):
-        self.remote_clients[client_id].say(message)
-
-    def close_client(self, client_id):
-        print('Closing client:', client_id, self.remote_clients)
-        client = self.remote_clients.pop(client_id)
-        return client
-
-
-class Client(BaseClient):
-
-    def __init__(self, host_address):
-        BaseClient.__init__(self)
-        self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-        print('Connecting to host at: %s' % repr(host_address))
-        self.connect(host_address)
-
-    def handle_connect(self):
-        print("%s is connected" % self)
+    def close_connection(self):
+        with LOOP_LOCK:
+            BaseClient.close(self)
+        self.on_close()
 
 
 class LoopThread(threading.Thread):
@@ -143,7 +100,8 @@ class LoopThread(threading.Thread):
 
     def run(self):
         while not self._kill_event.is_set():
-            asyncore.loop(timeout=0.001, count=1)
+            with LOOP_LOCK:
+                asyncore.loop(timeout=0.001, count=1)
         print("%s finished" % self)
 
     def kill(self):
@@ -155,8 +113,7 @@ def init_loop():
     if LOOP_THREAD and LOOP_THREAD.is_alive():
         print("LOOP_THREAD ALREADY STARTED: %s" % LOOP_THREAD)
     else:
-        # LOOP_THREAD = start_thread(asyncore.loop, timeout=0.001)
-        LOOP_THREAD = LoopThread(name="simplerpc_update")
+        LOOP_THREAD = LoopThread(name="asynctcp_update")
         LOOP_THREAD.daemon = True
         LOOP_THREAD.start()
 
@@ -170,7 +127,3 @@ def wait_exit():
 import atexit
 atexit.register(wait_exit)
 
-
-if __name__ == '__main__':
-    h = Host()
-    asyncore.loop()

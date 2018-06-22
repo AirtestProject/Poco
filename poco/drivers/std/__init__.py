@@ -25,13 +25,16 @@ class StdPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR):
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
-        self.c.DEBUG = False
-        self.c.wait_connected()
+        self.c.connect()
 
         hierarchy = FrozenUIHierarchy(StdDumper(self.c), StdAttributor(self.c))
         screen = StdScreen(self.c)
         input = AirtestInput()
         super(StdPocoAgent, self).__init__(hierarchy, input, screen, None)
+
+    @property
+    def rpc(self):
+        return self.c
 
     @sync_wrapper
     def get_debug_profiling_data(self):

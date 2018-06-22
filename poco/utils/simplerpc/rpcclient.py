@@ -1,35 +1,53 @@
 # encoding=utf-8
-from .simplerpc import RpcAgent
+from .simplerpc import RpcAgent, RpcConnectionError
 from . import simplerpc
+import warnings
 import time
 
 
 class RpcClient(RpcAgent):
 
-    CONNECTING, CONNECTED, CLOSED = 1, 2, 3
+    INIT, CONNECTING, CONNECTED, CLOSED = 0, 1, 2, 3
 
     """docstring for RpcClient"""
     def __init__(self, conn):
         super(RpcClient, self).__init__()
+        self._status = self.INIT
         self.conn = conn
         self.conn.connect_cb = self.on_connect
         self.conn.close_cb = self.on_close
+
+    def connect(self, timeout=10):
         self._status = self.CONNECTING
         self.conn.connect()
+        self._wait_connected(timeout)
 
-    @property
-    def DEBUG(self):
-        return simplerpc.DEBUG
+    def wait_connected(self):
+        warnings.warn(DeprecationWarning())
+        return self.connect()
 
-    @DEBUG.setter
-    def DEBUG(self, value):
-        simplerpc.DEBUG = value
+    def _wait_connected(self, timeout):
+        for i in range(timeout):
+            if self._status == self.CONNECTED:
+                return True
+            elif self._status == self.CONNECTING:
+                print("[rpc]waiting for connection...%s" % i)
+                time.sleep(0.5)
+            else:
+                raise RpcConnectionError("Rpc Connection Closed")
+        raise RpcConnectionError("Connecting Timeout")
+
+    def close(self):
+        self.conn.close()
+        self._status = self.CLOSED
 
     def on_connect(self):
+        print("[rpc]connected")
         if self._status == self.CONNECTING:
             self._status = self.CONNECTED
 
     def on_close(self):
+        print("[rpc]closed")
         self._status = self.CLOSED
 
     def call(self, func, *args, **kwargs):
@@ -46,16 +64,10 @@ class RpcClient(RpcAgent):
         for msg in data:
             self.handle_message(msg, self.conn)
 
-    def wait_connected(self):
-        for i in range(10):
-            print("waiting for connection...%s" % i)
-            if self._status == self.CONNECTED:
-                return True
-            elif self._status == self.CONNECTING:
-                time.sleep(0.5)
-            else:
-                raise RuntimeError("Connection Closed")
-        raise RuntimeError("connecting timeout")
+    @property
+    def DEBUG(self):
+        return simplerpc.DEBUG
 
-    def close(self):
-        self.conn.close()
+    @DEBUG.setter
+    def DEBUG(self, value):
+        simplerpc.DEBUG = value
