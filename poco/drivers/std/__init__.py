@@ -87,6 +87,8 @@ class StdPoco(Poco):
             # ip = device.get_ip_address()
             # use iproxy first
             ip = 'localhost'
+            local_port, _ = device.instruct_helper.setup_proxy(port)
+            port = local_port
 
         agent = StdPocoAgent((ip, port))
         super(StdPoco, self).__init__(agent, **kwargs)
