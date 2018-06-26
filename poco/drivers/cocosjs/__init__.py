@@ -34,10 +34,16 @@ class CocosJsPocoAgent(PocoAgent):
             local_port, _ = current_device().adb.setup_forward('tcp:{}'.format(port))
             ip = 'localhost'
             port = local_port
+        elif device_platform() == 'IOS':
+            # Note: ios is now support for now.
+            # ip = device.get_ip_address()
+            # use iproxy first
+            ip = 'localhost'
+            local_port, _ = current_device().instruct_helper.setup_proxy(port)
+            port = local_port
         else:
             import socket
             ip = socket.gethostbyname(socket.gethostname())
-            # Note: ios is not support for now.
 
         self.conn = WebSocketClient('ws://{}:{}'.format(ip, port))
         self.c = RpcClient(self.conn)
