@@ -241,7 +241,8 @@ class AndroidUiautomationPoco(Poco):
                 pass
 
         if self._instrument_proc is not None:
-            self._instrument_proc.kill()
+            if self._instrument_proc.poll() is None:
+                self._instrument_proc.kill()
             self._instrument_proc = None
 
         ready = False
