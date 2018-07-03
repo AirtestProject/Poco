@@ -81,7 +81,7 @@ class StdPoco(Poco):
         elif device_platform(device) == 'Android':
             # always forward for android device to avoid network unreachable
             local_port, _ = device.adb.setup_forward('tcp:{}'.format(port))
-            ip = 'localhost'
+            ip = device.adb.host or 'localhost'
             port = local_port
         elif device_platform(device) == 'IOS':
             # ip = device.get_ip_address()
