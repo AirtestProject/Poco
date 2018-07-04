@@ -120,7 +120,7 @@ class AndroidUiautomationPoco(Poco):
         if options.get('screenshot_each_action') is False:
             self.screenshot_each_action = False
 
-        device = device or current_device()
+        self.device = device or current_device()
         if not device:
             self.device = connect_device("Android:///")
 
