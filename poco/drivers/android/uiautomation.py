@@ -8,13 +8,7 @@ import time
 import warnings
 import atexit
 
-try:
-    new_airtest_api = True
-    import airtest.core.api as _____
-except ImportError:
-    new_airtest_api = False
-    from airtest.core.android.utils.iputils import get_ip_address
-
+from airtest.core.api import connect_device, device as current_device
 from airtest.core.android.ime import YosemiteIme
 
 from hrpc.client import RpcClient
@@ -126,29 +120,15 @@ class AndroidUiautomationPoco(Poco):
         if options.get('screenshot_each_action') is False:
             self.screenshot_each_action = False
 
+        device = device or current_device()
         if not device:
-            try:
-                # new version
-                from airtest.core.api import connect_device, device as current_device
-                if not current_device():
-                    connect_device("Android:///")
-            except ImportError:
-                # old version
-                from airtest.cli.runner import device as current_device
-                from airtest.core.main import set_serialno
-                if not current_device():
-                    set_serialno()
-            self.device = current_device()
-        else:
-            self.device = device
+            self.device = connect_device("Android:///")
+
         self.adb_client = self.device.adb
         if using_proxy:
             self.device_ip = self.adb_client.host or "127.0.0.1"
         else:
-            if new_airtest_api:
-                self.device_ip = self.adb_client.get_ip_address()
-            else:
-                self.device_ip = get_ip_address(self.adb_client)
+            self.device_ip = self.device.get_ip_address()
 
         # save current top activity (@nullable)
         current_top_activity_package = self.device.get_top_activity_name()
@@ -156,10 +136,7 @@ class AndroidUiautomationPoco(Poco):
             current_top_activity_package = current_top_activity_package.split('/')[0]
 
         # install ime
-        if new_airtest_api:
-            self.ime = YosemiteIme(self.adb_client)
-        else:
-            self.ime = YosemiteIme(self.device)
+        self.ime = YosemiteIme(self.adb_client)
         self.ime.start()
 
         # install
@@ -255,10 +232,7 @@ class AndroidUiautomationPoco(Poco):
                 'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
                 '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
-        if new_airtest_api:
-            self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
-        else:
-            self._instrument_proc = self.adb_client.shell(instrumentation_cmd, not_wait=True)
+        self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
         atexit.register(self._instrument_proc.kill)
         time.sleep(2)
         for i in range(10):
