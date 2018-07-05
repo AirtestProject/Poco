@@ -2,7 +2,7 @@
 import socket
 
 
-DEFAULT_TIMEOUT = 10
+DEFAULT_TIMEOUT = 2
 DEFAULT_SIZE = 4096
 
 
@@ -56,13 +56,13 @@ class Client(object):
         self.sock.settimeout(0)
         try:
             ret = self.recv(size)
-        except(socket.error) as e:
-            #10035 no data when nonblocking
-            if e.args[0] == 10035: #errno.EWOULDBLOCK: 尼玛errno似乎不一致
+        except socket.error as e:
+            # 10035 no data when nonblocking
+            if e.args[0] == 10035:  # errno.EWOULDBLOCK: errno is not always right
                 ret = None
-            #10053 connection abort by client
-            #10054 connection reset by peer
-            elif e.args[0] in [10053, 10054]: #errno.ECONNABORTED:
+            # 10053 connection abort by client
+            # 10054 connection reset by peer
+            elif e.args[0] in [10053, 10054]:  # errno.ECONNABORTED:
                 raise
             else:
                 raise
