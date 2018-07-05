@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from ..interfaces import IClient
-# from .asynctcp import Client, init_loop
 from .safetcp import Client, socket
 from .protocol import SimpleProtocolFilter
 
