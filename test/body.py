@@ -42,15 +42,24 @@ class Case(PocoTestCase):
 from airtest.core.api import connect_device
 from poco.utils.track import track_sampling, MotionTrack, MotionTrackBatch
 from poco.utils.airtest.input import AirtestInput
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+from poco.drivers.cocosjs import CocosJsPoco
+from poco.utils.device import VirtualDevice
 
+# dev = connect_device('Android://10.252.60.142:5039/a783575e')
+dev = VirtualDevice('10.254.49.151')
+poco = CocosJsPoco(('', 5003), dev)
 
-mt = MotionTrack()
+for n in poco():
+    print(n.get_name())
+
+mt0 = MotionTrack()
 mt1 = MotionTrack()
 mt2 = MotionTrack()
-mt.start([0.5, 0.5]).move([0.2, 0.5]).move([0.5, 0.5]).hold(1)
+mt0.start([0.5, 0.5]).move([0.2, 0.5]).move([0.5, 0.5]).hold(1)
 mt1.start([0.5, 0.6]).move([0.2, 0.6]).hold(1).move([0.5, 0.6])
-# mt2.hold(1).start([0.5, 0.4]).move([0.2, 0.4]).move([0.5, 0.4])
-
+mt2.hold(1).start([0.5, 0.4]).move([0.2, 0.4]).move([0.5, 0.4])
+poco.apply_motion_tracks([mt0, mt1, mt2])
 
 
 
