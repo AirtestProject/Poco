@@ -1,8 +1,14 @@
 # coding=utf-8
 
-from airtest.core.api import device as current_device
-from airtest.core.api import touch, swipe
-from airtest.core.helper import device_platform
+try:
+    from airtest.core.api import device as current_device
+    from airtest.core.api import touch, swipe
+    from airtest.core.helper import device_platform
+except ImportError:
+    # 兼容旧版本
+    from airtest.cli.runner import device as current_device
+    from airtest.core.main import touch, swipe
+    from airtest.core.main import get_platform as device_platform
 from poco.sdk.interfaces.input import InputInterface
 
 

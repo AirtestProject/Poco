@@ -41,9 +41,7 @@ class PocoAgent(object):
         pass
 
     def rpc_reconnect(self):
+        if not hasattr(self, "rpc"):
+            raise NotImplementedError
         self.rpc.close()
         self.rpc.connect()
-
-    @property
-    def rpc(self):
-        raise NotImplementedError('This poco agent does not have a explicit rpc connection.')

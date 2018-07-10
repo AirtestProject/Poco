@@ -29,8 +29,8 @@ class StdPocoAgent(PocoAgent):
 
         hierarchy = FrozenUIHierarchy(StdDumper(self.c), StdAttributor(self.c))
         screen = StdScreen(self.c)
-        inputs = AirtestInput()
-        super(StdPocoAgent, self).__init__(hierarchy, inputs, screen, None)
+        input = AirtestInput()
+        super(StdPocoAgent, self).__init__(hierarchy, input, screen, None)
 
     @property
     def rpc(self):
