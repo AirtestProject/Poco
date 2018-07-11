@@ -11,7 +11,7 @@ from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
 from poco.utils.simplerpc.utils import sync_wrapper
 
-from airtest.core.api import device as current_device
+from airtest.core.api import connect_device, device as current_device
 from airtest.core.helper import device_platform
 import socket
 
@@ -73,22 +73,27 @@ class StdPoco(Poco):
     """
 
     def __init__(self, port=DEFAULT_PORT, device=None, **kwargs):
-        device = device or current_device()
-        ip = socket.gethostbyname(socket.gethostname())
-        if not device:
-            import warnings
-            warnings.warn("no airtest device connected, please connect_device first")
-        elif device_platform(device) == 'Android':
+        self.device = device or current_device()
+        if not self.device:
+            self.device = connect_device("Android:///")
+
+        platform_name = device_platform(self.device)
+        if platform_name == 'Android':
             # always forward for android device to avoid network unreachable
-            local_port, _ = device.adb.setup_forward('tcp:{}'.format(port))
-            ip = device.adb.host or 'localhost'
+            local_port, _ = self.device.adb.setup_forward('tcp:{}'.format(port))
+            ip = self.device.adb.host or 'localhost'
             port = local_port
-        elif device_platform(device) == 'IOS':
+        elif platform_name == 'IOS':
             # ip = device.get_ip_address()
             # use iproxy first
             ip = 'localhost'
-            local_port, _ = device.instruct_helper.setup_proxy(port)
+            local_port, _ = self.device.instruct_helper.setup_proxy(port)
             port = local_port
+        else:
+            try:
+                ip = self.device.get_ip_address()
+            except AttributeError:
+                ip = socket.gethostbyname(socket.gethostname())
 
         agent = StdPocoAgent((ip, port))
         super(StdPoco, self).__init__(agent, **kwargs)
