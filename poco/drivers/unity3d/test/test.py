@@ -18,5 +18,11 @@ class TestU3dDriverAndroid(TestStandardFunction):
         cls.poco = UnityPoco()
 
 
+class TestU3dDriverUnityEditor(TestStandardFunction):
+    @classmethod
+    def setUpClass(cls):
+        cls.poco = UnityPoco(unity_editor=True)
+
+
 if __name__ == '__main__':
     unittest.main()
