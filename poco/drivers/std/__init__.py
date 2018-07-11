@@ -93,7 +93,11 @@ class StdPoco(Poco):
             try:
                 ip = self.device.get_ip_address()
             except AttributeError:
-                ip = socket.gethostbyname(socket.gethostname())
+                try:
+                    ip = socket.gethostbyname(socket.gethostname())
+                except socket.gaierror:
+                    # 某些特殊情况下会出现这个error，无法正确获取本机ip地址
+                    ip = 'localhost'
 
         agent = StdPocoAgent((ip, port))
         super(StdPoco, self).__init__(agent, **kwargs)

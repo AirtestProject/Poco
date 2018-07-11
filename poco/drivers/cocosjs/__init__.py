@@ -5,19 +5,24 @@
 
 from poco.pocofw import Poco
 from poco.agent import PocoAgent
-from poco.drivers.std.dumper import StdDumper
-from poco.freezeui.hierarchy import FrozenUIHierarchy
+from poco.freezeui.hierarchy import FrozenUIHierarchy, FrozenUIDumper
+from poco.utils.simplerpc.utils import sync_wrapper
 from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.ws import WebSocketClient
 from poco.utils import six
+if six.PY3:
+    from urllib.parse import urlparse
+else:
+    from urlparse import urlparse
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.helper import device_platform
 
 
 __all__ = ['CocosJsPoco']
-DEFAULT_ADDR = ('localhost', 5003)
+DEFAULT_PORT = 5003
+DEFAULT_ADDR = ('localhost', DEFAULT_PORT)
 
 
 class CocosJsPocoAgent(PocoAgent):
@@ -46,7 +51,7 @@ class CocosJsPocoAgent(PocoAgent):
         self.c = RpcClient(self.conn)
         self.c.connect()
 
-        hierarchy = FrozenUIHierarchy(StdDumper(self.c))
+        hierarchy = FrozenUIHierarchy(Dumper(self.c))
         screen = AirtestScreen()
         inputs = AirtestInput()
         super(CocosJsPocoAgent, self).__init__(hierarchy, inputs, screen, None)
@@ -54,6 +59,17 @@ class CocosJsPocoAgent(PocoAgent):
     @property
     def rpc(self):
         return self.c
+
+
+class Dumper(FrozenUIDumper):
+    def __init__(self, rpcclient):
+        super(Dumper, self).__init__()
+        self.rpcclient = rpcclient
+
+    @sync_wrapper
+    def dumpHierarchy(self, onlyVisibleNode=True):
+        # NOTE: cocosjs 的driver里，这个rpc方法名首字母是小写，特别注意！
+        return self.rpcclient.call("dump", onlyVisibleNode)
 
 
 class CocosJsPoco(Poco):
@@ -68,7 +84,9 @@ class CocosJsPoco(Poco):
             if isinstance(addr, (list, tuple)):
                 ip, port = addr
             else:
-                port = int(addr.rsplit(":", 1)[-1])
+                port = urlparse(addr).port
+                if not port:
+                    raise ValueError
         except ValueError:
             raise ValueError('Argument "addr" should be a tuple[2] or string format. e.g. '
                              '["localhost", 5003] or "ws://localhost:5003". Got {}'.format(repr(addr)))
