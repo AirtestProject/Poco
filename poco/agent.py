@@ -36,8 +36,15 @@ class PocoAgent(object):
         self.input = _assign(input, InputInterface())
         self.screen = _assign(screen, ScreenInterface())
         self.command = _assign(command, CommandInterface())
+        self._driver = None
 
     def get_sdk_version(self):
+        """
+        Retrieve the sdk version from remote runtime. Each poco agent implementation should override this method.
+
+        Returns:
+            :py:obj:`str`: version string of the poco sdk. usually in "0.0.0" format. None if not provided by poco sdk.
+        """
         pass
 
     def rpc_reconnect(self):
@@ -46,4 +53,33 @@ class PocoAgent(object):
 
     @property
     def rpc(self):
+        """
+        Return the interface of this agent handled.
+
+        Returns:
+            :py:obj:`object`: the rpc interface of this agent handled.
+
+        Raises:
+            NotImplementedError: raises if the agent implementation dose not expose the rpc interface to user.
+        """
+
         raise NotImplementedError('This poco agent does not have a explicit rpc connection.')
+
+    def on_bind_driver(self, driver):
+        self._driver = driver
+
+    @property
+    def driver(self):
+        """
+        Return the driver of this agent related to. None if the driver is not ready to bind.
+
+        Returns:
+            :py:class:`inherit from Poco <poco.pocofw.Poco>`: the driver of this agent related to.
+        """
+
+        if not self._driver:
+            raise AttributeError("`driver` is not bound on this agent implementation({}). "
+                                 "Do you forget to call `super().on_bind_driver` when you override the method "
+                                 "`on_bind_driver` in your sub class?"
+                                 .format(repr(self)))
+        return self._driver

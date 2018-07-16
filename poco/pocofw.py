@@ -40,6 +40,7 @@ class Poco(PocoAccelerationMixin):
     def __init__(self, agent, **options):
         super(Poco, self).__init__()
         self._agent = agent
+        self._agent.on_bind_driver(self)
 
         # options
         self._pre_action_wait_for_appearance = options.get(b'pre_action_wait_for_appearance', 6)
