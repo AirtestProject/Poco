@@ -31,7 +31,7 @@ class TcpClient(IClient):
         try:
             msg_bytes = self.c.recv()
         except socket.timeout:
-            print("socket recv timeout")
+            # print("socket recv timeout")
             msg_bytes = b""
         return self.prot.input(msg_bytes)
 
