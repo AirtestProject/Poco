@@ -2,14 +2,46 @@
 
 from airtest.core.api import device as current_device
 from airtest.core.api import touch, swipe
-from airtest.core.helper import device_platform
+from airtest.core.helper import device_platform, logwrap
 from poco.sdk.interfaces.input import InputInterface
+from functools import wraps
 
+
+def serializable_adapter(func):
+
+    class ISerializable():
+        def to_json(self):
+            raise NotImplementedError
+
+    @wraps(func)
+    def wrapped(*args):
+        class PocoSerializable(ISerializable):
+
+            def __init__(self, obj):
+                self.obj = obj
+
+            def to_json(self):
+                return repr(self.obj)
+
+        new_args = [PocoSerializable(a) for a in args]
+        return func(*new_args)
+
+    return wrapped
+
+@serializable_adapter
+@logwrap
+def record_ui(driver, action, ui, args):
+    return ui
 
 class AirtestInput(InputInterface):
     def __init__(self):
         super(AirtestInput, self).__init__()
         self.default_touch_down_duration = 0.01
+        self._driver = None
+
+    def add_preaction_cb(self, driver):
+        self._driver = driver
+        self._driver.add_pre_action_callback(record_ui)
 
     def _get_touch_resolution(self):
         """

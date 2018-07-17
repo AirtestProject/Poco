@@ -60,6 +60,10 @@ class CocosJsPocoAgent(PocoAgent):
     def rpc(self):
         return self.c
 
+    def on_bind_driver(self, driver):
+        super(CocosJsPocoAgent, self).on_bind_driver(driver)
+        if isinstance(self.input, AirtestInput):
+            self.input.add_preaction_cb(driver)
 
 class Dumper(FrozenUIDumper):
     def __init__(self, rpcclient):
