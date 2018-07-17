@@ -44,6 +44,10 @@ class StdPocoAgent(PocoAgent):
     def get_sdk_version(self):
         return self.c.call('GetSDKVersion')
 
+    def on_bind_driver(self, driver):
+        super(StdPocoAgent, self).on_bind_driver(driver)
+        if isinstance(self.input, AirtestInput):
+            self.input.add_preaction_cb(driver)
 
 class StdPoco(Poco):
     """

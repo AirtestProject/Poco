@@ -94,7 +94,7 @@ class AndroidPocoAgent(PocoAgent):
     def on_bind_driver(self, driver):
         super(AndroidPocoAgent, self).on_bind_driver(driver)
         if isinstance(self.input, AirtestInput):
-            pass
+            self.input.add_preaction_cb(driver)
 
 
 class AndroidUiautomationPoco(Poco):
