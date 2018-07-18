@@ -23,9 +23,10 @@ def new_translate_desc(self, step, code):
     trans = old_trans_desc(self, step, code)
 
     poco_ui = ""
-    for item in step["__children__"]:
-        if item["data"]["name"] == "record_ui":
-            poco_ui = item["data"]["call_args"]["ui"]
+    if "__children__" in step:
+        for item in step["__children__"]:
+            if item["data"]["name"] == "record_ui":
+                poco_ui = item["data"]["call_args"]["ui"]
 
     if poco_ui:
         print(step["data"])
@@ -49,9 +50,10 @@ def new_translate_title(self, name, step):
     title = old_translate_title(self, name, step)
 
     poco_title = False
-    for item in step["__children__"]:
-        if item["data"]["name"] == "record_ui":
-            poco_title = True
+    if "__children__" in step:
+        for item in step["__children__"]:
+            if item["data"]["name"] == "record_ui":
+                poco_title = True
 
     if poco_title:
         title = {
