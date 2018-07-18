@@ -60,6 +60,9 @@ class CocosJsPocoAgent(PocoAgent):
     def rpc(self):
         return self.c
 
+    def get_sdk_version(self):
+        return self.rpc.call("getSDKVersion")
+
 
 class Dumper(FrozenUIDumper):
     def __init__(self, rpcclient):
