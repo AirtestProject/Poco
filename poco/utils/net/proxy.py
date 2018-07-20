@@ -1,16 +1,14 @@
 # coding=utf-8
 
-from gevent.monkey import patch_all
-patch_all()
-
+import errno
 import socket
 import select
 import time
 import threading
 
 from simple_wss import SimpleWebSocketServer, WebSocket
-
 from poco.utils import six
+from poco.utils.simplerpc.transport.tcp.protocol import SimpleProtocolFilter
 
 if six.PY3:
     from queue import Queue, Empty
@@ -51,6 +49,7 @@ class TcpSocket(object):
         self.rq = Queue()
         self.tq = Queue()
         self.RX_SIZE = rxsize
+        self.p = SimpleProtocolFilter()
         print('server listens on ("{}", {}) transport socket'.format(self.ip, self.port))
 
     def update(self):
@@ -64,7 +63,14 @@ class TcpSocket(object):
                 print('accept from: {}'.format(addr))
                 drain(self.tq, self)
             else:
-                rxdata = self.c.recv(self.RX_SIZE)
+                try:
+                    rxdata = self.c.recv(self.RX_SIZE)
+                except socket.error as e:
+                    if e.errno in (errno.ECONNRESET, ):
+                        rxdata = ''
+                    else:
+                        continue
+
                 if not rxdata:
                     try:
                         self.c.close()
@@ -72,7 +78,8 @@ class TcpSocket(object):
                         pass
                     self.c = None
                 else:
-                    self.rq.put(rxdata)
+                    for packet in self.p.input(rxdata):
+                        self.rq.put(packet)
 
         return self.recv()
 
@@ -82,10 +89,11 @@ class TcpSocket(object):
         except Empty:
             return None
 
-    def send(self, data):
+    def send(self, packet):
         if not self.c:
-            self.tq.put(data)
+            self.tq.put(packet)
         else:
+            data = self.p.pack(packet)
             self.c.sendall(data)
 
 
