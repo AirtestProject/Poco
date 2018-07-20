@@ -49,6 +49,7 @@ class StdPocoAgent(PocoAgent):
         if isinstance(self.input, AirtestInput):
             self.input.add_preaction_cb(driver)
 
+
 class StdPoco(Poco):
     """
     Poco standard implementation for PocoSDK protocol.
