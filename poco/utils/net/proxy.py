@@ -1,12 +1,22 @@
 # coding=utf-8
 
+"""
+This module provides bidirectional packet switching above the transport layer.
+It is useful for target runtime which is not able to setup a server. The target runtime simple connect the repeater
+(this module) to switch packets.
+
+* Accepted tcp packet format: [4B as length][payload]
+* Accepted websocket message format: [payload]
+* Switching pattern: [payload] <--> [payload]
+"""
+
 import errno
 import socket
 import select
 import time
 import threading
 
-from simple_wss import SimpleWebSocketServer, WebSocket
+from poco.utils.net.simple_wss import SimpleWebSocketServer, WebSocket
 from poco.utils import six
 from poco.utils.simplerpc.transport.tcp.protocol import SimpleProtocolFilter
 
@@ -174,6 +184,7 @@ class Repeater(object):
                     t2.send(data)
 
 
+# raw tcp to tcp
 def tcp2tcp(ep1, ep2):
     RX_SIZE = 65536
 
