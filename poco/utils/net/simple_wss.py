@@ -1,7 +1,10 @@
-'''
+# coding=utf-8
+
+"""
 The MIT License (MIT)
 Copyright (c) 2013 Dave P.
-'''
+"""
+
 import sys
 VER = sys.version_info[0]
 if VER >= 3:
@@ -23,15 +26,18 @@ import codecs
 from collections import deque
 from select import select
 
+
 __all__ = ['WebSocket',
            'SimpleWebSocketServer',
            'SimpleSSLWebSocketServer']
+
 
 def _check_unicode(val):
     if VER >= 3:
         return isinstance(val, str)
     else:
         return isinstance(val, unicode)
+
 
 class HTTPRequest(BaseHTTPRequestHandler):
     def __init__(self, request_text):
@@ -43,8 +49,10 @@ class HTTPRequest(BaseHTTPRequestHandler):
         self.error_code = self.error_message = None
         self.parse_request()
 
+
 _VALID_STATUS_CODES = [1000, 1001, 1002, 1003, 1007, 1008,
                        1009, 1010, 1011, 3000, 3999, 4000, 4999]
+
 
 HANDSHAKE_STR = (
     "HTTP/1.1 101 Switching Protocols\r\n"
@@ -71,6 +79,7 @@ PAYLOAD = 7
 
 MAXHEADER = 65536
 MAXPAYLOAD = 33554432
+
 
 class WebSocket(object):
 
@@ -237,7 +246,6 @@ class WebSocket(object):
 
                 self.handleMessage()
 
-
     def _handleData(self):
         # do the HTTP header and handshake
         if self.handshaked is False:
@@ -303,7 +311,6 @@ class WebSocket(object):
 
         finally:
             self.closed = True
-
 
     def _sendBuffer(self, buff, send_all = False):
         size = len(buff)
@@ -375,7 +382,6 @@ class WebSocket(object):
             opcode = TEXT
         self._sendMessage(False, opcode, data)
 
-
     def _sendMessage(self, fin, opcode, data):
 
         payload = bytearray()
@@ -410,7 +416,6 @@ class WebSocket(object):
             payload.extend(data)
 
         self.sendq.append((opcode, payload))
-
 
     def _parseMessage(self, byte):
         # read in the header
@@ -470,7 +475,6 @@ class WebSocket(object):
             elif length == 127:
                 self.lengtharray = bytearray()
                 self.state = LENGTHLONG
-
 
         elif self.state == LENGTHSHORT:
             self.lengtharray.append(byte)
@@ -676,6 +680,7 @@ class SimpleWebSocketServer(object):
     def serveforever(self):
         while True:
             self.serveonce()
+
 
 class SimpleSSLWebSocketServer(SimpleWebSocketServer):
 
