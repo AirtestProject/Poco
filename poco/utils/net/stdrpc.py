@@ -206,6 +206,6 @@ if __name__ == '__main__':
         return '0.0.1'
 
     dispatcher = RpcDispatcher()
-    dispatcher.register('D0ump', Dump)
+    dispatcher.register('Dump', Dump)
     dispatcher.register('GetSDKVersion', GetSDKVersion)
     dispatcher.serve_forever()

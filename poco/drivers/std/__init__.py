@@ -5,6 +5,7 @@ from poco.agent import PocoAgent
 from poco.drivers.std.attributor import StdAttributor
 from poco.drivers.std.dumper import StdDumper
 from poco.drivers.std.screen import StdScreen
+from poco.drivers.std.inputs import StdInput
 from poco.freezeui.hierarchy import FrozenUIHierarchy
 from poco.utils.airtest import AirtestInput
 from poco.utils.simplerpc.rpcclient import RpcClient
@@ -22,14 +23,17 @@ DEFAULT_ADDR = ('localhost', DEFAULT_PORT)
 
 
 class StdPocoAgent(PocoAgent):
-    def __init__(self, addr=DEFAULT_ADDR):
+    def __init__(self, addr=DEFAULT_ADDR, use_airtest_input=True):
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
         self.c.connect()
 
         hierarchy = FrozenUIHierarchy(StdDumper(self.c), StdAttributor(self.c))
         screen = StdScreen(self.c)
-        inputs = AirtestInput()
+        if use_airtest_input:
+            inputs = AirtestInput()
+        else:
+            inputs = StdInput(self.c)
         super(StdPocoAgent, self).__init__(hierarchy, inputs, screen, None)
 
     @property
@@ -77,7 +81,7 @@ class StdPoco(Poco):
 
     """
 
-    def __init__(self, port=DEFAULT_PORT, device=None, **kwargs):
+    def __init__(self, port=DEFAULT_PORT, device=None, use_airtest_input=True, **kwargs):
         self.device = device or current_device()
         if not self.device:
             self.device = connect_device("Android:///")
@@ -104,5 +108,5 @@ class StdPoco(Poco):
                     # 某些特殊情况下会出现这个error，无法正确获取本机ip地址
                     ip = 'localhost'
 
-        agent = StdPocoAgent((ip, port))
+        agent = StdPocoAgent((ip, port), use_airtest_input)
         super(StdPoco, self).__init__(agent, **kwargs)
