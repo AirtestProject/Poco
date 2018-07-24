@@ -1,5 +1,8 @@
 # coding=utf-8
 
+import base64
+import zlib
+
 from poco.sdk.interfaces.screen import ScreenInterface
 from poco.utils.simplerpc.utils import sync_wrapper
 
@@ -11,7 +14,13 @@ class StdScreen(ScreenInterface):
 
     @sync_wrapper
     def getScreen(self, width):
-        return self.client.call("Screenshot", width)
+        b64, fmt = self.client.call("Screenshot", width)
+        if fmt.endswith('.deflate'):
+            fmt = fmt[:-len('.deflate')]
+            imgdata = base64.b64decode(b64)
+            imgdata = zlib.decompress(imgdata)
+            b64 = base64.b64encode(imgdata)
+        return b64, fmt
 
     @sync_wrapper
     def getPortSize(self):
