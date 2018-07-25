@@ -13,8 +13,11 @@ class StdScreen(ScreenInterface):
         self.client = client
 
     @sync_wrapper
+    def _getScreen(self, width):
+        return self.client.call("Screenshot", width)
+
     def getScreen(self, width):
-        b64, fmt = self.client.call("Screenshot", width)
+        b64, fmt = self._getScreen(width)
         if fmt.endswith('.deflate'):
             fmt = fmt[:-len('.deflate')]
             imgdata = base64.b64decode(b64)
