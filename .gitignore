@@ -19,6 +19,7 @@ __pycache__
 
 # Installer logs
 pip-log.txt
+@AutomationLog.txt
 
 # Unit test / coverage reports
 .coverage
@@ -52,3 +53,5 @@ pocounit-results/
 
 tokenid.py
 
+Screenshot.bmp
+screen.bmp
