@@ -6,6 +6,7 @@ from poco.sdk.AbstractNode import AbstractNode
 
 __author__ = 'linzecong'
 
+
 class WindowsUINode(AbstractNode):
     """
     AbstractNode is a wrapper class that provides UI hierarchy and node info in game engine.
@@ -43,7 +44,7 @@ class WindowsUINode(AbstractNode):
             self.Children = self.Control.GetChildren()
             for node in self.Children:
                 yield WindowsUINode(node, self.dumper)
-        
+
     def getAttr(self, attrName):
         """
         Return the attributes of the node. The list below shows the most used basic attributes used during while writing
@@ -75,7 +76,7 @@ class WindowsUINode(AbstractNode):
 
         Examples:
             The following sample code demonstrates some ideas about the implementation of this method::
-                
+
                 def getAttr(self, attrName):
                     # basic attributes
                     if attrName == 'name':
@@ -111,7 +112,7 @@ class WindowsUINode(AbstractNode):
             'scale': [1.0, 1.0],
             'anchorPoint': [0.5, 0.5],
             'zOrders': {'local': 0, 'global': 0},
-            'text':'Empty',
+            'text': 'Empty',
         }
 
         """
@@ -138,14 +139,14 @@ class WindowsUINode(AbstractNode):
         if attrName == 'size':
             rect = self.Control.BoundingRectangle
             return [float(rect[2] - rect[0]) / float(self.dumper.RootWidth), float(rect[3] - rect[1]) / float(self.dumper.RootHeight)]
-        
+
         if attrName == 'text':
             if ((isinstance(self.Control, UIAuto.ValuePattern) and self.Control.IsValuePatternAvailable())):
                 return self.Control.CurrentValue()
             else:
                 return 'Empty'
 
-        # for test,not sure will work 
+        # for test,not sure will work
         if attrName == '_instanceId':
             return self.Control.Handle
         return attrs.get(attrName)
@@ -175,8 +176,7 @@ class WindowsUINode(AbstractNode):
                 self.Control.SetValue(val)
                 return True
             else:
-                raise UnableToSetAttributeException(attrName, self) 
-
+                raise UnableToSetAttributeException(attrName, self)
 
     def getAvailableAttributeNames(self):
         """
@@ -199,11 +199,7 @@ class WindowsUINode(AbstractNode):
             Iterable<:obj:`str`>
         """
 
-        return super(WindowsUINode,self).getAvailableAttributeNames() + (
-                        'text',
-                        '_instanceId',
-                        'originType'
-                    )
+        return super(WindowsUINode, self).getAvailableAttributeNames() + ('text', '_instanceId', 'originType')
 
     def enumerateAttrs(self):
         """

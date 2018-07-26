@@ -3,6 +3,7 @@
 from poco.sdk.interfaces.input import InputInterface
 from poco.utils.simplerpc.utils import sync_wrapper
 
+
 class StdInput(InputInterface):
     def __init__(self, client):
         super(StdInput, self).__init__()
@@ -17,11 +18,11 @@ class StdInput(InputInterface):
     @sync_wrapper
     def swipe(self, x1, y1, x2, y2, duration):
         return self.client.call("Swipe", x1, y1, x2, y2, duration)
-    
+
     @sync_wrapper
     def longClick(self, x, y, duration):
         return self.client.call("LongClick", x, y, duration)
-    
+
     @sync_wrapper
     def keyevent(self, keycode):
         return self.client.call("KeyEvent", keycode)
