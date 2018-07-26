@@ -2,9 +2,11 @@
 # @Author: gzliuxin
 # @Email:  gzliuxin@corp.netease.com
 # @Date:   2017-07-12 16:56:14
+
 import json
 import time
 import traceback
+import uuid
 
 from .jsonrpc import JSONRPCResponseManager, dispatcher
 from .jsonrpc.jsonrpc2 import JSONRPC20Response
@@ -120,7 +122,7 @@ class RpcAgent(object):
 
     def __init__(self):
         super(RpcAgent, self).__init__()
-        self._id = 0
+        self._id = six.text_type(uuid.uuid4())
         self._callbacks = {}
 
     def call(self, *args, **kwargs):
@@ -134,7 +136,7 @@ class RpcAgent(object):
             "jsonrpc": "2.0",
             "id": rid,
         }
-        self._id += 1
+        self._id = six.text_type(uuid.uuid4())  # prepare next request id
         # send rpc
         req = json.dumps(payload)
         if DEBUG:
