@@ -18,7 +18,6 @@ import re
 DEFAULT_PORT = 15004
 DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 
-
 class PocoSDKWindows(object):
     
     def __init__(self, addr=DEFAULT_ADDR):
@@ -27,7 +26,6 @@ class PocoSDKWindows(object):
         self.running =False
         UIAuto.OPERATION_WAIT_TIME = 0.1 # make operation faster,see uiautomation
         self.root = None 
-        
         
     def Dump(self, _):
         res = WindowsUIDumper(self.root).dumpHierarchy()
@@ -82,7 +80,6 @@ class PocoSDKWindows(object):
         UIAuto.DragDrop(int(x1), int(y1), int(x2), int(y2))
         return True
 
-
     def LongClick(self, x, y, duration):
         Left = self.root.BoundingRectangle[0] 
         Top = self.root.BoundingRectangle[1]
@@ -94,7 +91,6 @@ class PocoSDKWindows(object):
         UIAuto.DragDrop(int(x), int(y), int(x), int(y))
         return True
 
-
     def KeyEvent(self, keycode):
         UIAuto.SendKeys(keycode)
         return True
@@ -104,22 +100,19 @@ class PocoSDKWindows(object):
         UIAuto.Win32API.SetForegroundWindow(self.root.Handle)
         return True
 
-    def ConnectWindowsByName(self, name=None, print_hierarchy=False):
-        if name != None and name != '':
-            hn = win32gui.FindWindow(None, name)
+    def ConnectWindowsByTitle(self, title=None):
+        if title != None and title != '':
+            hn = win32gui.FindWindow(None, title)
             if hn == 0:
                 return False
             else:
                 self.root = UIAuto.ControlFromHandle(hn)
         else:
            return False
-
-        if print_hierarchy:
-            UIAuto.EnumAndLogControl(self.root)
-        return True
+        return hn
     
-    def ConnectWindowsByNameRe(self, name_re=None, print_hierarchy=False):
-        if name_re != None:
+    def ConnectWindowsByTitleRe(self, title_re=None):
+        if title_re != None:
             hn = 0
             hWndList = []
             def foo(hwnd,mouse):
@@ -128,7 +121,7 @@ class PocoSDKWindows(object):
             win32gui.EnumWindows(foo, 0)
             for handle in hWndList:
                 title = win32gui.GetWindowText(handle)
-                if re.match(name_re, title.decode("gbk")):
+                if re.match(title_re, title.decode("gbk")):
                     self.root = UIAuto.ControlFromHandle(handle)
                     hn = handle
                     break
@@ -137,11 +130,9 @@ class PocoSDKWindows(object):
         else:
            return False
 
-        if print_hierarchy:
-            UIAuto.EnumAndLogControl(self.root)
-        return True
+        return hn
     
-    def ConnectWindowsByHandle(self, handle=None, print_hierarchy=False):
+    def ConnectWindowsByHandle(self, handle=None):
         if handle != None:
             title = win32gui.GetWindowText(handle) 
             if title:
@@ -150,11 +141,26 @@ class PocoSDKWindows(object):
                 return False       
         else:
            return False
+        return handle
 
-        if print_hierarchy:
-            UIAuto.EnumAndLogControl(self.root)
-        return True
-        
+    def ConnectWindow(self, selector):
+        handle = set()
+        if 'title' in selector:
+            handle.add(self.ConnectWindowsByTitle(selector['title']))
+        if 'handle' in selector:
+            handle.add(self.ConnectWindowsByHandle(selector['handle']))
+        if "title_re" in selector:
+            handle.add(self.ConnectWindowsByTitleRe(selector['title_re']))
+
+        if len(handle) != 1 :
+            return False
+        else:
+            hn = handle.pop()
+            if hn:
+                self.root = UIAuto.ControlFromHandle(hn)
+                return True
+            else:
+                return False    
 
     def run(self):
         if self.running == False:
@@ -171,14 +177,9 @@ class PocoSDKWindows(object):
             self.dispatcher.register('LongClick', self.LongClick)
             self.dispatcher.register('KeyEvent', self.KeyEvent)
             self.dispatcher.register('SetForeground', self.SetForeground)
-            self.dispatcher.register('ConnectWindowsByName', self.ConnectWindowsByName)
-            self.dispatcher.register('ConnectWindowsByNameRe', self.ConnectWindowsByNameRe)
-            self.dispatcher.register('ConnectWindowsByHandle', self.ConnectWindowsByHandle)
+            self.dispatcher.register('ConnectWindow', self.ConnectWindow)
             self.dispatcher.serve_forever()
-
 
 if __name__ == '__main__':
     pocosdk = PocoSDKWindows()
     pocosdk.run()
-
- 

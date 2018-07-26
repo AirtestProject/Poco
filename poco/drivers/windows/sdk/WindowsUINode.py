@@ -6,11 +6,9 @@ from poco.sdk.AbstractNode import AbstractNode
 
 __author__ = 'linzecong'
 
-
 class WindowsUINode(AbstractNode):
     """
     AbstractNode is a wrapper class that provides UI hierarchy and node info in game engine.
-
     This class uniformly specifies node-related methods such as retrieving the attributes or accessing the parent nodes
     or their children.
     """
@@ -46,7 +44,6 @@ class WindowsUINode(AbstractNode):
             for node in self.Children:
                 yield WindowsUINode(node, self.dumper)
         
-
     def getAttr(self, attrName):
         """
         Return the attributes of the node. The list below shows the most used basic attributes used during while writing
@@ -103,7 +100,6 @@ class WindowsUINode(AbstractNode):
         Returns:
             JsonSerializable attribute value or None if no such attribute.
         """
-        
         # default value
         attrs = {
             'name': '<Root>',
@@ -152,11 +148,7 @@ class WindowsUINode(AbstractNode):
         # for test,not sure will work 
         if attrName == '_instanceId':
             return self.Control.Handle
-
-
         return attrs.get(attrName)
-
-
 
     def setAttr(self, attrName, val):
         """
