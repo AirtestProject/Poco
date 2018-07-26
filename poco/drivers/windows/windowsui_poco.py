@@ -2,12 +2,13 @@
 
 from poco.drivers.std import StdPoco
 from poco.utils.device import VirtualDevice
-from poco.drivers.std import DEFAULT_ADDR,DEFAULT_PORT
+from poco.drivers.std import DEFAULT_ADDR, DEFAULT_PORT
 from airtest.core.error import DeviceConnectionError
 import subprocess
 import time
 import os
 import atexit
+
 
 class WindowsPoco(StdPoco):
     """
@@ -27,7 +28,7 @@ class WindowsPoco(StdPoco):
             # poco = WindowsPoco({'handle':123456})
             # poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'}) # match the first matched window
 
-    """
+    """   
 
     def __init__(self, selector=None, addr=DEFAULT_ADDR, **options):
         if 'action_interval' not in options:
@@ -41,19 +42,11 @@ class WindowsPoco(StdPoco):
         super(WindowsPoco, self).__init__(addr[1], dev, False, **options)
 
         cb = self.agent.rpc.call("ConnectWindow", selector)
-        ok = cb.wait(timeout=10)
+        ok = cb.wait(timeout=30)
         if not ok[0]:
             raise DeviceConnectionError("Can't find any windows by the given parameter")
         else:
             self.agent.rpc.call("SetForeground")
 
     def KillSDKProcess(self):
-        time.sleep(2) # wait server respond
         self.SDKProcess.kill()
-            
-
-        
-
-
-        
-
