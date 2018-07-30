@@ -4,7 +4,8 @@ from poco.drivers.std import StdPoco
 from poco.utils.device import VirtualDevice
 from poco.drivers.std import DEFAULT_ADDR, DEFAULT_PORT
 from airtest.core.error import DeviceConnectionError
-import subprocess
+
+import threading
 import time
 import os
 import atexit
@@ -23,6 +24,7 @@ class WindowsPoco(StdPoco):
         options: see :py:class:`poco.pocofw.Poco`
 
     Examples:
+        ::
             from poco.drivers.windows import WindowsPoco
             # poco = WindowsPoco({'title':'xxx'})
             # poco = WindowsPoco({'handle':123456})
@@ -35,8 +37,14 @@ class WindowsPoco(StdPoco):
             options['action_interval'] = 0.5
 
         if addr[0] == "localhost":
-            atexit.register(self.KillSDKProcess)
-            self.SDKProcess = subprocess.Popen("python " + os.path.dirname(__file__) + "\\sdk\\WindowsUI.py")
+            from .sdk.WindowsUI import PocoSDKWindows
+            sdk = PocoSDKWindows(addr)
+            self.SDKProcess = threading.Thread(target=sdk.run)  # 创建线程
+            self.SDKProcess.setDaemon(True)
+            self.SDKProcess.start()
+           
+            # atexit.register(self.KillSDKProcess)
+            # self.SDKProcess = subprocess.Popen("python " + os.path.dirname(__file__) + "\\sdk\\WindowsUI.py")
 
         dev = VirtualDevice(addr[0])
         super(WindowsPoco, self).__init__(addr[1], dev, False, **options)
@@ -47,6 +55,3 @@ class WindowsPoco(StdPoco):
             raise DeviceConnectionError("Can't find any windows by the given parameter")
         else:
             self.agent.rpc.call("SetForeground")
-
-    def KillSDKProcess(self):
-        self.SDKProcess.kill()
