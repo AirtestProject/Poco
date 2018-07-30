@@ -50,18 +50,19 @@ class PocoSDKWindows(object):
         return [Width, Height]
 
     def Screenshot(self, width):
-        # self.root.ToBitmap().ToFile('Screenshot.bmp')
-        # f=open(r'Screenshot.bmp', 'rb') #二进制方式打开图文件
-        # data = zlib.compress(f.read())
-        # ls_f=base64.b64encode(data) #读取文件内容，转换为base64编码
-        # f.close()
-        # return [ls_f, "bmp.deflate"]
-
+        # 如果采用压缩，PocoHierarchyViewer获取不到背景（当前Viewer版本还没支持）
         self.root.ToBitmap().ToFile('Screenshot.bmp')
-        f = open(r'Screenshot.bmp', 'rb')  # 二进制方式打开图文件
-        ls_f = base64.b64encode(f.read())  # 读取文件内容，转换为base64编码
+        f = open(r'Screenshot.bmp', 'rb')
+        deflated = zlib.compress(f.read())
+        ls_f = base64.b64encode(deflated)
         f.close()
-        return [ls_f, "bmp"]
+        return [ls_f, "bmp.deflate"]
+
+        # self.root.ToBitmap().ToFile('Screenshot.bmp')
+        # f = open(r'Screenshot.bmp', 'rb')
+        # ls_f = base64.b64encode(f.read())
+        # f.close()
+        # return [ls_f, "bmp"]
 
     def Click(self, x, y):
         self.root.Click(x, y)
@@ -101,7 +102,7 @@ class PocoSDKWindows(object):
         return True
 
     def ConnectWindowsByTitle(self, title):
-        hn = 0
+        hn = set()
         hWndList = []
 
         def foo(hwnd, mouse):
@@ -111,14 +112,13 @@ class PocoSDKWindows(object):
         for handle in hWndList:
             title_temp = win32gui.GetWindowText(handle)
             if title == title_temp.decode("gbk"):
-                hn = handle
-                break
-        if hn == 0:
-            return False
+                hn.add(handle)
+        if len(hn) == 0:
+            return -1
         return hn
 
     def ConnectWindowsByTitleRe(self, title_re):
-        hn = 0
+        hn = set()
         hWndList = []
 
         def foo(hwnd, mouse):
@@ -128,15 +128,13 @@ class PocoSDKWindows(object):
         for handle in hWndList:
             title = win32gui.GetWindowText(handle)
             if re.match(title_re, title.decode("gbk")):
-                self.root = UIAuto.ControlFromHandle(handle)
-                hn = handle
-                break
-        if hn == 0:
-            return False
+                hn.add(handle)
+        if len(hn) == 0:
+            return -1
         return hn
 
     def ConnectWindowsByHandle(self, handle):
-        hn = 0
+        hn = set()
         hWndList = []
 
         def foo(hwnd, mouse):
@@ -145,34 +143,62 @@ class PocoSDKWindows(object):
         win32gui.EnumWindows(foo, 0)
         for handle_temp in hWndList:
             if int(handle_temp) == int(handle):
-                hn = handle
+                hn.add(handle)
                 break
-        if hn == 0:
-            return False
+        if len(hn) == 0:
+            return -1
         return hn
 
-    def ConnectWindow(self, selector):
-        handle = set()
-        if 'title' in selector:
-            handle.add(self.ConnectWindowsByTitle(selector['title']))
-        if 'handle' in selector:
-            handle.add(self.ConnectWindowsByHandle(selector['handle']))
-        if "title_re" in selector:
-            handle.add(self.ConnectWindowsByTitleRe(selector['title_re']))
+    def ConnectWindow(self, selector, foreground=False):
+        if foreground:
+            time.sleep(1)
+            self.root = UIAuto.GetForegroundControl()
+            return True
 
-        if len(handle) != 1:
-            return False
-        else:
-            hn = handle.pop()
+        handleSetList = []
+        if 'title' in selector:
+            res = self.ConnectWindowsByTitle(selector['title'])
+            if res != -1:
+                handleSetList.append(res)
+        if 'handle' in selector:
+            res = self.ConnectWindowsByHandle(selector['handle'])
+            if res != -1:
+                handleSetList.append(res)
+        if "title_re" in selector:
+            res = self.ConnectWindowsByTitleRe(selector['title_re'])
+            if res != -1:
+                handleSetList.append(res)
+
+        # If there are multiple matches, return a random one
+        if len(handleSetList) == 1:
+            hn = handleSetList[0].pop()
             if hn:
                 self.root = UIAuto.ControlFromHandle(hn)
                 return True
             else:
                 return False
 
-    def run(self):
+        last = handleSetList[0]
+        for hn in handleSetList:
+            print hn
+            last = hn & last
+            
+        if len(last) == 0:
+            return False
+        else:
+            # If there are multiple matches, return a random one
+            hn = last.pop()
+            if hn:
+                self.root = UIAuto.ControlFromHandle(hn)
+                return True
+            else:
+                return False
+
+    def run(self, use_foregrond_window=False):
         if self.running is False:
             self.running = True
+            if use_foregrond_window:
+                self.ConnectWindow(set(), True)
             # print "Current Window :", self.root.Name
             self.dispatcher.register('Dump', self.Dump)
             self.dispatcher.register('SetText', self.SetText)
@@ -190,4 +216,4 @@ class PocoSDKWindows(object):
 
 if __name__ == '__main__':
     pocosdk = PocoSDKWindows()
-    pocosdk.run()
+    pocosdk.run(True)
