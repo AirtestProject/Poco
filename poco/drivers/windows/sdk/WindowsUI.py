@@ -1,6 +1,9 @@
 # coding=utf-8
 
-from poco.utils.net.stdrpc import RpcDispatcher
+from poco.sdk.std.rpc.controller import StdRpcEndpointController
+from poco.sdk.std.rpc.reactor import StdRpcReactor
+from poco.utils.net.transport.tcp import TcpSocket
+
 from WindowsUIDumper import WindowsUIDumper
 from WindowsUINode import WindowsUINode
 from poco.sdk.exceptions import UnableToSetAttributeException
@@ -22,7 +25,24 @@ DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 class PocoSDKWindows(object):
 
     def __init__(self, addr=DEFAULT_ADDR):
-        self.dispatcher = RpcDispatcher(addr)
+        self.reactor = StdRpcReactor()
+        self.reactor.register('Dump', self.Dump)
+        self.reactor.register('SetText', self.SetText)
+        self.reactor.register('GetSDKVersion', self.GetSDKVersion)
+        self.reactor.register('GetDebugProfilingData', self.GetDebugProfilingData)
+        self.reactor.register('GetScreenSize', self.GetScreenSize)
+        self.reactor.register('Screenshot', self.Screenshot)
+        self.reactor.register('Click', self.Click)
+        self.reactor.register('Swipe', self.Swipe)
+        self.reactor.register('LongClick', self.LongClick)
+        self.reactor.register('KeyEvent', self.KeyEvent)
+        self.reactor.register('SetForeground', self.SetForeground)
+        self.reactor.register('ConnectWindow', self.ConnectWindow)
+
+        transport = TcpSocket()
+        transport.bind(addr)
+        self.rpc = StdRpcEndpointController(transport, self.reactor)
+
         self.running = False
         UIAuto.OPERATION_WAIT_TIME = 0.1  # make operation faster
         self.root = None
@@ -199,20 +219,10 @@ class PocoSDKWindows(object):
             self.running = True
             if use_foregrond_window:
                 self.ConnectWindow(set(), True)
+
             # print "Current Window :", self.root.Name
-            self.dispatcher.register('Dump', self.Dump)
-            self.dispatcher.register('SetText', self.SetText)
-            self.dispatcher.register('GetSDKVersion', self.GetSDKVersion)
-            self.dispatcher.register('GetDebugProfilingData', self.GetDebugProfilingData)
-            self.dispatcher.register('GetScreenSize', self.GetScreenSize)
-            self.dispatcher.register('Screenshot', self.Screenshot)
-            self.dispatcher.register('Click', self.Click)
-            self.dispatcher.register('Swipe', self.Swipe)
-            self.dispatcher.register('LongClick', self.LongClick)
-            self.dispatcher.register('KeyEvent', self.KeyEvent)
-            self.dispatcher.register('SetForeground', self.SetForeground)
-            self.dispatcher.register('ConnectWindow', self.ConnectWindow)
-            self.dispatcher.serve_forever()
+            self.rpc.serve_forever()
+
 
 if __name__ == '__main__':
     pocosdk = PocoSDKWindows()
