@@ -1,8 +1,9 @@
 # coding=utf-8
 
-from uiautomation import uiautomation as UIAuto
+
 from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.AbstractNode import AbstractNode
+import uiautomation as UIAuto
 
 __author__ = 'linzecong'
 

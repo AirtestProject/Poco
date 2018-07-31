@@ -3,8 +3,8 @@
 
 from poco.sdk.AbstractDumper import AbstractDumper
 from poco.sdk.exceptions import InvalidTargetException
-from uiautomation import uiautomation as UIAuto
-from WindowsUINode import WindowsUINode
+from poco.drivers.windows.sdk.WindowsUINode import WindowsUINode
+import uiautomation as UIAuto
 
 __author__ = 'linzecong'
 
