@@ -2,7 +2,7 @@
 Welcome to Poco (ポコ) documentation!
 ===================================
 
-**A cross-engine UI automation framework**. ``Unity3D``/``cocos2dx-*``/``Android native APP``/(Other engines SDK)/...
+**A cross-engine UI automation framework**. ``Unity3D``/``cocos2dx-*``/``Android native APP``/``iOS native APP``/(Other engines SDK)/...
 
 .. raw:: html
 
@@ -122,8 +122,21 @@ standalone `PocoHierarchyViewer`_ (to viewer the hierarchy and attributes only b
 
 .. image:: source/doc/img/hunter-inspector.png
 
+Use poco on platforms/engines
+-----------------------------
+
+This section guide you how to start to use poco to write your test cases on different platforms/engines.
+
+- `Unity3D <source/doc/driver/unity3d.html>`_
+- `Android native app <source/doc/driver/android-native-app.html>`_
+- `Windows app <source/doc/driver/windows-app.html>`_
+- `cocos2dx-lua <>`_
+- `cocos2dx-js <>`_
+
 Tutorials and examples
 ----------------------
+
+This section will let your know all basic features of poco.
 
 * `basic usage`_
 * `interact with Buttons and Labels`_
@@ -146,6 +159,8 @@ Tutorials and examples
 .. _waiting for events: source/doc/poco-example/waiting_events.html
 .. _play with unittest framework: source/doc/poco-example/play_with_unittest_framework.html
 .. _optimize speed by freezing UI: source/doc/poco-example/optimize_speed_by_freezing_UI.html
+
+
 
 API reference
 =============
@@ -174,7 +189,9 @@ Engine specific API
 
   - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
   - `Android native app <source/poco.drivers.android.uiautomation.html>`_
+  - `iOS native app <source/poco.drivers.ios.html>`_
   - `cocos2dx-lua <source/poco.drivers.std.html>`_
+  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
 
 ..
  还没写完的连接先注释掉
@@ -263,10 +280,8 @@ More detailed info about properties are described in
 Join to discuss!
 ----------------
 
-
-
-
 `join slack`_
+
 
 .. _poco-sdk: source/doc/integration.html
 .. _Integration Guide: source/doc/integration.html
