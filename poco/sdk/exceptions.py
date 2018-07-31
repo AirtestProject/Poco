@@ -65,7 +65,7 @@ class NonuniqueTargetException(Exception):
     """
 
     def __init__(self, selector):
-        msg = 'The parameters ("{}") match multiple device.'.format(selector)
+        msg = 'The arguments ("{}") match multiple device. More precise conditions required.'.format(selector)
         super(NonuniqueTargetException, self).__init__(msg)
 
 
@@ -75,5 +75,5 @@ class InvalidTargetException(Exception):
     """
 
     def __init__(self, target, msg="None"):
-        msg = 'Target device invalid ("{}") . '.format(target) + "Detial message: " + msg
+        msg = 'Target device invalid ("{}") . Detial message: "{}"'.format(target, msg)
         super(InvalidTargetException, self).__init__(msg)
