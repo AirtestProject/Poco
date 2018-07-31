@@ -7,7 +7,7 @@ This module provides several exceptions for poco-sdk. These exceptions are raise
 
 __author__ = 'lxn3032'
 __all__ = ['NoSuchTargetException', 'NodeHasBeenRemovedException', 'UnableToSetAttributeException',
-           'NoSuchComparatorException']
+           'NoSuchComparatorException', 'NonuniqueTargetException', 'InvalidTargetException']
 
 
 class NodeHasBeenRemovedException(Exception):
@@ -57,3 +57,23 @@ class NoSuchComparatorException(Exception):
     def __init__(self, matchingMethod, matcherName):
         super(NoSuchComparatorException, self).__init__()
         self.message = 'No such matching method "{}" of this Matcher ("{}")'.format(matchingMethod, matcherName)
+
+
+class NonuniqueTargetException(Exception):
+    """
+    Raised when the device selector matches mutiple devices
+    """
+
+    def __init__(self, selector):
+        msg = 'The parameters ("{}") match multiple device.'.format(selector)
+        super(NonuniqueTargetException, self).__init__(msg)
+
+
+class InvalidTargetException(Exception):
+    """
+    Raised when the device is invalid
+    """
+
+    def __init__(self, target, msg="None"):
+        msg = 'Target device invalid ("{}") . '.format(target) + "Detial message: " + msg
+        super(InvalidTargetException, self).__init__(msg)
