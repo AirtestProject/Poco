@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2017, NetEase Co, Ltd.
 # This file is distributed under the same license as the poco package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 #, fuzzy
 msgid ""
@@ -17,25 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 
-#: ../../source/poco.drivers.cocosjs.rst:2
-msgid "poco\\.drivers\\.cocosjs package"
+#: ../../source/poco.drivers.qt.rst:2
+msgid "poco\\.drivers\\.qt package"
 msgstr ""
 
-#: of poco.drivers.cocosjs.CocosJsPoco:1
-msgid "Bases: :class:`poco.pocofw.Poco`"
+#: of poco.drivers.qt.QtPoco:1
+msgid "Bases: :class:`poco.drivers.std.StdPoco`"
 msgstr ""
 
-#: of poco.drivers.cocosjs.CocosJsPoco:1
-msgid "docstring for CocosJsPoco"
+#: of poco.drivers.qt.QtPoco:1
+msgid "Poco Qt implementation."
 msgstr ""
-
-#: ../../source/poco.drivers.cocosjs.rst:9
-msgid "Subpackages"
-msgstr ""
-
-#~ msgid "Bases: :class:`poco.pocofw.Poco`"
-#~ msgstr ""
-
-#~ msgid "docstring for CocosJsPoco"
-#~ msgstr ""
 
