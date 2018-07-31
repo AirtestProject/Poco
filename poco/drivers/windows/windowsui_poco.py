@@ -37,7 +37,7 @@ class WindowsPoco(StdPoco):
             options['action_interval'] = 0.5
 
         if addr[0] == "localhost" or addr[0] == "127.0.0.1":
-            from .sdk.WindowsUI import PocoSDKWindows
+            from poco.drivers.windows.sdk.WindowsUI import PocoSDKWindows
             sdk = PocoSDKWindows(addr)
             self.SDKProcess = threading.Thread(target=sdk.run)  # 创建线程
             self.SDKProcess.setDaemon(True)

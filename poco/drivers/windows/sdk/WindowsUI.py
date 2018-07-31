@@ -3,12 +3,11 @@
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
-from WindowsUIDumper import WindowsUIDumper
-from WindowsUINode import WindowsUINode
+from poco.drivers.windows.sdk.WindowsUINode import WindowsUINode
+from poco.drivers.windows.sdk.WindowsUIDumper import WindowsUIDumper
 from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueTargetException
-from poco.utils.six import text_type
-from uiautomation import uiautomation as UIAuto
-from poco.utils.six import string_types, PY2
+from poco.utils.six import text_type, string_types, PY2
+import uiautomation as UIAuto
 import time
 import base64
 import zlib
