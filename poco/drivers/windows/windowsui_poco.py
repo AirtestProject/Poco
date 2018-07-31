@@ -28,7 +28,7 @@ class WindowsPoco(StdPoco):
             from poco.drivers.windows import WindowsPoco
             # poco = WindowsPoco({'title':'xxx'})
             # poco = WindowsPoco({'handle':123456})
-            # poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'}) # match the first matched window
+            # poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'})
 
     """   
     

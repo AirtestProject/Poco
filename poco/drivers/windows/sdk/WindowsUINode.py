@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from uiautomation import uiautomation as UIAuto
-from poco.sdk.exceptions import UnableToSetAttributeException, InvalidTargetException
+from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.AbstractNode import AbstractNode
 
 __author__ = 'linzecong'
@@ -134,14 +134,10 @@ class WindowsUINode(AbstractNode):
 
         if attrName == 'pos':
             rect = self.Control.BoundingRectangle
-            if self.dumper.RootWidth == 0 or self.dumper.RootHeight == 0:
-                raise InvalidTargetException(self, "You may have minimized your window or the window is too small!")
             return [float(rect[0] + (rect[2] - rect[0]) / 2.0 - self.dumper.RootLeft) / float(self.dumper.RootWidth), float(rect[1] + (rect[3] - rect[1]) / 2.0 - self.dumper.RootTop) / float(self.dumper.RootHeight)]
 
         if attrName == 'size':
             rect = self.Control.BoundingRectangle
-            if self.dumper.RootWidth == 0 or self.dumper.RootHeight == 0:
-                raise InvalidTargetException(self, "You may have minimized your window or the window is too small!")
             return [float(rect[2] - rect[0]) / float(self.dumper.RootWidth), float(rect[3] - rect[1]) / float(self.dumper.RootHeight)]
 
         if attrName == 'text':
