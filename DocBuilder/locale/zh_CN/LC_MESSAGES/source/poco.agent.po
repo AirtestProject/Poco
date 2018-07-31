@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-07-31 11:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,5 +59,67 @@ msgid ""
 ":py:class:`CommandInterface "
 "<poco.sdk.interfaces.command.CommandInterface>`: defines methods to "
 "communicate with target device in arbitrary way. This is optional."
+msgstr ""
+
+#: of poco.agent.PocoAgent.driver:1
+msgid ""
+"Return the driver of this agent related to. None if the driver is not "
+"ready to bind."
+msgstr ""
+
+#: of poco.agent.PocoAgent.driver poco.agent.PocoAgent.get_sdk_version
+#: poco.agent.PocoAgent.rpc
+msgid "返回"
+msgstr ""
+
+#: of poco.agent.PocoAgent.driver:3
+msgid "the driver of this agent related to."
+msgstr ""
+
+#: of poco.agent.PocoAgent.driver poco.agent.PocoAgent.get_sdk_version
+#: poco.agent.PocoAgent.rpc
+msgid "返回类型"
+msgstr ""
+
+#: of poco.agent.PocoAgent.driver:4
+msgid ":py:class:`inherit from Poco <poco.pocofw.Poco>`"
+msgstr ""
+
+#: of poco.agent.PocoAgent.get_sdk_version:1
+msgid ""
+"Retrieve the sdk version from remote runtime. Each poco agent "
+"implementation should override this method."
+msgstr ""
+
+#: of poco.agent.PocoAgent.get_sdk_version:3
+msgid ""
+"version string of the poco sdk. usually in \"0.0.0\" format. None if not "
+"provided by poco sdk."
+msgstr ""
+
+#: of poco.agent.PocoAgent.get_sdk_version:4
+msgid ":py:obj:`str`"
+msgstr ""
+
+#: of poco.agent.PocoAgent.rpc:1
+msgid "Return the interface of this agent handled."
+msgstr ""
+
+#: of poco.agent.PocoAgent.rpc:3
+msgid "the rpc interface of this agent handled."
+msgstr ""
+
+#: of poco.agent.PocoAgent.rpc:4
+msgid ":py:obj:`object`"
+msgstr ""
+
+#: of poco.agent.PocoAgent.rpc
+msgid "raises"
+msgstr ""
+
+#: of poco.agent.PocoAgent.rpc:6
+msgid ""
+":exc:`NotImplementedError` -- raises if the agent implementation dose not"
+" expose the rpc interface to user."
 msgstr ""
 
