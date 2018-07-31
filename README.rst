@@ -6,7 +6,7 @@ Poco ポコ
 
 |docs| |chat on slack|
 
-**A cross-engine UI automation framework**. ``Unity3D``/``cocos2dx-*``/``Android native APP``/(Other engines SDK)/...
+**A cross-engine UI automation framework**. ``Unity3D``/``cocos2dx-*``/``Android native APP``/``iOS native APP``/(Other engines SDK)/...
 
 Example
 -------
@@ -51,7 +51,7 @@ Installation
 In order to use Poco, you must install Poco python library on your host and also install the `poco-sdk`_ in
 your game/app.
 
-**Poco** can be installed straightforward with ``pip`` command
+**Poco** can be installed straightforward with ``pip`` command. It is called ``pocoui``.
 
 .. code-block:: bash
 
@@ -66,7 +66,7 @@ For **poco-sdk** integration please refer to `Integration Guide`_
 Features
 --------
 
-* supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua and Android native apps
+* supports mainstream game engines, including: Unity3D, cocos2dx-js, cocos2dx-lua, Android/iOS native apps
 * retrieves UI Elements Hierarchy in game's runtime
 * is super fast and impact-free to the game
 * allows straightforward SDK integration to the game (within in 5 minutes)
@@ -74,7 +74,7 @@ Features
 * supports multi-touch e.g. fling/pinch/... (and more is coming soon)
 * support gps, accelerometer and gyro sensors, rotation (landscape/portrait) and other sensors as input (coming soon)
 * is extensible to other private engines by `implementing poco-sdk`_ .
-* is compatible with Python 2.7 and Python 3.3+.
+* is compatible with Python 2.7 and Python 3.3-3.6.
 
 
 Documentation
@@ -82,8 +82,22 @@ Documentation
 
 `Online docs`_.
 
+Use poco on platforms/engines
+-----------------------------
+
+This section guide you how to start to use poco to write your test cases on different platforms/engines.
+
+- `Unity3D <http://poco.readthedocs.io/en/latest/source/doc/drivers/unity3d.html>`_
+- `Android native app <http://poco.readthedocs.io/en/latest/source/doc/drivers/android-native-app.html>`_
+- `Windows app <http://poco.readthedocs.io/en/latest/source/doc/drivers/windows-app.html>`_
+- `cocos2dx-lua <>`_
+- `cocos2dx-js <>`_
+
+
 Tutorials and examples
 ----------------------
+
+This section will let your know all basic features of poco.
 
 * `basic usage`_
 * `interact with Buttons and Labels`_
@@ -115,7 +129,7 @@ Poco supports different types of engines by different drivers. For different eng
 by corresponding driver. Remember to connect an Android device to your PC/mac with a running game or launch and keep
 the game/app active on PC/mac.
 
-Following example shows how to initialize popo instance for
+Following example shows how to initialize poco instance for
 
 * Unity3D.
 
@@ -124,7 +138,7 @@ Following example shows how to initialize popo instance for
     from poco.drivers.unity3d import UnityPoco
 
     poco = UnityPoco()
-    # for windows
+    # for unity editor on windows
     # poco = UnityPoco(('localhost', 5001), unity_editor=True)
 
     ui = poco('...')
@@ -147,10 +161,10 @@ Following example shows how to initialize popo instance for
     from poco.drivers.netease.internal import NeteasePoco
     from airtest.core.api import connect_device
 
-    # 先连上android设备
+    # connect android device
     connect_device('Android:///')
 
-    # windows的话这样
+    # or connect a window on windows
     # connect_device('Windows:///?title_re=^.*errors and.*$')  # 填写可以识别出的窗口标题栏正则表达式，无需urlencode
 
     poco = NeteasePoco('g37')  # hunter上的项目代号
@@ -159,7 +173,10 @@ Following example shows how to initialize popo instance for
 
 
 * `cocos2dx-js`_
+* `cocos2dx-lua`_
 * `android-native`_
+* `iOS-native`_
+* `Egret`_
 * unreal (in development)
 * for other engines, refer to `Integration Guide`_ for more details
 
@@ -514,8 +531,10 @@ python 2/3 and have the same coding style.
 ..
  下面是对应sdk的下载链接
 
+.. _cocos2dx-lua:
 .. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
-
+.. _Egret: https://github.com/AirtestProject/Poco-SDK/Egret
+.. _iOS-native: https://github.com/AirtestProject/iOS-Tagent
 
 .. |docs| image:: https://readthedocs.org/projects/poco/badge/?version=latest
     :target: http://poco.readthedocs.io/en/latest/?badge=latest

@@ -4,7 +4,7 @@
 # @Date:   2017-07-14 19:47:51
 
 from poco.drivers.std import StdPoco
-from airtest.core.device import Device
+from poco.utils.device import VirtualDevice
 
 
 __all__ = ['QtPoco']
@@ -18,4 +18,5 @@ class QtPoco(StdPoco):
     """
 
     def __init__(self, addr=DEFAULT_ADDR, **options):
-        super(QtPoco, self).__init__(addr[1], Device(), **options)
+        dev = VirtualDevice(addr[0])
+        super(QtPoco, self).__init__(addr[1], dev, **options)
