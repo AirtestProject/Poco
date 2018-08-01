@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2018-08-01 11:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,9 +27,11 @@ msgid ""
 "are raised only in sdk corresponding runtime."
 msgstr ""
 
-#: of poco.sdk.exceptions.NoSuchComparatorException:1
+#: of poco.sdk.exceptions.InvalidTargetException:1
+#: poco.sdk.exceptions.NoSuchComparatorException:1
 #: poco.sdk.exceptions.NoSuchTargetException:1
 #: poco.sdk.exceptions.NodeHasBeenRemovedException:1
+#: poco.sdk.exceptions.NonuniqueTargetException:1
 #: poco.sdk.exceptions.UnableToSetAttributeException:1
 msgid "Bases: :class:`exceptions.Exception`"
 msgstr ""
@@ -68,5 +70,13 @@ msgstr ""
 
 #: of poco.sdk.exceptions.NoSuchComparatorException:1
 msgid "Raised when the matcher does not support the given comparison method."
+msgstr ""
+
+#: of poco.sdk.exceptions.NonuniqueTargetException:1
+msgid "Raised when the device selector matches mutiple devices"
+msgstr ""
+
+#: of poco.sdk.exceptions.InvalidTargetException:1
+msgid "Raised when the device is invalid"
 msgstr ""
 

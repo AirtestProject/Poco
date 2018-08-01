@@ -4,6 +4,7 @@
 # @Date:   2017-07-14 19:47:51
 
 from poco.drivers.std import StdPoco
+from poco.drivers.unity3d.device import UnityEditorWindow
 
 from airtest.core.api import connect_device, device as current_device
 
@@ -22,6 +23,8 @@ class UnityPoco(StdPoco):
         unity_editor (:py:obj:`bool`): whether your Unity3D game is running in UnityEditor or not. default to ``False``
         connect_default_device (:py:obj:`bool`): whether connect to a default device if no devices selected manually.
          default to ``True``.
+        device (:py:obj:`Device`): :py:obj:`airtest.core.device.Device` instance provided by ``airtest``. leave the
+         parameter default and the default device will be chosen. more details refer to ``airtest doc``
         options: see :py:class:`poco.pocofw.Poco`
 
     Examples:
@@ -37,18 +40,16 @@ class UnityPoco(StdPoco):
 
     """
 
-    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, connect_default_device=True, **options):
+    def __init__(self, addr=DEFAULT_ADDR, unity_editor=False, connect_default_device=True, device=None, **options):
         if 'action_interval' not in options:
             options['action_interval'] = 0.5
 
-        dev = None
         if unity_editor:
-            dev = connect_device("Windows:///?class_name=UnityContainerWndClass&title_re=Unity.*")
-            game_window = dev.app.top_window().child_window(title="UnityEditor.GameView")
-            dev._top_window = game_window.wrapper_object()
-            dev.focus_rect = (0, 40, 0, 0)
+            dev = UnityEditorWindow()
+        else:
+            dev = device
 
-        if connect_default_device and not current_device():
+        if dev is None and connect_default_device and not current_device():
             # currently only connect to Android as default
             # can apply auto detection in the future
             dev = connect_device("Android:///")
