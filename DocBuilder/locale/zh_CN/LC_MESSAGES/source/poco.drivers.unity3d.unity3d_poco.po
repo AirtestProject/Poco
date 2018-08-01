@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 18:05+0800\n"
+"POT-Creation-Date: 2018-08-01 11:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,14 +50,21 @@ msgid ""
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:10
-msgid "see :py:class:`poco.pocofw.Poco`"
+msgid ""
+":py:obj:`airtest.core.device.Device` instance provided by ``airtest``. "
+"leave the parameter default and the default device will be chosen. more "
+"details refer to ``airtest doc``"
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:13
+msgid "see :py:class:`poco.pocofw.Poco`"
+msgstr ""
+
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:16
 msgid "Examples"
 msgstr ""
 
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:14
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:17
 msgid ""
 "If your game is running on Android, you could initialize poco instance by"
 " using following snippet::"

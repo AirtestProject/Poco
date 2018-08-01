@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 11:31+0800\n"
+"POT-Creation-Date: 2018-08-01 11:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,43 +35,72 @@ msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:3
 msgid ""
-"find window by a selector, optional parameters: "
-"`title`,`handle`,`title_re`"
+"find window by a selector, optional parameters: ``title``, ``handle``, "
+"``title_re`` title: find windows by title  handle: find windows by handle"
+"  title_re: find windows by regular expression of title"
 msgstr ""
 
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:5
-msgid "find windows by title"
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:3
+msgid ""
+"find window by a selector, optional parameters: ``title``, ``handle``, "
+"``title_re`` title: find windows by title"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:6
-msgid "find windows by handle"
-msgstr ""
-
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:7
-msgid "find windows by regular expression of title"
+msgid "handle: find windows by handle"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:8
-msgid "where the WindowsUI running on, (localhost,15004) by default"
+msgid "title_re: find windows by regular expression of title"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:10
+msgid "where the WindowsUI running on, (localhost,15004) by default"
+msgstr ""
+
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:12
 msgid "see :py:class:`poco.pocofw.Poco`"
 msgstr ""
 
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:13
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:15
 msgid "Examples"
 msgstr ""
 
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:17
-msgid "::"
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:19
+msgid ""
+"If your programme is running, you could initialize poco instance by using"
+" following snippet::"
 msgstr ""
 
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:15
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:17
 msgid ""
 "from poco.drivers.windows import WindowsPoco # poco = "
 "WindowsPoco({'title':'xxx'}) # poco = WindowsPoco({'handle':123456}) # "
-"poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'}) # match the first "
-"matched window"
+"poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'})"
 msgstr ""
+
+#~ msgid ""
+#~ "find window by a selector, optional "
+#~ "parameters: `title`,`handle`,`title_re`"
+#~ msgstr ""
+
+#~ msgid "find windows by title"
+#~ msgstr ""
+
+#~ msgid "find windows by handle"
+#~ msgstr ""
+
+#~ msgid "find windows by regular expression of title"
+#~ msgstr ""
+
+#~ msgid "::"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "from poco.drivers.windows import WindowsPoco #"
+#~ " poco = WindowsPoco({'title':'xxx'}) # poco"
+#~ " = WindowsPoco({'handle':123456}) # poco ="
+#~ " WindowsPoco({'title_re':'[a-z][a-z][a-z]'}) # match"
+#~ " the first matched window"
+#~ msgstr ""
 
