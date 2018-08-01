@@ -85,6 +85,3 @@ class WindowsUINode(AbstractNode):
     def getAvailableAttributeNames(self):
         return super(WindowsUINode, self).getAvailableAttributeNames() + ('text', '_instanceId', 'originType')
 
-    def enumerateAttrs(self):
-        for attrName in self.getAvailableAttributeNames():
-            yield attrName, self.getAttr(attrName)

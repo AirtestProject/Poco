@@ -66,6 +66,7 @@ class PocoSDKWindows(object):
         return [Width, Height]
 
     def JudgeSize(self):
+        self.SetForeground()
         size = self.GetScreenSize()
         if size[0] == 0 or size[1] == 0:
             raise InvalidSurfaceException(self, "You may have minimized your window or the window is too small!")
@@ -117,6 +118,7 @@ class PocoSDKWindows(object):
         return True
 
     def KeyEvent(self, keycode):
+        self.JudgeSize()
         UIAuto.SendKeys(keycode)
         return True
 
