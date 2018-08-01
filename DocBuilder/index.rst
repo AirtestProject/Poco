@@ -127,9 +127,9 @@ Use poco on platforms/engines
 
 This section guide you how to start to use poco to write your test cases on different platforms/engines.
 
-- `Unity3D <source/doc/driver/unity3d.html>`_
-- `Android native app <source/doc/driver/android-native-app.html>`_
-- `Windows app <source/doc/driver/windows-app.html>`_
+- `Unity3D <source/doc/drivers/unity3d.html>`_
+- `Android native app <source/doc/drivesr/android-native-app.html>`_
+- `Windows app <source/doc/drivers/windows-app.html>`_
 - `cocos2dx-lua <>`_
 - `cocos2dx-js <>`_
 

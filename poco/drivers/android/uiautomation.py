@@ -6,6 +6,7 @@ import os
 import requests
 import time
 import warnings
+import threading
 import atexit
 
 from airtest.core.api import connect_device, device as current_device
@@ -176,6 +177,9 @@ class AndroidUiautomationPoco(Poco):
 
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
+        if ready:
+            # 首次启动成功后，在后台线程里监控这个进程的状态，保持让它不退出
+            self._keep_running_instrumentation(p0)
 
         endpoint = "http://{}:{}".format(self.device_ip, p1)
         agent = AndroidPocoAgent(endpoint, self.ime, use_airtest_input)
@@ -194,21 +198,20 @@ class AndroidUiautomationPoco(Poco):
                 return True
         return False
 
-    # def _keep_running_instrumentation(self):
-    #     def loop():
-    #         while True:
-    #             proc = self.adb_client.shell([
-    #                 'am', 'instrument', '-w', '-e', 'class',
-    #                 '{}.InstrumentedTestAsLauncher#launch'.format(PocoServicePackage),
-    #                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)],
-    #                 not_wait=True)
-    #             stdout, stderr = proc.communicate()
-    #             print(stdout)
-    #             print(stderr)
-    #             time.sleep(1)
-    #     t = threading.Thread(target=loop)
-    #     t.daemon = True
-    #     t.start()
+    def _keep_running_instrumentation(self, port_to_ping):
+        print('[pocoservice.apk] background daemon started.')
+
+        def loop():
+            while True:
+                stdout, stderr = self._instrument_proc.communicate()
+                print('[pocoservice.apk] stdout: {}'.format(stdout))
+                print('[pocoservice.apk] stderr: {}'.format(stderr))
+                print('[pocoservice.apk] retrying instrumentation PocoService')
+                self._start_instrument(port_to_ping)  # 尝试重启
+                time.sleep(1)
+        t = threading.Thread(target=loop)
+        t.daemon = True
+        t.start()
 
     def _start_instrument(self, port_to_ping, force_restart=False):
         if not force_restart:
@@ -249,9 +252,11 @@ class AndroidUiautomationPoco(Poco):
                 break
             except requests.exceptions.ConnectionError:
                 if self._instrument_proc.poll() is not None:
-                    warnings.warn("instrument server process is not alive")
-                    output = self._instrument_proc.stdout.read()
-                    print(output)
+                    warnings.warn("[pocoservice.apk] instrumentation test server process is no longer alive")
+                    stdout = self._instrument_proc.stdout.read()
+                    stderr = self._instrument_proc.stderr.read()
+                    print('[pocoservice.apk] stdout: {}'.format(stdout))
+                    print('[pocoservice.apk] stderr: {}'.format(stderr))
                 time.sleep(1)
                 print("still waiting for uiautomation ready.")
                 continue
