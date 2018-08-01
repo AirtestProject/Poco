@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 11:31+0800\n"
+"POT-Creation-Date: 2018-08-01 11:39+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,5 +19,58 @@ msgstr ""
 
 #: ../../source/doc/drivers/unity3d.rst:3
 msgid "Unity3D (poco driver)"
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:5
+msgid ""
+"Following example shows how to initialize poco instance for Unity3D games"
+" on Windows, UnityEditor or Android."
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:8
+msgid "Android (default)"
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:10
+msgid "Remember to connect an Android device to your PC/mac with a running game."
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:24
+msgid ""
+"If multiple devices connected to your PC/mac, please select the device in"
+" the following way."
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:49
+msgid "Unity player on Windows"
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:51
+msgid ""
+"Similar to Android, if the game runs on Windows, simply connect to the "
+"windows device in the following way. The only difference is on "
+"``connect_device``. More window selectors refers to "
+"`airtest.core.api.connect_device`_."
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:78
+msgid "UnityEditor on Windows"
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:80
+msgid ""
+"Poco driver is also available for UnityEditor, which is easy for game "
+"debugging. Use ``UnityEditorWindow`` to initialize the device object will"
+" do."
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:107
+msgid "Multiple devices together (mixed platforms)"
+msgstr ""
+
+#: ../../source/doc/drivers/unity3d.rst:109
+msgid ""
+"If you are going to control multiple devices in the same test case, "
+"please follow the following example."
 msgstr ""
 
