@@ -3,10 +3,9 @@
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
-from poco.drivers.windows.sdk.WindowsUINode import WindowsUINode
 from poco.drivers.windows.sdk.WindowsUIDumper import WindowsUIDumper
-from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueTargetException
-from poco.utils.six import text_type, string_types, PY2
+from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueSurfaceException, InvalidSurfaceException
+from poco.utils.six import string_types, PY2
 import uiautomation as UIAuto
 import time
 import base64
@@ -14,7 +13,6 @@ import zlib
 import win32con
 import win32gui
 import re
-import sys
 
 DEFAULT_PORT = 15004
 DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
@@ -67,7 +65,13 @@ class PocoSDKWindows(object):
         Height = self.root.BoundingRectangle[3] - self.root.BoundingRectangle[1]
         return [Width, Height]
 
+    def JudgeSize(self):
+        size = self.GetScreenSize()
+        if size[0] == 0 or size[1] == 0:
+            raise InvalidSurfaceException(self, "You may have minimized your window or the window is too small!")
+
     def Screenshot(self, width):
+        self.JudgeSize()
         self.root.ToBitmap().ToFile('Screenshot.bmp')
         f = open(r'Screenshot.bmp', 'rb')
         deflated = zlib.compress(f.read())
@@ -82,10 +86,12 @@ class PocoSDKWindows(object):
         # return [ls_f, "bmp"]
 
     def Click(self, x, y):
+        self.JudgeSize()
         self.root.Click(x, y)
         return True
 
     def Swipe(self, x1, y1, x2, y2, duration):
+        self.JudgeSize()
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -99,6 +105,7 @@ class PocoSDKWindows(object):
         return True
 
     def LongClick(self, x, y, duration):
+        self.JudgeSize()
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -191,7 +198,7 @@ class PocoSDKWindows(object):
         if len(handleSet) == 0:
             return False
         elif len(handleSet) != 1:
-            raise NonuniqueTargetException(selector)
+            raise NonuniqueSurfaceException(selector)
         else:
             hn = handleSet.pop()
             if hn:

@@ -7,7 +7,7 @@ This module provides several exceptions for poco-sdk. These exceptions are raise
 
 __author__ = 'lxn3032'
 __all__ = ['NoSuchTargetException', 'NodeHasBeenRemovedException', 'UnableToSetAttributeException',
-           'NoSuchComparatorException', 'NonuniqueTargetException', 'InvalidTargetException']
+           'NoSuchComparatorException', 'NonuniqueSurfaceException', 'InvalidSurfaceException']
 
 
 class NodeHasBeenRemovedException(Exception):
@@ -59,21 +59,21 @@ class NoSuchComparatorException(Exception):
         self.message = 'No such matching method "{}" of this Matcher ("{}")'.format(matchingMethod, matcherName)
 
 
-class NonuniqueTargetException(Exception):
+class NonuniqueSurfaceException(Exception):
     """
-    Raised when the device selector matches mutiple devices
+    Raised when the device selector matches mutiple devices surface
     """
 
     def __init__(self, selector):
-        msg = 'The arguments ("{}") match multiple device. More precise conditions required.'.format(selector)
-        super(NonuniqueTargetException, self).__init__(msg)
+        msg = 'The arguments ("{}") match multiple device surface. More precise conditions required.'.format(selector)
+        super(NonuniqueSurfaceException, self).__init__(msg)
 
 
-class InvalidTargetException(Exception):
+class InvalidSurfaceException(Exception):
     """
-    Raised when the device is invalid
+    Raised when the device surface is invalid
     """
 
     def __init__(self, target, msg="None"):
-        msg = 'Target device invalid ("{}") . Detial message: "{}"'.format(target, msg)
-        super(InvalidTargetException, self).__init__(msg)
+        msg = 'Target device surface invalid ("{}") . Detial message: "{}"'.format(target, msg)
+        super(InvalidSurfaceException, self).__init__(msg)
