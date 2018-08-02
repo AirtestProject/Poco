@@ -9,13 +9,15 @@ __author__ = 'linzecong'
 
 class WindowsUINode(AbstractNode):
 
+    NameTime = {}
+
     def __init__(self, control, dumper):
         self.Control = control
         self.Children = []
         self.dumper = dumper
 
     def getParent(self):
-        return self.Control.GetParentControl()
+        return WindowsUINode(self.Control.GetParentControl(), self.dumper)
 
     def getChildren(self):
         if len(self.Children):
@@ -42,11 +44,17 @@ class WindowsUINode(AbstractNode):
         }
 
         if attrName == 'name':
+            newname = "Uname"
             strr = self.Control.Name
-            if strr == "":
-                return "Uname"
+            if strr != "":
+                newname = strr
+            if newname in WindowsUINode.NameTime:
+                WindowsUINode.NameTime[newname] += 1
             else:
-                return strr
+                WindowsUINode.NameTime[newname] = 0
+            if WindowsUINode.NameTime[newname] != 0:
+                newname = newname + str(WindowsUINode.NameTime[newname])
+            return newname
 
         if attrName == 'originType':
             return self.Control.ControlTypeName
@@ -84,4 +92,3 @@ class WindowsUINode(AbstractNode):
 
     def getAvailableAttributeNames(self):
         return super(WindowsUINode, self).getAvailableAttributeNames() + ('text', '_instanceId', 'originType')
-

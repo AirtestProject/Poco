@@ -146,7 +146,7 @@ class PocoSDKWindows(object):
             if title == title_temp:
                 hn.add(handle)
         if len(hn) == 0:
-            print
+            return -1
         return hn
 
     def ConnectWindowsByTitleRe(self, title_re):
