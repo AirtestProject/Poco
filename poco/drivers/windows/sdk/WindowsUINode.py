@@ -44,18 +44,11 @@ class WindowsUINode(AbstractNode):
         }
 
         if attrName == 'name':
-            newname = "Uname"
             strr = self.Control.Name
             if strr != "":
-                newname = strr
-            if newname in WindowsUINode.NameTime:
-                WindowsUINode.NameTime[newname] += 1
-            else:
-                WindowsUINode.NameTime[newname] = 0
-            if WindowsUINode.NameTime[newname] != 0:
-                newname = newname + str(WindowsUINode.NameTime[newname])
-            return newname
-
+                return strr
+            return self.Control.ControlTypeName.replace("Control", "")
+            
         if attrName == 'originType':
             return self.Control.ControlTypeName
 
