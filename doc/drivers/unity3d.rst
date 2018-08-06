@@ -48,8 +48,8 @@ If multiple devices connected to your PC/mac, please select the device in the fo
 Unity player on Windows
 -----------------------
 
-Similar to Android, if the game runs on Windows, simply connect to the windows device in the following way.
-The only difference is on ``connect_device``. More window selectors refers to `airtest.core.api.connect_device`_.
+Similar to Android, if the game runs on Windows, simply connect to the window device in the following way.
+The only difference is on ``connect_device``. More window selectors refer to `airtest.core.api.connect_device`_.
 
 .. code-block:: python
 

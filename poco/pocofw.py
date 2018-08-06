@@ -174,19 +174,23 @@ class Poco(PocoAccelerationMixin):
         """
 
         class FrozenPoco(Poco):
-            def __init__(self):
+            def __init__(self, **kwargs):
                 hierarchy_dict = this.agent.hierarchy.dump()
                 hierarchy = create_immutable_hierarchy(hierarchy_dict)
                 agent_ = PocoAgent(hierarchy, this.agent.input, this.agent.screen)
-                super(FrozenPoco, self).__init__(agent_, action_interval=0.01, pre_action_wait_for_appearance=0)
-                self._pre_action_callbacks = this._pre_action_callbacks
-                self._post_action_callbacks = this._post_action_callbacks
+                kwargs['action_interval'] = 0.01
+                kwargs['pre_action_wait_for_appearance'] = 0
+                super(FrozenPoco, self).__init__(agent_, **kwargs)
+                self.this = this
 
             def __enter__(self):
                 return self
 
             def __exit__(self, exc_type, exc_val, exc_tb):
                 pass
+
+            def __getattr__(self, item):
+                return getattr(self.this, item)
 
         return FrozenPoco()
 
