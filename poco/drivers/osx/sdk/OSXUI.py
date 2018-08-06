@@ -7,6 +7,7 @@ import re
 import pyautogui
 import atomac
 import AppKit
+import operator
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -175,6 +176,19 @@ class PocoSDKOSX(object):
 
     def ConnectWindow(self, selector):
         
+        # 目前来说，如下处理，以后添加更多的参数后需修改代码逻辑
+        argunums = 0
+        if 'bundleid' in selector:
+            argunums += 1
+        if 'appname' in selector:
+            argunums += 1
+        if 'appname_re' in selector:
+            argunums += 1
+        if argunums == 0:
+            raise ValueError("Expect bundleid or appname, got none")
+        elif argunums != 1:
+            raise ValueError("Too many arguments, only need bundleid or appname or appname_re")
+        
         winlist = self.EnumWindows(selector)
 
         handleSetList = []
@@ -190,10 +204,8 @@ class PocoSDKOSX(object):
 
         if len(handleSetList) == 0:  # 三种方法都找不到窗口
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
-
-        handleSet = handleSetList[0]
-        for s in handleSetList:
-            handleSet = s & handleSet  # 求三种方法的交集
+            
+        handleSet = reduce(operator.__and__, handleSetList)
 
         if len(handleSet) == 0:
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
@@ -206,7 +218,6 @@ class PocoSDKOSX(object):
                 raise IndexError("Unable to find the specified window through the index, you may have closed the specified window during the run")
             self.root = self.app.windows()[hn]
             self.SetForeground()
-            return True
 
     def run(self):
         if self.running is False:

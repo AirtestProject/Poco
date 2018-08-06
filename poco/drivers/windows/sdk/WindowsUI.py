@@ -6,6 +6,7 @@ import zlib
 import win32con
 import win32gui
 import re
+import operator
 import uiautomation as UIAuto
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
@@ -173,11 +174,21 @@ class PocoSDKWindows(object):
             return -1
         return hn
 
-    def ConnectWindow(self, selector, foreground=False):
-        if foreground:
-            time.sleep(1)  # 等待一秒，让用户选择窗口
-            self.root = UIAuto.GetForegroundControl()  # 直接使用前台进程，一般是服务器独立运行SDK时用
-            return True
+    def ConnectWindow(self, selector):
+        
+        # 目前来说，如下处理，以后添加更多的参数后需修改代码逻辑
+        argunums = 0
+        if 'handle' in selector:
+            argunums += 1
+        if 'title' in selector:
+            argunums += 1
+        if 'title_re' in selector:
+            argunums += 1
+        
+        if argunums == 0:
+            raise ValueError("Expect handle or title, got none")
+        elif argunums != 1:
+            raise ValueError("Too many arguments, only need handle or title or title_re")
 
         handleSetList = []
         if 'title' in selector:
@@ -190,12 +201,10 @@ class PocoSDKWindows(object):
         while -1 in handleSetList:
             handleSetList.remove(-1)
 
-        if len(handleSetList) == 0:  # 三种方法都找不到窗口
+        if len(handleSetList) is 0:
             raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
 
-        handleSet = handleSetList[0]
-        for s in handleSetList:
-            handleSet = s & handleSet  # 求三种方法获取到的窗口的交集
+        handleSet = reduce(operator.__and__, handleSetList)
 
         if len(handleSet) == 0:
             raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
@@ -203,21 +212,15 @@ class PocoSDKWindows(object):
             raise NonuniqueSurfaceException(selector)
         else:
             hn = handleSet.pop()
-            if hn:
-                self.root = UIAuto.ControlFromHandle(hn)
-                if self.root is None:
-                    raise ValueError("Handle(" + str(hn) + ") Invalid.")
-                return True
-            else:
-                raise ValueError("Handle(" + str(hn) + ") Invalid.")
+            self.root = UIAuto.ControlFromHandle(hn)
+            if self.root is None:
+                raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
 
-    def run(self, use_foregrond_window=False):
+    def run(self):
         if self.running is False:
             self.running = True
-            if use_foregrond_window:
-                self.ConnectWindow(set(), True)
             self.rpc.serve_forever()
 
 if __name__ == '__main__':
     pocosdk = PocoSDKWindows()
-    pocosdk.run(True)
+    pocosdk.run()
