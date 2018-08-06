@@ -41,11 +41,15 @@ class WindowsUINode(AbstractNode):
         if attrName == 'pos':
             rect = self.Control.BoundingRectangle
             # 计算比例
-            return [float(rect[0] + (rect[2] - rect[0]) / 2.0 - self.dumper.RootLeft) / float(self.dumper.RootWidth), float(rect[1] + (rect[3] - rect[1]) / 2.0 - self.dumper.RootTop) / float(self.dumper.RootHeight)]
+            pos1 = float(rect[0] + (rect[2] - rect[0]) / 2.0 - self.dumper.RootLeft) / float(self.dumper.RootWidth)
+            pos2 = float(rect[1] + (rect[3] - rect[1]) / 2.0 - self.dumper.RootTop) / float(self.dumper.RootHeight)
+            return [pos1, pos2]
 
         if attrName == 'size':
             rect = self.Control.BoundingRectangle
-            return [float(rect[2] - rect[0]) / float(self.dumper.RootWidth), float(rect[3] - rect[1]) / float(self.dumper.RootHeight)]
+            pos1 = float(rect[2] - rect[0]) / float(self.dumper.RootWidth)
+            pos2 = float(rect[3] - rect[1]) / float(self.dumper.RootHeight)
+            return [pos1, pos2]
 
         if attrName == 'text':
             # 先判断控件是否有text属性

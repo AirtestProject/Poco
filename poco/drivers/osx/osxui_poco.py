@@ -22,20 +22,7 @@ class OSXPoco(StdPoco):
 
         dev = VirtualDevice(addr[0])
         super(OSXPoco, self).__init__(addr[1], dev, False, **options)
-
-        argunums = 0
-        if 'bundleid' in selector:
-            argunums += 1
-        if 'appname' in selector:
-            argunums += 1
-        if 'appname_re' in selector:
-            argunums += 1
-        
-        if argunums == 0:
-            raise ValueError("Expect bundleid or appname, got none")
-        elif argunums != 1:
-            raise ValueError("Too many arguments, only need bundleid or appname or appname_re")
-        
+       
         self.selector = selector
         self.connect_window(self.selector)
         self.set_foreground()
