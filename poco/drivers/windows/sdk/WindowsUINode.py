@@ -1,15 +1,11 @@
 # coding=utf-8
 
+import uiautomation as UIAuto
 from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.AbstractNode import AbstractNode
-import uiautomation as UIAuto
-
-__author__ = 'linzecong'
 
 
 class WindowsUINode(AbstractNode):
-
-    NameTime = {}
 
     def __init__(self, control, dumper):
         self.Control = control
@@ -29,19 +25,6 @@ class WindowsUINode(AbstractNode):
                 yield WindowsUINode(node, self.dumper)
 
     def getAttr(self, attrName):
-        # default value
-        attrs = {
-            'name': '<Root>',
-            'originType': 'Unknow',
-            'type': 'Root',
-            'visible': True,
-            'pos': [0.0, 0.0],
-            'size': [0.0, 0.0],
-            'scale': [1.0, 1.0],
-            'anchorPoint': [0.5, 0.5],
-            'zOrders': {'local': 0, 'global': 0},
-            'text': 'Empty',
-        }
 
         if attrName == 'name':
             strr = self.Control.Name
@@ -57,6 +40,7 @@ class WindowsUINode(AbstractNode):
 
         if attrName == 'pos':
             rect = self.Control.BoundingRectangle
+            # 计算比例
             return [float(rect[0] + (rect[2] - rect[0]) / 2.0 - self.dumper.RootLeft) / float(self.dumper.RootWidth), float(rect[1] + (rect[3] - rect[1]) / 2.0 - self.dumper.RootTop) / float(self.dumper.RootHeight)]
 
         if attrName == 'size':
@@ -64,14 +48,16 @@ class WindowsUINode(AbstractNode):
             return [float(rect[2] - rect[0]) / float(self.dumper.RootWidth), float(rect[3] - rect[1]) / float(self.dumper.RootHeight)]
 
         if attrName == 'text':
+            # 先判断控件是否有text属性
             if ((isinstance(self.Control, UIAuto.ValuePattern) and self.Control.IsValuePatternAvailable())):
                 return self.Control.CurrentValue()
             else:
-                return 'Empty'
+                return None
 
         if attrName == '_instanceId':
             return self.Control.Handle
-        return attrs.get(attrName)
+            
+        return super(WindowsUINode, self).getAttr(attrName)
 
     def setAttr(self, attrName, val):
         if attrName != 'text':
@@ -84,4 +70,7 @@ class WindowsUINode(AbstractNode):
                 raise UnableToSetAttributeException(attrName, self)
 
     def getAvailableAttributeNames(self):
-        return super(WindowsUINode, self).getAvailableAttributeNames() + ('text', '_instanceId', 'originType')
+        if ((isinstance(self.Control, UIAuto.ValuePattern) and self.Control.IsValuePatternAvailable())):
+            return super(WindowsUINode, self).getAvailableAttributeNames() + ('text', '_instanceId', 'originType')
+        else:
+            return super(WindowsUINode, self).getAvailableAttributeNames() + ('_instanceId', 'originType')

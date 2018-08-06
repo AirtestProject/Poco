@@ -6,9 +6,6 @@ from poco.drivers.osx.sdk.OSXUINode import OSXUINode
 from poco.sdk.exceptions import InvalidSurfaceException
 
 
-__author__ = 'linzecong'
-
-
 class OSXUIDumper(AbstractDumper):
 
     def __init__(self, root):
@@ -21,5 +18,4 @@ class OSXUIDumper(AbstractDumper):
             raise InvalidSurfaceException(self, "You may have minimized your window or the window is too small!")
 
     def getRoot(self):
-        OSXUINode.NameTime.clear()
         return OSXUINode(self.RootControl, self)
