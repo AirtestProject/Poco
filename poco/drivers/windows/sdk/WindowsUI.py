@@ -1,18 +1,18 @@
 # coding=utf-8
 
-from poco.sdk.std.rpc.controller import StdRpcEndpointController
-from poco.sdk.std.rpc.reactor import StdRpcReactor
-from poco.utils.net.transport.tcp import TcpSocket
-from poco.drivers.windows.sdk.WindowsUIDumper import WindowsUIDumper
-from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueSurfaceException, InvalidSurfaceException
-from poco.utils.six import string_types, PY2
-import uiautomation as UIAuto
 import time
 import base64
 import zlib
 import win32con
 import win32gui
 import re
+import uiautomation as UIAuto
+from poco.sdk.std.rpc.controller import StdRpcEndpointController
+from poco.sdk.std.rpc.reactor import StdRpcReactor
+from poco.utils.net.transport.tcp import TcpSocket
+from poco.drivers.windows.sdk.WindowsUIDumper import WindowsUIDumper
+from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueSurfaceException, InvalidSurfaceException
+from poco.utils.six import string_types, PY2
 
 DEFAULT_PORT = 15004
 DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
@@ -66,7 +66,7 @@ class PocoSDKWindows(object):
         return [Width, Height]
 
     def JudgeSize(self):
-        self.SetForeground()
+        self.SetForeground()  # 先打开窗口再获取大小，否则最小化的窗口获取到的大小会为0
         size = self.GetScreenSize()
         if size[0] == 0 or size[1] == 0:
             raise InvalidSurfaceException(self, "You may have minimized your window or the window is too small!")
@@ -101,7 +101,7 @@ class PocoSDKWindows(object):
         y1 = Top + Height * y1
         x2 = Left + Width * x2
         y2 = Top + Height * y2
-        UIAuto.MAX_MOVE_SECOND = duration * 10
+        UIAuto.MAX_MOVE_SECOND = duration * 10  # 同步到跟UIAutomation库的时间设定一样
         UIAuto.DragDrop(int(x1), int(y1), int(x2), int(y2))
         return True
 
@@ -123,8 +123,8 @@ class PocoSDKWindows(object):
         return True
 
     def SetForeground(self):
-        win32gui.ShowWindow(self.root.Handle, win32con.SW_SHOWNORMAL)
-        UIAuto.Win32API.SetForegroundWindow(self.root.Handle)
+        win32gui.ShowWindow(self.root.Handle, win32con.SW_SHOWNORMAL)  # 先把窗口取消最小化
+        UIAuto.Win32API.SetForegroundWindow(self.root.Handle)  # 再把窗口设为前台，方便点击和截图
         return True
 
     def EnumWindows(self):
@@ -142,7 +142,7 @@ class PocoSDKWindows(object):
         for handle in hWndList:
             title_temp = win32gui.GetWindowText(handle)
             if PY2:
-                title_temp = title_temp.decode("gbk")
+                title_temp = title_temp.decode("gbk")  # py2要解码成GBK，WindowsAPI中文返回的一般都是GBK
             if title == title_temp:
                 hn.add(handle)
         if len(hn) == 0:
@@ -175,8 +175,8 @@ class PocoSDKWindows(object):
 
     def ConnectWindow(self, selector, foreground=False):
         if foreground:
-            time.sleep(1)
-            self.root = UIAuto.GetForegroundControl()
+            time.sleep(1)  # 等待一秒，让用户选择窗口
+            self.root = UIAuto.GetForegroundControl()  # 直接使用前台进程，一般是服务器独立运行SDK时用
             return True
 
         handleSetList = []
@@ -190,24 +190,26 @@ class PocoSDKWindows(object):
         while -1 in handleSetList:
             handleSetList.remove(-1)
 
-        if len(handleSetList) == 0:
-            return False
+        if len(handleSetList) == 0:  # 三种方法都找不到窗口
+            raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
 
         handleSet = handleSetList[0]
         for s in handleSetList:
-            handleSet = s & handleSet
+            handleSet = s & handleSet  # 求三种方法获取到的窗口的交集
 
         if len(handleSet) == 0:
-            return False
+            raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
         elif len(handleSet) != 1:
             raise NonuniqueSurfaceException(selector)
         else:
             hn = handleSet.pop()
             if hn:
                 self.root = UIAuto.ControlFromHandle(hn)
+                if self.root is None:
+                    raise ValueError("Handle(" + str(hn) + ") Invalid.")
                 return True
             else:
-                return False
+                raise ValueError("Handle(" + str(hn) + ") Invalid.")
 
     def run(self, use_foregrond_window=False):
         if self.running is False:

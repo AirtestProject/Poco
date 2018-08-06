@@ -1,12 +1,8 @@
 # coding=utf-8
 
-
 from poco.sdk.AbstractDumper import AbstractDumper
 from poco.sdk.exceptions import InvalidSurfaceException
 from poco.drivers.windows.sdk.WindowsUINode import WindowsUINode
-import uiautomation as UIAuto
-
-__author__ = 'linzecong'
 
 
 class WindowsUIDumper(AbstractDumper):

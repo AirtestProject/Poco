@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import threading
 from poco.drivers.std import StdPoco
 from poco.utils.device import VirtualDevice
 from poco.drivers.std import DEFAULT_ADDR, DEFAULT_PORT
 from poco.utils.simplerpc.utils import sync_wrapper
-from airtest.core.error import DeviceConnectionError
-import threading
 
 
 class WindowsPoco(StdPoco):
@@ -46,12 +45,22 @@ class WindowsPoco(StdPoco):
         dev = VirtualDevice(addr[0])
         super(WindowsPoco, self).__init__(addr[1], dev, False, **options)
 
+        argunums = 0
+        if 'handle' in selector:
+            argunums += 1
+        if 'title' in selector:
+            argunums += 1
+        if 'title_re' in selector:
+            argunums += 1
+        
+        if argunums == 0:
+            raise ValueError("Expect handle or title, got none")
+        elif argunums != 1:
+            raise ValueError("Too many arguments, only need handle or title or title_re")
+        
         self.selector = selector
-        ok = self.connect_window(self.selector)
-        if not ok:
-            raise DeviceConnectionError("Can't find any windows by the given parameter")
-        else:
-            self.set_foreground()
+        self.connect_window(self.selector)
+        self.set_foreground()
 
     @sync_wrapper
     def connect_window(self, selector):

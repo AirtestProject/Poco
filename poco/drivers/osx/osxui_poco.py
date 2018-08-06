@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import threading
 from poco.drivers.std import StdPoco
 from poco.utils.device import VirtualDevice
 from poco.drivers.std import DEFAULT_ADDR, DEFAULT_PORT
 from poco.utils.simplerpc.utils import sync_wrapper
-from airtest.core.error import DeviceConnectionError
-import threading
 
 
 class OSXPoco(StdPoco):
@@ -24,18 +23,22 @@ class OSXPoco(StdPoco):
         dev = VirtualDevice(addr[0])
         super(OSXPoco, self).__init__(addr[1], dev, False, **options)
 
-        argusnum = int('bundleid' in selector) + int('title' in selector) + int('title_re' in selector)
-        if argusnum == 0:
-            raise DeviceConnectionError("need bundleid or title to connect device")
-        elif argusnum != 1:
-            raise DeviceConnectionError("too many arguments, only need bundleid or title or title_re")
+        argunums = 0
+        if 'bundleid' in selector:
+            argunums += 1
+        if 'appname' in selector:
+            argunums += 1
+        if 'appname_re' in selector:
+            argunums += 1
+        
+        if argunums == 0:
+            raise ValueError("Expect bundleid or appname, got none")
+        elif argunums != 1:
+            raise ValueError("Too many arguments, only need bundleid or appname or appname_re")
         
         self.selector = selector
-        ok = self.connect_window(self.selector)
-        if not ok:
-            raise DeviceConnectionError("Can't find any windows by the given parameter")
-        else:
-            self.set_foreground()
+        self.connect_window(self.selector)
+        self.set_foreground()
 
     @sync_wrapper
     def connect_window(self, selector):

@@ -119,54 +119,55 @@ class PocoSDKOSX(object):
                 names.append((w.AXTitle, i))
             return names
 
-        if 'title' in selector:
-            self.app = atomac.getAppRefByLocalizedName(selector['title'])
+        if 'appname' in selector:
+            self.app = atomac.getAppRefByLocalizedName(selector['appname'])
             windows = self.app.windows()
             for i, w in enumerate(windows):
                 names.append((w.AXTitle, i))
             return names
 
-        if 'title_re' in selector:
-            apps = atomac.NativeUIElement._getRunningApps()
-
-            s = set()
-            sn = set()
+        if 'appname_re' in selector:  # 此方法由于MacOS API，问题较多
+            apps = atomac.NativeUIElement._getRunningApps()  # 获取当前运行的所有应用程序
+            appset = set()  # 应用程序集合
+            appnameset = set()  # 应用程序标题集合
             for t in apps:
-                temp = atomac.getAppRefByPid(t.processIdentifier())
-                if str(temp) == str(atomac.AXClasses.NativeUIElement()):
+                tempapp = atomac.getAppRefByPid(t.processIdentifier())
+                if str(tempapp) == str(atomac.AXClasses.NativeUIElement()):  # 通过trick判断应用程序是都否为空
                     continue
-                attrs = temp.getAttributes()
+                attrs = tempapp.getAttributes()
                 if 'AXTitle' in attrs:
-                    tit = temp.AXTitle
-                    if re.match(selector['title_re'], tit):
-                        s.add(temp)
-                        sn.add(tit)  # 这里有Bug，可能会获取到相同的进程，所以要通过名字去判断是否唯一
+                    tit = tempapp.AXTitle
+                    if re.match(selector['appname_re'], tit):
+                        appset.add(tempapp)
+                        appnameset.add(tit)  # 这里有Bug，可能会获取到进程的不同副本，所以要通过名字去判断是否唯一
 
-            if len(sn) != 1:
+            if len(appnameset) is 0:
+                raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
+            if len(appnameset) != 1:
                 raise NonuniqueSurfaceException(selector)
-            while len(names) is 0:
-                if len(s) is 0:
+            while len(names) is 0:  # 有可能有多个副本，但只有一个真的应用程序有窗口，所以要枚举去找
+                if len(appset) is 0:
                     return names
-                self.app = s.pop()
-                windows = self.app.windows()
+                self.app = appset.pop()
+                windows = self.app.windows()  # 获取当前应用程序的所有窗口
                 for i, w in enumerate(windows):
                     names.append((w.AXTitle, i))
             return names
         return names
         
-    def ConnectWindowsByWindowName(self, selector, wlist):
+    def ConnectWindowsByWindowTitle(self, selector, wlist):
         hn = set()
         for n in wlist:
-            if selector['windowname'] == n[0]:
+            if selector['windowtitle'] == n[0]:
                 hn.add(n[1])
         if len(hn) == 0:
             return -1
         return hn
 
-    def ConnectWindowsByWindowNameRe(self, selector, wlist):
+    def ConnectWindowsByWindowTitleRe(self, selector, wlist):
         hn = set()
         for n in wlist:
-            if re.match(selector['windowname_re'], n[0]):
+            if re.match(selector['windowtitle_re'], n[0]):
                 hn.add(n[1])
         if len(hn) == 0:
             return -1
@@ -177,31 +178,33 @@ class PocoSDKOSX(object):
         winlist = self.EnumWindows(selector)
 
         handleSetList = []
-        if 'windowname' in selector:
-            handleSetList.append(self.ConnectWindowsByWindowName(selector, winlist))
-        if 'windownumber' in selector:
-            handleSetList.append(set([selector['windownumber']]))
-        if "windowname_re" in selector:
-            handleSetList.append(self.ConnectWindowsByWindowNameRe(selector, winlist))
+        if 'windowtitle' in selector:
+            handleSetList.append(self.ConnectWindowsByWindowTitle(selector, winlist))
+        if 'windowindex' in selector:
+            handleSetList.append(set([selector['windowindex']]))
+        if "windowtitle_re" in selector:
+            handleSetList.append(self.ConnectWindowsByWindowTitleRe(selector, winlist))
 
         while -1 in handleSetList:
             handleSetList.remove(-1)
 
-        if len(handleSetList) == 0:
-            return False
+        if len(handleSetList) == 0:  # 三种方法都找不到窗口
+            raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
 
         handleSet = handleSetList[0]
         for s in handleSetList:
-            handleSet = s & handleSet
+            handleSet = s & handleSet  # 求三种方法的交集
 
         if len(handleSet) == 0:
-            return False
+            raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
         elif len(handleSet) != 1:
             raise NonuniqueSurfaceException(selector)
         else:
             hn = handleSet.pop()
+            w = self.app.windows()
+            if len(w) <= hn:
+                raise IndexError("Unable to find the specified window through the index, you may have closed the specified window during the run")
             self.root = self.app.windows()[hn]
-            
             self.SetForeground()
             return True
 
@@ -212,5 +215,5 @@ class PocoSDKOSX(object):
 
 if __name__ == '__main__':
     pocosdk = PocoSDKOSX()
-    pocosdk.ConnectWindow({'title_re': u'系统偏好', 'windownumber': 0})
+    # pocosdk.ConnectWindow({'appname_re': u'系统偏好', 'windowindex': 0})
     pocosdk.run()

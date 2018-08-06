@@ -4,12 +4,8 @@ from poco.sdk.exceptions import UnableToSetAttributeException
 from poco.sdk.AbstractNode import AbstractNode
 from poco.utils.six import string_types
 
-__author__ = 'linzecong'
-
 
 class OSXUINode(AbstractNode):
-
-    NameTime = {}
 
     def __init__(self, control, dumper):
         self.Control = control
@@ -25,19 +21,6 @@ class OSXUINode(AbstractNode):
                 yield OSXUINode(node, self.dumper)
 
     def getAttr(self, attrName):
-        # default value
-        attr = {
-            'name': 'Uname',
-            'originType': 'Unknow',
-            'type': 'Root',
-            'visible': True,
-            'pos': [0.0, 0.0],
-            'size': [0.0, 0.0],
-            'scale': [1.0, 1.0],
-            'anchorPoint': [0.5, 0.5],
-            'zOrders': {'local': 0, 'global': 0},
-            'text': 'Empty',
-        }
 
         attrs = self.Control.getAttributes()
 
@@ -73,11 +56,12 @@ class OSXUINode(AbstractNode):
                 if isinstance(self.Control.AXValue, string_types):
                     return self.Control.AXValue
                 if isinstance(self.Control.AXValue, int):
-                    return self.Control.AXValue
-                return self.Control.AXValue.AXValue
-            return 'Empty'
+                    return str(self.Control.AXValue)
+                if isinstance(self.Control.AXValue, float):
+                    return str(self.Control.AXValue)
+                return None
 
-        return attr.get(attrName)
+        return super(OSXUINode, self).getAttr(attrName)
 
     def setAttr(self, attrName, val):
         attrs = self.Control.getAttributes()
@@ -90,4 +74,7 @@ class OSXUINode(AbstractNode):
                 raise UnableToSetAttributeException(attrName, self)
 
     def getAvailableAttributeNames(self):
-        return super(OSXUINode, self).getAvailableAttributeNames() + ('text', 'originType')
+        if 'AXValue' in self.Control.getAttributes():
+            return super(OSXUINode, self).getAvailableAttributeNames() + ('text', 'originType')
+        else:
+            return super(OSXUINode, self).getAvailableAttributeNames() + ('originType', )
