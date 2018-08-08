@@ -14,6 +14,7 @@ from poco.utils.net.transport.tcp import TcpSocket
 from poco.drivers.osx.sdk.OSXUIDumper import OSXUIDumper
 from poco.sdk.exceptions import UnableToSetAttributeException, NonuniqueSurfaceException, InvalidSurfaceException
 from poco.utils.six import string_types, PY2
+from poco.utils.six.moves import reduce
 
 DEFAULT_PORT = 15004
 DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
