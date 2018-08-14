@@ -1,5 +1,5 @@
 ---
-name: 报bug 报error
+name: Bug report Chinese
 about: 给我们提bug
 
 ---
