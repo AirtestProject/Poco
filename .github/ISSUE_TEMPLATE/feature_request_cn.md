@@ -1,5 +1,5 @@
 ---
-name: 提需求和新特性性
+name: Feature request Chinese
 about: 给我们的项目提一些建议或者新特性需求
 
 ---
