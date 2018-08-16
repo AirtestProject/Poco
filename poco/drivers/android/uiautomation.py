@@ -203,10 +203,11 @@ class AndroidUiautomationPoco(Poco):
 
         def loop():
             while True:
-                stdout, stderr = self._instrument_proc.communicate()
-                print('[pocoservice.apk] stdout: {}'.format(stdout))
-                print('[pocoservice.apk] stderr: {}'.format(stderr))
-                print('[pocoservice.apk] retrying instrumentation PocoService')
+                if self._instrument_proc is not None:
+                    stdout, stderr = self._instrument_proc.communicate()
+                    print('[pocoservice.apk] stdout: {}'.format(stdout))
+                    print('[pocoservice.apk] stderr: {}'.format(stderr))
+                    print('[pocoservice.apk] retrying instrumentation PocoService')
                 self._start_instrument(port_to_ping)  # 尝试重启
                 time.sleep(1)
         t = threading.Thread(target=loop)
@@ -241,7 +242,16 @@ class AndroidUiautomationPoco(Poco):
                 '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
                 '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
         self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
-        atexit.register(self._instrument_proc.kill)
+
+        def cleanup_proc(proc):
+            def wrapped():
+                try:
+                    proc.kill()
+                except:
+                    pass
+            return wrapped
+        atexit.register(cleanup_proc(self._instrument_proc))
+
         time.sleep(2)
         for i in range(10):
             try:

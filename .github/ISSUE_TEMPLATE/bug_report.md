@@ -28,7 +28,7 @@ If applicable, add screenshots to help explain your problem.
 
 **python version:** `python2.7`
 
-**poco version:** `1.0.68`
+**poco version:** `1.0.69`
 > You can get poco version via `pip freeze` command.
 
 **Smartphone (please complete the following information):**
