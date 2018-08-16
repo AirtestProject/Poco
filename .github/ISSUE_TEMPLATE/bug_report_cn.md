@@ -4,11 +4,11 @@ about: 给我们提bug
 
 ---
 
-(请尽量按照下面提示内容填写，有助于我们快速定位和解决问题，感谢配合。)
+(请尽量按照下面提示内容填写，有助于我们快速定位和解决问题，感谢配合。否则直接关闭。)
 
-**重要！问题分类**
-* 图像识别相关问题 -> [issues](https://github.com/AirtestProject/Airtest/issues)
-* 测试开发环境AirtestIDE使用问题 -> [issues](https://github.com/AirtestProject/AirtestIDE/issues)
+**(重要！问题分类)**
+* 图像识别相关问题 -> https://github.com/AirtestProject/Airtest/issues
+* 测试开发环境AirtestIDE使用问题 -> https://github.com/AirtestProject/AirtestIDE/issues
 * 控件识别、树状结构、poco库报错  -> 此仓库
 
 **描述问题bug**
@@ -32,8 +32,7 @@ about: 给我们提bug
 
 **python 版本:** `python2.7`
 
-**poco 版本:** `1.0.68`
-
+**poco 版本:** `1.0.69`
 > poco版本通过`pip freeze`可以命令可以查到
 
 **设备:**
