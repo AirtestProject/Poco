@@ -67,6 +67,10 @@ class PocoSDKWindows(object):
         Height = self.root.BoundingRectangle[3] - self.root.BoundingRectangle[1]
         return [Width, Height]
 
+    def GetWindowRect(self):
+        print(self.root.BoundingRectangle)
+        return self.root.BoundingRectangle
+
     def JudgeSize(self):
         self.SetForeground()  # 先打开窗口再获取大小，否则最小化的窗口获取到的大小会为0
         size = self.GetScreenSize()
@@ -224,5 +228,6 @@ class PocoSDKWindows(object):
 
 if __name__ == '__main__':
     pocosdk = PocoSDKWindows()
-    # pocosdk.ConnectWindow({"title":"sdk"})
+    # pocosdk.ConnectWindow({"title_re":"123"})
+    # pocosdk.GetWindowRect()
     pocosdk.run()

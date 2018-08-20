@@ -61,6 +61,11 @@ class PocoSDKOSX(object):
         Height = self.root.AXSize[1]
         return [Width, Height]
 
+    def GetWindowRect(self):
+        Width = self.root.AXSize[0]
+        Height = self.root.AXSize[1]
+        return [self.root.AXPosition[0], self.root.AXPosition[1], self.root.AXPosition[0] + Width, self.root.AXPosition[1] + Height]
+
     def Screenshot(self, width):
         self.SetForeground()
         size = self.root.AXSize
@@ -228,4 +233,5 @@ class PocoSDKOSX(object):
 if __name__ == '__main__':
     pocosdk = PocoSDKOSX()
     # pocosdk.ConnectWindow({'appname_re': u'系统偏好', 'windowindex': 0})
+    # pocosdk.GetWindowRect()
     pocosdk.run()
