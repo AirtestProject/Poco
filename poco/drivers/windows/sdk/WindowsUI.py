@@ -23,24 +23,7 @@ DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 class PocoSDKWindows(object):
 
     def __init__(self, addr=DEFAULT_ADDR):
-        self.reactor = StdRpcReactor()
-        self.reactor.register('Dump', self.Dump)
-        self.reactor.register('SetText', self.SetText)
-        self.reactor.register('GetSDKVersion', self.GetSDKVersion)
-        self.reactor.register('GetDebugProfilingData', self.GetDebugProfilingData)
-        self.reactor.register('GetScreenSize', self.GetScreenSize)
-        self.reactor.register('Screenshot', self.Screenshot)
-        self.reactor.register('Click', self.Click)
-        self.reactor.register('Swipe', self.Swipe)
-        self.reactor.register('LongClick', self.LongClick)
-        self.reactor.register('KeyEvent', self.KeyEvent)
-        self.reactor.register('SetForeground', self.SetForeground)
-        self.reactor.register('ConnectWindow', self.ConnectWindow)
-
-        transport = TcpSocket()
-        transport.bind(addr)
-        self.rpc = StdRpcEndpointController(transport, self.reactor)
-
+        self.addr = addr
         self.running = False
         UIAuto.OPERATION_WAIT_TIME = 0.1  # make operation faster
         self.root = None
@@ -220,8 +203,25 @@ class PocoSDKWindows(object):
             self.root = UIAuto.ControlFromHandle(hn)
             if self.root is None:
                 raise InvalidSurfaceException(selector, "Can't find any windows by the given parameter")
+            self.SetForeground()
 
     def run(self):
+        self.reactor = StdRpcReactor()
+        self.reactor.register('Dump', self.Dump)
+        self.reactor.register('SetText', self.SetText)
+        self.reactor.register('GetSDKVersion', self.GetSDKVersion)
+        self.reactor.register('GetDebugProfilingData', self.GetDebugProfilingData)
+        self.reactor.register('GetScreenSize', self.GetScreenSize)
+        self.reactor.register('Screenshot', self.Screenshot)
+        self.reactor.register('Click', self.Click)
+        self.reactor.register('Swipe', self.Swipe)
+        self.reactor.register('LongClick', self.LongClick)
+        self.reactor.register('KeyEvent', self.KeyEvent)
+        self.reactor.register('SetForeground', self.SetForeground)
+        self.reactor.register('ConnectWindow', self.ConnectWindow)
+        transport = TcpSocket()
+        transport.bind(self.addr)
+        self.rpc = StdRpcEndpointController(transport, self.reactor)
         if self.running is False:
             self.running = True
             self.rpc.serve_forever()
