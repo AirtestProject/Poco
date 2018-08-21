@@ -77,3 +77,4 @@ class InvalidSurfaceException(Exception):
     def __init__(self, target, msg="None"):
         msg = 'Target device surface invalid ("{}") . Detial message: "{}"'.format(target, msg)
         super(InvalidSurfaceException, self).__init__(msg)
+

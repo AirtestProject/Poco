@@ -23,6 +23,7 @@ DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 class PocoSDKOSX(object):
 
     def __init__(self, addr=DEFAULT_ADDR):
+        self.reactor = None
         self.addr = addr
         self.running = False
         self.root = None
@@ -102,6 +103,35 @@ class PocoSDKOSX(object):
         pyautogui.dragTo(x, y, duration)
         return True
 
+    def Scroll(self, direction, percent, duration):
+        if direction not in ('vertical', 'horizontal'):
+            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
+        
+        if direction == 'horizontal':
+            raise ValueError("MacOS does not support horizontal scrolling well")
+
+        x = 0.5
+        y = 0.5
+        steps = percent
+        Left = self.GetWindowRect()[0]
+        Top = self.GetWindowRect()[1]
+        Width = self.GetScreenSize()[0]
+        Height = self.GetScreenSize()[1]
+        x = Left + Width * x
+        y = Top + Height * y
+        x = int(x)
+        y = int(y)
+        interval = float(duration) / (abs(steps) + 1)
+        if steps < 0:
+            for i in range(0, abs(steps)):
+                time.sleep(interval)
+                pyautogui.scroll(-1, x=x, y=y)
+        else:
+            for i in range(0, abs(steps)):
+                time.sleep(interval)
+                pyautogui.scroll(1, x=x, y=y)
+        return True
+
     def EnumWindows(self, selector):
         names = []
         if 'bundleid' in selector:
@@ -120,7 +150,7 @@ class PocoSDKOSX(object):
 
         if 'appname_re' in selector:  # 此方法由于MacOS API，问题较多
             apps = OSXFunc.getRunningApps()  # 获取当前运行的所有应用程序
-            appset = set()  # 应用程序集合
+            appset = []  # 应用程序集合
             appnameset = set()  # 应用程序标题集合
             for t in apps:
                 tempapp = OSXFunc.getAppRefByPid(t.processIdentifier())
@@ -130,7 +160,7 @@ class PocoSDKOSX(object):
                 if 'AXTitle' in attrs:
                     tit = tempapp.AXTitle
                     if re.match(selector['appname_re'], tit):
-                        appset.add(tempapp)
+                        appset.append(tempapp)
                         appnameset.add(tit)  # 这里有Bug，可能会获取到进程的不同副本，所以要通过名字去判断是否唯一
 
             if len(appnameset) is 0:
@@ -222,6 +252,7 @@ class PocoSDKOSX(object):
         self.reactor.register('LongClick', self.LongClick)
         self.reactor.register('SetForeground', self.SetForeground)
         self.reactor.register('ConnectWindow', self.ConnectWindow)
+        self.reactor.register('Scroll', self.Scroll)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)

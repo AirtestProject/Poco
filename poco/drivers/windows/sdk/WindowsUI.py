@@ -8,6 +8,7 @@ import win32gui
 import re
 import operator
 import uiautomation as UIAuto
+from pywinauto import mouse
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -23,6 +24,7 @@ DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 class PocoSDKWindows(object):
 
     def __init__(self, addr=DEFAULT_ADDR):
+        self.reactor = None
         self.addr = addr
         self.running = False
         UIAuto.OPERATION_WAIT_TIME = 0.1  # make operation faster
@@ -104,6 +106,36 @@ class PocoSDKWindows(object):
         y = Top + Height * y
         UIAuto.MAX_MOVE_SECOND = duration * 10
         UIAuto.DragDrop(int(x), int(y), int(x), int(y))
+        return True
+
+    def Scroll(self, direction, percent, duration):
+        if direction not in ('vertical', 'horizontal'):
+            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
+
+        if direction == 'horizontal':
+            raise ValueError("Windows does not support horizontal scrolling currently")
+        
+        self.JudgeSize()
+        x = 0.5
+        y = 0.5
+        steps = percent
+        Left = self.root.BoundingRectangle[0]
+        Top = self.root.BoundingRectangle[1]
+        Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
+        Height = self.root.BoundingRectangle[3] - self.root.BoundingRectangle[1]
+        x = Left + Width * x
+        y = Top + Height * y
+        x = int(x)
+        y = int(y)
+        interval = float(duration) / (abs(steps) + 1)
+        if steps < 0:
+            for i in range(0, abs(steps)):
+                time.sleep(interval)
+                mouse.scroll(coords=(x, y), wheel_dist=-1)
+        else:
+            for i in range(0, abs(steps)):
+                time.sleep(interval)
+                mouse.scroll(coords=(x, y), wheel_dist=1)
         return True
 
     def KeyEvent(self, keycode):
@@ -219,6 +251,7 @@ class PocoSDKWindows(object):
         self.reactor.register('KeyEvent', self.KeyEvent)
         self.reactor.register('SetForeground', self.SetForeground)
         self.reactor.register('ConnectWindow', self.ConnectWindow)
+        self.reactor.register('Scroll', self.Scroll)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)
