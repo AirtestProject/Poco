@@ -77,6 +77,22 @@ class PocoSDKOSX(object):
         pyautogui.click(pos[0] + size[0] * x, pos[1] + size[1] * y)
         return True
 
+    def RClick(self, x, y):
+        self.SetForeground()
+        size = self.root.AXSize
+        pos = self.root.AXPosition
+        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        pyautogui.rightClick(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        return True
+
+    def DoubleClick(self, x, y):
+        self.SetForeground()
+        size = self.root.AXSize
+        pos = self.root.AXPosition
+        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        pyautogui.doubleClick(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        return True
+
     def Swipe(self, x1, y1, x2, y2, duration):
         self.SetForeground()
         Left = self.root.AXPosition[0]
@@ -125,11 +141,11 @@ class PocoSDKOSX(object):
         if steps < 0:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                pyautogui.scroll(-1, x=x, y=y)
+                pyautogui.scroll(1, x=x, y=y)
         else:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                pyautogui.scroll(1, x=x, y=y)
+                pyautogui.scroll(-1, x=x, y=y)
         return True
 
     def EnumWindows(self, selector):
@@ -253,6 +269,8 @@ class PocoSDKOSX(object):
         self.reactor.register('SetForeground', self.SetForeground)
         self.reactor.register('ConnectWindow', self.ConnectWindow)
         self.reactor.register('Scroll', self.Scroll)
+        self.reactor.register('RClick', self.RClick)
+        self.reactor.register('DoubleClick', self.DoubleClick)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)

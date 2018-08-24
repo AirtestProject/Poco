@@ -58,11 +58,17 @@ class WindowsPoco(StdPoco):
     def set_foreground(self):
         return self.agent.rpc.call("SetForeground")
 
-    @sync_wrapper
     def scroll(self, direction='vertical', percent=1, duration=2.0):
         # 重写Win下的Scroll函数，percent代表滑动滚轮多少次，正数为向上滑，负数为向下滑，direction无用，只能上下滚
         if direction not in ('vertical', 'horizontal'):
             raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
         if direction is 'horizontal':
             raise InvalidOperationException("Windows does not support horizontal scrolling currently")
-        return self.agent.rpc.call("Scroll", direction, percent, duration)
+            
+        return self.agent.input.scroll(direction, percent, duration)
+
+    def rclick(self, pos):
+        return self.agent.input.rclick(pos[0], pos[1])
+
+    def double_click(self, pos):
+        return self.agent.input.double_click(pos[0], pos[1])
