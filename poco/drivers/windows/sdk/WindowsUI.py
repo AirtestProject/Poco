@@ -81,6 +81,16 @@ class PocoSDKWindows(object):
         self.JudgeSize()
         self.root.Click(x, y)
         return True
+    
+    def RClick(self, x, y):
+        self.JudgeSize()
+        self.root.RightClick(x, y)
+        return True
+
+    def DoubleClick(self, x, y):
+        self.JudgeSize()
+        self.root.DoubleClick(x, y)
+        return True
 
     def Swipe(self, x1, y1, x2, y2, duration):
         self.JudgeSize()
@@ -131,11 +141,11 @@ class PocoSDKWindows(object):
         if steps < 0:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                mouse.scroll(coords=(x, y), wheel_dist=-1)
+                mouse.scroll(coords=(x, y), wheel_dist=1)
         else:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                mouse.scroll(coords=(x, y), wheel_dist=1)
+                mouse.scroll(coords=(x, y), wheel_dist=-1)
         return True
 
     def KeyEvent(self, keycode):
@@ -252,6 +262,8 @@ class PocoSDKWindows(object):
         self.reactor.register('SetForeground', self.SetForeground)
         self.reactor.register('ConnectWindow', self.ConnectWindow)
         self.reactor.register('Scroll', self.Scroll)
+        self.reactor.register('RClick', self.RClick)
+        self.reactor.register('DoubleClick', self.DoubleClick)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)

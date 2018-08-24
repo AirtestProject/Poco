@@ -26,3 +26,15 @@ class StdInput(InputInterface):
     @sync_wrapper
     def keyevent(self, keycode):
         return self.client.call("KeyEvent", keycode)
+
+    @sync_wrapper
+    def scroll(self, direction='vertical', percent=1, duration=2.0):
+        return self.client.call("Scroll", direction, percent, duration)
+
+    @sync_wrapper
+    def rclick(self, x, y):
+        return self.client.call("RClick", x, y)
+
+    @sync_wrapper
+    def double_click(self, x, y):
+        return self.client.call("DoubleClick", x, y)
