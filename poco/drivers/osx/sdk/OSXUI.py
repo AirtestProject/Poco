@@ -73,24 +73,21 @@ class PocoSDKOSX(object):
         self.SetForeground()
         size = self.root.AXSize
         pos = self.root.AXPosition
-        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
-        pyautogui.click(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        OSXFunc.click(pos[0] + size[0] * x, pos[1] + size[1] * y)
         return True
 
     def RClick(self, x, y):
         self.SetForeground()
         size = self.root.AXSize
         pos = self.root.AXPosition
-        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
-        pyautogui.rightClick(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        OSXFunc.rclick(pos[0] + size[0] * x, pos[1] + size[1] * y)
         return True
 
     def DoubleClick(self, x, y):
         self.SetForeground()
         size = self.root.AXSize
         pos = self.root.AXPosition
-        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
-        pyautogui.doubleClick(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        OSXFunc.doubleclick(pos[0] + size[0] * x, pos[1] + size[1] * y)   
         return True
 
     def Swipe(self, x1, y1, x2, y2, duration):
@@ -103,8 +100,17 @@ class PocoSDKOSX(object):
         y1 = Top + Height * y1
         x2 = Left + Width * x2
         y2 = Top + Height * y2
-        pyautogui.moveTo(x1, y1)
-        pyautogui.dragTo(x2, y2, duration)
+        sx = abs(x1 - x2)
+        sy = abs(y1 - y2)
+        stepx = sx / (duration * 10.0)
+        stepy = sy / (duration * 10.0)
+        OSXFunc.move(x1, y1)
+        OSXFunc.press(x1, y1)
+        duration = int(duration * 10.0)
+        for i in range(duration):
+            OSXFunc.drag(x1 + stepx * i, y1 + stepy * i)
+            time.sleep(0.1)
+        OSXFunc.release(x2, y2)
         return True
 
     def LongClick(self, x, y, duration):
@@ -115,16 +121,15 @@ class PocoSDKOSX(object):
         Height = self.root.AXSize[1]
         x = Left + Width * x
         y = Top + Height * y
-        pyautogui.moveTo(x, y)
-        pyautogui.dragTo(x, y, duration)
+        OSXFunc.move(x, y)
+        OSXFunc.press(x, y)
+        time.sleep(duration)
+        OSXFunc.release(x, y)
         return True
 
     def Scroll(self, direction, percent, duration):
         if direction not in ('vertical', 'horizontal'):
             raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
-        
-        if direction == 'horizontal':
-            raise ValueError("MacOS does not support horizontal scrolling well")
 
         x = 0.5
         y = 0.5
@@ -137,15 +142,28 @@ class PocoSDKOSX(object):
         y = Top + Height * y
         x = int(x)
         y = int(y)
-        interval = float(duration) / (abs(steps) + 1)
-        if steps < 0:
-            for i in range(0, abs(steps)):
-                time.sleep(interval)
-                pyautogui.scroll(1, x=x, y=y)
+        OSXFunc.move(x, y)
+
+        if direction == 'horizontal':
+            interval = float(duration) / (abs(steps) + 1)
+            if steps < 0:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(None, 1)
+            else:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(None, -1)
         else:
-            for i in range(0, abs(steps)):
-                time.sleep(interval)
-                pyautogui.scroll(-1, x=x, y=y)
+            interval = float(duration) / (abs(steps) + 1)
+            if steps < 0:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(1)
+            else:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(-1)
         return True
 
     def EnumWindows(self, selector):
@@ -255,6 +273,7 @@ class PocoSDKOSX(object):
                 raise IndexError("Unable to find the specified window through the index, you may have closed the specified window during the run")
             self.root = self.app.windows()[hn]
             self.SetForeground()
+            return True
 
     def run(self):
         self.reactor = StdRpcReactor()

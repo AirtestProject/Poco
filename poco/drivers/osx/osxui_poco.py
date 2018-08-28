@@ -26,7 +26,6 @@ class OSXPoco(StdPoco):
        
         self.selector = selector
         self.connect_window(self.selector)
-        self.set_foreground()
 
     @sync_wrapper
     def connect_window(self, selector):
@@ -37,12 +36,9 @@ class OSXPoco(StdPoco):
         return self.agent.rpc.call("SetForeground")
 
     def scroll(self, direction='vertical', percent=1, duration=2.0): 
-        # 重写Mac下的Scroll函数，percent代表滑动滚轮多少次，正数为向上滑，负数为向下滑,只能上下滚,左右滚支持不太好
+        # 重写Mac下的Scroll函数，percent代表滑动滚轮多少次，正数为向上滑，负数为向下滑
         if direction not in ('vertical', 'horizontal'):
             raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
-        if direction is 'horizontal':
-            raise InvalidOperationException("MacOS does not support horizontal scrolling well")
-
         return self.agent.input.scroll(direction, percent, duration)
 
     def rclick(self, pos):

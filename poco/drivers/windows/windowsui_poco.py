@@ -48,7 +48,6 @@ class WindowsPoco(StdPoco):
         
         self.selector = selector
         self.connect_window(self.selector)
-        self.set_foreground()
 
     @sync_wrapper
     def connect_window(self, selector):

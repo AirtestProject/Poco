@@ -8,7 +8,6 @@ import win32gui
 import re
 import operator
 import uiautomation as UIAuto
-from pywinauto import mouse
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -27,7 +26,7 @@ class PocoSDKWindows(object):
         self.reactor = None
         self.addr = addr
         self.running = False
-        UIAuto.OPERATION_WAIT_TIME = 0.1  # make operation faster
+        UIAuto.OPERATION_WAIT_TIME = 0.05  # make operation faster
         self.root = None
 
     def Dump(self, _):
@@ -137,15 +136,18 @@ class PocoSDKWindows(object):
         y = Top + Height * y
         x = int(x)
         y = int(y)
-        interval = float(duration) / (abs(steps) + 1)
+        UIAuto.MoveTo(x, y)
+        interval = float(duration - 0.3 * steps) / (abs(steps) + 1)
+        if interval <= 0:
+            interval = 0.1
         if steps < 0:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                mouse.scroll(coords=(x, y), wheel_dist=1)
+                UIAuto.WheelUp(1)
         else:
             for i in range(0, abs(steps)):
                 time.sleep(interval)
-                mouse.scroll(coords=(x, y), wheel_dist=-1)
+                UIAuto.WheelDown(1)
         return True
 
     def KeyEvent(self, keycode):
