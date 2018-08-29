@@ -16,7 +16,7 @@ class WindowsUINode(AbstractNode):
         return WindowsUINode(self.Control.GetParentControl(), self.dumper)
 
     def getChildren(self):
-        if len(self.Children):
+        if len(self.Children):  # 防止多次获取children，提高性能
             for node in self.Children:
                 yield WindowsUINode(node, self.dumper)
         else:

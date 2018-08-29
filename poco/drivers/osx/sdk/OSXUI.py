@@ -102,12 +102,12 @@ class PocoSDKOSX(object):
         y2 = Top + Height * y2
         sx = abs(x1 - x2)
         sy = abs(y1 - y2)
-        stepx = sx / (duration * 10.0)
+        stepx = sx / (duration * 10.0)  # 将滑动距离分割，实现平滑的拖动
         stepy = sy / (duration * 10.0)
         OSXFunc.move(x1, y1)
         OSXFunc.press(x1, y1)
         duration = int(duration * 10.0)
-        for i in range(duration):
+        for i in range(duration + 1):
             OSXFunc.drag(x1 + stepx * i, y1 + stepy * i)
             time.sleep(0.1)
         OSXFunc.release(x2, y2)
@@ -131,7 +131,7 @@ class PocoSDKOSX(object):
         if direction not in ('vertical', 'horizontal'):
             raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
 
-        x = 0.5
+        x = 0.5  # 先把鼠标移到窗口中间，这样才能保证滚动的是这个窗口。
         y = 0.5
         steps = percent
         Left = self.GetWindowRect()[0]
@@ -167,7 +167,7 @@ class PocoSDKOSX(object):
         return True
 
     def EnumWindows(self, selector):
-        names = []
+        names = []  # 一个应用程序会有多个窗口，因此我们要先枚举一个应用程序里的所有窗口
         if 'bundleid' in selector:
             self.app = OSXFunc.getAppRefByBundleId(selector['bundleid'])
             windows = self.app.windows()
@@ -215,7 +215,7 @@ class PocoSDKOSX(object):
         hn = set()
         for n in wlist:
             if selector['windowtitle'] == n[0]:
-                hn.add(n[1])
+                hn.add(n[1])  # 添加窗口索引到集合里
         if len(hn) == 0:
             return -1
         return hn
@@ -224,7 +224,7 @@ class PocoSDKOSX(object):
         hn = set()
         for n in wlist:
             if re.match(selector['windowtitle_re'], n[0]):
-                hn.add(n[1])
+                hn.add(n[1])  # 添加窗口索引到集合里
         if len(hn) == 0:
             return -1
         return hn
@@ -255,19 +255,19 @@ class PocoSDKOSX(object):
             handleSetList.append(self.ConnectWindowsByWindowTitleRe(selector, winlist))
 
         while -1 in handleSetList:
-            handleSetList.remove(-1)
+            handleSetList.remove(-1)  # 有些参数没有提供会返回-1.把所有的-1去掉
 
         if len(handleSetList) == 0:  # 三种方法都找不到窗口
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
             
-        handleSet = reduce(operator.__and__, handleSetList)
+        handleSet = reduce(operator.__and__, handleSetList)  # 提供了多个参数来确定唯一一个窗口，所以要做交集，取得唯一匹配的窗口
 
         if len(handleSet) == 0:
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
         elif len(handleSet) != 1:
             raise NonuniqueSurfaceException(selector)
         else:
-            hn = handleSet.pop()
+            hn = handleSet.pop()  # 取得该窗口的索引
             w = self.app.windows()
             if len(w) <= hn:
                 raise IndexError("Unable to find the specified window through the index, you may have closed the specified window during the run")
