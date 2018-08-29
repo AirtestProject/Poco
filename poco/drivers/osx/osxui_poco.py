@@ -12,12 +12,12 @@ class OSXPoco(StdPoco):
 
     def __init__(self, selector=None, addr=DEFAULT_ADDR, **options):
         if 'action_interval' not in options:
-            options['action_interval'] = 0.5
+            options['action_interval'] = 0.1
 
         if addr[0] == "localhost" or addr[0] == "127.0.0.1":
             from poco.drivers.osx.sdk.OSXUI import PocoSDKOSX
-            sdk = PocoSDKOSX(addr)
-            self.SDKProcess = threading.Thread(target=sdk.run)  # 创建线程
+            self.sdk = PocoSDKOSX(addr)
+            self.SDKProcess = threading.Thread(target=self.sdk.run)  # 创建线程
             self.SDKProcess.setDaemon(True)
             self.SDKProcess.start()
 
