@@ -8,7 +8,7 @@ import win32gui
 import re
 import operator
 import uiautomation as UIAuto
-from pywinauto import mouse
+from pynput.mouse import Controller, Button
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -91,8 +91,21 @@ class PocoSDKWindows(object):
         self.root.DoubleClick(x, y)
         return True
 
-    def Swipe(self, x1, y1, x2, y2, duration):
+    def Swipe(self, x1, y1, x2, y2, duration, **kwargs):
         self.JudgeSize()
+
+        # poco std暂不支持选择鼠标按键
+        button = kwargs.get("button", "left")
+        if button is "middle":
+            button = Button.middle
+        elif button is "right":
+            button = Button.right
+        elif button is "left":
+            button = Button.left
+        else:
+            raise ValueError("Unknow button: " + button)
+        steps = kwargs.get("steps", 5)
+
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -105,25 +118,38 @@ class PocoSDKWindows(object):
         # UIAuto.MAX_MOVE_SECOND = duration * 10  # 同步到跟UIAutomation库的时间设定一样
         # UIAuto.DragDrop(int(x1), int(y1), int(x2), int(y2))
         # 有Bug，暂时不用UIAutomation库的Swipe实现。
-        
-        steps = 3
+
+        m = Controller()
         interval = float(duration) / (steps + 1)
-        mouse.press(coords=(x1, y1))
+        m.position = (x1, y1)
+        m.press(button)
         time.sleep(interval)
-        for i in range(1, steps):
-            mouse.press(coords=(
-                int(x1 + (x2 - x1) * i / steps),
-                int(y1 + (y2 - y1) * i / steps),
-            ))
+        for i in range(1, steps + 1):
+            m.move(
+                int((x2 - x1) / steps),
+                int((y2 - y1) / steps)
+            )
             time.sleep(interval)
-        mouse.press(coords=(x2, y2))
+        m.position = (x2, y2)
         time.sleep(interval)
-        mouse.release(coords=(x2, y2))
+        m.release(button)
 
         return True
 
-    def LongClick(self, x, y, duration):
+    def LongClick(self, x, y, duration, **kwargs):
         self.JudgeSize()
+
+        # poco std暂不支持选择鼠标按键
+        button = kwargs.get("button", "left")
+        if button is "middle":
+            button = Button.middle
+        elif button is "right":
+            button = Button.right
+        elif button is "left":
+            button = Button.left
+        else:
+            raise ValueError("Unknow button: " + button)
+
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -134,18 +160,20 @@ class PocoSDKWindows(object):
         # UIAuto.MAX_MOVE_SECOND = duration * 10
         # UIAuto.DragDrop(int(x), int(y), int(x), int(y))
         # 有Bug，暂时不用UIAutomation库的Swipe实现。
-        
-        mouse.press(coords=(int(x), int(y)))
+
+        m = Controller()
+        m.position = (x, y)
+        m.press(button)
         time.sleep(duration)
-        mouse.release(coords=(int(x), int(y)))
+        m.release(button)
         return True
 
     def Scroll(self, direction, percent, duration):
         if direction not in ('vertical', 'horizontal'):
-            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
+            return False
 
         if direction == 'horizontal':
-            raise ValueError("Windows does not support horizontal scrolling currently")
+            return False
         
         self.JudgeSize()
         x = 0.5  # 先把鼠标移到窗口中间，这样才能保证滚动的是这个窗口。
@@ -219,7 +247,7 @@ class PocoSDKWindows(object):
         return hn
 
     def ConnectWindowsByHandle(self, handle):
-        hn = set() # 匹配窗口的集合，把所有handle匹配上的窗口handle都保存在这个集合里
+        hn = set()  # 匹配窗口的集合，把所有handle匹配上的窗口handle都保存在这个集合里
         hWndList = self.EnumWindows()
         for handle_temp in hWndList:
             if int(handle_temp) == int(handle):
