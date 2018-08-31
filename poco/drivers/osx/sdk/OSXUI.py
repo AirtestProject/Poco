@@ -113,8 +113,18 @@ class PocoSDKOSX(object):
         OSXFunc.release(x2, y2)
         return True
 
-    def LongClick(self, x, y, duration):
+    def LongClick(self, x, y, duration, **kwargs):
         self.SetForeground()
+
+        # poco std暂不支持选择鼠标按键
+        button = kwargs.get("button", "left")
+        if button not in ("left", "right"):
+            raise ValueError("Unknow button: " + button)
+        if button is "left":
+            button = 1
+        else:
+            button = 2
+
         Left = self.root.AXPosition[0]
         Top = self.root.AXPosition[1]
         Width = self.root.AXSize[0]
@@ -122,9 +132,9 @@ class PocoSDKOSX(object):
         x = Left + Width * x
         y = Top + Height * y
         OSXFunc.move(x, y)
-        OSXFunc.press(x, y)
+        OSXFunc.press(x, y, button=button)
         time.sleep(duration)
-        OSXFunc.release(x, y)
+        OSXFunc.release(x, y, button=button)
         return True
 
     def Scroll(self, direction, percent, duration):
