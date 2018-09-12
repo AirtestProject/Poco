@@ -46,3 +46,6 @@ class OSXPoco(StdPoco):
 
     def double_click(self, pos):
         return self.agent.input.double_click(pos[0], pos[1])
+
+    def keyevent(self, keyname):
+        return self.agent.input.keyevent(keyname)

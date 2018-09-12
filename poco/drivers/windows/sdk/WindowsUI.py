@@ -8,7 +8,6 @@ import win32gui
 import re
 import operator
 import uiautomation as UIAuto
-from pynput.mouse import Controller, Button
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -93,19 +92,6 @@ class PocoSDKWindows(object):
 
     def Swipe(self, x1, y1, x2, y2, duration, **kwargs):
         self.JudgeSize()
-
-        # poco std暂不支持选择鼠标按键
-        button = kwargs.get("button", "left")
-        if button is "middle":
-            button = Button.middle
-        elif button is "right":
-            button = Button.right
-        elif button is "left":
-            button = Button.left
-        else:
-            raise ValueError("Unknow button: " + button)
-        steps = kwargs.get("steps", 5)
-
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -115,41 +101,12 @@ class PocoSDKWindows(object):
         x2 = int(Left + Width * x2)
         y2 = int(Top + Height * y2)
 
-        # UIAuto.MAX_MOVE_SECOND = duration * 10  # 同步到跟UIAutomation库的时间设定一样
-        # UIAuto.DragDrop(int(x1), int(y1), int(x2), int(y2))
-        # 有Bug，暂时不用UIAutomation库的Swipe实现。
-
-        m = Controller()
-        interval = float(duration) / (steps + 1)
-        m.position = (x1, y1)
-        m.press(button)
-        time.sleep(interval)
-        for i in range(1, steps + 1):
-            m.move(
-                int((x2 - x1) / steps),
-                int((y2 - y1) / steps)
-            )
-            time.sleep(interval)
-        m.position = (x2, y2)
-        time.sleep(interval)
-        m.release(button)
-
+        UIAuto.MAX_MOVE_SECOND = duration * 10  # 同步到跟UIAutomation库的时间设定一样
+        UIAuto.DragDrop(int(x1), int(y1), int(x2), int(y2))
         return True
 
     def LongClick(self, x, y, duration, **kwargs):
         self.JudgeSize()
-
-        # poco std暂不支持选择鼠标按键
-        button = kwargs.get("button", "left")
-        if button is "middle":
-            button = Button.middle
-        elif button is "right":
-            button = Button.right
-        elif button is "left":
-            button = Button.left
-        else:
-            raise ValueError("Unknow button: " + button)
-
         Left = self.root.BoundingRectangle[0]
         Top = self.root.BoundingRectangle[1]
         Width = self.root.BoundingRectangle[2] - self.root.BoundingRectangle[0]
@@ -157,15 +114,8 @@ class PocoSDKWindows(object):
         x = Left + Width * x
         y = Top + Height * y
 
-        # UIAuto.MAX_MOVE_SECOND = duration * 10
-        # UIAuto.DragDrop(int(x), int(y), int(x), int(y))
-        # 有Bug，暂时不用UIAutomation库的Swipe实现。
-
-        m = Controller()
-        m.position = (x, y)
-        m.press(button)
-        time.sleep(duration)
-        m.release(button)
+        UIAuto.MAX_MOVE_SECOND = duration * 10
+        UIAuto.DragDrop(int(x), int(y), int(x), int(y))
         return True
 
     def Scroll(self, direction, percent, duration):

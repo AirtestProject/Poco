@@ -29,7 +29,7 @@ class ISelector(object):
 
 class Selector(ISelector):
     """
-    This class implements the standard Selector interface that uses BFS algorithm to travers through tree-like hierarchy
+    This class implements the standard Selector interface that uses DFS algorithm to travers through tree-like hierarchy
     structure. It supports flexible query expressions such as parental relationship, attribute predicate, etc. Any
     combinations of expressions mentioned above are also allowed as the query conditions.
     

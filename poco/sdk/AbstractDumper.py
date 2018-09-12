@@ -73,7 +73,7 @@ class AbstractDumper(IDumper):
 
     def dumpHierarchyImpl(self, node, onlyVisibleNode=True):
         """
-        Crawl the hierarchy tree using the simple BFS algorithm. The ``dump`` procedure is the engine independent as
+        Crawl the hierarchy tree using the simple DFS algorithm. The ``dump`` procedure is the engine independent as
         the hierarchy structure is wrapped by :py:class:`AbstractNode <poco.sdk.AbstractNode>` and therefore the
         ``dump`` procedure can be algorithmized.
 

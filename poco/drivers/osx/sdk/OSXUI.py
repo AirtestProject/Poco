@@ -7,6 +7,7 @@ import re
 import pyautogui
 import atomac
 import operator
+from pynput.keyboard import Controller
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -27,6 +28,7 @@ class PocoSDKOSX(object):
         self.addr = addr
         self.running = False
         self.root = None
+        self.keyboard = Controller()
 
     def Dump(self, _):
         res = OSXUIDumper(self.root).dumpHierarchy()
@@ -51,6 +53,14 @@ class PocoSDKOSX(object):
         Width = self.root.AXSize[0]
         Height = self.root.AXSize[1]
         return [self.root.AXPosition[0], self.root.AXPosition[1], self.root.AXPosition[0] + Width, self.root.AXPosition[1] + Height]
+
+    def KeyEvent(self, keycode):
+        waittime = 0.05
+        for c in keycode:
+            self.keyboard.press(key=c)
+            self.keyboard.release(key=c)
+            time.sleep(waittime)
+        return True
 
     def Screenshot(self, width):
         self.SetForeground()
@@ -300,6 +310,7 @@ class PocoSDKOSX(object):
         self.reactor.register('Scroll', self.Scroll)
         self.reactor.register('RClick', self.RClick)
         self.reactor.register('DoubleClick', self.DoubleClick)
+        self.reactor.register('KeyEvent', self.KeyEvent)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)
