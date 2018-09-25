@@ -42,11 +42,11 @@ class Poco(PocoAccelerationMixin):
         self._agent = agent
 
         # options
-        self._pre_action_wait_for_appearance = options.get(b'pre_action_wait_for_appearance', 6)
-        self._post_action_interval = options.get(b'action_interval', 0.8)
-        self._poll_interval = options.get(b'poll_interval', 1.44)
+        self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
+        self._post_action_interval = options.get('action_interval', 0.8)
+        self._poll_interval = options.get('poll_interval', 1.44)
         if 'touch_down_duration' in options:
-            touch_down_duration = options[b'touch_down_duration']
+            touch_down_duration = options['touch_down_duration']
             try:
                 touch_down_duration = float(touch_down_duration)
             except ValueError:
