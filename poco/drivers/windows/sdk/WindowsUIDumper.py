@@ -14,7 +14,7 @@ class WindowsUIDumper(AbstractDumper):
         self.RootLeft = self.RootControl.BoundingRectangle[0]
         self.RootTop = self.RootControl.BoundingRectangle[1]
         if self.RootWidth == 0 or self.RootHeight == 0:
-                raise InvalidSurfaceException(self, "You may have minimized your window or the window is too small!")
+                raise InvalidSurfaceException(self, "You may have minimized or closed your window or the window is too small!")
 
     def getRoot(self):
         return WindowsUINode(self.RootControl, self)

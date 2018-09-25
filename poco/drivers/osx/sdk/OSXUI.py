@@ -7,6 +7,7 @@ import re
 import pyautogui
 import atomac
 import operator
+from pynput.keyboard import Controller
 from poco.sdk.std.rpc.controller import StdRpcEndpointController
 from poco.sdk.std.rpc.reactor import StdRpcReactor
 from poco.utils.net.transport.tcp import TcpSocket
@@ -23,9 +24,11 @@ DEFAULT_ADDR = ('0.0.0.0', DEFAULT_PORT)
 class PocoSDKOSX(object):
 
     def __init__(self, addr=DEFAULT_ADDR):
+        self.reactor = None
         self.addr = addr
         self.running = False
         self.root = None
+        self.keyboard = Controller()
 
     def Dump(self, _):
         res = OSXUIDumper(self.root).dumpHierarchy()
@@ -51,6 +54,14 @@ class PocoSDKOSX(object):
         Height = self.root.AXSize[1]
         return [self.root.AXPosition[0], self.root.AXPosition[1], self.root.AXPosition[0] + Width, self.root.AXPosition[1] + Height]
 
+    def KeyEvent(self, keycode):
+        waittime = 0.05
+        for c in keycode:
+            self.keyboard.press(key=c)
+            self.keyboard.release(key=c)
+            time.sleep(waittime)
+        return True
+
     def Screenshot(self, width):
         self.SetForeground()
         size = self.root.AXSize
@@ -72,8 +83,21 @@ class PocoSDKOSX(object):
         self.SetForeground()
         size = self.root.AXSize
         pos = self.root.AXPosition
-        pyautogui.moveTo(pos[0] + size[0] * x, pos[1] + size[1] * y)
-        pyautogui.click(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        OSXFunc.click(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        return True
+
+    def RClick(self, x, y):
+        self.SetForeground()
+        size = self.root.AXSize
+        pos = self.root.AXPosition
+        OSXFunc.rclick(pos[0] + size[0] * x, pos[1] + size[1] * y)
+        return True
+
+    def DoubleClick(self, x, y):
+        self.SetForeground()
+        size = self.root.AXSize
+        pos = self.root.AXPosition
+        OSXFunc.doubleclick(pos[0] + size[0] * x, pos[1] + size[1] * y)   
         return True
 
     def Swipe(self, x1, y1, x2, y2, duration):
@@ -86,24 +110,84 @@ class PocoSDKOSX(object):
         y1 = Top + Height * y1
         x2 = Left + Width * x2
         y2 = Top + Height * y2
-        pyautogui.moveTo(x1, y1)
-        pyautogui.dragTo(x2, y2, duration)
+        sx = abs(x1 - x2)
+        sy = abs(y1 - y2)
+        stepx = sx / (duration * 10.0)  # 将滑动距离分割，实现平滑的拖动
+        stepy = sy / (duration * 10.0)
+        OSXFunc.move(x1, y1)
+        OSXFunc.press(x1, y1)
+        duration = int(duration * 10.0)
+        for i in range(duration + 1):
+            OSXFunc.drag(x1 + stepx * i, y1 + stepy * i)
+            time.sleep(0.1)
+        OSXFunc.release(x2, y2)
         return True
 
-    def LongClick(self, x, y, duration):
+    def LongClick(self, x, y, duration, **kwargs):
         self.SetForeground()
+
+        # poco std暂不支持选择鼠标按键
+        button = kwargs.get("button", "left")
+        if button not in ("left", "right"):
+            raise ValueError("Unknow button: " + button)
+        if button is "left":
+            button = 1
+        else:
+            button = 2
+
         Left = self.root.AXPosition[0]
         Top = self.root.AXPosition[1]
         Width = self.root.AXSize[0]
         Height = self.root.AXSize[1]
         x = Left + Width * x
         y = Top + Height * y
-        pyautogui.moveTo(x, y)
-        pyautogui.dragTo(x, y, duration)
+        OSXFunc.move(x, y)
+        OSXFunc.press(x, y, button=button)
+        time.sleep(duration)
+        OSXFunc.release(x, y, button=button)
+        return True
+
+    def Scroll(self, direction, percent, duration):
+        if direction not in ('vertical', 'horizontal'):
+            raise ValueError('Argument `direction` should be one of "vertical" or "horizontal". Got {}'.format(repr(direction)))
+
+        x = 0.5  # 先把鼠标移到窗口中间，这样才能保证滚动的是这个窗口。
+        y = 0.5
+        steps = percent
+        Left = self.GetWindowRect()[0]
+        Top = self.GetWindowRect()[1]
+        Width = self.GetScreenSize()[0]
+        Height = self.GetScreenSize()[1]
+        x = Left + Width * x
+        y = Top + Height * y
+        x = int(x)
+        y = int(y)
+        OSXFunc.move(x, y)
+
+        if direction == 'horizontal':
+            interval = float(duration) / (abs(steps) + 1)
+            if steps < 0:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(None, 1)
+            else:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(None, -1)
+        else:
+            interval = float(duration) / (abs(steps) + 1)
+            if steps < 0:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(1)
+            else:
+                for i in range(0, abs(steps)):
+                    time.sleep(interval)
+                    OSXFunc.scroll(-1)
         return True
 
     def EnumWindows(self, selector):
-        names = []
+        names = []  # 一个应用程序会有多个窗口，因此我们要先枚举一个应用程序里的所有窗口
         if 'bundleid' in selector:
             self.app = OSXFunc.getAppRefByBundleId(selector['bundleid'])
             windows = self.app.windows()
@@ -120,7 +204,7 @@ class PocoSDKOSX(object):
 
         if 'appname_re' in selector:  # 此方法由于MacOS API，问题较多
             apps = OSXFunc.getRunningApps()  # 获取当前运行的所有应用程序
-            appset = set()  # 应用程序集合
+            appset = []  # 应用程序集合
             appnameset = set()  # 应用程序标题集合
             for t in apps:
                 tempapp = OSXFunc.getAppRefByPid(t.processIdentifier())
@@ -130,7 +214,7 @@ class PocoSDKOSX(object):
                 if 'AXTitle' in attrs:
                     tit = tempapp.AXTitle
                     if re.match(selector['appname_re'], tit):
-                        appset.add(tempapp)
+                        appset.append(tempapp)
                         appnameset.add(tit)  # 这里有Bug，可能会获取到进程的不同副本，所以要通过名字去判断是否唯一
 
             if len(appnameset) is 0:
@@ -151,7 +235,7 @@ class PocoSDKOSX(object):
         hn = set()
         for n in wlist:
             if selector['windowtitle'] == n[0]:
-                hn.add(n[1])
+                hn.add(n[1])  # 添加窗口索引到集合里
         if len(hn) == 0:
             return -1
         return hn
@@ -160,7 +244,7 @@ class PocoSDKOSX(object):
         hn = set()
         for n in wlist:
             if re.match(selector['windowtitle_re'], n[0]):
-                hn.add(n[1])
+                hn.add(n[1])  # 添加窗口索引到集合里
         if len(hn) == 0:
             return -1
         return hn
@@ -191,24 +275,25 @@ class PocoSDKOSX(object):
             handleSetList.append(self.ConnectWindowsByWindowTitleRe(selector, winlist))
 
         while -1 in handleSetList:
-            handleSetList.remove(-1)
+            handleSetList.remove(-1)  # 有些参数没有提供会返回-1.把所有的-1去掉
 
         if len(handleSetList) == 0:  # 三种方法都找不到窗口
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
             
-        handleSet = reduce(operator.__and__, handleSetList)
+        handleSet = reduce(operator.__and__, handleSetList)  # 提供了多个参数来确定唯一一个窗口，所以要做交集，取得唯一匹配的窗口
 
         if len(handleSet) == 0:
             raise InvalidSurfaceException(selector, "Can't find any applications by the given parameter")
         elif len(handleSet) != 1:
             raise NonuniqueSurfaceException(selector)
         else:
-            hn = handleSet.pop()
+            hn = handleSet.pop()  # 取得该窗口的索引
             w = self.app.windows()
             if len(w) <= hn:
                 raise IndexError("Unable to find the specified window through the index, you may have closed the specified window during the run")
             self.root = self.app.windows()[hn]
             self.SetForeground()
+            return True
 
     def run(self):
         self.reactor = StdRpcReactor()
@@ -222,6 +307,10 @@ class PocoSDKOSX(object):
         self.reactor.register('LongClick', self.LongClick)
         self.reactor.register('SetForeground', self.SetForeground)
         self.reactor.register('ConnectWindow', self.ConnectWindow)
+        self.reactor.register('Scroll', self.Scroll)
+        self.reactor.register('RClick', self.RClick)
+        self.reactor.register('DoubleClick', self.DoubleClick)
+        self.reactor.register('KeyEvent', self.KeyEvent)
         transport = TcpSocket()
         transport.bind(self.addr)
         self.rpc = StdRpcEndpointController(transport, self.reactor)

@@ -249,6 +249,12 @@ class Poco(PocoAccelerationMixin):
         self.wait_stable()
         return ret
 
+    def rclick(self, pos):
+        raise NotImplementedError
+
+    def double_click(self, pos):
+        raise NotImplementedError
+
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
         Perform swipe action on target device from point to point given by start point and end point, or by the

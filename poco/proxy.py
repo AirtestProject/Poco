@@ -291,6 +291,70 @@ class UIObjectProxy(object):
         return ret
 
     @wait
+    def rclick(self, focus=None, sleep_interval=None):
+        """
+        Perform the right click action on the UI element(s) represented by the UI proxy. If this UI proxy represents a set of
+        UI elements, the first one in the set is clicked and the anchor point of the UI element is used as the default
+        one. It is also possible to click another point offset by providing ``focus`` argument.
+
+        See ``CoordinateSystem`` for more details.
+
+        Args:
+            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): an offset point (x, y) from the top left corner of the UI
+             element(s), values must be in range of 0~1. This argument can be also specified by 'anchor' or 'center'.
+             'Center' means to click the center of bounding box of UI element. 
+            sleep_interval: number of seconds to wait after this action. Default is None which is the default sleep
+             interval. This value can be configured by Poco initialization. See configuration at poco
+             :py:class:`initialization <poco.pocofw.Poco>` for more details.
+
+        Raises:
+            PocoNoSuchNodeException: raised when the UI element does not exist
+        """
+
+        focus = focus or self._focus or 'anchor'
+        pos_in_percentage = self.get_position(focus)
+        self.poco.pre_action('rclick', self, pos_in_percentage)
+        ret = self.poco.rclick(pos_in_percentage)
+        if sleep_interval:
+            time.sleep(sleep_interval)
+        else:
+            self.poco.wait_stable()
+        self.poco.post_action('rclick', self, pos_in_percentage)
+        return ret
+
+    @wait
+    def double_click(self, focus=None, sleep_interval=None):
+        """
+        Perform the double click action on the UI element(s) represented by the UI proxy. If this UI proxy represents a set of
+        UI elements, the first one in the set is clicked and the anchor point of the UI element is used as the default
+        one. It is also possible to click another point offset by providing ``focus`` argument.
+
+        See ``CoordinateSystem`` for more details.
+
+        Args:
+            focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): an offset point (x, y) from the top left corner of the UI
+             element(s), values must be in range of 0~1. This argument can be also specified by 'anchor' or 'center'.
+             'Center' means to double click the center of bounding box of UI element. 
+            sleep_interval: number of seconds to wait after this action. Default is None which is the default sleep
+             interval. This value can be configured by Poco initialization. See configuration at poco
+             :py:class:`initialization <poco.pocofw.Poco>` for more details.
+
+        Raises:
+            PocoNoSuchNodeException: raised when the UI element does not exist
+        """
+
+        focus = focus or self._focus or 'anchor'
+        pos_in_percentage = self.get_position(focus)
+        self.poco.pre_action('double_click', self, pos_in_percentage)
+        ret = self.poco.double_click(pos_in_percentage)
+        if sleep_interval:
+            time.sleep(sleep_interval)
+        else:
+            self.poco.wait_stable()
+        self.poco.post_action('double_click', self, pos_in_percentage)
+        return ret
+
+    @wait
     def long_click(self, duration=2.0):
         """
         Perform the long click action on the UI element(s) represented by the UI proxy. If this UI proxy represents a 

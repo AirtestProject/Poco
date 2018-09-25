@@ -46,7 +46,7 @@ class StdRpcReactor(object):
         except Exception as e:
             ret['error'] = {
                 'message': '{}\n\n|--- REMOTE TRACEBACK ---|\n{}|--- REMOTE TRACEBACK END ---|'
-                           .format(e.message, traceback.format_exc())
+                           .format(six.text_type(e), traceback.format_exc())
             }
 
         return ret
