@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 18:12+0800\n"
+"POT-Creation-Date: 2018-09-28 11:05+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,69 +32,106 @@ msgid "`Unity3D`_"
 msgstr ""
 
 #: ../../source/doc/poco_drivers.rst:9
-msgid "`android-native`_"
+msgid "`Android native apps`_"
 msgstr ""
 
 #: ../../source/doc/poco_drivers.rst:10
-msgid "`cocos2dx-js`_"
+msgid "`OSX apps`_"
 msgstr ""
 
 #: ../../source/doc/poco_drivers.rst:11
-msgid "`NetEase Internal Engines`_"
+msgid "`Windows apps`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:12
+msgid "`cocos2dx-lua`_"
 msgstr ""
 
 #: ../../source/doc/poco_drivers.rst:13
-msgid ""
-"Following example shows how to initialize poco instance for Unity3D. "
-"Remember to connect an Android device to your PC/mac with a running game "
-"or launch and keep the Unity game active on PC/mac."
-msgstr "下面例子展示如何实例化poco对象来控制Unity3D游戏的UI对象。记得先连上一个android手机并打开 **ADB调试模式** 。"
-
-#: ../../source/doc/poco_drivers.rst:31
-msgid "For **cocos2dx-lua** games are similar as Unity3d drivers."
+msgid "`cocos2dx-js`_"
 msgstr ""
 
-#: ../../source/doc/poco_drivers.rst:48
-msgid ""
-"If multiple devices connected, please select one by invoking "
-"``connect_device`` from airtest API."
-msgstr "如果连接了多个手机，调用airtest API里的 ``connect_device`` 函数来选其中一个。"
+#: ../../source/doc/poco_drivers.rst:14
+msgid "`Egret`_"
+msgstr ""
 
-#: ../../source/doc/poco_drivers.rst:59
-msgid "For other engines, refer to `Integration guide`_ for more details"
+#: ../../source/doc/poco_drivers.rst:15
+msgid "`NetEase Internal Engines`_"
+msgstr ""
+
+#: ../../source/doc/poco_drivers.rst:17
+#, fuzzy
+msgid ""
+"For other engines and platforms, please refer to `Integration guide`_ for"
+" more details"
 msgstr "除了以上列出的引擎driver，其他的请参见 `Integration guide`_ 。"
 
-#: ../../source/doc/poco_drivers.rst:62
-msgid "Device object"
-msgstr ""
-
-#: ../../source/doc/poco_drivers.rst:64
+#: ../../source/doc/poco_drivers.rst:19
+#, fuzzy
 msgid ""
-"``Device`` is an abstract object which game/app runs on. In poco "
-"communicating with game/app is under a connection with the device. This "
-"device connection is handled by `Airtest device abstraction`_ (take "
-"Android as example)."
-msgstr ""
-"``Device`` 是Airtest中的抽象对象，也是游戏或app运行的载体。在poco中，和UI交互（例如点击）就是通过Device对象的。见"
-" `Airtest device abstraction`_ 查看Device相关的API。"
-
-#: ../../source/doc/poco_drivers.rst:67
-msgid "There are 2 ways to connect to the device."
-msgstr "两种方式与设备进行连接"
-
-#: ../../source/doc/poco_drivers.rst:69
-msgid "Call function `airtest.core.api.connect_device`_."
-msgstr "直接调用 `airtest.core.api.connect_device`_ "
-
-#: ../../source/doc/poco_drivers.rst:70
-msgid ""
-"Initialize Device instance according to platform "
-"(`android`_/`windows`_/`ios`_) then pass the device instance to Poco "
-"constructor according to different poco drivers."
-msgstr ""
-"根据平台实例化不同的Device实例 (`android`_/`windows`_/`ios`_) ，然后将这个实例传入对应的poco "
-"driver构造函数中。具体请见每个poco driver的构造函数API文档。"
+"For **multiple devices cases**, please refer to `Multiple devices guide`_"
+" for more details."
+msgstr "除了以上列出的引擎driver，其他的请参见 `Integration guide`_ 。"
 
 #~ msgid "For cocos2dx-lua games are similar as Unity3d drivers."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Following example shows how to "
+#~ "initialize poco instance for Unity3D. "
+#~ "Remember to connect an Android device"
+#~ " to your PC/mac with a running "
+#~ "game or launch and keep the Unity"
+#~ " game active on PC/mac."
+#~ msgstr "下面例子展示如何实例化poco对象来控制Unity3D游戏的UI对象。记得先连上一个android手机并打开 **ADB调试模式** 。"
+
+#~ msgid "For **cocos2dx-lua** games are similar as Unity3d drivers."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If multiple devices connected, please "
+#~ "select one by invoking ``connect_device`` "
+#~ "from airtest API."
+#~ msgstr "如果连接了多个手机，调用airtest API里的 ``connect_device`` 函数来选其中一个。"
+
+#~ msgid "Device object"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "``Device`` is an abstract object which"
+#~ " game/app runs on. In poco "
+#~ "communicating with game/app is under a"
+#~ " connection with the device. This "
+#~ "device connection is handled by `Airtest"
+#~ " device abstraction`_ (take Android as "
+#~ "example)."
+#~ msgstr ""
+#~ "``Device`` "
+#~ "是Airtest中的抽象对象，也是游戏或app运行的载体。在poco中，和UI交互（例如点击）就是通过Device对象的。见 "
+#~ "`Airtest device abstraction`_ 查看Device相关的API。"
+
+#~ msgid "There are 2 ways to connect to the device."
+#~ msgstr "两种方式与设备进行连接"
+
+#~ msgid "Call function `airtest.core.api.connect_device`_."
+#~ msgstr "直接调用 `airtest.core.api.connect_device`_ "
+
+#~ msgid ""
+#~ "Initialize Device instance according to "
+#~ "platform (`android`_/`windows`_/`ios`_) then pass"
+#~ " the device instance to Poco "
+#~ "constructor according to different poco "
+#~ "drivers."
+#~ msgstr ""
+#~ "根据平台实例化不同的Device实例 (`android`_/`windows`_/`ios`_) "
+#~ "，然后将这个实例传入对应的poco driver构造函数中。具体请见每个poco driver的构造函数API文档。"
+
+#~ msgid "`android-native`_"
+#~ msgstr ""
+
+#~ msgid "`osx apps`_"
+#~ msgstr ""
+
+#~ msgid "`windows apps`_"
 #~ msgstr ""
 

@@ -208,7 +208,7 @@ See `implementation guide <implementation_guide.html>`_. This guide helps you im
 game step by step.
 
 .. _poco-sdk repo: https://github.com/AirtestProject/Poco-SDK
-.. _poco for Android Native App: poco_for_android_native_app.html
+.. _poco for Android Native App: drivers/android-native-app.html
 .. _Hunter: http://hunter.nie.netease.com/mywork/instruction
 .. _WebSocketServer reference: http://discuss.cocos2d-x.org/t/cocos2d-js-websocket-server/33570
 .. _open an issue here: https://github.com/AirtestProject/Poco-SDK/issues

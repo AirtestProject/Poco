@@ -127,11 +127,21 @@ Use poco on platforms/engines
 
 This section guide you how to start to use poco to write your test cases on different platforms/engines.
 
-- `Unity3D <source/doc/drivers/unity3d.html>`_
-- `Android native app <source/doc/drivesr/android-native-app.html>`_
-- `Windows app <source/doc/drivers/windows-app.html>`_
-- `cocos2dx-lua <>`_
-- `cocos2dx-js <>`_
+- `Unity3D`_
+- `Android native apps`_
+- `OSX apps`_
+- `Windows apps`_
+- `cocos2dx-lua`_
+- `cocos2dx-js`_
+- `Egret`_
+
+.. _Android native apps: source/doc/drivers/android-native-app.html
+.. _Unity3D: source/doc/drivers/unity3d.html
+.. _OSX apps: source/doc/drivers/osx-app.html
+.. _Windows apps: source/doc/drivers/windows-app.html
+.. _cocos2dx-lua: source/doc/drivers/cocos2dx-lua.html
+.. _cocos2dx-js: source/poco.drivers.cocosjs.html
+.. _Egret: https://github.com/AirtestProject/Poco-SDK/tree/master/Egret
 
 Tutorials and examples
 ----------------------
@@ -187,15 +197,13 @@ Engine specific API
 
 - `poco drivers (engine specific poco implementation) <source/doc/poco_drivers.html>`_
 
-  - `Unity3D <source/poco.drivers.unity3d.unity3d_poco.html>`_
-  - `Android native app <source/poco.drivers.android.uiautomation.html>`_
-  - `iOS native app <source/poco.drivers.ios.html>`_
-  - `cocos2dx-lua <source/poco.drivers.std.html>`_
-  - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
-
-..
- 还没写完的连接先注释掉
- - `cocos2dx-js <source/poco.drivers.cocosjs.html>`_
+  - `Unity3D`_
+  - `Android native apps`_
+  - `OSX apps`_
+  - `Windows apps`_
+  - `cocos2dx-lua`_
+  - `cocos2dx-js`_
+  - `Egret`_
 
 
 Poco SDK API
@@ -289,7 +297,6 @@ Join to discuss!
 .. _More examples: source/doc/poco-example/index.html
 .. _Hunter内嵌inspector: source/doc/hunter-inspector-guide.html
 .. _网易游戏项目测试脚本标准模板: source/doc/netease-internal-use-template.html
-.. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: source/doc/about-standalone-inspector.html
 .. _AirtestIDE: http://airtest.netease.com/

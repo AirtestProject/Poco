@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 11:31+0800\n"
+"POT-Creation-Date: 2018-09-28 10:34+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,4 +20,121 @@ msgstr ""
 #: ../../source/doc/drivers/windows-app.rst:3
 msgid "Windows app (poco driver)"
 msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:6
+msgid ""
+"This page will teach you how to use Poco to test your windows programs. "
+"To test your program is very simple, just follow the steps below."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:11
+msgid ""
+"Only some GUI programs developed by Windows native framework are "
+"supported. Such as MFC, WindowsForm, WPF, Modern UI(Metro UI), "
+"Qt(partly), IE, Firefox ..."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:15
+msgid "Dependency"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:17
+msgid "To run Windows Poco SDK, you need to install the following library."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:19
+msgid "**pip install pywin32**"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:21
+msgid "**pip install uiautomation**"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:26
+msgid "Initialize a Poco instance"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:28
+msgid ""
+"First you need to initialize a Poco instance. Remember to import the poco"
+" library first. The first parameter is a dictionary that determines which"
+" window you want to test. The second parameter is an address that "
+"identifies the machine on which the program you are testing is located. "
+"The default is the local machine."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:33
+msgid "Currently, there are three ways to search for windows."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:35
+msgid "``title`` Find windows by title."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:36
+msgid "``handle`` Find windows by handle."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:37
+msgid "``title_re`` Find windows by regular expression of title"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:39
+msgid "You can use it with the following example"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:49
+msgid ""
+"Poco also supports **testing multiple windows** at the same time. You "
+"only need to provide different addresses for different poco instances."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:68
+msgid ""
+"If the parameters you provide cannot locate a unique window, an error "
+"will be reported. For example, a regular expressions as you provide may "
+"match multiple windows."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:73
+msgid ""
+"The winows driver has integrated the WindowsUI SDK. If you are testing a "
+"local program, you can start the driver directly. If you are testing a "
+"remote program, you will need to launch the WindowsUI SDK service on the "
+"remote machine."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:80
+msgid "Start testing your program"
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:82
+msgid ""
+"After initializing the poco instance, you can test your program. Just "
+"like other engines, you can simulate the various inputs of your device "
+"through Poco's own functions, such as ``click``, ``long_click``, "
+"``swipe``, ``snapshot``. See `object proxy related operation`_ for more "
+"details."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:86
+msgid "Here is an simple example."
+msgstr ""
+
+#: ../../source/doc/drivers/windows-app.rst:103
+msgid ""
+"If you don't know the name of the UI control in the window, you can check"
+" it out through our `Poco Hierarchy Viewer (UI Inspector)`_"
+msgstr ""
+
+#~ msgid ""
+#~ "After initializing the poco instance, "
+#~ "you can test your program. Just "
+#~ "like other engines, you can simulate "
+#~ "the various inputs of your device "
+#~ "through Poco's own functions, such as"
+#~ " ``click``, ``long_click``, ``swipe``, "
+#~ "``snapshot``. See `object-proxy-related-"
+#~ "operation`_ for more details."
+#~ msgstr ""
 
