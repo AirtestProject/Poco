@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-06 11:14+0800\n"
+"POT-Creation-Date: 2018-09-28 10:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,30 +76,77 @@ msgid "Implement the Abstract Method"
 msgstr ""
 
 #: ../../source/doc/implementation_guide.rst:31
-#: ../../source/doc/implementation_guide.rst:36
-#: ../../source/doc/implementation_guide.rst:49
-#: ../../source/doc/implementation_guide.rst:56
-#: ../../source/doc/implementation_guide.rst:63
-msgid "(coming soon...)"
+msgid ""
+"In your SDK, you need to implement several important functions to drive "
+"the entire SDK."
 msgstr ""
 
 #: ../../source/doc/implementation_guide.rst:34
+msgid "Dump"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:36
+msgid ""
+"This function must be implemented. But, it is very simple to implement. "
+"The onlyVisibleNode argument is not required, but must receive an "
+"argument."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:49
+msgid "Screenshot"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:51
+msgid ""
+"If needed, can implement this function so that it can be called correctly"
+" in Poco. The return is a string of base64 encrypted strings and its "
+"format."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:60
+msgid "Click, Swipe, LongClick"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:62
+msgid "These functions are also required to make all of Poco's features work."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:65
+msgid ""
+"Note that the form of the argument passed in is a percentage.If your API "
+"does not support this form of input, calculate the correct coordinates "
+"yourself.Just Like this ``x = Left + Width * x``, ``y = Top + Height * "
+"y``"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:84
+msgid ""
+"Other optional functions are ``GetScreenSize``, ``GetSDKVersion``, and if"
+" your Poco driver needs other functions, you can add it yourself."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:88
 msgid "Initialize poco-sdk after game launched"
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:40
-msgid "Object Model"
+#: ../../source/doc/implementation_guide.rst:90
+msgid ""
+"A variety of basic functions have been implemented, and the final step is"
+" to establish communication between the client and the server. Poco "
+"offers a simple RPC service, you can use it like below."
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:42
-msgid "This section shows key models and relationship between them."
+#: ../../source/doc/implementation_guide.rst:113
+msgid ""
+"You can use other RPC frameworks, but I would recommend using our Poco "
+"RPC framework."
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:45
+#: ../../source/doc/implementation_guide.rst:117
 msgid "Abstract Class/Interface Implementation"
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:47
+#: ../../source/doc/implementation_guide.rst:119
 msgid ""
 "To implement your own version of poco sdk, you only need to implement the"
 " following 2 classes/interfaces and override its abstract method. This "
@@ -107,25 +154,108 @@ msgid ""
 "classes or interfaces."
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:52
+#: ../../source/doc/implementation_guide.rst:155
 msgid ":py:class:`AbstractNode <poco.sdk.AbstractNode>`"
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:54
+#: ../../source/doc/implementation_guide.rst:157
 msgid "4 methods should be override"
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:59
-msgid ":py:class:`AbstractNode <poco.sdk.AbstractDumper>`"
+#: ../../source/doc/implementation_guide.rst:160
+msgid "getParent"
 msgstr ""
 
-#: ../../source/doc/implementation_guide.rst:61
+#: ../../source/doc/implementation_guide.rst:162
+msgid ""
+"This function returns the parent of a node, so it is very simple to "
+"overwrite. According to your own API function, return a parent node."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:170
+msgid "getChildren"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:172
+msgid ""
+"This function returns an iterator of all child nodes of a node. It's also"
+" very simple to implement, you can write a code similar to the following"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:182
+msgid "getAttr"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:184
+msgid ""
+"This function role is to return a property value of the node. So you have"
+" to return the corresponding property value based on the given argument."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:203
+msgid ""
+"The attributes of ``anchor``, ``pos``, and ``size`` are well defined, and"
+" you must return a value in the specified format. For more information, "
+"please read the comments in :py:class:`AbstractNode "
+"<poco.sdk.AbstractNode>`."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:206
+msgid "setAttr"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:208
+msgid ""
+"The purpose of this function is to set an attribute. You can override "
+"this function as needed. Sometimes not all properties can be set. At this"
+" point you can throw the error appropriately."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:224
+msgid "getAvailableAttributeNames"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:226
+msgid ""
+"This function is optional. If your API provides more property access, you"
+" can override this function and add other properties."
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:236
+msgid ":py:class:`AbstractDumper <poco.sdk.AbstractDumper>`"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:238
 msgid "1 method should be override"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:241
+msgid "getRoot"
+msgstr ""
+
+#: ../../source/doc/implementation_guide.rst:243
+msgid ""
+"You only need to override this function. This function is also very "
+"simple to implement, just return the root surface of the device. So, Poco"
+" can access the properties of all child elements through this root "
+"surface and your overloaded functhons ``getChildren``, ``getAttr``."
 msgstr ""
 
 #~ msgid "(this page is not finished yet)"
 #~ msgstr ""
 
 #~ msgid "xxx"
+#~ msgstr ""
+
+#~ msgid "(coming soon...)"
+#~ msgstr ""
+
+#~ msgid "Object Model"
+#~ msgstr ""
+
+#~ msgid "This section shows key models and relationship between them."
+#~ msgstr ""
+
+#~ msgid ":py:class:`AbstractNode <poco.sdk.AbstractDumper>`"
 #~ msgstr ""
 

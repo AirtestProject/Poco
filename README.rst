@@ -87,12 +87,7 @@ Use poco on platforms/engines
 
 This section guide you how to start to use poco to write your test cases on different platforms/engines.
 
-- `Unity3D <http://poco.readthedocs.io/en/latest/source/doc/drivers/unity3d.html>`_
-- `Android native app <http://poco.readthedocs.io/en/latest/source/doc/drivers/android-native-app.html>`_
-- `Windows app <http://poco.readthedocs.io/en/latest/source/doc/drivers/windows-app.html>`_
-- `cocos2dx-lua <>`_
-- `cocos2dx-js <>`_
-
+`Poco drivers`_
 
 Tutorials and examples
 ----------------------
@@ -154,33 +149,9 @@ Following example shows how to initialize poco instance for
     poco.device.wake()
     poco(text='Clock').click()
 
-* `NetEase Internal Engines`_ except for Unity3D projects.
 
-.. code-block:: python
-
-    from poco.drivers.netease.internal import NeteasePoco
-    from airtest.core.api import connect_device
-
-    # connect android device
-    connect_device('Android:///')
-
-    # or connect a window on windows
-    # connect_device('Windows:///?title_re=^.*errors and.*$')  # 填写可以识别出的窗口标题栏正则表达式，无需urlencode
-
-    poco = NeteasePoco('g37')  # hunter上的项目代号
-    ui = poco('...')
-    ui.click()
-
-
-* `cocos2dx-js`_
-* `cocos2dx-lua`_
-* `android-native`_
-* `iOS-native`_
-* `Egret`_
-* unreal (in development)
-* for other engines, refer to `Integration Guide`_ for more details
-
-If you are using multiple devices at the same time, please refer to `Poco drivers`_.
+* for other engines, refer to `Poco drivers`_ for more details. If poco drivers does not support your engine, please
+refer to `Integration Guide`_.
 
 
 Working with Poco Objects
@@ -339,7 +310,8 @@ then ``[0.5, 0.5]`` and the bottom right corner has coordinates ``[1, 1]``.
     poco('bg_mission').focus('center').click()  # click the center
 
 
-The focus function can also be used as internal positioning within the objects. Following example demonstrates the implementation of `scroll` operation in `ScrollView`.
+The focus function can also be used as internal positioning within the objects. Following example demonstrates the
+implementation of `scroll` operation in `ScrollView`.
 
 .. code-block:: python
 
@@ -514,8 +486,6 @@ python 2/3 and have the same coding style.
 .. _More examples: http://poco.readthedocs.io/en/latest/source/doc/poco-example/index.html
 .. _Hunter内嵌inspector: http://poco.readthedocs.io/en/latest/source/doc/hunter-inspector-guide.html
 .. _网易游戏项目测试脚本标准模板: http://poco.readthedocs.io/en/latest/source/doc/netease-internal-use-template.html
-.. _NetEase Internal Engines: http://poco.readthedocs.io/en/latest/source/poco.drivers.netease.internal.html
-.. _android-native: http://poco.readthedocs.io/en/latest/source/doc/poco_for_android_native_app.html
 .. _Tutorial of PocoUnit: http://poco.readthedocs.io/en/latest/source/doc/poco-example/play_with_unittest_framework.html
 .. _Poco drivers: http://poco.readthedocs.io/en/latest/source/doc/poco_drivers.html
 
@@ -528,13 +498,6 @@ python 2/3 and have the same coding style.
 .. _PocoUnit: https://github.com/AirtestProject/PocoUnit
 .. _PocoHierarchyViewer: http://poco.readthedocs.io/en/latest/source/doc/about-standalone-inspector.html
 
-..
- 下面是对应sdk的下载链接
-
-.. _cocos2dx-lua:
-.. _cocos2dx-js: https://github.com/AirtestProject/Poco-SDK
-.. _Egret: https://github.com/AirtestProject/Poco-SDK/Egret
-.. _iOS-native: https://github.com/AirtestProject/iOS-Tagent
 
 .. |docs| image:: https://readthedocs.org/projects/poco/badge/?version=latest
     :target: http://poco.readthedocs.io/en/latest/?badge=latest

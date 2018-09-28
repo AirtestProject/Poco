@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 20:10+0800\n"
+"POT-Creation-Date: 2018-09-28 10:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,10 +38,11 @@ msgstr ""
 
 #: of poco.proxy.UIObjectProxy poco.proxy.UIObjectProxy.__getitem__
 #: poco.proxy.UIObjectProxy.attr poco.proxy.UIObjectProxy.child
-#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
-#: poco.proxy.UIObjectProxy.focus poco.proxy.UIObjectProxy.get_position
-#: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
-#: poco.proxy.UIObjectProxy.pinch poco.proxy.UIObjectProxy.scroll
+#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.double_click
+#: poco.proxy.UIObjectProxy.drag_to poco.proxy.UIObjectProxy.focus
+#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.long_click
+#: poco.proxy.UIObjectProxy.offspring poco.proxy.UIObjectProxy.pinch
+#: poco.proxy.UIObjectProxy.rclick poco.proxy.UIObjectProxy.scroll
 #: poco.proxy.UIObjectProxy.set_text poco.proxy.UIObjectProxy.setattr
 #: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.swipe
 #: poco.proxy.UIObjectProxy.wait poco.proxy.UIObjectProxy.wait_for_appearance
@@ -149,8 +150,9 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.__iter__ poco.proxy.UIObjectProxy.attr
-#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.drag_to
-#: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.pinch
+#: poco.proxy.UIObjectProxy.click poco.proxy.UIObjectProxy.double_click
+#: poco.proxy.UIObjectProxy.drag_to poco.proxy.UIObjectProxy.get_position
+#: poco.proxy.UIObjectProxy.pinch poco.proxy.UIObjectProxy.rclick
 #: poco.proxy.UIObjectProxy.scroll poco.proxy.UIObjectProxy.set_text
 #: poco.proxy.UIObjectProxy.setattr poco.proxy.UIObjectProxy.swipe
 #: poco.proxy.UIObjectProxy.wait_for_appearance
@@ -297,11 +299,12 @@ msgid ""
 "providing ``focus`` argument."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.click:5
+#: of poco.proxy.UIObjectProxy.click:5 poco.proxy.UIObjectProxy.double_click:5
+#: poco.proxy.UIObjectProxy.rclick:5
 msgid "See ``CoordinateSystem`` for more details."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.click:7
+#: of poco.proxy.UIObjectProxy.click:7 poco.proxy.UIObjectProxy.rclick:7
 msgid ""
 "an offset point (x, y) from the top left corner of the UI element(s), "
 "values must be in range of 0~1. This argument can be also specified by "
@@ -310,6 +313,7 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.click:11
+#: poco.proxy.UIObjectProxy.double_click:11 poco.proxy.UIObjectProxy.rclick:11
 msgid ""
 "number of seconds to wait after this action. Default is None which is the"
 " default sleep interval. This value can be configured by Poco "
@@ -317,12 +321,30 @@ msgid ""
 "<poco.pocofw.Poco>` for more details."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.click:15 poco.proxy.UIObjectProxy.drag_to:9
-#: poco.proxy.UIObjectProxy.pinch:12 poco.proxy.UIObjectProxy.scroll:12
-#: poco.proxy.UIObjectProxy.swipe:15
+#: of poco.proxy.UIObjectProxy.click:15
+#: poco.proxy.UIObjectProxy.double_click:15 poco.proxy.UIObjectProxy.drag_to:9
+#: poco.proxy.UIObjectProxy.pinch:12 poco.proxy.UIObjectProxy.rclick:15
+#: poco.proxy.UIObjectProxy.scroll:12 poco.proxy.UIObjectProxy.swipe:15
 msgid ""
 ":exc:`PocoNoSuchNodeException` -- raised when the UI element does not "
 "exist"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.double_click:1
+msgid ""
+"Perform the double click action on the UI element(s) represented by the "
+"UI proxy. If this UI proxy represents a set of UI elements, the first one"
+" in the set is clicked and the anchor point of the UI element is used as "
+"the default one. It is also possible to click another point offset by "
+"providing ``focus`` argument."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.double_click:7
+msgid ""
+"an offset point (x, y) from the top left corner of the UI element(s), "
+"values must be in range of 0~1. This argument can be also specified by "
+"'anchor' or 'center'. 'Center' means to double click the center of "
+"bounding box of UI element."
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.drag_to:1
@@ -492,6 +514,15 @@ msgstr ""
 
 #: of poco.proxy.UIObjectProxy.pinch:9
 msgid "pinching inner circle radius. should not be greater than ``percent``"
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.rclick:1
+msgid ""
+"Perform the right click action on the UI element(s) represented by the UI"
+" proxy. If this UI proxy represents a set of UI elements, the first one "
+"in the set is clicked and the anchor point of the UI element is used as "
+"the default one. It is also possible to click another point offset by "
+"providing ``focus`` argument."
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.scroll:1

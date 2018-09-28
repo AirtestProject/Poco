@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-28 10:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/drivers/osx-app.rst:3
+msgid "MacOS app (poco driver)"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:5
+msgid ""
+"This page will teach you how to use Poco to test your MacOS programs. To "
+"test your program is very simple, just follow the steps below."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:10
+msgid ""
+"Only some GUI programs developed by Accessibility API are supported. For "
+"more information, please visit `Accessibility Programming Guide for OS "
+"X`_"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:15
+msgid ""
+"Remember to give your script secure access. Specific steps are as "
+"follows. Navigate to ``System preferences`` -> ``Security and privacy`` "
+"-> ``privacy`` -> ``Accessibility``. Add your script access, usually is "
+"the terminal or your runtime environment"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:21
+msgid "Dependency"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:23
+msgid ""
+"To run OSX Poco SDK, you need to install **Xcode first**, then install "
+"the following python libraries."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:31
+msgid "Initialize a Poco instance"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:33
+msgid ""
+"First you need to initialize a Poco instance. Remember to import the poco"
+" library first. The first parameter is a dictionary that determines which"
+" window you want to test. The second parameter is an address that "
+"identifies the machine on which the program you are testing is located. "
+"The default is the local machine."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:38
+msgid ""
+"First, you have to decide which application the window you want to test "
+"is.There are three ways."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:40
+msgid "``appname`` Find application by name."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:41
+msgid ""
+"``bundleid`` Find application by bundleid, something like "
+"\"com.apple.Setting\"."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:42
+msgid "``appname_re`` Find application by regular expression of name"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:44
+msgid ""
+"Second, find the window you want to test in this application. There are "
+"three ways."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:46
+msgid "``windowtitle`` Find window by name."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:47
+msgid "``windowindex`` Find window by window index."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:48
+msgid "``windowtitle_re`` Find window by regular expression of name"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:51
+msgid "You can use it by the following example"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:61
+msgid ""
+"Poco also supports to **test multiple windows** at the same time. You "
+"only need to provide different addresses for different poco instances."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:66
+msgid ""
+"If the parameters you provide cannot locate a unique window, an error "
+"will be reported. For example, a regular expressions as you provide may "
+"match multiple windows."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:70
+msgid ""
+"The osx driver has integrated the OSX SDK. If you are testing a local "
+"program, you can start the driver directly. If you are testing a remote "
+"program, you will need to launch the OSX SDK service on the remote "
+"machine."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:76
+msgid "Start testing your program"
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:78
+msgid ""
+"After initializing the poco instance, you can test your program. Just "
+"like other engines, you can simulate various inputs of your device "
+"through Poco's own functions, such as ``click``, ``long_click``, "
+"``swipe``, ``snapshot``. See `object proxy related operation`_ for more "
+"details."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:82
+msgid "Here simple examples."
+msgstr ""
+
+#: ../../source/doc/drivers/osx-app.rst:92
+msgid ""
+"If you don't know the name of the UI control in the window, you can check"
+" it out through our `Poco Hierarchy Viewer (UI Inspector)`_"
+msgstr ""
+
+#~ msgid ""
+#~ "Only some GUI programs developed by "
+#~ "Accessibility API are supported. For "
+#~ "more information, please visit "
+#~ "`Accessibility-Programming-Guide-for-OS-X`_"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To run OSX Poco SDK, you need "
+#~ "to install **Xcode first**, then install"
+#~ " the following library."
+#~ msgstr ""
+
+#~ msgid "You can use it with the following example"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Poco also supports **testing multiple "
+#~ "windows** at the same time. You "
+#~ "only need to provide different addresses"
+#~ " for different poco instances."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "After initializing the poco instance, "
+#~ "you can test your program. Just "
+#~ "like other engines, you can simulate "
+#~ "various inputs of your device through"
+#~ " Poco's own functions, such as "
+#~ "``click``, ``long_click``, ``swipe``, ``snapshot``."
+#~ " See `object-proxy-related-operation`_ "
+#~ "for more details."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you don't know the name of "
+#~ "the UI control in the window, you"
+#~ " can check it out through our "
+#~ "`Poco-Hierarchy-Viewer (UI-Inspector) "
+#~ "<https://poco.readthedocs.io/en/latest/source/doc/about-"
+#~ "standalone-inspector.html>`_"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Remember to give your script secure "
+#~ "access. Specific steps are as follows."
+#~ msgstr ""
+
+#~ msgid "System preferences -> Security and privacy -> privacy -> Accessibility"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Add your script access, usually is "
+#~ "the terminal or your runtime environment"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Remember to give your script secure "
+#~ "access. Specific steps are as follows."
+#~ " System preferences -> Security and "
+#~ "privacy -> privacy -> Accessibility Add"
+#~ " your script access, usually is the"
+#~ " terminal or your runtime environment"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Remember to give your script secure "
+#~ "access. Specific steps are as follows."
+#~ " ``System preferences`` -> ``Security and"
+#~ " privacy`` -> ``privacy`` -> "
+#~ "``Accessibility`` Add your script access, "
+#~ "usually is the terminal or your "
+#~ "runtime environment"
+#~ msgstr ""
+
