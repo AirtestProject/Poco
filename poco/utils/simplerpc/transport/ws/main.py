@@ -17,6 +17,10 @@ class WebSocketClient(IClient):
         self._ws = None
         self._ws_thread = None
 
+    def __str__(self):
+        return self.addr
+    __repr__ = __str__
+
     def connect(self):
         if self._ws_thread:
             self.close()

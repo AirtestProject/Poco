@@ -22,6 +22,9 @@ class RpcClient(RpcAgent):
         self.conn.connect()
         self._wait_connected(timeout)
 
+    def get_connection(self):
+        return self.conn
+
     def wait_connected(self):
         warnings.warn(DeprecationWarning())
         return self.connect()
