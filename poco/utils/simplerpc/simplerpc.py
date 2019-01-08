@@ -78,10 +78,11 @@ class Callback(object):
                     raise RpcTimeoutError(self)
             else:
                 break
-        return (self.result, self.error)
+        return self.result, self.error
 
     def __str__(self):
-        return repr(self) + "(rid=%s)" % self.rid
+        conn = self.agent.get_connection()
+        return '{} (rid={}) (connection="{}")'.format(repr(self), self.rid, conn)
 
 
 class AsyncResponse(object):
@@ -126,6 +127,9 @@ class RpcAgent(object):
         self._callbacks = {}
 
     def call(self, *args, **kwargs):
+        raise NotImplementedError
+
+    def get_connection(self):
         raise NotImplementedError
 
     def format_request(self, func, *args, **kwargs):

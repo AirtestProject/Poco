@@ -16,6 +16,10 @@ class TcpClient(IClient):
         self.prot = SimpleProtocolFilter()
         self.c = None
 
+    def __str__(self):
+        return 'tcp://{}:{}'.format(*self.addr)
+    __repr__ = __str__
+
     def connect(self):
         if not self.c:
             self.c = Client(self.addr,

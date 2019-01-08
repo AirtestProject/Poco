@@ -1,37 +1,40 @@
 # coding=utf-8
 
+from functools import wraps
+
 from airtest.core.api import device as current_device
 from airtest.core.api import touch, swipe
 from airtest.core.helper import device_platform, logwrap
 from poco.sdk.interfaces.input import InputInterface
-from functools import wraps
+
+__all__ = ['AirtestInput']
 
 
 def serializable_adapter(func):
-
-    class ISerializable():
+    class ISerializable(object):
         def to_json(self):
             raise NotImplementedError
 
     @wraps(func)
     def wrapped(*args):
-        class PocoSerializable(ISerializable):
-
+        class PocoUIProxySerializable(ISerializable):
             def __init__(self, obj):
                 self.obj = obj
 
             def to_json(self):
                 return repr(self.obj)
 
-        new_args = [PocoSerializable(a) for a in args]
+        new_args = [PocoUIProxySerializable(a) for a in args]
         return func(*new_args)
 
     return wrapped
+
 
 @serializable_adapter
 @logwrap
 def record_ui(driver, action, ui, args):
     return ui
+
 
 class AirtestInput(InputInterface):
     def __init__(self):
