@@ -720,6 +720,7 @@ class UIObjectProxy(object):
         """
 
         try:
+            self._evaluated = False
             return self.attr('visible')
         except (PocoTargetRemovedException, PocoNoSuchNodeException):
             return False
