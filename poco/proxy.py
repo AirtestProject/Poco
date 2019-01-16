@@ -44,6 +44,36 @@ def refresh_when(err_type):
     return wrapper
 
 
+class ReevaluationContext(object):
+    """
+    volatile attributes的重运算同一批次内只执行一次，无需多次执行
+    """
+
+    def __init__(self, proxy):
+        self.target = proxy
+        self.with_this_batch = hasattr(self.target, '__reevaluation_context__')
+
+    def __enter__(self):
+        if not self.with_this_batch:
+            setattr(self.target, '__reevaluation_context__', True)
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if not self.with_this_batch:
+            delattr(self.target, '__reevaluation_context__')
+
+
+def volatile_attribute(func):
+    @wraps(func)
+    def wrapped(proxy, *args, **kwargs):
+        with ReevaluationContext(proxy) as rc:
+            if not rc.with_this_batch and proxy.poco._reevaluate_volatile_attributes:
+                proxy._evaluated = False
+            return func(proxy, *args, **kwargs)
+
+    return wrapped
+
+
 class UIObjectProxy(object):
     """
     UI Proxy class that represents the UI element on target device.
@@ -544,6 +574,7 @@ class UIObjectProxy(object):
         ret._focus = f
         return ret
 
+    @volatile_attribute
     def get_position(self, focus=None):
         """
         Get the position of the UI elements.
@@ -710,6 +741,7 @@ class UIObjectProxy(object):
         except UnableToSetAttributeException as e:
             raise InvalidOperationException('"{}" of "{}"'.format(str(e), self))
 
+    @volatile_attribute
     def exists(self):
         """
         Test whether the UI element is in the hierarchy. Similar to :py:meth:`.attr('visible')
@@ -760,6 +792,7 @@ class UIObjectProxy(object):
 
         return self.attr('name')
 
+    @volatile_attribute
     def get_size(self):
         """
         Get the UI element size in ``NormalizedCoordinate`` system.
@@ -770,6 +803,7 @@ class UIObjectProxy(object):
 
         return self.attr('size')
 
+    @volatile_attribute
     def get_bounds(self):
         """
         Get the parameters of bounding box of the UI element.

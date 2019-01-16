@@ -109,4 +109,5 @@ class StdPoco(Poco):
                     ip = 'localhost'
 
         agent = StdPocoAgent((ip, port), use_airtest_input)
+        kwargs['reevaluate_volatile_attributes'] = True
         super(StdPoco, self).__init__(agent, **kwargs)

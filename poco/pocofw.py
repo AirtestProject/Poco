@@ -35,6 +35,9 @@ class Poco(PocoAccelerationMixin):
             - ``touch_down_duration``: Touch down step duration of the click operation last for. If this argument is
               provided, this value will set to ``self.agent.input`` module. Note that not all implementation of poco 
               support this parameter. If not support, you may see a warning.
+            - ``reevaluate_volatile_attributes``: Re-select target UI proxy when retrieving volatile attributes. Poco
+              drivers that using hrpc connections should default to be ``False`` as hrpc always reevaluate the
+              attributes remotely. This option is useful for ``StdPoco`` driver and should be handled by ``StdPoco``.
     """
 
     def __init__(self, agent, **options):
@@ -45,6 +48,7 @@ class Poco(PocoAccelerationMixin):
         self._pre_action_wait_for_appearance = options.get('pre_action_wait_for_appearance', 6)
         self._post_action_interval = options.get('action_interval', 0.8)
         self._poll_interval = options.get('poll_interval', 1.44)
+        self._reevaluate_volatile_attributes = options.get('reevaluate_volatile_attributes', False)
         if 'touch_down_duration' in options:
             touch_down_duration = options['touch_down_duration']
             try:
