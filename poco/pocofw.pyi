@@ -15,6 +15,7 @@ class Poco(PocoAccelerationMixin):
         self._pre_action_wait_for_appearance = 6
         self._post_action_interval = 0.8
         self._poll_interval = 1.44
+        self._reevaluate_volatile_attributes = False # type: bool
         self._pre_action_callbacks = []             # type: List[Callable[Text, UIObjectProxy, Any]]
         self._post_action_callbacks = []            # type: List[Callable[Text, UIObjectProxy, Any]]
 
