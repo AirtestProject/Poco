@@ -189,6 +189,25 @@ class UIObjectProxy(object):
         obj.query = query
         return obj
 
+    def parent(self):
+        """
+        Select the direct child(ren) from the UI element(s) given by the query expression, see ``QueryCondition`` for
+        more details about the selectors.
+
+        Warnings:
+            Experimental method, may not be available for all drivers.
+
+        Returns:
+            :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object representing the direct parent
+            of the first UI element.
+        """
+
+        sub_query = build_query(None)  # as placeholder
+        query = ('^', (self.query, sub_query))
+        obj = UIObjectProxy(self.poco)
+        obj.query = query
+        return obj
+
     def __getitem__(self, item):
         """
         Select the specific UI element by index. If this UI proxy represents a set of UI elements, then use this method

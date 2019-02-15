@@ -30,6 +30,9 @@ class UIObjectProxy(object):
     def sibling(self, name: Text=None, **attrs) -> UIObjectProxy:
         ...
 
+    def parent(self) -> UIObjectProxy:
+        ...
+
     def __getitem__(self, item: int) -> UIObjectProxy:
         ...
 
