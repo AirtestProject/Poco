@@ -9,16 +9,16 @@ class FrozenUITutorial(TutorialCase):
         with self.poco.freeze() as frozen_poco:
             t0 = time.time()
             for item in frozen_poco('Scroll View').offspring(type='Text'):
-                print item.get_text()
+                print(item.get_text())
             t1 = time.time()
-            print t1 - t0
+            print(t1 - t0)
 
     def no_using_freezing(self):
         t0 = time.time()
         for item in self.poco('Scroll View').offspring(type='Text'):
-            print item.get_text()
+            print(item.get_text())
         t1 = time.time()
-        print t1 - t0
+        print(t1 - t0)
 
     def runTest(self):
         self.using_freezing()
