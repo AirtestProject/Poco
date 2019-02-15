@@ -44,7 +44,8 @@ class Selector(ISelector):
         '>': offsprings, select all offsprings matched expr1 from all roots matched expr0.
         '/': children, select all children matched expr1 from all roots matched expr0.
         '-': siblings, select all siblings matched expr1 from all roots matched expr0.
-    
+        '^': parent, select the parent of 1st UI element matched expr0. expr1 is always None.
+
     - ``'index'``: select specific n-th UI element from the previous results
 
     - ``others``: passes the expression to matcher
@@ -137,6 +138,15 @@ class Selector(ISelector):
             except IndexError:
                 raise NoSuchTargetException(
                     u'Query results index out of range. Index={} condition "{}" from root "{}".'.format(i, cond, root))
+        elif op == '^':
+            # parent
+            # only select parent of the first matched UI element
+            query1, _ = args
+            result1 = self.selectImpl(query1, False, root, maxDepth, onlyVisibleNode, includeRoot)
+            if result1:
+                parent_node = result1[0].getParent()
+                if parent_node is not None:
+                    result = [parent_node]
         else:
             self._selectTraverse(cond, root, result, multiple, maxDepth, onlyVisibleNode, includeRoot)
 

@@ -19,6 +19,7 @@ TranslateOp = {
     '/': '/',
     '>': '>',
     '-': '-',
+    '^': '\'s parent',
 }
 
 
@@ -27,7 +28,7 @@ ComparableTypes = six.integer_types + six.string_types + (six.binary_type, bool,
 
 def query_expr(query):
     op = query[0]
-    if op in ('/', '>', '-'):
+    if op in ('/', '>', '-', '^'):
         return TranslateOp[op].join([query_expr(q) for q in query[1]])
     elif op == 'index':
         return '{}[{}]'.format(query_expr(query[1][0]), query[1][1])
