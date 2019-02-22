@@ -99,8 +99,7 @@ class AndroidPocoAgent(PocoAgent):
 
 
 class KeepRunningInstrumentationThread(threading.Thread):
-    """Thread class with a stop() method. The thread itself has to check
-    regularly for the stopped() condition."""
+    """Keep pocoservice running"""
 
     def __init__(self, poco, port_to_ping):
         super(KeepRunningInstrumentationThread, self).__init__()
