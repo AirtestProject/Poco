@@ -44,6 +44,7 @@ class FrozenUIDumper(AbstractDumper):
                 self._linkParent(child)
 
 
+
 class FrozenUIHierarchy(HierarchyInterface):
     """
     Locally implementation of hierarchy interface with a given dumper and all other behaviours by default. As all 
