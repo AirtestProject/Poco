@@ -98,6 +98,34 @@ class AndroidPocoAgent(PocoAgent):
             self.input.add_preaction_cb(driver)
 
 
+class KeepRunningInstrumentationThread(threading.Thread):
+    """Thread class with a stop() method. The thread itself has to check
+    regularly for the stopped() condition."""
+
+    def __init__(self, poco, port_to_ping):
+        super(KeepRunningInstrumentationThread, self).__init__()
+        self._stop_event = threading.Event()
+        self.poco = poco
+        self.port_to_ping = port_to_ping
+
+    def stop(self):
+        self._stop_event.set()
+
+    def stopped(self):
+        return self._stop_event.is_set()
+
+    def run(self):
+        while not self.stopped():
+            if getattr(self.poco, "_instrument_proc", None) is not None:
+                stdout, stderr = self.poco._instrument_proc.communicate()
+                print('[pocoservice.apk] stdout: {}'.format(stdout))
+                print('[pocoservice.apk] stderr: {}'.format(stderr))
+            if not self.stopped():
+                print('[pocoservice.apk] retrying instrumentation PocoService')
+                self.poco._start_instrument(self.port_to_ping)  # 尝试重启
+                time.sleep(1)
+
+
 class AndroidUiautomationPoco(Poco):
     """
     Poco Android implementation for testing **Android native apps**.
@@ -179,7 +207,8 @@ class AndroidUiautomationPoco(Poco):
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
         if ready:
             # 首次启动成功后，在后台线程里监控这个进程的状态，保持让它不退出
-            self._keep_running_instrumentation(p0)
+            self._keep_running_thread = KeepRunningInstrumentationThread(self, p0)
+            self._keep_running_thread.start()
 
         endpoint = "http://{}:{}".format(self.device_ip, p1)
         agent = AndroidPocoAgent(endpoint, self.ime, use_airtest_input)
@@ -197,22 +226,6 @@ class AndroidUiautomationPoco(Poco):
             if ps.endswith(package_name):
                 return True
         return False
-
-    def _keep_running_instrumentation(self, port_to_ping):
-        print('[pocoservice.apk] background daemon started.')
-
-        def loop():
-            while True:
-                if self._instrument_proc is not None:
-                    stdout, stderr = self._instrument_proc.communicate()
-                    print('[pocoservice.apk] stdout: {}'.format(stdout))
-                    print('[pocoservice.apk] stderr: {}'.format(stderr))
-                    print('[pocoservice.apk] retrying instrumentation PocoService')
-                self._start_instrument(port_to_ping)  # 尝试重启
-                time.sleep(1)
-        t = threading.Thread(target=loop)
-        t.daemon = True
-        t.start()
 
     def _start_instrument(self, port_to_ping, force_restart=False):
         if not force_restart:
@@ -280,6 +293,12 @@ class AndroidUiautomationPoco(Poco):
             if not isinstance(msg, six.text_type):
                 msg = msg.decode('utf-8')
             snapshot(msg=msg)
+
+    def stop_running(self):
+        print('[pocoservice.apk] stopping PocoService')
+        self._keep_running_thread.stop()
+        self._keep_running_thread.join(3)
+        self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
 
 
 class AndroidUiautomationHelper(object):
