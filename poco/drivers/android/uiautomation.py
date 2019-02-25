@@ -106,6 +106,7 @@ class KeepRunningInstrumentationThread(threading.Thread):
         self._stop_event = threading.Event()
         self.poco = poco
         self.port_to_ping = port_to_ping
+        self.daemon = True
 
     def stop(self):
         self._stop_event.set()
