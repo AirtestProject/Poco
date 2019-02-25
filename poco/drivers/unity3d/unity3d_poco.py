@@ -5,13 +5,36 @@
 
 from poco.drivers.std import StdPoco
 from poco.drivers.unity3d.device import UnityEditorWindow
-
+from poco.exceptions import InvalidOperationException
 from airtest.core.api import connect_device, device as current_device
-
 
 __all__ = ['UnityPoco']
 DEFAULT_PORT = 5001
 DEFAULT_ADDR = ("localhost", DEFAULT_PORT)
+
+
+class UnityVRSupport():
+    def __init__(self, client):
+        self.client = client
+        self.support_vr = False
+        try:
+            self.support_vr = self.client.call("isVrSupported")
+        except InvalidOperationException:
+            raise InvalidOperationException('VR not supported')
+
+    def hasMovementFinished(self):
+        success, error_msg  =self.client.call("hasMovementFinished").wait()
+        print(success)
+        if success != None:
+            return True
+        else:
+            return False
+
+    def rotateObject(self, x, y, z, camera, follower, speed=0.125):
+        return self.client.call("RotateObject", x, y, z, camera, follower, speed)
+
+    def objectLookAt(self, name, camera, follower, speed=0.125):
+        return self.client.call("ObjectLookAt", name, camera, follower, speed)
 
 
 class UnityPoco(StdPoco):
@@ -23,7 +46,7 @@ class UnityPoco(StdPoco):
         unity_editor (:py:obj:`bool`): whether your Unity3D game is running in UnityEditor or not. default to ``False``
         connect_default_device (:py:obj:`bool`): whether connect to a default device if no devices selected manually.
          default to ``True``.
-        device (:py:obj:`Device`): :py:obj:`airtest.core.device.Device` instance provided by ``airtest``. leave the
+         device (:py:obj:`Device`): :py:obj:`airtest.core.device.Device` instance provided by ``airtest``. leave the
          parameter default and the default device will be chosen. more details refer to ``airtest doc``
         options: see :py:class:`poco.pocofw.Poco`
 
@@ -45,7 +68,7 @@ class UnityPoco(StdPoco):
             options['action_interval'] = 0.5
 
         if unity_editor:
-            dev = UnityEditorWindow()
+           dev = UnityEditorWindow()
         else:
             dev = device
 
@@ -55,3 +78,4 @@ class UnityPoco(StdPoco):
             dev = connect_device("Android:///")
 
         super(UnityPoco, self).__init__(addr[1], dev, **options)
+        self.vr = UnityVRSupport(self.agent.rpc)
