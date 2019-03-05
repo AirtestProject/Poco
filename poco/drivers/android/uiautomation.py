@@ -121,7 +121,6 @@ class KeepRunningInstrumentationThread(threading.Thread):
                 print('[pocoservice.apk] stdout: {}'.format(stdout))
                 print('[pocoservice.apk] stderr: {}'.format(stderr))
             if not self.stopped():
-                print('[pocoservice.apk] retrying instrumentation PocoService')
                 self.poco._start_instrument(self.port_to_ping)  # 尝试重启
                 time.sleep(1)
 
