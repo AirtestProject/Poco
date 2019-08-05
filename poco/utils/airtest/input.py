@@ -41,6 +41,7 @@ class AirtestInput(InputInterface):
         super(AirtestInput, self).__init__()
         self.default_touch_down_duration = 0.01
         self._driver = None
+        self.use_render_resolution = False
 
     def add_preaction_cb(self, driver):
         self._driver = driver
@@ -60,7 +61,11 @@ class AirtestInput(InputInterface):
          or window size if running in window mode
         """
         current_device().display_info
-        return current_device().get_render_resolution()
+        if self.use_render_resolution:
+            return current_device().get_render_resolution()
+        else:
+            w, h = current_device().get_current_resolution()
+            return 0, 0, w, h
 
     def setTouchDownDuration(self, duration):
         self.default_touch_down_duration = duration

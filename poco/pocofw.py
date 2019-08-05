@@ -494,3 +494,12 @@ class Poco(PocoAccelerationMixin):
                 cb(self, action, ui, args)
             except Exception as e:
                 warnings.warn("Error occurred at post action stage.\n{}".format(traceback.format_exc()))
+
+    def use_render_resolution(self, use=True):
+        '''
+        Whether to use render resolution
+
+        Args:
+            use: True or false
+        '''
+        self._agent.input.use_render_resolution = use
