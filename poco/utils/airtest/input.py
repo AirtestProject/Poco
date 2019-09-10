@@ -60,12 +60,11 @@ class AirtestInput(InputInterface):
         get real time resolution on device if full screen
          or window size if running in window mode
         """
-        current_device().display_info
-        if self.use_render_resolution:
-            return current_device().get_render_resolution()
-        else:
-            w, h = current_device().get_current_resolution()
-            return 0, 0, w, h
+        if device_platform() == 'Android':
+            if self.use_render_resolution:
+                return current_device().get_render_resolution()
+        w, h = current_device().get_current_resolution()
+        return 0, 0, w, h
 
     def setTouchDownDuration(self, duration):
         self.default_touch_down_duration = duration
