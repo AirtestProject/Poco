@@ -29,7 +29,6 @@ def new_translate_desc(self, step, code):
                 poco_ui = item["data"]["call_args"]["ui"]
 
     if poco_ui:
-        print(step["data"])
         name = step['data']['name']
         desc = {
             "touch": "Touch %s" % poco_ui,
