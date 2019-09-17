@@ -42,6 +42,7 @@ class AirtestInput(InputInterface):
         self.default_touch_down_duration = 0.01
         self._driver = None
         self.use_render_resolution = False
+        self.render_resolution = None
 
     def add_preaction_cb(self, driver):
         self._driver = driver
@@ -62,7 +63,10 @@ class AirtestInput(InputInterface):
         """
         if device_platform() == 'Android':
             if self.use_render_resolution:
-                return current_device().get_render_resolution()
+                if self.render_resolution and len(self.render_resolution) == 4:
+                    return self.render_resolution
+                else:
+                    return current_device().get_render_resolution()
         w, h = current_device().get_current_resolution()
         return 0, 0, w, h
 
