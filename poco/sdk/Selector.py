@@ -74,7 +74,6 @@ class Selector(ISelector):
         """
         See Also: :py:meth:`select <poco.sdk.Selector.ISelector.select>` method in ``ISelector``.
         """
-
         return self.selectImpl(cond, multiple, self.getRoot(), 9999, True, True)
 
     def selectImpl(self, cond, multiple, root, maxDepth, onlyVisibleNode, includeRoot):
@@ -134,7 +133,8 @@ class Selector(ISelector):
         elif op == 'index':
             cond, i = args
             try:
-                result = [self.selectImpl(cond, multiple, root, maxDepth, onlyVisibleNode, includeRoot)[i]]
+                # set multiple=True, self.selectImpl will return a list
+                result = [self.selectImpl(cond, True, root, maxDepth, onlyVisibleNode, includeRoot)[i]]
             except IndexError:
                 raise NoSuchTargetException(
                     u'Query results index out of range. Index={} condition "{}" from root "{}".'.format(i, cond, root))
