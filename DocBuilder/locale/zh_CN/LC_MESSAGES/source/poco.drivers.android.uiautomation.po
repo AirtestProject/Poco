@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-12 19:58+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.android.uiautomation.rst:2
-msgid "poco\\.drivers\\.android\\.uiautomation module"
+msgid "poco.drivers.android.uiautomation module"
 msgstr ""
 
 #: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:1
-msgid "Bases: :class:`poco.pocofw.Poco`"
+msgid "基类：:class:`poco.pocofw.Poco`"
 msgstr ""
 
 #: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:1
@@ -55,7 +55,7 @@ msgid "see :py:class:`poco.pocofw.Poco`"
 msgstr ""
 
 #: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:13
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
 #: of poco.drivers.android.uiautomation.AndroidUiautomationPoco:14
@@ -63,4 +63,13 @@ msgid ""
 "The simplest way to initialize AndroidUiautomationPoco instance and no "
 "matter your device network status::"
 msgstr ""
+
+#~ msgid "poco\\.drivers\\.android\\.uiautomation module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.pocofw.Poco`"
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
 

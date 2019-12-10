@@ -1,0 +1,301 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017, NetEase Co, Ltd.
+# This file is distributed under the same license as the poco package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: poco 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: ../../source/doc/unity3d_vr.rst:3
+msgid "Automating virtual reality with AirtestIDE:"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:6
+msgid "Introduction"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:7
+msgid ""
+"One of the most recent technologies widely used in gaming is virtual "
+"reality."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:9
+msgid ""
+"AirtestIDE currently support unity automation, but there are some actions"
+" that are unique from virtual reality that needed special support."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:11
+msgid ""
+"For example, for Google VR, clicking on an object is no longer a right "
+"action. Instead, the camera should look at this object and then perform a"
+" click anywhere in the screen."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:13
+msgid "Camera manipulation is a must for VR automation."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:15 ../../source/doc/unity3d_vr.rst:102
+msgid ""
+"SteamVR supports hand devices that would point and perform the action on "
+"the objects, so again, the previous automation of ‘clicking’ on an object"
+" is not longer enough for VR automation."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:17
+msgid ""
+"Last but not least, unity is not the only tool to create VR applications,"
+" so we would like to support other platforms as well, such as WebVR."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:21
+msgid "Version 1: Google VR support"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:23
+msgid ""
+"As stated in the introduction, automating actions on Google VR requires "
+"an initial camera movement."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:25
+msgid ""
+"Airtest supports a combination of Unity and Android for automating Google"
+" VR. We are not currently supporting DayDream."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:27
+msgid ""
+"On the new unity versions, this movement is only allowed after embedding "
+"the camera in an object and performing the action on such object."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:29
+msgid ""
+"The first thing to do is to add the Airtest “Unity3D” folder inside of "
+"your project as with any other unity automation with Airtest."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:31
+msgid ""
+"Then add a new empty object and add the “Poco Manager” script to this "
+"object."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:33
+msgid ""
+"You also need to have two objects to contain your camera, in our example,"
+" we called it “CameraContainer” and “CameraFollower”. This is because of "
+"GoogleVR’s policies of allowing the user to be in charge of the camera at"
+" all points. We need a camera container to move the camera (as per these "
+"policies we cannot move it on our own) and another one to follow the "
+"camera movements so we can move from the current camera position rather "
+"than the container’s."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:35
+msgid "In the scene should look like this:"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:39
+msgid "And the project:"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:43
+msgid ""
+"Next, we can start creating the scripts with AirtestIDE. As with other "
+"AirtestIDE add the following lines: .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:46
+msgid ""
+"import sys from airtest.core.api import * import time from "
+"poco.drivers.unity3d import UnityPoco import poco auto_setup(__file__) "
+"poco = UnityPoco() # note: use device=UnityEditorWindow() to test in "
+"unity vr = poco.vr uiproxy = poco()"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:56
+msgid "Airtest supports two ways of rotating the camera :"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:58
+msgid ""
+"1) Indicating the degrees that you wish to rotate on each direction and "
+"the object to which apply this rotation. You can optionally indicate the "
+"speed of the rotation (by default is 0.125) which would simulate more "
+"realistically a head turn. .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:61
+msgid "vr.rotateObject(-10,0,0,'CameraContainer', ‘cameraFollower’, 0.5)"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:63
+msgid ""
+"2) Indicating the name of the object that the camera should be looking "
+"at, and the object to which apply this rotation. Speed can be added "
+"optionally as well. .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:66
+msgid "vr.objectLookAt('Cube', 'CameraContainer', ‘cameraFollower’ , 5)"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:68
+msgid ""
+"Once the camera is looking at the right object, we can perform a random "
+"click on the Android screen in the following way: .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:71
+msgid "poco.click([0.5, 0.5])"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:73
+msgid ""
+"However, please notice that when we perform above actions, since we are "
+"adding speed, it is possible that the object was still not located when "
+"the click was performed."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:75
+msgid ""
+"In order to ensure that there are no commands pending on execution by the"
+" time the click is performed, we should introduce some sort of loop that "
+"we would escape if the action takes longer than expected: .. code-block::"
+" python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:78
+msgid ""
+"count = 1 while vr.checkIfUnityFinished() != True and count < 10: "
+"sleep(10) count = count + 1 print(\"loop\")"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:84
+msgid ""
+"The method “uiproxy.checkIfUnityFinished()” returns true once the unity "
+"queue has no more commands to execute, meaning that the position desired "
+"was reached. You only need to do verify this before an action such click "
+"or assert, but not between rotations as the unity code would control "
+"this."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:86
+msgid ""
+"Last, we should add some assertions. For example, if the object is "
+"visible, if the pointer is active, if the object changed color, if the "
+"position of the camera have changed (which would be useful for Waypoints)"
+" ..."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:88
+msgid ""
+"For example, we check the cube texture at the beginning of the script "
+"(after the object is located for better results) to save the object’s "
+"texture: .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:91
+msgid "texture = poco('Cube').attr('texture')"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:93
+msgid ""
+"After that, we would like to assert a change of texture, or perhaps that "
+"it changed to the color we wanted: .. code-block:: python"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:96
+msgid ""
+"assert poco('Cube').attr('texture') != texture assert "
+"poco('Cube').attr('texture') == \"RGBA(0.000, 0.000, 1.000, 1.000)\""
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:101
+msgid "Version 2: SteamVR support"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:104
+msgid ""
+"We are currently working on the support for this automation, stay tuned "
+"in."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:107
+msgid "Version 3: WebVR"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:108
+msgid ""
+"WebVR provide the means of creating virtual applications and games "
+"embedded on a website."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:110
+msgid ""
+"Airtest is an open source project and as such, collaborates with selenium"
+" for this automation."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:112
+msgid ""
+"As before, currently, we have several possibilities here "
+"(https://webvr.info/):"
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:114
+msgid ""
+"Google Cardboard: Works best with Chrome on Android devices. You can "
+"still experience WebVR content in other browsers on Android and iOS, but "
+"it might not be as smooth since those browsers don’t fully support WebVR."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:115
+msgid "Daydream: Works with Chrome on Daydream-ready Android devices."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:116
+msgid "Samsung Gear VR: Works with Oculus Browser and Samsung Internet."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:117
+msgid "Oculus Rift: Works with Firefox and Supermedium on Windows."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:118
+msgid "Oculus Go: Works with Oculus Browser."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:119
+msgid ""
+"HTC Vive: Works with Firefox, Servo, and Supermedium on Windows. On "
+"macOS, you can use Firefox Nightly."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:120
+msgid ""
+"Windows Mixed Reality headsets: WebVR v1.1 is supported by Microsoft Edge"
+" on Windows. Firefox and Supermedium are also supported with SteamVR."
+msgstr ""
+
+#: ../../source/doc/unity3d_vr.rst:122
+msgid ""
+"This is not yet supported by AirtestIDE but we wish to add its support in"
+" the near future."
+msgstr ""
+

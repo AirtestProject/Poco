@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:29+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.sdk.AbstractDumper.rst:2
-msgid "poco\\.sdk\\.AbstractDumper module"
+msgid "poco.sdk.AbstractDumper module"
 msgstr ""
 
 #: of poco.sdk.AbstractDumper.IDumper:1
-msgid "Bases: :class:`object`"
+msgid "基类：:class:`object`"
 msgstr ""
 
 #: of poco.sdk.AbstractDumper.IDumper:1
@@ -80,7 +80,7 @@ msgid ":py:class:`inherit from AbstractNode <poco.sdk.AbstractNode>`"
 msgstr ""
 
 #: of poco.sdk.AbstractDumper.AbstractDumper:1
-msgid "Bases: :class:`poco.sdk.AbstractDumper.IDumper`"
+msgid "基类：:class:`poco.sdk.AbstractDumper.IDumper`"
 msgstr ""
 
 #: of poco.sdk.AbstractDumper.AbstractDumper:1
@@ -163,5 +163,14 @@ msgstr ""
 #~ "by :py:class:`AbstractNode <poco.sdk.AbstractNode>` "
 #~ "and therefore the ``dump`` procedure can"
 #~ " be algorithmized."
+#~ msgstr ""
+
+#~ msgid "poco\\.sdk\\.AbstractDumper module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`object`"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.sdk.AbstractDumper.IDumper`"
 #~ msgstr ""
 

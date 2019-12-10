@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-23 15:24+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.utils.six.rst:2
-msgid "poco\\.utils\\.six module"
+msgid "poco.utils.six module"
 msgstr ""
 
 #: of poco.utils.six:1
@@ -26,7 +26,7 @@ msgid "Utilities for writing code that runs on Python 2 and 3"
 msgstr ""
 
 #: of poco.utils.six.Module_six_moves_urllib:1
-msgid "Bases: :class:`module`"
+msgid "基类：:class:`module`"
 msgstr ""
 
 #: of poco.utils.six.Module_six_moves_urllib:1
@@ -38,7 +38,7 @@ msgstr ""
 #: poco.utils.six.Module_six_moves_urllib_request:1
 #: poco.utils.six.Module_six_moves_urllib_response:1
 #: poco.utils.six.Module_six_moves_urllib_robotparser:1
-msgid "Bases: :class:`poco.utils.six._LazyModule`"
+msgid "基类：:class:`poco.utils.six._LazyModule`"
 msgstr ""
 
 #: of poco.utils.six.Module_six_moves_urllib_error:1
@@ -73,12 +73,18 @@ msgstr ""
 msgid "Byte literal"
 msgstr ""
 
-#: of poco.utils.six.exec_:1
-msgid "Execute code in a namespace."
-msgstr ""
-
 #: of poco.utils.six.get_unbound_function:1
 msgid "Get the function out of a possibly unbound function"
+msgstr ""
+
+#: of poco.utils.six.int2byte:1
+msgid "S.pack(v1, v2, ...) -> bytes"
+msgstr ""
+
+#: of poco.utils.six.int2byte:3
+msgid ""
+"Return a bytes object containing values v1, v2, ... packed according to "
+"the format string S.format.  See help(struct) for more on format strings."
 msgstr ""
 
 #: of poco.utils.six.iteritems:1
@@ -124,4 +130,16 @@ msgstr ""
 #: of poco.utils.six.with_metaclass:1
 msgid "Create a base class with a metaclass."
 msgstr ""
+
+#~ msgid "poco\\.utils\\.six module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`module`"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.utils.six._LazyModule`"
+#~ msgstr ""
+
+#~ msgid "Execute code in a namespace."
+#~ msgstr ""
 

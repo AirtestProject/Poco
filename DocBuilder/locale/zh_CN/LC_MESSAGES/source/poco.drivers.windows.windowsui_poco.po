@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 11:39+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.windows.windowsui_poco.rst:2
-msgid "poco\\.drivers\\.windows\\.windowsui\\_poco module"
+msgid "poco.drivers.windows.windowsui\\_poco module"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:1
-msgid "Bases: :class:`poco.drivers.std.StdPoco`"
+msgid "基类：:class:`poco.drivers.std.StdPoco`"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:1
@@ -30,6 +30,7 @@ msgid "Poco WindowsUI implementation."
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco
+#: poco.drivers.windows.windowsui_poco.WindowsPoco.scroll
 msgid "参数"
 msgstr ""
 
@@ -63,10 +64,10 @@ msgid "see :py:class:`poco.pocofw.Poco`"
 msgstr ""
 
 #: of poco.drivers.windows.windowsui_poco.WindowsPoco:15
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
-#: of poco.drivers.windows.windowsui_poco.WindowsPoco:19
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco:21
 msgid ""
 "If your programme is running, you could initialize poco instance by using"
 " following snippet::"
@@ -77,6 +78,24 @@ msgid ""
 "from poco.drivers.windows import WindowsPoco # poco = "
 "WindowsPoco({'title':'xxx'}) # poco = WindowsPoco({'handle':123456}) # "
 "poco = WindowsPoco({'title_re':'[a-z][a-z][a-z]'})"
+msgstr ""
+
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco.scroll:1
+msgid "Scroll from the lower part to the upper part of the entire screen."
+msgstr ""
+
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco.scroll:3
+msgid "scrolling direction. \"vertical\" or \"horizontal\""
+msgstr ""
+
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco.scroll:5
+msgid ""
+"scrolling distance percentage of the entire screen height or width "
+"according to direction"
+msgstr ""
+
+#: of poco.drivers.windows.windowsui_poco.WindowsPoco.scroll:8
+msgid "time interval in which the action is performed"
 msgstr ""
 
 #~ msgid ""
@@ -102,5 +121,14 @@ msgstr ""
 #~ " = WindowsPoco({'handle':123456}) # poco ="
 #~ " WindowsPoco({'title_re':'[a-z][a-z][a-z]'}) # match"
 #~ " the first matched window"
+#~ msgstr ""
+
+#~ msgid "poco\\.drivers\\.windows\\.windowsui\\_poco module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.drivers.std.StdPoco`"
+#~ msgstr ""
+
+#~ msgid "Examples"
 #~ msgstr ""
 

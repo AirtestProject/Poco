@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:29+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,35 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.osx.osxui_poco.rst:2
-msgid "poco\\.drivers\\.osx\\.osxui\\_poco module"
+msgid "poco.drivers.osx.osxui\\_poco module"
 msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco:1
+msgid "基类：:class:`poco.drivers.std.StdPoco`"
+msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco.scroll:1
+msgid "Scroll from the lower part to the upper part of the entire screen."
+msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco.scroll
+msgid "参数"
+msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco.scroll:3
+msgid "scrolling direction. \"vertical\" or \"horizontal\""
+msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco.scroll:5
+msgid ""
+"scrolling distance percentage of the entire screen height or width "
+"according to direction"
+msgstr ""
+
+#: of poco.drivers.osx.osxui_poco.OSXPoco.scroll:8
+msgid "time interval in which the action is performed"
+msgstr ""
+
+#~ msgid "poco\\.drivers\\.osx\\.osxui\\_poco module"
+#~ msgstr ""
 

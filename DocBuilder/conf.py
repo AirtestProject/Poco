@@ -81,7 +81,7 @@ master_doc = 'index'
 # General information about the project.
 project = 'poco'
 copyright = '2017, NetEase Co, Ltd.'
-author = ['lxn3032@corp.netease.com', 'gzliuxin@corp.netease.com']
+author = 'lxn3032@corp.netease.com'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

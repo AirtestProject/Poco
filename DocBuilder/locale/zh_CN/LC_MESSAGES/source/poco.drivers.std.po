@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 20:59+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.std.rst:2
-msgid "poco\\.drivers\\.std package"
+msgid "poco.drivers.std package"
 msgstr ""
 
 #: of poco.drivers.std.StdPoco:1
-msgid "Bases: :class:`poco.pocofw.Poco`"
+msgid "基类：:class:`poco.pocofw.Poco`"
 msgstr ""
 
 #: of poco.drivers.std.StdPoco:1
@@ -51,11 +51,63 @@ msgid "see :py:class:`poco.pocofw.Poco`"
 msgstr ""
 
 #: of poco.drivers.std.StdPoco:11
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
 #: of poco.drivers.std.StdPoco:12
 msgid "The simplest way to connect to a cocos2dx-lua game::"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent:1
+msgid "基类：:class:`poco.agent.PocoAgent`"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.get_sdk_version:1
+msgid ""
+"Retrieve the sdk version from remote runtime. Each poco agent "
+"implementation should override this method."
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.get_sdk_version
+#: poco.drivers.std.StdPocoAgent.rpc
+msgid "返回"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.get_sdk_version:3
+msgid ""
+"version string of the poco sdk. usually in \"0.0.0\" format. None if not "
+"provided by poco sdk."
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.get_sdk_version
+#: poco.drivers.std.StdPocoAgent.rpc
+msgid "返回类型"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.get_sdk_version:4
+msgid ":py:obj:`str`"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.rpc:1
+msgid "Return the interface of this agent handled."
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.rpc:3
+msgid "the rpc interface of this agent handled."
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.rpc:4
+msgid ":py:obj:`object`"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.rpc
+msgid "raises"
+msgstr ""
+
+#: of poco.drivers.std.StdPocoAgent.rpc:6
+msgid ""
+":exc:`NotImplementedError` -- raises if the agent implementation dose not"
+" expose the rpc interface to user."
 msgstr ""
 
 #: ../../source/poco.drivers.std.rst:9
@@ -65,4 +117,13 @@ msgstr ""
 #: ../../source/poco.drivers.std.rst:16
 msgid "Submodules"
 msgstr ""
+
+#~ msgid "poco\\.drivers\\.std package"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.pocofw.Poco`"
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
 

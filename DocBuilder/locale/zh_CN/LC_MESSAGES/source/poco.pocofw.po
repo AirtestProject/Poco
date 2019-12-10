@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 21:02+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.pocofw.rst:2
-msgid "poco\\.pocofw module"
+msgid "poco.pocofw module"
 msgstr ""
 
 #: of poco.pocofw.Poco:1
-msgid "Bases: :class:`poco.acceleration.PocoAccelerationMixin`"
+msgid "基类：:class:`poco.acceleration.PocoAccelerationMixin`"
 msgstr ""
 
 #: of poco.pocofw.Poco:1
@@ -35,8 +35,8 @@ msgstr ""
 #: poco.pocofw.Poco.apply_motion_tracks poco.pocofw.Poco.click
 #: poco.pocofw.Poco.long_click poco.pocofw.Poco.pinch poco.pocofw.Poco.scroll
 #: poco.pocofw.Poco.snapshot poco.pocofw.Poco.start_gesture
-#: poco.pocofw.Poco.swipe poco.pocofw.Poco.wait_for_all
-#: poco.pocofw.Poco.wait_for_any
+#: poco.pocofw.Poco.swipe poco.pocofw.Poco.use_render_resolution
+#: poco.pocofw.Poco.wait_for_all poco.pocofw.Poco.wait_for_any
 msgid "参数"
 msgstr ""
 
@@ -61,7 +61,12 @@ msgid ""
 "``touch_down_duration``: Touch down step duration of the click operation "
 "last for. If this argument is   provided, this value will set to "
 "``self.agent.input`` module. Note that not all implementation of poco   "
-"support this parameter. If not support, you may see a warning."
+"support this parameter. If not support, you may see a warning. - "
+"``reevaluate_volatile_attributes``: Re-select target UI proxy when "
+"retrieving volatile attributes. Poco   drivers that using hrpc "
+"connections should default to be ``False`` as hrpc always reevaluate the"
+"   attributes remotely. This option is useful for ``StdPoco`` driver and "
+"should be handled by ``StdPoco``."
 msgstr ""
 
 #: of poco.pocofw.Poco:7
@@ -95,6 +100,15 @@ msgid ""
 "support this parameter. If not support, you may see a warning."
 msgstr ""
 
+#: of poco.pocofw.Poco:17
+msgid ""
+"``reevaluate_volatile_attributes``: Re-select target UI proxy when "
+"retrieving volatile attributes. Poco drivers that using hrpc connections "
+"should default to be ``False`` as hrpc always reevaluate the attributes "
+"remotely. This option is useful for ``StdPoco`` driver and should be "
+"handled by ``StdPoco``."
+msgstr ""
+
 #: of poco.pocofw.Poco.__call__:1
 msgid ""
 "Call Poco instance to select the UI element by query expression. Query "
@@ -113,7 +127,7 @@ msgstr ""
 #: of poco.pocofw.Poco.__call__:9 poco.pocofw.Poco.click:10
 #: poco.pocofw.Poco.freeze:6 poco.pocofw.Poco.start_gesture:6
 #: poco.pocofw.Poco.swipe:10
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
 #: of poco.pocofw.Poco.__call__:10
@@ -125,7 +139,7 @@ msgid "name of the UI element to be selected"
 msgstr ""
 
 #: of poco.pocofw.Poco.__call__
-msgid "Keyword Arguments"
+msgid "关键字参数"
 msgstr ""
 
 #: of poco.pocofw.Poco.__call__:18
@@ -447,6 +461,20 @@ msgid ""
 "action lies outside the screen"
 msgstr ""
 
+#: of poco.pocofw.Poco.use_render_resolution:1
+msgid "Whether to use render resolution"
+msgstr ""
+
+#: of poco.pocofw.Poco.use_render_resolution:3
+msgid "True or false"
+msgstr ""
+
+#: of poco.pocofw.Poco.use_render_resolution:4
+msgid ""
+"render resolution in portrait mode, offset_x, offset_y, offset_width, "
+"offset_height, (0, 10, 1080, 1820)"
+msgstr ""
+
 #: of poco.pocofw.Poco.wait_for_all:1
 msgid ""
 "Wait until all of given UI proxies show up before timeout. All UI proxies"
@@ -520,5 +548,46 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Example::"
+#~ msgstr ""
+
+#~ msgid "poco\\.pocofw module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.acceleration.PocoAccelerationMixin`"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "- ``action_interval``: time interval to "
+#~ "wait for the action (such as touch"
+#~ " or swipe) completion performed   on "
+#~ "device and for the UI to become"
+#~ " still (stable). Default value is "
+#~ "0.8s. - ``poll_interval``: the minimum "
+#~ "time needed between each poll events "
+#~ "(such as waiting for UI element to"
+#~ "   appear on the screen). Polling is"
+#~ " done periodically. - "
+#~ "``pre_action_wait_for_appearance``: time interval to"
+#~ " wait before the action (such as "
+#~ "click or swipe) is   performed. If "
+#~ "the target UI element does not "
+#~ "appear on the screen after this "
+#~ "time interval, the   "
+#~ ":py:class:`PocoNoSuchNodeException "
+#~ "<poco.exceptions.PocoNoSuchNodeException>` is raised "
+#~ "- ``touch_down_duration``: Touch down step "
+#~ "duration of the click operation last "
+#~ "for. If this argument is   provided, "
+#~ "this value will set to "
+#~ "``self.agent.input`` module. Note that not "
+#~ "all implementation of poco   support "
+#~ "this parameter. If not support, you "
+#~ "may see a warning."
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
+
+#~ msgid "Keyword Arguments"
 #~ msgstr ""
 

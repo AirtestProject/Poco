@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-12 20:19+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.freezeui.hierarchy.rst:2
-msgid "poco\\.freezeui\\.hierarchy module"
+msgid "poco.freezeui.hierarchy module"
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIDumper:1
-msgid "Bases: :class:`poco.sdk.AbstractDumper.AbstractDumper`"
+msgid "基类：:class:`poco.sdk.AbstractDumper.AbstractDumper`"
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIDumper:1
@@ -35,6 +35,12 @@ msgid ""
 "target app, but to perform like a ordinary dumper."
 msgstr ""
 
+#: of poco.freezeui.hierarchy.FrozenUIDumper.dumpHierarchy:1
+msgid ""
+"Returns: :obj:`dict`: json serializable dict holding the whole hierarchy "
+"data"
+msgstr ""
+
 #: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot:1
 msgid ""
 "Dump a hierarchy immediately from target runtime and store into a Node "
@@ -42,6 +48,7 @@ msgid ""
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot
+#: poco.freezeui.hierarchy.FrozenUIHierarchy.dump
 msgid "返回"
 msgstr ""
 
@@ -58,6 +65,7 @@ msgid "data."
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIDumper.getRoot
+#: poco.freezeui.hierarchy.FrozenUIHierarchy.dump
 msgid "返回类型"
 msgstr ""
 
@@ -66,7 +74,7 @@ msgid ":py:class:`inherit from AbstractNode <Node>`"
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIHierarchy:1
-msgid "Bases: :class:`poco.sdk.interfaces.hierarchy.HierarchyInterface`"
+msgid "基类：:class:`poco.sdk.interfaces.hierarchy.HierarchyInterface`"
 msgstr ""
 
 #: of poco.freezeui.hierarchy.FrozenUIHierarchy:1
@@ -90,6 +98,22 @@ msgid ""
 "out of date."
 msgstr ""
 
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.dump:1
+msgid ""
+"Get the UI hierarchy with its origin structure and attributes, then store"
+" the structure and attributes  into a json serializable dictionary."
+msgstr ""
+
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.dump:4
+msgid ""
+"dict representing the hierarchy structure. Structure specification refers"
+" to              :py:class:`IDumper <poco.sdk.AbstractDumper.IDumper>`."
+msgstr ""
+
+#: of poco.freezeui.hierarchy.FrozenUIHierarchy.dump:5
+msgid ":obj:`dict`"
+msgstr ""
+
 #: of poco.freezeui.hierarchy.FrozenUIHierarchy.getAttr:1
 msgid "get node attribute"
 msgstr ""
@@ -101,4 +125,13 @@ msgstr ""
 #: of poco.freezeui.hierarchy.FrozenUIHierarchy.setAttr:1
 msgid "set node attribute"
 msgstr ""
+
+#~ msgid "poco\\.freezeui\\.hierarchy module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.sdk.AbstractDumper.AbstractDumper`"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.sdk.interfaces.hierarchy.HierarchyInterface`"
+#~ msgstr ""
 

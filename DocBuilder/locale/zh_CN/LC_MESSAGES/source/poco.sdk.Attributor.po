@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.sdk.Attributor.rst:2
-msgid "poco\\.sdk\\.Attributor module"
+msgid "poco.sdk.Attributor module"
 msgstr ""
 
 #: of poco.sdk.Attributor.Attributor:1
-msgid "Bases: :class:`object`"
+msgid "基类：:class:`object`"
 msgstr ""
 
 #: of poco.sdk.Attributor.Attributor:1
@@ -42,4 +42,10 @@ msgstr ""
 #: of poco.sdk.Attributor.Attributor:6
 msgid "Do not call these methods explicitly in the test codes."
 msgstr ""
+
+#~ msgid "poco\\.sdk\\.Attributor module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`object`"
+#~ msgstr ""
 

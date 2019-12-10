@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:29+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.windows.sdk.WindowsUINode.rst:2
-msgid "poco\\.drivers\\.windows\\.sdk\\.WindowsUINode module"
+msgid "poco.drivers.windows.sdk.WindowsUINode module"
 msgstr ""
 
 #~ msgid "Bases: :class:`poco.sdk.AbstractNode.AbstractNode`"
@@ -226,5 +226,8 @@ msgstr ""
 #~ ":py:meth:`setAttr "
 #~ "<poco.sdk.interfaces.hierarchy.HierarchyInterface.setAttr>` in"
 #~ " ``poco.sdk.interfaces.hierarchy``"
+#~ msgstr ""
+
+#~ msgid "poco\\.drivers\\.windows\\.sdk\\.WindowsUINode module"
 #~ msgstr ""
 

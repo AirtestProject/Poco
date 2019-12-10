@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:29+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.sdk.exceptions.rst:2
-msgid "poco\\.sdk\\.exceptions module"
+msgid "poco.sdk.exceptions module"
 msgstr ""
 
 #: of poco.sdk.exceptions:1
@@ -33,7 +33,7 @@ msgstr ""
 #: poco.sdk.exceptions.NodeHasBeenRemovedException:1
 #: poco.sdk.exceptions.NonuniqueSurfaceException:1
 #: poco.sdk.exceptions.UnableToSetAttributeException:1
-msgid "Bases: :class:`exceptions.Exception`"
+msgid "基类：:class:`Exception`"
 msgstr ""
 
 #: of poco.sdk.exceptions.NoSuchTargetException:1
@@ -84,5 +84,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Raised when the device is invalid"
+#~ msgstr ""
+
+#~ msgid "poco\\.sdk\\.exceptions module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`exceptions.Exception`"
 #~ msgstr ""
 

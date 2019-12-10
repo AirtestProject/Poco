@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 10:29+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.proxy.rst:2
-msgid "poco\\.proxy module"
+msgid "poco.proxy module"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy:1
-msgid "Bases: :class:`object`"
+msgid "基类：:class:`object`"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy:1
@@ -102,8 +102,8 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.get_name poco.proxy.UIObjectProxy.get_position
 #: poco.proxy.UIObjectProxy.get_size poco.proxy.UIObjectProxy.get_text
 #: poco.proxy.UIObjectProxy.long_click poco.proxy.UIObjectProxy.offspring
-#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.start_gesture
-#: poco.proxy.UIObjectProxy.wait
+#: poco.proxy.UIObjectProxy.parent poco.proxy.UIObjectProxy.sibling
+#: poco.proxy.UIObjectProxy.start_gesture poco.proxy.UIObjectProxy.wait
 msgid "返回"
 msgstr ""
 
@@ -117,15 +117,15 @@ msgstr ""
 #: poco.proxy.UIObjectProxy.get_bounds poco.proxy.UIObjectProxy.get_name
 #: poco.proxy.UIObjectProxy.get_position poco.proxy.UIObjectProxy.get_size
 #: poco.proxy.UIObjectProxy.get_text poco.proxy.UIObjectProxy.offspring
-#: poco.proxy.UIObjectProxy.sibling poco.proxy.UIObjectProxy.start_gesture
-#: poco.proxy.UIObjectProxy.wait
+#: poco.proxy.UIObjectProxy.parent poco.proxy.UIObjectProxy.sibling
+#: poco.proxy.UIObjectProxy.start_gesture poco.proxy.UIObjectProxy.wait
 msgid "返回类型"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.__getitem__:16 poco.proxy.UIObjectProxy.child:9
 #: poco.proxy.UIObjectProxy.children:5 poco.proxy.UIObjectProxy.focus:8
-#: poco.proxy.UIObjectProxy.offspring:9 poco.proxy.UIObjectProxy.sibling:9
-#: poco.proxy.UIObjectProxy.wait:6
+#: poco.proxy.UIObjectProxy.offspring:9 poco.proxy.UIObjectProxy.parent:8
+#: poco.proxy.UIObjectProxy.sibling:9 poco.proxy.UIObjectProxy.wait:6
 msgid ":py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`"
 msgstr ""
 
@@ -257,7 +257,7 @@ msgid ""
 "<poco.sdk.AbstractNode.AbstractNode.getAttr>`."
 msgstr ""
 
-#: of poco.proxy.UIObjectProxy.child:1
+#: of poco.proxy.UIObjectProxy.child:1 poco.proxy.UIObjectProxy.parent:1
 msgid ""
 "Select the direct child(ren) from the UI element(s) given by the query "
 "expression, see ``QueryCondition`` for more details about the selectors."
@@ -496,6 +496,16 @@ msgid ""
 " details about selectors."
 msgstr ""
 
+#: of poco.proxy.UIObjectProxy.parent:4
+msgid "Experimental method, may not be available for all drivers."
+msgstr ""
+
+#: of poco.proxy.UIObjectProxy.parent:6
+msgid ""
+"a new UI proxy object representing the direct parent of the first UI "
+"element."
+msgstr ""
+
 #: of poco.proxy.UIObjectProxy.pinch:1
 msgid ""
 "Squeezing or expanding 2 fingers on this UI with given motion range and "
@@ -594,7 +604,7 @@ msgid ""
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.start_gesture:6
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
 #: of poco.proxy.UIObjectProxy.start_gesture:18
@@ -711,5 +721,14 @@ msgstr ""
 #~ "None if the UI element does not"
 #~ " have the text element, otherwise the"
 #~ " utf-8 encoded text value"
+#~ msgstr ""
+
+#~ msgid "poco\\.proxy module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`object`"
+#~ msgstr ""
+
+#~ msgid "Examples"
 #~ msgstr ""
 

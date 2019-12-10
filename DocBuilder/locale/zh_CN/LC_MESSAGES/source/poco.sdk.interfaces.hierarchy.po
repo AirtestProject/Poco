@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 21:02+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.sdk.interfaces.hierarchy.rst:2
-msgid "poco\\.sdk\\.interfaces\\.hierarchy module"
+msgid "poco.sdk.interfaces.hierarchy module"
 msgstr ""
 
 #: of poco.sdk.interfaces.hierarchy.HierarchyInterface:1
-msgid "Bases: :class:`object`"
+msgid "基类：:class:`object`"
 msgstr ""
 
 #: of poco.sdk.interfaces.hierarchy.HierarchyInterface:1
@@ -154,5 +154,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Parameters"
+#~ msgstr ""
+
+#~ msgid "poco\\.sdk\\.interfaces\\.hierarchy module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`object`"
 #~ msgstr ""
 

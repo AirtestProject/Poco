@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-23 15:24+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,116 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.utils.hrpc.hierarchy.rst:2
-msgid "poco\\.utils\\.hrpc\\.hierarchy module"
+msgid "poco.utils.hrpc.hierarchy module"
 msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy:1
+msgid "基类：:class:`poco.sdk.interfaces.hierarchy.HierarchyInterface`"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.dump:1
+msgid ""
+"Get the UI hierarchy with its origin structure and attributes, then store"
+" the structure and attributes  into a json serializable dictionary."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.dump
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select
+msgid "返回"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.dump:4
+msgid ""
+"dict representing the hierarchy structure. Structure specification refers"
+" to              :py:class:`IDumper <poco.sdk.AbstractDumper.IDumper>`."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.dump
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select
+msgid "返回类型"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.dump:5
+msgid ":obj:`dict`"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.getAttr:1
+msgid "Get attribute of UI element."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.getAttr
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr
+msgid "参数"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.getAttr:3
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:3
+msgid ""
+"UI element or list of UI elements, if there is a list of UI elements "
+"provided, then only the             first UI element will be used"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.getAttr:4
+#: poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:4
+msgid "attribute name"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select:1
+msgid ""
+"Select UI element(s) matching the given query expression and return the "
+"list of selected UI element(s)"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select:3
+msgid ""
+"query expression,  for the structure specification refer to "
+":py:class:`Selector <poco.sdk.Selector>`."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select:6
+msgid ""
+"whether or not to select multiple elements,  if False, the method "
+"terminates             immediately once the node is found, otherwise the "
+"method travers through all nodes and then terminates"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select:9
+msgid "list of UI elements corresponding to the given query expression"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.select:10
+msgid ":obj:`list`"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:1
+msgid "Set attribute of UI element."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:6
+msgid "new value to be set."
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr
+msgid "raises"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:8
+msgid ":exc:`UnableToSetAttributeException` -- raised when："
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:10
+msgid "fails to set attributes on given UI element"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:11
+msgid "the  engine does not support mutating attributes"
+msgstr ""
+
+#: of poco.utils.hrpc.hierarchy.RemotePocoHierarchy.setAttr:12
+msgid "developer does not allow to change the attribute value by implementation"
+msgstr ""
+
+#~ msgid "poco\\.utils\\.hrpc\\.hierarchy module"
+#~ msgstr ""
 

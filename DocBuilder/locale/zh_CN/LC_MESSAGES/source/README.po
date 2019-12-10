@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-28 11:05+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,11 +226,8 @@ msgstr ""
 #: ../../source/README.rst:153
 msgid ""
 "for other engines, refer to `Poco drivers`_ for more details. If poco "
-"drivers does not support your engine, please"
-msgstr ""
-
-#: ../../source/README.rst:154
-msgid "refer to `Integration Guide`_."
+"drivers does not support your engine, please refer to `Integration "
+"Guide`_."
 msgstr ""
 
 #: ../../source/README.rst:158
@@ -649,4 +646,14 @@ msgstr ""
 #~ "at the same time, please refer to"
 #~ " `Poco drivers`_."
 #~ msgstr "如果你PC/mac上同时连接了多个设备，请见 `Poco drivers`_ 这一章节"
+
+#~ msgid ""
+#~ "for other engines, refer to `Poco "
+#~ "drivers`_ for more details. If poco "
+#~ "drivers does not support your engine,"
+#~ " please"
+#~ msgstr ""
+
+#~ msgid "refer to `Integration Guide`_."
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 19:31+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,8 @@ msgid ""
 "Add ``Unity3D/PocoManager.cs`` as script component on any ``GameObject``,"
 " generally on main camera."
 msgstr ""
-"场景中任意 ``GameObject`` 上 Add Component ``Unity3D/PocoManager.cs`` ，一般 ``GameObject`` 选root或者主camera."
+"场景中任意 ``GameObject`` 上 Add Component ``Unity3D/PocoManager.cs`` ，一般 "
+"``GameObject`` 选root或者主camera."
 
 #: ../../source/doc/integration.rst:19
 msgid "Cocos2dx-lua"
@@ -113,8 +114,9 @@ msgid ""
 "Check the adb logcat (for Android) whether successfully integrated. (It "
 "is highly recommended to use Android Studio.) If you can see the "
 "following \"LUA-print\", you poco-sdk is successfully integrated."
-msgstr "(对于Android平台)最好检查一下adb logcat的输出(建议使用Android Studio里的logcat)，选择你的应用看下是否有如下输出，"
-"如果有则表示接入成功。"
+msgstr ""
+"(对于Android平台)最好检查一下adb logcat的输出(建议使用Android "
+"Studio里的logcat)，选择你的应用看下是否有如下输出，如果有则表示接入成功。"
 
 #: ../../source/doc/integration.rst:47
 msgid ""
@@ -122,8 +124,8 @@ msgid ""
 " problems, feel free to `open an issue here`_. **Title format: [cocos2dx-"
 "lua sdk integration] xxx**"
 msgstr ""
-"整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an issue here`_"
-"。标题格式: **[cocos2dx-lua sdk 集成]xxx**"
+"整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an issue here`_。标题格式: "
+"**[cocos2dx-lua sdk 集成]xxx**"
 
 #: ../../source/doc/integration.rst:51
 msgid "Cocos2dx-js (beta)"
@@ -142,7 +144,7 @@ msgstr ""
 msgid "cocos2d-x 3.13.1 is tested and passed."
 msgstr "cocos2d-x 3.13.1 已经测试通过"
 
-#: ../../source/doc/integration.rst:58
+#: ../../source/doc/integration.rst:58 ../../source/doc/integration.rst:157
 msgid "Clone sdk source code from `poco-sdk repo`_."
 msgstr "从 `poco-sdk repo`_ clone或下载源码。"
 
@@ -198,11 +200,11 @@ msgid ""
 "following order."
 msgstr "编辑你的 ``project.json``, 按下列顺序将sdk文件名添加到 ``jsList`` 中."
 
-#: ../../source/doc/integration.rst:134
+#: ../../source/doc/integration.rst:134 ../../source/doc/integration.rst:168
 msgid "Recompile your cocos project"
 msgstr "重新编译你的项目"
 
-#: ../../source/doc/integration.rst:135
+#: ../../source/doc/integration.rst:135 ../../source/doc/integration.rst:169
 msgid ""
 "``require('Poco')``  in your game's first initialized script to start "
 "PocoSDK, and do not destroy it during game's lifetime."
@@ -214,29 +216,83 @@ msgid ""
 " [cocos2dx-js sdk integration] xxx**"
 msgstr "如果出现任何问题，请 `open an issue here`_. 。 标题格式：[cocos2dx-js sdk 集成] xxx"
 
-#: ../../source/doc/integration.rst:149
+#: ../../source/doc/integration.rst:151
+msgid "Cocos-Creator"
+msgstr ""
+
+#: ../../source/doc/integration.rst:153
+msgid "PocoSDK supports Cocos Creator 2.2.1 or higher."
+msgstr ""
+
+#: ../../source/doc/integration.rst:155
+#, fuzzy
+msgid "Cocos Creator 2.2.1 is tested and passed."
+msgstr "cocos2d-x 3.13.1 已经测试通过"
+
+#: ../../source/doc/integration.rst:158
+#, fuzzy
+msgid ""
+"Copy the ``cocos-creator/Poco`` folder to your cocos project javascript "
+"folder."
+msgstr "拷贝 ``cocos2dx-js/Poco`` 文件夹到你的cocos2dx-js项目脚本目录，任意路径都可以。"
+
+#: ../../source/doc/integration.rst:159
+msgid ""
+"As sdk requires WebSocketServer, we should enable WebSocketServer module "
+"and js bindings in native code."
+msgstr ""
+
+#: ../../source/doc/integration.rst:161
+msgid ""
+"The WebSocketServer is part of cocos2dx framework but not include by "
+"default thus we should include it manually by following steps."
+msgstr ""
+
+#: ../../source/doc/integration.rst:164
+msgid "Go to the engine directory."
+msgstr ""
+
+#: ../../source/doc/integration.rst:165
+msgid ""
+"Edit the ``ccConfig.h`` file. The path is like  "
+"your/path/to/CocosCreator_2.2.1/resources/cocos2d-x/cocos/base/ccConfig.h"
+msgstr ""
+
+#: ../../source/doc/integration.rst:166
+msgid ""
+"Edit line 62. Change ``#define USE_WEBSOCKET_SERVER 0`` to ``#define "
+"USE_WEBSOCKET_SERVER 1``"
+msgstr ""
+
+#: ../../source/doc/integration.rst:194
+msgid ""
+"Currently only supports Android and Windows platform, and Poco can only "
+"be used after packaging. Not available in preview mode."
+msgstr ""
+
+#: ../../source/doc/integration.rst:197
 msgid "Unreal"
 msgstr ""
 
-#: ../../source/doc/integration.rst:151
+#: ../../source/doc/integration.rst:199
 msgid "(Coming soon.)"
 msgstr "(即将支持)"
 
-#: ../../source/doc/integration.rst:154
+#: ../../source/doc/integration.rst:202
 msgid "Android Native App"
 msgstr "Android原生应用 (Native App)"
 
-#: ../../source/doc/integration.rst:156
+#: ../../source/doc/integration.rst:204
 msgid ""
 "Nothing to do about integration. Just start writing tests and be happy. "
 "See `poco for Android Native App`_ section for more details."
 msgstr "什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
 
-#: ../../source/doc/integration.rst:160
+#: ../../source/doc/integration.rst:208
 msgid "Netease Internal Engines"
 msgstr "网易自研引擎 (Netease Internal Engines)"
 
-#: ../../source/doc/integration.rst:162
+#: ../../source/doc/integration.rst:210
 msgid ""
 "Just config the module preload at `Hunter`_. Please append following "
 "script to the end of hunter ``__init__`` instruction. Require safaia "
@@ -247,23 +303,23 @@ msgstr ""
 "在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片段。 要求safaia版本大于1.2.0. "
 "有疑问请联系 ``lxn3032@corp.netease.com``."
 
-#: ../../source/doc/integration.rst:166
+#: ../../source/doc/integration.rst:214
 msgid "for NeoX"
 msgstr ""
 
-#: ../../source/doc/integration.rst:184
+#: ../../source/doc/integration.rst:232
 msgid "for Messiah"
 msgstr ""
 
-#: ../../source/doc/integration.rst:202
+#: ../../source/doc/integration.rst:250
 msgid "for cocos2dx-* and others: please contact ``lxn3032@corp.netease.com``."
 msgstr ""
 
-#: ../../source/doc/integration.rst:205
+#: ../../source/doc/integration.rst:253
 msgid "Other Engines"
 msgstr "其他引擎 (Other Engines)"
 
-#: ../../source/doc/integration.rst:207
+#: ../../source/doc/integration.rst:255
 msgid ""
 "See `implementation guide <implementation_guide.html>`_. This guide helps"
 " you implement and integrate PocoSDK with your game step by step."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 11:31+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.windows.rst:2
-msgid "poco\\.drivers\\.windows package"
+msgid "poco.drivers.windows package"
 msgstr ""
 
 #: ../../source/poco.drivers.windows.rst:9
@@ -28,4 +28,7 @@ msgstr ""
 #: ../../source/poco.drivers.windows.rst:16
 msgid "Submodules"
 msgstr ""
+
+#~ msgid "poco\\.drivers\\.windows package"
+#~ msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 11:39+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.drivers.unity3d.unity3d_poco.rst:2
-msgid "poco\\.drivers\\.unity3d\\.unity3d\\_poco module"
+msgid "poco.drivers.unity3d.unity3d\\_poco module"
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
-msgid "Bases: :class:`poco.drivers.std.StdPoco`"
+msgid "基类：:class:`poco.drivers.std.StdPoco`"
 msgstr ""
 
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:1
@@ -46,25 +46,21 @@ msgstr ""
 #: of poco.drivers.unity3d.unity3d_poco.UnityPoco:7
 msgid ""
 "whether connect to a default device if no devices selected manually. "
-"default to ``True``."
-msgstr ""
-
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:10
-msgid ""
+"default to ``True``. device (:py:obj:`Device`): "
 ":py:obj:`airtest.core.device.Device` instance provided by ``airtest``. "
 "leave the parameter default and the default device will be chosen. more "
 "details refer to ``airtest doc``"
 msgstr ""
 
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:13
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:12
 msgid "see :py:class:`poco.pocofw.Poco`"
 msgstr ""
 
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:16
-msgid "Examples"
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:15
+msgid "实际案例"
 msgstr ""
 
-#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:17
+#: of poco.drivers.unity3d.unity3d_poco.UnityPoco:16
 msgid ""
 "If your game is running on Android, you could initialize poco instance by"
 " using following snippet::"
@@ -80,5 +76,28 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Bases: :class:`poco.pocofw.Poco`"
+#~ msgstr ""
+
+#~ msgid "poco\\.drivers\\.unity3d\\.unity3d\\_poco module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.drivers.std.StdPoco`"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "whether connect to a default device "
+#~ "if no devices selected manually. default"
+#~ " to ``True``."
+#~ msgstr ""
+
+#~ msgid ""
+#~ ":py:obj:`airtest.core.device.Device` instance provided "
+#~ "by ``airtest``. leave the parameter "
+#~ "default and the default device will "
+#~ "be chosen. more details refer to "
+#~ "``airtest doc``"
+#~ msgstr ""
+
+#~ msgid "Examples"
 #~ msgstr ""
 

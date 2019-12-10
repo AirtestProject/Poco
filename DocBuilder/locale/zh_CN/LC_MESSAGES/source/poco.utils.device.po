@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 11:31+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,13 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.utils.device.rst:2
-msgid "poco\\.utils\\.device module"
+msgid "poco.utils.device module"
 msgstr ""
+
+#: of poco.utils.device.VirtualDevice:1
+msgid "基类：:class:`airtest.core.device.Device`"
+msgstr ""
+
+#~ msgid "poco\\.utils\\.device module"
+#~ msgstr ""
 

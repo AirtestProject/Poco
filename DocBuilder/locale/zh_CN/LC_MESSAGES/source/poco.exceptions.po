@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 15:46+0800\n"
+"POT-Creation-Date: 2019-12-10 14:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: ../../source/poco.exceptions.rst:2
-msgid "poco\\.exceptions module"
+msgid "poco.exceptions module"
 msgstr ""
 
 #: of poco.exceptions.InvalidOperationException:1
 #: poco.exceptions.PocoNoSuchNodeException:1
 #: poco.exceptions.PocoTargetRemovedException:1
 #: poco.exceptions.PocoTargetTimeout:1
-msgid "Bases: :class:`poco.exceptions.PocoException`"
+msgid "基类：:class:`poco.exceptions.PocoException`"
 msgstr ""
 
 #: of poco.exceptions.InvalidOperationException:1
@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 
 #: of poco.exceptions.PocoException:1
-msgid "Bases: :class:`exceptions.Exception`"
+msgid "基类：:class:`Exception`"
 msgstr ""
 
 #: of poco.exceptions.PocoException:1
@@ -62,7 +62,7 @@ msgid ""
 msgstr ""
 
 #: of poco.exceptions.PocoTargetRemovedException:9
-msgid "Examples"
+msgid "实际案例"
 msgstr ""
 
 #: of poco.exceptions.PocoTargetTimeout:1
@@ -71,4 +71,16 @@ msgid ""
 "fulfilled, e.g. waiting for the specific UI element but it has not "
 "appeared on the screen."
 msgstr ""
+
+#~ msgid "poco\\.exceptions module"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`poco.exceptions.PocoException`"
+#~ msgstr ""
+
+#~ msgid "Bases: :class:`exceptions.Exception`"
+#~ msgstr ""
+
+#~ msgid "Examples"
+#~ msgstr ""
 
