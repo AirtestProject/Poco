@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the poco package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: poco \n"
+"Project-Id-Version: poco\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-10 14:16+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2019-12-10 14:46+0800\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: ../../source/doc/integration.rst:3
 msgid "PocoSDK Integration Guide"
@@ -23,9 +25,9 @@ msgstr "如何嵌入PocoSDK(Integration Guide)"
 
 #: ../../source/doc/integration.rst:5
 msgid ""
-"PocoSDK implementations for most popular game engines are already "
-"provided in `poco-sdk repo`_. You can easily integrate PocoSDK in your "
-"game following the corresponding instruction."
+"PocoSDK implementations for most popular game engines are already provided "
+"in `poco-sdk repo`_. You can easily integrate PocoSDK in your game following "
+"the corresponding instruction."
 msgstr "主流引擎直接将我们的sdk嵌入到游戏中即可，sdk总仓库 `poco-sdk repo`_ "
 
 #: ../../source/doc/integration.rst:7
@@ -42,9 +44,9 @@ msgid ""
 "your game is not supported yet, please refer to `implementation guide "
 "<implementation_guide.html>`_."
 msgstr ""
-"PocoSDK 支持Unity3D "
-"4以上版本，支持NGUI和UGUI，SDK目前只有c#版。如果你的Unity3D游戏使用了其他GUI框架，请参考 `implementation "
-"guide <implementation_guide.html>`_ 。接入步骤如下："
+"PocoSDK 支持Unity3D 4以上版本，支持NGUI和UGUI，SDK目前只有c#版。如果你的"
+"Unity3D游戏使用了其他GUI框架，请参考 `implementation guide "
+"<implementation_guide.html>`_ 。接入步骤如下："
 
 #: ../../source/doc/integration.rst:13
 msgid "Clone source code from `poco-sdk repo`_."
@@ -56,16 +58,16 @@ msgstr "拷贝 ``Unity3D`` 文件夹到你的Unity3D项目脚本目录，任意�
 
 #: ../../source/doc/integration.rst:15
 msgid ""
-"If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . "
-"If you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` ."
+"If you are using ``ngui``, just remove the sub folder ``Unity3D/ugui`` . If "
+"you are using ``ugui``, just remove the sub folder ``Unity3D/ngui`` ."
 msgstr ""
-"使用 ``NGUI`` 的话就把 ``Unity3D/ugui`` 目录删除。使用 ``UGUI`` 的话就把 ``Unity3D/ngui`` "
-"目录删除。"
+"使用 ``NGUI`` 的话就把 ``Unity3D/ugui`` 目录删除。使用 ``UGUI`` 的话就把 "
+"``Unity3D/ngui`` 目录删除。"
 
 #: ../../source/doc/integration.rst:16
 msgid ""
-"Add ``Unity3D/PocoManager.cs`` as script component on any ``GameObject``,"
-" generally on main camera."
+"Add ``Unity3D/PocoManager.cs`` as script component on any ``GameObject``, "
+"generally on main camera."
 msgstr ""
 "场景中任意 ``GameObject`` 上 Add Component ``Unity3D/PocoManager.cs`` ，一般 "
 "``GameObject`` 选root或者主camera."
@@ -84,48 +86,48 @@ msgstr "从 `poco-sdk repo`_ clone或下载源码。"
 
 #: ../../source/doc/integration.rst:24
 msgid ""
-"Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You "
-"can rename the folder if you wish."
-msgstr "将 ``cocos2dx-lua/poco`` 文件夹复制到项目脚本文件夹中。你可以重命名该文件夹"
+"Copy the ``cocos2dx-lua/poco`` folder to your project script folder. You can "
+"rename the folder if you wish."
+msgstr ""
+"将 ``cocos2dx-lua/poco`` 文件夹复制到项目脚本文件夹中。你可以重命名该文件夹"
 
 #: ../../source/doc/integration.rst:25
 msgid ""
-"Initialize poco-sdk by copying following code to your game initialization"
-" script."
+"Initialize poco-sdk by copying following code to your game initialization "
+"script."
 msgstr "将以下代码复制到您的游戏初始化脚本中，来初始化poco-sdk。"
 
 #: ../../source/doc/integration.rst:34
 msgid ""
-"Your cocos2dx-lua project should at least enable ``socket`` or "
-"``socket.core`` module, as poco requires this module to setup a tcp "
-"server at runtime."
+"Your cocos2dx-lua project should at least enable ``socket`` or ``socket."
+"core`` module, as poco requires this module to setup a tcp server at runtime."
 msgstr ""
-"您的cocos2dx-lua项目至少应该启用 ``socket`` 或 ``socket.core`` "
-"模块。poco要求这个模块在运行时设置一个tcp服务器。"
+"您的cocos2dx-lua项目至少应该启用 ``socket`` 或 ``socket.core`` 模块。poco要求"
+"这个模块在运行时设置一个tcp服务器。"
 
 #: ../../source/doc/integration.rst:39
 msgid ""
-"If your cocos2dx-lua project does not have ``mime`` module, it still "
-"works but a little slow."
+"If your cocos2dx-lua project does not have ``mime`` module, it still works "
+"but a little slow."
 msgstr "如果cocos2dx-lua项目没有 ``mime`` 模块，它仍然可以工作，但是有点慢。"
 
 #: ../../source/doc/integration.rst:42
 msgid ""
-"Check the adb logcat (for Android) whether successfully integrated. (It "
-"is highly recommended to use Android Studio.) If you can see the "
-"following \"LUA-print\", you poco-sdk is successfully integrated."
+"Check the adb logcat (for Android) whether successfully integrated. (It is "
+"highly recommended to use Android Studio.) If you can see the following "
+"\"LUA-print\", you poco-sdk is successfully integrated."
 msgstr ""
-"(对于Android平台)最好检查一下adb logcat的输出(建议使用Android "
-"Studio里的logcat)，选择你的应用看下是否有如下输出，如果有则表示接入成功。"
+"(对于Android平台)最好检查一下adb logcat的输出(建议使用Android Studio里的"
+"logcat)，选择你的应用看下是否有如下输出，如果有则表示接入成功。"
 
 #: ../../source/doc/integration.rst:47
 msgid ""
-"After integration, you can start to `play with poco`_. Or if you have any"
-" problems, feel free to `open an issue here`_. **Title format: [cocos2dx-"
-"lua sdk integration] xxx**"
+"After integration, you can start to `play with poco`_. Or if you have any "
+"problems, feel free to `open an issue here`_. **Title format: [cocos2dx-lua "
+"sdk integration] xxx**"
 msgstr ""
-"整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an issue here`_。标题格式: "
-"**[cocos2dx-lua sdk 集成]xxx**"
+"整合之后，你可以开始 `play with poco`_。如果你有任何问题，欢迎 `open an "
+"issue here`_。标题格式: **[cocos2dx-lua sdk 集成]xxx**"
 
 #: ../../source/doc/integration.rst:51
 msgid "Cocos2dx-js (beta)"
@@ -133,12 +135,12 @@ msgstr ""
 
 #: ../../source/doc/integration.rst:53
 msgid ""
-"PocoSDK supports 3.1 <= Cocos2dx version <= 3.13.1 (theoretically). To "
-"make sure compatibility across every javascript engines, the javascript "
-"sdk is written in ES5."
+"PocoSDK supports 3.1 <= Cocos2dx version <= 3.13.1 (theoretically). To make "
+"sure compatibility across every javascript engines, the javascript sdk is "
+"written in ES5."
 msgstr ""
-"PocoSDK 支持 3.1 <= Cocos2dx version <= 3.13.1 (理论上). "
-"为了确保每个JavaScript引擎的兼容性, 这个JavaScript sdk是用ES5编写的"
+"PocoSDK 支持 3.1 <= Cocos2dx version <= 3.13.1 (理论上). 为了确保每个"
+"JavaScript引擎的兼容性, 这个JavaScript sdk是用ES5编写的"
 
 #: ../../source/doc/integration.rst:56
 msgid "cocos2d-x 3.13.1 is tested and passed."
@@ -150,49 +152,47 @@ msgstr "从 `poco-sdk repo`_ clone或下载源码。"
 
 #: ../../source/doc/integration.rst:59
 msgid ""
-"Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript "
-"folder."
-msgstr "拷贝 ``cocos2dx-js/Poco`` 文件夹到你的cocos2dx-js项目脚本目录，任意路径都可以。"
+"Copy the ``cocos2dx-js/Poco`` folder to your cocos project javascript folder."
+msgstr ""
+"拷贝 ``cocos2dx-js/Poco`` 文件夹到你的cocos2dx-js项目脚本目录，任意路径都可"
+"以。"
 
 #: ../../source/doc/integration.rst:60
 msgid ""
-"As sdk requires WebSocketServer, we should build WebSocketServer module "
-"and js bindings in native code. The WebSocketServer is part of cocos2dx "
-"framework but not include by default thus we build it manually by "
-"following steps. See also `WebSocketServer reference`_. You'd better "
-"backup your origin ``websockets`` folder before copying. The js binding "
-"for WebSocketServer requires libwebsockets version == 1.6. There may be "
-"some incompatibility issues in cocos2d-x itself if your cocos2d-x engine "
-"is not using libwebsockets version == 1.6."
+"As sdk requires WebSocketServer, we should build WebSocketServer module and "
+"js bindings in native code. The WebSocketServer is part of cocos2dx "
+"framework but not include by default thus we build it manually by following "
+"steps. See also `WebSocketServer reference`_. You'd better backup your "
+"origin ``websockets`` folder before copying. The js binding for "
+"WebSocketServer requires libwebsockets version == 1.6. There may be some "
+"incompatibility issues in cocos2d-x itself if your cocos2d-x engine is not "
+"using libwebsockets version == 1.6."
 msgstr ""
-"由于sdk需要WebSocketServer，我们应该使用本机代码构建WebSocketServer模块和js绑定。 "
-"WebSocketServer是cocos2dx框架的一部分，但默认不包含，因此我们通过以下步骤手动构建它。 "
-"另请参阅WebSocketServer参考。 "
-"您最好在复制之前备份您的原始websockets文件夹。WebSocketServer的js绑定需要libwebsockets版本== "
-"1.6。如果您的cocos2d-x引擎没有使用libwebsockets version == "
-"1.6，那么在cocos2d-x本身中可能会有一些不兼容问题。"
+"由于sdk需要WebSocketServer，我们应该使用本机代码构建WebSocketServer模块和js绑"
+"定。 WebSocketServer是cocos2dx框架的一部分，但默认不包含，因此我们通过以下步"
+"骤手动构建它。 另请参阅WebSocketServer参考。 您最好在复制之前备份您的原始"
+"websockets文件夹。WebSocketServer的js绑定需要libwebsockets版本== 1.6。如果您"
+"的cocos2d-x引擎没有使用libwebsockets version == 1.6，那么在cocos2d-x本身中可"
+"能会有一些不兼容问题。"
 
 #: ../../source/doc/integration.rst:71
 msgid ""
-"Edit ``<your-cocos-project>/frameworks/runtime-"
-"src/Classes/AppDelegate.cpp``. Add following 2 lines at proper position "
-"respectively."
+"Edit ``<your-cocos-project>/frameworks/runtime-src/Classes/AppDelegate."
+"cpp``. Add following 2 lines at proper position respectively."
 msgstr ""
-"编辑 ``<your-cocos-project>/frameworks/runtime-"
-"src/Classes/AppDelegate.cpp``. 在适当的位置添加下面2行代码"
+"编辑 ``<your-cocos-project>/frameworks/runtime-src/Classes/AppDelegate."
+"cpp``. 在适当的位置添加下面2行代码"
 
 #: ../../source/doc/integration.rst:85
 msgid ""
-"Edit ``<your-cocos-project>/frameworks/runtime-"
-"src/proj.android/jni/Android.mk``. Add following boxed line at proper "
-"position in your own makefile. If you are using AndroidStudio project, "
-"edit ``proj.android-studio/jni/Android.mk`` and ensure the path is "
-"correct."
+"Edit ``<your-cocos-project>/frameworks/runtime-src/proj.android/jni/Android."
+"mk``. Add following boxed line at proper position in your own makefile. If "
+"you are using AndroidStudio project, edit ``proj.android-studio/jni/Android."
+"mk`` and ensure the path is correct."
 msgstr ""
-"编辑 ``<your-cocos-project>/frameworks/runtime-"
-"src/proj.android/jni/Android.mk``. 在你自己的makefile适当位置添加下方的内容, "
-"如果你正在使用AndroidStudio项目, 请编辑 ``proj.android-studio/jni/Android.mk`` "
-"并保证路径正确"
+"编辑 ``<your-cocos-project>/frameworks/runtime-src/proj.android/jni/Android."
+"mk``. 在你自己的makefile适当位置添加下方的内容, 如果你正在使用AndroidStudio项"
+"目, 请编辑 ``proj.android-studio/jni/Android.mk`` 并保证路径正确"
 
 #: ../../source/doc/integration.rst:113
 msgid ""
@@ -208,13 +208,17 @@ msgstr "重新编译你的项目"
 msgid ""
 "``require('Poco')``  in your game's first initialized script to start "
 "PocoSDK, and do not destroy it during game's lifetime."
-msgstr "``require('Poco')`` 会在游戏的第一个初始化脚本中启动PocoSDK，并且不要在游戏的生命周期中销毁它"
+msgstr ""
+"``require('Poco')`` 会在游戏的第一个初始化脚本中启动PocoSDK，并且不要在游戏的"
+"生命周期中销毁它"
 
 #: ../../source/doc/integration.rst:146
 msgid ""
-"**If anything goes wrong, please** `open an issue here`_. **Title format:"
-" [cocos2dx-js sdk integration] xxx**"
-msgstr "如果出现任何问题，请 `open an issue here`_. 。 标题格式：[cocos2dx-js sdk 集成] xxx"
+"**If anything goes wrong, please** `open an issue here`_. **Title format: "
+"[cocos2dx-js sdk integration] xxx**"
+msgstr ""
+"如果出现任何问题，请 `open an issue here`_. 。 标题格式：[cocos2dx-js sdk 集"
+"成] xxx"
 
 #: ../../source/doc/integration.rst:151
 msgid "Cocos-Creator"
@@ -222,53 +226,61 @@ msgstr ""
 
 #: ../../source/doc/integration.rst:153
 msgid "PocoSDK supports Cocos Creator 2.2.1 or higher."
-msgstr ""
+msgstr "PocoSDK 支持 Cocos Creator 2.2.1 或更高的版本"
 
 #: ../../source/doc/integration.rst:155
-#, fuzzy
 msgid "Cocos Creator 2.2.1 is tested and passed."
-msgstr "cocos2d-x 3.13.1 已经测试通过"
+msgstr "已经在Cocos Creator 2.2.1上测试过。"
 
 #: ../../source/doc/integration.rst:158
-#, fuzzy
 msgid ""
 "Copy the ``cocos-creator/Poco`` folder to your cocos project javascript "
 "folder."
-msgstr "拷贝 ``cocos2dx-js/Poco`` 文件夹到你的cocos2dx-js项目脚本目录，任意路径都可以。"
+msgstr ""
+"复制 ``cocos-creator/Poco`` 文件夹到你的cocos-creator项目脚本目录，任意路径都"
+"可以。"
 
 #: ../../source/doc/integration.rst:159
 msgid ""
-"As sdk requires WebSocketServer, we should enable WebSocketServer module "
-"and js bindings in native code."
-msgstr ""
+"As sdk requires WebSocketServer, we should enable WebSocketServer module and "
+"js bindings in native code."
+msgstr "因为SDK需要WebSocketServer的支持，我们需要开启WebSocketServer模块。"
 
 #: ../../source/doc/integration.rst:161
 msgid ""
-"The WebSocketServer is part of cocos2dx framework but not include by "
-"default thus we should include it manually by following steps."
+"The WebSocketServer is part of cocos2dx framework but not include by default "
+"thus we should include it manually by following steps."
 msgstr ""
+"WebSocketServer已经被cocos creator支持，但是默认没有开启，我们只需要按照如下"
+"步骤去开启他。"
 
 #: ../../source/doc/integration.rst:164
 msgid "Go to the engine directory."
-msgstr ""
+msgstr "去到引擎目录"
 
 #: ../../source/doc/integration.rst:165
 msgid ""
-"Edit the ``ccConfig.h`` file. The path is like  "
-"your/path/to/CocosCreator_2.2.1/resources/cocos2d-x/cocos/base/ccConfig.h"
+"Edit the ``ccConfig.h`` file. The path is like  your/path/to/"
+"CocosCreator_2.2.1/resources/cocos2d-x/cocos/base/ccConfig.h"
 msgstr ""
+"编辑 ``ccConfig.h`` 文件。文件路径在  your/path/to/CocosCreator_2.2.1/"
+"resources/cocos2d-x/cocos/base/ccConfig.h"
 
 #: ../../source/doc/integration.rst:166
 msgid ""
 "Edit line 62. Change ``#define USE_WEBSOCKET_SERVER 0`` to ``#define "
 "USE_WEBSOCKET_SERVER 1``"
 msgstr ""
+"编辑第62行。把 ``#define USE_WEBSOCKET_SERVER 0`` 改为 ``#define "
+"USE_WEBSOCKET_SERVER 1``"
 
 #: ../../source/doc/integration.rst:194
 msgid ""
-"Currently only supports Android and Windows platform, and Poco can only "
-"be used after packaging. Not available in preview mode."
+"Currently only supports Android and Windows platform, and Poco can only be "
+"used after packaging. Not available in preview mode."
 msgstr ""
+"当前的版本只支持Android和Windows平台。并且Poco只能在打包后使用，不支持预览模"
+"式中使用。"
 
 #: ../../source/doc/integration.rst:197
 msgid "Unreal"
@@ -284,9 +296,10 @@ msgstr "Android原生应用 (Native App)"
 
 #: ../../source/doc/integration.rst:204
 msgid ""
-"Nothing to do about integration. Just start writing tests and be happy. "
-"See `poco for Android Native App`_ section for more details."
-msgstr "什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
+"Nothing to do about integration. Just start writing tests and be happy. See "
+"`poco for Android Native App`_ section for more details."
+msgstr ""
+"什么都不需要做，直接使用即可。使用方法见 `poco for Android Native App`_ "
 
 #: ../../source/doc/integration.rst:208
 msgid "Netease Internal Engines"
@@ -294,14 +307,13 @@ msgstr "网易自研引擎 (Netease Internal Engines)"
 
 #: ../../source/doc/integration.rst:210
 msgid ""
-"Just config the module preload at `Hunter`_. Please append following "
-"script to the end of hunter ``__init__`` instruction. Require safaia "
-"version >= 1.2.0. Use ``print Safaia.__version__`` to get current "
-"version. Any questions about hunter feel free to contact "
-"``lxn3032@corp.netease.com``."
+"Just config the module preload at `Hunter`_. Please append following script "
+"to the end of hunter ``__init__`` instruction. Require safaia version >= "
+"1.2.0. Use ``print Safaia.__version__`` to get current version. Any "
+"questions about hunter feel free to contact ``lxn3032@corp.netease.com``."
 msgstr ""
-"在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片段。 要求safaia版本大于1.2.0. "
-"有疑问请联系 ``lxn3032@corp.netease.com``."
+"在 `Hunter`_ 里直接配置即可，在 ``__init__`` 指令最后面根据引擎加入下面代码片"
+"段。 要求safaia版本大于1.2.0. 有疑问请联系 ``lxn3032@corp.netease.com``."
 
 #: ../../source/doc/integration.rst:214
 msgid "for NeoX"
@@ -321,7 +333,6 @@ msgstr "其他引擎 (Other Engines)"
 
 #: ../../source/doc/integration.rst:255
 msgid ""
-"See `implementation guide <implementation_guide.html>`_. This guide helps"
-" you implement and integrate PocoSDK with your game step by step."
+"See `implementation guide <implementation_guide.html>`_. This guide helps "
+"you implement and integrate PocoSDK with your game step by step."
 msgstr "请见 `implementation guide <implementation_guide.html>`_ 。"
-
