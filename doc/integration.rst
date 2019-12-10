@@ -110,7 +110,7 @@ cocos2d-x 3.13.1 is tested and passed.
 
     ...
 
-7. Edit your ``project.json``. Append sdk filenames to ``jsList`` in the following order.
+6. Edit your ``project.json``. Append sdk filenames to ``jsList`` in the following order.
 
 .. code-block:: javascript
 
@@ -131,7 +131,7 @@ cocos2d-x 3.13.1 is tested and passed.
         ]
     }
 
-8. Recompile your cocos project
+7. Recompile your cocos project
 #. ``require('Poco')``  in your game's first initialized script to start PocoSDK, and do not destroy it during game's
    lifetime.
 
@@ -144,6 +144,54 @@ cocos2d-x 3.13.1 is tested and passed.
     window.poco = poco
 
 **If anything goes wrong, please** `open an issue here`_. **Title format: [cocos2dx-js sdk integration] xxx**
+
+
+
+Cocos-Creator
+------------------
+
+PocoSDK supports Cocos Creator 2.2.1 or higher.
+
+Cocos Creator 2.2.1 is tested and passed.
+
+1. Clone sdk source code from `poco-sdk repo`_. 
+#. Copy the ``cocos-creator/Poco`` folder to your cocos project javascript folder.
+#. As sdk requires WebSocketServer, we should enable WebSocketServer module and js bindings in native code.
+
+   The WebSocketServer is part of cocos2dx framework but not include by default thus we should include it manually by following
+   steps. 
+
+   1. Go to the engine directory. 
+   2. Edit the ``ccConfig.h`` file. The path is like  your/path/to/CocosCreator_2.2.1/resources/cocos2d-x/cocos/base/ccConfig.h
+   3. Edit line 62. Change ``#define USE_WEBSOCKET_SERVER 0`` to ``#define USE_WEBSOCKET_SERVER 1``
+
+#. Recompile your cocos project
+#. ``require('Poco')``  in your game's first initialized script to start PocoSDK, and do not destroy it during game's
+   lifetime.
+
+.. code-block:: javascript
+
+    cc.Class({
+        extends: cc.Component,
+
+        .....
+
+        //remember to put code in onLoad function
+        onLoad: function () {
+           .....
+
+            var poco = require("./Poco") // use your own relative path
+            window.poco = new poco(); // not destroy
+            cc.log(window.poco);
+
+        },
+
+       .....
+    });
+
+.. note::
+
+    Currently only supports Android and Windows platform, and Poco can only be used after packaging. Not available in preview mode.
 
 Unreal
 ------
