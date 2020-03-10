@@ -438,7 +438,7 @@ class UIObjectProxy(object):
             direction (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`):  coordinates (x, y) in NormalizedCoordinate system, it
              can be also specified as  'up', 'down', 'left', 'right'. Swipe 'up' is equivalent to [0, -0.1], swipe
              'down' is equivalent to [0, 0.1], swipe 'left' is equivalent to [-0.1, 0] and swipe 'right' is equivalent
-             to [0, 0.1]
+             to [0.1, 0]
             focus (2-:obj:`tuple`/2-:obj:`list`/:obj:`str`): see :py:meth:`.click() <poco.proxy.UIObjectProxy.click>`
              for more details
             duration (:py:obj:`float`): time interval in which the action is performed
