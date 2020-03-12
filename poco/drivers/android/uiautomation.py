@@ -183,6 +183,10 @@ class AndroidUiautomationPoco(Poco):
         else:
             p0 = 10080
             p1 = 10081
+            
+        # export forward port
+        self.p0 = p0
+        self.p1 = p1
 
         # start
         if self._is_running('com.github.uiautomator'):
