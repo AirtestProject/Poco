@@ -1,5 +1,6 @@
 # coding=utf-8
 
+from poco.utils.airtest import AirtestInput
 from poco.sdk.interfaces.hierarchy import HierarchyInterface
 from poco.sdk.interfaces.input import InputInterface
 from poco.sdk.interfaces.screen import ScreenInterface
@@ -67,6 +68,8 @@ class PocoAgent(object):
 
     def on_bind_driver(self, driver):
         self._driver = driver
+        if isinstance(self.input, AirtestInput):
+            self.input.add_preaction_cb(driver)
 
     @property
     def driver(self):

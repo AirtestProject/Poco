@@ -94,11 +94,6 @@ class AndroidPocoAgent(PocoAgent):
             inputer = remote_poco.inputer
         super(AndroidPocoAgent, self).__init__(hierarchy, inputer, ScreenWrapper(remote_poco.screen), None)
 
-    def on_bind_driver(self, driver):
-        super(AndroidPocoAgent, self).on_bind_driver(driver)
-        if isinstance(self.input, AirtestInput):
-            self.input.add_preaction_cb(driver)
-
 
 class KeepRunningInstrumentationThread(threading.Thread):
     """Keep pocoservice running"""
