@@ -99,7 +99,7 @@ class AirtestInput(InputInterface):
             raise NotImplementedError
 
         # Android minitouch only, currently
-        from airtest.core.android.base_touch import DownEvent, MoveEvent, UpEvent, SleepEvent
+        from airtest.core.android.touch_methods.base_touch import DownEvent, MoveEvent, UpEvent, SleepEvent
 
         mes = []
         for e in events:
