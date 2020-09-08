@@ -11,6 +11,7 @@ import atexit
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.android.ime import YosemiteIme
+from airtest.core.error import AdbShellError
 
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
@@ -27,6 +28,7 @@ __all__ = ['AndroidUiautomationPoco', 'AndroidUiautomationHelper']
 this_dir = os.path.dirname(os.path.realpath(__file__))
 PocoServicePackage = 'com.netease.open.pocoservice'
 PocoServicePackageTest = 'com.netease.open.pocoservice.test'
+UiAutomatorPackage = 'com.github.uiautomator'
 
 
 class AndroidRpcClient(RpcClient):
@@ -192,9 +194,8 @@ class AndroidUiautomationPoco(Poco):
 
         ready = self._start_instrument(p0, force_restart=force_restart)
         if not ready:
-            # 启动失败则需要卸载再重启，instrument的奇怪之处
-            uninstall(self.adb_client, PocoServicePackage)
-            self._install_service()
+            # 之前启动失败就卸载重装，现在改为尝试kill进程或卸载uiautomator
+            self._kill_uiautomator()
             ready = self._start_instrument(p0)
 
             if current_top_activity_package is not None:
@@ -219,12 +220,24 @@ class AndroidUiautomationPoco(Poco):
         return updated
 
     def _is_running(self, package_name):
-        processes = self.adb_client.shell(['ps']).splitlines()
+        """
+        use ps |grep to check whether the process exists
+
+        :param package_name: package name(e.g., com.github.uiautomator)
+                            or regular expression(e.g., poco\|airtest\|uiautomator\|airbase)
+        :return: pid or None
+        """
+        cmd = r' |echo $(grep -E {package_name})'.format(package_name=package_name)
+        if self.device.sdk_version > 25:
+            cmd = r'ps -A' + cmd
+        else:
+            cmd = r'ps' + cmd
+        processes = self.adb_client.shell(cmd).splitlines()
         for ps in processes:
-            ps = ps.strip()
-            if ps.endswith(package_name):
-                return True
-        return False
+            if ps:
+                ps = ps.split()
+                return ps[1]
+        return None
 
     def _start_instrument(self, port_to_ping, force_restart=False):
         if not force_restart:
@@ -283,6 +296,25 @@ class AndroidUiautomationPoco(Poco):
                 print("still waiting for uiautomation ready.")
                 continue
         return ready
+
+    def _kill_uiautomator(self):
+        """
+        poco-service无法与其他instrument启动的apk同时存在，因此在启动前，需要杀掉一些可能的进程：
+        比如 io.appium.uiautomator2.server, com.github.uiautomator, com.netease.open.pocoservice等
+
+        :return:
+        """
+        pid = self._is_running("uiautomator")
+        if pid:
+            warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
+                          .format(self.__class__.__name__))
+            self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+
+            try:
+                self.adb_client.shell(['kill', pid])
+            except AdbShellError:
+                # 没有root权限
+                uninstall(self.adb_client, UiAutomatorPackage)
 
     def on_pre_action(self, action, ui, args):
         if self.screenshot_each_action:
