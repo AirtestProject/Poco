@@ -18,7 +18,7 @@ class UE4Poco(StdPoco):
         if ue4_editor:
             dev = UE4EditorWindow()
         else:
-            dev = device
+            dev = device or current_device()
 
         if dev is None and connect_default_device and not current_device():
             dev = connect_device("Android:///")

@@ -68,9 +68,9 @@ class UnityPoco(StdPoco):
             options['action_interval'] = 0.5
 
         if unity_editor:
-           dev = UnityEditorWindow()
+            dev = UnityEditorWindow()
         else:
-            dev = device
+            dev = device or current_device()
 
         if dev is None and connect_default_device and not current_device():
             # currently only connect to Android as default
