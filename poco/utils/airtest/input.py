@@ -98,7 +98,7 @@ class AirtestInput(InputInterface):
         if device_platform() != 'Android':
             raise NotImplementedError
 
-        # Android minitouch only, currently
+        # Android minitouch/maxtouch only, currently
         from airtest.core.android.touch_methods.base_touch import DownEvent, MoveEvent, UpEvent, SleepEvent
 
         mes = []
@@ -124,4 +124,4 @@ class AirtestInput(InputInterface):
                 raise ValueError('Unknown event type {}'.format(repr(t)))
             mes.append(me)
 
-        current_device().minitouch.perform(mes, interval=0)
+        current_device().touch_proxy.perform(mes, interval=0)
