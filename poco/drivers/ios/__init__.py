@@ -43,9 +43,12 @@ class iosDumper(FrozenUIDumper):
         if self.ori is not nowOri:
             self.ori = nowOri
             self.size = self.client.window_size()
-
+        switch_flag = False
+        if self.ori in ["LANDSCAPE", "LANDSCAPE_RIGHT"]:
+            if self.client.home_interface():
+                switch_flag = True
         jsonObj = self.client.driver.source(format='json')
-        data = ios_dump_json(jsonObj, self.size)
+        data = ios_dump_json(jsonObj, self.size, switch_flag=switch_flag)
         return data
 
     def dumpHierarchy_xml(self):
@@ -61,12 +64,12 @@ def ios_dump_xml(xml, screen_size):
     return data
 
 
-def ios_dump_json(jsonObj, screen_size):
-    data = json_parser(jsonObj, screen_size)
+def ios_dump_json(jsonObj, screen_size, switch_flag=False):
+    data = json_parser(jsonObj, screen_size, switch_flag=switch_flag)
     return data
 
 
-def json_parser(node, screen_size):
+def json_parser(node, screen_size, switch_flag=False):
     screen_w, screen_h = screen_size
 
     if "name" in node and node["name"]:
@@ -86,17 +89,31 @@ def json_parser(node, screen_size):
         for key in [x for x in node.keys() if x not in ['frame', 'children']]:
             data["payload"][key] = node[key]
 
-    w = float(node["frame"]["width"])
-    h = float(node["frame"]["height"])
-    x = float(node["frame"]["x"])
-    y = float(node["frame"]["y"])
+    w = float(node["rect"]["width"])
+    h = float(node["rect"]["height"])
+    x = float(node["rect"]["x"])
+    y = float(node["rect"]["y"])
+
+    if switch_flag:
+        temp = x
+        x = y
+        y = screen_h - temp
+        temp = h
+        h = w
+        w = temp
+        data["payload"]["pos"] = [
+            (x + w / 2) / screen_w,
+            (y - h / 2) / screen_h
+        ]
+    else:
+        data["payload"]["pos"] = [
+            (x + w / 2) / screen_w,
+            (y + h / 2) / screen_h
+        ]
 
     data["payload"]["name"] = name
     data["payload"]["size"] = [w / screen_w, h / screen_h]
-    data["payload"]["pos"] = [
-        (x + w / 2) / screen_w,
-        (y + h / 2) / screen_h
-    ]
+    
     data["payload"]["zOrders"] = {
         "local": 0,
         "global": 0,
@@ -117,7 +134,7 @@ def json_parser(node, screen_size):
     children_data = []
     if "children" in node:
         for child in node["children"]:
-            child_data = json_parser(child, screen_size)
+            child_data = json_parser(child, screen_size=screen_size, switch_flag=switch_flag)
             children_data.append(child_data)
 
     if children_data:
