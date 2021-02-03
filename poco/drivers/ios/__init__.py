@@ -6,6 +6,10 @@ from poco.freezeui.hierarchy import FrozenUIDumper, FrozenUIHierarchy
 from poco.utils.airtest import AirtestInput, AirtestScreen
 from poco.utils import six
 from airtest.core.api import device as current_device
+try:
+    from airtest.core.ios.rotation import XYTransformer
+except AttributeError:
+    raise RuntimeError('The iOS module of Airtest>1.1.7 only supports python3, if you want to use, please upgrade to python3 first.')
 from pprint import pprint
 
 
@@ -37,18 +41,17 @@ class iosDumper(FrozenUIDumper):
         self.size = client.window_size()
         self.ori = client.orientation
 
-    def dumpHierarchy(self):
+    def dumpHierarchy(self, onlyVisibleNode=True):
         # should get updated window_size
         nowOri = self.client.orientation
         if self.ori is not nowOri:
             self.ori = nowOri
             self.size = self.client.window_size()
         switch_flag = False
-        if self.ori in ["LANDSCAPE", "LANDSCAPE_RIGHT"]:
-            if self.client.home_interface():
-                switch_flag = True
+        if self.client.is_pad and self.ori != 'PORTRAIT' and self.client.home_interface():
+            switch_flag = True
         jsonObj = self.client.driver.source(format='json')
-        data = ios_dump_json(jsonObj, self.size, switch_flag=switch_flag)
+        data = json_parser(jsonObj, self.size, switch_flag=switch_flag, ori=self.ori)
         return data
 
     def dumpHierarchy_xml(self):
@@ -64,12 +67,17 @@ def ios_dump_xml(xml, screen_size):
     return data
 
 
-def ios_dump_json(jsonObj, screen_size, switch_flag=False):
-    data = json_parser(jsonObj, screen_size, switch_flag=switch_flag)
-    return data
+def json_parser(node, screen_size, switch_flag=False, ori='PORTRAIT'):
+    """
 
-
-def json_parser(node, screen_size, switch_flag=False):
+    :param node: node info {}
+    :param screen_size: ios.windows_size()
+    :param switch_flag: If it is an ipad , when on the desktop, all coordinates must be converted to vertical screen coordinates
+    :param ori: wda ['PORTRAIT', 'LANDSCAPE',
+                    'UIA_DEVICE_ORIENTATION_LANDSCAPERIGHT',
+                    'UIA_DEVICE_ORIENTATION_PORTRAIT_UPSIDEDOWN']
+    :return:
+    """
     screen_w, screen_h = screen_size
 
     if "name" in node and node["name"]:
@@ -94,15 +102,26 @@ def json_parser(node, screen_size, switch_flag=False):
     x = float(node["rect"]["x"])
     y = float(node["rect"]["y"])
 
-    if switch_flag:
-        temp = x
-        x = y
-        y = screen_h - temp
-        temp = h
-        h = w
-        w = temp
+    x, y = XYTransformer.ori_2_up(
+        (x, y),
+        (screen_w, screen_h),
+        ori
+    )
+    if switch_flag and ori == 'LANDSCAPE':
+        w, h = h, w
         data["payload"]["pos"] = [
             (x + w / 2) / screen_w,
+            (y - h / 2) / screen_h
+        ]
+    elif switch_flag and ori == 'UIA_DEVICE_ORIENTATION_LANDSCAPERIGHT':
+        w, h = h, w
+        data["payload"]["pos"] = [
+            (x - w / 2) / screen_w,
+            (y + h / 2) / screen_h
+        ]
+    elif switch_flag and ori == 'UIA_DEVICE_ORIENTATION_PORTRAIT_UPSIDEDOWN':
+        data["payload"]["pos"] = [
+            (x - w / 2) / screen_w,
             (y - h / 2) / screen_h
         ]
     else:
@@ -134,7 +153,7 @@ def json_parser(node, screen_size, switch_flag=False):
     children_data = []
     if "children" in node:
         for child in node["children"]:
-            child_data = json_parser(child, screen_size=screen_size, switch_flag=switch_flag)
+            child_data = json_parser(child, screen_size=screen_size, switch_flag=switch_flag, ori=ori)
             children_data.append(child_data)
 
     if children_data:
