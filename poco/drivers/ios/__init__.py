@@ -38,20 +38,17 @@ class iosDumper(FrozenUIDumper):
     def __init__(self, client):
         super(iosDumper, self).__init__()
         self.client = client
-        self.size = client.window_size()
-        self.ori = client.orientation
+        self.size = client.display_info["window_width"], client.display_info["window_height"]
 
     def dumpHierarchy(self, onlyVisibleNode=True):
-        # should get updated window_size
-        nowOri = self.client.orientation
-        if self.ori is not nowOri:
-            self.ori = nowOri
-            self.size = self.client.window_size()
         switch_flag = False
-        if self.client.is_pad and self.ori != 'PORTRAIT' and self.client.home_interface():
+        if self.client.is_pad and self.client.orientation != 'PORTRAIT' and self.client.home_interface():
             switch_flag = True
         jsonObj = self.client.driver.source(format='json')
-        data = json_parser(jsonObj, self.size, switch_flag=switch_flag, ori=self.ori)
+        w, h = self.size
+        if self.client.orientation in ['LANDSCAPE', 'UIA_DEVICE_ORIENTATION_LANDSCAPERIGHT']:
+            w, h = h, w
+        data = json_parser(jsonObj, (w, h), switch_flag=switch_flag, ori=self.client.orientation)
         return data
 
     def dumpHierarchy_xml(self):
