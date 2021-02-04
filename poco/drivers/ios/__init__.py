@@ -102,11 +102,12 @@ def json_parser(node, screen_size, switch_flag=False, ori='PORTRAIT'):
     x = float(node["rect"]["x"])
     y = float(node["rect"]["y"])
 
-    x, y = XYTransformer.ori_2_up(
-        (x, y),
-        (screen_w, screen_h),
-        ori
-    )
+    if switch_flag:
+        x, y = XYTransformer.ori_2_up(
+            (x, y),
+            (screen_w, screen_h),
+            ori
+        )
     if switch_flag and ori == 'LANDSCAPE':
         w, h = h, w
         data["payload"]["pos"] = [
@@ -142,8 +143,7 @@ def json_parser(node, screen_size, switch_flag=False, ori='PORTRAIT'):
     # TODO: w = 0 and h = 0 situation need to solve with
     # roll back set as True when finding a visible child
     if "visible" not in node:
-        if (x > 0 or x + w > 0) and (x < screen_w) \
-        and (y > 0 or y + h > 0) and (y < screen_h):
+        if (x >= 0 or x + w > 0) and (x < screen_w) and (y >= 0 or y + h > 0) and (y < screen_h):
             data["payload"]["visible"] = True
         elif w == 0 or h == 0:
             data["payload"]["visible"] = True
@@ -158,6 +158,11 @@ def json_parser(node, screen_size, switch_flag=False, ori='PORTRAIT'):
 
     if children_data:
         data["children"] = children_data
+        if data["payload"]["visible"] is False:
+            for child_node in children_data:
+                if child_node["payload"].get("visible") is True:
+                    data["payload"]["visible"] = True
+                    break
 
     return data
 
