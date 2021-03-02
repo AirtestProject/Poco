@@ -167,7 +167,6 @@ class AndroidUiautomationPoco(Poco):
 
         # install ime
         self.ime = YosemiteIme(self.adb_client)
-        self.ime.start()
 
         # install
         self._instrument_proc = None
