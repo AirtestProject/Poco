@@ -289,6 +289,7 @@ class AndroidUiautomationPoco(Poco):
                     print('[pocoservice.apk] stderr: {}'.format(stderr))
                 time.sleep(1)
                 print("still waiting for uiautomation ready.")
+                self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
                 continue
         return ready
 
