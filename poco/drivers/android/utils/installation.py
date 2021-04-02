@@ -23,8 +23,10 @@ def install(adb_client, localpath, force_reinstall=False):
     except (RuntimeError, ValueError):
         apk_version = 0
     installed_version = _get_installed_apk_version(package_name)
-    print('installed version is {}, installer version is {}. force_reinstall={}'.format(installed_version, apk_version, force_reinstall))
     if installed_version is None or apk_version > installed_version or force_reinstall:
+        print('installed version is {}, installer version is {}. force_reinstall={}'.format(installed_version,
+                                                                                            apk_version,
+                                                                                            force_reinstall))
         if installed_version is not None:
             force_reinstall = True
         if hasattr(adb_client, 'install_app'):
