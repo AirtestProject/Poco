@@ -26,6 +26,7 @@ class StdPocoAgent(PocoAgent):
     def __init__(self, addr=DEFAULT_ADDR, use_airtest_input=True):
         self.conn = TcpClient(addr)
         self.c = RpcClient(self.conn)
+        self.c.DEBUG = False
         self.c.connect()
 
         hierarchy = FrozenUIHierarchy(StdDumper(self.c), StdAttributor(self.c))
@@ -91,8 +92,7 @@ class StdPoco(Poco):
             # ip = device.get_ip_address()
             # use iproxy first
             ip = 'localhost'
-            local_port, _ = self.device.instruct_helper.setup_proxy(port)
-            port = local_port
+            port, _ = self.device.instruct_helper.setup_proxy(port)
         else:
             try:
                 ip = self.device.get_ip_address()
