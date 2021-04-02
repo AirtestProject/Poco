@@ -108,11 +108,13 @@ class AirtestInput(InputInterface):
                 contact = e[2]
                 x, y = e[1]
                 pos = self.get_target_pos(x, y)
+                pos = current_device()._touch_point_by_orientation(pos)
                 me = DownEvent(pos, contact)
             elif t == 'm':
                 contact = e[2]
                 x, y = e[1]
                 pos = self.get_target_pos(x, y)
+                pos = current_device()._touch_point_by_orientation(pos)
                 me = MoveEvent(pos, contact)
             elif t == 'u':
                 contact = e[1]
