@@ -8,17 +8,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 14:16+0800\n"
+"POT-Creation-Date: 2021-07-19 19:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../../source/poco.drivers.unity3d.test.tutorial.case.rst:2
 msgid "poco.drivers.unity3d.test.tutorial.case module"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.case.TutorialCase:1
+msgid "基类：:class:`pocounit.case.PocoTestCase`"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.case.TutorialCase.setUpClass:1
+msgid "用例预处理，加载自定义插件等"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.case.TutorialCase.setUpClass
+#: poco.drivers.unity3d.test.tutorial.case.TutorialCase.tearDownClass
+msgid "返回"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.case.TutorialCase.tearDownClass:1
+msgid "用例后处理"
 msgstr ""
 
 #~ msgid "poco\\.drivers\\.unity3d\\.test\\.tutorial\\.case module"

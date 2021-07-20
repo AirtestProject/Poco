@@ -8,17 +8,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: poco \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-10 14:16+0800\n"
+"POT-Creation-Date: 2021-07-19 19:29+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../../source/poco.drivers.unity3d.test.tutorial.scroll2.rst:2
 msgid "poco.drivers.unity3d.test.tutorial.scroll2 module"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.scroll2.Scroll2Tutorial:1
+msgid "基类：:class:`poco.drivers.unity3d.test.tutorial.case.TutorialCase`"
+msgstr ""
+
+#: of poco.drivers.unity3d.test.tutorial.scroll2.Scroll2Tutorial.runTest:1
+msgid "testcase的正文，把要执行的测试和包括断言语句都写到这里"
 msgstr ""
 
 #~ msgid "poco\\.drivers\\.unity3d\\.test\\.tutorial\\.scroll2 module"

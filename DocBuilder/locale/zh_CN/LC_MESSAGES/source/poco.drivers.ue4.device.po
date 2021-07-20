@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) 2017, NetEase Co, Ltd.
 # This file is distributed under the same license as the poco package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: poco \n"
+"Project-Id-Version: poco 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-19 16:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,13 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: ../../source/poco.drivers.netease.internal.rst:2
-msgid "poco.drivers.netease.internal module"
+#: ../../source/poco.drivers.ue4.device.rst:2
+msgid "poco.drivers.ue4.device module"
 msgstr ""
-
-#~ msgid "poco\\.drivers\\.netease\\.internal module"
-#~ msgstr ""
-
-#~ msgid "基类：:class:`poco.pocofw.Poco`"
-#~ msgstr ""
 
