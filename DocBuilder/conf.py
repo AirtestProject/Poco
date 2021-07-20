@@ -34,7 +34,7 @@ print(sys.path)
 # compatible with readthedocs online builder and local builder
 # local: sphinx-build -b html . ../doc-auto
 # readthedocs: /bin/python -m sphinx -T -b html -d _build/doctrees
-if ('sphinx' in sys.argv or sys.argv[0].endswith('sphinx-build')) and ('html' in sys.argv or sys.argv[-1] == '_build/html'):
+if 'html' in sys.argv or sys.argv[-1] == '_build/html':
     if not os.path.exists('source'):
         os.mkdir('source')
 
