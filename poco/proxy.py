@@ -612,15 +612,15 @@ class UIObjectProxy(object):
         if focus == 'anchor':
             pos = self.attr('pos')
         elif focus == 'center':
-            x, y = self.attr('pos')
+            x, y = map(float, self.attr('pos'))
             w, h = self.get_size()
-            ap_x, ap_y = self.attr("anchorPoint")
+            ap_x, ap_y = map(float, self.attr("anchorPoint"))
             fx, fy = 0.5, 0.5
             pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
         elif type(focus) in (list, tuple):
-            x, y = self.attr('pos')
+            x, y = map(float, self.attr('pos'))
             w, h = self.get_size()
-            ap_x, ap_y = self.attr("anchorPoint")
+            ap_x, ap_y = map(float, self.attr("anchorPoint"))
             fx, fy = focus
             pos = [x + w * (fx - ap_x), y + h * (fy - ap_y)]
         else:
