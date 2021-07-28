@@ -610,7 +610,7 @@ class UIObjectProxy(object):
 
         focus = focus or self._focus or 'anchor'
         if focus == 'anchor':
-            pos = self.attr('pos')
+            pos = list(map(float, self.attr('pos')))
         elif focus == 'center':
             x, y = map(float, self.attr('pos'))
             w, h = self.get_size()
