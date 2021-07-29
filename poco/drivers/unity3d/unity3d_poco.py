@@ -78,4 +78,5 @@ class UnityPoco(StdPoco):
             dev = connect_device("Android:///")
 
         super(UnityPoco, self).__init__(addr[1], dev, **options)
-        self.vr = UnityVRSupport(self.agent.rpc)
+        # If some devices fail to initialize, the UI tree cannot be obtained
+        # self.vr = UnityVRSupport(self.agent.rpc)

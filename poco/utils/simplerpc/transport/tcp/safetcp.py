@@ -7,10 +7,7 @@ DEFAULT_SIZE = 4096
 
 
 class Client(object):
-
     """safe and exact recv & send"""
-
-
     def __init__(self, address, on_connect=None, on_close=None):
         """address is (host, port) tuple"""
         self.address = address
