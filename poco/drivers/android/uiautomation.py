@@ -210,7 +210,6 @@ class AndroidUiautomationPoco(Poco):
 
     def _install_service(self):
         updated = install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug.apk'))
-        install(self.adb_client, os.path.join(this_dir, 'lib', 'pocoservice-debug-androidTest.apk'), updated)
         return updated
 
     def _is_running(self, package_name):
@@ -259,7 +258,7 @@ class AndroidUiautomationPoco(Poco):
         instrumentation_cmd = [
                 'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
                 '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
-                '{}.test/android.support.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
+                '{}/androidx.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
         self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
 
         def cleanup_proc(proc):
