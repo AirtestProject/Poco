@@ -29,6 +29,7 @@ def install(adb_client, localpath, force_reinstall=False):
                                                                                             force_reinstall))
         if installed_version is not None:
             force_reinstall = True
+            uninstall(adb_client, package_name)
         if hasattr(adb_client, 'install_app'):
             adb_client.install_app(localpath, force_reinstall)
         else:
