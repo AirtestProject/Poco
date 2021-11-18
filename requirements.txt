@@ -1,5 +1,5 @@
 six
 requests
 airtest
-hrpc>=1.0.5
+hrpc>=1.0.9
 websocket-client==0.48.0
