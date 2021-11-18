@@ -181,11 +181,6 @@ class AndroidUiautomationPoco(Poco):
             p1 = 10081
 
         # start
-        if self._is_running('com.github.uiautomator'):
-            warnings.warn('{} should not run together with "uiautomator". "uiautomator" will be killed.'
-                          .format(self.__class__.__name__))
-            self.adb_client.shell(['am', 'force-stop', 'com.github.uiautomator'])
-
         ready = self._start_instrument(p0, force_restart=force_restart)
         if not ready:
             # 之前启动失败就卸载重装，现在改为尝试kill进程或卸载uiautomator
@@ -250,7 +245,7 @@ class AndroidUiautomationPoco(Poco):
             self._instrument_proc = None
 
         ready = False
-        self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+        # self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
 
         # 启动instrument之前，先把主类activity启动起来，不然instrumentation可能失败
         self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
