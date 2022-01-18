@@ -159,7 +159,7 @@ class Poco(PocoAccelerationMixin):
                 raise PocoTargetTimeout('all to appear', objects)
             self.sleep_for_polling_interval()
 
-    def freeze(this):
+    def freeze(this, name=None):
         """
         Snapshot current **hierarchy** and cache it into a new poco instance. This new poco instance is a copy from
         current poco instance (``self``). The hierarchy of the new poco instance is fixed and immutable. It will be
@@ -172,6 +172,9 @@ class Poco(PocoAccelerationMixin):
                 frozen_poco = poco.freeze()
                 hierarchy_dict = frozen_poco.agent.hierarchy.dump()  # will return the already cached hierarchy data
                 
+                or   #  faster in scrollview loop
+                poco = Poco(...)
+                frozen_poco = poco.freeze(name)   # name means freeze path
 
         Returns:
             :py:class:`Poco <poco.pocofw.Poco>`: new poco instance copy from current poco instance (``self``)
@@ -179,7 +182,7 @@ class Poco(PocoAccelerationMixin):
 
         class FrozenPoco(Poco):
             def __init__(self, **kwargs):
-                hierarchy_dict = this.agent.hierarchy.dump()
+                hierarchy_dict = this.agent.hierarchy.dump(name)
                 hierarchy = create_immutable_hierarchy(hierarchy_dict)
                 agent_ = PocoAgent(hierarchy, this.agent.input, this.agent.screen)
                 kwargs['action_interval'] = 0.01
