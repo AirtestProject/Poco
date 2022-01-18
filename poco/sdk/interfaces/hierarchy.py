@@ -25,7 +25,7 @@ class HierarchyInterface(object):
 
         raise NotImplementedError
 
-    def dump(self):
+    def dump(self, name):
         """
         Get the UI hierarchy with its origin structure and attributes, then store the structure and attributes  into
         a json serializable dictionary.
