@@ -11,7 +11,7 @@ import atexit
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.android.ime import YosemiteIme
-from airtest.core.error import AdbShellError
+from airtest.core.error import AdbShellError, AirtestError
 
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
@@ -161,7 +161,12 @@ class AndroidUiautomationPoco(Poco):
             self.device_ip = self.device.get_ip_address()
 
         # save current top activity (@nullable)
-        current_top_activity_package = self.device.get_top_activity_name()
+        try:
+            current_top_activity_package = self.device.get_top_activity_name()
+        except AirtestError as e:
+            # 在一些极端情况下，可能获取不到top activity的信息
+            print(e)
+            current_top_activity_package = None
         if current_top_activity_package is not None:
             current_top_activity_package = current_top_activity_package.split('/')[0]
 
