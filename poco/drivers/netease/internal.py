@@ -17,7 +17,7 @@ __author__ = 'lxn3032'
 
 class NeteasePocoAgent(PocoAgent):
     def __init__(self, hunter):
-        client = HunterRpcClient(hunter)
+        client = hunter.rpc
         client.set_timeout(25)
         remote_poco = client.remote('poco-uiautomation-framework-2')
 
