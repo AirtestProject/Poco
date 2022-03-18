@@ -42,10 +42,10 @@ class NeteasePocoAgent(PocoAgent):
 
 class NeteasePoco(Poco):
     def __init__(self, process, hunter=None, **options):
-        apitoken = open_platform.get_api_token(process)
         if hunter:
             self._hunter = hunter
         else:
+            apitoken = open_platform.get_api_token(process)
             self._hunter = AirtestHunter(apitoken, process)
         agent = NeteasePocoAgent(self._hunter)
         super(NeteasePoco, self).__init__(agent, **options)
