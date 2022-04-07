@@ -696,6 +696,8 @@ class UIObjectProxy(object):
             self.poco.sleep_for_polling_interval()
             if time.time() - start > timeout:
                 raise PocoTargetTimeout('disappearance', self)
+            # 强制重新获取节点状态，避免节点已经存在、又消失后，这里不会刷新节点信息导致exists()永远为True的bug
+            self.invalidate()
 
     @refresh_when(PocoTargetRemovedException)
     def attr(self, name):
@@ -862,10 +864,22 @@ class UIObjectProxy(object):
     def invalidate(self):
         """
         Clear the flag to indicate to re-query or re-select the UI element(s) from hierarchy.
+
+        alias is refresh()
+
+        Example:
+            >>> a = poco(text="settings")
+            >>> print(a.exists())
+            >>> a.refresh()
+            >>> print(a.exists())
         """
 
         self._evaluated = False
         self._nodes = None
+
+    # refresh is alias of invalidate
+    # use poco(xxx).refresh() to force the UI element(s) to re-query
+    refresh = invalidate
 
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:
