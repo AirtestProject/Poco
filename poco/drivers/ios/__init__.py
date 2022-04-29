@@ -41,9 +41,16 @@ class iosDumper(FrozenUIDumper):
         self.size = client.display_info["window_width"], client.display_info["window_height"]
 
     def dumpHierarchy(self, onlyVisibleNode=True):
-        switch_flag = False
-        if self.client.is_pad and self.client.orientation != 'PORTRAIT' and self.client.home_interface():
+        # 当使用了appium/WebDriverAgent时，ipad横屏且在桌面下，坐标需要按照竖屏坐标额外转换一次
+        # 判断条件如下：
+        # 当ios.using_ios_tagent有值、且为false，说明使用的是appium/WebDriverAgent
+        # airtest<=1.2.4时，没有ios.using_ios_tagent的值，说明也是用的appium/wda
+        if ((hasattr(self.client, "using_ios_tagent") and not self.client.using_ios_tagent) or
+            (not hasattr(self.client, "using_ios_tagent"))) \
+                and (self.client.is_pad and self.client.orientation != 'PORTRAIT' and self.client.home_interface()):
             switch_flag = True
+        else:
+            switch_flag = False
         jsonObj = self.client.driver.source(format='json')
         w, h = self.size
         if self.client.orientation in ['LANDSCAPE', 'UIA_DEVICE_ORIENTATION_LANDSCAPERIGHT']:

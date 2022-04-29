@@ -17,7 +17,7 @@ __author__ = 'lxn3032'
 
 class NeteasePocoAgent(PocoAgent):
     def __init__(self, hunter):
-        client = HunterRpcClient(hunter)
+        client = hunter.rpc
         client.set_timeout(25)
         remote_poco = client.remote('poco-uiautomation-framework-2')
 
@@ -42,10 +42,10 @@ class NeteasePocoAgent(PocoAgent):
 
 class NeteasePoco(Poco):
     def __init__(self, process, hunter=None, **options):
-        apitoken = open_platform.get_api_token(process)
         if hunter:
             self._hunter = hunter
         else:
+            apitoken = open_platform.get_api_token(process)
             self._hunter = AirtestHunter(apitoken, process)
         agent = NeteasePocoAgent(self._hunter)
         super(NeteasePoco, self).__init__(agent, **options)
