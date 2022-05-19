@@ -64,7 +64,7 @@ class WebSocketClient(IClient):
         print("on error", error)
         self.on_close()
 
-    def _on_ws_close(self, ws):
+    def _on_ws_close(self, ws, *args, **kwargs):
         print("on close")
         self.on_close()
 
