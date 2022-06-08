@@ -328,7 +328,7 @@ class UIObjectProxy(object):
             PocoNoSuchNodeException: raised when the UI element does not exist
         """
 
-        focus = focus or self._focus or 'anchor'
+        focus = focus or self._focus or 'center'
         pos_in_percentage = self.get_position(focus)
         self.poco.pre_action('click', self, pos_in_percentage)
         ret = self.poco.click(pos_in_percentage)
@@ -360,7 +360,7 @@ class UIObjectProxy(object):
             PocoNoSuchNodeException: raised when the UI element does not exist
         """
 
-        focus = focus or self._focus or 'anchor'
+        focus = focus or self._focus or 'center'
         pos_in_percentage = self.get_position(focus)
         self.poco.pre_action('rclick', self, pos_in_percentage)
         ret = self.poco.rclick(pos_in_percentage)
@@ -392,7 +392,7 @@ class UIObjectProxy(object):
             PocoNoSuchNodeException: raised when the UI element does not exist
         """
 
-        focus = focus or self._focus or 'anchor'
+        focus = focus or self._focus or 'center'
         pos_in_percentage = self.get_position(focus)
         self.poco.pre_action('double_click', self, pos_in_percentage)
         ret = self.poco.double_click(pos_in_percentage)
@@ -422,7 +422,7 @@ class UIObjectProxy(object):
         except ValueError:
             raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
-        pos_in_percentage = self.get_position(self._focus or 'anchor')
+        pos_in_percentage = self.get_position(self._focus or 'center')
         self.poco.pre_action('long_click', self, pos_in_percentage)
         ret = self.poco.long_click(pos_in_percentage, duration)
         self.poco.post_action('long_click', self, pos_in_percentage)
@@ -452,7 +452,7 @@ class UIObjectProxy(object):
         except ValueError:
             raise ValueError('Argument `duration` should be <float>. Got {}'.format(repr(duration)))
 
-        focus = focus or self._focus or 'anchor'
+        focus = focus or self._focus or 'center'
         dir_vec = self._direction_vector_of(direction)
         origin = self.get_position(focus)
         self.poco.pre_action('swipe', self, (origin, dir_vec))
@@ -588,7 +588,6 @@ class UIObjectProxy(object):
         Returns:
             :py:class:`UIObjectProxy <poco.proxy.UIObjectProxy>`: a new UI proxy object (copy)
         """
-
         ret = copy.copy(self)
         ret._focus = f
         return ret
@@ -607,8 +606,7 @@ class UIObjectProxy(object):
         Raises:
             TypeError: raised when unsupported focus type is specified
         """
-
-        focus = focus or self._focus or 'anchor'
+        focus = focus or self._focus or 'center'
         if focus == 'anchor':
             pos = list(map(float, self.attr('pos')))
         elif focus == 'center':
