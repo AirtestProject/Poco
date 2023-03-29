@@ -10,7 +10,7 @@ def parse_requirements(filename='requirements.txt'):
 
 setup(
     name='pocoui',
-    version='1.0.88',
+    version='1.0.89',
     keywords="poco, automation test, ui automation",
     description='Poco cross-engine UI automated test framework.',
     long_description='Poco cross-engine UI automated test framework. 2018 present by NetEase Games',
@@ -20,6 +20,6 @@ setup(
     license='Apache License 2.0',
 
     author='Netease Games',
-    author_email='lxn3032@corp.netease.com, gzliuxin@corp.netease.com',
+    author_email='rockywhisper@163.com, lxhustauto@gmail.com',
     url='https://github.com/AirtestProject/Poco',
 )
