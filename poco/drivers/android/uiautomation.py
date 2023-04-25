@@ -200,6 +200,8 @@ class AndroidUiautomationPoco(Poco):
             if not ready:
                 raise RuntimeError("unable to launch AndroidUiautomationPoco")
         if ready:
+            if hasattr(self, '_keep_running_thread') and self._keep_running_thread.is_alive():
+                self._keep_running_thread.stop()
             # 首次启动成功后，在后台线程里监控这个进程的状态，保持让它不退出
             self._keep_running_thread = KeepRunningInstrumentationThread(self, p0)
             self._keep_running_thread.start()
