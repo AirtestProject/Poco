@@ -882,7 +882,7 @@ class UIObjectProxy(object):
     def _do_query(self, multiple=True, refresh=False):
         if not self._evaluated or refresh:
             self._nodes = self.poco.agent.hierarchy.select(self.query, multiple)
-            if len(self._nodes) == 0:
+            if not self._nodes or len(self._nodes) == 0:
                 # 找不到节点时，将当前节点状态重置，强制下一次访问时重新查询一次节点信息
                 self.invalidate()
                 raise PocoNoSuchNodeException(self)

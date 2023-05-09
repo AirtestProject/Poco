@@ -505,3 +505,13 @@ class Poco(PocoAccelerationMixin):
         '''
         self._agent.input.use_render_resolution = use
         self._agent.input.render_resolution = resolution
+
+    def dump(self):
+        """
+        Dump the current UI tree of the target device. The output format depends on the agent implementation.
+
+        Returns:
+            :obj:`str`: base64 encoded UI tree data
+        """
+
+        return self.agent.hierarchy.dump()
