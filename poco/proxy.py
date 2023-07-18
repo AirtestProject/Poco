@@ -191,7 +191,7 @@ class UIObjectProxy(object):
 
     def parent(self):
         """
-        Select the direct child(ren) from the UI element(s) given by the query expression, see ``QueryCondition`` for
+        Select the direct parent from the UI element(s) given by the query expression, see ``QueryCondition`` for
         more details about the selectors.
 
         Warnings:
