@@ -257,7 +257,9 @@ class Poco(PocoAccelerationMixin):
         raise NotImplementedError
 
     def double_click(self, pos):
-        raise NotImplementedError
+        ret = self.agent.input.double_click(pos[0], pos[1])
+        self.wait_stable()
+        return ret
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """

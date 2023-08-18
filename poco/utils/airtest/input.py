@@ -3,7 +3,7 @@
 from functools import wraps
 
 from airtest.core.api import device as current_device
-from airtest.core.api import touch, swipe
+from airtest.core.api import touch, swipe,double_click
 from airtest.core.helper import device_platform, logwrap
 from poco.sdk.interfaces.input import InputInterface
 
@@ -79,6 +79,12 @@ class AirtestInput(InputInterface):
     def click(self, x, y):
         pos = self.get_target_pos(x, y)
         touch(pos, duration=self.default_touch_down_duration)
+
+    def double_click(self, x, y):
+        pos = self.get_target_pos(x, y)
+        double_click(pos)
+
+
 
     def swipe(self, x1, y1, x2, y2, duration=2.0):
         if duration <= 0:

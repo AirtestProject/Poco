@@ -23,6 +23,16 @@ class InputInterface(object):
         """
 
         raise NotImplementedError
+    def double_click(self, x, y):
+        """
+        Perform click action as simulated input on target device. Coordinates arguments are all in range of 0~1.
+
+        Args:
+            y (:obj:`float`): y-coordinate
+            x (:obj:`float`): x-coordinate
+        """
+
+        raise NotImplementedError
 
     def swipe(self, x1, y1, x2, y2, duration):
         """
