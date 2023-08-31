@@ -269,7 +269,7 @@ class UIObjectProxy(object):
                 nodes = []
         else:
             nodes = self._nodes
-        return len(nodes)
+        return len(nodes) if nodes else 0
 
     def __iter__(self):
         """
