@@ -238,7 +238,7 @@ UI hierarchy.
     from poco.drivers.unity3d import UnityPoco as Poco
 
     poco = Poco()
-    ui = poco.agent.hierarchy.dump()
+    ui = poco.dump()  # equivalent to poco.agent.hierarchy.dump()
     print(json.dumps(ui, indent=4))
 
 
