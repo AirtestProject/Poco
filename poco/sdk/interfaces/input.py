@@ -23,6 +23,7 @@ class InputInterface(object):
         """
 
         raise NotImplementedError
+
     def double_click(self, x, y):
         """
         Perform click action as simulated input on target device. Coordinates arguments are all in range of 0~1.
