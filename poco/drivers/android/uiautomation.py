@@ -178,9 +178,11 @@ class AndroidUiautomationPoco(Poco):
         self._install_service()
 
         # forward
+        self.forward_list = []
         if using_proxy:
             p0, _ = self.adb_client.setup_forward("tcp:10080")
             p1, _ = self.adb_client.setup_forward("tcp:10081")
+            self.forward_list.extend(["tcp:%s" % p0, "tcp:%s" % p1])
         else:
             p0 = 10080
             p1 = 10081
@@ -323,7 +325,13 @@ class AndroidUiautomationPoco(Poco):
         print('[pocoservice.apk] stopping PocoService')
         self._keep_running_thread.stop()
         self._keep_running_thread.join(3)
+        self.remove_forwards()
         self.adb_client.shell(['am', 'force-stop', PocoServicePackage])
+
+    def remove_forwards(self):
+        for p in self.forward_list:
+            self.adb_client.remove_forward(p)
+        self.forward_list = []
 
 
 class AndroidUiautomationHelper(object):
