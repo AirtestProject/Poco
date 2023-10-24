@@ -257,7 +257,9 @@ class Poco(PocoAccelerationMixin):
         raise NotImplementedError
 
     def double_click(self, pos):
-        raise NotImplementedError
+        ret = self.agent.input.double_click(pos[0], pos[1])
+        self.wait_stable()
+        return ret
 
     def swipe(self, p1, p2=None, direction=None, duration=2.0):
         """
@@ -505,3 +507,13 @@ class Poco(PocoAccelerationMixin):
         '''
         self._agent.input.use_render_resolution = use
         self._agent.input.render_resolution = resolution
+
+    def dump(self):
+        """
+        Dump the current UI tree of the target device. The output format depends on the agent implementation.
+
+        Returns:
+            :obj:`str`: base64 encoded UI tree data
+        """
+
+        return self.agent.hierarchy.dump()
