@@ -96,7 +96,7 @@ class StdPoco(Poco):
         else:
             try:
                 ip = self.device.get_ip_address()
-            except AttributeError:
+            except:
                 try:
                     ip = socket.gethostbyname(socket.gethostname())
                 except socket.gaierror:
