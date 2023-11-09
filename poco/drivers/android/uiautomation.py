@@ -11,7 +11,7 @@ import atexit
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.android.ime import YosemiteIme
-from airtest.core.error import AdbShellError, AirtestError
+from airtest.core.error import AdbShellError, AirtestError, NoDeviceError
 
 from hrpc.client import RpcClient
 from hrpc.transport.http import HttpTransport
@@ -149,9 +149,9 @@ class AndroidUiautomationPoco(Poco):
         self.screenshot_each_action = True
         if options.get('screenshot_each_action') is False:
             self.screenshot_each_action = False
-
-        self.device = device or current_device()
-        if not self.device:
+        try:
+            self.device = device or current_device()
+        except NoDeviceError:
             self.device = connect_device("Android:///")
 
         self.adb_client = self.device.adb
