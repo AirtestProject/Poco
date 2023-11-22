@@ -23,4 +23,4 @@ class UE4Poco(StdPoco):
         if dev is None and connect_default_device and not current_device():
             dev = connect_device("Android:///")
 
-        super(UE4Poco, self).__init__(addr[1], dev, **options)
+        super(UE4Poco, self).__init__(addr[1], dev, ip=addr[0], **options)

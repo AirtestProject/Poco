@@ -9,7 +9,6 @@ import warnings
 import threading
 import atexit
 
-from airtest.core.api import connect_device, device as current_device
 from airtest.core.android.ime import YosemiteIme
 from airtest.core.error import AdbShellError, AirtestError
 
@@ -22,6 +21,7 @@ from poco.sdk.interfaces.screen import ScreenInterface
 from poco.utils.hrpc.hierarchy import RemotePocoHierarchy
 from poco.utils.airtest.input import AirtestInput
 from poco.utils import six
+from poco.utils.device import default_device
 from poco.drivers.android.utils.installation import install, uninstall
 
 __all__ = ['AndroidUiautomationPoco', 'AndroidUiautomationHelper']
@@ -150,9 +150,7 @@ class AndroidUiautomationPoco(Poco):
         if options.get('screenshot_each_action') is False:
             self.screenshot_each_action = False
 
-        self.device = device or current_device()
-        if not self.device:
-            self.device = connect_device("Android:///")
+        self.device = device or default_device()
 
         self.adb_client = self.device.adb
         if using_proxy:

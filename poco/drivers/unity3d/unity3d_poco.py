@@ -77,6 +77,6 @@ class UnityPoco(StdPoco):
             # can apply auto detection in the future
             dev = connect_device("Android:///")
 
-        super(UnityPoco, self).__init__(addr[1], dev, **options)
+        super(UnityPoco, self).__init__(addr[1], dev, ip=addr[0], **options)
         # If some devices fail to initialize, the UI tree cannot be obtained
         # self.vr = UnityVRSupport(self.agent.rpc)
