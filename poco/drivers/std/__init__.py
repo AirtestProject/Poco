@@ -11,6 +11,7 @@ from poco.utils.airtest import AirtestInput
 from poco.utils.simplerpc.rpcclient import RpcClient
 from poco.utils.simplerpc.transport.tcp.main import TcpClient
 from poco.utils.simplerpc.utils import sync_wrapper
+from poco.utils.device import default_device
 
 from airtest.core.api import connect_device, device as current_device
 from airtest.core.helper import device_platform
@@ -70,6 +71,9 @@ class StdPoco(Poco):
             device = connect_device('Android:///')
             poco = StdPoco(10054, device)
 
+            # or use ip:port to initialize poco object
+            poco = StdPoco(port=10054, ip='xx.xx.xx.xx')
+
             # now you can play with poco
             ui = poco('...')
             ui.click()
@@ -77,31 +81,31 @@ class StdPoco(Poco):
 
     """
 
-    def __init__(self, port=DEFAULT_PORT, device=None, use_airtest_input=True, **kwargs):
-        self.device = device or current_device()
-        if not self.device:
-            self.device = connect_device("Android:///")
+    def __init__(self, port=DEFAULT_PORT, device=None, use_airtest_input=True, ip=None, **kwargs):
+        if ip is None or ip == "localhost":
+            self.device = device or default_device()
 
-        platform_name = device_platform(self.device)
-        if platform_name == 'Android':
-            # always forward for android device to avoid network unreachable
-            local_port, _ = self.device.adb.setup_forward('tcp:{}'.format(port))
-            ip = self.device.adb.host or 'localhost'
-            port = local_port
-        elif platform_name == 'IOS':
-            # ip = device.get_ip_address()
-            # use iproxy first
-            ip = 'localhost'
-            port, _ = self.device.instruct_helper.setup_proxy(port)
-        else:
-            try:
-                ip = self.device.get_ip_address()
-            except AttributeError:
-                try:
-                    ip = socket.gethostbyname(socket.gethostname())
-                except socket.gaierror:
-                    # 某些特殊情况下会出现这个error，无法正确获取本机ip地址
+            platform_name = device_platform(self.device)
+            if platform_name == 'Android':
+                # always forward for android device to avoid network unreachable
+                local_port, _ = self.device.adb.setup_forward('tcp:{}'.format(port))
+                ip = self.device.adb.host or 'localhost'
+                port = local_port
+            elif platform_name == 'IOS':
+                port, _ = self.device.setup_forward(port)
+                if self.device.is_local_device:
                     ip = 'localhost'
+                else:
+                    ip = self.device.ip
+            else:
+                try:
+                    ip = self.device.get_ip_address()
+                except AttributeError:
+                    try:
+                        ip = socket.gethostbyname(socket.gethostname())
+                    except socket.gaierror:
+                        # 某些特殊情况下会出现这个error，无法正确获取本机ip地址
+                        ip = 'localhost'
 
         agent = StdPocoAgent((ip, port), use_airtest_input)
         kwargs['reevaluate_volatile_attributes'] = True
