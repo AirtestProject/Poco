@@ -80,3 +80,6 @@ class UnityPoco(StdPoco):
         super(UnityPoco, self).__init__(addr[1], dev, ip=addr[0], **options)
         # If some devices fail to initialize, the UI tree cannot be obtained
         # self.vr = UnityVRSupport(self.agent.rpc)
+
+    def send_message(self, message):
+        self.agent.rpc.call("SendMessage", message)
