@@ -83,3 +83,13 @@ class UnityPoco(StdPoco):
 
     def send_message(self, message):
         self.agent.rpc.call("SendMessage", message)
+
+    def invoke(self, listener, **kwargs):
+        callback = self.agent.rpc.call("Invoke", listener=listener, data=kwargs)
+
+        value, error = callback.wait()
+
+        if error is not None:
+            raise Exception(error)
+
+        return value
