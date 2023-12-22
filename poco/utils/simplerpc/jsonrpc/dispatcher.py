@@ -4,9 +4,9 @@ For usage examples see :meth:`Dispatcher.add_method`
 
 """
 try:
-    from collections import MutableMapping
-except AttributeError:
-    from collections.abc import MutableMapping
+    from collections import MutableMapping  # noqa
+except ImportError:
+    from collections.abc import MutableMapping  # noqa
 
 
 class Dispatcher(MutableMapping):
