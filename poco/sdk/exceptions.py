@@ -61,7 +61,7 @@ class NoSuchComparatorException(Exception):
 
 class NonuniqueSurfaceException(Exception):
     """
-    Raised when the device selector matches mutiple devices surface
+    Raised when the device selector matches multiple devices surface
     """
 
     def __init__(self, selector):
@@ -75,6 +75,6 @@ class InvalidSurfaceException(Exception):
     """
 
     def __init__(self, target, msg="None"):
-        msg = 'Target device surface invalid ("{}") . Detial message: "{}"'.format(target, msg)
+        msg = 'Target device surface invalid ("{}") . Detail message: "{}"'.format(target, msg)
         super(InvalidSurfaceException, self).__init__(msg)
 
