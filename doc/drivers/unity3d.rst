@@ -134,4 +134,65 @@ If you are going to control multiple devices in the same test case, please follo
     ui2.swipe('up')
 
 
+Integrating and Using Poco Interface Functions in Unity
+-------------------------------------------------------
+
+This document serves as a guide for integrating and using the new ``UnityPoco.sendMessage()`` and ``UnityPoco.invoke()`` functions in your Unity project.
+These functions facilitate communication between your Unity game and Poco, allowing for simple calls with single string arguments or calls with custom arguments.
+
+Getting Started
+````````````````
+
+Before using the new interfaces, ensure that you have the latest version of the Poco SDK that includes the changelog updates mentioned. This functionality relies on the updates provided in https://github.com/AirtestProject/Poco-SDK/pull/123.
+
+Using the ``sendMessage()`` Function
+`````````````````````````````````````
+
+The ``UnityPoco.sendMessage()`` function allows you to send simple messages with a single string argument from Poco to Unity.
+
+Poco-side
+~~~~~~~~~
+
+To use the ``sendMessage()`` function on the Poco side, you just need to call it and pass the message.
+
+.. code-block:: python
+
+    poco = UnityPoco()
+    poco.sendMessage("Your message here")
+
+
+
+Using the ``invoke()`` Function
+```````````````````````````````
+
+The ``UnityPoco.invoke()`` function allows for more complex interactions with custom arguments.
+
+Poco-side
+~~~~~~~~~
+
+To use the ``invoke()`` function on the Poco side, you'll need to specify the listener and the arguments you want to pass.
+
+.. code-block:: python
+
+    poco = UnityPoco()
+    poco.invoke(listener="say_hello", name="anonymous", year=2024)
+
+Unity-side
+~~~~~~~~~~
+
+On the Unity side, set up a method that will be called when ``invoke()`` is used from Poco.
+
+1. Create a class that derives from ``PocoListenerBase``.
+2. Add a method that corresponds to the ``invoke()`` call:
+
+   .. code-block:: csharp
+
+       [PocoMethod("say_hello")]
+       public void SayHello(string name, int year)
+       {
+           Debug.Log($"Hi, {name}! The year {year} is coming soon!");
+       }
+
+3. Add a reference to the new class in the ``PocoManager`` so that it knows to listen for calls to the ``say_hello`` method.
+
 .. _airtest.core.api.connect_device: https://airtest.readthedocs.io/en/latest/all_module/airtest.core.api.html#airtest.core.api.connect_device
