@@ -150,6 +150,16 @@ Using the ``sendMessage()`` Function
 
 The ``UnityPoco.sendMessage()`` function allows you to send simple messages with a single string argument from Poco to Unity.
 
+Unity-side
+~~~~~~~~~~
+
+Implement OnPocoMessageReceived and add it to PocoManager.MessageReceived. This function will be called when a message is received from Poco.
+
+.. code-block:: csharp
+
+    PocoManager.MessageReceived += OnPocoMessageReceived;
+
+
 Poco-side
 ~~~~~~~~~
 
