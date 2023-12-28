@@ -113,10 +113,6 @@ class KeepRunningInstrumentationThread(threading.Thread):
 
     def run(self):
         while not self.stopped():
-            if getattr(self.poco, "_instrument_proc", None) is not None:
-                stdout, stderr = self.poco._instrument_proc.communicate()
-                print('[pocoservice.apk] stdout: {}'.format(stdout))
-                print('[pocoservice.apk] stderr: {}'.format(stderr))
             if not self.stopped():
                 self.poco._start_instrument(self.port_to_ping)  # 尝试重启
                 time.sleep(1)
@@ -256,9 +252,9 @@ class AndroidUiautomationPoco(Poco):
         self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
         instrumentation_cmd = [
-                'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
-                '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
-                '{}/androidx.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
+            'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
+            '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
+            '{}/androidx.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
         self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
 
         def cleanup_proc(proc):
@@ -287,7 +283,17 @@ class AndroidUiautomationPoco(Poco):
                     print('[pocoservice.apk] stderr: {}'.format(stderr))
                 time.sleep(1)
                 print("still waiting for uiautomation ready.")
+                try:
+                    self.adb_client.shell(
+                        ['monkey', '-p', {PocoServicePackage}, '-c', 'android.intent.category.LAUNCHER', '1'])
+                except Exception as e:
+                    pass
                 self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
+                instrumentation_cmd = [
+                    'am', 'instrument', '-w', '-e', 'debug', 'false', '-e', 'class',
+                    '{}.InstrumentedTestAsLauncher'.format(PocoServicePackage),
+                    '{}/androidx.test.runner.AndroidJUnitRunner'.format(PocoServicePackage)]
+                self._instrument_proc = self.adb_client.start_shell(instrumentation_cmd)
                 continue
         return ready
 
