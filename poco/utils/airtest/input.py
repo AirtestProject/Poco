@@ -78,7 +78,9 @@ class AirtestInput(InputInterface):
 
     def click(self, x, y):
         pos = self.get_target_pos(x, y)
-        touch(pos, duration=self.default_touch_down_duration)
+        ret = touch(pos, duration=self.default_touch_down_duration)
+        resolution = current_device().get_current_resolution()
+        return ret[0] / resolution[0], ret[1] / resolution[1]  # convert position to normalized coordinate
 
     def double_click(self, x, y):
         pos = self.get_target_pos(x, y)
@@ -90,13 +92,18 @@ class AirtestInput(InputInterface):
         direction = x2 - x1, y2 - y1
         pos = self.get_target_pos(x1, y1)
         steps = int(duration * 40) + 1
-        swipe(pos, vector=direction, duration=duration, steps=steps)
+        ret = swipe(pos, vector=direction, duration=duration, steps=steps)
+        resolution = current_device().get_current_resolution()
+        return (ret[0][0] / resolution[0], ret[0][1] / resolution[1]),\
+               (ret[1][0] / resolution[0], ret[1][1] / resolution[1])
 
     def longClick(self, x, y, duration=2.0):
         if duration <= 0:
             raise ValueError("Operation duration cannot be less equal 0. Please provide a positive number.")
         pos = self.get_target_pos(x, y)
-        touch(pos, duration=duration)
+        ret = touch(pos, duration=duration)
+        resolution = current_device().get_current_resolution()
+        return ret[0] / resolution[0], ret[1] / resolution[1]
 
     def applyMotionEvents(self, events):
         if device_platform() != 'Android':
