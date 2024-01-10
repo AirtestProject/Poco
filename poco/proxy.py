@@ -889,3 +889,65 @@ class UIObjectProxy(object):
             self._evaluated = True
             self._query_multiple = multiple
         return self._nodes
+
+    def index(self):
+        """
+        Returns the index of this element in all the child nodes of the parent node
+
+        """
+        sibling = self.sibling()
+        if not sibling._query_multiple:
+            nodes = sibling._do_query(multiple=True, refresh=True)
+        else:
+            nodes = sibling._nodes
+        current_pos = self.get_position(focus="anchor")
+        for i, node in enumerate(nodes,start=1):
+            if node.getAttr('pos') == current_pos:
+                return i
+
+    def last_sibling(self):
+        """
+        Returns the sibling to the left of an element
+
+        """
+        sibling = self.sibling()
+        if not sibling._query_multiple:
+            nodes = sibling._do_query(multiple=True, refresh=True)
+        else:
+            nodes = sibling._nodes
+        current_pos = self.get_position(focus="anchor")
+        rst = None
+        for i, node in enumerate(nodes):
+            if node.getAttr('pos') == current_pos:
+                uiobj = UIObjectProxy(self.poco)
+                uiobj.query = ('index', (self.query, i - 1))
+                uiobj._evaluated = True
+                uiobj._query_multiple = True
+                uiobj._nodes = nodes[i - 1]
+                uiobj._nodes_proxy_is_list = False
+                rst = uiobj
+        return rst
+
+    def next_sibling(self):
+        """
+        Returns the sibling to the left of an element
+        """
+        sibling = self.sibling()
+        if not sibling._query_multiple:
+            nodes = sibling._do_query(multiple=True, refresh=True)
+        else:
+            nodes = sibling._nodes
+        current_pos = self.get_position(focus="anchor")
+        rst = None
+        for i, node in enumerate(nodes):
+            if node.getAttr('pos') == current_pos:
+                uiobj = UIObjectProxy(self.poco)
+                uiobj.query = ('index', (self.query, i + 1))
+                uiobj._evaluated = True
+                uiobj._query_multiple = True
+                uiobj._nodes = nodes[i + 1]
+                uiobj._nodes_proxy_is_list = False
+                rst = uiobj
+        return rst
+
+
