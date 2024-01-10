@@ -18,7 +18,7 @@ class UnityVRSupport():
         self.client = client
         self.support_vr = False
         try:
-            self.support_vr = self.client.call("isVrSupported")
+            self.support_vr = self.client.call("isVRSupported")
         except InvalidOperationException:
             raise InvalidOperationException('VR not supported')
 
